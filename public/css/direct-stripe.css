@@ -1,0 +1,43 @@
+/*** Boutons stripe ****/
+.stripe-button-el {
+	display: inline;
+}
+.direct-stripe-button {
+  margin: 0 auto;
+	position: relative;
+	display: inline-block;
+	line-height: 24px;
+	font-weight: 700;
+	padding: 12px 34px;
+	background: none;
+	background-image: none;
+	background-color: #CC3300;
+	border: 1px solid #CC3300;
+	color: #fff;
+	text-transform: uppercase;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.direct-stripe-button:hover {
+	background-color: transparent;
+	color: #CC3300;
+}
+.direct-stripe-button span {
+	background: transparent;
+	text-shadow: none;
+	box-shadow: none;
+	color: inherit;
+	font-family: inherit;
+}
+.direct-stripe-button span:hover {
+	background: transparent;
+	color: #CC3300;
+}
+
