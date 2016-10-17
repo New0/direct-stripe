@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Direct Stripe
-Plugin URI: https://github.com/New0/Direct-Stripe/archive/master.zip
+Plugin URI: https://github.com/New0/direct-stripe
 Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
 Author: Nicolas Figueira @nahuelmahe
 Version: 1.0
@@ -50,7 +50,7 @@ add_action( 'edit_user_profile_update', array( $directstripe, 'direct_stripe_sav
 
 //Custom Styles
 $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
-if(  $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) {
+if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) {
 	add_action( 'wp_enqueue_scripts', array( $directstripe, 'direct_stripe_styles_method') );
 }
 

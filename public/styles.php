@@ -1,5 +1,5 @@
 <?php
-wp_enqueue_style(	'direct-stripe-style', DSCORE_PATH . '/public/css/direct-stripe.css' );
+wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . '/public/css/direct-stripe.css' );
 
 $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
 	$maincolor = $d_stripe_styles['direct_stripe_main_color_style']; 

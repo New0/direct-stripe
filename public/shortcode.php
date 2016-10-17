@@ -3,6 +3,9 @@
 ?>
 <!-- pass in the $params array and the URL --> 
 <form action="<?php echo add_query_arg($params); ?>" id="stripeForm" value="submit" method="POST" >
+	<?php if(  $a['type'] === 'donation' ) { ?>
+	<input type="number" name="donationvalue" id="donationvalue" required />
+	<?php } ?>
   <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" 
 		<?php if( $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { ?>
 		data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_test_publishable_api_key']); ?>"

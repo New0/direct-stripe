@@ -32,7 +32,7 @@ public function direct_stripe_buttons_func( $atts ) {
 	$description = get_bloginfo('description');	
     $a = shortcode_atts( array(
 			  'name' => $sitename,
-        'amount' => 'amount',
+        'amount' => '',
         'description' => $description,
     	  'label' =>  __('Pay with card', 'direct-stripe'),
       	'panellabel' => __('Pay', 'direct-stripe'),
@@ -45,7 +45,17 @@ $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
 $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 	// the query var and its value 
-$params = array('direct-stripe' => $a['type'], 'amount' => $a['amount'], 'coupon' => $a['coupon'], 'ds-nonce' => $ds_nonce); 
+	if(  $a['type'] === 'donation' ) { 
+		$amount = 'donation';
+	} else {
+		$amount = $a['amount'];
+	}
+$params = array(
+	'direct-stripe' => $a['type'],
+	'amount' => $amount,
+	'coupon' => $a['coupon'],
+	'ds-nonce' => $ds_nonce
+	); 
 	 ob_start();
 include( DSCORE_PATH . '/public/shortcode.php');
 	return ob_get_clean();
@@ -69,6 +79,11 @@ public function direct_stripe_parse_request($wp) {
             && $wp->query_vars['direct-stripe'] == 'payment') {
       
       include_once DSCORE_PATH . '/includes/create_payment.php';
+    }
+	if (array_key_exists('direct-stripe', $wp->query_vars) 
+            && $wp->query_vars['direct-stripe'] == 'donation') {
+      
+      include_once DSCORE_PATH . '/includes/create_donation.php';
     }
 }
 	
