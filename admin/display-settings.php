@@ -1,6 +1,5 @@
 <?php
 
-
 class DirectStripeDisplaySettings {
 	
 /*****   Live API KEYS   *******/

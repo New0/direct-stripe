@@ -1,11 +1,14 @@
 <?php
-wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . '/public/css/direct-stripe.css' );
-
 $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
+global $directStripeAttrValues;
+if(isset($directStripeAttrValues['color']) && $directStripeAttrValues['color'] != '' || isset($directStripeAttrValues['radius']) && $directStripeAttrValues['radius'] != '') {
+	$maincolor = $directStripeAttrValues['color']; 
+	$borderradius = $directStripeAttrValues['radius'] . 'px';
+} else {
 	$maincolor = $d_stripe_styles['direct_stripe_main_color_style']; 
 	$borderradius = $d_stripe_styles['direct_stripe_border_radius'] . 'px';
-
-		$custom_css = "
+}
+	$custom_css = "
 			.stripe-button-el {
 				visibility: hidden !important;
 				display: none !important;
@@ -22,5 +25,4 @@ $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
 				color: $maincolor;
 			}
 		";
-
 wp_add_inline_style( 'direct-stripe-style', $custom_css );
