@@ -4,7 +4,7 @@
 <!-- pass in the $params array and the URL --> 
 <form action="<?php echo add_query_arg($params); ?>" id="stripeForm" value="submit" method="POST" >
 	<?php if(  $a['type'] === 'donation' ) { ?>
-	<input type="number" name="donationvalue" id="donationvalue" required />
+	<input type="number" name="donationvalue" id="donationvalue" required /><br/>
 	<?php } ?>
   <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" 
 		<?php if( $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { ?>
@@ -20,7 +20,7 @@
 		data-locale="<?php echo esc_attr($a['locale']) ?>"
 		data-currency="<?php echo esc_attr($a['currency']) ?>" >
 		</script>
-	<?php if(  $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) { ?>
+	<?php if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) { ?>
 	<?php if(  $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
 	<input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo home_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
 	<?php } ?>
