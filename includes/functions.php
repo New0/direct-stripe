@@ -1,10 +1,38 @@
-<?php
+<?php 
 
 class DirectStripeFunctions {
   
 //Add Stripe user role on plugin activation
 function direct_stripe_user_roles_on_activation() {
        add_role( 'stripe-user', 'Stripe user', array( 'read' => true ));
+			$title = __( 'Direct Stripe log', 'direct-stripe' );
+		$plural = __( 'Direct Stripe logs', 'direct-stripe' );
+
+		$labels = array (
+			'name' => $plural,
+			'singular_name' => $plural,
+			'add_new_item' => __( 'Add New', 'direct-stripe' ) . ' ' . $title,
+			'edit_item' => __( 'Edit', 'direct-stripe' ) . ' ' . $title,
+			'new_item' => __( 'New', 'direct-stripe' ) . ' ' . $title,
+			'view_item' => __( 'View', 'direct-stripe' ) . ' ' . $title,
+			'search_items' => __( 'Search', 'direct-stripe' ) . ' ' . $plural,
+			'not_found' => __( 'No', 'direct-stripe' ) . ' ' . $plural . ' ' . __( 'Found', 'direct-stripe'  )
+		);
+
+		$args = array (
+			'labels' => $labels,
+			'hierarchical' => FALSE,
+			'description' => $plural,
+			'supports' => array( 'title' ),
+			'show_ui' => TRUE,
+			'show_in_menu' => 'direct_stripe',
+			'show_in_nav_menus' => TRUE,
+			'publicly_queryable' => TRUE,
+			'exclude_from_search' => FALSE,
+			'has_archive' => TRUE
+		);
+
+		register_post_type( 'direct_stripe' , $args );
    }
   
  /**
@@ -63,32 +91,31 @@ function direct_stripe_query_vars($vars) {
     $vars[] = 'direct-stripe';
     return $vars;
 }
-//Redirection Payments Subscriptions
+	
+//Redirection Payments / Subscriptions / donations
 function direct_stripe_parse_request($wp) {
 	//Créer souscription
     if (array_key_exists('direct-stripe', $wp->query_vars) 
-            && $wp->query_vars['direct-stripe'] == 'subscription') {
-      
+            && $wp->query_vars['direct-stripe'] === 'subscription') {     
       include_once DSCORE_PATH . '/includes/create_subscription.php';
     }
 	//Créer payment
    if (array_key_exists('direct-stripe', $wp->query_vars) 
-            && $wp->query_vars['direct-stripe'] == 'payment') {
-      
+            && $wp->query_vars['direct-stripe'] === 'payment') {   
       include_once DSCORE_PATH . '/includes/create_payment.php';
     }
 	//Créer donation
 	if (array_key_exists('direct-stripe', $wp->query_vars) 
-            && $wp->query_vars['direct-stripe'] == 'donation') {
-      
+            && $wp->query_vars['direct-stripe'] === 'donation') {   
       include_once DSCORE_PATH . '/includes/create_donation.php';
     }
 }
 	
-//Add admin sub-page
+//Add admin page
 function direct_stripe_add_admin_menu() { 
 global $direct_stripe_page;
-	$direct_stripe_page = add_options_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page') );
+	$direct_stripe_page = add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page') );
+	add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
 }
 	//Register settings
 function direct_stripe_settings_init() { 
@@ -111,6 +138,7 @@ function direct_stripe_options_page() {
 function direct_stripe_styles_method() {
 	wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . '/public/css/direct-stripe.css' );
 	include( DSCORE_PATH . '/public/styles.php');
+	wp_add_inline_style( 'direct-stripe-style', $custom_css );
 }
 
 	// Display Stripe users
@@ -123,5 +151,98 @@ function direct_stripe_save_extra_profile_fields( $user_id ) {
     	return false;
 	update_user_meta( $user_id, 'stripe_id', $_POST['stripe_id'] );
 } 
+	
+//Log Transactions in WordPress admin
+function direct_stripe_create_post_type() {
+   // Set UI labels for Custom Post Type
+	$labels = array(
+		'name'                => _x( 'Direct Stripe logs', 'Post Type General Name', 'direct-stripe' ),
+		'singular_name'       => _x( 'Direct Stripe log', 'Post Type Singular Name', 'direct-stripe' ),
+		'parent_item_colon'   => __( 'Direct Stripe Parent Log', 'direct-stripe' ),
+		'all_items'           => __( 'Direct Stripe logs', 'direct-stripe' ),
+		'view_item'           => __( 'Direct Stripe log', 'direct-stripe' ),
+		'add_new_item'        => __( 'Add New Direct Stripe log', 'direct-stripe' ),
+		'add_new'             => __( 'Add New', 'direct-stripe' ),
+		'edit_item'           => __( 'Edit Direct Stripe log', 'direct-stripe' ),
+		'update_item'         => __( 'Update Direct Stripe log', 'direct-stripe' ),
+		'search_items'        => __( 'SearchDirect Stripe log', 'direct-stripe' ),
+		'not_found'           => __( 'Direct Stripe log Not Found', 'direct-stripe' ),
+		'not_found_in_trash'  => __( 'Direct Stripe log Not found in Trash', 'direct-stripe' ),
+	);
+	
+// Set other options for Direct Stripe Post Type
+	$args = array(
+		'label'               => __( 'Direct Stripe logs', 'direct-stripe' ),
+		'description'         => __( 'Direct Stripe logs', 'direct-stripe' ),
+		'labels'              => $labels,
+		'hierarchical'        => false,
+		'public'              => false,
+		'show_ui'             => true,
+		'show_in_menu'        => 'direct_stripe',
+		'show_in_nav_menus'   => true,
+		'can_export'          => false,
+		'exclude_from_search' => true,
+		'publicly_queryable'  => false,
+		'capability_type'     => 'page'
+	);
+	// Registering Direct Stripe Post Type
+	register_post_type( 'Direct Stripe Logs', $args );
+}
+
+//Rename Colums for direct Stripe Post Type
+function direct_stripe_logs_colums_names( $columns ) {
+    $columns = array(
+			'cb' => '<input type="checkbox" />',
+			'title' => __( 'Transaction ID', 'direct-stripe' ),
+			'author' => __( 'Stripe User', 'direct-stripe' ),
+			'amount' => __( 'Amount', 'direct-stripe' ),
+			'type'	=>	__( 'Type', 'direct-stripe' ),
+			'date' => __( 'Date', 'direct-stripe' )			
+	);
+    return $columns;
+}
+	
+//Add content to custom columns
+function direct_stripe_manage_logs_columns( $column ) {
+	global $post;
+	switch( $column ) {
+			
+		/* If displaying the 'amount' column. */
+		case 'amount' :
+			$firstamount = get_post_meta( get_the_ID(), 'amount', true );
+			$secamount = $firstamount / 100;
+			$amount = number_format( $secamount, 2 );
+			if ( empty( $amount ) )
+				echo __( 'Unknown', 'direct-stripe' );
+			else
+				printf( __( '%s', 'direct-stripe' ), $amount );
+			break;
+		
+			case 'type' :
+			$type = get_post_meta( get_the_ID(), 'type', true );
+			if ( empty( $type ) )
+				echo __( 'Unknown', 'direct-stripe' );
+			else
+				printf( __( '%s', 'direct-stripe' ), $type );
+			break;
+			
+		/* Just break out of the switch statement for everything else. */
+		default :
+			break;
+	}
+}
+	
+//Make Direct Stripe logs columns sortable
+function direct_stripe_sortable_columns( $columns ) {
+
+	$columns = array(
+			'title'	=>	'title',
+			'author' =>	'author',
+			'amount' => 'amount',
+			'type'	=>	'type',
+			'date'	=>	'date'
+	);
+	return $columns;
+}
   //End functions
 } // End Class DirectStripeFunctions

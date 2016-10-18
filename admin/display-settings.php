@@ -1,4 +1,6 @@
-<?php
+<?php //One function for each setting Field value and settings section callback ( sub-title )
+
+defined( 'ABSPATH' ) or die( 'Please!' );
 
 class DirectStripeDisplaySettings {
 	

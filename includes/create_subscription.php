@@ -10,24 +10,23 @@ if( !class_exists( 'Stripe' ) ) {
 }
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
-$admin_email = get_option('admin_email');
-            // Be sure to replace this with your actual test API key
-            // (switch to the live key later)
+// Be sure to replace this with your actual test API key
+// (switch to the live key later)
 if( $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
-\Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
+    \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
 } else { 
-\Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
+    \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
 } 
 
 $admin_email = get_option( 'admin_email' );
 
-try
-{
+try {
   $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
   $coupon = isset($_GET['coupon']) ? $_GET['coupon'] : '';
   $token = $_POST['stripeToken'];
   $email_address = $_POST['stripeEmail'];
 
+  //Cherche si utilisateur enregistré correspond à l'adresse email
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
   $user = get_user_by( 'email', $email_address );
   $stripe_id_array = get_user_meta( $user->id, 'stripe_id' );
@@ -36,7 +35,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
     $stripe_id == false;
 }
 
-if($stripe_id) {
+if($stripe_id) { //Utilisateur existant
   // create new subscription
     $subscription = \Stripe\Subscription::create(array(
           "customer" => $stripe_id,
@@ -45,19 +44,30 @@ if($stripe_id) {
         ));
 
     $plan = \Stripe\Plan::retrieve($amount);
-    $plan_actif = $plan->name;
-    //$abonnement = $subscription->subscriptions->data[0]->id;
-    //$invoices = \Stripe\Invoice::all(array("limit" => 3, "customer" => $cu->id));
+    $plan_amount = $plan->amount;
+  
+  //Log transaction in WordPress admin
+  $post_id = wp_insert_post(
+							array(
+								'post_title' => $token,
+								'post_status' => 'publish',
+								'post_type' => 'Direct Stripe Logs',
+								'post_author'	=>	$user->id
+							)
+						);
+		add_post_meta($post_id, 'amount', $plan_amount);
+	  add_post_meta($post_id, 'type', 'subscription');
+  
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' )  {
       wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] ,  $d_stripe_emails['direct_stripe_user_email_content'] );
   }
       // Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
-      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_email_content'] );
+      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_email_content'] .  $plan_amount );
   }
   
-    } else {  // Si user n'existe pas
+ } else {  // Si user n'existe pas
       $customer = \Stripe\Customer::create(array(
         'email'   => $email_address,
         'source'  => $token,
@@ -66,9 +76,10 @@ if($stripe_id) {
       ));
 
     $plan = \Stripe\Plan::retrieve($amount);
-    $plan_actif = $plan->name;
+    $plan_amount = $plan->amount;
     //$abonnement = $customer->subscriptions->data[0]->id;
     //$invoices = \Stripe\Invoice::all(array("limit" => 3, "customer" => $customer->id));
+  
          // Generate the password and create the user
       $password = wp_generate_password( 12, false );
       $user_id = wp_create_user( $email_address, $password, $email_address );
@@ -85,7 +96,19 @@ if($stripe_id) {
       // Set the role
       $user = new WP_User( $user_id );
       $user->set_role( 'stripe-user' );
-      } //endelse
+  
+  		//Log transaction in WordPress admin
+  $post_id = wp_insert_post(
+							array(
+								'post_title' => $token,
+								'post_status' => 'publish',
+								'post_type' => 'Direct Stripe Logs',
+								'Author'	=>	$user_id
+							)
+						);
+		add_post_meta($post_id, 'amount', $plan_amount);
+	  add_post_meta($post_id, 'type', 'subscription');
+  
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
       wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] ,  $d_stripe_emails['direct_stripe_user_email_content'] );
@@ -94,9 +117,10 @@ if($stripe_id) {
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
       wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_email_content'] );
   }
-      //Redirection
-      wp_redirect( $d_stripe_general['direct_stripe_success_page'] );
-      exit;
+}//endelse user existant
+ //Redirection
+wp_redirect( $d_stripe_general['direct_stripe_success_page'] );
+  exit;
 }
 catch(Exception $e)
 {

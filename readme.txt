@@ -23,8 +23,13 @@ Set up redirections pages after payments or errors.
 
 
 1. Upload the plugin files to the `/wp-content/plugins/direct-stripe` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Use the Settings->Direct Stripe screen to configure the plugin
+1.1 Activate the plugin through the 'Plugins' screen in WordPress
+1.2 Use the Settings->Direct Stripe screen to configure the plugin
+
+=>Configure settings in admin panel :
+Create a stripe account at https://dashboard.stripe.com/register
+  ->Enter your Stripe API keys ( find them at https://dashboard.stripe.com/account/apikeys )
+  ->
 
 
 == Frequently Asked Questions ==

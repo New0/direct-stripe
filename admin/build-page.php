@@ -1,4 +1,6 @@
-<?php  // Build admin settings page ?>
+<?php  // Build admin settings page 
+defined( 'ABSPATH' ) or die( 'Please!' ); ?>
+
 <div id="direct-stripe">
 		<h2><?php _e( 'Direct Stripe', 'direct-stripe'); ?></h2>
 		<?php if( isset( $_GET[ 'tab' ] ) ) {
