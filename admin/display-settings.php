@@ -214,13 +214,13 @@ function direct_stripe_user_error_email_content_render() {
 	
 	//Settings sections callbacks
 public function direct_stripe_api_section_callback() { 
-	echo __( 'Stripe API keys (test or live keys)', 'direct-stripe' );
+	echo __( 'Stripe API keys', 'direct-stripe' );
 }
 public function direct_stripe_redirections_section_callback(  ) { 
-	echo __( 'Pages after success payment or error ', 'direct-stripe' );
+	echo __( 'Pages after success payment or error (enter only page slug) ', 'direct-stripe' );
 }
 public function direct_stripe_logo_section_callback() { 
-	echo __( 'Set image in form and main button color', 'direct-stripe' );
+	echo __( 'Set image for Stripe\'s modal form', 'direct-stripe' );
 }
 public function direct_stripe_tc_section_callback() { ?>
 	<span class="direct-stripe-avert"><?php echo __( 'Only used with custom button styles enabled', 'direct-stripe' ); ?></span>
