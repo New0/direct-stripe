@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 16:05+0000\n"
-"PO-Revision-Date: 2016-10-11 16:15+0000\n"
+"POT-Creation-Date: 2016-10-19 17:36+0000\n"
+"PO-Revision-Date: 2016-10-19 18:04+0000\n"
 "Last-Translator: Nico <nico@newo.fr>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -13,126 +13,354 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#: direct-stripe.php:37
-msgid "Logo for Stripe Form"
-msgstr "Logo pour le formulaire Stripe"
+#: admin/display-users.php:2
+msgid "Direct Stripe user infos"
+msgstr "Infos utilisateur Stripe"
 
-#: direct-stripe.php:38
-msgid "Use selected image"
-msgstr "Utiliser image selectionnée"
+#: admin/display-users.php:5
+msgid "Direct Sripe Data"
+msgstr "Données Direct Stripe"
 
-#: includes/button.php:11
-msgid "Pay with card"
-msgstr "Régler avec une carte"
+#: admin/display-users.php:6
+msgid "Stripe customer ID"
+msgstr "ID client Stripe"
 
-#: includes/button.php:12
-msgid "Pay"
-msgstr "Procéder"
+#: admin/display-users.php:9
+msgid "stripe_id"
+msgstr "stripe_id"
 
-#: includes/admin.php:20
-msgid "Set API keys"
-msgstr "Renseigner les clés API"
+#: admin/display-settings.php:217
+msgid "Stripe API keys"
+msgstr "Clés API Stripe"
 
-#: includes/admin.php:27
-msgid "Secret API key"
-msgstr "Clé API secrète"
+#: admin/display-settings.php:220
+msgid "Pages after success payment or error (enter only page slug) "
+msgstr ""
+"Pages suivant un paiement ou une tentative (renseigner le slug de page "
+"uniquement)"
 
-#: includes/admin.php:34
-msgid "Publishable API key"
-msgstr "Clé API publique"
+#: admin/display-settings.php:223
+msgid "Set image for Stripe's modal form"
+msgstr "Choisir votre image pour le formulaire Stripe (Logo)"
 
-#: includes/admin.php:44
-msgid "Redirection pages"
-msgstr "Pages de redirection"
+#: admin/display-settings.php:229 admin/display-settings.php:235
+msgid "Emails sent to WordPress system email address"
+msgstr "Emails envoyés à l'adresse du système"
 
-#: includes/admin.php:51
-msgid "Success page"
-msgstr "Redirection après succès"
+#: admin/display-settings.php:232 admin/display-settings.php:238
+msgid "Emails sent to Stripe user email address"
+msgstr "Emails envoyés à l'adresse de l'utilisateur Stripe"
 
-#: includes/admin.php:59
-msgid "Error page"
-msgstr "Redirection après erreur"
+#: admin/build-page.php:10
+msgid "General Options"
+msgstr "Options générales"
 
-#: includes/admin.php:68
-msgid "Logo image loading"
-msgstr "Chargement image"
+#: admin/build-page.php:11
+msgid "Styles"
+msgstr "Styles"
 
-#: includes/admin.php:74
-msgid "Form logo / image"
-msgstr "Logo / image du formulaire"
+#: admin/build-page.php:12
+msgid "Emails"
+msgstr "Emails"
 
-#: includes/admin.php:83
-msgid "Custom button styles"
-msgstr "Styles de boutons sur mesure"
+#: admin/register-settings.php:23
+msgid "Live Secret API key"
+msgstr "Clé API secrète live"
 
-#: includes/admin.php:89
-msgid "Use custom styles"
-msgstr "Utiliser les styles sur mesure"
+#: admin/register-settings.php:30
+msgid "Live Publishable API key"
+msgstr "Clé API publique live"
 
-#: includes/admin.php:96
-msgid "Main Color"
-msgstr "Couleur principale"
+#: admin/register-settings.php:37
+msgid "Use test keys / mode"
+msgstr "Utiliser les clés test"
 
-#: includes/admin.php:103
-msgid "Border radius"
-msgstr "Radius des bordures"
+#: admin/register-settings.php:44
+msgid "Test Secret API key"
+msgstr "Clé API secrète test"
 
-#: includes/admin.php:112
-msgid "Terms and conditions"
-msgstr "Conditions de vente"
+#: admin/register-settings.php:51
+msgid "Test Publishable API key"
+msgstr "Clé API publique test"
 
-#: includes/admin.php:118
-msgid "Use Terms and Conditions checkbox"
-msgstr "Utiliser la case à cocher des conditions de vente"
+#: admin/register-settings.php:165
+msgid "Automated emails to admin"
+msgstr "Emails automatisés à l'administrateur"
 
-#: includes/admin.php:125
-msgid "Terms and conditions text"
-msgstr "Texte conditions de vente"
+#: admin/register-settings.php:171
+msgid "Send emails to admin on successful transaction"
+msgstr "Envoyer un email à l'administrateur suite à un paiement valide"
 
-#: includes/admin.php:132
-msgid "Terms and conditions link text"
-msgstr "Texte lié aux conditions de ventes"
+#: admin/register-settings.php:178
+msgid "Admin email subject"
+msgstr "Sujet de l'email à l'administrateur"
 
-#: includes/admin.php:139
-msgid "Terms and conditions page (slug)"
-msgstr "Slug de la page des conditions de vente"
+#: admin/register-settings.php:185
+msgid "Admin email content"
+msgstr "Contenu de l'email pour l'administrateur"
 
-#: includes/admin.php:186
+#: admin/register-settings.php:194
+msgid "Automated emails to Stripe user"
+msgstr "Emails automatisés à l'utilisateur Stripe"
+
+#: admin/register-settings.php:200
+msgid "Send emails to Stripe user on successful transaction"
+msgstr "Envoyer un email à l'utilisateur Stripe suite à un paiement valide"
+
+#: admin/register-settings.php:207
+msgid "User email subject"
+msgstr "Sujet de l'email pour l'utilisateur"
+
+#: admin/register-settings.php:214
+msgid "User email content"
+msgstr "Contenu de l'email pour l'utilisateur"
+
+#: admin/register-settings.php:223
+msgid "Automated emails to admin after failed transaction"
+msgstr ""
+"Emails automatisés pour l'administrateur suite à une transaction non aboutie"
+
+#: admin/register-settings.php:229
+msgid "Send emails to admin after failed transaction"
+msgstr "Prévenir un administrateur par email lorsqu'une transaction a échoué"
+
+#: admin/register-settings.php:236
+msgid "Admin error email subject"
+msgstr "Sujet de l'email pour l'administrateur"
+
+#: admin/register-settings.php:243
+msgid "Admin error email content"
+msgstr "Contenu de l'email pour l'administrateur"
+
+#: admin/register-settings.php:252
+msgid "Automated emails to Stripe user after failed transaction"
+msgstr ""
+"Emails automatisés pour l'utilisateur Stripe suite à une transaction non "
+"aboutie"
+
+#: admin/register-settings.php:258
+msgid "Send emails to Stripe user after failed transaction"
+msgstr "Relancer l'utilisateur Stripe  suite à une transaction non aboutie"
+
+#: admin/register-settings.php:265
+msgid "User error email subject"
+msgstr "Sujet de email pour l'utilisateur suite à transaction non aboutie"
+
+#: admin/register-settings.php:272
+msgid "User error email content"
+msgstr "Contenu de l'email pour l'utilisateur suite à transaction non aboutie"
+
+#: includes/functions.php:8 includes/functions.php:163
+msgid "Direct Stripe log"
+msgstr "Log Direct Stripe"
+
+#: includes/functions.php:9 includes/functions.php:162 
+#: includes/functions.php:175 includes/functions.php:176
+msgid "Direct Stripe logs"
+msgstr "Logs Direct Stripe"
+
+#: includes/functions.php:14 includes/functions.php:165
+msgid "Add New"
+msgstr "Ajouter"
+
+#: includes/functions.php:15
+msgid "Edit"
+msgstr "Éditer"
+
+#: includes/functions.php:16
+msgid "New"
+msgstr "Nouveau"
+
+#: includes/functions.php:17
+msgid "View"
+msgstr "Ouvrir"
+
+#: includes/functions.php:18
+msgid "Search"
+msgstr "Rechercher"
+
+#: includes/functions.php:19
+msgid "No"
+msgstr "Aucun"
+
+#: includes/functions.php:19
+msgid "Found"
+msgstr "Trouvé"
+
+#: includes/functions.php:118 includes/functions.php:118
+msgid "Settings"
+msgstr "Réglages"
+
+#: includes/functions.php:159
+msgctxt "Post Type General Name"
+msgid "Direct Stripe logs"
+msgstr "Logs Direct Stripe"
+
+#: includes/functions.php:160
+msgctxt "Post Type Singular Name"
+msgid "Direct Stripe log"
+msgstr "Log Direct Stripe"
+
+#: includes/functions.php:161
+msgid "Direct Stripe Parent Log"
+msgstr "Log Parent Direct Stripe"
+
+#: includes/functions.php:164
+msgid "Add New Direct Stripe log"
+msgstr "Ajouter un log Direct Stripe"
+
+#: includes/functions.php:166
+msgid "Edit Direct Stripe log"
+msgstr "Éditer log Direct Stripe"
+
+#: includes/functions.php:167
+msgid "Update Direct Stripe log"
+msgstr "Mettre à jour le log Direct Stripe"
+
+#: includes/functions.php:168
+msgid "SearchDirect Stripe log"
+msgstr "Rechercher dans le log Direct Stripe"
+
+#: includes/functions.php:169
+msgid "Direct Stripe log Not Found"
+msgstr "Log Direct Stripe vide"
+
+#: includes/functions.php:170
+msgid "Direct Stripe log Not found in Trash"
+msgstr "Aucun log Direct Stripe dans la corbeille"
+
+#: includes/functions.php:196
+msgid "Transaction ID"
+msgstr "ID de transaction"
+
+#: includes/functions.php:197
+msgid "Stripe User"
+msgstr "Utilisateur Stripe"
+
+#: includes/functions.php:198
+msgid "Amount"
+msgstr "Montant"
+
+#: includes/functions.php:199
+msgid "Type"
+msgstr "Type"
+
+#: includes/functions.php:200
+msgid "Date"
+msgstr "Date"
+
+#: includes/functions.php:216 includes/functions.php:224
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: includes/functions.php:218 includes/functions.php:226
+msgid "%s"
+msgstr "%s"
+
+#. Description of the plugin
+msgid ""
+"Use Stripe payment buttons anywhere in a WordPress website, let your users "
+"easily proceed to checkout"
+msgstr ""
+"Utilisez des boutons de paiement Stripe dans un site WordPress, le processus "
+"de règlement le plus simple pour les utilisateurs."
+
+#. URI of the plugin
+msgid "https://github.com/New0/direct-stripe"
+msgstr "https://github.com/New0/direct-stripe"
+
+#: admin/display-settings.php:70
 msgid "Select image"
-msgstr "Selectionner l'image"
+msgstr "Choisir image"
 
-#: includes/admin.php:209
+#: admin/display-settings.php:93
 msgid "px"
 msgstr "px"
 
-#: includes/admin.php:244
-msgid "Stripe API keys (test or live keys)"
-msgstr "Clés API Stripe (test ou live)"
-
-#: includes/admin.php:247
-msgid "Pages after success payment or error "
-msgstr "Pages de redirection après paiement ou erreur"
-
-#: includes/admin.php:250
-msgid "Set image in form and main button color"
-msgstr "Image du formulaire"
-
-#: includes/admin.php:253
+#: admin/display-settings.php:226
 msgid "Only used with custom button styles enabled"
 msgstr "Seulement actif avec le style de bouton sur mesure activé"
 
 #. Name of the plugin
-#: includes/admin.php:275
+#: admin/build-page.php:5
 msgid "Direct Stripe"
 msgstr "Direct Stripe"
 
-#. Description of the plugin
-msgid "Use Stripe buttons everywhere in a WordPress website"
-msgstr "Utiliser un bouton Stripe partout dans un site web WordPress"
+#: admin/register-settings.php:16
+msgid "Set API keys"
+msgstr "Renseigner les clés API"
 
-#. URI of the plugin
-msgid "https://newo.fr/"
-msgstr "https://newo.fr/"
+#: admin/register-settings.php:61
+msgid "Redirection pages"
+msgstr "Pages de redirection"
+
+#: admin/register-settings.php:68
+msgid "Success page"
+msgstr "Redirection après succès"
+
+#: admin/register-settings.php:76
+msgid "Error page"
+msgstr "Redirection après erreur"
+
+#: admin/register-settings.php:85
+msgid "Logo image loading"
+msgstr "Chargement image"
+
+#: admin/register-settings.php:91
+msgid "Form logo / image"
+msgstr "Logo / image du formulaire"
+
+#: admin/register-settings.php:100
+msgid "Custom button styles"
+msgstr "Styles de boutons sur mesure"
+
+#: admin/register-settings.php:106
+msgid "Use custom styles"
+msgstr "Utiliser les styles sur mesure"
+
+#: admin/register-settings.php:113
+msgid "Main Color"
+msgstr "Couleur principale"
+
+#: admin/register-settings.php:120
+msgid "Border radius"
+msgstr "Radius des bordures"
+
+#: admin/register-settings.php:129
+msgid "Terms and conditions"
+msgstr "Conditions de vente"
+
+#: admin/register-settings.php:135
+msgid "Use Terms and Conditions checkbox"
+msgstr "Utiliser la case à cocher des conditions de vente"
+
+#: admin/register-settings.php:142
+msgid "Terms and conditions text"
+msgstr "Texte conditions de vente"
+
+#: admin/register-settings.php:149
+msgid "Terms and conditions link text"
+msgstr "Texte lié aux conditions de ventes"
+
+#: admin/register-settings.php:156
+msgid "Terms and conditions page (slug)"
+msgstr "Slug de la page des conditions de vente"
+
+#: includes/functions.php:51
+msgid "Logo for Stripe Form"
+msgstr "Logo pour le formulaire Stripe"
+
+#: includes/functions.php:52
+msgid "Use selected image"
+msgstr "Utiliser image selectionnée"
+
+#: includes/functions.php:68
+msgid "Pay with card"
+msgstr "Régler par carte"
+
+#: includes/functions.php:69
+msgid "Pay"
+msgstr "Procéder"
 
 #. Author of the plugin
 msgid "Nicolas Figueira"
