@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 11:22+0000\n"
+"POT-Creation-Date: 2016-10-20 17:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -30,36 +30,52 @@ msgstr ""
 msgid "stripe_id"
 msgstr ""
 
-#: admin/display-settings.php:95
+#: admin/display-settings.php:29
+msgid "Visa card test number 4242 4242 4242 4242"
+msgstr ""
+
+#: admin/display-settings.php:30
+msgid "With any exp date and 3 CVV numbers"
+msgstr ""
+
+#: admin/display-settings.php:97
 msgid "Select image"
 msgstr ""
 
-#: admin/display-settings.php:118
+#: admin/display-settings.php:120
 msgid "px"
 msgstr ""
 
-#: admin/display-settings.php:242
+#: admin/display-settings.php:244
 msgid "Stripe API keys"
 msgstr ""
 
-#: admin/display-settings.php:245
+#: admin/display-settings.php:247
 msgid "Pages after success payment or error (enter only page slug) "
 msgstr ""
 
-#: admin/display-settings.php:248
+#: admin/display-settings.php:250
 msgid "Set image for Stripe's modal form"
 msgstr ""
 
-#: admin/display-settings.php:251
+#: admin/display-settings.php:253
 msgid "Only used with custom button styles enabled"
 msgstr ""
 
-#: admin/display-settings.php:254 admin/display-settings.php:260
+#: admin/display-settings.php:256 admin/display-settings.php:262
 msgid "Emails sent to WordPress system email address"
 msgstr ""
 
-#: admin/display-settings.php:257 admin/display-settings.php:263
+#: admin/display-settings.php:259 admin/display-settings.php:265
 msgid "Emails sent to Stripe user email address"
+msgstr ""
+
+#: admin/display-settings.php:268
+msgid "Check to use custom button"
+msgstr ""
+
+#: admin/display-settings.php:271
+msgid "Set your Stripe's account currency"
 msgstr ""
 
 #. Name of the plugin
