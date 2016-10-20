@@ -4,35 +4,7 @@ class DirectStripeFunctions {
   
 //Add Stripe user role on plugin activation
 function direct_stripe_user_roles_on_activation() {
-       add_role( 'stripe-user', 'Stripe user', array( 'read' => true ));
-			$title = __( 'Direct Stripe log', 'direct-stripe' );
-		$plural = __( 'Direct Stripe logs', 'direct-stripe' );
-
-		$labels = array (
-			'name' => $plural,
-			'singular_name' => $plural,
-			'add_new_item' => __( 'Add New', 'direct-stripe' ) . ' ' . $title,
-			'edit_item' => __( 'Edit', 'direct-stripe' ) . ' ' . $title,
-			'new_item' => __( 'New', 'direct-stripe' ) . ' ' . $title,
-			'view_item' => __( 'View', 'direct-stripe' ) . ' ' . $title,
-			'search_items' => __( 'Search', 'direct-stripe' ) . ' ' . $plural,
-			'not_found' => __( 'No', 'direct-stripe' ) . ' ' . $plural . ' ' . __( 'Found', 'direct-stripe'  )
-		);
-
-		$args = array (
-			'labels' => $labels,
-			'hierarchical' => FALSE,
-			'description' => $plural,
-			'supports' => array( 'title' ),
-			'show_ui' => TRUE,
-			'show_in_menu' => 'direct_stripe',
-			'show_in_nav_menus' => TRUE,
-			'publicly_queryable' => TRUE,
-			'exclude_from_search' => FALSE,
-			'has_archive' => TRUE
-		);
-
-		register_post_type( 'direct_stripe' , $args );
+      add_role( 'stripe-user', 'Stripe user', array( 'read' => true ));
    }
   
  /**
@@ -114,7 +86,7 @@ function direct_stripe_parse_request($wp) {
 //Add admin page
 function direct_stripe_add_admin_menu() { 
 global $direct_stripe_page;
-	$direct_stripe_page = add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page') );
+	$direct_stripe_page = add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'admin/images/logo_stripe_white.svg' );
 	add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
 }
 	//Register settings
