@@ -13,10 +13,10 @@ defined( 'ABSPATH' ) or die( 'Please!' ); ?>
         </h2> 
 <form action='options.php' method='post'>
 		<?php
-		if( $active_tab == 'styles' ) {
+		if( isset($active_tab) && $active_tab === 'styles' ) {
 		settings_fields( 'directStripeStyles' );
 		do_settings_sections( 'directStripeStyles' );
-	} else if( $active_tab == 'emails' ) {
+	} else if( isset($active_tab) && $active_tab === 'emails' ) {
 		settings_fields( 'directStripeEmails' );
 		do_settings_sections( 'directStripeEmails' );
 	} else {

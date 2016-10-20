@@ -20,12 +20,14 @@ function direct_stripe_publishable_api_key_render() {
 	<?php
 }
 
-/***************    Checkbox test or live keys   **************************/
+/***************    Checkbox for test keys   **************************/
 function direct_stripe_checkbox_api_keys_render() { 
 
 	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
 	?>
 	<input type='checkbox' name='direct_stripe_general_settings[direct_stripe_checkbox_api_keys]' value='1' <?php checked( isset ( $d_stripe_options['direct_stripe_checkbox_api_keys'] ), 1 ); ?> />
+ 	<div class="direct-stripe-test-card-number"><?php _e('Visa card test number 4242 4242 4242 4242', 'direct-stripe'); ?></div>
+	<div class="direct-stripe-test-card-infos"><?php _e('With any exp date and 3 CVV numbers', 'direct-stripe'); ?></div>
 	<?php 
 }
 /********************    Test API Keys  ***************************/
@@ -239,28 +241,34 @@ function direct_stripe_user_error_email_content_render() {
 	
 	//Settings sections callbacks
 public function direct_stripe_api_section_callback() { 
-	echo __( 'Stripe API keys', 'direct-stripe' );
+	_e( 'Stripe API keys', 'direct-stripe' );
 }
 public function direct_stripe_redirections_section_callback(  ) { 
-	echo __( 'Pages after success payment or error (enter only page slug) ', 'direct-stripe' );
+	_e( 'Pages after success payment or error (enter only page slug) ', 'direct-stripe' );
 }
 public function direct_stripe_logo_section_callback() { 
-	echo __( 'Set image for Stripe\'s modal form', 'direct-stripe' );
+	_e( 'Set image for Stripe\'s modal form', 'direct-stripe' );
 }
 public function direct_stripe_tc_section_callback() { ?>
-	<span class="direct-stripe-avert"><?php echo __( 'Only used with custom button styles enabled', 'direct-stripe' ); ?></span>
+	<span class="direct-stripe-avert"><?php _e( 'Only used with custom button styles enabled', 'direct-stripe' ); ?></span>
 <?php }
 public function direct_stripe_admin_emails_section_callback() { 
-	echo __( 'Emails sent to WordPress system email address', 'direct-stripe' );
+	_e( 'Emails sent to WordPress system email address', 'direct-stripe' );
 }
 public function direct_stripe_user_emails_section_callback() { 
-	echo __( 'Emails sent to Stripe user email address', 'direct-stripe' );
+	_e( 'Emails sent to Stripe user email address', 'direct-stripe' );
 }
 public function direct_stripe_admin_error_emails_section_callback() { 
-	echo __( 'Emails sent to WordPress system email address', 'direct-stripe' );
+	_e( 'Emails sent to WordPress system email address', 'direct-stripe' );
 }
 public function direct_stripe_user_error_emails_section_callback() { 
-	echo __( 'Emails sent to Stripe user email address', 'direct-stripe' );
+	_e( 'Emails sent to Stripe user email address', 'direct-stripe' );
+}
+public function direct_stripe_styles_section_callback() {
+	_e( 'Check to use custom button', 'direct-stripe' );
+}
+public function direct_stripe_currency_section_callback() {
+	 _e( 'Set your Stripe\'s account currency', 'direct-stripe' );
 }
 	
 //Settings validation
