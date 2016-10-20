@@ -53,6 +53,22 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 		'directStripeGeneral', 
 		'direct_stripe_keys_section' 
 	);
+
+//Currency
+	add_settings_section(
+		'direct_stripe_currency_section', 
+		__( 'Currency', 'direct-stripe' ), 
+		array($displaysettings, 'direct_stripe_currency_section_callback'), 
+		'directStripeGeneral'
+	);
+	
+	add_settings_field( 
+		'direct_stripe_currency', 
+		__( 'Currency', 'direct-stripe' ), 
+		array($displaysettings, 'direct_stripe_currency_render'), 
+		'directStripeGeneral', 
+		'direct_stripe_currency_section' 
+	);
 	
 	
 	// Redirection pages section

@@ -44,6 +44,31 @@ function direct_stripe_test_publishable_api_key_render() {
 	<?php
 }
 	
+/********************   Currency *********************/
+function direct_stripe_currency_render() { 
+
+	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
+	?>
+<select name="direct_stripe_general_settings[direct_stripe_currency]">
+    <option value="usd" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "usd"); ?>>USD</option>
+    <option value="eur" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "eur"); ?>>EUR</option>
+    <option value="gbp" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "gbp"); ?>>GBP</option>
+    <option value="aud" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "aud"); ?>>AUD</option>
+	  <option value="cad" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "cad"); ?>>CAD</option>
+	  <option value="jpy" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "jpy"); ?>>JPY</option>
+	  <option value="dkk" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "dkk"); ?>>DKK</option>
+	  <option value="nok" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "nok"); ?>>NOK</option>
+	  <option value="sek" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "sek"); ?>>SEK</option>
+	  <option value="sgd" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "sgd"); ?>>SGD</option>
+	  <option value="hkd" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "hkd"); ?>>HKD</option>
+	  <option value="chf" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "chf"); ?>>CHF</option>
+	  <option value="mxn" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "mxn"); ?>>MXN</option>
+	  <option value="brl" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "brl"); ?>>BRL</option>
+	  <option value="nzd" <?php selected( esc_attr( $d_stripe_options['direct_stripe_currency'] ), "nzd"); ?>>NZD</option>
+ </select>
+	<?php
+}
+	
 /************   Redirection pages   ************/
 function direct_stripe_success_page_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
