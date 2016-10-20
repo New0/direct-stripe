@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Direct Stripe\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-11 16:05+0000\n"
+"PO-Revision-Date: 2016-10-11 16:15+0000\n"
+"Last-Translator: Nico <nico@newo.fr>\n"
+"Language-Team: French (France)\n"
+"Language: fr-FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: direct-stripe.php:37
+msgid "Logo for Stripe Form"
+msgstr "Logo pour le formulaire Stripe"
+
+#: direct-stripe.php:38
+msgid "Use selected image"
+msgstr "Utiliser image selectionnée"
+
+#: includes/button.php:11
+msgid "Pay with card"
+msgstr "Régler avec une carte"
+
+#: includes/button.php:12
+msgid "Pay"
+msgstr "Procéder"
+
+#: includes/admin.php:20
+msgid "Set API keys"
+msgstr "Renseigner les clés API"
+
+#: includes/admin.php:27
+msgid "Secret API key"
+msgstr "Clé API secrète"
+
+#: includes/admin.php:34
+msgid "Publishable API key"
+msgstr "Clé API publique"
+
+#: includes/admin.php:44
+msgid "Redirection pages"
+msgstr "Pages de redirection"
+
+#: includes/admin.php:51
+msgid "Success page"
+msgstr "Redirection après succès"
+
+#: includes/admin.php:59
+msgid "Error page"
+msgstr "Redirection après erreur"
+
+#: includes/admin.php:68
+msgid "Logo image loading"
+msgstr "Chargement image"
+
+#: includes/admin.php:74
+msgid "Form logo / image"
+msgstr "Logo / image du formulaire"
+
+#: includes/admin.php:83
+msgid "Custom button styles"
+msgstr "Styles de boutons sur mesure"
+
+#: includes/admin.php:89
+msgid "Use custom styles"
+msgstr "Utiliser les styles sur mesure"
+
+#: includes/admin.php:96
+msgid "Main Color"
+msgstr "Couleur principale"
+
+#: includes/admin.php:103
+msgid "Border radius"
+msgstr "Radius des bordures"
+
+#: includes/admin.php:112
+msgid "Terms and conditions"
+msgstr "Conditions de vente"
+
+#: includes/admin.php:118
+msgid "Use Terms and Conditions checkbox"
+msgstr "Utiliser la case à cocher des conditions de vente"
+
+#: includes/admin.php:125
+msgid "Terms and conditions text"
+msgstr "Texte conditions de vente"
+
+#: includes/admin.php:132
+msgid "Terms and conditions link text"
+msgstr "Texte lié aux conditions de ventes"
+
+#: includes/admin.php:139
+msgid "Terms and conditions page (slug)"
+msgstr "Slug de la page des conditions de vente"
+
+#: includes/admin.php:186
+msgid "Select image"
+msgstr "Selectionner l'image"
+
+#: includes/admin.php:209
+msgid "px"
+msgstr "px"
+
+#: includes/admin.php:244
+msgid "Stripe API keys (test or live keys)"
+msgstr "Clés API Stripe (test ou live)"
+
+#: includes/admin.php:247
+msgid "Pages after success payment or error "
+msgstr "Pages de redirection après paiement ou erreur"
+
+#: includes/admin.php:250
+msgid "Set image in form and main button color"
+msgstr "Image du formulaire"
+
+#: includes/admin.php:253
+msgid "Only used with custom button styles enabled"
+msgstr "Seulement actif avec le style de bouton sur mesure activé"
+
+#. Name of the plugin
+#: includes/admin.php:275
+msgid "Direct Stripe"
+msgstr "Direct Stripe"
+
+#. Description of the plugin
+msgid "Use Stripe buttons everywhere in a WordPress website"
+msgstr "Utiliser un bouton Stripe partout dans un site web WordPress"
+
+#. URI of the plugin
+msgid "https://newo.fr/"
+msgstr "https://newo.fr/"
+
+#. Author of the plugin
+msgid "Nicolas Figueira"
+msgstr "Nicolas Figueira"
+
+#. Author URI of the plugin
+msgid "https://newo.me"
+msgstr "https://newo.me"
