@@ -78,8 +78,11 @@ In progress, in the meanwhile asking yours may help to fill this section.
 == Screenshots ==
 
 https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe&tab=emails.png
+
 https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe&tab=styles.png
+
 https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe.png
+
 https://newo.me/ds-screenshots/wp-admin_edit_php_post_type=directstripelogs.png
 
 == Changelog ==
