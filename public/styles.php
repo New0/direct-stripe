@@ -21,5 +21,6 @@ $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
 			}
 			.direct-stripe-button:hover {
 				color: $maincolor;
+				border-color: $maincolor;
 			}
 		";

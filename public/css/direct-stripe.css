@@ -27,5 +27,9 @@
 }
 .direct-stripe-button:hover {
 	background-color: transparent;
+	border-color: #6772e5;
 	color: #6772e5;
+}
+#donationvalue {
+	
 }
