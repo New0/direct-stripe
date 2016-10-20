@@ -28,7 +28,7 @@ $directstripe = new \DirectStripeFunctions;
 register_activation_hook( __FILE__,  array( $directstripe, 'direct_stripe_user_roles_on_activation') );
 
 //Translation ready
-load_plugin_textdomain('direct-stripe', false, DSCORE_PATH . '/languages' );
+add_action( 'init', array( $directstripe, 'direct_stripe_load_textdomain') );
 
 //Load admin scripts
 add_action( 'admin_enqueue_scripts', array( $directstripe, 'direct_stripe_load_admin_scripts') );
