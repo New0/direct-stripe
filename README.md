@@ -29,6 +29,9 @@ Customize the button via shortcode attributes.
 Customize emails sent after a successful or error action on the button.
 Set up redirections pages after payments or errors.
 
+First release => functionnal button for payment/donation and subscriptions. 
+Logs users and transactions in WordPress admin. 
+Set custom styles and automaed emails.
 
 
 == Installation ==
@@ -69,12 +72,16 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 == Frequently Asked Questions ==
 
-Waiting for them!
+In progress, in the meanwhile asking yours may help to fill this section.
 
 
 == Screenshots ==
 
+https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe&tab=emails.png
+https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe&tab=styles.png
+https://newo.me/ds-screenshots/wp-admin_admin_php_page=direct_stripe.png
+https://newo.me/ds-screenshots/wp-admin_edit_php_post_type=directstripelogs.png
 
 == Changelog ==
 
-== Changelog ==
+1.0 Released functionnal button for payment/donation and subscriptions. Logs users and transactions in WordPress admin. Set custom styles and automaed emails.
