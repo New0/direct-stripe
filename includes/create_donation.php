@@ -38,7 +38,7 @@ $stripe_zip = $_POST['stripeBillingAddressZip'];*/
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
       'amount' => $amount,
-      'currency' => 'eur'
+      'currency' => $d_stripe_general['direct_stripe_currency']
   ));
 	
 		//Log transaction in WordPress admin

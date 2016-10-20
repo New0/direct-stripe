@@ -4,8 +4,13 @@ class DirectStripeFunctions {
   
 //Add Stripe user role on plugin activation
 function direct_stripe_user_roles_on_activation() {
-      add_role( 'stripe-user', 'Stripe user', array( 'read' => true ));
+      add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
    }
+
+//Languages support
+function direct_stripe_load_textdomain() {
+	load_plugin_textdomain('direct-stripe', false, dirname( DSCORE_BASENAME ) . '/languages' );
+}
   
  /**
  * Admin Scripts & Styles
@@ -15,10 +20,10 @@ function direct_stripe_load_admin_scripts( $hook ) {
   global $direct_stripe_page;
 	if( $hook != $direct_stripe_page ) 
 		return;
-  wp_enqueue_style('direct-stripe-admin', DSCORE_URL . '/admin/css/ds-admin.css');
+  wp_enqueue_style('direct-stripe-admin', DSCORE_PATH . '/admin/css/ds-admin.css');
   wp_enqueue_media();
   wp_enqueue_style('wp-color-picker');
-  wp_enqueue_script('direct-stripe-image-script', DSCORE_URL . '/admin/js/ds-script.js', array('jquery', 'wp-color-picker'), false, true );
+  wp_enqueue_script('direct-stripe-image-script', DSCORE_PATH . '/admin/js/ds-script.js', array('jquery', 'wp-color-picker'), false, true );
   wp_localize_script('direct-stripe-image-script', 'direct_stripe_image_script_vars', array(
 			'title' => __('Logo for Stripe Form', 'direct-stripe'),
 			'message' => __('Use selected image', 'direct-stripe')

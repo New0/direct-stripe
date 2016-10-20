@@ -39,7 +39,7 @@ if($stripe_id) { // Utilisateur enregistré
   $charge = \Stripe\Charge::create(array(
       'customer' => $stripe_id,
       'amount' => $amount,
-		  'currency' => 'eur'
+		  'currency' => $d_stripe_general['direct_stripe_currency']
   ));
 	
 	//Log transaction in WordPress admin
