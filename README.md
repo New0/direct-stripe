@@ -31,7 +31,7 @@ Set up redirections pages after payments or errors.
 
 First release => functionnal button for payment/donation and subscriptions. 
 Logs users and transactions in WordPress admin. 
-Set custom styles and automaed emails.
+Set custom styles and automated emails.
 
 Display the Stripe button on your site with a simple shortcode [direct-stripe]
 
