@@ -33,6 +33,27 @@ First release => functionnal button for payment/donation and subscriptions.
 Logs users and transactions in WordPress admin. 
 Set custom styles and automaed emails.
 
+Display the Stripe button on your site with a simple shortcode [direct-stripe]
+
+These are the valid options :
+ type : payment / subscription /donation
+ name : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
+ description : Product description displayed on modal form. Set by default to the site description.description
+ amount : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
+ label : Text displayed on button to display modal form
+ panellabel : Text for modal form button
+ coupon : coupon id set in stripe admin
+ 
+ Exemples, put a shortcode in a page / post content or template :
+ 
+ Payment button for the amount of 50,00 (the currency set up in global settings), using the coupon xmas_offer (created in Stripe admin)
+ [direct-stripe type="payment" amount="5000" name="My Shop" description="The great product you dream of" label="Proceed to checkout" panellabel="Pay now" coupon="xmas-offer"]
+ 
+ Subscription button for the plan monthly-plan (created in stripe admin) with coupon first-month-50 (created in Stripe admin)
+ [direct-stripe type="subscription" amount="monthly-plan" coupon="first-month-50" description="The great monthly plan" label="Subscribe" panellabel="That's it"]
+ 
+ Donation button 
+ [direct-stripe type="donation" name="My plugin" description="Help me improve the plugin" label="Buy me coffee" panellabel="This will add one more setting option!"]
 
 == Installation ==
 
