@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 17:48+0000\n"
-"PO-Revision-Date: 2016-10-20 17:48+0000\n"
+"POT-Creation-Date: 2016-10-21 16:40+0000\n"
+"PO-Revision-Date: 2016-10-21 16:40+0000\n"
 "Last-Translator: Nico <nico@newo.fr>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#: admin/display-settings.php:268
-msgid "Check to use custom button"
-msgstr "Utiliser le bouton personnalisé"
+#: includes/create_donation.php:53
+msgid "donation"
+msgstr "don"
 
-#: admin/display-settings.php:271
-msgid "Set your Stripe's account currency"
-msgstr "Enregistrer la devise du compte Stripe"
+#: includes/create_payment.php:55 includes/create_payment.php:102
+msgid "payment"
+msgstr "paiement"
 
 #: admin/display-users.php:2
 msgid "Direct Stripe user infos"
@@ -58,10 +58,8 @@ msgid "Stripe API keys"
 msgstr "Clés API Stripe"
 
 #: admin/display-settings.php:247
-msgid "Pages after success payment or error (enter only page slug) "
-msgstr ""
-"Pages suivant un paiement ou une tentative (renseigner le slug de page "
-"uniquement)"
+msgid "Only enter the page's slug (URL friendly version of the post title)"
+msgstr "Renseigner le slug de la page (version URL du titre de page)"
 
 #: admin/display-settings.php:250
 msgid "Set image for Stripe's modal form"
@@ -79,20 +77,28 @@ msgstr "Emails envoyés à l'adresse du système"
 msgid "Emails sent to Stripe user email address"
 msgstr "Emails envoyés à l'adresse de l'utilisateur Stripe"
 
+#: admin/display-settings.php:268
+msgid "Check to use custom button"
+msgstr "Utiliser le bouton personnalisé"
+
+#: admin/display-settings.php:271
+msgid "Set your Stripe's account currency"
+msgstr "Enregistrer la devise du compte Stripe"
+
 #. Name of the plugin
 #: admin/build-page.php:5
 msgid "Direct Stripe"
 msgstr "Direct Stripe"
 
-#: admin/build-page.php:10
+#: admin/build-page.php:16
 msgid "General Options"
 msgstr "Options générales"
 
-#: admin/build-page.php:11
+#: admin/build-page.php:17
 msgid "Styles"
 msgstr "Styles"
 
-#: admin/build-page.php:12
+#: admin/build-page.php:18
 msgid "Emails"
 msgstr "Emails"
 
@@ -125,7 +131,7 @@ msgid "Currency"
 msgstr "Devise"
 
 #: admin/register-settings.php:77
-msgid "Redirection pages"
+msgid "Landing pages"
 msgstr "Pages de redirection"
 
 #: admin/register-settings.php:84
@@ -137,12 +143,12 @@ msgid "Error page"
 msgstr "Redirection après erreur"
 
 #: admin/register-settings.php:101
-msgid "Logo image loading"
-msgstr "Chargement image"
+msgid "Modal form logo / image"
+msgstr "Logo / image du formulaire Stripe"
 
 #: admin/register-settings.php:107
-msgid "Form logo / image"
-msgstr "Logo / image du formulaire"
+msgid "Current logo / image"
+msgstr "Logo / image chargé"
 
 #: admin/register-settings.php:116
 msgid "Custom button styles"
@@ -181,12 +187,12 @@ msgid "Terms and conditions page (slug)"
 msgstr "Slug de la page des conditions de vente"
 
 #: admin/register-settings.php:181
-msgid "Automated emails to admin"
-msgstr "Emails automatisés à l'administrateur"
+msgid "Automated emails to admin after successful transactions"
+msgstr "Emails automatiques pour l'administrateur suite à un paiement abouti"
 
 #: admin/register-settings.php:187
-msgid "Send emails to admin on successful transaction"
-msgstr "Envoyer un email à l'administrateur suite à un paiement valide"
+msgid "Send emails to admin after successful transaction"
+msgstr "Envoyer un email à l'admin suite à une transaction aboutie"
 
 #: admin/register-settings.php:194
 msgid "Admin email subject"
@@ -197,12 +203,14 @@ msgid "Admin email content"
 msgstr "Contenu de l'email pour l'administrateur"
 
 #: admin/register-settings.php:210
-msgid "Automated emails to Stripe user"
-msgstr "Emails automatisés à l'utilisateur Stripe"
+msgid "Automated emails to Stripe user after successful transactions"
+msgstr ""
+"Emails automatiques pour l'utilisateur Stripe suite à un paiement abouti"
 
 #: admin/register-settings.php:216
-msgid "Send emails to Stripe user on successful transaction"
-msgstr "Envoyer un email à l'utilisateur Stripe suite à un paiement valide"
+msgid "Send emails to Stripe user after successful transaction"
+msgstr ""
+"Envoyer un email à l'utilisateur Stripe suite à une transaction aboutie"
 
 #: admin/register-settings.php:223
 msgid "User email subject"
@@ -285,7 +293,7 @@ msgstr "Log Direct Stripe"
 msgid "Direct Stripe Parent Log"
 msgstr "Log Parent Direct Stripe"
 
-#: includes/functions.php:139 includes/functions.php:152 
+#: includes/functions.php:139 includes/functions.php:152
 #: includes/functions.php:153
 msgid "Direct Stripe logs"
 msgstr "Logs Direct Stripe"
@@ -343,12 +351,19 @@ msgid "Date"
 msgstr "Date"
 
 #: includes/functions.php:193 includes/functions.php:201
+#: includes/functions.php:209
 msgid "Unknown"
 msgstr "Inconnu"
 
 #: includes/functions.php:195 includes/functions.php:203
+#: includes/functions.php:211
+#, php-format
 msgid "%s"
 msgstr "%s"
+
+#: includes/create_subscription.php:59 includes/create_subscription.php:110
+msgid "subscription"
+msgstr "souscription"
 
 #. Description of the plugin
 msgid ""

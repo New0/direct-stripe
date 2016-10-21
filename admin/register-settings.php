@@ -74,7 +74,7 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	// Redirection pages section
 	add_settings_section(
 		'direct_stripe_redirectionPages_section', 
-		__( 'Redirection pages', 'direct-stripe' ), 
+		__( 'Landing pages', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_redirections_section_callback'), 
 		'directStripeGeneral'
 	);
@@ -98,13 +98,13 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	// Logo image
 	add_settings_section(
 		'direct_stripe_logo_section', 
-		__( 'Logo image loading', 'direct-stripe' ), 
+		__( 'Modal form logo / image', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_logo_section_callback'), 
 		'directStripeGeneral'
 	);
 	add_settings_field( 
 		'direct_stripe_logo_image', 
-		__( 'Form logo / image', 'direct-stripe' ), 
+		__( 'Current logo / image', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_logo_render'), 
 		'directStripeGeneral', 
 		'direct_stripe_logo_section' 
@@ -178,13 +178,13 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	// Emails to admin
 	add_settings_section(
 		'direct_stripe_admin_emails_section', 
-		__( 'Automated emails to admin', 'direct-stripe' ), 
+		__( 'Automated emails to admin after successful transactions', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_admin_emails_section_callback'), 
 		'directStripeEmails'
 	);
 	add_settings_field( 
 		'direct_stripe_admin_emails_checkbox', 
-		__( 'Send emails to admin on successful transaction', 'direct-stripe' ), 
+		__( 'Send emails to admin after successful transaction', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_admin_emails_checkbox_render'), 
 		'directStripeEmails', 
 		'direct_stripe_admin_emails_section' 
@@ -207,13 +207,13 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	// Emails to stripe user
 	add_settings_section(
 		'direct_stripe_user_emails_section', 
-		__( 'Automated emails to Stripe user', 'direct-stripe' ), 
+		__( 'Automated emails to Stripe user after successful transactions', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_user_emails_section_callback'), 
 		'directStripeEmails'
 	);
 	add_settings_field( 
 		'direct_stripe_user_emails_checkbox', 
-		__( 'Send emails to Stripe user on successful transaction', 'direct-stripe' ), 
+		__( 'Send emails to Stripe user after successful transaction', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_user_emails_checkbox_render'), 
 		'directStripeEmails', 
 		'direct_stripe_user_emails_section' 

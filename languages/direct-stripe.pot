@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 17:47+0000\n"
+"POT-Creation-Date: 2016-10-21 16:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -51,7 +51,7 @@ msgid "Stripe API keys"
 msgstr ""
 
 #: admin/display-settings.php:247
-msgid "Pages after success payment or error (enter only page slug) "
+msgid "Only enter the page's slug (URL friendly version of the post title)"
 msgstr ""
 
 #: admin/display-settings.php:250
@@ -83,15 +83,15 @@ msgstr ""
 msgid "Direct Stripe"
 msgstr ""
 
-#: admin/build-page.php:10
+#: admin/build-page.php:16
 msgid "General Options"
 msgstr ""
 
-#: admin/build-page.php:11
+#: admin/build-page.php:17
 msgid "Styles"
 msgstr ""
 
-#: admin/build-page.php:12
+#: admin/build-page.php:18
 msgid "Emails"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgid "Currency"
 msgstr ""
 
 #: admin/register-settings.php:77
-msgid "Redirection pages"
+msgid "Landing pages"
 msgstr ""
 
 #: admin/register-settings.php:84
@@ -136,11 +136,11 @@ msgid "Error page"
 msgstr ""
 
 #: admin/register-settings.php:101
-msgid "Logo image loading"
+msgid "Modal form logo / image"
 msgstr ""
 
 #: admin/register-settings.php:107
-msgid "Form logo / image"
+msgid "Current logo / image"
 msgstr ""
 
 #: admin/register-settings.php:116
@@ -180,11 +180,11 @@ msgid "Terms and conditions page (slug)"
 msgstr ""
 
 #: admin/register-settings.php:181
-msgid "Automated emails to admin"
+msgid "Automated emails to admin after successful transactions"
 msgstr ""
 
 #: admin/register-settings.php:187
-msgid "Send emails to admin on successful transaction"
+msgid "Send emails to admin after successful transaction"
 msgstr ""
 
 #: admin/register-settings.php:194
@@ -196,11 +196,11 @@ msgid "Admin email content"
 msgstr ""
 
 #: admin/register-settings.php:210
-msgid "Automated emails to Stripe user"
+msgid "Automated emails to Stripe user after successful transactions"
 msgstr ""
 
 #: admin/register-settings.php:216
-msgid "Send emails to Stripe user on successful transaction"
+msgid "Send emails to Stripe user after successful transaction"
 msgstr ""
 
 #: admin/register-settings.php:223
@@ -281,7 +281,7 @@ msgstr ""
 msgid "Direct Stripe Parent Log"
 msgstr ""
 
-#: includes/functions.php:139 includes/functions.php:152 
+#: includes/functions.php:139 includes/functions.php:152
 #: includes/functions.php:153
 msgid "Direct Stripe logs"
 msgstr ""
@@ -339,11 +339,26 @@ msgid "Date"
 msgstr ""
 
 #: includes/functions.php:193 includes/functions.php:201
+#: includes/functions.php:209
 msgid "Unknown"
 msgstr ""
 
 #: includes/functions.php:195 includes/functions.php:203
+#: includes/functions.php:211
+#, php-format
 msgid "%s"
+msgstr ""
+
+#: includes/create_subscription.php:59 includes/create_subscription.php:110
+msgid "subscription"
+msgstr ""
+
+#: includes/create_donation.php:53
+msgid "donation"
+msgstr ""
+
+#: includes/create_payment.php:55 includes/create_payment.php:102
+msgid "payment"
 msgstr ""
 
 #. Description of the plugin

@@ -203,6 +203,14 @@ function direct_stripe_manage_logs_columns( $column ) {
 				printf( __( '%s', 'direct-stripe' ), $type );
 			break;
 			
+			case 'date' :
+			$date = get_post_meta( get_the_ID(), 'date', true );
+			if ( empty( $date ) )
+				echo __( 'Unknown', 'direct-stripe' );
+			else
+				printf( __( '%s', 'direct-stripe' ), $date );
+			break;
+			
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;

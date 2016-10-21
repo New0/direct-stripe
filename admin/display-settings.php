@@ -244,7 +244,7 @@ public function direct_stripe_api_section_callback() {
 	_e( 'Stripe API keys', 'direct-stripe' );
 }
 public function direct_stripe_redirections_section_callback(  ) { 
-	_e( 'Pages after success payment or error (enter only page slug) ', 'direct-stripe' );
+	_e( 'Only enter the page\'s slug (URL friendly version of the post title)', 'direct-stripe' );
 }
 public function direct_stripe_logo_section_callback() { 
 	_e( 'Set image for Stripe\'s modal form', 'direct-stripe' );

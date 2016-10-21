@@ -52,7 +52,7 @@ if($stripe_id) { // Utilisateur enregistré
 							)
 						);
 	add_post_meta($post_id, 'amount', $amount);
-	add_post_meta($post_id, 'type', 'payment');
+	add_post_meta($post_id, 'type', __('payment','direct-stripe') );
 	
          // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
@@ -95,11 +95,11 @@ if($stripe_id) { // Utilisateur enregistré
 								'post_title' => $token,
 								'post_status' => 'publish',
 								'post_type' => 'Direct Stripe Logs',
-								'Author'	=>	$user_id
+								'post_author' =>	$user_id
 							)
 						);
 	add_post_meta($post_id, 'amount', $amount);
-	add_post_meta($post_id, 'type', 'payment');
+	add_post_meta($post_id, 'type', __('payment','direct-stripe'));
 
 	       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
