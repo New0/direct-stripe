@@ -4,6 +4,8 @@ Plugin Name: Direct Stripe
 Plugin URI: https://github.com/New0/direct-stripe
 Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
 Author: Nicolas Figueira
+Text Domain: direct-stripe
+Domain Path: /languages
 Version: 1.0
 Author URI: https://newo.me
 */

@@ -51,7 +51,7 @@ Ready for translation
     - amount : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
     - abel : Text displayed on button to display modal form
     - panellabel : Text for modal form button
-	   - coupon : coupon id set in stripe admin
+	- coupon : coupon id set in stripe admin
 
  - Exemples, put a shortcode in a page / post content or template :
 
@@ -66,7 +66,8 @@ Ready for translation
 
 
 => Global Setup
- - Log in to your stripe's account or create one at https://dashboard.stripe.com/register
+
+  - Log in to your stripe's account or create one at https://dashboard.stripe.com/register
 
   - Configure settings in admin panel :
 
@@ -97,7 +98,8 @@ Ready for translation
 
 == Installation ==
 
-    Upload the plugin files to the /wp-content/plugins/direct-stripe directory, or install the plugin through the WordPress plugins screen directly. 1.1 Activate the plugin through the 'Plugins' screen in WordPress
+1.0 Upload the plugin files to the /wp-content/plugins/direct-stripe directory, or install the plugin through the WordPress plugins screen directly. 
+1.1 Activate the plugin through the 'Plugins' screen in WordPress
 
 Log in to your stripe's account or create one at https://dashboard.stripe.com/register
 
