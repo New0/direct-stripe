@@ -12,7 +12,7 @@ $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
-if( $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
+if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
 \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
 } else { 
 \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
