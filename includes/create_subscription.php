@@ -12,7 +12,7 @@ $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
-if( $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
+if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
 } else { 
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
@@ -37,12 +37,18 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 
 if($stripe_id) { //Utilisateur existant
   // create new subscription
+	if( !empty($coupon) ){
     $subscription = \Stripe\Subscription::create(array(
           "customer" => $stripe_id,
           "plan"     => $amount,
           'coupon'   => $coupon
         ));
-
+	} else {
+		 $subscription = \Stripe\Subscription::create(array(
+          "customer" => $stripe_id,
+          "plan"     => $amount
+        ));
+	}
     $plan = \Stripe\Plan::retrieve($amount);
     $plan_amount = $plan->amount;
   
@@ -68,12 +74,20 @@ if($stripe_id) { //Utilisateur existant
   }
   
  } else {  // Si user n'existe pas
+			if( !empty($coupon) ){
       $customer = \Stripe\Customer::create(array(
         'email'   => $email_address,
         'source'  => $token,
         'plan'    => $amount,
         'coupon'  => $coupon
       ));
+			} else {
+				$customer = \Stripe\Customer::create(array(
+        'email'   => $email_address,
+        'source'  => $token,
+        'plan'    => $amount
+				));
+			}
 
     $plan = \Stripe\Plan::retrieve($amount);
     $plan_amount = $plan->amount;
