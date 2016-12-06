@@ -3,8 +3,8 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
-Tested up to: 4.6
-Stable tag: 1.0.1
+Tested up to: 4.6.1
+Stable tag: 1.1.0
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,8 @@ Setup automated emails sent after a successful or error action on modal form sub
 **Set up landing pages after payments or errors.**
 
 **Logs users and transactions in WordPress admin.**
+
+**Option to ask for the billing details**
 
 Ready for translations (Français déjà traduit) 
 
