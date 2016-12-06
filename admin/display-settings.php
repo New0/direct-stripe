@@ -97,6 +97,13 @@ $d_stripe_options = get_option( 'direct_stripe_general_settings' );
 	<input type="text" class="ds-media-input"  name="direct_stripe_general_settings[direct_stripe_logo_image]" value="<?php echo esc_url( $d_stripe_options['direct_stripe_logo_image'] ); ?>" /><button class="ds-media-button button"><?php _e('Select image', 'direct-stripe'); ?></button>
 <?php 
 }
+/***************    Checkbox for billing informations   **************************/
+function direct_stripe_billing_infos_checkbox_render() { 
+	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
+	?>
+	<input type='checkbox' name='direct_stripe_general_settings[direct_stripe_billing_infos_checkbox]' value='1' <?php checked( isset ( $d_stripe_options['direct_stripe_billing_infos_checkbox'] ), 1 ); ?> />
+	<?php 
+}
 
 /*********  Checkbox for stylesheet **********/
 function direct_stripe_use_custom_styles_render() { 
@@ -263,6 +270,9 @@ public function direct_stripe_admin_error_emails_section_callback() {
 }
 public function direct_stripe_user_error_emails_section_callback() { 
 	_e( 'Emails sent to Stripe user email address', 'direct-stripe' );
+}
+public function direct_stripe_billing_infos_section_callback() {
+	_e( 'Name, Address, City, Zip code and country will be collected before payment', 'direct-stripe' );
 }
 public function direct_stripe_styles_section_callback() {
 	_e( 'Check to use custom button', 'direct-stripe' );

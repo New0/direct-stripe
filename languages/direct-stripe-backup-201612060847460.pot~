@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 08:47+0000\n"
+"POT-Creation-Date: 2016-10-21 16:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,6 +13,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
+
+#: admin/display-users.php:2
+msgid "Direct Stripe user infos"
+msgstr ""
+
+#: admin/display-users.php:5
+msgid "Direct Sripe Data"
+msgstr ""
+
+#: admin/display-users.php:6
+msgid "Stripe customer ID"
+msgstr ""
+
+#: admin/display-users.php:9
+msgid "stripe_id"
+msgstr ""
+
+#: admin/display-settings.php:29
+msgid "Visa card test number 4242 4242 4242 4242"
+msgstr ""
+
+#: admin/display-settings.php:30
+msgid "With any exp date and 3 CVV numbers"
+msgstr ""
+
+#: admin/display-settings.php:97
+msgid "Select image"
+msgstr ""
+
+#: admin/display-settings.php:120
+msgid "px"
+msgstr ""
+
+#: admin/display-settings.php:244
+msgid "Stripe API keys"
+msgstr ""
+
+#: admin/display-settings.php:247
+msgid "Only enter the page's slug (URL friendly version of the post title)"
+msgstr ""
+
+#: admin/display-settings.php:250
+msgid "Set image for Stripe's modal form"
+msgstr ""
+
+#: admin/display-settings.php:253
+msgid "Only used with custom button styles enabled"
+msgstr ""
+
+#: admin/display-settings.php:256 admin/display-settings.php:262
+msgid "Emails sent to WordPress system email address"
+msgstr ""
+
+#: admin/display-settings.php:259 admin/display-settings.php:265
+msgid "Emails sent to Stripe user email address"
+msgstr ""
+
+#: admin/display-settings.php:268
+msgid "Check to use custom button"
+msgstr ""
+
+#: admin/display-settings.php:271
+msgid "Set your Stripe's account currency"
+msgstr ""
 
 #. Name of the plugin
 #: admin/build-page.php:5
@@ -29,75 +93,6 @@ msgstr ""
 
 #: admin/build-page.php:18
 msgid "Emails"
-msgstr ""
-
-#: admin/display-settings.php:29
-msgid "Visa card test number 4242 4242 4242 4242"
-msgstr ""
-
-#: admin/display-settings.php:30
-msgid "With any exp date and 3 CVV numbers"
-msgstr ""
-
-#: admin/display-settings.php:97
-msgid "Select image"
-msgstr ""
-
-#: admin/display-settings.php:127
-msgid "px"
-msgstr ""
-
-#: admin/display-settings.php:251
-msgid "Stripe API keys"
-msgstr ""
-
-#: admin/display-settings.php:254
-msgid "Only enter the page's slug (URL friendly version of the post title)"
-msgstr ""
-
-#: admin/display-settings.php:257
-msgid "Set image for Stripe's modal form"
-msgstr ""
-
-#: admin/display-settings.php:260
-msgid "Only used with custom button styles enabled"
-msgstr ""
-
-#: admin/display-settings.php:263 admin/display-settings.php:269
-msgid "Emails sent to WordPress system email address"
-msgstr ""
-
-#: admin/display-settings.php:266 admin/display-settings.php:272
-msgid "Emails sent to Stripe user email address"
-msgstr ""
-
-#: admin/display-settings.php:275
-msgid ""
-"Name, Address, City, Zip code and country will be collected before payment"
-msgstr ""
-
-#: admin/display-settings.php:278
-msgid "Check to use custom button"
-msgstr ""
-
-#: admin/display-settings.php:281
-msgid "Set your Stripe's account currency"
-msgstr ""
-
-#: admin/display-users.php:2
-msgid "Direct Stripe user infos"
-msgstr ""
-
-#: admin/display-users.php:5
-msgid "Direct Sripe Data"
-msgstr ""
-
-#: admin/display-users.php:6
-msgid "Stripe customer ID"
-msgstr ""
-
-#: admin/display-users.php:9
-msgid "stripe_id"
 msgstr ""
 
 #: admin/register-settings.php:16
@@ -148,124 +143,104 @@ msgstr ""
 msgid "Current logo / image"
 msgstr ""
 
-#: admin/register-settings.php:115
-msgid "Billing information"
-msgstr ""
-
-#: admin/register-settings.php:121
-msgid "Ask for address in modal Form"
-msgstr ""
-
-#: admin/register-settings.php:130
+#: admin/register-settings.php:116
 msgid "Custom button styles"
 msgstr ""
 
-#: admin/register-settings.php:136
+#: admin/register-settings.php:122
 msgid "Use custom styles"
 msgstr ""
 
-#: admin/register-settings.php:143
+#: admin/register-settings.php:129
 msgid "Main Color"
 msgstr ""
 
-#: admin/register-settings.php:150
+#: admin/register-settings.php:136
 msgid "Border radius"
 msgstr ""
 
-#: admin/register-settings.php:159
+#: admin/register-settings.php:145
 msgid "Terms and conditions"
 msgstr ""
 
-#: admin/register-settings.php:165
+#: admin/register-settings.php:151
 msgid "Use Terms and Conditions checkbox"
 msgstr ""
 
-#: admin/register-settings.php:172
+#: admin/register-settings.php:158
 msgid "Terms and conditions text"
 msgstr ""
 
-#: admin/register-settings.php:179
+#: admin/register-settings.php:165
 msgid "Terms and conditions link text"
 msgstr ""
 
-#: admin/register-settings.php:186
+#: admin/register-settings.php:172
 msgid "Terms and conditions page (slug)"
 msgstr ""
 
-#: admin/register-settings.php:195
+#: admin/register-settings.php:181
 msgid "Automated emails to admin after successful transactions"
 msgstr ""
 
-#: admin/register-settings.php:201
+#: admin/register-settings.php:187
 msgid "Send emails to admin after successful transaction"
 msgstr ""
 
-#: admin/register-settings.php:208
+#: admin/register-settings.php:194
 msgid "Admin email subject"
 msgstr ""
 
-#: admin/register-settings.php:215
+#: admin/register-settings.php:201
 msgid "Admin email content"
 msgstr ""
 
-#: admin/register-settings.php:224
+#: admin/register-settings.php:210
 msgid "Automated emails to Stripe user after successful transactions"
 msgstr ""
 
-#: admin/register-settings.php:230
+#: admin/register-settings.php:216
 msgid "Send emails to Stripe user after successful transaction"
 msgstr ""
 
-#: admin/register-settings.php:237
+#: admin/register-settings.php:223
 msgid "User email subject"
 msgstr ""
 
-#: admin/register-settings.php:244
+#: admin/register-settings.php:230
 msgid "User email content"
 msgstr ""
 
-#: admin/register-settings.php:253
+#: admin/register-settings.php:239
 msgid "Automated emails to admin after failed transaction"
 msgstr ""
 
-#: admin/register-settings.php:259
+#: admin/register-settings.php:245
 msgid "Send emails to admin after failed transaction"
 msgstr ""
 
-#: admin/register-settings.php:266
+#: admin/register-settings.php:252
 msgid "Admin error email subject"
 msgstr ""
 
-#: admin/register-settings.php:273
+#: admin/register-settings.php:259
 msgid "Admin error email content"
 msgstr ""
 
-#: admin/register-settings.php:282
+#: admin/register-settings.php:268
 msgid "Automated emails to Stripe user after failed transaction"
 msgstr ""
 
-#: admin/register-settings.php:288
+#: admin/register-settings.php:274
 msgid "Send emails to Stripe user after failed transaction"
 msgstr ""
 
-#: admin/register-settings.php:295
+#: admin/register-settings.php:281
 msgid "User error email subject"
 msgstr ""
 
-#: admin/register-settings.php:302
+#: admin/register-settings.php:288
 msgid "User error email content"
-msgstr ""
-
-#: includes/create_donation.php:52 includes/create_donation.php:100
-msgid "donation"
-msgstr ""
-
-#: includes/create_payment.php:55 includes/create_payment.php:103
-msgid "payment"
-msgstr ""
-
-#: includes/create_subscription.php:65 includes/create_subscription.php:124
-msgid "subscription"
 msgstr ""
 
 #: includes/functions.php:7
@@ -288,88 +263,102 @@ msgstr ""
 msgid "Pay"
 msgstr ""
 
-#: includes/functions.php:92 includes/functions.php:92
+#: includes/functions.php:95 includes/functions.php:95
 msgid "Settings"
 msgstr ""
 
-#: includes/functions.php:133
+#: includes/functions.php:136
 msgctxt "Post Type General Name"
 msgid "Direct Stripe logs"
 msgstr ""
 
-#: includes/functions.php:134
+#: includes/functions.php:137
 msgctxt "Post Type Singular Name"
 msgid "Direct Stripe log"
 msgstr ""
 
-#: includes/functions.php:135
+#: includes/functions.php:138
 msgid "Direct Stripe Parent Log"
 msgstr ""
 
-#: includes/functions.php:136 includes/functions.php:149
-#: includes/functions.php:150
+#: includes/functions.php:139 includes/functions.php:152
+#: includes/functions.php:153
 msgid "Direct Stripe logs"
 msgstr ""
 
-#: includes/functions.php:137
+#: includes/functions.php:140
 msgid "Direct Stripe log"
 msgstr ""
 
-#: includes/functions.php:138
+#: includes/functions.php:141
 msgid "Add New Direct Stripe log"
 msgstr ""
 
-#: includes/functions.php:139
+#: includes/functions.php:142
 msgid "Add New"
 msgstr ""
 
-#: includes/functions.php:140
+#: includes/functions.php:143
 msgid "Edit Direct Stripe log"
 msgstr ""
 
-#: includes/functions.php:141
+#: includes/functions.php:144
 msgid "Update Direct Stripe log"
 msgstr ""
 
-#: includes/functions.php:142
+#: includes/functions.php:145
 msgid "SearchDirect Stripe log"
 msgstr ""
 
-#: includes/functions.php:143
+#: includes/functions.php:146
 msgid "Direct Stripe log Not Found"
 msgstr ""
 
-#: includes/functions.php:144
+#: includes/functions.php:147
 msgid "Direct Stripe log Not found in Trash"
 msgstr ""
 
-#: includes/functions.php:170
+#: includes/functions.php:173
 msgid "Transaction ID"
 msgstr ""
 
-#: includes/functions.php:171
+#: includes/functions.php:174
 msgid "Stripe User"
 msgstr ""
 
-#: includes/functions.php:172
+#: includes/functions.php:175
 msgid "Amount"
 msgstr ""
 
-#: includes/functions.php:173
+#: includes/functions.php:176
 msgid "Type"
 msgstr ""
 
-#: includes/functions.php:174
+#: includes/functions.php:177
 msgid "Date"
 msgstr ""
 
-#: includes/functions.php:190 includes/functions.php:198
+#: includes/functions.php:193 includes/functions.php:201
+#: includes/functions.php:209
 msgid "Unknown"
 msgstr ""
 
-#: includes/functions.php:192 includes/functions.php:200
+#: includes/functions.php:195 includes/functions.php:203
+#: includes/functions.php:211
 #, php-format
 msgid "%s"
+msgstr ""
+
+#: includes/create_subscription.php:59 includes/create_subscription.php:110
+msgid "subscription"
+msgstr ""
+
+#: includes/create_donation.php:53
+msgid "donation"
+msgstr ""
+
+#: includes/create_payment.php:55 includes/create_payment.php:102
+msgid "payment"
 msgstr ""
 
 #. Description of the plugin
