@@ -19,7 +19,11 @@
 		data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
-		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" >
+		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" 
+		<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
+		data-address="true"
+		<?php } ?>
+		>
 		</script>
 	<?php //Custom styles button condition
 				if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) { ?>

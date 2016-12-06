@@ -109,6 +109,20 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 		'directStripeGeneral', 
 		'direct_stripe_logo_section' 
 	);
+	// Checkbox for billing infos
+	add_settings_section(
+		'direct_stripe_billing_infos_section', 
+		__( 'Billing information', 'direct-stripe' ), 
+		array($displaysettings, 'direct_stripe_billing_infos_section_callback'), 
+		'directStripeGeneral'
+	);
+	add_settings_field( 
+		'direct_stripe_billing_infos_checkbox', 
+		__( 'Ask for address in modal Form', 'direct-stripe' ), 
+		array($displaysettings, 'direct_stripe_billing_infos_checkbox_render'), 
+		'directStripeGeneral', 
+		'direct_stripe_billing_infos_section' 
+	);
 	
 	// Button Styles
 	add_settings_section(
