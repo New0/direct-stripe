@@ -117,75 +117,11 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 =>Configure settings in admin panel :
 
-**-> Direct Stripe -> Settings**
 
-
-**->General settings :**
-
-    - Enter your Stripe API keys ( find them at https://dashboard.stripe.com/account/apikeys )
-    - Option for test mode / keys
-    - Set your stripe's account currency 
-    - Choose a success and error pages
-    - Choose a log for your Stripes modal forms
-	
-
-**-> Styles Settings :**
-
-    - Choose to use custom buton
-    - Set custom button main colors
-    - Set custom button borders radius
-    - Choose to use a T&C checkbox 
-    - Set texts and link to T&C pages
-
-
-**-> Emails Settings :**
-   
-	  - Choose to use automated emails for successful payments to admin
-    - Set Email subject and content
-    - Choose to use automated emails for successful payments to Stripe's user
-    - Set Email subject and content
-    - Choose to use automated emails for unsuccessful payments to admin
-    - Set Email subject and content
-    - Choose to use automated emails for unsuccessful payments to Stripe's user
-
-
-
-
-**Display the Stripe button on your site with a simple shortcode [direct-stripe] and set your options :**
-
-    - type : payment / subscription /donation
-    - name : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
-    - description : Product description displayed on modal form. Set by default to the site description.description
-    - amount : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
-    - label : Text displayed on button to display modal form
-    - panellabel : Text for modal form button
-  	- coupon : coupon id set in stripe admin (only for subscriptions)
-
-**Three shortcodes exemples to simply add to pages / posts content or template :**
-
-    -> Payment button for the amount of 50,00 (the currency set up in global settings) :
-        - [direct-stripe type="payment" amount="5000" name="My Shop" description="The great product you dream of" label="Proceed to checkout" panellabel="Pay now"]
-
-    -> Subscription button for the plan monthly-plan (created in stripe admin) with coupon first-month-50 (created in Stripe admin) :
-        - [direct-stripe type="subscription" amount="monthly-plan" coupon="first-month-50" description="The great monthly plan" label="Subscribe" panellabel="That's it"]
-
-    -> Donation button :
-        - [direct-stripe type="donation" name="My plugin" description="Help me improve the plugin" label="Buy me coffee" panellabel="This will add one more setting option!"]
-
-	
-
-== Frequently Asked Questions ==
-
-In progress, in the meanwhile asking yours may help to fill this section.
-
-== Screenshots ==
-
-1. Admin pages general options
-2. Admin page styles options
-3. Admin page emails options
-4. Admin transaction logs
 
 == Changelog == 
+1.1.0 Add a checkbox option to allow billing details collection before payment
+
 1.0.1 Important fixes for subscriptions not using coupons
 
 1.0 Released functionnal button for payment/donation and subscriptions. 

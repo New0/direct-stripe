@@ -172,6 +172,9 @@ In progress, in the meanwhile asking yours may help to fill this section.
 4. Admin transaction logs
 
 == Changelog == 
+
+1.1.0 Add a checkbox option to allow billing details collection before payment
+
 1.0.1 Important fixes for subscriptions not using coupons
 
 1.0 Released functionnal button for payment/donation and subscriptions. 
