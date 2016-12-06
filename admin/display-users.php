@@ -1,7 +1,7 @@
 <?php // Display users ?>
 <h2><?php _e('Direct Stripe user infos', 'direct-stripe'); ?></h2>
 	<table class="form-table">
-			<tr>
+		<tr>
 			<h4><?php _e('Direct Sripe Data', 'direct-stripe'); ?></h4>
 			<th><label for="stripe_id"><?php _e('Stripe customer ID', 'direct-stripe'); ?></label></th>
 			<td>
@@ -9,5 +9,4 @@
 				<span class="description"><?php _e('stripe_id', 'direct-stripe'); ?></span>
 			</td>
 		</tr>
-		<tr>
 	</table>

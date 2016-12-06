@@ -17,6 +17,7 @@
 		data-name="<?php echo esc_attr($directStripeAttrValues['name']) ?>" 
 		data-description="<?php echo esc_attr($directStripeAttrValues['description']) ?>"
 		data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
+		data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
 		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" 
