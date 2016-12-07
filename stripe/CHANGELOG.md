@@ -1,3 +1,15 @@
+### 4.3.0 2016-11-30
+
+* Add support for verifying sources
+
+### 4.2.0 2016-11-21
+
+* Add retrieve method for 3-D Secure resources
+
+### 4.1.1 2016-10-21
+
+* Add docblock with model properties for `Plan`
+
 ### 4.1.0 2016-10-18
 
 * Support for 403 status codes (permission denied)
