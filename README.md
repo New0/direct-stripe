@@ -1,5 +1,5 @@
 # Direct-Stripe
-Stripe payment button for WordPress r
+Stripe payment button for WordPress
 
 === Direct Stripe ===
 
