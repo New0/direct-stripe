@@ -11,9 +11,9 @@ Tags: payment button, stripe button , stripe, custom stripe button, stripe modal
 
 Requires at least: 4.2
 
-Tested up to: 4.6.1
+Tested up to: 4.7
 
-Stable tag: 1.1.0
+Stable tag: 1.1.5
 
 License: GPLv2 or later 
 
@@ -120,6 +120,12 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
+
+1.1.3 IMPORTANT Bug Fix for success / error landing/redirection pages
+
+1.1.1 Bug Fix for existing users that don't have a Stripe ID and rewrote validation
+
 1.1.0 Add a checkbox option to allow billing details collection before payment
 
 1.0.1 Important fixes for subscriptions not using coupons

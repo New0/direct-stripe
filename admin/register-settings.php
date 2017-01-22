@@ -6,9 +6,9 @@ defined( 'ABSPATH' ) or die( 'Please!' );
 require_once (  DSCORE_PATH . 'admin/display-settings.php' );
 $displaysettings = new \DirectStripeDisplaySettings;
 //Register options by sections / page (one option field in options table each)
-register_setting( 'directStripeGeneral', 'direct_stripe_general_settings', array($displaysettings, 'direct_stripe_settings_validation') );
-register_setting( 'directStripeStyles', 'direct_stripe_styles_settings', array($displaysettings, 'direct_stripe_settings_validation') );
-register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($displaysettings, 'direct_stripe_settings_validation') );
+register_setting( 'directStripeGeneral', 'direct_stripe_general_settings', array($displaysettings, 'direct_stripe_general_settings_validation') );
+register_setting( 'directStripeStyles', 'direct_stripe_styles_settings', array($displaysettings, 'direct_stripe_styles_settings_validation') );
+register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($displaysettings, 'direct_stripe_emails_settings_validation') );
 //Register sections and settings fields
 	// API keys section
 	add_settings_section(
@@ -183,7 +183,7 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	);
 	add_settings_field( 
 		'direct_stripe_tc_link', 
-		__( 'Terms and conditions page (slug)', 'direct-stripe' ), 
+		__( 'Terms and conditions page', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_tc_link_render'), 
 		'directStripeStyles', 
 		'direct_stripe_tc_section' 

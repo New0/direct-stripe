@@ -1,6 +1,21 @@
 <?php
 // Shortcode output
-?>
+
+//Chrome for iOS hack to disable custom button styles and get Stripe modal forme to open
+if ( strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {
+	$crios = 'crios';
+} else {
+	$crios = 'false';
+}
+
+if ( $crios === 'crios' ) { ?>
+	<style type=text/css>
+		.stripe-button-el {
+					visibility:visible !important;
+					display: inline-block !important;
+			}
+	</style>
+<?php } ?>
 <!-- pass in the $params array and the URL --> 
 <form action="<?php echo add_query_arg($params); ?>" id="stripeForm" value="submit" method="POST" >
 	<?php //Donation condition and input
@@ -27,7 +42,7 @@
 		>
 		</script>
 	<?php //Custom styles button condition
-				if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) { ?>
+				if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' && $crios != 'crios' ) { ?>
 	<button id="directStripe" class="direct-stripe-button" type="submit" ><?php echo esc_attr($directStripeAttrValues['label']) ?></button>
 	<?php //T&C Check box condition
 				if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>

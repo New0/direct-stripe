@@ -24,12 +24,25 @@ $token = $_POST['stripeToken'];
 $email_address = $_POST['stripeEmail'];
 $admin_email = get_option( 'admin_email' );
 
-	//Cherche Si utilisateur est enregistré  
+//Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
+	
 	$user = get_user_by( 'email', $email_address );
-	$stripe_id_array = get_user_meta( $user->id, 'stripe_id' );
-	$stripe_id = implode(" ", $stripe_id_array);
+	$stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
+		if ( isset($stripe_id_array) && !empty($stripe_id_array) ) {
+			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
+		}
+		else {
+				$customer = \Stripe\Customer::create(array(
+				'email' => $email_address,
+				'source'  => $token
+				));
+			$stripe_id = $customer->id;
+			update_user_meta($user->id, 'stripe_id', $stripe_id);
+		}
+	
 } else {
+	
 	$stripe_id == false;
 }
 	
@@ -109,7 +122,7 @@ if($stripe_id) { // Utilisateur enregistré
   }
 }// Fin if else
 
-wp_redirect( $d_stripe_general['direct_stripe_success_page'] );
+wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
   exit;
 }
 catch(Exception $e)
@@ -122,7 +135,7 @@ catch(Exception $e)
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
   wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_error_email_content'] );
   }
-  wp_redirect( $d_stripe_general['direct_stripe_error_page'] );	
+  wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());
 	exit;

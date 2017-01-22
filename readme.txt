@@ -3,8 +3,8 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
-Tested up to: 4.6.1
-Stable tag: 1.1.0
+Tested up to: 4.7
+Stable tag: 1.1.5
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,12 @@ In progress, in the meanwhile asking yours may help to fill this section.
 4. Admin transaction logs
 
 == Changelog == 
+ 
+1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
+
+1.1.3 IMPORTANT Bug Fix for success / error landing/redirection pages
+
+1.1.1 Bug Fix for existing users that don't have a Stripe ID and rewrote validation
 
 1.1.0 Add a checkbox option to allow billing details collection before payment
 
