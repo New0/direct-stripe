@@ -6,7 +6,7 @@ Description: Use Stripe payment buttons anywhere in a WordPress website, let you
 Author: Nicolas Figueira
 Text Domain: direct-stripe
 Domain Path: /languages
-Version: 1.1.0
+Version: 1.1.4
 Author URI: https://newo.me
 */
 defined( 'ABSPATH' ) or die( 'Please!' );
@@ -52,7 +52,7 @@ add_action( 'edit_user_profile_update', array( $directstripe, 'direct_stripe_sav
 
 /* Create custom post type for transactions logs */
 add_action( 'init', array( $directstripe, 'direct_stripe_create_post_type' ) );
-//Rename Colums for direct Stripe Post Type
+//Rename Columns for direct Stripe Post Type
 add_filter( 'manage_edit-directstripelogs_columns', array( $directstripe, 'direct_stripe_logs_colums_names' ) );
 //Add content to custom columns
 add_action( 'manage_directstripelogs_posts_custom_column', array( $directstripe, 'direct_stripe_manage_logs_columns') );

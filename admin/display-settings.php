@@ -75,13 +75,31 @@ function direct_stripe_currency_render() {
 function direct_stripe_success_page_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
 	?>
-	<input type='text' name='direct_stripe_general_settings[direct_stripe_success_page]' value='<?php echo sanitize_title( $d_stripe_options['direct_stripe_success_page'] ); ?>'>
+			<select name="direct_stripe_general_settings[direct_stripe_success_page]">
+				<?php
+				if( $pages = get_pages() ){
+						foreach( $pages as $page ){ 
+							$selected = ($d_stripe_options['direct_stripe_success_page'] == $page->ID) ? "selected" : ""; ?>
+								<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
+							<?php }
+				}
+				?>
+			</select>
 	<?php
 }
 function direct_stripe_error_page_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
 	?>
-	<input type='text' name='direct_stripe_general_settings[direct_stripe_error_page]' value='<?php echo sanitize_title( $d_stripe_options['direct_stripe_error_page'] ); ?>'>
+			<select name="direct_stripe_general_settings[direct_stripe_error_page]">
+				<?php
+				if( $pages = get_pages() ){
+						foreach( $pages as $page ){ 
+							$selected = ($d_stripe_options['direct_stripe_error_page'] == $page->ID) ? "selected" : ""; ?>
+						<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
+							<?php }
+				}
+				?>
+			</select>
 	<?php
 }
 
@@ -275,24 +293,119 @@ public function direct_stripe_billing_infos_section_callback() {
 	_e( 'Name, Address, City, Zip code and country will be collected before payment', 'direct-stripe' );
 }
 public function direct_stripe_styles_section_callback() {
-	_e( 'Check to use custom button', 'direct-stripe' );
+	_e( 'Check to use custom button (Custom styles will not apply on browser Chrome for iOS)', 'direct-stripe' );
 }
 public function direct_stripe_currency_section_callback() {
 	 _e( 'Set your Stripe\'s account currency', 'direct-stripe' );
 }
 	
 //Settings validation
-public function direct_stripe_settings_validation( $input ) {
-	// Create our array for storing the validated options
-    $output = array();    
-    // Loop through each of the incoming options
-    foreach( $input as $key => $value ) {       
-        // Check to see if the current option has a value. If so, process it.
-        if( isset( $input[$key] ) ) {    
-            // Strip all HTML and PHP tags and properly handle quoted strings
-            $output[$key] = strip_tags( stripslashes( $input[ $key ] ) );        
-        }    
-    }
-    return apply_filters( array($this, 'direct_stripe_settings_validation'), $output, $input );
+public function direct_stripe_general_settings_validation( $input ) {   
+	//Texts
+	if( isset($input['direct_stripe_secret_api_key']) && !empty($input['direct_stripe_secret_api_key']) ) {
+		$input['direct_stripe_secret_api_key'] = wp_filter_nohtml_kses( $input['direct_stripe_secret_api_key'] );
+	}
+	if( isset($input['direct_stripe_publishable_api_key']) && !empty($input['direct_stripe_publishable_api_key']) ) {
+		$input['direct_stripe_publishable_api_key'] = wp_filter_nohtml_kses( $input['direct_stripe_publishable_api_key'] );
+	}
+	if( isset($input['direct_stripe_test_secret_api_key']) && !empty($input['direct_stripe_test_secret_api_key']) ) {
+		$input['direct_stripe_test_secret_api_key'] = wp_filter_nohtml_kses( $input['direct_stripe_test_secret_api_key'] );
+	}
+	if( isset($input['direct_stripe_test_publishable_api_key']) && !empty($input['direct_stripe_test_publishable_api_key']) ) {
+		$input['direct_stripe_test_publishable_api_key'] = wp_filter_nohtml_kses( $input['direct_stripe_test_publishable_api_key'] );
+	}
+	if( isset($input['direct_stripe_currency']) && !empty($input['direct_stripe_currency']) ) {
+		$input['direct_stripe_currency'] = wp_filter_nohtml_kses( $input['direct_stripe_currency'] );
+	}
+	if( isset($input['direct_stripe_success_page']) && !empty($input['direct_stripe_success_page']) ) {
+		$input['direct_stripe_success_page'] = wp_filter_nohtml_kses( $input['direct_stripe_success_page'] );
+	}
+	if( isset($input['direct_stripe_error_page']) && !empty($input['direct_stripe_error_page']) ) {
+		$input['direct_stripe_error_page'] = wp_filter_nohtml_kses( $input['direct_stripe_error_page'] );
+	}
+	//url
+	if( isset($input['direct_stripe_logo_image']) && !empty($input['direct_stripe_logo_image']) ) {
+		$input['direct_stripe_logo_image'] = esc_url_raw( $input['direct_stripe_logo_image'] );
+	}
+  // Make sure isauthorized is only true or false (0 or 1)
+	if( isset($input['direct_stripe_checkbox_api_keys']) && !empty($input['direct_stripe_checkbox_api_keys']) ) {
+  	$input['direct_stripe_checkbox_api_keys'] = '1';
+	}
+	if( isset($input['direct_stripe_billing_infos_checkbox']) && !empty($input['direct_stripe_billing_infos_checkbox']) ) {
+		$input['direct_stripe_billing_infos_checkbox'] = '1';
+	}
+    return $input;
 }
+public function direct_stripe_styles_settings_validation( $input ) {   
+	//Texts
+	if( isset($input['direct_stripe_main_color-style']) && !empty($input['direct_stripe_main_color-style']) ) {
+		$input['direct_stripe_main_color-style'] = wp_filter_nohtml_kses( $input['direct_stripe_main_color-style'] );
+	}
+	if( isset($input['direct_stripe_border_radius']) && !empty($input['direct_stripe_border_radius']) ) {
+		$input['direct_stripe_border_radius'] = wp_filter_nohtml_kses( $input['direct_stripe_border_radius'] );
+	}
+	if( isset($input['direct_stripe_tc_text']) && !empty($input['direct_stripe_tc_text']) ) {
+		$input['direct_stripe_tc_text'] = wp_filter_nohtml_kses( $input['direct_stripe_tc_text'] );
+	}
+	if( isset($input['direct_stripe_tc_link_text']) && !empty($input['direct_stripe_tc_link_text']) ) {
+		$input['direct_stripe_tc_link_text'] = wp_filter_nohtml_kses( $input['direct_stripe_tc_link_text'] );
+	}
+	//slug
+	if( isset($input['direct_stripe_tc_link']) && !empty($input['direct_stripe_tc_link']) ) {
+		$input['direct_stripe_tc_link'] = sanitize_title( $input['direct_stripe_tc_link'] );
+	}
+  // Make sure isauthorized is only true or false (0 or 1)
+	if( isset($input['direct_stripe_use_custom_styles']) && !empty($input['direct_stripe_use_custom_styles']) ) {
+  	$input['direct_stripe_use_custom_styles'] = '1';
+	}
+	if( isset($input['direct_stripe_use_tc_checkbox']) && !empty($input['direct_stripe_use_tc_checkbox']) ) {
+		$input['direct_stripe_use_tc_checkbox'] = '1';
+	}
+
+    return $input;
+}
+public function direct_stripe_emails_settings_validation( $input ) {   
+	//Texts
+	if( isset($input['direct_stripe_admin_email_subject']) && !empty($input['direct_stripe_admin_email_subject']) ) {
+		$input['direct_stripe_admin_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_email_subject'] );
+	}
+	if( isset($input['direct_stripe_admin_email_content']) && !empty($input['direct_stripe_admin_email_content']) ) {
+		$input['direct_stripe_admin_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_email_content'] );
+	}
+	if( isset($input['direct_stripe_user_email_subject']) && !empty($input['direct_stripe_user_email_subject']) ) {
+		$input['direct_stripe_user_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_user_email_subject'] );
+	}
+	if( isset($input['direct_stripe_user_email_content']) && !empty($input['direct_stripe_user_email_content']) ) {
+		$input['direct_stripe_user_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_user_email_content'] );
+	}
+	if( isset($input['direct_stripe_admin_error_email_subject']) && !empty($input['direct_stripe_admin_error_email_subject']) ) {
+		$input['direct_stripe_admin_error_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_error_email_subject'] );
+	}
+	if( isset($input['direct_stripe_admin_error_email_content']) && !empty($input['direct_stripe_admin_error_email_content']) ) {
+		$input['direct_stripe_admin_error_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_error_email_content'] );
+	}
+	if( isset($input['direct_stripe_user_error_email_subject']) && !empty($input['direct_stripe_user_error_email_subject']) ) {
+		$input['direct_stripe_user_error_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_user_error_email_subject'] );
+	}
+	if( isset($input['direct_stripe_user_error_email_content']) && !empty($input['direct_stripe_user_error_email_content']) ) {
+		$input['direct_stripe_user_error_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_user_error_email_content'] );
+	}
+  // Make sure isauthorized is only true or false (0 or 1)
+	if( isset($input['direct_stripe_admin_emails_checkbox']) && !empty($input['direct_stripe_admin_emails_checkbox']) ) {
+  	$input['direct_stripe_admin_emails_checkbox'] = '1';
+	}
+	if( isset($input['direct_stripe_user_emails_checkbox']) && !empty($input['direct_stripe_user_emails_checkbox']) ) {
+		$input['direct_stripe_user_emails_checkbox'] = '1';
+	}
+	if( isset($input['direct_stripe_admin_error_emails_checkbox']) && !empty($input['direct_stripe_admin_error_emails_checkbox']) ) {
+		$input['direct_stripe_admin_error_emails_checkbox'] = '1';
+	}
+	if( isset($input['direct_stripe_user_error_emails_checkbox']) && !empty($input['direct_stripe_user_error_emails_checkbox']) ) {
+		$input['direct_stripe_user_error_emails_checkbox'] = '1';
+	}
+
+    return $input;
+}
+
+	
 } //End Class DirectStripeDisplaySettings
