@@ -46,7 +46,7 @@ if ( $crios === 'crios' ) { ?>
 	<button id="directStripe" class="direct-stripe-button" type="submit" ><?php echo esc_attr($directStripeAttrValues['label']) ?></button>
 	<?php //T&C Check box condition
 				if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
-	<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo home_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
+	<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
 	<?php } ?>
 	<?php } ?>
 	</form>

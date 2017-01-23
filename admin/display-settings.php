@@ -170,7 +170,16 @@ function direct_stripe_tc_link_text_render() {
 function direct_stripe_tc_link_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_styles_settings' );
 	?>
-	<input type='text' name='direct_stripe_styles_settings[direct_stripe_tc_link]' value='<?php echo sanitize_text_field( $d_stripe_options['direct_stripe_tc_link'] ); ?>'>
+		<select name="direct_stripe_styles_settings[direct_stripe_tc_link]">
+			<?php
+			if( $pages = get_pages() ){
+					foreach( $pages as $page ){ 
+						$selected = ($d_stripe_options['direct_stripe_tc_link'] == $page->ID) ? "selected" : ""; ?>
+							<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
+						<?php }
+			}
+			?>
+		</select>
 	<?php
 }
 
