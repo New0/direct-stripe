@@ -24,6 +24,7 @@ $admin_email = get_option( 'admin_email' );
 try {
   $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
   $coupon = isset($_GET['coupon']) ? $_GET['coupon'] : '';
+	$setup_fee = isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
   $token = $_POST['stripeToken'];
   $email_address = $_POST['stripeEmail'];
 
@@ -63,6 +64,14 @@ if($stripe_id) { //Utilisateur existant
           "plan"     => $amount
         ));
 	}
+	if( !empty($setup_fee) ){
+		$fee = \Stripe\Charge::create(array(
+					"customer" => $stripe_id,
+					"amount" => $setup_fee,
+					"currency" => $d_stripe_general['direct_stripe_currency'],
+					"description" => "One-time setup fee",
+				));
+	}
     $plan = \Stripe\Plan::retrieve($amount);
     $plan_amount = $plan->amount;
   
@@ -88,6 +97,7 @@ if($stripe_id) { //Utilisateur existant
   }
   
  } else {  // Si user n'existe pas
+	
 			if( !empty($coupon) ){
       $customer = \Stripe\Customer::create(array(
         'email'   => $email_address,
@@ -102,6 +112,14 @@ if($stripe_id) { //Utilisateur existant
         'plan'    => $amount
 				));
 			}
+		if( !empty($setup_fee) ){
+			$fee = \Stripe\Charge::create(array(
+					"customer" => $customer->id,
+					"amount" => $setup_fee,
+					"currency" => $d_stripe_general['direct_stripe_currency'],
+					"description" => "One-time setup fee",
+				));
+		}
 
     $plan = \Stripe\Plan::retrieve($amount);
     $plan_amount = $plan->amount;
