@@ -46,13 +46,15 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
       	'panellabel' 	=>	__('Pay', 'direct-stripe'),
         'type' 				=>	'payment',
         'locale' 			=>	'auto',
-      	'coupon' 			=>	''
+      	'coupon' 			=>	'',
+				'setup_fee'		=>	''
     ), $atts, 'directstripe' );
 	// the query var and its value 
 $params = array(
 	'direct-stripe' => $directStripeAttrValues['type'],
 	'amount' => $directStripeAttrValues['amount'],
 	'coupon' => $directStripeAttrValues['coupon'],
+	'setup_fee' => $directStripeAttrValues['setup_fee'],
 	'ds-nonce' => $ds_nonce
 	); 
 	 ob_start();
