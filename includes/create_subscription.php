@@ -10,6 +10,7 @@ if( !class_exists( 'Stripe' ) ) {
 }
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
+$headers =  array('Content-Type: text/html; charset=UTF-8');
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
 if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
@@ -79,11 +80,11 @@ if($stripe_id) { //Utilisateur existant
   
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' )  {
-      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] ,  $d_stripe_emails['direct_stripe_user_email_content'] );
+      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'], $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
       // Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
-      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_email_content'] .  $plan_amount );
+      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'], $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
   
  } else {  // Si user n'existe pas
@@ -138,28 +139,35 @@ if($stripe_id) { //Utilisateur existant
   
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
-      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] ,  $d_stripe_emails['direct_stripe_user_email_content'] );
+      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'], $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
       // Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
-      wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_email_content'] );
+      wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'], $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
-}//endelse user existant
- //Redirection
-wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
+}//end else user existant
+
+//Redirection after success
+
+		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
+
   exit;
 }
 catch(Exception $e)
 {
    //Email client
   if(  isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
-  wp_mail( $admin_email, $d_stripe_emails['direct_stripe_user_error_email_subject'] ,  $d_stripe_emails['direct_stripe_user_error_email_content'] );
+ 	 wp_mail( $admin_email, $d_stripe_emails['direct_stripe_user_error_email_subject'], $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
   }
   //Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
-  wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] ,  $d_stripe_emails['direct_stripe_admin_error_email_content'] );
+  	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'], $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
-  wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );
+  //Redirection after error
+
+  	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );
+
+	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());
   exit;

@@ -120,6 +120,8 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+1.1.5 Added allowed html to emails content
+
 1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
 
 1.1.3 IMPORTANT Bug Fix for success / error landing/redirection pages

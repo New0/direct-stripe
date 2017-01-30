@@ -172,6 +172,8 @@ In progress, in the meanwhile asking yours may help to fill this section.
 4. Admin transaction logs
 
 == Changelog == 
+
+1.1.5 Added allowed html to emails content
  
 1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
 
