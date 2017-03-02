@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
 Tested up to: 4.7
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,7 +69,8 @@ Ready for translations (Français déjà traduit)
     - Option for test mode / keys
     - Set your stripe's account currency 
     - Choose a success and error pages
-    - Choose a log for your Stripes modal forms
+    - Choose a logo for your Stripes modal forms
+		- Choose wether you want to collect extra billing information in Stripes modal forms
 	
 
 **-> Styles Settings :**
@@ -112,7 +113,8 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
     - Option for test mode / keys
     - Set your stripe's account currency 
     - Choose a success and error pages
-    - Choose a log for your Stripes modal forms
+    - Choose a logo for your Stripes modal forms
+		- Choose wether you want to collect extra billing information in Stripes modal forms
 	
 
 **-> Styles Settings :**
@@ -172,6 +174,8 @@ In progress, in the meanwhile asking yours may help to fill this section.
 4. Admin transaction logs
 
 == Changelog == 
+
+1.1.6 Fixed error email sent to users bug (Thanks Tina!) - Added "setup_fee" option for subscriptions (under test)
 
 1.1.5 Added allowed html to emails content
  

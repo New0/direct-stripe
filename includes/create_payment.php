@@ -137,7 +137,7 @@ catch(Exception $e)
 {
 	//Email client
   if(  isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
-  	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_user_error_email_subject'] , $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
+  	wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_error_email_subject'] , $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
   }
   //Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {

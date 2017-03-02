@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7
 
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 
 License: GPLv2 or later 
 
@@ -83,7 +83,8 @@ Ready for translations (Français déjà traduit)
     - Option for test mode / keys
     - Set your stripe's account currency 
     - Choose a success and error pages
-    - Choose a log for your Stripes modal forms
+    - Choose a logo for your Stripes modal forms
+		- Choose wether you want to collect extra billing information in Stripes modal forms
 	
 
 **-> Styles Settings :**
@@ -120,6 +121,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+1.1.6 Fixed error email sent to users bug (Thanks Tina!) - Added "setup_fee" option for subscriptions for the shortcode (under test)
+
 1.1.5 Added allowed html to emails content
 
 1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
@@ -135,4 +139,3 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 1.0 Released functionnal button for payment/donation and subscriptions. 
 Logs users and transactions in WordPress admin. 
 Set custom styles and automaed emails.
-

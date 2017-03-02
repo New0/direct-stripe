@@ -1,9 +1,7 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please!' );
-
 $nonce = $_REQUEST['ds-nonce'];
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die("Security check");
-
 // Souscriptions Stripe
 if( !class_exists( 'Stripe' ) ) {
     require_once(DSCORE_PATH . 'stripe/init.php');
@@ -18,16 +16,13 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 } else { 
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
 } 
-
 $admin_email = get_option( 'admin_email' );
-
 try {
   $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
   $coupon = isset($_GET['coupon']) ? $_GET['coupon'] : '';
 	$setup_fee = isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
   $token = $_POST['stripeToken'];
   $email_address = $_POST['stripeEmail'];
-
 //Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
@@ -49,7 +44,6 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
 	$stripe_id == false;
 }
-
 if($stripe_id) { //Utilisateur existant
   // create new subscription
 	if( !empty($coupon) ){
@@ -120,7 +114,6 @@ if($stripe_id) { //Utilisateur existant
 					"description" => "One-time setup fee",
 				));
 		}
-
     $plan = \Stripe\Plan::retrieve($amount);
     $plan_amount = $plan->amount;
     //$abonnement = $customer->subscriptions->data[0]->id;
@@ -164,27 +157,22 @@ if($stripe_id) { //Utilisateur existant
       wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'], $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
 }//end else user existant
-
 //Redirection after success
-
 		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
-
   exit;
 }
 catch(Exception $e)
 {
    //Email client
   if(  isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
- 	 wp_mail( $admin_email, $d_stripe_emails['direct_stripe_user_error_email_subject'], $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
+ 	 wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_error_email_subject'], $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
   }
   //Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
   	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'], $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
   //Redirection after error
-
   	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );
-
 	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());

@@ -1,12 +1,10 @@
 <?php 
-
 class DirectStripeFunctions {
   
 //Add Stripe user role on plugin activation
 function direct_stripe_user_roles_on_activation() {
       add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
    }
-
 //Languages support
 function direct_stripe_load_textdomain() {
 	load_plugin_textdomain('direct-stripe', false, dirname( DSCORE_BASENAME ) . '/languages' );
@@ -116,7 +114,6 @@ function direct_stripe_styles_method() {
 	include( DSCORE_PATH . '/public/styles.php');
 	wp_add_inline_style( 'direct-stripe-style', $custom_css );
 }
-
 	// Display Stripe users
 function direct_stripe_show_extra_profile_fields( $user ) { 
 	include( DSCORE_PATH . '/admin/display-users.php');
@@ -164,7 +161,6 @@ function direct_stripe_create_post_type() {
 	// Registering Direct Stripe Post Type
 	register_post_type( 'Direct Stripe Logs', $args );
 }
-
 //Rename Colums for direct Stripe Post Type
 function direct_stripe_logs_colums_names( $columns ) {
     $columns = array(
@@ -210,7 +206,6 @@ function direct_stripe_manage_logs_columns( $column ) {
 	
 //Make Direct Stripe logs columns sortable
 function direct_stripe_sortable_columns( $columns ) {
-
 	$columns = array(
 			'title'	=>	'title',
 			'author' =>	'author',
