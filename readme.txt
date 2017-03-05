@@ -41,9 +41,9 @@ Ready for translations (Français déjà traduit)
     - label : Text displayed on button to display modal form
     - panellabel : Text for modal form button
   	- coupon : coupon id set in stripe admin (only for subscriptions)
-		- setup_fee : Only for subscriptions, charge a one time fee on subscription activation
-		- capture : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
-		- display_amount : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
+	  - setup_fee : Only for subscriptions, charge a one time fee on subscription activation
+	  - capture : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
+	  - display_amount : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
 
 ###Three shortcode exemples to simply add to pages / posts content or template
 
@@ -73,7 +73,7 @@ Ready for translations (Français déjà traduit)
     - Set your stripe's account currency 
     - Choose a success and error pages
     - Choose a logo for your Stripes modal forms
-		- Choose wether you want to collect extra billing information in Stripes modal forms
+	  - Choose wether you want to collect extra billing information in Stripes modal forms
 	
 
 **-> Styles Settings :**
@@ -117,7 +117,7 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
     - Set your stripe's account currency 
     - Choose a success and error pages
     - Choose a logo for your Stripes modal forms
-		- Choose wether you want to collect extra billing information in Stripes modal forms
+	  - Choose wether you want to collect extra billing information in Stripes modal forms
 	
 
 **-> Styles Settings :**
@@ -151,9 +151,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
     - label : Text displayed on button to display modal form
     - panellabel : Text for modal form button
   	- coupon : coupon id set in stripe admin (only for subscriptions)
-		- setup_fee : Only for subscriptions, charge a one time fee on subscription activation
-		- capture : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
-		- display_amount : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
+	  - setup_fee : Only for subscriptions, charge a one time fee on subscription activation
+	  - capture : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
+	  - display_amount : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
 
 **Three shortcodes exemples to simply add to pages / posts content or template :**
 
@@ -181,10 +181,10 @@ In progress, in the meanwhile asking yours may help to fill this section.
 == Changelog == 
 
 1.1.7 New shortcode options 
-      setup_fee (for subscriptions), 
-			display_amount (="fase" to make the modal form button not display the amount) , 
-			capture (="false" to register the payment witout capturing the charge and charge the payment from stripe's admin panel)
-			description of product setup with description's value of shortcode is now recorded in logs
+     - setup_fee (for subscriptions), 
+	   - display_amount (="false" to make the modal form button not display the amount) , 
+	   - capture (="false" to register the payment witout capturing the charge and charge the payment from stripe's admin panel)
+     - description of product setup with description's value of shortcode is now recorded in logs
 
 1.1.6 Fixed error email sent to users bug (Thanks Tina!) - Added "setup_fee" option for subscriptions (under test)
 
