@@ -24,20 +24,22 @@ if ( $crios === 'crios' ) { ?>
 	<?php } ?>
   <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" 
 		<?php if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { ?>
-		data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_test_publishable_api_key']); ?>"
+			data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_test_publishable_api_key']); ?>"
 		<?php } else { ?>
-		data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_publishable_api_key']); ?>"
+			data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_publishable_api_key']); ?>"
 		<?php } ?>
 		data-image="<?php echo esc_url($d_stripe_general['direct_stripe_logo_image']); ?>" 
 		data-name="<?php echo esc_attr($directStripeAttrValues['name']) ?>" 
 		data-description="<?php echo esc_attr($directStripeAttrValues['description']) ?>"
-		data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
 		data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
 		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" 
+		<?php if( $directStripeAttrValues['display_amount'] != 'false' ) { ?>
+			data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
+		<?php } ?>
 		<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
-		data-address="true"
+			data-address="true"
 		<?php } ?>
 		>
 		</script>

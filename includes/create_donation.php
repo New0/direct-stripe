@@ -24,6 +24,8 @@ $amount = $_POST['donationvalue'] * 100;
 $token = $_POST['stripeToken'];
 $email_address = $_POST['stripeEmail'];
 $admin_email = get_option( 'admin_email' );
+$capture = isset($_GET['capture']) ? $_GET['capture'] : '';
+$description = isset($_GET['description']) ? $_GET['description'] : '';
 
 //Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
@@ -52,7 +54,9 @@ if($stripe_id) { // Utilisateur enregistré
 	  $charge = \Stripe\Charge::create(array(
       'customer' => $stripe_id,
       'amount' => $amount,
-      'currency' => $d_stripe_general['direct_stripe_currency']
+      'currency' => $d_stripe_general['direct_stripe_currency'],
+			'capture' => $capture,
+			'description' => $description
   ));
 		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
@@ -65,6 +69,7 @@ if($stripe_id) { // Utilisateur enregistré
 						);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
+	add_post_meta($post_id, 'description', $description );
 	
          // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
@@ -85,7 +90,9 @@ if($stripe_id) { // Utilisateur enregistré
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
       'amount' => $amount,
-      'currency' => $d_stripe_general['direct_stripe_currency']
+      'currency' => $d_stripe_general['direct_stripe_currency'],
+			'capture' => $capture,
+			'description' => $description
   ));
 	
      // Generate the password and create the user
@@ -113,6 +120,7 @@ if($stripe_id) { // Utilisateur enregistré
 						);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
+	add_post_meta($post_id, 'description', $description );
 	
          // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {

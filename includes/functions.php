@@ -45,7 +45,9 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
         'type' 				=>	'payment',
         'locale' 			=>	'auto',
       	'coupon' 			=>	'',
-				'setup_fee'		=>	''
+				'setup_fee'		=>	'',
+				'capture'			=>	'true',
+				'display_amount'	=> ''
     ), $atts, 'directstripe' );
 	// the query var and its value 
 $params = array(
@@ -53,6 +55,8 @@ $params = array(
 	'amount' => $directStripeAttrValues['amount'],
 	'coupon' => $directStripeAttrValues['coupon'],
 	'setup_fee' => $directStripeAttrValues['setup_fee'],
+	'capture' => $directStripeAttrValues['capture'],
+	'description' => $directStripeAttrValues['description'],
 	'ds-nonce' => $ds_nonce
 	); 
 	 ob_start();
@@ -169,6 +173,7 @@ function direct_stripe_logs_colums_names( $columns ) {
 			'author' => __( 'Stripe User', 'direct-stripe' ),
 			'amount' => __( 'Amount', 'direct-stripe' ),
 			'type'	=>	__( 'Type', 'direct-stripe' ),
+			'description'	=>	__( 'Description', 'direct-stripe' ),
 			'date' => __( 'Date', 'direct-stripe' )			
 	);
     return $columns;
@@ -198,6 +203,14 @@ function direct_stripe_manage_logs_columns( $column ) {
 				printf( __( '%s', 'direct-stripe' ), $type );
 			break;
 			
+			case 'description' :
+			$type = get_post_meta( get_the_ID(), 'description', true );
+			if ( empty( $type ) )
+				echo __( 'None provided', 'direct-stripe' );
+			else
+				printf( __( '%s', 'direct-stripe' ), $type );
+			break;
+			
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -211,6 +224,7 @@ function direct_stripe_sortable_columns( $columns ) {
 			'author' =>	'author',
 			'amount' => 'amount',
 			'type'	=>	'type',
+			'description'	=>	'description',
 			'date'	=>	'date'
 	);
 	return $columns;

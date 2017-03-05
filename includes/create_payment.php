@@ -23,6 +23,8 @@ $admin_email = get_option( 'admin_email' );
 
 try {
 $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
+$capture = isset($_GET['capture']) ? $_GET['capture'] : '';
+$description = isset($_GET['description']) ? $_GET['description'] : '';
 $token = $_POST['stripeToken'];
 $email_address = $_POST['stripeEmail'];
 
@@ -53,7 +55,9 @@ if($stripe_id) { // Utilisateur enregistré
   $charge = \Stripe\Charge::create(array(
       'customer' => $stripe_id,
       'amount' => $amount,
-		  'currency' => $d_stripe_general['direct_stripe_currency']
+		  'currency' => $d_stripe_general['direct_stripe_currency'],
+			'capture' => $capture,
+			'description' => $description
   ));
 	
 	//Log transaction in WordPress admin
@@ -67,6 +71,7 @@ if($stripe_id) { // Utilisateur enregistré
 						);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('payment','direct-stripe') );
+	add_post_meta($post_id, 'description', $description );
 	
          // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
@@ -87,6 +92,8 @@ if($stripe_id) { // Utilisateur enregistré
       'customer' => $customer->id,
       'amount' => $amount,
       'currency' => $d_stripe_general['direct_stripe_currency'],
+			'capture' => $capture,
+			'description' => $description
   		));
 
 	
@@ -115,6 +122,7 @@ if($stripe_id) { // Utilisateur enregistré
 						);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('payment','direct-stripe'));
+	add_post_meta($post_id, 'description', $description );
 
 	       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {

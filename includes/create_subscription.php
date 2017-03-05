@@ -23,6 +23,9 @@ try {
 	$setup_fee = isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
   $token = $_POST['stripeToken'];
   $email_address = $_POST['stripeEmail'];
+	$capture = isset($_GET['capture']) ? $_GET['capture'] : '';
+	$description = isset($_GET['description']) ? $_GET['description'] : '';
+	
 //Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
@@ -50,12 +53,18 @@ if($stripe_id) { //Utilisateur existant
     $subscription = \Stripe\Subscription::create(array(
           "customer" => $stripe_id,
           "plan"     => $amount,
-          'coupon'   => $coupon
+          'coupon'   => $coupon,
+					'metadata'	=> array(
+												'description' => $description
+					)
         ));
 	} else {
 		 $subscription = \Stripe\Subscription::create(array(
           "customer" => $stripe_id,
-          "plan"     => $amount
+          "plan"     => $amount,
+			 		'metadata'	=> array(
+												'description' => $description
+					)
         ));
 	}
 	if( !empty($setup_fee) ){
@@ -63,7 +72,8 @@ if($stripe_id) { //Utilisateur existant
 					"customer" => $stripe_id,
 					"amount" => $setup_fee,
 					"currency" => $d_stripe_general['direct_stripe_currency'],
-					"description" => "One-time setup fee",
+					"description" => _e('One time setup fee ', 'direct-stripe') . $description,
+					"capture" => $capture
 				));
 	}
     $plan = \Stripe\Plan::retrieve($amount);
@@ -80,6 +90,22 @@ if($stripe_id) { //Utilisateur existant
 						);
 		add_post_meta($post_id, 'amount', $plan_amount);
 	  add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
+		add_post_meta($post_id, 'description', $description );
+	
+	//Log setup_fee in WordPress admin
+	if( !empty($setup_fee) ) {
+			$post_id = wp_insert_post(
+									array(
+										'post_title' => $token,
+										'post_status' => 'publish',
+										'post_type' => 'Direct Stripe Logs',
+										'post_author'	=>	$user->id
+									)
+								);
+				add_post_meta($post_id, 'amount', $setup_fee);
+				add_post_meta($post_id, 'type', __('setup fee','direct-stripe') );
+				add_post_meta($post_id, 'description', __('setup_fee ', 'direct_stripe') . $description );
+	}
   
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' )  {
@@ -97,13 +123,19 @@ if($stripe_id) { //Utilisateur existant
         'email'   => $email_address,
         'source'  => $token,
         'plan'    => $amount,
-        'coupon'  => $coupon
+        'coupon'  => $coupon,
+				'metadata'	=> array(
+												'description' => $description
+					)
       ));
 			} else {
 				$customer = \Stripe\Customer::create(array(
         'email'   => $email_address,
         'source'  => $token,
-        'plan'    => $amount
+        'plan'    => $amount,
+				'metadata'	=> array(
+												'description' => $description
+					)
 				));
 			}
 		if( !empty($setup_fee) ){
@@ -111,7 +143,8 @@ if($stripe_id) { //Utilisateur existant
 					"customer" => $customer->id,
 					"amount" => $setup_fee,
 					"currency" => $d_stripe_general['direct_stripe_currency'],
-					"description" => "One-time setup fee",
+					"description" => __('Setup fee ', 'direct-stripe') . $description,
+					"capture" => $capture
 				));
 		}
     $plan = \Stripe\Plan::retrieve($amount);
@@ -147,6 +180,21 @@ if($stripe_id) { //Utilisateur existant
 						);
 		add_post_meta($post_id, 'amount', $plan_amount);
 	  add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
+		add_post_meta($post_id, 'description', $description );
+	//Log setup_fee in WordPress admin
+	if( !empty($setup_fee) ) {
+			$post_id = wp_insert_post(
+									array(
+										'post_title' => $token . _e(' setup_fee', 'direct_stripe'),
+										'post_status' => 'publish',
+										'post_type' => 'Direct Stripe Logs',
+										'post_author'	=>	$user_id
+									)
+								);
+				add_post_meta($post_id, 'amount', $setup_fee);
+				add_post_meta($post_id, 'type', __('setup fee','direct-stripe') );
+				add_post_meta($post_id, 'description', __('Setup fee ', 'direct_stripe') . $description );
+	}
   
       // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
