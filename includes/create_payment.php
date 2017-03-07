@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( 'Please!' );
 $nonce = $_REQUEST['ds-nonce'];
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die("Security check");
 
-// Souscriptions Stripe
+// Stripe
 if( !class_exists( 'Stripe' ) ) {
     require_once(DSCORE_PATH . 'stripe/init.php');
 }
@@ -22,11 +22,20 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 $admin_email = get_option( 'admin_email' );
 
 try {
-$amount = isset($_GET['amount']) ? $_GET['amount'] : '';
-$capture = isset($_GET['capture']) ? $_GET['capture'] : '';
-$description = isset($_GET['description']) ? $_GET['description'] : '';
-$token = $_POST['stripeToken'];
-$email_address = $_POST['stripeEmail'];
+$amount 				= isset($_GET['amount']) ? $_GET['amount'] : '';
+$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
+$description		= isset($_GET['description']) ? $_GET['description'] : '';
+$success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
+$error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+$new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
+$token 					= $_POST['stripeToken'];
+$email_address 	= $_POST['stripeEmail'];
+	
+	if( isset($new_currency) && !empty($new_currency) ) {
+			$currency = $new_currency;
+	} else {
+			$currency = $d_stripe_general['direct_stripe_currency'];
+	}
 
 //Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
@@ -55,7 +64,7 @@ if($stripe_id) { // Utilisateur enregistré
   $charge = \Stripe\Charge::create(array(
       'customer' => $stripe_id,
       'amount' => $amount,
-		  'currency' => $d_stripe_general['direct_stripe_currency'],
+		  'currency' => $currency,
 			'capture' => $capture,
 			'description' => $description
   ));
@@ -91,7 +100,7 @@ if($stripe_id) { // Utilisateur enregistré
   	$charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
       'amount' => $amount,
-      'currency' => $d_stripe_general['direct_stripe_currency'],
+      'currency' => $currency,
 			'capture' => $capture,
 			'description' => $description
   		));
@@ -137,7 +146,7 @@ if($stripe_id) { // Utilisateur enregistré
 	
 //Redirection after success
 
-		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
+		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) . '/' . $success_query );
 
   exit;
 }
@@ -153,7 +162,7 @@ catch(Exception $e)
   }
   //Redirection after error
 	
-  	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );
+  	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) . '/' . $error_query );
 
 	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].

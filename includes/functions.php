@@ -37,27 +37,33 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 	$sitename = get_bloginfo('name');
 	$description = get_bloginfo('description');
 	$directStripeAttrValues = shortcode_atts( array(
-			  'name' 				=>	$sitename,
-        'amount' 			=>	'',
-        'description' =>	$description,
-    	  'label' 			=>	__('Pay with card', 'direct-stripe'),
-      	'panellabel' 	=>	__('Pay', 'direct-stripe'),
-        'type' 				=>	'payment',
-        'locale' 			=>	'auto',
-      	'coupon' 			=>	'',
-				'setup_fee'		=>	'',
-				'capture'			=>	'true',
-				'display_amount'	=> ''
+			  'name' 						=>	$sitename,
+        'amount' 					=>	'',
+        'description' 		=>	$description,
+    	  'label' 					=>	__('Pay with card', 'direct-stripe'),
+      	'panellabel' 			=>	__('Pay', 'direct-stripe'),
+        'type' 						=>	'payment',
+        'locale' 					=>	'auto',
+      	'coupon' 					=>	'',
+				'setup_fee'				=>	'',
+				'capture'					=>	'true',
+				'display_amount'	=> '',
+				'currency'				=> '',
+				'success_query'		=> '',
+				'error_query'			=> ''
     ), $atts, 'directstripe' );
 	// the query var and its value 
 $params = array(
 	'direct-stripe' => $directStripeAttrValues['type'],
-	'amount' => $directStripeAttrValues['amount'],
-	'coupon' => $directStripeAttrValues['coupon'],
-	'setup_fee' => $directStripeAttrValues['setup_fee'],
-	'capture' => $directStripeAttrValues['capture'],
-	'description' => $directStripeAttrValues['description'],
-	'ds-nonce' => $ds_nonce
+	'amount' 				=> $directStripeAttrValues['amount'],
+	'coupon' 				=> $directStripeAttrValues['coupon'],
+	'setup_fee' 		=> $directStripeAttrValues['setup_fee'],
+	'capture' 			=> $directStripeAttrValues['capture'],
+	'description'		=> $directStripeAttrValues['description'],
+	'currency' 			=> $directStripeAttrValues['currency'],
+	'success_query'	=> $directStripeAttrValues['success_query'],
+	'error_query'		=> $directStripeAttrValues['error_query'],
+	'ds-nonce'			=> $ds_nonce
 	); 
 	 ob_start();
 include( DSCORE_PATH . '/public/shortcode.php');
