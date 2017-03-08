@@ -5,7 +5,7 @@ $nonce = $_REQUEST['ds-nonce'];
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die("Security check");
 
 // Stripe
-if( !class_exists( 'Stripe' ) ) {
+if( ! class_exists( 'Stripe\Stripe' ) ) {
     require_once(DSCORE_PATH . '/stripe/init.php');
 }
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
