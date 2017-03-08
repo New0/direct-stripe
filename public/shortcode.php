@@ -34,7 +34,11 @@ if ( $crios === 'crios' ) { ?>
 		data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
-		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" 
+		data-currency="<?php if( $directStripeAttrValues['currency'] != 'false' ) {
+												echo esc_attr($directStripeAttrValues['currency']);
+									} else {
+											 echo esc_attr($d_stripe_general['direct_stripe_currency']);
+									} ?>" 
 		<?php if( $directStripeAttrValues['display_amount'] != 'false' ) { ?>
 			data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
 		<?php } ?>
