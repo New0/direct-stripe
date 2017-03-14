@@ -28,6 +28,14 @@ $capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description 		= isset($_GET['description']) ? $_GET['description'] : '';
 $success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
 $error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+if ( !empty($success_query)) {
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $success_query, $r); 
+	$s_query = array_combine($r[1], $r[2]);
+}
+if ( !empty($error_query)) {
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $error_query, $e); 
+	$e_query = array_combine($e[1], $e[2]);
+}
 $new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
 	
 	if( isset($new_currency) && !empty($new_currency) ) {
@@ -142,7 +150,7 @@ if($stripe_id) { // Utilisateur enregistré
 }// Fin if else
 	//Redirection after success
 
-		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) . '/' . $success_query );
+		wp_redirect( add_query_arg( $s_query , get_permalink( $d_stripe_general['direct_stripe_success_page'] ) ) );
 	
   exit;
 }
@@ -157,8 +165,7 @@ catch(Exception $e)
   wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] , $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
 	//Redirection after error
-
-  	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) . '/' . $error_query );
+  	wp_redirect( add_query_arg( $e_query , get_permalink( $d_stripe_general['direct_stripe_error_page'] ) ) );
 
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());

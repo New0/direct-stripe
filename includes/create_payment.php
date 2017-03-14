@@ -27,10 +27,18 @@ $capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description		= isset($_GET['description']) ? $_GET['description'] : '';
 $success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
 $error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+if ( !empty($success_query)) {
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $success_query, $r); 
+	$s_query = array_combine($r[1], $r[2]);
+}
+if ( !empty($error_query)) {
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $error_query, $e); 
+	$e_query = array_combine($e[1], $e[2]);
+}
 $new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
 $token 					= $_POST['stripeToken'];
 $email_address 	= $_POST['stripeEmail'];
-	
+
 	if( isset($new_currency) && !empty($new_currency) ) {
 			$currency = $new_currency;
 	} else {
@@ -134,9 +142,10 @@ if($stripe_id) { // Utilisateur enregistré
 	add_post_meta($post_id, 'description', $description );
 
 	       // Email client
-  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
-      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
+  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {	
+			 wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
+	
       // Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
       wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] , $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
@@ -145,8 +154,7 @@ if($stripe_id) { // Utilisateur enregistré
 }//endif user exists
 	
 //Redirection after success
-
-		wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) . '/' . $success_query );
+	wp_redirect( add_query_arg( $s_query , get_permalink( $d_stripe_general['direct_stripe_success_page'] ) ) );
 
   exit;
 }
@@ -161,8 +169,7 @@ catch(Exception $e)
   	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] , $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
   //Redirection after error
-	
-  	wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) . '/' . $error_query );
+  wp_redirect( add_query_arg( $e_query , get_permalink( $d_stripe_general['direct_stripe_error_page'] ) ) );
 
 	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
