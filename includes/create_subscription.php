@@ -21,7 +21,8 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 $admin_email = get_option( 'admin_email' );
 
 try {
-  $amount 				= isset($_GET['amount']) ? $_GET['amount'] : '';
+  $preamount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
+	$amount 				= urldecode_deep( base64_decode($preamount) );
   $coupon 				= isset($_GET['coupon']) ? $_GET['coupon'] : '';
 	$setup_fee 			= isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
   $token 					= $_POST['stripeToken'];
@@ -29,13 +30,15 @@ try {
 	$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 	$description 		= isset($_GET['description']) ? $_GET['description'] : '';
 	$success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
-$error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+	$error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $success_query, $r); 
+	$pres_query = urldecode_deep( base64_decode($success_query) );
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
 	$s_query = array_combine($r[1], $r[2]);
 }
 if ( !empty($error_query)) {
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $error_query, $e); 
+	$pres_query = urldecode_deep( base64_decode($error_query) );
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e); 
 	$e_query = array_combine($e[1], $e[2]);
 }
 	$new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
@@ -225,7 +228,11 @@ if($stripe_id) { //Utilisateur existant
       wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'], $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
 }//end else user existant
-//Redirection after success
+	
+	// Add custom action before redirection
+	do_action( 'direct_stripe_before_success_redirection', $post_id );
+	
+	//Redirection after success
 		wp_redirect( add_query_arg( $s_query , get_permalink( $d_stripe_general['direct_stripe_success_page'] ) ) );
 	
   exit;
@@ -240,6 +247,10 @@ catch(Exception $e)
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
   	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'], $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
+	
+	// Add custom action before redirection
+	do_action( 'direct_stripe_before_error_redirection', $post_id );
+	
   //Redirection after error
   	wp_redirect( add_query_arg( $e_query , get_permalink( $d_stripe_general['direct_stripe_error_page'] ) ) );
 	

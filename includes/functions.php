@@ -52,6 +52,17 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 				'success_query'		=> '',
 				'error_query'			=> ''
     ), $atts, 'directstripe' );
+	
+if( !empty( $directStripeAttrValues['amount']) ) {
+ 	$directStripeAttrValues['amount'] = urlencode_deep( base64_encode($directStripeAttrValues['amount']) );
+ 	}
+if(  !empty($directStripeAttrValues['success_query']) ) {
+ 	 		$directStripeAttrValues['success_query'] = urlencode_deep( base64_encode($directStripeAttrValues['success_query']) );
+ 	 	}
+if(  !empty($directStripeAttrValues['error_query']) ) {
+ 	 		$directStripeAttrValues['error_query'] = urlencode_deep( base64_encode($directStripeAttrValues['error_query']) );
+ 	 	}
+	
 	// the query var and its value 
 $params = array(
 	'direct-stripe' => $directStripeAttrValues['type'],
@@ -65,6 +76,7 @@ $params = array(
 	'error_query'		=> $directStripeAttrValues['error_query'],
 	'ds-nonce'			=> $ds_nonce
 	); 
+$values = apply_filters( 'ds_param_filter', $params );
 	 ob_start();
 include( DSCORE_PATH . '/public/shortcode.php');
 	return ob_get_clean();
@@ -235,5 +247,6 @@ function direct_stripe_sortable_columns( $columns ) {
 	);
 	return $columns;
 }
+	
   //End functions
 } // End Class DirectStripeFunctions
