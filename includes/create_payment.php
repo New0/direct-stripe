@@ -39,6 +39,19 @@ if ( !empty($error_query)) {
 	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e); 
 	$e_query = array_combine($e[1], $e[2]);
 }
+$success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
+	if ( !empty($success_url)) {
+		$s_url = urldecode_deep(  base64_decode($success_url) );
+	} else {
+		$s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+	}
+$error_url 	=	isset($_GET['error_url']) ? $_GET['error_url'] : '';
+	if ( !empty($error_url)) {
+		$e_url = urldecode_deep(  base64_decode($error_url) );
+	} else {
+		$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+	}
+	
 $new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
 $token 					= $_POST['stripeToken'];
 $email_address 	= $_POST['stripeEmail'];
@@ -160,8 +173,8 @@ if($stripe_id) { // Utilisateur enregistré
 	// Add custom action before redirection
 	do_action( 'direct_stripe_before_success_redirection', $post_id );
 	
-//Redirection after success
-	wp_redirect( add_query_arg( $s_query , get_permalink( $d_stripe_general['direct_stripe_success_page'] ) ) );
+	//Redirection after success
+	wp_redirect( add_query_arg( $s_query , $s_url) );
 
   exit;
 }
@@ -180,8 +193,7 @@ catch(Exception $e)
 	do_action( 'direct_stripe_before_error_redirection', $post_id );
 	
   //Redirection after error
-  wp_redirect( add_query_arg( $e_query , get_permalink( $d_stripe_general['direct_stripe_error_page'] ) ) );
-
+	wp_redirect( add_query_arg( $e_query , $e_url ) );
 	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());

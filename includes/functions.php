@@ -50,7 +50,9 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 				'display_amount'	=> '',
 				'currency'				=> '',
 				'success_query'		=> '',
-				'error_query'			=> ''
+				'error_query'			=> '',
+				'success_url'			=>	'',
+				'error_url'				=>	''
     ), $atts, 'directstripe' );
 	
 if( !empty( $directStripeAttrValues['amount']) ) {
@@ -58,10 +60,16 @@ if( !empty( $directStripeAttrValues['amount']) ) {
  	}
 if(  !empty($directStripeAttrValues['success_query']) ) {
  	 		$directStripeAttrValues['success_query'] = urlencode_deep( base64_encode($directStripeAttrValues['success_query']) );
- 	 	}
+ 	 }
 if(  !empty($directStripeAttrValues['error_query']) ) {
  	 		$directStripeAttrValues['error_query'] = urlencode_deep( base64_encode($directStripeAttrValues['error_query']) );
- 	 	}
+ 	}
+if( !empty( $directStripeAttrValues['success_url']) ) {
+ 	$directStripeAttrValues['success_url'] = urlencode_deep( base64_encode($directStripeAttrValues['success_url']) );
+	}
+if( !empty( $directStripeAttrValues['error_url']) ) {
+ 	$directStripeAttrValues['error_url'] = urlencode_deep( base64_encode($directStripeAttrValues['error_url']) );
+	}
 	
 	// the query var and its value 
 $params = array(
@@ -74,6 +82,8 @@ $params = array(
 	'currency' 			=> $directStripeAttrValues['currency'],
 	'success_query'	=> $directStripeAttrValues['success_query'],
 	'error_query'		=> $directStripeAttrValues['error_query'],
+	'success_url'		=> $directStripeAttrValues['success_url'],
+	'error_url'			=> $directStripeAttrValues['error_url'],
 	'ds-nonce'			=> $ds_nonce
 	); 
 $values = apply_filters( 'ds_param_filter', $params );
