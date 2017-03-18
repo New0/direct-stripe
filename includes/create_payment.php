@@ -173,8 +173,11 @@ if($stripe_id) { // Utilisateur enregistré
 	// Add custom action before redirection
 	do_action( 'direct_stripe_before_success_redirection', $post_id );
 	
+	if( !empty($s_query) ) {
+			$s_url = add_query_arg( $s_query , $s_url);
+	}
 	//Redirection after success
-	wp_redirect( add_query_arg( $s_query , $s_url) );
+	wp_redirect( $s_url );
 
   exit;
 }
@@ -193,7 +196,10 @@ catch(Exception $e)
 	do_action( 'direct_stripe_before_error_redirection', $post_id );
 	
   //Redirection after error
-	wp_redirect( add_query_arg( $e_query , $e_url ) );
+	if( !empty($e_query) ) {
+			$e_url = add_query_arg( $e_query , $e_url);
+	}
+	wp_redirect( $e_url );
 	
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());
