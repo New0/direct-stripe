@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7
 
-Stable tag: 1.1.7
+Stable tag: 1.1.9
 
 License: GPLv2 or later 
 
@@ -48,19 +48,21 @@ Ready for translations (Français déjà traduit)
 
 ###Display the Stripe button on your site with a simple shortcode [direct-stripe] and set your options :
 
-   	- type : payment / subscription /donation
-   	- name : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
-   	- description : Product description displayed on modal form. Set by default to the site description.description
-   	- amount : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
-   	- label : Text displayed on button to display modal form
-   	- panellabel : Text for modal form button
-  	- coupon : coupon id set in stripe admin (only for subscriptions)
-  	- setup_fee : Only for subscriptions, charge a one time fee on subscription activation
-	 	- capture : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
-	 	- display_amount : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
-		- success_query : pass query_vars into success redirection url => success_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => success_query="my_query1=var%26my_query2=var2")
-		- error_query : pass query_vars into error redirection url => error_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => error_query="my_query1=var%26my_query2=var2")
-		- currency : use a currency argument to use per shortcode currencies => currency="EUR"
+* **type** : payment / subscription /donation
+* **name** : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
+* **description** : Product description displayed on modal form. Set by default to the site description.
+* **amount** : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
+* **label** : Text displayed on button to display modal form
+* **panellabel** : Text for modal form button
+* **coupon** : coupon id set in stripe admin (only for subscriptions)
+* **setup_fee** : Only for subscriptions, charge a one time fee on subscription activation
+* **capture** : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
+* **display_amount** : set it to false ( display_amount="false" ) in the shortcode to make the modal form button not display the amount
+* **currency** : use a currency argument to use per shortcode currencies => currency="EUR"
+* **success_query** : pass query_vars into success redirection url => success_query="query1:var1,query2:var2" 
+* **error_query** : pass query_vars into error redirection url => error_query="query1:var1,query2:var2"
+* **success_url** : Success redirection option per button => success_url="http://wordpress.org/"
+* **error_url** : Error redirection option per button => error_url="http://wordpress.org/"
    
 
 ###Three shortcode exemples to simply add to pages / posts content or template
@@ -129,10 +131,31 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 == Changelog == 
 
+1.1.9 New Shortcode options 
+		- success_query : pass query_vars into success redirection url => success_query="query1:var1,query2:var2" 
+		- error_query : pass query_vars into error redirection url => error_query="query1:var1,query2:var2"
+		- success_url: Success redirection option per button => success_url="http://wordpress.org/" 
+		- error_url : Error redirection option per button => error_url="http://wordpress.org/"
+		
+		Testing Actions: 
+		_ direct_stripe_before_form
+		- direct_stripe_after_data_fields
+		- direct_stripe_after_script_tag
+		- direct_stripe_after_form
+		- direct_stripe_before_success_redirection
+		- direct_stripe_before_error_redirection
+		
+		Testing filters:
+		- direct_stripe_params_filter
+
 1.1.8 New shortcode options
+			- currency : use a currency argument to use per shortcode currencies => currency="EUR"
+			
+			!!!! Fixed typo creating classname colision with other stripe plugins... !!!!
+			
+			Testing:
 			- success_query : pass query_vars into success redirection url => success_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => success_query="my_query1=var%26my_query2=var2")
 			- error_query : pass query_vars into error redirection url => error_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => error_query="my_query1=var%26my_query2=var2")
-			- currency : use a currency argument to use per shortcode currencies => currency="EUR"
 
 1.1.7 New shortcode options 
       - setup_fee (for subscriptions), 

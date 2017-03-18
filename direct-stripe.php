@@ -23,10 +23,8 @@ define('DSCORE_BASENAME', plugin_basename( __FILE__ ));
 
 require_once ( DSCORE_PATH . 'includes/functions.php' );
 
-global $directstripe;
-
 /* functions object */
-if( !$directstripe ) $directstripe = new \DirectStripeFunctions;
+$directstripe = new \DirectStripeFunctions;
 
 //Add user type when activating plugin
 register_activation_hook( __FILE__,  array( $directstripe, 'direct_stripe_user_roles_on_activation') );

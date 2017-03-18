@@ -86,7 +86,7 @@ $params = array(
 	'error_url'			=> $directStripeAttrValues['error_url'],
 	'ds-nonce'			=> $ds_nonce
 	); 
-$values = apply_filters( 'ds_param_filter', $params );
+//$values = apply_filters( 'direct_stripe_params_filter', $params );
 	 ob_start();
 include( DSCORE_PATH . '/public/shortcode.php');
 	return ob_get_clean();
