@@ -23,7 +23,8 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 $admin_email = get_option( 'admin_email' );
 
 try {
-$preamount 				= isset($_GET['amount']) ? $_GET['amount'] : '';
+$button_id 			= isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$preamount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
 $amount = urldecode_deep( base64_decode($preamount) );
 $capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description		= isset($_GET['description']) ? $_GET['description'] : '';
@@ -171,7 +172,10 @@ if($stripe_id) { // Utilisateur enregistré
 }//endif user exists
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_success_redirection', $post_id );
+	
+	$chargeID = $charge->id;
+
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
 	
 	if( !empty($s_query) ) {
 			$s_url = add_query_arg( $s_query , $s_url);
@@ -193,7 +197,7 @@ catch(Exception $e)
   }
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection', $post_id );
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );
 	
   //Redirection after error
 	if( !empty($e_query) ) {
