@@ -131,37 +131,37 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 == Changelog == 
 
-1.1.9 New Shortcode options 
-		- success_query : pass query_vars into success redirection url => success_query="query1:var1,query2:var2" 
-		- error_query : pass query_vars into error redirection url => error_query="query1:var1,query2:var2"
-		- success_url: Success redirection option per button => success_url="http://wordpress.org/" 
-		- error_url : Error redirection option per button => error_url="http://wordpress.org/"
-		
-		Testing Actions: 
-		_ direct_stripe_before_form
-		- direct_stripe_after_data_fields
-		- direct_stripe_after_script_tag
-		- direct_stripe_after_form
-		- direct_stripe_before_success_redirection
-		- direct_stripe_before_error_redirection
-		
-		Testing filters:
-		- direct_stripe_params_filter
+1.1.9 
+**New Shortcode options**
+*success_query : pass query_vars into success redirection url => success_query="query1:var1,query2:var2" 
+*error_query : pass query_vars into error redirection url => error_query="query1:var1,query2:var2"
+*success_url: Success redirection option per button => success_url="http://wordpress.org/" 
+*error_url : Error redirection option per button => error_url="http://wordpress.org/"
 
-1.1.8 New shortcode options
-			- currency : use a currency argument to use per shortcode currencies => currency="EUR"
-			
-			!!!! Fixed typo creating classname colision with other stripe plugins... !!!!
-			
-			Testing:
-			- success_query : pass query_vars into success redirection url => success_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => success_query="my_query1=var%26my_query2=var2")
-			- error_query : pass query_vars into error redirection url => error_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => error_query="my_query1=var%26my_query2=var2")
+**Testing Actions** 
+*direct_stripe_before_form
+*direct_stripe_after_data_fields
+*direct_stripe_after_script_tag
+*direct_stripe_after_form
+*direct_stripe_before_success_redirection
+*direct_stripe_before_error_redirection
 
-1.1.7 New shortcode options 
-      - setup_fee (for subscriptions), 
-	    - display_amount (="fase" to make the modal form button not display the amount) , 
-	    - capture (="false" to register the payment witout capturing the charge and charge the payment from stripe's admin panel)
-	    - description of product setup with description's value of shortcode is now recorded in logs
+1.1.8 
+New shortcode options:
+- currency : use a currency argument to use per shortcode currencies => currency="EUR"
+
+!!!! Fixed typo creating classname colision with other stripe plugins... !!!!
+
+Testing:
+- success_query : pass query_vars into success redirection url => success_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => success_query="my_query1=var%26my_query2=var2")
+- error_query : pass query_vars into error redirection url => error_query="my_query=var" ( to use multiple queries please use %26 to encode & like  => error_query="my_query1=var%26my_query2=var2")
+
+1.1.7 
+New shortcode options 
+- setup_fee (for subscriptions), 
+- display_amount (="fase" to make the modal form button not display the amount) , 
+- capture (="false" to register the payment witout capturing the charge and charge the payment from stripe's admin panel)
+- description of product setup with description's value of shortcode is now recorded in logs
 	
 1.1.6 Fixed error email sent to users bug (Thanks Tina!) - Added "setup_fee" option for subscriptions for the shortcode (under test)
 
