@@ -52,7 +52,8 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 				'success_query'		=> '',
 				'error_query'			=> '',
 				'success_url'			=>	'',
-				'error_url'				=>	''
+				'error_url'				=>	'',
+				'button_id'				=>	''
     ), $atts, 'directstripe' );
 	
 if( !empty( $directStripeAttrValues['amount']) ) {
@@ -84,6 +85,7 @@ $params = array(
 	'error_query'		=> $directStripeAttrValues['error_query'],
 	'success_url'		=> $directStripeAttrValues['success_url'],
 	'error_url'			=> $directStripeAttrValues['error_url'],
+	'button_id'			=> $directStripeAttrValues['button_id'],
 	'ds-nonce'			=> $ds_nonce
 	); 
 //$values = apply_filters( 'direct_stripe_params_filter', $params );
