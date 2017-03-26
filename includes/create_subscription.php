@@ -3,13 +3,8 @@ defined( 'ABSPATH' ) or die( 'Please!' );
 $nonce = $_REQUEST['ds-nonce'];
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die("Security check");
 
-<<<<<<< HEAD
-// Souscriptions Stripe
-if( !class_exists( 'Stripe' ) ) {
-=======
 //  Stripe
 if( ! class_exists( 'Stripe\Stripe' ) ) {
->>>>>>> master
     require_once(DSCORE_PATH . 'stripe/init.php');
 }
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
@@ -18,21 +13,14 @@ $headers =  array('Content-Type: text/html; charset=UTF-8');
 
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
-if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
+if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
-} else { 
+} else {
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
-} 
+}
 $admin_email = get_option( 'admin_email' );
 
 try {
-<<<<<<< HEAD
-  $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
-  $coupon = isset($_GET['coupon']) ? $_GET['coupon'] : '';
-  $token = $_POST['stripeToken'];
-  $email_address = $_POST['stripeEmail'];
-
-=======
 	$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
     $preamount 			    = isset($_GET['amount']) ? $_GET['amount'] : '';
 	$amount 				= urldecode_deep( base64_decode($preamount) );
@@ -46,12 +34,12 @@ try {
 	$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
 	$s_query = array_combine($r[1], $r[2]);
 }
 if ( !empty($error_query)) {
 	$pres_query = urldecode_deep( base64_decode($error_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e); 
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
 	$e_query = array_combine($e[1], $e[2]);
 }
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
@@ -75,8 +63,7 @@ $new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
 			$currency = $d_stripe_general['direct_stripe_currency'];
 	}
 	
->>>>>>> master
-//Cherche Si utilisateur est enregistré  
+//Cherche Si utilisateur est enregistré
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
 	$user = get_user_by( 'email', $email_address );
@@ -254,25 +241,19 @@ if($stripe_id) { //Utilisateur existant
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
       wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_email_subject'], $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
-<<<<<<< HEAD
-}//endelse user existant
- //Redirection
-wp_redirect( get_permalink( $d_stripe_general['direct_stripe_success_page'] ) );
-=======
 }//end else user existant
 	
 	// Add custom action before redirection
 	$chargeID = $charge->id;
 	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
 	
-	//Redirection after success	
+	//Redirection after success
 	if( !empty($s_query) ) {
 			$s_url = add_query_arg( $s_query , $s_url);
 	}
 	//Redirection after success
 	wp_redirect( $s_url );
 	
->>>>>>> master
   exit;
 }
 catch(Exception $e)
@@ -285,9 +266,6 @@ catch(Exception $e)
   if(  isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
   	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'], $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
-<<<<<<< HEAD
-  wp_redirect( get_permalink( $d_stripe_general['direct_stripe_error_page'] ) );
-=======
 	
 	// Add custom action before redirection
 	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );;
@@ -298,7 +276,6 @@ catch(Exception $e)
 	}
 	wp_redirect( $e_url );
 	
->>>>>>> master
   error_log("unable to proceed with:" . $_POST['stripeEmail'].
     ", error:" . $e->getMessage());
   exit;
