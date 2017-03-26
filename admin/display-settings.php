@@ -77,9 +77,16 @@ function direct_stripe_success_page_render() {
 	?>
 			<select name="direct_stripe_general_settings[direct_stripe_success_page]">
 				<?php
+<<<<<<< HEAD
 				if( $pages = get_pages() ){
 						foreach( $pages as $page ){ 
 							$selected = ($d_stripe_options['direct_stripe_success_page'] == $page->ID) ? "selected" : ""; ?>
+=======
+				if( $pages = get_pages() ){ ?>
+								<option value="<?php _e('Select success page', 'direct-stripe'); ?>" selected><?php _e('Select success page', 'direct-stripe'); ?></option>
+					<?php	foreach( $pages as $page ){ 
+							$selected = ($d_stripe_options['direct_stripe_success_page'] == $page->ID) ? "selected" : ""; ?>	
+>>>>>>> master
 								<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
 							<?php }
 				}
@@ -92,8 +99,14 @@ function direct_stripe_error_page_render() {
 	?>
 			<select name="direct_stripe_general_settings[direct_stripe_error_page]">
 				<?php
+<<<<<<< HEAD
 				if( $pages = get_pages() ){
 						foreach( $pages as $page ){ 
+=======
+				if( $pages = get_pages() ){ ?>
+					<option value="<?php _e('Select error page', 'direct-stripe'); ?>" selected><?php _e('Select error page', 'direct-stripe'); ?></option>
+					<?php	foreach( $pages as $page ){ 
+>>>>>>> master
 							$selected = ($d_stripe_options['direct_stripe_error_page'] == $page->ID) ? "selected" : ""; ?>
 						<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
 							<?php }
@@ -170,7 +183,17 @@ function direct_stripe_tc_link_text_render() {
 function direct_stripe_tc_link_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_styles_settings' );
 	?>
-	<input type='text' name='direct_stripe_styles_settings[direct_stripe_tc_link]' value='<?php echo sanitize_text_field( $d_stripe_options['direct_stripe_tc_link'] ); ?>'>
+		<select name="direct_stripe_styles_settings[direct_stripe_tc_link]">
+			<?php
+			if( $pages = get_pages() ){ ?>
+				<option value="<?php _e('Select T&C page', 'direct-stripe'); ?>" selected><?php _e('Select T&C page', 'direct-stripe'); ?></option>
+				<?php	foreach( $pages as $page ){ 
+						$selected = ($d_stripe_options['direct_stripe_tc_link'] == $page->ID) ? "selected" : ""; ?>
+							<option value="<?php echo $page->ID; ?>" <?php echo $selected; ?>><?php echo $page->post_title; ?></option>
+						<?php }
+			}
+			?>
+		</select>
 	<?php
 }
 
@@ -192,7 +215,17 @@ function direct_stripe_admin_email_subject_render() {
 function direct_stripe_admin_email_content_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_emails_settings' );
 	?>
-<textarea name='direct_stripe_emails_settings[direct_stripe_admin_email_content]'><?php echo sanitize_text_field( $d_stripe_options['direct_stripe_admin_email_content'] ); ?></textarea>
+<?php
+							$settings_admin_email_content = array(
+										'wpautop'       => true,
+										'media_buttons' => false,
+										'textarea_name' => 'direct_stripe_emails_settings[direct_stripe_admin_email_content]',
+										'textarea_rows' => 10
+									);
+									
+									wp_editor( $d_stripe_options['direct_stripe_admin_email_content'], 'direct_stripe_emails_settings[direct_stripe_admin_email_content]', $settings_admin_email_content);
+							?>
+<!-- <textarea name='direct_stripe_emails_settings[direct_stripe_admin_email_content]'><?php echo sanitize_text_field( $d_stripe_options['direct_stripe_admin_email_content'] ); ?></textarea>-->
 	<?php
 }
 
@@ -214,7 +247,16 @@ function direct_stripe_user_email_subject_render() {
 function direct_stripe_user_email_content_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_emails_settings' );
 	?>
-<textarea name='direct_stripe_emails_settings[direct_stripe_user_email_content]'><?php echo sanitize_text_field( $d_stripe_options['direct_stripe_user_email_content'] ); ?></textarea>
+<?php
+							$settings_user_email_content = array(
+										'wpautop'       => true,
+										'media_buttons' => false,
+										'textarea_name' => 'direct_stripe_emails_settings[direct_stripe_user_email_content]',
+										'textarea_rows' => 10
+									);
+									
+									wp_editor( $d_stripe_options['direct_stripe_user_email_content'], 'direct_stripe_emails_settings[direct_stripe_user_email_content]', $settings_user_email_content);
+							?>
 	<?php
 }
 
@@ -238,7 +280,16 @@ function direct_stripe_admin_error_email_subject_render() {
 function direct_stripe_admin_error_email_content_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_emails_settings' );
 	?>
-<textarea name='direct_stripe_emails_settings[direct_stripe_admin_error_email_content]'><?php echo esc_html( $d_stripe_options['direct_stripe_admin_error_email_content'] ); ?></textarea>
+<?php
+							$settings_admin_error_content = array(
+										'wpautop'       => true,
+										'media_buttons' => false,
+										'textarea_name' => 'direct_stripe_emails_settings[direct_stripe_admin_error_email_content]',
+										'textarea_rows' => 10
+									);
+									
+									wp_editor( $d_stripe_options['direct_stripe_admin_error_email_content'], 'direct_stripe_emails_settings[direct_stripe_admin_error_email_content]', $settings_admin_error_content);
+							?>
 	<?php
 }
 
@@ -260,7 +311,16 @@ function direct_stripe_user_error_email_subject_render() {
 function direct_stripe_user_error_email_content_render() { 
 	$d_stripe_options = get_option( 'direct_stripe_emails_settings' );
 	?>
-<textarea name='direct_stripe_emails_settings[direct_stripe_user_error_email_content]'><?php echo esc_html( $d_stripe_options['direct_stripe_user_error_email_content'] ); ?></textarea>
+<?php
+							$settings_user_error_content = array(
+										'wpautop'       => true,
+										'media_buttons' => false,
+										'textarea_name' => 'direct_stripe_emails_settings[direct_stripe_user_error_email_content]',
+										'textarea_rows' => 10
+									);
+									
+									wp_editor( $d_stripe_options['direct_stripe_user_error_email_content'] , 'direct_stripe_emails_settings[direct_stripe_user_error_email_content]', $settings_user_error_content);
+							?>
 	<?php
 }
 	
@@ -365,30 +425,50 @@ public function direct_stripe_styles_settings_validation( $input ) {
     return $input;
 }
 public function direct_stripe_emails_settings_validation( $input ) {   
+<<<<<<< HEAD
+=======
+	$allowed_tags = wp_kses_allowed_html( 'post' );
+>>>>>>> master
 	//Texts
 	if( isset($input['direct_stripe_admin_email_subject']) && !empty($input['direct_stripe_admin_email_subject']) ) {
 		$input['direct_stripe_admin_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_email_subject'] );
 	}
 	if( isset($input['direct_stripe_admin_email_content']) && !empty($input['direct_stripe_admin_email_content']) ) {
+<<<<<<< HEAD
 		$input['direct_stripe_admin_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_email_content'] );
+=======
+		$input['direct_stripe_admin_email_content'] = wp_kses( $input['direct_stripe_admin_email_content'], $allowed_tags );
+>>>>>>> master
 	}
 	if( isset($input['direct_stripe_user_email_subject']) && !empty($input['direct_stripe_user_email_subject']) ) {
 		$input['direct_stripe_user_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_user_email_subject'] );
 	}
 	if( isset($input['direct_stripe_user_email_content']) && !empty($input['direct_stripe_user_email_content']) ) {
+<<<<<<< HEAD
 		$input['direct_stripe_user_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_user_email_content'] );
+=======
+		$input['direct_stripe_user_email_content'] = wp_kses( $input['direct_stripe_user_email_content'], $allowed_tags);
+>>>>>>> master
 	}
 	if( isset($input['direct_stripe_admin_error_email_subject']) && !empty($input['direct_stripe_admin_error_email_subject']) ) {
 		$input['direct_stripe_admin_error_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_error_email_subject'] );
 	}
 	if( isset($input['direct_stripe_admin_error_email_content']) && !empty($input['direct_stripe_admin_error_email_content']) ) {
+<<<<<<< HEAD
 		$input['direct_stripe_admin_error_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_admin_error_email_content'] );
+=======
+		$input['direct_stripe_admin_error_email_content'] = wp_kses( $input['direct_stripe_admin_error_email_content'], $allowed_tags );
+>>>>>>> master
 	}
 	if( isset($input['direct_stripe_user_error_email_subject']) && !empty($input['direct_stripe_user_error_email_subject']) ) {
 		$input['direct_stripe_user_error_email_subject'] = wp_filter_nohtml_kses( $input['direct_stripe_user_error_email_subject'] );
 	}
 	if( isset($input['direct_stripe_user_error_email_content']) && !empty($input['direct_stripe_user_error_email_content']) ) {
+<<<<<<< HEAD
 		$input['direct_stripe_user_error_email_content'] = wp_filter_nohtml_kses( $input['direct_stripe_user_error_email_content'] );
+=======
+		$input['direct_stripe_user_error_email_content'] = wp_kses( $input['direct_stripe_user_error_email_content'], $allowed_tags );
+>>>>>>> master
 	}
   // Make sure isauthorized is only true or false (0 or 1)
 	if( isset($input['direct_stripe_admin_emails_checkbox']) && !empty($input['direct_stripe_admin_emails_checkbox']) ) {

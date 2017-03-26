@@ -1,14 +1,21 @@
 <?php
 // Shortcode output
+<<<<<<< HEAD
 
+=======
+do_action( 'direct_stripe_before_form' );
+>>>>>>> master
 //Chrome for iOS hack to disable custom button styles and get Stripe modal forme to open
 if ( strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {
 	$crios = 'crios';
 } else {
 	$crios = 'false';
 }
+<<<<<<< HEAD
 var_dump($crios); 
 
+=======
+>>>>>>> master
 if ( $crios === 'crios' ) { ?>
 	<style type=text/css>
 		.stripe-button-el {
@@ -25,29 +32,38 @@ if ( $crios === 'crios' ) { ?>
 	<?php } ?>
   <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" 
 		<?php if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { ?>
-		data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_test_publishable_api_key']); ?>"
+			data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_test_publishable_api_key']); ?>"
 		<?php } else { ?>
-		data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_publishable_api_key']); ?>"
+			data-key="<?php echo esc_attr($d_stripe_general['direct_stripe_publishable_api_key']); ?>"
 		<?php } ?>
 		data-image="<?php echo esc_url($d_stripe_general['direct_stripe_logo_image']); ?>" 
 		data-name="<?php echo esc_attr($directStripeAttrValues['name']) ?>" 
 		data-description="<?php echo esc_attr($directStripeAttrValues['description']) ?>"
-		data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
 		data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
-		data-currency="<?php echo esc_attr($d_stripe_general['direct_stripe_currency']) ?>" 
-		<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
-		data-address="true"
+		data-currency="<?php if( $directStripeAttrValues['currency'] != 'false' ) {
+												echo esc_attr($directStripeAttrValues['currency']);
+									} else {
+											 echo esc_attr($d_stripe_general['direct_stripe_currency']);
+									} ?>" 
+		<?php if( $directStripeAttrValues['display_amount'] != 'false' ) { ?>
+			data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>" 
 		<?php } ?>
+		<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
+			data-address="true"
+		<?php } ?>
+		<?php do_action( 'direct_stripe_after_data_fields' ); ?> 
 		>
 		</script>
+		<?php do_action( 'direct_stripe_after_script_tag' ); ?>
 	<?php //Custom styles button condition
 				if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' && $crios != 'crios' ) { ?>
 	<button id="directStripe" class="direct-stripe-button" type="submit" ><?php echo esc_attr($directStripeAttrValues['label']) ?></button>
 	<?php //T&C Check box condition
 				if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
-	<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo home_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
+	<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
 	<?php } ?>
 	<?php } ?>
-	</form>
+</form>
+<?php do_action( 'direct_stripe_after_form' ); ?>
