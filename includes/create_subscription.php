@@ -21,16 +21,17 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 $admin_email = get_option( 'admin_email' );
 
 try {
-  $preamount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
+	$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
+    $preamount 			    = isset($_GET['amount']) ? $_GET['amount'] : '';
 	$amount 				= urldecode_deep( base64_decode($preamount) );
-  $coupon 				= isset($_GET['coupon']) ? $_GET['coupon'] : '';
-	$setup_fee 			= isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
-  $token 					= $_POST['stripeToken'];
-  $email_address 	= $_POST['stripeEmail'];
+    $coupon 				= isset($_GET['coupon']) ? $_GET['coupon'] : '';
+	$setup_fee 			    = isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
+    $token 					= $_POST['stripeToken'];
+    $email_address  	    = $_POST['stripeEmail'];
 	$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
-	$description 		= isset($_GET['description']) ? $_GET['description'] : '';
-	$success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
-	$error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+	$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
+	$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
+	$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
 	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
@@ -243,7 +244,8 @@ if($stripe_id) { //Utilisateur existant
 }//end else user existant
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_success_redirection', $post_id );
+	$chargeID = $charge->id;
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
 	
 	//Redirection after success	
 	if( !empty($s_query) ) {
@@ -266,7 +268,7 @@ catch(Exception $e)
   }
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection', $post_id );
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );;
 	
   //Redirection after error
   if( !empty($e_query) ) {

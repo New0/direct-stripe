@@ -25,11 +25,11 @@ $admin_email = get_option( 'admin_email' );
 try {
 $button_id 			= isset($_GET['button_id']) ? $_GET['button_id'] : '';
 $preamount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
-$amount = urldecode_deep( base64_decode($preamount) );
-$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
+$amount             = urldecode_deep( base64_decode($preamount) );
+$capture 			= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description		= isset($_GET['description']) ? $_GET['description'] : '';
-$success_query 	=	isset($_GET['success_query']) ? $_GET['success_query'] : '';
-$error_query 		=	isset($_GET['error_query']) ? $_GET['error_query'] : '';
+$success_query 	    = isset($_GET['success_query']) ? $_GET['success_query'] : '';
+$error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
 	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
@@ -127,8 +127,8 @@ if($stripe_id) { // Utilisateur enregistré
       'customer' => $customer->id,
       'amount' => $amount,
       'currency' => $currency,
-			'capture' => $capture,
-			'description' => $description
+      'capture' => $capture,
+      'description' => $description
   		));
 
 	
@@ -172,9 +172,7 @@ if($stripe_id) { // Utilisateur enregistré
 }//endif user exists
 	
 	// Add custom action before redirection
-	
 	$chargeID = $charge->id;
-
 	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
 	
 	if( !empty($s_query) ) {
