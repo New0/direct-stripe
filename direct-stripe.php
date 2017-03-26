@@ -6,19 +6,19 @@ Description: Use Stripe payment buttons anywhere in a WordPress website, let you
 Author: Nicolas Figueira
 Text Domain: direct-stripe
 Domain Path: /languages
-Version: 1.1.5
+Version: 1.1.9
 Author URI: https://newo.me
 */
 defined( 'ABSPATH' ) or die( 'Please!' );
 
 if(!defined('DSCORE_PATH')) {
-define('DSCORE_PATH', plugin_dir_path(__FILE__));
+	define('DSCORE_PATH', plugin_dir_path(__FILE__));
 }
 if(!defined('DSCORE_URL')) {
-define('DSCORE_URL', plugin_dir_url(__FILE__));
+	define('DSCORE_URL', plugin_dir_url(__FILE__));
 }
 if(!defined('DSCORE_BASENAME')) {
-define('DSCORE_BASENAME', plugin_basename( __FILE__ ));
+	define('DSCORE_BASENAME', plugin_basename( __FILE__ ));
 }
 
 require_once ( DSCORE_PATH . 'includes/functions.php' );
@@ -66,8 +66,10 @@ if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styl
 }
 
 // Admin actions
-if (is_admin() ) { 
-  // Add admin settings area
-add_action( 'admin_menu', array( $directstripe, 'direct_stripe_add_admin_menu') );
-add_action( 'admin_init', array( $directstripe, 'direct_stripe_settings_init') );
+if ( is_admin() ) {
+	// Add admin settings area
+	add_action( 'admin_menu', array( $directstripe, 'direct_stripe_add_admin_menu') );
+	add_action( 'admin_init', array( $directstripe, 'direct_stripe_settings_init') );
+	add_action( 'media_buttons', array( $directstripe, 'direct_stripe_add_shortcode_button'), 20);
+	add_action( 'admin_footer', array( $directstripe, 'ds_add_mce_popup') );
 }

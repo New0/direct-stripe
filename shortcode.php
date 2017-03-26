@@ -1,12 +1,13 @@
 <?php
 // Shortcode output
-do_action( 'direct_stripe_before_form' );
+
 //Chrome for iOS hack to disable custom button styles and get Stripe modal forme to open
 if ( strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {
 	$crios = 'crios';
 } else {
 	$crios = 'false';
 }
+
 if ( $crios === 'crios' ) { ?>
 	<style type=text/css>
 		.stripe-button-el {
@@ -33,7 +34,7 @@ if ( $crios === 'crios' ) { ?>
 		data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
 		data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
 		data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
-		data-currency="<?php if( $directStripeAttrValues['currency'] != 'false' ) {
+		data-currency="<?php if( ! empty($directStripeAttrValues['currency'] ) ) {
 												echo esc_attr($directStripeAttrValues['currency']);
 									} else {
 											 echo esc_attr($d_stripe_general['direct_stripe_currency']);
@@ -44,10 +45,8 @@ if ( $crios === 'crios' ) { ?>
 		<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
 			data-address="true"
 		<?php } ?>
-		<?php do_action( 'direct_stripe_after_data_fields' ); ?> 
 		>
 		</script>
-		<?php do_action( 'direct_stripe_after_script_tag' ); ?>
 	<?php //Custom styles button condition
 				if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' && $crios != 'crios' ) { ?>
 	<button id="directStripe" class="direct-stripe-button" type="submit" ><?php echo esc_attr($directStripeAttrValues['label']) ?></button>
@@ -56,5 +55,4 @@ if ( $crios === 'crios' ) { ?>
 	<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
 	<?php } ?>
 	<?php } ?>
-</form>
-<?php do_action( 'direct_stripe_after_form' ); ?>
+	</form>

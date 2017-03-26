@@ -1,0 +1,29 @@
+/* Shortcode button */
+
+.ds_media_icon {
+  background: url('../images/logo_stripe_white.svg') no-repeat top left;
+  display: inline-block;
+  height: 16px;
+  margin: 0 2px 0 0;
+  vertical-align: text-top;
+  width: 16px;
+}
+div#TB_window.thickbox-loading {
+  height: auto !important;
+}
+#TB_ajaxContent {
+  width: auto !important;
+  height: 80vh !important;
+  overflow: scroll;
+}
+
+.ds-row {
+  width: 100%;
+  clear: both;
+}
+
+.ds-one-third {
+  width: 30%;
+  float: left;
+  margin: 1%;
+}
