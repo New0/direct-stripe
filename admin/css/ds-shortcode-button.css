@@ -4,9 +4,10 @@
   background: url('../images/logo_stripe_white.svg') no-repeat top left;
   display: inline-block;
   height: 16px;
+  width: 16px;
   margin: 0 2px 0 0;
   vertical-align: text-top;
-  width: 16px;
+
 }
 div#TB_window.thickbox-loading {
   height: auto !important;
@@ -20,6 +21,12 @@ div#TB_window.thickbox-loading {
 .ds-row {
   width: 100%;
   clear: both;
+}
+.ds-row h4 {
+    font-size: 1.4rem;
+    text-decoration: underline;
+    margin-top: 0;
+    padding-top: 2rem;
 }
 .ds-only-one {
   width: 100%;
@@ -56,6 +63,9 @@ div#TB_window.thickbox-loading {
   opacity: 0;
   transition: opacity 1s;
   font-size: 1rem;
+}
+.ds_infos .ds_button_infos.ds_right {
+    right: 100%;
 }
 .ds_infos  .ds_button_infos:after {
   content: "";

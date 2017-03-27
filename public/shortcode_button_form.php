@@ -128,10 +128,10 @@ function ds_insert_shortcode(){
            </div>
       </div>
       <div class="ds-row">
-        <div>
+        <div class="ds-only-one">
             <strong><?php _e('Description','direct-stripe');?></strong><br />
             <textarea id="ds_description" type="text" class="ds-shortcode-description" name="ds_description" rows="3" cols="50"></textarea>
-            </div>
+        </div>
       </div>
         <div class="ds-row">
             <h4><?php _e('Options for subscriptions','direct-stripe');?></h4>
@@ -147,7 +147,7 @@ function ds_insert_shortcode(){
             <div class="ds-one-half">
             <strong><?php _e('Setup Fee','direct-stripe');?></strong>
                 <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
-                    <span class="ds_button_infos"><?php _e('Setup Fee allows you to charge a one time fee on plan subscription activation.', 'direct-stripe'); ?></span></button>
+                    <span class="ds_button_infos"><?php _e('Setup Fee allows you to charge a one time fee on plan subscription activation. Enter the amount use it and charge, 500 means 5.00', 'direct-stripe'); ?></span></button>
                 <br />
                 <input id="ds_setup_fee" type="text" class="ds-shortcode-setup-fee" name="ds_setup_fee">     
             </div>
@@ -168,7 +168,7 @@ function ds_insert_shortcode(){
                 </select> <br/>                    
             </div>
             <div class="ds-one-third">
-                <strong><?php _e('Display amount','direct-stripe');?></strong><
+                <strong><?php _e('Display amount','direct-stripe');?></strong>
                 <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
                     <span class="ds_button_infos"><?php _e('Set to "No" to hide the amount in modal form button.', 'direct-stripe'); ?></span></button>
                 <br />
@@ -181,7 +181,7 @@ function ds_insert_shortcode(){
             <div class="ds-one-third">
             <strong><?php _e('Currency','direct-stripe');?></strong>
                 <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
-                    <span class="ds_button_infos"><?php _e('Override the currency set under Direct Stripe -> setup , and use currency per button.', 'direct-stripe'); ?></span></button>
+                    <span class="ds_button_infos ds_right"><?php _e('Override the currency set under Direct Stripe -> setup , and use currency per button.', 'direct-stripe'); ?></span></button>
                 <br />
                 <input id="ds_currency" type="text" class="ds-shortcode-currency" name="ds_currency">     
             </div>
@@ -201,7 +201,7 @@ function ds_insert_shortcode(){
             <div class="ds-one-half">
             <strong><?php _e('Error query arguments','direct-stripe');?></strong>
                 <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
-                    <span class="ds_button_infos"><?php _e('Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:myvalue2', 'direct-stripe'); ?></span></button>
+                    <span class="ds_button_infos ds_right"><?php _e('Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:myvalue2', 'direct-stripe'); ?></span></button>
                 <br />
                 <input id="ds_error_query" type="text" class="ds-shortcode-error-query" name="ds_error_query">     
             </div>
