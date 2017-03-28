@@ -1,7 +1,7 @@
 /* Shortcode button */
 
 .ds_media_icon {
-  background: url('../images/logo_stripe_white.svg') no-repeat top left;
+  background: url('../images/logo_stripe_white.svg') no-repeat;
   display: inline-block;
   height: 16px;
   width: 16px;
@@ -17,7 +17,13 @@ div#TB_window.thickbox-loading {
   height: 80vh !important;
   overflow: scroll;
 }
-
+#ds_add_button .ds_buttons {
+  width: 100%;
+  text-align: center;
+}
+#ds_add_button .button-primary, #ds_add_button .button-secondary {
+  margin-top: 2rem;
+}
 .ds-row {
   width: 100%;
   clear: both;
