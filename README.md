@@ -13,11 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7
 
-<<<<<<< HEAD
-Stable tag: 1.1.4
-=======
 Stable tag: 1.1.9
->>>>>>> master
 
 License: GPLv2 or later 
 
@@ -52,15 +48,6 @@ Ready for translations (Français déjà traduit)
 
 ###Display the Stripe button on your site with a simple shortcode [direct-stripe] and set your options :
 
-<<<<<<< HEAD
-    - type : payment / subscription /donation
-    - name : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
-    - description : Product description displayed on modal form. Set by default to the site description.description
-    - amount : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
-    - label : Text displayed on button to display modal form
-    - panellabel : Text for modal form button
-  	- coupon : coupon id set in stripe admin (only for subscriptions)
-=======
 * **type** : payment / subscription /donation
 * **name** : Name displayed in Stripe modal form (shop name). Set by fefault to the sitename
 * **description** : Product description displayed on modal form. Set by default to the site description.
@@ -77,7 +64,6 @@ Ready for translations (Français déjà traduit)
 * **success_url** : Success redirection option per button => success_url="http://wordpress.org/"
 * **error_url** : Error redirection option per button => error_url="http://wordpress.org/"
    
->>>>>>> master
 
 ###Three shortcode exemples to simply add to pages / posts content or template
 
@@ -106,12 +92,8 @@ Ready for translations (Français déjà traduit)
     - Option for test mode / keys
     - Set your stripe's account currency 
     - Choose a success and error pages
-<<<<<<< HEAD
-    - Choose a log for your Stripes modal forms
-=======
     - Choose a logo for your Stripes modal forms
 	  - Choose wether you want to collect extra billing information in Stripes modal forms
->>>>>>> master
 	
 
 **-> Styles Settings :**
@@ -148,8 +130,6 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
-<<<<<<< HEAD
-=======
 
 1.1.9 
 **New Shortcode options**
@@ -187,7 +167,6 @@ New shortcode options
 
 1.1.5 Added allowed html to emails content
 
->>>>>>> master
 1.1.4 Bypassed Chrome on iOS bug ( customized button would'nt open modal form ), disabled custom styles for that particular case ( Still need a real fix)
 
 1.1.3 IMPORTANT Bug Fix for success / error landing/redirection pages
@@ -201,7 +180,3 @@ New shortcode options
 1.0 Released functionnal button for payment/donation and subscriptions. 
 Logs users and transactions in WordPress admin. 
 Set custom styles and automaed emails.
-<<<<<<< HEAD
-
-=======
->>>>>>> master
