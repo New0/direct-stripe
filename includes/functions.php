@@ -61,6 +61,10 @@ class DirectStripeFunctions {
 			'button_id'				=>	''
 		), $atts, 'directstripe' );
 		
+		//Useful to print the amount in the modal form
+		$original_amount = $directStripeAttrValues['amount'];
+		
+		//Encryprion of the amount and query args
 		if( !empty( $directStripeAttrValues['amount']) ) {
 			$directStripeAttrValues['amount'] = urlencode_deep( base64_encode($directStripeAttrValues['amount']) );
 		}
