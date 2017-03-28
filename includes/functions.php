@@ -15,7 +15,7 @@ class DirectStripeFunctions {
 	 */
 	function direct_stripe_load_admin_scripts( $hook ) {
 		
-		wp_enqueue_style( 'direct-stripe-shortcode-button', DSCORE_URL . 'admin/css/ds-shortcode-button.css', false, '1.2.1' );
+		wp_enqueue_style( 'direct-stripe-shortcode-button', DSCORE_URL . 'admin/css/ds-shortcode-button.css', false, '1.2.0' );
 		
 		global $direct_stripe_page;
 		if( $hook != $direct_stripe_page )
