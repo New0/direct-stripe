@@ -33,9 +33,9 @@ if ( $crios === 'crios' ) { ?>
 			<?php } ?>
 			    data-image="<?php echo esc_url($d_stripe_general['direct_stripe_logo_image']); ?>"
 			    data-name="<?php echo esc_attr($directStripeAttrValues['name']) ?>"
-			    data-description="<?php echo esc_attr($directStripeAttrValues['description']) ?>"
-			    data-label="<?php echo esc_attr($directStripeAttrValues['label']) ?>"
-			    data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']) ?>"
+			    data-description="<?php echo esc_attr($directStripeAttrValues['description']); ?>"
+			    data-label="<?php echo esc_attr($directStripeAttrValues['label']); ?>"
+			    data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']); ?>"
 			    data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
 			    data-currency="<?php if( $directStripeAttrValues['currency'] != 'false' ) {
 				    echo esc_attr($directStripeAttrValues['currency']);
@@ -43,7 +43,7 @@ if ( $crios === 'crios' ) { ?>
 				    echo esc_attr($d_stripe_general['direct_stripe_currency']);
 			    } ?>"
 			<?php if( $directStripeAttrValues['display_amount'] != 'false' ) { ?>
-				data-amount="<?php echo absint($directStripeAttrValues['amount']) ?>"
+				data-amount="<?php echo absint($original_amount); ?>"
 			<?php } ?>
 			<?php if( isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) && $d_stripe_general['direct_stripe_billing_infos_checkbox'] === '1' ) { ?>
 				data-address="true"
@@ -57,7 +57,7 @@ if ( $crios === 'crios' ) { ?>
 			<button id="directStripe" class="direct-stripe-button" type="submit" ><?php echo esc_attr($directStripeAttrValues['label']) ?></button>
 			<?php //T&C Check box condition
 			if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
-				<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']) ?> <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
+				<br/><input type="checkbox" class="conditions" id="conditions" required>&nbsp; <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?> <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a><br />
 			<?php } ?>
 		<?php } ?>
 	</form>
