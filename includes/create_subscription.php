@@ -13,11 +13,11 @@ $headers =  array('Content-Type: text/html; charset=UTF-8');
 
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
-if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
+if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
-} else {
+} else { 
     \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
-}
+} 
 $admin_email = get_option( 'admin_email' );
 
 try {
@@ -34,12 +34,12 @@ try {
 	$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
 	$s_query = array_combine($r[1], $r[2]);
 }
 if ( !empty($error_query)) {
 	$pres_query = urldecode_deep( base64_decode($error_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e); 
 	$e_query = array_combine($e[1], $e[2]);
 }
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
@@ -63,7 +63,7 @@ $new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
 			$currency = $d_stripe_general['direct_stripe_currency'];
 	}
 	
-//Cherche Si utilisateur est enregistré
+//Cherche Si utilisateur est enregistré  
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
 	$user = get_user_by( 'email', $email_address );
@@ -247,7 +247,7 @@ if($stripe_id) { //Utilisateur existant
 	$chargeID = $charge->id;
 	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
 	
-	//Redirection after success
+	//Redirection after success	
 	if( !empty($s_query) ) {
 			$s_url = add_query_arg( $s_query , $s_url);
 	}
