@@ -42,23 +42,23 @@ class DirectStripeFunctions {
 		$sitename = get_bloginfo('name');
 		$description = get_bloginfo('description');
 		$directStripeAttrValues = shortcode_atts( array(
-			'name' 						=>	$sitename,
-			'amount' 					=>	'',
+			'name' 				=>	$sitename,
+			'amount' 			=>	'',
 			'description' 		=>	$description,
-			'label' 					=>	__('Pay with card', 'direct-stripe'),
-			'panellabel' 			=>	__('Pay', 'direct-stripe'),
-			'type' 						=>	'payment',
-			'locale' 					=>	'auto',
-			'coupon' 					=>	'',
-			'setup_fee'				=>	'',
-			'capture'					=>	'true',
+			'label' 			=>	__('Pay with card', 'direct-stripe'),
+			'panellabel' 		=>	__('Pay', 'direct-stripe'),
+			'type' 				=>	'payment',
+			'locale' 			=>	'auto',
+			'coupon' 			=>	'',
+			'setup_fee'			=>	'',
+			'capture'			=>	'true',
 			'display_amount'	=> '',
-			'currency'				=> '',
+			'currency'			=> '',
 			'success_query'		=> '',
-			'error_query'			=> '',
-			'success_url'			=>	'',
-			'error_url'				=>	'',
-			'button_id'				=>	''
+			'error_query'		=> '',
+			'success_url'		=>	'',
+			'error_url'			=>	'',
+			'button_id'			=>	''
 		), $atts, 'directstripe' );
 		
 		if( !empty( $directStripeAttrValues['amount']) ) {
@@ -79,14 +79,14 @@ class DirectStripeFunctions {
 		
 		// the query var and its value
 		$params = array(
-			'direct-stripe' => $directStripeAttrValues['type'],
-			'amount' 				=> $directStripeAttrValues['amount'],
-			'coupon' 				=> $directStripeAttrValues['coupon'],
+			'direct-stripe'     => $directStripeAttrValues['type'],
+			'amount' 			=> $directStripeAttrValues['amount'],
+			'coupon' 			=> $directStripeAttrValues['coupon'],
 			'setup_fee' 		=> $directStripeAttrValues['setup_fee'],
 			'capture' 			=> $directStripeAttrValues['capture'],
 			'description'		=> $directStripeAttrValues['description'],
 			'currency' 			=> $directStripeAttrValues['currency'],
-			'success_query'	=> $directStripeAttrValues['success_query'],
+			'success_query'	    => $directStripeAttrValues['success_query'],
 			'error_query'		=> $directStripeAttrValues['error_query'],
 			'success_url'		=> $directStripeAttrValues['success_url'],
 			'error_url'			=> $directStripeAttrValues['error_url'],
@@ -203,13 +203,13 @@ class DirectStripeFunctions {
 //Rename Colums for direct Stripe Post Type
 	function direct_stripe_logs_colums_names( $columns ) {
 		$columns = array(
-			'cb' => '<input type="checkbox" />',
-			'title' => __( 'Transaction ID', 'direct-stripe' ),
-			'author' => __( 'Stripe User', 'direct-stripe' ),
-			'amount' => __( 'Amount', 'direct-stripe' ),
-			'type'	=>	__( 'Type', 'direct-stripe' ),
+			'cb'            => '<input type="checkbox" />',
+			'title'         => __( 'Transaction ID', 'direct-stripe' ),
+			'author'        => __( 'Stripe User', 'direct-stripe' ),
+			'amount'        => __( 'Amount', 'direct-stripe' ),
+			'type'	        =>	__( 'Type', 'direct-stripe' ),
 			'description'	=>	__( 'Description', 'direct-stripe' ),
-			'date' => __( 'Date', 'direct-stripe' )
+			'date'          => __( 'Date', 'direct-stripe' )
 		);
 		return $columns;
 	}
@@ -255,12 +255,12 @@ class DirectStripeFunctions {
 //Make Direct Stripe logs columns sortable
 	function direct_stripe_sortable_columns( $columns ) {
 		$columns = array(
-			'title'	=>	'title',
-			'author' =>	'author',
-			'amount' => 'amount',
-			'type'	=>	'type',
+			'title'	        =>	'title',
+			'author'        =>	'author',
+			'amount'        => 'amount',
+			'type'	        =>	'type',
 			'description'	=>	'description',
-			'date'	=>	'date'
+			'date'	        =>	'date'
 		);
 		return $columns;
 	}
