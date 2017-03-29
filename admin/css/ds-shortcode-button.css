@@ -1,11 +1,10 @@
 /* Shortcode button */
 
 .ds_media_icon {
-  background: url('../images/logo_stripe_white.svg') no-repeat;
   display: inline-block;
   height: 16px;
   width: 16px;
-  margin: 0 2px 0 0;
+  margin: 0 0.5rem 0 0;
   vertical-align: text-top;
 
 }

@@ -14,11 +14,11 @@ $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
 $headers =  array('Content-Type: text/html; charset=UTF-8');
 // Be sure to replace this with your actual test API key
 // (switch to the live key later)
-if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) { 
+if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
 		\Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
-} else { 
+} else {
 		\Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
-} 
+}
 
 $admin_email = get_option( 'admin_email' );
 
@@ -32,12 +32,12 @@ $success_query 	    = isset($_GET['success_query']) ? $_GET['success_query'] : '
 $error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r); 
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
 	$s_query = array_combine($r[1], $r[2]);
 }
 if ( !empty($error_query)) {
 	$pres_query = urldecode_deep( base64_decode($error_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e); 
+	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
 	$e_query = array_combine($e[1], $e[2]);
 }
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
@@ -63,7 +63,7 @@ $email_address 	= $_POST['stripeEmail'];
 			$currency = $d_stripe_general['direct_stripe_currency'];
 	}
 
-//Cherche Si utilisateur est enregistré  
+//Cherche Si utilisateur est enregistré
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
 	$user = get_user_by( 'email', $email_address );
@@ -84,7 +84,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	
 	$stripe_id == false;
 }
-	
+
 if($stripe_id) { // Utilisateur enregistré
 
   $charge = \Stripe\Charge::create(array(
@@ -160,7 +160,7 @@ if($stripe_id) { // Utilisateur enregistré
 	add_post_meta($post_id, 'description', $description );
 
 	       // Email client
-  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {	
+  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
 			 wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
 	
