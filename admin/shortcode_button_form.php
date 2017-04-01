@@ -202,10 +202,10 @@ function ds_insert_shortcode(){
     <div class="ds-row">
         <div class="ds-one-third">
             <strong><?php _e('Custom Capability','direct-stripe');?></strong>
-            <button class="ds_cutom_cap"><?php _e('infos', 'direct-stripe'); ?>
-                <span class="ds_button_infos ds_right"><?php _e('Add a per button capbility for the stripe user, no space and only _ symbol allowed', 'direct-stripe'); ?></span></button>
+            <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
+                <span class="ds_button_infos"><?php _e('Add a per button capability for the stripe user, no space and only _ symbol allowed', 'direct-stripe'); ?></span></button>
             <br />
-            <input id="ds_cutom_cap" type="text" class="ds-shortcode-custo-ca" name="ds_custom_cap">
+            <input id="ds_custom_cap" type="text" class="ds-shortcode-custom-cap" name="ds_custom_cap">
         </div>
     </div>
 
