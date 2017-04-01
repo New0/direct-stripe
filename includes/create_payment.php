@@ -28,24 +28,29 @@ $preamount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
 $amount             = urldecode_deep( base64_decode($preamount) );
 $capture 			= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description		= isset($_GET['description']) ? $_GET['description'] : '';
+$user_cap            = isset($_GET['user_cap']) ? $_GET['user_cap'] : '';
+
 $success_query 	    = isset($_GET['success_query']) ? $_GET['success_query'] : '';
-$error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($success_query)) {
 	$pres_query = urldecode_deep( base64_decode($success_query) );
 	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
 	$s_query = array_combine($r[1], $r[2]);
 }
+
+$error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
 if ( !empty($error_query)) {
 	$pres_query = urldecode_deep( base64_decode($error_query) );
 	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
 	$e_query = array_combine($e[1], $e[2]);
 }
+
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
 	if ( !empty($success_url)) {
 		$s_url = urldecode_deep(  base64_decode($success_url) );
 	} else {
 		$s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
 	}
+	
 $error_url 	=	isset($_GET['error_url']) ? $_GET['error_url'] : '';
 	if ( !empty($error_url)) {
 		$e_url = urldecode_deep(  base64_decode($error_url) );
@@ -78,6 +83,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				));
 			$stripe_id = $customer->id;
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
+			$user->add_cap( $user_cap );
 		}
 	
 } else {
@@ -90,9 +96,9 @@ if($stripe_id) { // Utilisateur enregistré
   $charge = \Stripe\Charge::create(array(
       'customer' => $stripe_id,
       'amount' => $amount,
-		  'currency' => $currency,
-			'capture' => $capture,
-			'description' => $description
+      'currency' => $currency,
+      'capture' => $capture,
+      'description' => $description
   ));
 	
 	//Log transaction in WordPress admin
@@ -145,6 +151,7 @@ if($stripe_id) { // Utilisateur enregistré
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	    $user = new WP_User( $user_id );
       $user->set_role( 'stripe-user' );
+	$user->add_cap( $user_cap );
 	
 		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
@@ -173,7 +180,7 @@ if($stripe_id) { // Utilisateur enregistré
 	
 	// Add custom action before redirection
 	$chargeID = $charge->id;
-	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 	
 	if( !empty($s_query) ) {
 			$s_url = add_query_arg( $s_query , $s_url);
@@ -195,7 +202,7 @@ catch(Exception $e)
   }
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 	
   //Redirection after error
 	if( !empty($e_query) ) {

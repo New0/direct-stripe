@@ -20,25 +20,28 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 }
 
 try{
-	$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
-	$amount 				= $_POST['donationvalue'] * 100;
-	$token 					= $_POST['stripeToken'];
-	$email_address 	        = $_POST['stripeEmail'];
-	$admin_email 		    = get_option( 'admin_email' );
-	$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
-	$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
-	$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
-	$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
-if ( !empty($success_query)) {
-	$pres_query = urldecode_deep( base64_decode($success_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-	$s_query = array_combine($r[1], $r[2]);
-}
-if ( !empty($error_query)) {
-	$pres_query = urldecode_deep( base64_decode($error_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
-	$e_query = array_combine($e[1], $e[2]);
-}
+$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$amount 				= $_POST['donationvalue'] * 100;
+$token 					= $_POST['stripeToken'];
+$email_address 	        = $_POST['stripeEmail'];
+$admin_email 		    = get_option( 'admin_email' );
+$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
+$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
+$user_cap            = isset($_GET['user_cap']) ? $_GET['user_cap'] : '';
+	
+$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
+	if ( !empty($success_query)) {
+		$pres_query = urldecode_deep( base64_decode($success_query) );
+		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+		$s_query = array_combine($r[1], $r[2]);
+	}
+	
+$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
+	if ( !empty($error_query)) {
+		$pres_query = urldecode_deep( base64_decode($error_query) );
+		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
+		$e_query = array_combine($e[1], $e[2]);
+	}
 
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
 	if ( !empty($success_url)) {
@@ -76,6 +79,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				));
 			$stripe_id = $customer->id;
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
+			$user->add_cap( $user_cap );
 		}
 	
 } else {
@@ -86,21 +90,21 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 if($stripe_id) { // Utilisateur enregistré
 	
 	  $charge = \Stripe\Charge::create(array(
-	  	'customer' => $stripe_id,
-        'amount' => $amount,
-        'currency' => $currency,
-	    'capture' => $capture,
-	    'description' => $description
+	  	'customer'      => $stripe_id,
+        'amount'        => $amount,
+        'currency'      => $currency,
+	    'capture'       => $capture,
+	    'description'   => $description
   ));
 		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
-							array(
-								'post_title' => $token,
-								'post_status' => 'publish',
-								'post_type' => 'Direct Stripe Logs',
-								'post_author'	=>	$user->id
-							)
-						);
+			array(
+				'post_title' => $token,
+				'post_status' => 'publish',
+				'post_type' => 'Direct Stripe Logs',
+				'post_author'	=>	$user->id
+			)
+		);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
 	add_post_meta($post_id, 'description', $description );
@@ -122,11 +126,11 @@ if($stripe_id) { // Utilisateur enregistré
   ));
 
   $charge = \Stripe\Charge::create(array(
-      'customer' => $customer->id,
-      'amount' => $amount,
-      'currency' => $currency,
-			'capture' => $capture,
-			'description' => $description
+        'customer'      => $customer->id,
+        'amount'        => $amount,
+        'currency'      => $currency,
+		'capture'       => $capture,
+		'description'   => $description
   ));
 	
      // Generate the password and create the user
@@ -141,7 +145,8 @@ if($stripe_id) { // Utilisateur enregistré
   );
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	    $user = new WP_User( $user_id );
-      $user->set_role( 'stripe-user' );
+        $user->set_role( 'stripe-user' );
+		$user->add_cap( $user_cap );
 	
 		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
@@ -168,12 +173,13 @@ if($stripe_id) { // Utilisateur enregistré
 	
 	// Add custom action before redirection
 	$chargeID = $charge->id;
-	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 	
 	//Redirection after success
 	if( !empty($s_query) ) {
 			$s_url = add_query_arg( $s_query , $s_url);
 	}
+	
 	//Redirection after success
 	wp_redirect( $s_url );
 	
@@ -191,7 +197,7 @@ catch(Exception $e)
   }
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 	
 	//Redirection after error
   if( !empty($e_query) ) {

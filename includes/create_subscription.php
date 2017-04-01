@@ -30,18 +30,22 @@ try {
     $email_address  	    = $_POST['stripeEmail'];
 	$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 	$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
+	$error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
+	
 	$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
+	if ( !empty($success_query)) {
+		$pres_query = urldecode_deep( base64_decode($success_query) );
+		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+		$s_query = array_combine($r[1], $r[2]);
+	}
+	
 	$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
-if ( !empty($success_query)) {
-	$pres_query = urldecode_deep( base64_decode($success_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-	$s_query = array_combine($r[1], $r[2]);
-}
-if ( !empty($error_query)) {
-	$pres_query = urldecode_deep( base64_decode($error_query) );
-	preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
-	$e_query = array_combine($e[1], $e[2]);
-}
+	if ( !empty($error_query)) {
+		$pres_query = urldecode_deep( base64_decode($error_query) );
+		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
+		$e_query = array_combine($e[1], $e[2]);
+	}
+	
 $success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
 	if ( !empty($success_url)) {
 		$s_url = urldecode_deep(  base64_decode($success_url) );
@@ -78,6 +82,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				));
 			$stripe_id = $customer->id;
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
+			$user->add_cap( $user_cap );
 		}
 	
 } else {
@@ -91,9 +96,9 @@ if($stripe_id) { //Utilisateur existant
           "customer" => $stripe_id,
           "plan"     => $amount,
           'coupon'   => $coupon,
-					'metadata'	=> array(
-												'description' => $description
-					)
+          'metadata'	=> array(
+          'description' => $description
+		)
         ));
 	} else {
 		 $subscription = \Stripe\Subscription::create(array(
@@ -205,6 +210,7 @@ if($stripe_id) { //Utilisateur existant
       // Set the role
       $user = new WP_User( $user_id );
       $user->set_role( 'stripe-user' );
+		$user->add_cap( $user_cap );
   
   		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
@@ -245,7 +251,7 @@ if($stripe_id) { //Utilisateur existant
 	
 	// Add custom action before redirection
 	$chargeID = $charge->id;
-	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id );
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 	
 	//Redirection after success
 	if( !empty($s_query) ) {
@@ -268,7 +274,7 @@ catch(Exception $e)
   }
 	
 	// Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id );;
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 	
   //Redirection after error
   if( !empty($e_query) ) {
