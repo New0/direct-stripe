@@ -24,7 +24,7 @@ function ds_insert_shortcode(){
       var ds_capture = jQuery("#ds_capture").val();
       var ds_display_amount = jQuery("#ds_display_amount").val();
       var ds_currency = jQuery("#ds_currency").val();
-      var ds_custom_cap = jQuery("#ds_custom_cap").val();
+      var ds_custom_role = jQuery("#ds_custom_role").val();
       var ds_success_query = jQuery("#ds_success_query").val();
       var ds_error_query = jQuery("#ds_error_query").val();
       var ds_success_url = jQuery("#ds_success_url").val();
