@@ -59,7 +59,7 @@ class DirectStripeFunctions {
 			'success_url'		=>	'',
 			'error_url'			=>	'',
 			'button_id'			=>	'',
-			'user_cap'          =>  ''
+			'user_role'          =>  ''
 		), $atts, 'directstripe' );
 		
 		//Useful to print the amount in the modal form
@@ -96,7 +96,7 @@ class DirectStripeFunctions {
 			'success_url'		=> $directStripeAttrValues['success_url'],
 			'error_url'			=> $directStripeAttrValues['error_url'],
 			'button_id'			=> $directStripeAttrValues['button_id'],
-			'user_cap'          => $directStripeAttrValues['user_cap'],
+			'user_role'          => $directStripeAttrValues['user_role'],
 			'ds-nonce'			=> $ds_nonce
 		);
 //$values = apply_filters( 'direct_stripe_params_filter', $params );

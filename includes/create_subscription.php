@@ -22,15 +22,18 @@ $admin_email = get_option( 'admin_email' );
 
 try {
 	$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
-    $preamount 			    = isset($_GET['amount']) ? $_GET['amount'] : '';
-	$amount 				= urldecode_deep( base64_decode($preamount) );
+	$pre_amount 			= isset($_GET['amount']) ? $_GET['amount'] : '';
+	$amount 				= urldecode_deep( base64_decode($pre_amount) );
     $coupon 				= isset($_GET['coupon']) ? $_GET['coupon'] : '';
 	$setup_fee 			    = isset($_GET['setup_fee']) ? $_GET['setup_fee'] : '';
     $token 					= $_POST['stripeToken'];
     $email_address  	    = $_POST['stripeEmail'];
 	$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
 	$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
-	$error_query 		= isset($_GET['error_query']) ? $_GET['error_query'] : '';
+	$user_role              = isset($_GET['user_role']) ? $_GET['user_role'] : '';
+	if ( !empty( $user_role ) ) {
+		add_role( $user_role , __('DS role ' . $user_role , 'direct-stripe'), array( 'read' => true ));
+	}
 	
 	$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
 	if ( !empty($success_query)) {
@@ -46,26 +49,26 @@ try {
 		$e_query = array_combine($e[1], $e[2]);
 	}
 	
-$success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
-	if ( !empty($success_url)) {
-		$s_url = urldecode_deep(  base64_decode($success_url) );
-	} else {
-		$s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
-	}
-$error_url 	=	isset($_GET['error_url']) ? $_GET['error_url'] : '';
-	if ( !empty($error_url)) {
-		$e_url = urldecode_deep(  base64_decode($error_url) );
-	} else {
-		$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
-	}
-	
-$new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
-	
-	if( isset($new_currency) && !empty($new_currency) ) {
-			$currency = $new_currency;
-	} else {
-			$currency = $d_stripe_general['direct_stripe_currency'];
-	}
+	$success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
+		if ( !empty($success_url)) {
+			$s_url = urldecode_deep(  base64_decode($success_url) );
+		} else {
+			$s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+		}
+	$error_url 	=	isset($_GET['error_url']) ? $_GET['error_url'] : '';
+		if ( !empty($error_url)) {
+			$e_url = urldecode_deep(  base64_decode($error_url) );
+		} else {
+			$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+		}
+		
+	$new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
+		
+		if( isset($new_currency) && !empty($new_currency) ) {
+				$currency = $new_currency;
+		} else {
+				$currency = $d_stripe_general['direct_stripe_currency'];
+		}
 	
 //Cherche Si utilisateur est enregistré
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {
@@ -77,12 +80,13 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 		}
 		else {
 				$customer = \Stripe\Customer::create(array(
-				'email' => $email_address,
-				'source'  => $token
+				'email'     => $email_address,
+				'source'    => $token
 				));
 			$stripe_id = $customer->id;
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
-			$user->add_cap( $user_cap );
+			$user->add_role( 'stripe-user' );
+			$user->add_role( $user_role );
 		}
 	
 } else {
@@ -102,11 +106,11 @@ if($stripe_id) { //Utilisateur existant
         ));
 	} else {
 		 $subscription = \Stripe\Subscription::create(array(
-          "customer" => $stripe_id,
-          "plan"     => $amount,
-			 		'metadata'	=> array(
-												'description' => $description
-					)
+            "customer" => $stripe_id,
+            "plan"     => $amount,
+            "metadata"	=> array(
+            	"description" => $description
+            )
         ));
 	}
 	if( !empty($setup_fee) ){
@@ -131,7 +135,7 @@ if($stripe_id) { //Utilisateur existant
 							)
 						);
 		add_post_meta($post_id, 'amount', $plan_amount);
-	  add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
+	    add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
 		add_post_meta($post_id, 'description', $description );
 	
 	//Log setup_fee in WordPress admin
@@ -210,7 +214,7 @@ if($stripe_id) { //Utilisateur existant
       // Set the role
       $user = new WP_User( $user_id );
       $user->set_role( 'stripe-user' );
-		$user->add_cap( $user_cap );
+	  $user->add_role( $user_role );
   
   		//Log transaction in WordPress admin
   $post_id = wp_insert_post(

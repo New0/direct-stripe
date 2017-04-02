@@ -20,43 +20,46 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 }
 
 try{
-$button_id 			    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
-$amount 				= $_POST['donationvalue'] * 100;
-$token 					= $_POST['stripeToken'];
-$email_address 	        = $_POST['stripeEmail'];
-$admin_email 		    = get_option( 'admin_email' );
-$capture 				= isset($_GET['capture']) ? $_GET['capture'] : '';
-$description 		    = isset($_GET['description']) ? $_GET['description'] : '';
-$user_cap            = isset($_GET['user_cap']) ? $_GET['user_cap'] : '';
+$button_id 	    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$amount 	    = $_POST['donationvalue'] * 100;
+$token 		    = $_POST['stripeToken'];
+$email_address  = $_POST['stripeEmail'];
+$admin_email    = get_option( 'admin_email' );
+$capture        = isset($_GET['capture']) ? $_GET['capture'] : '';
+$description    = isset($_GET['description']) ? $_GET['description'] : '';
+$user_role      = isset($_GET['user_role']) ? $_GET['user_role'] : '';
+	if ( !empty( $user_role ) ) {
+		add_role( $user_role , __('DS role ' . $user_role , 'direct-stripe'), array( 'read' => true ));
+	}
 	
-$success_query 	        = isset($_GET['success_query']) ? $_GET['success_query'] : '';
+$success_query = isset($_GET['success_query']) ? $_GET['success_query'] : '';
 	if ( !empty($success_query)) {
 		$pres_query = urldecode_deep( base64_decode($success_query) );
 		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
 		$s_query = array_combine($r[1], $r[2]);
 	}
 	
-$error_query 		    = isset($_GET['error_query']) ? $_GET['error_query'] : '';
+$error_query = isset($_GET['error_query']) ? $_GET['error_query'] : '';
 	if ( !empty($error_query)) {
 		$pres_query = urldecode_deep( base64_decode($error_query) );
 		preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
 		$e_query = array_combine($e[1], $e[2]);
 	}
 
-$success_url 	=	isset($_GET['success_url']) ? $_GET['success_url'] : '';
+$success_url =  isset($_GET['success_url']) ? $_GET['success_url'] : '';
 	if ( !empty($success_url)) {
 		$s_url = urldecode_deep(  base64_decode($success_url) );
 	} else {
 		$s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
 	}
-$error_url 	=	isset($_GET['error_url']) ? $_GET['error_url'] : '';
+$error_url = isset($_GET['error_url']) ? $_GET['error_url'] : '';
 	if ( !empty($error_url)) {
 		$e_url = urldecode_deep(  base64_decode($error_url) );
 	} else {
 		$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
 	}
 	
-$new_currency 	=	isset($_GET['currency']) ? $_GET['currency'] : '';
+$new_currency =	isset($_GET['currency']) ? $_GET['currency'] : '';
 	
 	if( isset($new_currency) && !empty($new_currency) ) {
 			$currency = $new_currency;
@@ -79,7 +82,8 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				));
 			$stripe_id = $customer->id;
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
-			$user->add_cap( $user_cap );
+			$user->add_role( 'stripe-user' );
+			$user->add_role( $user_role );
 		}
 	
 } else {
@@ -146,7 +150,7 @@ if($stripe_id) { // Utilisateur enregistré
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	    $user = new WP_User( $user_id );
         $user->set_role( 'stripe-user' );
-		$user->add_cap( $user_cap );
+	    $user->add_role( $user_role );
 	
 		//Log transaction in WordPress admin
   $post_id = wp_insert_post(
