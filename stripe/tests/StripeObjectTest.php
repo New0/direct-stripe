@@ -64,10 +64,10 @@ class StripeObjectTest extends TestCase
         $converted = $s->__toArray(true);
 
         $this->assertInternalType('array', $converted);
-        $this->assertArrayHasKey('child', $converted);
-        $this->assertInternalType('array', $converted['child']);
-        $this->assertArrayHasKey('foo', $converted['child']);
-        $this->assertEquals('a', $converted['child']['foo']);
+	    $this->assertArrayHasKey('child', $converted);
+	    $this->assertInternalType('array', $converted['child']);
+	    $this->assertArrayHasKey('foo', $converted['child']);
+	    $this->assertEquals('a', $converted['child']['foo']);
     }
 
     public function testNonexistentProperty()

@@ -42,23 +42,24 @@ class DirectStripeFunctions {
 		$sitename = get_bloginfo('name');
 		$description = get_bloginfo('description');
 		$directStripeAttrValues = shortcode_atts( array(
-			'name' 				=>	$sitename,
-			'amount' 			=>	'',
+			'name' 			=>	$sitename,
+			'amount' 		=>	'',
 			'description' 		=>	$description,
-			'label' 			=>	__('Pay with card', 'direct-stripe'),
+			'label' 		=>	__('Pay with card', 'direct-stripe'),
 			'panellabel' 		=>	__('Pay', 'direct-stripe'),
-			'type' 				=>	'payment',
-			'locale' 			=>	'auto',
-			'coupon' 			=>	'',
-			'setup_fee'			=>	'',
-			'capture'			=>	'true',
-			'display_amount'	=> '',
-			'currency'			=> '',
-			'success_query'		=> '',
-			'error_query'		=> '',
+			'type' 			=>	'payment',
+			'locale' 		=>	'auto',
+			'coupon' 		=>	'',
+			'setup_fee'		=>	'',
+			'capture'		=>	'true',
+			'display_amount'	=> 	'',
+			'currency'		=> 	'',
+			'success_query'		=> 	'',
+			'error_query'		=> 	'',
 			'success_url'		=>	'',
-			'error_url'			=>	'',
-			'button_id'			=>	''
+			'error_url'		=>	'',
+			'button_id'		=>	'',
+			'user_role'          	=>  	''
 		), $atts, 'directstripe' );
 		
 		//Useful to print the amount in the modal form
@@ -83,21 +84,22 @@ class DirectStripeFunctions {
 		
 		// the query var and its value
 		$params = array(
-			'direct-stripe'     => $directStripeAttrValues['type'],
-			'amount' 			=> $directStripeAttrValues['amount'],
-			'coupon' 			=> $directStripeAttrValues['coupon'],
+			'direct-stripe'     	=> $directStripeAttrValues['type'],
+			'amount' 		=> $directStripeAttrValues['amount'],
+			'coupon' 		=> $directStripeAttrValues['coupon'],
 			'setup_fee' 		=> $directStripeAttrValues['setup_fee'],
-			'capture' 			=> $directStripeAttrValues['capture'],
+			'capture' 		=> $directStripeAttrValues['capture'],
 			'description'		=> $directStripeAttrValues['description'],
-			'currency' 			=> $directStripeAttrValues['currency'],
-			'success_query'	    => $directStripeAttrValues['success_query'],
+			'currency' 		=> $directStripeAttrValues['currency'],
+			'success_query'	    	=> $directStripeAttrValues['success_query'],
 			'error_query'		=> $directStripeAttrValues['error_query'],
 			'success_url'		=> $directStripeAttrValues['success_url'],
-			'error_url'			=> $directStripeAttrValues['error_url'],
-			'button_id'			=> $directStripeAttrValues['button_id'],
-			'ds-nonce'			=> $ds_nonce
+			'error_url'		=> $directStripeAttrValues['error_url'],
+			'button_id'		=> $directStripeAttrValues['button_id'],
+			'user_role'          	=> $directStripeAttrValues['user_role'],
+			'ds-nonce'		=> $ds_nonce
 		);
-//$values = apply_filters( 'direct_stripe_params_filter', $params );
+	//$values = apply_filters( 'direct_stripe_params_filter', $params );
 		ob_start();
 		include( DSCORE_PATH . '/public/shortcode.php');
 		return ob_get_clean();
@@ -261,7 +263,7 @@ class DirectStripeFunctions {
 		$columns = array(
 			'title'	        =>	'title',
 			'author'        =>	'author',
-			'amount'        => 'amount',
+			'amount'        => 	'amount',
 			'type'	        =>	'type',
 			'description'	=>	'description',
 			'date'	        =>	'date'
