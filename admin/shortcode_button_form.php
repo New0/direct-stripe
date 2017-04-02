@@ -203,7 +203,7 @@ function ds_insert_shortcode(){
         <div class="ds-one-third">
             <strong><?php _e('Custom Role','direct-stripe');?></strong>
             <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
-                <span class="ds_button_infos"><?php _e('Add a per button custom role', 'direct-stripe'); ?></span></button>
+                <span class="ds_button_infos"><?php _e('Add a per button custom role to user', 'direct-stripe'); ?></span></button>
             <br />
             <input id="ds_custom_role" type="text" class="ds-shortcode-custom-role" name="ds_custom_role">
         </div>
