@@ -19,7 +19,7 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_secret_api_key']);
 }
 
-try{
+try{ //Retrieve Data
 $button_id 	= isset($_GET['button_id']) ? $_GET['button_id'] : '';
 $amount 	= $_POST['donationvalue'] * 100;
 $token 		= $_POST['stripeToken'];
@@ -67,31 +67,35 @@ $new_currency =	isset($_GET['currency']) ? $_GET['currency'] : '';
 			$currency = $d_stripe_general['direct_stripe_currency'];
 	}
 
-//Cherche Si utilisateur est enregistré
-if( username_exists( $email_address ) || email_exists( $email_address ) ) {
-	
+//Check if user exists
+if( username_exists( $email_address ) || email_exists( $email_address ) ) { 
+	//User exists, check if it already have a stripe ID
 	$user = get_user_by( 'email', $email_address );
 	$stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
-		if ( isset($stripe_id_array) && !empty($stripe_id_array) ) {
+		if ( isset($stripe_id_array) && !empty($stripe_id_array) ) {//Stripe ID exists
+			//Retrieve Stripe ID and update user roles
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
+			$user->add_role( 'stripe-user' );
+			$user->add_role( $user_role );
 		}
-		else {
-				$customer = \Stripe\Customer::create(array(
+		else {//It doesn't have Stripe ID
+			//Create Stripe Customer
+			$customer = \Stripe\Customer::create(array(
 				'email' => $email_address,
 				'source'  => $token
-				));
+			));
 			$stripe_id = $customer->id;
+			//Update User roles
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
 			$user->add_role( $user_role );
 		}
 	
-} else {
-	
+} else { // User doesn't exist	
 	$stripe_id == false;
 }
 
-if($stripe_id) { // Utilisateur enregistré
+if($stripe_id) { // User exists
 //Charge
 	$charge = \Stripe\Charge::create(array(
 		'customer'      => $stripe_id,
@@ -124,88 +128,88 @@ if($stripe_id) { // Utilisateur enregistré
   }
 	
 } else { // Utilisateur non reconnu
-	
+//Stripe customer	
   $customer = \Stripe\Customer::create(array(
     'email' => $email_address,
     'source'  => $token
   ));
-
+//Create Charge
   $charge = \Stripe\Charge::create(array(
         'customer'      => $customer->id,
         'amount'        => $amount,
         'currency'      => $currency,
-		'capture'       => $capture,
-		'description'   => $description
+	'capture'       => $capture,
+	'description'   => $description
   ));
 	
-     // Generate the password and create the user
+// Generate the password and create the user
   $password = wp_generate_password( 12, false );
+//Create User
   $user_id = wp_create_user( $email_address, $password, $email_address );
-  // Set the nickname
+// Set the nickname
   wp_update_user(
     array(
       'ID'          =>    $user_id,
       'nickname'    =>    $email_address
     )
   );
+//Add Stripe ID and User roles
 	update_user_meta($user_id, 'stripe_id', $customer->id );
-	    $user = new WP_User( $user_id );
-        $user->set_role( 'stripe-user' );
-	    $user->add_role( $user_role );
+	$user = new WP_User( $user_id );
+	$user->set_role( 'stripe-user' );
+	$user->add_role( $user_role );
 	
-		//Log transaction in WordPress admin
+//Log transaction in WordPress admin
   $post_id = wp_insert_post(
-							array(
-								'post_title' => $token,
-								'post_status' => 'publish',
-								'post_type' => 'Direct Stripe Logs',
-								'post_author' =>	$user_id
-							)
-						);
+		array(
+			'post_title' => $token,
+			'post_status' => 'publish',
+			'post_type' => 'Direct Stripe Logs',
+			'post_author' =>	$user_id
+		)
+	);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
 	add_post_meta($post_id, 'description', $description );
 	
-         // Email client
+ // Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
       wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
-      // Email admin
+// Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
       wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] , $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
+	
 }// Fin if else
 	
-	// Add custom action before redirection
+// Add custom action before redirection
 	$chargeID = $charge->id;
 	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
-	
-	//Redirection after success
+
+//Redirection after success
 	if( !empty($s_query) ) {
-			$s_url = add_query_arg( $s_query , $s_url);
+		$s_url = add_query_arg( $s_query , $s_url);
 	}
-	
-	//Redirection after success
-	wp_redirect( $s_url );
-	
-  exit;
+	wp_redirect( $s_url );	
+  	exit;
 }
 catch(Exception $e)
 {
-	//Email client
+//Email client
   if( isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
-  wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_error_email_subject'] , $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
+  	wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_error_email_subject'] , $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
   }
-  //Email admin
+//Email admin
   if( isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
-  wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] , $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
+  	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] , $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
   }
 	
-	// Add custom action before redirection
+// Add custom action before redirection
 	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 	
-	//Redirection after error
-  if( !empty($e_query) ) {
+//Redirection after error
+	if( !empty($e_query) ) {
 		$e_url = add_query_arg( $e_query , $e_url);
 	}
 	wp_redirect( $e_url );
