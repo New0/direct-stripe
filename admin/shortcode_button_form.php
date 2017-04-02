@@ -24,6 +24,7 @@ function ds_insert_shortcode(){
       var ds_capture = jQuery("#ds_capture").val();
       var ds_display_amount = jQuery("#ds_display_amount").val();
       var ds_currency = jQuery("#ds_currency").val();
+      var ds_custom_role = jQuery("#ds_custom_role").val();
       var ds_success_query = jQuery("#ds_success_query").val();
       var ds_error_query = jQuery("#ds_error_query").val();
       var ds_success_url = jQuery("#ds_success_url").val();
@@ -62,6 +63,9 @@ function ds_insert_shortcode(){
       }
       if( ds_currency !== "" ) {
          ds_button_shortcode = ds_button_shortcode + ' currency="' + ds_currency + '"';
+      }
+      if( ds_custom_role !== "" ) {
+        ds_button_shortcode = ds_button_shortcode + ' custom_role="' + ds_custom_role + '"';
       }
       if( ds_success_query !== "" ) {
          ds_button_shortcode = ds_button_shortcode + ' success_query="' + ds_success_query + '"';
@@ -192,6 +196,16 @@ function ds_insert_shortcode(){
                 <span class="ds_button_infos ds_right"><?php _e('Override the currency set under Direct Stripe -> setup , and use currency per button.', 'direct-stripe'); ?></span></button>
             <br />
             <input id="ds_currency" type="text" class="ds-shortcode-currency" name="ds_currency">
+        </div>
+    </div>
+
+    <div class="ds-row">
+        <div class="ds-one-third">
+            <strong><?php _e('Custom Role','direct-stripe');?></strong>
+            <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
+                <span class="ds_button_infos"><?php _e('Add a per button custom role to user', 'direct-stripe'); ?></span></button>
+            <br />
+            <input id="ds_custom_role" type="text" class="ds-shortcode-custom-role" name="ds_custom_role">
         </div>
     </div>
 
