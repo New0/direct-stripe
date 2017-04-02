@@ -11,8 +11,8 @@ if( ! class_exists( 'Stripe\Stripe' ) ) {
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
 $headers =  array('Content-Type: text/html; charset=UTF-8');
-// Be sure to replace this with your actual test API key
-// (switch to the live key later)
+
+// API keys
 if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
 \Stripe\Stripe::setApiKey($d_stripe_general['direct_stripe_test_secret_api_key']);
 } else {
@@ -20,9 +20,9 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 }
 
 try{
-$button_id 	    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
-$amount 	    = $_POST['donationvalue'] * 100;
-$token 		    = $_POST['stripeToken'];
+$button_id 	= isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$amount 	= $_POST['donationvalue'] * 100;
+$token 		= $_POST['stripeToken'];
 $email_address  = $_POST['stripeEmail'];
 $admin_email    = get_option( 'admin_email' );
 $capture        = isset($_GET['capture']) ? $_GET['capture'] : '';
@@ -92,32 +92,33 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 }
 
 if($stripe_id) { // Utilisateur enregistré
+//Charge
+	$charge = \Stripe\Charge::create(array(
+		'customer'      => $stripe_id,
+		'amount'        => $amount,
+		'currency'      => $currency,
+		'capture'       => $capture,
+		'description'   => $description
+	));
 	
-	  $charge = \Stripe\Charge::create(array(
-	  	'customer'      => $stripe_id,
-        'amount'        => $amount,
-        'currency'      => $currency,
-	    'capture'       => $capture,
-	    'description'   => $description
-  ));
-		//Log transaction in WordPress admin
-  $post_id = wp_insert_post(
-			array(
-				'post_title' => $token,
-				'post_status' => 'publish',
-				'post_type' => 'Direct Stripe Logs',
-				'post_author'	=>	$user->id
-			)
-		);
+//Log transaction in WordPress admin
+	$post_id = wp_insert_post(
+		array(
+			'post_title' 	=> $token,
+			'post_status' 	=> 'publish',
+			'post_type' 	=> 'Direct Stripe Logs',
+			'post_author'	=>  $user->id
+		)
+	);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
 	add_post_meta($post_id, 'description', $description );
 	
-         // Email client
+// Email client
   if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
       wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
   }
-      // Email admin
+// Email admin
   if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
       wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] , $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
   }
