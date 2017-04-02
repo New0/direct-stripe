@@ -64,8 +64,8 @@ function ds_insert_shortcode(){
       if( ds_currency !== "" ) {
          ds_button_shortcode = ds_button_shortcode + ' currency="' + ds_currency + '"';
       }
-      if( ds_custom_cap !== "" ) {
-        ds_button_shortcode = ds_button_shortcode + ' custom_cap="' + ds_custom_cap + '"';
+      if( ds_custom_role !== "" ) {
+        ds_button_shortcode = ds_button_shortcode + ' custom_role="' + ds_custom_role + '"';
       }
       if( ds_success_query !== "" ) {
          ds_button_shortcode = ds_button_shortcode + ' success_query="' + ds_success_query + '"';
