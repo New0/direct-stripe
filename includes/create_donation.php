@@ -20,9 +20,9 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 }
 
 try{ //Retrieve Data
-$button_id 	= isset($_GET['button_id']) ? $_GET['button_id'] : '';
-$amount 	= $_POST['donationvalue'] * 100;
-$token 		= $_POST['stripeToken'];
+$button_id 	    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$amount 	    = $_POST['donationvalue'] * 100;
+$token 		    = $_POST['stripeToken'];
 $email_address  = $_POST['stripeEmail'];
 $admin_email    = get_option( 'admin_email' );
 $capture        = isset($_GET['capture']) ? $_GET['capture'] : '';
@@ -81,8 +81,8 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 		else {//It doesn't have Stripe ID
 			//Create Stripe Customer
 			$customer = \Stripe\Customer::create(array(
-				'email' => $email_address,
-				'source'  => $token
+				'email'     => $email_address,
+				'source'    => $token
 			));
 			$stripe_id = $customer->id;
 			//Update User roles
@@ -130,16 +130,16 @@ if($stripe_id) { // User exists
 } else { // Utilisateur non reconnu
 //Stripe customer	
   $customer = \Stripe\Customer::create(array(
-    'email' => $email_address,
-    'source'  => $token
+        'email'     => $email_address,
+        'source'    => $token
   ));
 //Create Charge
   $charge = \Stripe\Charge::create(array(
         'customer'      => $customer->id,
         'amount'        => $amount,
         'currency'      => $currency,
-	'capture'       => $capture,
-	'description'   => $description
+		'capture'       => $capture,
+		'description'   => $description
   ));
 	
 // Generate the password and create the user

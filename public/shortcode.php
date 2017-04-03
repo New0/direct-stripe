@@ -37,7 +37,7 @@ if ( $crios === 'crios' ) { ?>
 			    data-label="<?php echo esc_attr($directStripeAttrValues['label']); ?>"
 			    data-panel-label="<?php echo esc_attr($directStripeAttrValues['panellabel']); ?>"
 			    data-locale="<?php echo esc_attr($directStripeAttrValues['locale']) ?>"
-			    data-currency="<?php if( $directStripeAttrValues['currency'] != 'false' ) {
+			    data-currency="<?php if( !empty( $directStripeAttrValues['currency'] )  ) {
 				    echo esc_attr($directStripeAttrValues['currency']);
 			    } else {
 				    echo esc_attr($d_stripe_general['direct_stripe_currency']);
