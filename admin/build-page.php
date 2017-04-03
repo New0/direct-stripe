@@ -3,8 +3,8 @@ defined( 'ABSPATH' ) or die( 'Please!' ); ?>
 
 <div id="direct-stripe">
 		<h2><?php _e( 'Direct Stripe', 'direct-stripe'); ?></h2>
-		<?php if( isset( $_GET[ 'tab' ] ) ) {
-				$active_tab = $_GET[ 'tab' ];
+		<?php if( isset( $_GET['tab'] ) ) {
+				$active_tab = $_GET['tab'];
 			} else if(  isset($active_tab) && $active_tab == 'styles' ) {
         			$active_tab = 'styles';
     			}  else if( isset($active_tab) && $active_tab == 'emails' ) {
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) or die( 'Please!' ); ?>
         	<a href="?page=direct_stripe&tab=general_options" class="nav-tab <?php echo $active_tab == 'general_options' ? 'nav-tab-active' : 'general_options'; ?>"><?php _e( 'General Options', 'direct-stripe'); ?></a>
         	<a href="?page=direct_stripe&tab=styles" class="nav-tab <?php echo $active_tab == 'styles' ? 'nav-tab-active' : 'general_options'; ?>"><?php _e( 'Styles', 'direct-stripe'); ?></a>
 		<a href="?page=direct_stripe&tab=emails" class="nav-tab <?php echo $active_tab == 'emails' ? 'nav-tab-active' : 'general_options'; ?>"><?php _e( 'Emails', 'direct-stripe'); ?></a>
-        </h2> 
+    </h2>
 	<form action='options.php' method='post'>
 		<?php
 		if( isset($active_tab) && $active_tab === 'styles' ) {

@@ -28,9 +28,9 @@ $pre_amount 	= isset($_GET['amount']) ? $_GET['amount'] : '';
 $amount         = urldecode_deep( base64_decode($pre_amount) );
 $capture 	= isset($_GET['capture']) ? $_GET['capture'] : '';
 $description	= isset($_GET['description']) ? $_GET['description'] : '';
-$user_role      = isset($_GET['user_role']) ? $_GET['user_role'] : '';
-	if ( !empty( $user_role ) ) {
-		add_role( $user_role , __('DS role ' . $user_role , 'direct-stripe'), array( 'read' => true ));
+$custom_role      = isset($_GET['custom_role']) ? $_GET['custom_role'] : '';
+	if ( !empty( $custom_role  ) ) {
+		add_role( $custom_role  , __('Direct Stripe' . $custom_role , 'direct-stripe'), array( 'read' => true ));
 	}
 
 $success_query	= isset($_GET['success_query']) ? $_GET['success_query'] : '';
@@ -160,7 +160,7 @@ if($stripe_id) { // User exists
 // Add User roles
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	$user = new WP_User( $user_id );
-	$user->set_role( 'stripe-user' );
+	$user->add_role( 'stripe-user' );
 	$user->add_role( $user_role );
 	
 //Log transaction in WordPress admin
