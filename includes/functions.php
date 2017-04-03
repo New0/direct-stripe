@@ -42,24 +42,24 @@ class DirectStripeFunctions {
 		$sitename = get_bloginfo('name');
 		$description = get_bloginfo('description');
 		$directStripeAttrValues = shortcode_atts( array(
-			'name' 			=>	$sitename,
-			'amount' 		=>	'',
+			'name' 			    =>	$sitename,
+			'amount' 		    =>	'',
 			'description' 		=>	$description,
-			'label' 		=>	__('Pay with card', 'direct-stripe'),
+			'label' 		    =>	__('Pay with card', 'direct-stripe'),
 			'panellabel' 		=>	__('Pay', 'direct-stripe'),
-			'type' 			=>	'payment',
-			'locale' 		=>	'auto',
-			'coupon' 		=>	'',
-			'setup_fee'		=>	'',
-			'capture'		=>	'true',
+			'type' 			    =>	'payment',
+			'locale' 		    =>	'auto',
+			'coupon' 		    =>	'',
+			'setup_fee'		    =>	'',
+			'capture'		    =>	'true',
 			'display_amount'	=> 	'',
-			'currency'		=> 	'',
+			'currency'		    => 	'',
 			'success_query'		=> 	'',
 			'error_query'		=> 	'',
 			'success_url'		=>	'',
-			'error_url'		=>	'',
-			'button_id'		=>	'',
-			'user_role'          	=>  	''
+			'error_url'		    =>	'',
+			'button_id'		    =>	'',
+			'custom_role'         =>  ''
 		), $atts, 'directstripe' );
 		
 		//Useful to print the amount in the modal form
@@ -96,7 +96,7 @@ class DirectStripeFunctions {
 			'success_url'		=> $directStripeAttrValues['success_url'],
 			'error_url'		=> $directStripeAttrValues['error_url'],
 			'button_id'		=> $directStripeAttrValues['button_id'],
-			'user_role'          	=> $directStripeAttrValues['user_role'],
+			'custom_role'          	=> $directStripeAttrValues['custom_role'],
 			'ds-nonce'		=> $ds_nonce
 		);
 	//$values = apply_filters( 'direct_stripe_params_filter', $params );
