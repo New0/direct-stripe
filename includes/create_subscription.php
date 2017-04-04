@@ -213,10 +213,10 @@ if($stripe_id) { //User exist
 	      $user_id = wp_create_user( $email_address, $password, $email_address );
 	      // Set the nickname
 	      wp_update_user(
-		array(
-		  'ID'          =>    $user_id,
-		  'nickname'    =>    $email_address
-		)
+				array(
+				  'ID'          =>    $user_id,
+				  'nickname'    =>    $email_address
+				)
 	      );
 		//Add Stripe ID to User
 	      update_user_meta($user_id, 'stripe_id', $customer->id );

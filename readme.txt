@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
 Tested up to: 4.7.3
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,11 +16,11 @@ Stripe buttons. High conversion checkout without leaving your site! Payments, do
 
 **High conversion Stripe checkout buttons, easily start charging without leaving your website.**
 
-Add Stripe buttons to your website with a simple shortcode.
-
 **The shortcode is automatically generated and inserted in editor areas with a simple options form!!!**
 
 Automatically recognize email address of logged-in users
+
+**Add custom user roles**
 
 Customize the button looks.
 
@@ -45,6 +45,7 @@ Ready for translations (Français déjà traduit)
 * **label** : Text displayed on button to display modal form
 * **button_id** : give your button the id you want ex: button_id="first_button"
 * **panellabel** : Text for modal form button
+* **custom_role** : Add the role of your choice to the user (Useful to restrict content)
 * **coupon** : coupon id set in stripe admin (only for subscriptions)
 * **setup_fee** : Only for subscriptions, charge a one time fee on subscription activation
 * **capture** : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
@@ -160,6 +161,7 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 * **amount** : Amount to charge if payment type (Stripe format : 100 is 1,00) or plan-id for subscription type, not required for donations
 * **label** : Text displayed on button to display modal form
 * **panellabel** : Text for modal form button
+* **custom_role** : Add the role of your choice to the user (Useful to restrict content)
 * **coupon** : coupon id set in stripe admin (only for subscriptions)
 * **setup_fee** : Only for subscriptions, charge a one time fee on subscription activation
 * **capture** : set it to false ( capture="false" ) in the shortcode to manually charge the transaction from your stripe'a admin panel later
@@ -193,10 +195,15 @@ In progress, in the meanwhile asking yours may help to fill this section.
 3. Admin page emails options
 4. Admin transaction logs
 
-== Changelog == 
+== Changelog ==
+
+=1.2.1=
+* **Custom_role** added as shortcode argument custom_role="custom_user_role"
+* $user_id passed to 'direct_stripe_before_success_redirection' and 'direct_stripe_before_error_redirection' actions
+
  
 = 1.2.0 =
-**Button that triggers the options form to insert automatically the shortcode in editor area**
+* **Button that triggers the options form to insert automatically the shortcode in editor area**
 * New shortcode argument button_id
 * Fixed amount not showing in modal form since version 1.1.9 due to new amount encryption
 * Automatically recognize email address of logged_in users
