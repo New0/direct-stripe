@@ -27,9 +27,10 @@ $email_address  = $_POST['stripeEmail'];
 $admin_email    = get_option( 'admin_email' );
 $capture        = isset($_GET['capture']) ? $_GET['capture'] : '';
 $description    = isset($_GET['description']) ? $_GET['description'] : '';
-$user_role      = isset($_GET['user_role']) ? $_GET['user_role'] : '';
-	if ( !empty( $user_role ) ) {
-		add_role( $user_role , __('DS role ' . $user_role , 'direct-stripe'), array( 'read' => true ));
+
+$custom_role    = isset($_GET['custom_role']) ? $_GET['custom_role'] : '';
+	if ( !empty( $custom_role  ) && wp_roles()->is_role( $custom_role ) == false ) {
+		add_role( $custom_role  , __('Direct Stripe ' . $custom_role , 'direct-stripe'), array( 'read' => true ));
 	}
 	
 $success_query = isset($_GET['success_query']) ? $_GET['success_query'] : '';
@@ -76,7 +77,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			//Retrieve Stripe ID and update user roles
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
 			$user->add_role( 'stripe-user' );
-			$user->add_role( $user_role );
+			$user->add_role( $custom_role );
 		}
 		else {//It doesn't have Stripe ID
 			//Create Stripe Customer
@@ -88,7 +89,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			//Update User roles
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
-			$user->add_role( $user_role );
+			$user->add_role( $custom_role );
 		}
 	
 } else { // User doesn't exist	
@@ -156,8 +157,8 @@ if($stripe_id) { // User exists
 //Add Stripe ID and User roles
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	$user = new WP_User( $user_id );
-	$user->set_role( 'stripe-user' );
-	$user->add_role( $user_role );
+	$user->add_role( 'stripe-user' );
+	$user->add_role( $custom_role );
 	
 //Log transaction in WordPress admin
   $post_id = wp_insert_post(

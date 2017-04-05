@@ -23,14 +23,15 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 $admin_email = get_option( 'admin_email' );
 
 try { //Retrieve Data
-$button_id 	= isset($_GET['button_id']) ? $_GET['button_id'] : '';
+$button_id 	    = isset($_GET['button_id']) ? $_GET['button_id'] : '';
 $pre_amount 	= isset($_GET['amount']) ? $_GET['amount'] : '';
 $amount         = urldecode_deep( base64_decode($pre_amount) );
-$capture 	= isset($_GET['capture']) ? $_GET['capture'] : '';
+$capture 	    = isset($_GET['capture']) ? $_GET['capture'] : '';
 $description	= isset($_GET['description']) ? $_GET['description'] : '';
-$custom_role      = isset($_GET['custom_role']) ? $_GET['custom_role'] : '';
-	if ( !empty( $custom_role  ) ) {
-		add_role( $custom_role  , __('Direct Stripe' . $custom_role , 'direct-stripe'), array( 'read' => true ));
+
+$custom_role    = isset($_GET['custom_role']) ? $_GET['custom_role'] : '';
+	if ( !empty( $custom_role  ) && wp_roles()->is_role( $custom_role ) == false ) {
+		add_role( $custom_role  , __('Direct Stripe ' . $custom_role , 'direct-stripe'), array( 'read' => true ));
 	}
 
 $success_query	= isset($_GET['success_query']) ? $_GET['success_query'] : '';
@@ -80,7 +81,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
 			//Update user roles
 			$user->add_role( 'stripe-user' );
-			$user->add_role( $user_role );
+			$user->add_role( $custom_role );
 		}
 		else {// User exists but doesn't have a Stripe ID
 			//Create Stripe customer
@@ -92,7 +93,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			//Update user roles
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
-			$user->add_role( $user_role );
+			$user->add_role( $custom_role );
 		}
 	
 } else {// User doesn't exist
@@ -161,7 +162,7 @@ if($stripe_id) { // User exists
 	update_user_meta($user_id, 'stripe_id', $customer->id );
 	$user = new WP_User( $user_id );
 	$user->add_role( 'stripe-user' );
-	$user->add_role( $user_role );
+	$user->add_role( $custom_role );
 	
 //Log transaction in WordPress admin
 	$post_id = wp_insert_post(
