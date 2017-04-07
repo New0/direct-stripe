@@ -57,7 +57,7 @@ $error_url = isset($_GET['error_url']) ? $_GET['error_url'] : '';
 	if ( !empty($error_url)) {
 		$e_url = urldecode_deep(  base64_decode($error_url) );
 	} else {
-		$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+		$e_url = get_permalink( $d_stripe_general['direct_stripe_error_page'] );
 	}
 	
 $new_currency =	isset($_GET['currency']) ? $_GET['currency'] : '';

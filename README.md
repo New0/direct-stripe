@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7.3
 
-Stable tag: 1.2.1
+Stable tag: 1.2.1.1
 
 License: GPLv2 or later 
 
@@ -132,6 +132,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+=1.2.1.1=
+* Corrects error redirection link bug
 
 =1.2.1=
 * **Custom_role** added as shortcode argument custom_role="custom_user_role"
