@@ -76,6 +76,7 @@ $email_address	= $_POST['stripeEmail'];
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {	
 	$user = get_user_by( 'email', $email_address );
 	$stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
+
 		if ( !empty($stripe_id_array) ) {//User exists and have a Stripe ID
 			//Retrieve Stripe ID
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
@@ -91,6 +92,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			));
 
 			$stripe_id = $customer->id;
+      
 			//Update user roles
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
