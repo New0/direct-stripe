@@ -6,7 +6,9 @@ Description: Use Stripe payment buttons anywhere in a WordPress website, let you
 Author: Nicolas Figueira
 Text Domain: direct-stripe
 Domain Path: /languages
-Version: 1.2.1.1
+
+Version: 1.2.1.2
+
 Author URI: https://newo.me
 */
 defined( 'ABSPATH' ) or die( 'Please!' );
