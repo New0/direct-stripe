@@ -59,7 +59,7 @@ $error_url	= isset($_GET['error_url']) ? $_GET['error_url'] : '';
 	if ( !empty($error_url)) {
 		$e_url = urldecode_deep(  base64_decode($error_url) );
 	} else {
-		$e_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
+		$e_url = get_permalink( $d_stripe_general['direct_stripe_error_page'] );
 	}
 	
 $new_currency = isset($_GET['currency']) ? $_GET['currency'] : '';
@@ -76,7 +76,7 @@ $email_address	= $_POST['stripeEmail'];
 if( username_exists( $email_address ) || email_exists( $email_address ) ) {	
 	$user = get_user_by( 'email', $email_address );
 	$stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
-		if ( isset($stripe_id_array) && !empty($stripe_id_array) ) {//User exists and have a Stripe ID
+		if ( !empty($stripe_id_array) ) {//User exists and have a Stripe ID
 			//Retrieve Stripe ID
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
 			//Update user roles
@@ -89,7 +89,8 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				'email' => $email_address,
 				'source'  => $token
 			));
-			$stripe_id = $customer->ID;
+
+			$stripe_id = $customer->id;
 			//Update user roles
 			update_user_meta($user->id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
