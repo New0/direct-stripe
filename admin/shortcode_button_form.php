@@ -1,16 +1,5 @@
 <?php //do
 
-// Stripe
-if( ! class_exists( 'Stripe\Stripe' ) ) {
-	require_once(DSCORE_PATH . '/stripe/init.php');
-}
-\Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
-
-$plans11 = \Stripe\Plan::all();
-$plans[] = $plans11->data;
-
-var_dump($plans->list);
-
 ?>
 <script>
 function ds_insert_shortcode(){
@@ -45,7 +34,7 @@ function ds_insert_shortcode(){
       var ds_button_shortcode = '[direct-stripe type="' + ds_type + '"';
       if( ds_amount !== "" ) {
            ds_button_shortcode = ds_button_shortcode + ' amount="' + ds_amount + '"';
-       } 
+       }
       if( ds_button_id !== "" ) {
          ds_button_shortcode = ds_button_shortcode + ' button_id="' + ds_button_id + '"';
       }
@@ -95,7 +84,7 @@ function ds_insert_shortcode(){
       ds_button_shortcode = ds_button_shortcode  + ']';
 
       window.send_to_editor(ds_button_shortcode);
-        
+      
  }
 </script>
 <div id="ds_add_button" style="display:none;">
@@ -240,7 +229,7 @@ function ds_insert_shortcode(){
             <input id="ds_error_query" type="text" class="ds-shortcode-error-query" name="ds_error_query">
         </div>
     </div>
-        
+    
     <div class="ds-row">
         <h4><?php _e('Per button success/error redirections','direct-stripe');?></h4>
         <p><?php _e('Enter the entire http address "http://domain.ext/success-or-error-page" ; this will override redirections globally set.','direct-stripe');?></p>
