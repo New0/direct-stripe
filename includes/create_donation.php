@@ -73,6 +73,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 	//User exists, check if it already have a stripe ID
 	$user = get_user_by( 'email', $email_address );
 	$stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
+    $user_id = $user->id;
 		if ( isset($stripe_id_array) && !empty($stripe_id_array) ) {//Stripe ID exists
 			//Retrieve Stripe ID and update user roles
 			$stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
@@ -87,7 +88,7 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 			));
 			$stripe_id = $customer->id;
 			//Update User roles
-			update_user_meta($user->id, 'stripe_id', $stripe_id);
+			update_user_meta($user_id, 'stripe_id', $stripe_id);
 			$user->add_role( 'stripe-user' );
 			$user->add_role( $custom_role );
 		}
@@ -112,21 +113,12 @@ if($stripe_id) { // User exists
 			'post_title' 	=> $token,
 			'post_status' 	=> 'publish',
 			'post_type' 	=> 'Direct Stripe Logs',
-			'post_author'	=>  $user->id
+			'post_author'	=>  $user_id
 		)
 	);
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
 	add_post_meta($post_id, 'description', $description );
-	
-// Email client
-  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
-      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
-  }
-// Email admin
-  if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
-      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] , $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
-  }
 	
 } else { // Utilisateur non reconnu
 //Stripe customer	
@@ -172,17 +164,26 @@ if($stripe_id) { // User exists
 	add_post_meta($post_id, 'amount', $amount);
 	add_post_meta($post_id, 'type', __('donation','direct-stripe') );
 	add_post_meta($post_id, 'description', $description );
-	
- // Email client
-  if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
-      wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_email_subject'] , $d_stripe_emails['direct_stripe_user_email_content'], $headers );
-  }
-// Email admin
-  if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
-      wp_mail( $admin_email , $d_stripe_emails['direct_stripe_admin_email_subject'] , $d_stripe_emails['direct_stripe_admin_email_content'], $headers );
-  }
+
 	
 }// Fin if else
+	
+	// Email client
+    if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
+
+        $email_subject = apply_filters( 'direct_stripe_success_user_email_subject', $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+        $email_content = apply_filters( 'direct_stripe_success_user_email_content', $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+
+        wp_mail( $email_address, $email_subject , $email_content, $headers );
+    }
+// Email admin
+    if(  isset($d_stripe_emails['direct_stripe_admin_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === '1' ) {
+
+        $email_subject = apply_filters( 'direct_stripe_success_admin_donation_email_subject', $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+        $email_content = apply_filters( 'direct_stripe_success_admin_donation_email_content', $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+
+        wp_mail( $admin_address, $email_subject , $email_content, $headers );
+    }
 	
 // Add custom action before redirection
 	$chargeID = $charge->id;
@@ -199,11 +200,19 @@ catch(Exception $e)
 {
 //Email client
   if( isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
-  	wp_mail( $email_address, $d_stripe_emails['direct_stripe_user_error_email_subject'] , $d_stripe_emails['direct_stripe_user_error_email_content'], $headers );
+
+	  $email_subject = apply_filters( 'direct_stripe_error_user_email_subject', $d_stripe_emails['direct_stripe_user_error_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+      $email_content = apply_filters( 'direct_stripe_error_user_email_content', $d_stripe_emails['direct_stripe_user_error_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+
+	  wp_mail( $email_address, $email_subject , $email_content, $headers );
   }
 //Email admin
   if( isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === '1' ) {
-  	wp_mail( $admin_email, $d_stripe_emails['direct_stripe_admin_error_email_subject'] , $d_stripe_emails['direct_stripe_admin_error_email_content'], $headers );
+
+  	  $email_subject = apply_filters( 'direct_stripe_error_admin_email_subject', $d_stripe_emails['direct_stripe_admin_error_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+      $email_content = apply_filters( 'direct_stripe_error_admin_email_content', $d_stripe_emails['direct_stripe_admin_error_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
+
+      wp_mail( $admin_email, $email_subject , $email_content, $headers );
   }
 	
 // Add custom action before redirection
