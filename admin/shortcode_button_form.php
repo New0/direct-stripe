@@ -1,5 +1,17 @@
 <?php //do
-?>    
+
+// Stripe
+if( ! class_exists( 'Stripe\Stripe' ) ) {
+	require_once(DSCORE_PATH . '/stripe/init.php');
+}
+\Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+
+$plans11 = \Stripe\Plan::all();
+$plans[] = $plans11->data;
+
+var_dump($plans->list);
+
+?>
 <script>
 function ds_insert_shortcode(){
       var ds_type = jQuery("#ds_type").val();

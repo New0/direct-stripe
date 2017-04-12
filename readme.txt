@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
 Tested up to: 4.7.3
-Stable tag: 1.2.1.2
+Stable tag: 1.2.2
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,6 +196,21 @@ In progress, in the meanwhile asking yours may help to fill this section.
 4. Admin transaction logs
 
 == Changelog ==
+
+=1.2.2=
+* Filters for emails subject
+    direct_stripe_success_user_email_subject
+    direct_stripe_success_admin_email_subject
+    direct_stripe_error_user_email_subject
+    direct_stripe_error_admin_email_subject
+
+* Filters for emails content
+    direct_stripe_success_user_email_content
+    direct_stripe_success_admin_email_content
+    direct_stripe_error_user_email_content
+    direct_stripe_error_admin_email_content
+
+    Filters explained at : https://newo.me/filter-direct-stripe-emails/
 
 =1.2.1.2=
 * Back to small id for stripe customer object in create payment
