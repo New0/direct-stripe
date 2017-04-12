@@ -75,6 +75,7 @@ try {
     if( username_exists( $email_address ) || email_exists( $email_address ) ) {
         $user = get_user_by( 'email', $email_address );
         $stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
+        $user_id = $user->id;
         if ( isset($stripe_id_array) && !empty($stripe_id_array) ) { //User exists and have a stripe ID
             //Retrieve Stripe ID
             $stripe_id = $stripe_id_array; //implode(" ", $stripe_id_array);
@@ -90,7 +91,7 @@ try {
             ));
             $stripe_id = $customer->id;
             //Add user roles and stripe ID
-            update_user_meta($user->id, 'stripe_id', $stripe_id);
+            update_user_meta($user_id, 'stripe_id', $stripe_id);
             $user->add_role( 'stripe-user' );
             $user->add_role( $custom_role );
         }
@@ -106,8 +107,7 @@ try {
                 "customer" => $stripe_id,
                 "plan"     => $amount,
                 'coupon'   => $coupon,
-                'metadata'	=> array(
-                    'description' => $description
+                'metadata'	=> array('description' => $description
                 )
             ));
         } else { //Coupon doesn't exist
@@ -139,7 +139,7 @@ try {
                 'post_title' => $token,
                 'post_status' => 'publish',
                 'post_type' => 'Direct Stripe Logs',
-                'post_author'	=>	$user->id
+                'post_author'	=>	$user_id
             )
         );
 
@@ -153,7 +153,7 @@ try {
                     'post_title' => $token,
                     'post_status' => 'publish',
                     'post_type' => 'Direct Stripe Logs',
-                    'post_author'	=>	$user->id
+                    'post_author'	=>	$user_id
                 )
             );
             add_post_meta($post_id, 'amount', $setup_fee);
@@ -250,7 +250,8 @@ try {
 
         $email_subject = apply_filters( 'direct_stripe_success_user_email_subject', $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
         $email_content = apply_filters( 'direct_stripe_success_user_email_content', $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
-
+        var_dump($plan);
+        die('ok');
         wp_mail( $email_address, $email_subject , $email_content, $headers );
     }
 // Email admin

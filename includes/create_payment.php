@@ -76,6 +76,7 @@ try { //Retrieve Data
     if( username_exists( $email_address ) || email_exists( $email_address ) ) {
         $user = get_user_by( 'email', $email_address );
         $stripe_id_array = get_user_meta( $user->id, 'stripe_id', true );
+        $user_id = $user->id;
 
         if ( !empty($stripe_id_array) ) {//User exists and have a Stripe ID
             //Retrieve Stripe ID
@@ -94,7 +95,7 @@ try { //Retrieve Data
             $stripe_id = $customer->id;
 
             //Update user roles
-            update_user_meta($user->id, 'stripe_id', $stripe_id);
+            update_user_meta($user_id, 'stripe_id', $stripe_id);
             $user->add_role( 'stripe-user' );
             $user->add_role( $custom_role );
         }
@@ -119,7 +120,7 @@ try { //Retrieve Data
                 'post_title' 	=> $token,
                 'post_status' 	=> 'publish',
                 'post_type' 	=> 'Direct Stripe Logs',
-                'post_author'	=>  $user->id
+                'post_author'	=>  $user_id
             )
         );
         add_post_meta($post_id, 'amount', $amount);
