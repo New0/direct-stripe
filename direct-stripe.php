@@ -7,7 +7,7 @@ Author: Nicolas Figueira
 Text Domain: direct-stripe
 Domain Path: /languages
 
-Version: 1.2.2
+Version: 1.2.2.1
 
 Author URI: https://newo.me
 */
