@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 16:24+0000\n"
+"POT-Creation-Date: 2017-04-19 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,1908 +14,528 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#: includes/create_subscription.php:128
-#: trunk/includes/create_subscription.php:112
-#: tags/1.1.9/includes/create_subscription.php:111
-#: tags/1.1.7/includes/create_subscription.php:75
-#: tags/1.2.0/includes/create_subscription.php:112
-#: tags/1.1.8/includes/create_subscription.php:87
-msgid "One time setup fee "
-msgstr ""
-
-#: includes/create_subscription.php:147 includes/create_subscription.php:238
-#: trunk/includes/create_subscription.php:129
-#: trunk/includes/create_subscription.php:219
-#: tags/1.1.9/includes/create_subscription.php:128
-#: tags/1.1.9/includes/create_subscription.php:218
-#: tags/1.1.3/includes/create_subscription.php:78
-#: tags/1.1.3/includes/create_subscription.php:137
-#: tags/1.1.7/includes/create_subscription.php:92
-#: tags/1.1.7/includes/create_subscription.php:182
-#: tags/1.1.4/includes/create_subscription.php:78
-#: tags/1.1.4/includes/create_subscription.php:137
-#: tags/1.1.1/includes/create_subscription.php:78
-#: tags/1.1.1/includes/create_subscription.php:137
-#: tags/1.1.2/includes/create_subscription.php:78
-#: tags/1.1.2/includes/create_subscription.php:137
-#: tags/1.1.5/includes/create_subscription.php:79
-#: tags/1.1.5/includes/create_subscription.php:138
-#: tags/1.1.6/includes/create_subscription.php:82
-#: tags/1.1.6/includes/create_subscription.php:149
-#: tags/1.0.1/includes/create_subscription.php:65
-#: tags/1.0.1/includes/create_subscription.php:124
-#: tags/1.2.0/includes/create_subscription.php:129
-#: tags/1.2.0/includes/create_subscription.php:219
-#: tags/1.1.8/includes/create_subscription.php:104
-#: tags/1.1.8/includes/create_subscription.php:194
-#: tags/1.1.0/includes/create_subscription.php:65
-#: tags/1.1.0/includes/create_subscription.php:124
-#: tags/1.0/includes/create_subscription.php:59
-#: tags/1.0/includes/create_subscription.php:110
-msgid "subscription"
-msgstr ""
-
-#: includes/create_subscription.php:160 includes/create_subscription.php:251
-#: trunk/includes/create_subscription.php:143
-#: trunk/includes/create_subscription.php:232
-#: tags/1.1.9/includes/create_subscription.php:142
-#: tags/1.1.9/includes/create_subscription.php:231
-#: tags/1.1.7/includes/create_subscription.php:106
-#: tags/1.1.7/includes/create_subscription.php:195
-#: tags/1.2.0/includes/create_subscription.php:143
-#: tags/1.2.0/includes/create_subscription.php:232
-#: tags/1.1.8/includes/create_subscription.php:118
-#: tags/1.1.8/includes/create_subscription.php:207
-msgid "setup fee"
-msgstr ""
-
-#: includes/create_subscription.php:202
-#: trunk/includes/create_subscription.php:183
-#: tags/1.1.9/includes/create_subscription.php:182
-#: tags/1.1.7/includes/create_subscription.php:146
-#: tags/1.2.0/includes/create_subscription.php:183
-#: tags/1.1.8/includes/create_subscription.php:158
-msgid "Setup fee "
-msgstr ""
-
-#: includes/functions.php:6 trunk/includes/functions.php:6
-#: tags/1.1.9/includes/functions.php:6 tags/1.1.3/includes/functions.php:7
-#: tags/1.1.7/includes/functions.php:6 tags/1.1.4/includes/functions.php:7
-#: tags/1.1.1/includes/functions.php:7 tags/1.1.2/includes/functions.php:7
-#: tags/1.1.5/includes/functions.php:7 tags/1.1.6/includes/functions.php:6
-#: tags/1.0.1/includes/functions.php:7 tags/1.2.0/includes/functions.php:6
-#: tags/1.1.8/includes/functions.php:6 tags/1.1.0/includes/functions.php:7
-#: tags/1.0/includes/functions.php:7
+#: direct-stripe.php:96
 msgid "Stripe user"
 msgstr ""
 
-#: includes/functions.php:29 trunk/includes/functions.php:29
-#: tags/1.1.9/includes/functions.php:26 tags/1.1.3/includes/functions.php:28
-#: tags/1.1.7/includes/functions.php:26 tags/1.1.4/includes/functions.php:28
-#: tags/1.1.1/includes/functions.php:28 tags/1.1.2/includes/functions.php:28
-#: tags/1.1.5/includes/functions.php:28 tags/1.1.6/includes/functions.php:26
-#: tags/1.0.1/includes/functions.php:28 tags/1.2.0/includes/functions.php:29
-#: tags/1.1.8/includes/functions.php:26 tags/1.1.0/includes/functions.php:28
-#: tags/1.0/includes/functions.php:28
-msgid "Logo for Stripe Form"
-msgstr ""
-
-#: includes/functions.php:30 trunk/includes/functions.php:30
-#: tags/1.1.9/includes/functions.php:27 tags/1.1.3/includes/functions.php:29
-#: tags/1.1.7/includes/functions.php:27 tags/1.1.4/includes/functions.php:29
-#: tags/1.1.1/includes/functions.php:29 tags/1.1.2/includes/functions.php:29
-#: tags/1.1.5/includes/functions.php:29 tags/1.1.6/includes/functions.php:27
-#: tags/1.0.1/includes/functions.php:29 tags/1.2.0/includes/functions.php:30
-#: tags/1.1.8/includes/functions.php:27 tags/1.1.0/includes/functions.php:29
-#: tags/1.0/includes/functions.php:29
-msgid "Use selected image"
-msgstr ""
-
-#: includes/functions.php:48 trunk/includes/functions.php:48
-#: tags/1.1.9/includes/functions.php:43 tags/1.1.3/includes/functions.php:45
-#: tags/1.1.7/includes/functions.php:43 tags/1.1.4/includes/functions.php:45
-#: tags/1.1.1/includes/functions.php:45 tags/1.1.2/includes/functions.php:45
-#: tags/1.1.5/includes/functions.php:45 tags/1.1.6/includes/functions.php:43
-#: tags/1.0.1/includes/functions.php:45 tags/1.2.0/includes/functions.php:48
-#: tags/1.1.8/includes/functions.php:43 tags/1.1.0/includes/functions.php:45
-#: tags/1.0/includes/functions.php:45
-msgid "Pay with card"
-msgstr ""
-
-#: includes/functions.php:49 trunk/includes/functions.php:49
-#: tags/1.1.9/includes/functions.php:44 tags/1.1.3/includes/functions.php:46
-#: tags/1.1.7/includes/functions.php:44 tags/1.1.4/includes/functions.php:46
-#: tags/1.1.1/includes/functions.php:46 tags/1.1.2/includes/functions.php:46
-#: tags/1.1.5/includes/functions.php:46 tags/1.1.6/includes/functions.php:44
-#: tags/1.0.1/includes/functions.php:46 tags/1.2.0/includes/functions.php:49
-#: tags/1.1.8/includes/functions.php:44 tags/1.1.0/includes/functions.php:46
-#: tags/1.0/includes/functions.php:46
-msgid "Pay"
-msgstr ""
-
-#: includes/functions.php:137 includes/functions.php:137
-#: trunk/includes/functions.php:135 trunk/includes/functions.php:135
-#: tags/1.1.9/includes/functions.php:124 tags/1.1.9/includes/functions.php:124
-#: tags/1.1.3/includes/functions.php:92 tags/1.1.3/includes/functions.php:92
-#: tags/1.1.7/includes/functions.php:96 tags/1.1.7/includes/functions.php:96
-#: tags/1.1.4/includes/functions.php:92 tags/1.1.4/includes/functions.php:92
-#: tags/1.1.1/includes/functions.php:92 tags/1.1.1/includes/functions.php:92
-#: tags/1.1.2/includes/functions.php:92 tags/1.1.2/includes/functions.php:92
-#: tags/1.1.5/includes/functions.php:92 tags/1.1.5/includes/functions.php:92
-#: tags/1.1.6/includes/functions.php:92 tags/1.1.6/includes/functions.php:92
-#: tags/1.0.1/includes/functions.php:92 tags/1.0.1/includes/functions.php:92
-#: tags/1.2.0/includes/functions.php:135 tags/1.2.0/includes/functions.php:135
-#: tags/1.1.8/includes/functions.php:102 tags/1.1.8/includes/functions.php:102
-#: tags/1.1.0/includes/functions.php:92 tags/1.1.0/includes/functions.php:92
-#: tags/1.0/includes/functions.php:92 tags/1.0/includes/functions.php:92
+#: controllers/class-ds-admin.php:31 controllers/class-ds-admin.php:31
 msgid "Settings"
 msgstr ""
 
-#: includes/functions.php:177 trunk/includes/functions.php:175
-#: tags/1.1.9/includes/functions.php:164 tags/1.1.3/includes/functions.php:133
-#: tags/1.1.7/includes/functions.php:136 tags/1.1.4/includes/functions.php:133
-#: tags/1.1.1/includes/functions.php:133 tags/1.1.2/includes/functions.php:133
-#: tags/1.1.5/includes/functions.php:133 tags/1.1.6/includes/functions.php:132
-#: tags/1.0.1/includes/functions.php:133 tags/1.2.0/includes/functions.php:175
-#: tags/1.1.8/includes/functions.php:142 tags/1.1.0/includes/functions.php:133
-#: tags/1.0/includes/functions.php:133
-msgctxt "Post Type General Name"
-msgid "Direct Stripe logs"
+#: controllers/class-ds-scripts.php:36
+msgid "Logo for Stripe Form"
 msgstr ""
 
-#: includes/functions.php:178 trunk/includes/functions.php:176
-#: tags/1.1.9/includes/functions.php:165 tags/1.1.3/includes/functions.php:134
-#: tags/1.1.7/includes/functions.php:137 tags/1.1.4/includes/functions.php:134
-#: tags/1.1.1/includes/functions.php:134 tags/1.1.2/includes/functions.php:134
-#: tags/1.1.5/includes/functions.php:134 tags/1.1.6/includes/functions.php:133
-#: tags/1.0.1/includes/functions.php:134 tags/1.2.0/includes/functions.php:176
-#: tags/1.1.8/includes/functions.php:143 tags/1.1.0/includes/functions.php:134
-#: tags/1.0/includes/functions.php:134
-msgctxt "Post Type Singular Name"
-msgid "Direct Stripe log"
+#: controllers/class-ds-scripts.php:37
+msgid "Use selected image"
 msgstr ""
 
-#: includes/functions.php:179 trunk/includes/functions.php:177
-#: tags/1.1.9/includes/functions.php:166 tags/1.1.3/includes/functions.php:135
-#: tags/1.1.7/includes/functions.php:138 tags/1.1.4/includes/functions.php:135
-#: tags/1.1.1/includes/functions.php:135 tags/1.1.2/includes/functions.php:135
-#: tags/1.1.5/includes/functions.php:135 tags/1.1.6/includes/functions.php:134
-#: tags/1.0.1/includes/functions.php:135 tags/1.2.0/includes/functions.php:177
-#: tags/1.1.8/includes/functions.php:144 tags/1.1.0/includes/functions.php:135
-#: tags/1.0/includes/functions.php:135
-msgid "Direct Stripe Parent Log"
+#: includes/class-display-settings.php:30
+msgid "Visa card test number 4242 4242 4242 4242"
 msgstr ""
 
-#: includes/functions.php:180 includes/functions.php:193
-#: includes/functions.php:194 trunk/includes/functions.php:178
-#: trunk/includes/functions.php:191 trunk/includes/functions.php:192
-#: tags/1.1.9/includes/functions.php:167 tags/1.1.9/includes/functions.php:180
-#: tags/1.1.9/includes/functions.php:181 tags/1.1.3/includes/functions.php:136
-#: tags/1.1.3/includes/functions.php:149 tags/1.1.3/includes/functions.php:150
-#: tags/1.1.7/includes/functions.php:139 tags/1.1.7/includes/functions.php:152
-#: tags/1.1.7/includes/functions.php:153 tags/1.1.4/includes/functions.php:136
-#: tags/1.1.4/includes/functions.php:149 tags/1.1.4/includes/functions.php:150
-#: tags/1.1.1/includes/functions.php:136 tags/1.1.1/includes/functions.php:149
-#: tags/1.1.1/includes/functions.php:150 tags/1.1.2/includes/functions.php:136
-#: tags/1.1.2/includes/functions.php:149 tags/1.1.2/includes/functions.php:150
-#: tags/1.1.5/includes/functions.php:136 tags/1.1.5/includes/functions.php:149
-#: tags/1.1.5/includes/functions.php:150 tags/1.1.6/includes/functions.php:135
-#: tags/1.1.6/includes/functions.php:148 tags/1.1.6/includes/functions.php:149
-#: tags/1.0.1/includes/functions.php:136 tags/1.0.1/includes/functions.php:149
-#: tags/1.0.1/includes/functions.php:150 tags/1.2.0/includes/functions.php:178
-#: tags/1.2.0/includes/functions.php:191 tags/1.2.0/includes/functions.php:192
-#: tags/1.1.8/includes/functions.php:145 tags/1.1.8/includes/functions.php:158
-#: tags/1.1.8/includes/functions.php:159 tags/1.1.0/includes/functions.php:136
-#: tags/1.1.0/includes/functions.php:149 tags/1.1.0/includes/functions.php:150
-#: tags/1.0/includes/functions.php:136 tags/1.0/includes/functions.php:149
-#: tags/1.0/includes/functions.php:150
-msgid "Direct Stripe logs"
+#: includes/class-display-settings.php:31
+msgid "With any exp date and 3 CVV numbers"
 msgstr ""
 
-#: includes/functions.php:181 trunk/includes/functions.php:179
-#: tags/1.1.9/includes/functions.php:168 tags/1.1.3/includes/functions.php:137
-#: tags/1.1.7/includes/functions.php:140 tags/1.1.4/includes/functions.php:137
-#: tags/1.1.1/includes/functions.php:137 tags/1.1.2/includes/functions.php:137
-#: tags/1.1.5/includes/functions.php:137 tags/1.1.6/includes/functions.php:136
-#: tags/1.0.1/includes/functions.php:137 tags/1.2.0/includes/functions.php:179
-#: tags/1.1.8/includes/functions.php:146 tags/1.1.0/includes/functions.php:137
-#: tags/1.0/includes/functions.php:137
-msgid "Direct Stripe log"
+#: includes/class-display-settings.php:133
+#: includes/class-display-settings.php:133
+msgid "Select success page"
 msgstr ""
 
-#: includes/functions.php:182 trunk/includes/functions.php:180
-#: tags/1.1.9/includes/functions.php:169 tags/1.1.3/includes/functions.php:138
-#: tags/1.1.7/includes/functions.php:141 tags/1.1.4/includes/functions.php:138
-#: tags/1.1.1/includes/functions.php:138 tags/1.1.2/includes/functions.php:138
-#: tags/1.1.5/includes/functions.php:138 tags/1.1.6/includes/functions.php:137
-#: tags/1.0.1/includes/functions.php:138 tags/1.2.0/includes/functions.php:180
-#: tags/1.1.8/includes/functions.php:147 tags/1.1.0/includes/functions.php:138
-#: tags/1.0/includes/functions.php:138
-msgid "Add New Direct Stripe log"
+#: includes/class-display-settings.php:149
+#: includes/class-display-settings.php:149
+msgid "Select error page"
 msgstr ""
 
-#: includes/functions.php:183 trunk/includes/functions.php:181
-#: tags/1.1.9/includes/functions.php:170 tags/1.1.3/includes/functions.php:139
-#: tags/1.1.7/includes/functions.php:142 tags/1.1.4/includes/functions.php:139
-#: tags/1.1.1/includes/functions.php:139 tags/1.1.2/includes/functions.php:139
-#: tags/1.1.5/includes/functions.php:139 tags/1.1.6/includes/functions.php:138
-#: tags/1.0.1/includes/functions.php:139 tags/1.2.0/includes/functions.php:181
-#: tags/1.1.8/includes/functions.php:148 tags/1.1.0/includes/functions.php:139
-#: tags/1.0/includes/functions.php:139
-msgid "Add New"
+#: includes/class-display-settings.php:169
+msgid "Select image"
 msgstr ""
 
-#: includes/functions.php:184 trunk/includes/functions.php:182
-#: tags/1.1.9/includes/functions.php:171 tags/1.1.3/includes/functions.php:140
-#: tags/1.1.7/includes/functions.php:143 tags/1.1.4/includes/functions.php:140
-#: tags/1.1.1/includes/functions.php:140 tags/1.1.2/includes/functions.php:140
-#: tags/1.1.5/includes/functions.php:140 tags/1.1.6/includes/functions.php:139
-#: tags/1.0.1/includes/functions.php:140 tags/1.2.0/includes/functions.php:182
-#: tags/1.1.8/includes/functions.php:149 tags/1.1.0/includes/functions.php:140
-#: tags/1.0/includes/functions.php:140
-msgid "Edit Direct Stripe log"
+#: includes/class-display-settings.php:199
+msgid "px"
 msgstr ""
 
-#: includes/functions.php:185 trunk/includes/functions.php:183
-#: tags/1.1.9/includes/functions.php:172 tags/1.1.3/includes/functions.php:141
-#: tags/1.1.7/includes/functions.php:144 tags/1.1.4/includes/functions.php:141
-#: tags/1.1.1/includes/functions.php:141 tags/1.1.2/includes/functions.php:141
-#: tags/1.1.5/includes/functions.php:141 tags/1.1.6/includes/functions.php:140
-#: tags/1.0.1/includes/functions.php:141 tags/1.2.0/includes/functions.php:183
-#: tags/1.1.8/includes/functions.php:150 tags/1.1.0/includes/functions.php:141
-#: tags/1.0/includes/functions.php:141
-msgid "Update Direct Stripe log"
+#: includes/class-display-settings.php:230
+#: includes/class-display-settings.php:230
+msgid "Select T&C page"
 msgstr ""
 
-#: includes/functions.php:186 trunk/includes/functions.php:184
-#: tags/1.1.9/includes/functions.php:173 tags/1.1.3/includes/functions.php:142
-#: tags/1.1.7/includes/functions.php:145 tags/1.1.4/includes/functions.php:142
-#: tags/1.1.1/includes/functions.php:142 tags/1.1.2/includes/functions.php:142
-#: tags/1.1.5/includes/functions.php:142 tags/1.1.6/includes/functions.php:141
-#: tags/1.0.1/includes/functions.php:142 tags/1.2.0/includes/functions.php:184
-#: tags/1.1.8/includes/functions.php:151 tags/1.1.0/includes/functions.php:142
-#: tags/1.0/includes/functions.php:142
-msgid "SearchDirect Stripe log"
+#: includes/class-display-settings.php:369
+msgid "Stripe API keys"
 msgstr ""
 
-#: includes/functions.php:187 trunk/includes/functions.php:185
-#: tags/1.1.9/includes/functions.php:174 tags/1.1.3/includes/functions.php:143
-#: tags/1.1.7/includes/functions.php:146 tags/1.1.4/includes/functions.php:143
-#: tags/1.1.1/includes/functions.php:143 tags/1.1.2/includes/functions.php:143
-#: tags/1.1.5/includes/functions.php:143 tags/1.1.6/includes/functions.php:142
-#: tags/1.0.1/includes/functions.php:143 tags/1.2.0/includes/functions.php:185
-#: tags/1.1.8/includes/functions.php:152 tags/1.1.0/includes/functions.php:143
-#: tags/1.0/includes/functions.php:143
-msgid "Direct Stripe log Not Found"
+#: includes/class-display-settings.php:372
+msgid "Messages to print when transactions completed"
 msgstr ""
 
-#: includes/functions.php:188 trunk/includes/functions.php:186
-#: tags/1.1.9/includes/functions.php:175 tags/1.1.3/includes/functions.php:144
-#: tags/1.1.7/includes/functions.php:147 tags/1.1.4/includes/functions.php:144
-#: tags/1.1.1/includes/functions.php:144 tags/1.1.2/includes/functions.php:144
-#: tags/1.1.5/includes/functions.php:144 tags/1.1.6/includes/functions.php:143
-#: tags/1.0.1/includes/functions.php:144 tags/1.2.0/includes/functions.php:186
-#: tags/1.1.8/includes/functions.php:153 tags/1.1.0/includes/functions.php:144
-#: tags/1.0/includes/functions.php:144
-msgid "Direct Stripe log Not found in Trash"
+#: includes/class-display-settings.php:375
+msgid "Use check box to use redirections"
 msgstr ""
 
-#: includes/functions.php:213 trunk/includes/functions.php:211
-#: tags/1.1.9/includes/functions.php:200 tags/1.1.3/includes/functions.php:170
-#: tags/1.1.7/includes/functions.php:172 tags/1.1.4/includes/functions.php:170
-#: tags/1.1.1/includes/functions.php:170 tags/1.1.2/includes/functions.php:170
-#: tags/1.1.5/includes/functions.php:170 tags/1.1.6/includes/functions.php:168
-#: tags/1.0.1/includes/functions.php:170 tags/1.2.0/includes/functions.php:211
-#: tags/1.1.8/includes/functions.php:178 tags/1.1.0/includes/functions.php:170
-#: tags/1.0/includes/functions.php:170
-msgid "Transaction ID"
+#: includes/class-display-settings.php:378
+msgid "Set image for Stripe's modal form"
 msgstr ""
 
-#: includes/functions.php:214 trunk/includes/functions.php:212
-#: tags/1.1.9/includes/functions.php:201 tags/1.1.3/includes/functions.php:171
-#: tags/1.1.7/includes/functions.php:173 tags/1.1.4/includes/functions.php:171
-#: tags/1.1.1/includes/functions.php:171 tags/1.1.2/includes/functions.php:171
-#: tags/1.1.5/includes/functions.php:171 tags/1.1.6/includes/functions.php:169
-#: tags/1.0.1/includes/functions.php:171 tags/1.2.0/includes/functions.php:212
-#: tags/1.1.8/includes/functions.php:179 tags/1.1.0/includes/functions.php:171
-#: tags/1.0/includes/functions.php:171
-msgid "Stripe User"
+#: includes/class-display-settings.php:381
+msgid "Only used with custom button styles enabled"
 msgstr ""
 
-#: includes/functions.php:215 trunk/includes/functions.php:213
-#: tags/1.1.9/includes/functions.php:202 tags/1.1.3/includes/functions.php:172
-#: tags/1.1.7/includes/functions.php:174 tags/1.1.4/includes/functions.php:172
-#: tags/1.1.1/includes/functions.php:172 tags/1.1.2/includes/functions.php:172
-#: tags/1.1.5/includes/functions.php:172 tags/1.1.6/includes/functions.php:170
-#: tags/1.0.1/includes/functions.php:172 tags/1.2.0/includes/functions.php:213
-#: tags/1.1.8/includes/functions.php:180 tags/1.1.0/includes/functions.php:172
-#: tags/1.0/includes/functions.php:172
-msgid "Amount"
+#: includes/class-display-settings.php:384
+#: includes/class-display-settings.php:390
+msgid "Emails sent to WordPress system email address"
 msgstr ""
 
-#: includes/functions.php:216 trunk/includes/functions.php:214
-#: tags/1.1.9/includes/functions.php:203 tags/1.1.3/includes/functions.php:173
-#: tags/1.1.7/includes/functions.php:175 tags/1.1.4/includes/functions.php:173
-#: tags/1.1.1/includes/functions.php:173 tags/1.1.2/includes/functions.php:173
-#: tags/1.1.5/includes/functions.php:173 tags/1.1.6/includes/functions.php:171
-#: tags/1.0.1/includes/functions.php:173 tags/1.2.0/includes/functions.php:214
-#: tags/1.1.8/includes/functions.php:181 tags/1.1.0/includes/functions.php:173
-#: tags/1.0/includes/functions.php:173
-msgid "Type"
+#: includes/class-display-settings.php:387
+#: includes/class-display-settings.php:393
+msgid "Emails sent to Stripe user email address"
 msgstr ""
 
-#: includes/functions.php:217 public/shortcode_button_form.php:136
-#: admin/shortcode_button_form.php:140 trunk/includes/functions.php:215
-#: trunk/public/shortcode_button_form.php:136
-#: trunk/admin/shortcode_button_form.php:136
-#: tags/1.1.9/includes/functions.php:204 tags/1.1.7/includes/functions.php:176
-#: tags/1.2.0/includes/functions.php:215
-#: tags/1.2.0/admin/shortcode_button_form.php:136
-#: tags/1.1.8/includes/functions.php:182
-msgid "Description"
+#: includes/class-display-settings.php:396
+msgid ""
+"Name, Address, City, Zip code and country will be collected before payment"
 msgstr ""
 
-#: includes/functions.php:218 trunk/includes/functions.php:216
-#: tags/1.1.9/includes/functions.php:205 tags/1.1.3/includes/functions.php:174
-#: tags/1.1.7/includes/functions.php:177 tags/1.1.4/includes/functions.php:174
-#: tags/1.1.1/includes/functions.php:174 tags/1.1.2/includes/functions.php:174
-#: tags/1.1.5/includes/functions.php:174 tags/1.1.6/includes/functions.php:172
-#: tags/1.0.1/includes/functions.php:174 tags/1.2.0/includes/functions.php:216
-#: tags/1.1.8/includes/functions.php:183 tags/1.1.0/includes/functions.php:174
-#: tags/1.0/includes/functions.php:174
-msgid "Date"
+#: includes/class-display-settings.php:399
+msgid ""
+"Check to use custom button (Custom styles will not apply on browser Chrome "
+"for iOS)"
 msgstr ""
 
-#: includes/functions.php:234 includes/functions.php:242
-#: trunk/includes/functions.php:232 trunk/includes/functions.php:240
-#: tags/1.1.9/includes/functions.php:221 tags/1.1.9/includes/functions.php:229
-#: tags/1.1.3/includes/functions.php:190 tags/1.1.3/includes/functions.php:198
-#: tags/1.1.7/includes/functions.php:193 tags/1.1.7/includes/functions.php:201
-#: tags/1.1.4/includes/functions.php:190 tags/1.1.4/includes/functions.php:198
-#: tags/1.1.1/includes/functions.php:190 tags/1.1.1/includes/functions.php:198
-#: tags/1.1.2/includes/functions.php:190 tags/1.1.2/includes/functions.php:198
-#: tags/1.1.5/includes/functions.php:190 tags/1.1.5/includes/functions.php:198
-#: tags/1.1.6/includes/functions.php:188 tags/1.1.6/includes/functions.php:196
-#: tags/1.0.1/includes/functions.php:190 tags/1.0.1/includes/functions.php:198
-#: tags/1.2.0/includes/functions.php:232 tags/1.2.0/includes/functions.php:240
-#: tags/1.1.8/includes/functions.php:199 tags/1.1.8/includes/functions.php:207
-#: tags/1.1.0/includes/functions.php:190 tags/1.1.0/includes/functions.php:198
-#: tags/1.0/includes/functions.php:190 tags/1.0/includes/functions.php:198
-msgid "Unknown"
+#: includes/class-display-settings.php:402
+msgid "Set your Stripe's account currency"
 msgstr ""
 
-#: includes/functions.php:236 includes/functions.php:244
-#: includes/functions.php:252 trunk/includes/functions.php:234
-#: trunk/includes/functions.php:242 trunk/includes/functions.php:250
-#: tags/1.1.9/includes/functions.php:223 tags/1.1.9/includes/functions.php:231
-#: tags/1.1.9/includes/functions.php:239 tags/1.1.3/includes/functions.php:192
-#: tags/1.1.3/includes/functions.php:200 tags/1.1.7/includes/functions.php:195
-#: tags/1.1.7/includes/functions.php:203 tags/1.1.7/includes/functions.php:211
-#: tags/1.1.4/includes/functions.php:192 tags/1.1.4/includes/functions.php:200
-#: tags/1.1.1/includes/functions.php:192 tags/1.1.1/includes/functions.php:200
-#: tags/1.1.2/includes/functions.php:192 tags/1.1.2/includes/functions.php:200
-#: tags/1.1.5/includes/functions.php:192 tags/1.1.5/includes/functions.php:200
-#: tags/1.1.6/includes/functions.php:190 tags/1.1.6/includes/functions.php:198
-#: tags/1.0.1/includes/functions.php:192 tags/1.0.1/includes/functions.php:200
-#: tags/1.2.0/includes/functions.php:234 tags/1.2.0/includes/functions.php:242
-#: tags/1.2.0/includes/functions.php:250 tags/1.1.8/includes/functions.php:201
-#: tags/1.1.8/includes/functions.php:209 tags/1.1.8/includes/functions.php:217
-#: tags/1.1.0/includes/functions.php:192 tags/1.1.0/includes/functions.php:200
-#: tags/1.0/includes/functions.php:192 tags/1.0/includes/functions.php:200
-#, php-format
-msgid "%s"
+#: includes/display-users.php:2
+msgid "Direct Stripe user infos"
 msgstr ""
 
-#: includes/functions.php:250 trunk/includes/functions.php:248
-#: tags/1.1.9/includes/functions.php:237 tags/1.1.7/includes/functions.php:209
-#: tags/1.2.0/includes/functions.php:248 tags/1.1.8/includes/functions.php:215
-msgid "None provided"
+#: includes/display-users.php:5
+msgid "Direct Sripe Data"
 msgstr ""
 
-#: includes/create_donation.php:119 includes/create_donation.php:173
-#: trunk/includes/create_donation.php:105
-#: trunk/includes/create_donation.php:156
-#: tags/1.1.9/includes/create_donation.php:104
-#: tags/1.1.9/includes/create_donation.php:155
-#: tags/1.1.3/includes/create_donation.php:65
-#: tags/1.1.3/includes/create_donation.php:113
-#: tags/1.1.7/includes/create_donation.php:71
-#: tags/1.1.7/includes/create_donation.php:122
-#: tags/1.1.4/includes/create_donation.php:65
-#: tags/1.1.4/includes/create_donation.php:113
-#: tags/1.1.1/includes/create_donation.php:65
-#: tags/1.1.1/includes/create_donation.php:113
-#: tags/1.1.2/includes/create_donation.php:65
-#: tags/1.1.2/includes/create_donation.php:113
-#: tags/1.1.5/includes/create_donation.php:67
-#: tags/1.1.5/includes/create_donation.php:115
-#: tags/1.1.6/includes/create_donation.php:67
-#: tags/1.1.6/includes/create_donation.php:115
-#: tags/1.0.1/includes/create_donation.php:52
-#: tags/1.0.1/includes/create_donation.php:100
-#: tags/1.2.0/includes/create_donation.php:105
-#: tags/1.2.0/includes/create_donation.php:156
-#: tags/1.1.8/includes/create_donation.php:80
-#: tags/1.1.8/includes/create_donation.php:131
-#: tags/1.1.0/includes/create_donation.php:52
-#: tags/1.1.0/includes/create_donation.php:100
-#: tags/1.0/includes/create_donation.php:52
-#: tags/1.0/includes/create_donation.php:100
-msgid "donation"
+#: includes/display-users.php:6
+msgid "Stripe customer ID"
 msgstr ""
 
-#: includes/create_payment.php:123 includes/create_payment.php:177
-#: trunk/includes/create_payment.php:108 trunk/includes/create_payment.php:159
-#: tags/1.1.9/includes/create_payment.php:107
-#: tags/1.1.9/includes/create_payment.php:158
-#: tags/1.1.3/includes/create_payment.php:68
-#: tags/1.1.3/includes/create_payment.php:116
-#: tags/1.1.7/includes/create_payment.php:73
-#: tags/1.1.7/includes/create_payment.php:124
-#: tags/1.1.4/includes/create_payment.php:68
-#: tags/1.1.4/includes/create_payment.php:116
-#: tags/1.1.1/includes/create_payment.php:68
-#: tags/1.1.1/includes/create_payment.php:116
-#: tags/1.1.2/includes/create_payment.php:68
-#: tags/1.1.2/includes/create_payment.php:116
-#: tags/1.1.5/includes/create_payment.php:69
-#: tags/1.1.5/includes/create_payment.php:117
-#: tags/1.1.6/includes/create_payment.php:69
-#: tags/1.1.6/includes/create_payment.php:117
-#: tags/1.0.1/includes/create_payment.php:55
-#: tags/1.0.1/includes/create_payment.php:103
-#: tags/1.2.0/includes/create_payment.php:108
-#: tags/1.2.0/includes/create_payment.php:159
-#: tags/1.1.8/includes/create_payment.php:82
-#: tags/1.1.8/includes/create_payment.php:133
-#: tags/1.1.0/includes/create_payment.php:55
-#: tags/1.1.0/includes/create_payment.php:103
-#: tags/1.0/includes/create_payment.php:55
-#: tags/1.0/includes/create_payment.php:102
-msgid "payment"
+#: includes/display-users.php:9
+msgid "stripe_id"
 msgstr ""
 
-#: public/shortcode_button.php:16 public/shortcode_button.php:16
-#: public/shortcode_button.php:21 public/shortcode_button.php:21
-#: admin/shortcode_button.php:10 admin/shortcode_button.php:10
-#: trunk/public/shortcode_button.php:16 trunk/public/shortcode_button.php:16
-#: trunk/public/shortcode_button.php:21 trunk/public/shortcode_button.php:21
-#: trunk/admin/shortcode_button.php:10 trunk/admin/shortcode_button.php:10
-#: tags/1.2.0/admin/shortcode_button.php:10
-#: tags/1.2.0/admin/shortcode_button.php:10
+#: includes/register-settings.php:17
+msgid "Set API keys"
+msgstr ""
+
+#: includes/register-settings.php:24
+msgid "Live Secret API key"
+msgstr ""
+
+#: includes/register-settings.php:31
+msgid "Live Publishable API key"
+msgstr ""
+
+#: includes/register-settings.php:38
+msgid "Use test keys / mode"
+msgstr ""
+
+#: includes/register-settings.php:45
+msgid "Test Secret API key"
+msgstr ""
+
+#: includes/register-settings.php:52
+msgid "Test Publishable API key"
+msgstr ""
+
+#: includes/register-settings.php:61 includes/register-settings.php:68
+#: includes/shortcode_button_form.php:194
+msgid "Currency"
+msgstr ""
+
+#: includes/register-settings.php:77
+msgid "Success and error messages"
+msgstr ""
+
+#: includes/register-settings.php:85
+msgid "Success message"
+msgstr ""
+
+#: includes/register-settings.php:92
+msgid "Error message"
+msgstr ""
+
+#: includes/register-settings.php:102
+msgid "Landing pages"
+msgstr ""
+
+#: includes/register-settings.php:108
+msgid "Redirect users to success or error pages when transaction completed"
+msgstr ""
+
+#: includes/register-settings.php:115
+msgid "Success page"
+msgstr ""
+
+#: includes/register-settings.php:123
+msgid "Error page"
+msgstr ""
+
+#: includes/register-settings.php:132
+msgid "Modal form logo / image"
+msgstr ""
+
+#: includes/register-settings.php:138
+msgid "Current logo / image"
+msgstr ""
+
+#: includes/register-settings.php:146
+msgid "Billing information"
+msgstr ""
+
+#: includes/register-settings.php:152
+msgid "Ask for address in modal Form"
+msgstr ""
+
+#: includes/register-settings.php:161
+msgid "Custom button styles"
+msgstr ""
+
+#: includes/register-settings.php:167
+msgid "Use custom styles"
+msgstr ""
+
+#: includes/register-settings.php:174
+msgid "Main Color"
+msgstr ""
+
+#: includes/register-settings.php:181
+msgid "Border radius"
+msgstr ""
+
+#: includes/register-settings.php:190
+msgid "Terms and conditions"
+msgstr ""
+
+#: includes/register-settings.php:196
+msgid "Use Terms and Conditions checkbox"
+msgstr ""
+
+#: includes/register-settings.php:203
+msgid "Terms and conditions text"
+msgstr ""
+
+#: includes/register-settings.php:210
+msgid "Terms and conditions link text"
+msgstr ""
+
+#: includes/register-settings.php:217
+msgid "Terms and conditions page"
+msgstr ""
+
+#: includes/register-settings.php:226
+msgid "Automated emails to admin after successful transactions"
+msgstr ""
+
+#: includes/register-settings.php:232
+msgid "Send emails to admin after successful transaction"
+msgstr ""
+
+#: includes/register-settings.php:239
+msgid "Admin email subject"
+msgstr ""
+
+#: includes/register-settings.php:246
+msgid "Admin email content"
+msgstr ""
+
+#: includes/register-settings.php:255
+msgid "Automated emails to Stripe user after successful transactions"
+msgstr ""
+
+#: includes/register-settings.php:261
+msgid "Send emails to Stripe user after successful transaction"
+msgstr ""
+
+#: includes/register-settings.php:268
+msgid "User email subject"
+msgstr ""
+
+#: includes/register-settings.php:275
+msgid "User email content"
+msgstr ""
+
+#: includes/register-settings.php:284
+msgid "Automated emails to admin after failed transaction"
+msgstr ""
+
+#: includes/register-settings.php:290
+msgid "Send emails to admin after failed transaction"
+msgstr ""
+
+#: includes/register-settings.php:297
+msgid "Admin error email subject"
+msgstr ""
+
+#: includes/register-settings.php:304
+msgid "Admin error email content"
+msgstr ""
+
+#: includes/register-settings.php:313
+msgid "Automated emails to Stripe user after failed transaction"
+msgstr ""
+
+#: includes/register-settings.php:319
+msgid "Send emails to Stripe user after failed transaction"
+msgstr ""
+
+#: includes/register-settings.php:326
+msgid "User error email subject"
+msgstr ""
+
+#: includes/register-settings.php:333
+msgid "User error email content"
+msgstr ""
+
+#: includes/shortcode_button.php:10 includes/shortcode_button.php:10
 msgid "Add Stripe button"
 msgstr ""
 
-#: public/shortcode_button_form.php:87 admin/shortcode_button_form.php:91
-#: trunk/public/shortcode_button_form.php:87
-#: trunk/admin/shortcode_button_form.php:87
-#: tags/1.2.0/admin/shortcode_button_form.php:87
+#: includes/shortcode_button_form.php:91
 msgid "Main Button Options"
 msgstr ""
 
-#: public/shortcode_button_form.php:88 admin/shortcode_button_form.php:92
-#: trunk/public/shortcode_button_form.php:88
-#: trunk/admin/shortcode_button_form.php:88
-#: tags/1.2.0/admin/shortcode_button_form.php:88
+#: includes/shortcode_button_form.php:92
 msgid ""
 "The button type is required, the amount is required for \"payments\" and "
 "\"subscriptions\" type buttons."
 msgstr ""
 
-#: public/shortcode_button_form.php:93 admin/shortcode_button_form.php:97
-#: trunk/public/shortcode_button_form.php:93
-#: trunk/admin/shortcode_button_form.php:93
-#: tags/1.2.0/admin/shortcode_button_form.php:93
+#: includes/shortcode_button_form.php:97
 msgid "Button Type"
 msgstr ""
 
-#: public/shortcode_button_form.php:95 admin/shortcode_button_form.php:99
-#: trunk/public/shortcode_button_form.php:95
-#: trunk/admin/shortcode_button_form.php:95
-#: tags/1.2.0/admin/shortcode_button_form.php:95
+#: includes/shortcode_button_form.php:99
 msgid "Choose button type"
 msgstr ""
 
-#: public/shortcode_button_form.php:96 admin/shortcode_button_form.php:100
-#: trunk/public/shortcode_button_form.php:96
-#: trunk/admin/shortcode_button_form.php:96
-#: tags/1.2.0/admin/shortcode_button_form.php:96
+#: includes/shortcode_button_form.php:100
 msgid "Payment"
 msgstr ""
 
-#: public/shortcode_button_form.php:97 admin/shortcode_button_form.php:101
-#: trunk/public/shortcode_button_form.php:97
-#: trunk/admin/shortcode_button_form.php:97
-#: tags/1.2.0/admin/shortcode_button_form.php:97
+#: includes/shortcode_button_form.php:101
 msgid "Subscription"
 msgstr ""
 
-#: public/shortcode_button_form.php:98 admin/shortcode_button_form.php:102
-#: trunk/public/shortcode_button_form.php:98
-#: trunk/admin/shortcode_button_form.php:98
-#: tags/1.2.0/admin/shortcode_button_form.php:98
+#: includes/shortcode_button_form.php:102
 msgid "Donation"
 msgstr ""
 
-#: public/shortcode_button_form.php:102 admin/shortcode_button_form.php:106
-#: trunk/public/shortcode_button_form.php:102
-#: trunk/admin/shortcode_button_form.php:102
-#: tags/1.2.0/admin/shortcode_button_form.php:102
+#: includes/shortcode_button_form.php:106
 msgid "Button Amount field"
 msgstr ""
 
-#: public/shortcode_button_form.php:103 public/shortcode_button_form.php:148
-#: public/shortcode_button_form.php:155 public/shortcode_button_form.php:169
-#: public/shortcode_button_form.php:180 public/shortcode_button_form.php:191
-#: public/shortcode_button_form.php:204 public/shortcode_button_form.php:211
-#: admin/shortcode_button_form.php:107 admin/shortcode_button_form.php:152
-#: admin/shortcode_button_form.php:159 admin/shortcode_button_form.php:173
-#: admin/shortcode_button_form.php:184 admin/shortcode_button_form.php:195
-#: admin/shortcode_button_form.php:205 admin/shortcode_button_form.php:218
-#: admin/shortcode_button_form.php:225
-#: trunk/public/shortcode_button_form.php:103
-#: trunk/public/shortcode_button_form.php:148
-#: trunk/public/shortcode_button_form.php:155
-#: trunk/public/shortcode_button_form.php:169
-#: trunk/public/shortcode_button_form.php:180
-#: trunk/public/shortcode_button_form.php:191
-#: trunk/public/shortcode_button_form.php:204
-#: trunk/public/shortcode_button_form.php:211
-#: trunk/admin/shortcode_button_form.php:103
-#: trunk/admin/shortcode_button_form.php:148
-#: trunk/admin/shortcode_button_form.php:155
-#: trunk/admin/shortcode_button_form.php:169
-#: trunk/admin/shortcode_button_form.php:180
-#: trunk/admin/shortcode_button_form.php:191
-#: trunk/admin/shortcode_button_form.php:204
-#: trunk/admin/shortcode_button_form.php:211
-#: tags/1.2.0/admin/shortcode_button_form.php:103
-#: tags/1.2.0/admin/shortcode_button_form.php:148
-#: tags/1.2.0/admin/shortcode_button_form.php:155
-#: tags/1.2.0/admin/shortcode_button_form.php:169
-#: tags/1.2.0/admin/shortcode_button_form.php:180
-#: tags/1.2.0/admin/shortcode_button_form.php:191
-#: tags/1.2.0/admin/shortcode_button_form.php:204
-#: tags/1.2.0/admin/shortcode_button_form.php:211
+#: includes/shortcode_button_form.php:107
+#: includes/shortcode_button_form.php:152
+#: includes/shortcode_button_form.php:159
+#: includes/shortcode_button_form.php:173
+#: includes/shortcode_button_form.php:184
+#: includes/shortcode_button_form.php:195
+#: includes/shortcode_button_form.php:205
+#: includes/shortcode_button_form.php:218
+#: includes/shortcode_button_form.php:225
 msgid "infos"
 msgstr ""
 
-#: public/shortcode_button_form.php:104 admin/shortcode_button_form.php:108
-#: trunk/public/shortcode_button_form.php:104
-#: trunk/admin/shortcode_button_form.php:104
-#: tags/1.2.0/admin/shortcode_button_form.php:104
+#: includes/shortcode_button_form.php:108
 msgid ""
 "Payments type amount should be entered without commas and with decimals, Ex: "
 "500 means 5.00 . For subscriptions, enter the plan ID( preferably letters), "
 "previously created in Stripe admin panel."
 msgstr ""
 
-#: public/shortcode_button_form.php:109 admin/shortcode_button_form.php:113
-#: trunk/public/shortcode_button_form.php:109
-#: trunk/admin/shortcode_button_form.php:109
-#: tags/1.2.0/admin/shortcode_button_form.php:109
+#: includes/shortcode_button_form.php:113
 msgid "Button ID"
 msgstr ""
 
-#: public/shortcode_button_form.php:115 admin/shortcode_button_form.php:119
-#: trunk/public/shortcode_button_form.php:115
-#: trunk/admin/shortcode_button_form.php:115
-#: tags/1.2.0/admin/shortcode_button_form.php:115
+#: includes/shortcode_button_form.php:119
 msgid "Override general Options"
 msgstr ""
 
-#: public/shortcode_button_form.php:116 admin/shortcode_button_form.php:120
-#: trunk/public/shortcode_button_form.php:116
-#: trunk/admin/shortcode_button_form.php:116
-#: tags/1.2.0/admin/shortcode_button_form.php:116
+#: includes/shortcode_button_form.php:120
 msgid ""
 "Set a shop name and product/service description. The label is the text of "
 "the button, the panel label is the text of the text of the modal form button"
 msgstr ""
 
-#: public/shortcode_button_form.php:121 admin/shortcode_button_form.php:125
-#: trunk/public/shortcode_button_form.php:121
-#: trunk/admin/shortcode_button_form.php:121
-#: tags/1.2.0/admin/shortcode_button_form.php:121
+#: includes/shortcode_button_form.php:125
 msgid "Name"
 msgstr ""
 
-#: public/shortcode_button_form.php:125 admin/shortcode_button_form.php:129
-#: trunk/public/shortcode_button_form.php:125
-#: trunk/admin/shortcode_button_form.php:125
-#: tags/1.2.0/admin/shortcode_button_form.php:125
+#: includes/shortcode_button_form.php:129
 msgid "Label"
 msgstr ""
 
-#: public/shortcode_button_form.php:129 admin/shortcode_button_form.php:133
-#: trunk/public/shortcode_button_form.php:129
-#: trunk/admin/shortcode_button_form.php:129
-#: tags/1.2.0/admin/shortcode_button_form.php:129
+#: includes/shortcode_button_form.php:133
 msgid "Panel Label"
 msgstr ""
 
-#: public/shortcode_button_form.php:142 admin/shortcode_button_form.php:146
-#: trunk/public/shortcode_button_form.php:142
-#: trunk/admin/shortcode_button_form.php:142
-#: tags/1.2.0/admin/shortcode_button_form.php:142
+#: includes/shortcode_button_form.php:140
+msgid "Description"
+msgstr ""
+
+#: includes/shortcode_button_form.php:146
 msgid "Options for subscriptions"
 msgstr ""
 
-#: public/shortcode_button_form.php:147 admin/shortcode_button_form.php:151
-#: trunk/public/shortcode_button_form.php:147
-#: trunk/admin/shortcode_button_form.php:147
-#: tags/1.2.0/admin/shortcode_button_form.php:147
+#: includes/shortcode_button_form.php:151
 msgid "Coupon"
 msgstr ""
 
-#: public/shortcode_button_form.php:149 admin/shortcode_button_form.php:153
-#: trunk/public/shortcode_button_form.php:149
-#: trunk/admin/shortcode_button_form.php:149
-#: tags/1.2.0/admin/shortcode_button_form.php:149
+#: includes/shortcode_button_form.php:153
 msgid ""
 "Coupon are to be previously created in Stripe admin panel and allows you to "
 "create a discount/promotion, enter the coupon ID."
 msgstr ""
 
-#: public/shortcode_button_form.php:154 admin/shortcode_button_form.php:158
-#: trunk/public/shortcode_button_form.php:154
-#: trunk/admin/shortcode_button_form.php:154
-#: tags/1.2.0/admin/shortcode_button_form.php:154
+#: includes/shortcode_button_form.php:158
 msgid "Setup Fee"
 msgstr ""
 
-#: public/shortcode_button_form.php:156 admin/shortcode_button_form.php:160
-#: trunk/public/shortcode_button_form.php:156
-#: trunk/admin/shortcode_button_form.php:156
-#: tags/1.2.0/admin/shortcode_button_form.php:156
+#: includes/shortcode_button_form.php:160
 msgid ""
 "Setup Fee allows you to charge a one time fee on plan subscription "
 "activation. Enter the amount use it and charge, 500 means 5.00"
 msgstr ""
 
-#: public/shortcode_button_form.php:163 admin/shortcode_button_form.php:167
-#: trunk/public/shortcode_button_form.php:163
-#: trunk/admin/shortcode_button_form.php:163
-#: tags/1.2.0/admin/shortcode_button_form.php:163
+#: includes/shortcode_button_form.php:167
 msgid "Extra options"
 msgstr ""
 
-#: public/shortcode_button_form.php:168 admin/shortcode_button_form.php:172
-#: trunk/public/shortcode_button_form.php:168
-#: trunk/admin/shortcode_button_form.php:168
-#: tags/1.2.0/admin/shortcode_button_form.php:168
+#: includes/shortcode_button_form.php:172
 msgid "Capture"
 msgstr ""
 
-#: public/shortcode_button_form.php:170 admin/shortcode_button_form.php:174
-#: trunk/public/shortcode_button_form.php:170
-#: trunk/admin/shortcode_button_form.php:170
-#: tags/1.2.0/admin/shortcode_button_form.php:170
+#: includes/shortcode_button_form.php:174
 msgid ""
 "Set capture to \"No\" to manually create the charge from your Stripe admin "
 "panel within the next 7 days."
 msgstr ""
 
-#: public/shortcode_button_form.php:174 public/shortcode_button_form.php:185
-#: admin/shortcode_button_form.php:178 admin/shortcode_button_form.php:189
-#: trunk/public/shortcode_button_form.php:174
-#: trunk/public/shortcode_button_form.php:185
-#: trunk/admin/shortcode_button_form.php:174
-#: trunk/admin/shortcode_button_form.php:185
-#: tags/1.2.0/admin/shortcode_button_form.php:174
-#: tags/1.2.0/admin/shortcode_button_form.php:185
+#: includes/shortcode_button_form.php:178
+#: includes/shortcode_button_form.php:189
 msgid "Yes"
 msgstr ""
 
-#: public/shortcode_button_form.php:175 public/shortcode_button_form.php:186
-#: admin/shortcode_button_form.php:179 admin/shortcode_button_form.php:190
-#: trunk/public/shortcode_button_form.php:175
-#: trunk/public/shortcode_button_form.php:186
-#: trunk/admin/shortcode_button_form.php:175
-#: trunk/admin/shortcode_button_form.php:186
-#: tags/1.2.0/admin/shortcode_button_form.php:175
-#: tags/1.2.0/admin/shortcode_button_form.php:186
+#: includes/shortcode_button_form.php:179
+#: includes/shortcode_button_form.php:190
 msgid "No"
 msgstr ""
 
-#: public/shortcode_button_form.php:179 admin/shortcode_button_form.php:183
-#: trunk/public/shortcode_button_form.php:179
-#: trunk/admin/shortcode_button_form.php:179
-#: tags/1.2.0/admin/shortcode_button_form.php:179
+#: includes/shortcode_button_form.php:183
 msgid "Display amount"
 msgstr ""
 
-#: public/shortcode_button_form.php:181 admin/shortcode_button_form.php:185
-#: trunk/public/shortcode_button_form.php:181
-#: trunk/admin/shortcode_button_form.php:181
-#: tags/1.2.0/admin/shortcode_button_form.php:181
+#: includes/shortcode_button_form.php:185
 msgid "Set to \"No\" to hide the amount in modal form button."
 msgstr ""
 
-#: public/shortcode_button_form.php:190 admin/register-settings.php:60
-#: admin/register-settings.php:67 admin/shortcode_button_form.php:194
-#: trunk/public/shortcode_button_form.php:190
-#: trunk/admin/register-settings.php:60 trunk/admin/register-settings.php:67
-#: trunk/admin/shortcode_button_form.php:190
-#: tags/1.1.9/admin/register-settings.php:60
-#: tags/1.1.9/admin/register-settings.php:67
-#: tags/1.1.3/admin/register-settings.php:60
-#: tags/1.1.3/admin/register-settings.php:67
-#: tags/1.1.7/admin/register-settings.php:60
-#: tags/1.1.7/admin/register-settings.php:67
-#: tags/1.1.4/admin/register-settings.php:60
-#: tags/1.1.4/admin/register-settings.php:67
-#: tags/1.1.1/admin/register-settings.php:60
-#: tags/1.1.1/admin/register-settings.php:67
-#: tags/1.1.2/admin/register-settings.php:60
-#: tags/1.1.2/admin/register-settings.php:67
-#: tags/1.1.5/admin/register-settings.php:60
-#: tags/1.1.5/admin/register-settings.php:67
-#: tags/1.1.6/admin/register-settings.php:60
-#: tags/1.1.6/admin/register-settings.php:67
-#: tags/1.0.1/admin/register-settings.php:60
-#: tags/1.0.1/admin/register-settings.php:67
-#: tags/1.2.0/admin/register-settings.php:60
-#: tags/1.2.0/admin/register-settings.php:67
-#: tags/1.2.0/admin/shortcode_button_form.php:190
-#: tags/1.1.8/admin/register-settings.php:60
-#: tags/1.1.8/admin/register-settings.php:67
-#: tags/1.1.0/admin/register-settings.php:60
-#: tags/1.1.0/admin/register-settings.php:67
-#: tags/1.0/admin/register-settings.php:60
-#: tags/1.0/admin/register-settings.php:67
-msgid "Currency"
-msgstr ""
-
-#: public/shortcode_button_form.php:192 admin/shortcode_button_form.php:196
-#: trunk/public/shortcode_button_form.php:192
-#: trunk/admin/shortcode_button_form.php:192
-#: tags/1.2.0/admin/shortcode_button_form.php:192
+#: includes/shortcode_button_form.php:196
 msgid ""
 "Override the currency set under Direct Stripe -> setup , and use currency "
 "per button."
 msgstr ""
 
-#: public/shortcode_button_form.php:199 admin/shortcode_button_form.php:213
-#: trunk/public/shortcode_button_form.php:199
-#: trunk/admin/shortcode_button_form.php:199
-#: tags/1.2.0/admin/shortcode_button_form.php:199
+#: includes/shortcode_button_form.php:204
+msgid "Custom Role"
+msgstr ""
+
+#: includes/shortcode_button_form.php:206
+msgid "Add a per button custom role to user"
+msgstr ""
+
+#: includes/shortcode_button_form.php:213
 msgid "Extra query arguments"
 msgstr ""
 
-#: public/shortcode_button_form.php:203 admin/shortcode_button_form.php:217
-#: trunk/public/shortcode_button_form.php:203
-#: trunk/admin/shortcode_button_form.php:203
-#: tags/1.2.0/admin/shortcode_button_form.php:203
+#: includes/shortcode_button_form.php:217
 msgid "Success query arguments"
 msgstr ""
 
-#: public/shortcode_button_form.php:205 admin/shortcode_button_form.php:219
-#: trunk/public/shortcode_button_form.php:205
-#: trunk/admin/shortcode_button_form.php:205
-#: tags/1.2.0/admin/shortcode_button_form.php:205
+#: includes/shortcode_button_form.php:219
 msgid ""
 "Pass arguments after success button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
 msgstr ""
 
-#: public/shortcode_button_form.php:210 admin/shortcode_button_form.php:224
-#: trunk/public/shortcode_button_form.php:210
-#: trunk/admin/shortcode_button_form.php:210
-#: tags/1.2.0/admin/shortcode_button_form.php:210
+#: includes/shortcode_button_form.php:224
 msgid "Error query arguments"
 msgstr ""
 
-#: public/shortcode_button_form.php:212 admin/shortcode_button_form.php:226
-#: trunk/public/shortcode_button_form.php:212
-#: trunk/admin/shortcode_button_form.php:212
-#: tags/1.2.0/admin/shortcode_button_form.php:212
+#: includes/shortcode_button_form.php:226
 msgid ""
 "Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
 msgstr ""
 
-#: public/shortcode_button_form.php:219 admin/shortcode_button_form.php:233
-#: trunk/public/shortcode_button_form.php:219
-#: trunk/admin/shortcode_button_form.php:219
-#: tags/1.2.0/admin/shortcode_button_form.php:219
+#: includes/shortcode_button_form.php:233
 msgid "Per button success/error redirections"
 msgstr ""
 
-#: public/shortcode_button_form.php:220 admin/shortcode_button_form.php:234
-#: trunk/public/shortcode_button_form.php:220
-#: trunk/admin/shortcode_button_form.php:220
-#: tags/1.2.0/admin/shortcode_button_form.php:220
+#: includes/shortcode_button_form.php:234
 msgid ""
 "Enter the entire http address \"http://domain.ext/success-or-error-page\" ; "
 "this will override redirections globally set."
 msgstr ""
 
-#: public/shortcode_button_form.php:225 admin/shortcode_button_form.php:239
-#: trunk/public/shortcode_button_form.php:225
-#: trunk/admin/shortcode_button_form.php:225
-#: tags/1.2.0/admin/shortcode_button_form.php:225
+#: includes/shortcode_button_form.php:239
 msgid "Success url"
 msgstr ""
 
-#: public/shortcode_button_form.php:229 admin/shortcode_button_form.php:243
-#: trunk/public/shortcode_button_form.php:229
-#: trunk/admin/shortcode_button_form.php:229
-#: tags/1.2.0/admin/shortcode_button_form.php:229
+#: includes/shortcode_button_form.php:243
 msgid "Error url"
 msgstr ""
 
-#: public/shortcode_button_form.php:235 admin/shortcode_button_form.php:249
-#: trunk/public/shortcode_button_form.php:235
-#: trunk/admin/shortcode_button_form.php:235
-#: tags/1.2.0/admin/shortcode_button_form.php:235
+#: includes/shortcode_button_form.php:249
 msgid "Insert Button"
 msgstr ""
 
-#: public/shortcode_button_form.php:236 admin/shortcode_button_form.php:250
-#: trunk/public/shortcode_button_form.php:236
-#: trunk/admin/shortcode_button_form.php:236
-#: tags/1.2.0/admin/shortcode_button_form.php:236
+#: includes/shortcode_button_form.php:250
 msgid "Cancel"
 msgstr ""
 
-#: admin/register-settings.php:16 trunk/admin/register-settings.php:16
-#: tags/1.1.9/admin/register-settings.php:16
-#: tags/1.1.3/admin/register-settings.php:16
-#: tags/1.1.7/admin/register-settings.php:16
-#: tags/1.1.4/admin/register-settings.php:16
-#: tags/1.1.1/admin/register-settings.php:16
-#: tags/1.1.2/admin/register-settings.php:16
-#: tags/1.1.5/admin/register-settings.php:16
-#: tags/1.1.6/admin/register-settings.php:16
-#: tags/1.0.1/admin/register-settings.php:16
-#: tags/1.2.0/admin/register-settings.php:16
-#: tags/1.1.8/admin/register-settings.php:16
-#: tags/1.1.0/admin/register-settings.php:16
-#: tags/1.0/admin/register-settings.php:16
-msgid "Set API keys"
+#: process/create_donation.php:120 process/create_donation.php:165
+#: process/ds_donation.php:122 process/ds_donation.php:167
+msgid "donation"
 msgstr ""
 
-#: admin/register-settings.php:23 trunk/admin/register-settings.php:23
-#: tags/1.1.9/admin/register-settings.php:23
-#: tags/1.1.3/admin/register-settings.php:23
-#: tags/1.1.7/admin/register-settings.php:23
-#: tags/1.1.4/admin/register-settings.php:23
-#: tags/1.1.1/admin/register-settings.php:23
-#: tags/1.1.2/admin/register-settings.php:23
-#: tags/1.1.5/admin/register-settings.php:23
-#: tags/1.1.6/admin/register-settings.php:23
-#: tags/1.0.1/admin/register-settings.php:23
-#: tags/1.2.0/admin/register-settings.php:23
-#: tags/1.1.8/admin/register-settings.php:23
-#: tags/1.1.0/admin/register-settings.php:23
-#: tags/1.0/admin/register-settings.php:23
-msgid "Live Secret API key"
+#: process/create_payment.php:127 process/create_payment.php:172
+#: process/ds_payment.php:125 process/ds_payment.php:179
+msgid "payment"
 msgstr ""
 
-#: admin/register-settings.php:30 trunk/admin/register-settings.php:30
-#: tags/1.1.9/admin/register-settings.php:30
-#: tags/1.1.3/admin/register-settings.php:30
-#: tags/1.1.7/admin/register-settings.php:30
-#: tags/1.1.4/admin/register-settings.php:30
-#: tags/1.1.1/admin/register-settings.php:30
-#: tags/1.1.2/admin/register-settings.php:30
-#: tags/1.1.5/admin/register-settings.php:30
-#: tags/1.1.6/admin/register-settings.php:30
-#: tags/1.0.1/admin/register-settings.php:30
-#: tags/1.2.0/admin/register-settings.php:30
-#: tags/1.1.8/admin/register-settings.php:30
-#: tags/1.1.0/admin/register-settings.php:30
-#: tags/1.0/admin/register-settings.php:30
-msgid "Live Publishable API key"
+#: process/create_subscription.php:128
+msgid "One time setup fee "
 msgstr ""
 
-#: admin/register-settings.php:37 trunk/admin/register-settings.php:37
-#: tags/1.1.9/admin/register-settings.php:37
-#: tags/1.1.3/admin/register-settings.php:37
-#: tags/1.1.7/admin/register-settings.php:37
-#: tags/1.1.4/admin/register-settings.php:37
-#: tags/1.1.1/admin/register-settings.php:37
-#: tags/1.1.2/admin/register-settings.php:37
-#: tags/1.1.5/admin/register-settings.php:37
-#: tags/1.1.6/admin/register-settings.php:37
-#: tags/1.0.1/admin/register-settings.php:37
-#: tags/1.2.0/admin/register-settings.php:37
-#: tags/1.1.8/admin/register-settings.php:37
-#: tags/1.1.0/admin/register-settings.php:37
-#: tags/1.0/admin/register-settings.php:37
-msgid "Use test keys / mode"
+#: process/create_subscription.php:147 process/create_subscription.php:229
+msgid "subscription"
 msgstr ""
 
-#: admin/register-settings.php:44 trunk/admin/register-settings.php:44
-#: tags/1.1.9/admin/register-settings.php:44
-#: tags/1.1.3/admin/register-settings.php:44
-#: tags/1.1.7/admin/register-settings.php:44
-#: tags/1.1.4/admin/register-settings.php:44
-#: tags/1.1.1/admin/register-settings.php:44
-#: tags/1.1.2/admin/register-settings.php:44
-#: tags/1.1.5/admin/register-settings.php:44
-#: tags/1.1.6/admin/register-settings.php:44
-#: tags/1.0.1/admin/register-settings.php:44
-#: tags/1.2.0/admin/register-settings.php:44
-#: tags/1.1.8/admin/register-settings.php:44
-#: tags/1.1.0/admin/register-settings.php:44
-#: tags/1.0/admin/register-settings.php:44
-msgid "Test Secret API key"
+#: process/create_subscription.php:160 process/create_subscription.php:242
+msgid "setup fee"
 msgstr ""
 
-#: admin/register-settings.php:51 trunk/admin/register-settings.php:51
-#: tags/1.1.9/admin/register-settings.php:51
-#: tags/1.1.3/admin/register-settings.php:51
-#: tags/1.1.7/admin/register-settings.php:51
-#: tags/1.1.4/admin/register-settings.php:51
-#: tags/1.1.1/admin/register-settings.php:51
-#: tags/1.1.2/admin/register-settings.php:51
-#: tags/1.1.5/admin/register-settings.php:51
-#: tags/1.1.6/admin/register-settings.php:51
-#: tags/1.0.1/admin/register-settings.php:51
-#: tags/1.2.0/admin/register-settings.php:51
-#: tags/1.1.8/admin/register-settings.php:51
-#: tags/1.1.0/admin/register-settings.php:51
-#: tags/1.0/admin/register-settings.php:51
-msgid "Test Publishable API key"
-msgstr ""
-
-#: admin/register-settings.php:77 trunk/admin/register-settings.php:77
-#: tags/1.1.9/admin/register-settings.php:77
-#: tags/1.1.3/admin/register-settings.php:77
-#: tags/1.1.7/admin/register-settings.php:77
-#: tags/1.1.4/admin/register-settings.php:77
-#: tags/1.1.1/admin/register-settings.php:77
-#: tags/1.1.2/admin/register-settings.php:77
-#: tags/1.1.5/admin/register-settings.php:77
-#: tags/1.1.6/admin/register-settings.php:77
-#: tags/1.0.1/admin/register-settings.php:77
-#: tags/1.2.0/admin/register-settings.php:77
-#: tags/1.1.8/admin/register-settings.php:77
-#: tags/1.1.0/admin/register-settings.php:77
-#: tags/1.0/admin/register-settings.php:77
-msgid "Landing pages"
-msgstr ""
-
-#: admin/register-settings.php:84 trunk/admin/register-settings.php:84
-#: tags/1.1.9/admin/register-settings.php:84
-#: tags/1.1.3/admin/register-settings.php:84
-#: tags/1.1.7/admin/register-settings.php:84
-#: tags/1.1.4/admin/register-settings.php:84
-#: tags/1.1.1/admin/register-settings.php:84
-#: tags/1.1.2/admin/register-settings.php:84
-#: tags/1.1.5/admin/register-settings.php:84
-#: tags/1.1.6/admin/register-settings.php:84
-#: tags/1.0.1/admin/register-settings.php:84
-#: tags/1.2.0/admin/register-settings.php:84
-#: tags/1.1.8/admin/register-settings.php:84
-#: tags/1.1.0/admin/register-settings.php:84
-#: tags/1.0/admin/register-settings.php:84
-msgid "Success page"
-msgstr ""
-
-#: admin/register-settings.php:92 trunk/admin/register-settings.php:92
-#: tags/1.1.9/admin/register-settings.php:92
-#: tags/1.1.3/admin/register-settings.php:92
-#: tags/1.1.7/admin/register-settings.php:92
-#: tags/1.1.4/admin/register-settings.php:92
-#: tags/1.1.1/admin/register-settings.php:92
-#: tags/1.1.2/admin/register-settings.php:92
-#: tags/1.1.5/admin/register-settings.php:92
-#: tags/1.1.6/admin/register-settings.php:92
-#: tags/1.0.1/admin/register-settings.php:92
-#: tags/1.2.0/admin/register-settings.php:92
-#: tags/1.1.8/admin/register-settings.php:92
-#: tags/1.1.0/admin/register-settings.php:92
-#: tags/1.0/admin/register-settings.php:92
-msgid "Error page"
-msgstr ""
-
-#: admin/register-settings.php:101 trunk/admin/register-settings.php:101
-#: tags/1.1.9/admin/register-settings.php:101
-#: tags/1.1.3/admin/register-settings.php:101
-#: tags/1.1.7/admin/register-settings.php:101
-#: tags/1.1.4/admin/register-settings.php:101
-#: tags/1.1.1/admin/register-settings.php:101
-#: tags/1.1.2/admin/register-settings.php:101
-#: tags/1.1.5/admin/register-settings.php:101
-#: tags/1.1.6/admin/register-settings.php:101
-#: tags/1.0.1/admin/register-settings.php:101
-#: tags/1.2.0/admin/register-settings.php:101
-#: tags/1.1.8/admin/register-settings.php:101
-#: tags/1.1.0/admin/register-settings.php:101
-#: tags/1.0/admin/register-settings.php:101
-msgid "Modal form logo / image"
-msgstr ""
-
-#: admin/register-settings.php:107 trunk/admin/register-settings.php:107
-#: tags/1.1.9/admin/register-settings.php:107
-#: tags/1.1.3/admin/register-settings.php:107
-#: tags/1.1.7/admin/register-settings.php:107
-#: tags/1.1.4/admin/register-settings.php:107
-#: tags/1.1.1/admin/register-settings.php:107
-#: tags/1.1.2/admin/register-settings.php:107
-#: tags/1.1.5/admin/register-settings.php:107
-#: tags/1.1.6/admin/register-settings.php:107
-#: tags/1.0.1/admin/register-settings.php:107
-#: tags/1.2.0/admin/register-settings.php:107
-#: tags/1.1.8/admin/register-settings.php:107
-#: tags/1.1.0/admin/register-settings.php:107
-#: tags/1.0/admin/register-settings.php:107
-msgid "Current logo / image"
-msgstr ""
-
-#: admin/register-settings.php:115 trunk/admin/register-settings.php:115
-#: tags/1.1.9/admin/register-settings.php:115
-#: tags/1.1.3/admin/register-settings.php:115
-#: tags/1.1.7/admin/register-settings.php:115
-#: tags/1.1.4/admin/register-settings.php:115
-#: tags/1.1.1/admin/register-settings.php:115
-#: tags/1.1.2/admin/register-settings.php:115
-#: tags/1.1.5/admin/register-settings.php:115
-#: tags/1.1.6/admin/register-settings.php:115
-#: tags/1.2.0/admin/register-settings.php:115
-#: tags/1.1.8/admin/register-settings.php:115
-#: tags/1.1.0/admin/register-settings.php:115
-msgid "Billing information"
-msgstr ""
-
-#: admin/register-settings.php:121 trunk/admin/register-settings.php:121
-#: tags/1.1.9/admin/register-settings.php:121
-#: tags/1.1.3/admin/register-settings.php:121
-#: tags/1.1.7/admin/register-settings.php:121
-#: tags/1.1.4/admin/register-settings.php:121
-#: tags/1.1.1/admin/register-settings.php:121
-#: tags/1.1.2/admin/register-settings.php:121
-#: tags/1.1.5/admin/register-settings.php:121
-#: tags/1.1.6/admin/register-settings.php:121
-#: tags/1.2.0/admin/register-settings.php:121
-#: tags/1.1.8/admin/register-settings.php:121
-#: tags/1.1.0/admin/register-settings.php:121
-msgid "Ask for address in modal Form"
-msgstr ""
-
-#: admin/register-settings.php:130 trunk/admin/register-settings.php:130
-#: tags/1.1.9/admin/register-settings.php:130
-#: tags/1.1.3/admin/register-settings.php:130
-#: tags/1.1.7/admin/register-settings.php:130
-#: tags/1.1.4/admin/register-settings.php:130
-#: tags/1.1.1/admin/register-settings.php:130
-#: tags/1.1.2/admin/register-settings.php:130
-#: tags/1.1.5/admin/register-settings.php:130
-#: tags/1.1.6/admin/register-settings.php:130
-#: tags/1.0.1/admin/register-settings.php:116
-#: tags/1.2.0/admin/register-settings.php:130
-#: tags/1.1.8/admin/register-settings.php:130
-#: tags/1.1.0/admin/register-settings.php:130
-#: tags/1.0/admin/register-settings.php:116
-msgid "Custom button styles"
-msgstr ""
-
-#: admin/register-settings.php:136 trunk/admin/register-settings.php:136
-#: tags/1.1.9/admin/register-settings.php:136
-#: tags/1.1.3/admin/register-settings.php:136
-#: tags/1.1.7/admin/register-settings.php:136
-#: tags/1.1.4/admin/register-settings.php:136
-#: tags/1.1.1/admin/register-settings.php:136
-#: tags/1.1.2/admin/register-settings.php:136
-#: tags/1.1.5/admin/register-settings.php:136
-#: tags/1.1.6/admin/register-settings.php:136
-#: tags/1.0.1/admin/register-settings.php:122
-#: tags/1.2.0/admin/register-settings.php:136
-#: tags/1.1.8/admin/register-settings.php:136
-#: tags/1.1.0/admin/register-settings.php:136
-#: tags/1.0/admin/register-settings.php:122
-msgid "Use custom styles"
-msgstr ""
-
-#: admin/register-settings.php:143 trunk/admin/register-settings.php:143
-#: tags/1.1.9/admin/register-settings.php:143
-#: tags/1.1.3/admin/register-settings.php:143
-#: tags/1.1.7/admin/register-settings.php:143
-#: tags/1.1.4/admin/register-settings.php:143
-#: tags/1.1.1/admin/register-settings.php:143
-#: tags/1.1.2/admin/register-settings.php:143
-#: tags/1.1.5/admin/register-settings.php:143
-#: tags/1.1.6/admin/register-settings.php:143
-#: tags/1.0.1/admin/register-settings.php:129
-#: tags/1.2.0/admin/register-settings.php:143
-#: tags/1.1.8/admin/register-settings.php:143
-#: tags/1.1.0/admin/register-settings.php:143
-#: tags/1.0/admin/register-settings.php:129
-msgid "Main Color"
-msgstr ""
-
-#: admin/register-settings.php:150 trunk/admin/register-settings.php:150
-#: tags/1.1.9/admin/register-settings.php:150
-#: tags/1.1.3/admin/register-settings.php:150
-#: tags/1.1.7/admin/register-settings.php:150
-#: tags/1.1.4/admin/register-settings.php:150
-#: tags/1.1.1/admin/register-settings.php:150
-#: tags/1.1.2/admin/register-settings.php:150
-#: tags/1.1.5/admin/register-settings.php:150
-#: tags/1.1.6/admin/register-settings.php:150
-#: tags/1.0.1/admin/register-settings.php:136
-#: tags/1.2.0/admin/register-settings.php:150
-#: tags/1.1.8/admin/register-settings.php:150
-#: tags/1.1.0/admin/register-settings.php:150
-#: tags/1.0/admin/register-settings.php:136
-msgid "Border radius"
-msgstr ""
-
-#: admin/register-settings.php:159 trunk/admin/register-settings.php:159
-#: tags/1.1.9/admin/register-settings.php:159
-#: tags/1.1.3/admin/register-settings.php:159
-#: tags/1.1.7/admin/register-settings.php:159
-#: tags/1.1.4/admin/register-settings.php:159
-#: tags/1.1.1/admin/register-settings.php:159
-#: tags/1.1.2/admin/register-settings.php:159
-#: tags/1.1.5/admin/register-settings.php:159
-#: tags/1.1.6/admin/register-settings.php:159
-#: tags/1.0.1/admin/register-settings.php:145
-#: tags/1.2.0/admin/register-settings.php:159
-#: tags/1.1.8/admin/register-settings.php:159
-#: tags/1.1.0/admin/register-settings.php:159
-#: tags/1.0/admin/register-settings.php:145
-msgid "Terms and conditions"
-msgstr ""
-
-#: admin/register-settings.php:165 trunk/admin/register-settings.php:165
-#: tags/1.1.9/admin/register-settings.php:165
-#: tags/1.1.3/admin/register-settings.php:165
-#: tags/1.1.7/admin/register-settings.php:165
-#: tags/1.1.4/admin/register-settings.php:165
-#: tags/1.1.1/admin/register-settings.php:165
-#: tags/1.1.2/admin/register-settings.php:165
-#: tags/1.1.5/admin/register-settings.php:165
-#: tags/1.1.6/admin/register-settings.php:165
-#: tags/1.0.1/admin/register-settings.php:151
-#: tags/1.2.0/admin/register-settings.php:165
-#: tags/1.1.8/admin/register-settings.php:165
-#: tags/1.1.0/admin/register-settings.php:165
-#: tags/1.0/admin/register-settings.php:151
-msgid "Use Terms and Conditions checkbox"
-msgstr ""
-
-#: admin/register-settings.php:172 trunk/admin/register-settings.php:172
-#: tags/1.1.9/admin/register-settings.php:172
-#: tags/1.1.3/admin/register-settings.php:172
-#: tags/1.1.7/admin/register-settings.php:172
-#: tags/1.1.4/admin/register-settings.php:172
-#: tags/1.1.1/admin/register-settings.php:172
-#: tags/1.1.2/admin/register-settings.php:172
-#: tags/1.1.5/admin/register-settings.php:172
-#: tags/1.1.6/admin/register-settings.php:172
-#: tags/1.0.1/admin/register-settings.php:158
-#: tags/1.2.0/admin/register-settings.php:172
-#: tags/1.1.8/admin/register-settings.php:172
-#: tags/1.1.0/admin/register-settings.php:172
-#: tags/1.0/admin/register-settings.php:158
-msgid "Terms and conditions text"
-msgstr ""
-
-#: admin/register-settings.php:179 trunk/admin/register-settings.php:179
-#: tags/1.1.9/admin/register-settings.php:179
-#: tags/1.1.3/admin/register-settings.php:179
-#: tags/1.1.7/admin/register-settings.php:179
-#: tags/1.1.4/admin/register-settings.php:179
-#: tags/1.1.1/admin/register-settings.php:179
-#: tags/1.1.2/admin/register-settings.php:179
-#: tags/1.1.5/admin/register-settings.php:179
-#: tags/1.1.6/admin/register-settings.php:179
-#: tags/1.0.1/admin/register-settings.php:165
-#: tags/1.2.0/admin/register-settings.php:179
-#: tags/1.1.8/admin/register-settings.php:179
-#: tags/1.1.0/admin/register-settings.php:179
-#: tags/1.0/admin/register-settings.php:165
-msgid "Terms and conditions link text"
-msgstr ""
-
-#: admin/register-settings.php:186 trunk/admin/register-settings.php:186
-#: tags/1.1.9/admin/register-settings.php:186
-#: tags/1.1.7/admin/register-settings.php:186
-#: tags/1.1.4/admin/register-settings.php:186
-#: tags/1.1.5/admin/register-settings.php:186
-#: tags/1.1.6/admin/register-settings.php:186
-#: tags/1.2.0/admin/register-settings.php:186
-#: tags/1.1.8/admin/register-settings.php:186
-msgid "Terms and conditions page"
-msgstr ""
-
-#: admin/register-settings.php:195 trunk/admin/register-settings.php:195
-#: tags/1.1.9/admin/register-settings.php:195
-#: tags/1.1.3/admin/register-settings.php:195
-#: tags/1.1.7/admin/register-settings.php:195
-#: tags/1.1.4/admin/register-settings.php:195
-#: tags/1.1.1/admin/register-settings.php:195
-#: tags/1.1.2/admin/register-settings.php:195
-#: tags/1.1.5/admin/register-settings.php:195
-#: tags/1.1.6/admin/register-settings.php:195
-#: tags/1.0.1/admin/register-settings.php:181
-#: tags/1.2.0/admin/register-settings.php:195
-#: tags/1.1.8/admin/register-settings.php:195
-#: tags/1.1.0/admin/register-settings.php:195
-#: tags/1.0/admin/register-settings.php:181
-msgid "Automated emails to admin after successful transactions"
-msgstr ""
-
-#: admin/register-settings.php:201 trunk/admin/register-settings.php:201
-#: tags/1.1.9/admin/register-settings.php:201
-#: tags/1.1.3/admin/register-settings.php:201
-#: tags/1.1.7/admin/register-settings.php:201
-#: tags/1.1.4/admin/register-settings.php:201
-#: tags/1.1.1/admin/register-settings.php:201
-#: tags/1.1.2/admin/register-settings.php:201
-#: tags/1.1.5/admin/register-settings.php:201
-#: tags/1.1.6/admin/register-settings.php:201
-#: tags/1.0.1/admin/register-settings.php:187
-#: tags/1.2.0/admin/register-settings.php:201
-#: tags/1.1.8/admin/register-settings.php:201
-#: tags/1.1.0/admin/register-settings.php:201
-#: tags/1.0/admin/register-settings.php:187
-msgid "Send emails to admin after successful transaction"
-msgstr ""
-
-#: admin/register-settings.php:208 trunk/admin/register-settings.php:208
-#: tags/1.1.9/admin/register-settings.php:208
-#: tags/1.1.3/admin/register-settings.php:208
-#: tags/1.1.7/admin/register-settings.php:208
-#: tags/1.1.4/admin/register-settings.php:208
-#: tags/1.1.1/admin/register-settings.php:208
-#: tags/1.1.2/admin/register-settings.php:208
-#: tags/1.1.5/admin/register-settings.php:208
-#: tags/1.1.6/admin/register-settings.php:208
-#: tags/1.0.1/admin/register-settings.php:194
-#: tags/1.2.0/admin/register-settings.php:208
-#: tags/1.1.8/admin/register-settings.php:208
-#: tags/1.1.0/admin/register-settings.php:208
-#: tags/1.0/admin/register-settings.php:194
-msgid "Admin email subject"
-msgstr ""
-
-#: admin/register-settings.php:215 trunk/admin/register-settings.php:215
-#: tags/1.1.9/admin/register-settings.php:215
-#: tags/1.1.3/admin/register-settings.php:215
-#: tags/1.1.7/admin/register-settings.php:215
-#: tags/1.1.4/admin/register-settings.php:215
-#: tags/1.1.1/admin/register-settings.php:215
-#: tags/1.1.2/admin/register-settings.php:215
-#: tags/1.1.5/admin/register-settings.php:215
-#: tags/1.1.6/admin/register-settings.php:215
-#: tags/1.0.1/admin/register-settings.php:201
-#: tags/1.2.0/admin/register-settings.php:215
-#: tags/1.1.8/admin/register-settings.php:215
-#: tags/1.1.0/admin/register-settings.php:215
-#: tags/1.0/admin/register-settings.php:201
-msgid "Admin email content"
-msgstr ""
-
-#: admin/register-settings.php:224 trunk/admin/register-settings.php:224
-#: tags/1.1.9/admin/register-settings.php:224
-#: tags/1.1.3/admin/register-settings.php:224
-#: tags/1.1.7/admin/register-settings.php:224
-#: tags/1.1.4/admin/register-settings.php:224
-#: tags/1.1.1/admin/register-settings.php:224
-#: tags/1.1.2/admin/register-settings.php:224
-#: tags/1.1.5/admin/register-settings.php:224
-#: tags/1.1.6/admin/register-settings.php:224
-#: tags/1.0.1/admin/register-settings.php:210
-#: tags/1.2.0/admin/register-settings.php:224
-#: tags/1.1.8/admin/register-settings.php:224
-#: tags/1.1.0/admin/register-settings.php:224
-#: tags/1.0/admin/register-settings.php:210
-msgid "Automated emails to Stripe user after successful transactions"
-msgstr ""
-
-#: admin/register-settings.php:230 trunk/admin/register-settings.php:230
-#: tags/1.1.9/admin/register-settings.php:230
-#: tags/1.1.3/admin/register-settings.php:230
-#: tags/1.1.7/admin/register-settings.php:230
-#: tags/1.1.4/admin/register-settings.php:230
-#: tags/1.1.1/admin/register-settings.php:230
-#: tags/1.1.2/admin/register-settings.php:230
-#: tags/1.1.5/admin/register-settings.php:230
-#: tags/1.1.6/admin/register-settings.php:230
-#: tags/1.0.1/admin/register-settings.php:216
-#: tags/1.2.0/admin/register-settings.php:230
-#: tags/1.1.8/admin/register-settings.php:230
-#: tags/1.1.0/admin/register-settings.php:230
-#: tags/1.0/admin/register-settings.php:216
-msgid "Send emails to Stripe user after successful transaction"
-msgstr ""
-
-#: admin/register-settings.php:237 trunk/admin/register-settings.php:237
-#: tags/1.1.9/admin/register-settings.php:237
-#: tags/1.1.3/admin/register-settings.php:237
-#: tags/1.1.7/admin/register-settings.php:237
-#: tags/1.1.4/admin/register-settings.php:237
-#: tags/1.1.1/admin/register-settings.php:237
-#: tags/1.1.2/admin/register-settings.php:237
-#: tags/1.1.5/admin/register-settings.php:237
-#: tags/1.1.6/admin/register-settings.php:237
-#: tags/1.0.1/admin/register-settings.php:223
-#: tags/1.2.0/admin/register-settings.php:237
-#: tags/1.1.8/admin/register-settings.php:237
-#: tags/1.1.0/admin/register-settings.php:237
-#: tags/1.0/admin/register-settings.php:223
-msgid "User email subject"
-msgstr ""
-
-#: admin/register-settings.php:244 trunk/admin/register-settings.php:244
-#: tags/1.1.9/admin/register-settings.php:244
-#: tags/1.1.3/admin/register-settings.php:244
-#: tags/1.1.7/admin/register-settings.php:244
-#: tags/1.1.4/admin/register-settings.php:244
-#: tags/1.1.1/admin/register-settings.php:244
-#: tags/1.1.2/admin/register-settings.php:244
-#: tags/1.1.5/admin/register-settings.php:244
-#: tags/1.1.6/admin/register-settings.php:244
-#: tags/1.0.1/admin/register-settings.php:230
-#: tags/1.2.0/admin/register-settings.php:244
-#: tags/1.1.8/admin/register-settings.php:244
-#: tags/1.1.0/admin/register-settings.php:244
-#: tags/1.0/admin/register-settings.php:230
-msgid "User email content"
-msgstr ""
-
-#: admin/register-settings.php:253 trunk/admin/register-settings.php:253
-#: tags/1.1.9/admin/register-settings.php:253
-#: tags/1.1.3/admin/register-settings.php:253
-#: tags/1.1.7/admin/register-settings.php:253
-#: tags/1.1.4/admin/register-settings.php:253
-#: tags/1.1.1/admin/register-settings.php:253
-#: tags/1.1.2/admin/register-settings.php:253
-#: tags/1.1.5/admin/register-settings.php:253
-#: tags/1.1.6/admin/register-settings.php:253
-#: tags/1.0.1/admin/register-settings.php:239
-#: tags/1.2.0/admin/register-settings.php:253
-#: tags/1.1.8/admin/register-settings.php:253
-#: tags/1.1.0/admin/register-settings.php:253
-#: tags/1.0/admin/register-settings.php:239
-msgid "Automated emails to admin after failed transaction"
-msgstr ""
-
-#: admin/register-settings.php:259 trunk/admin/register-settings.php:259
-#: tags/1.1.9/admin/register-settings.php:259
-#: tags/1.1.3/admin/register-settings.php:259
-#: tags/1.1.7/admin/register-settings.php:259
-#: tags/1.1.4/admin/register-settings.php:259
-#: tags/1.1.1/admin/register-settings.php:259
-#: tags/1.1.2/admin/register-settings.php:259
-#: tags/1.1.5/admin/register-settings.php:259
-#: tags/1.1.6/admin/register-settings.php:259
-#: tags/1.0.1/admin/register-settings.php:245
-#: tags/1.2.0/admin/register-settings.php:259
-#: tags/1.1.8/admin/register-settings.php:259
-#: tags/1.1.0/admin/register-settings.php:259
-#: tags/1.0/admin/register-settings.php:245
-msgid "Send emails to admin after failed transaction"
-msgstr ""
-
-#: admin/register-settings.php:266 trunk/admin/register-settings.php:266
-#: tags/1.1.9/admin/register-settings.php:266
-#: tags/1.1.3/admin/register-settings.php:266
-#: tags/1.1.7/admin/register-settings.php:266
-#: tags/1.1.4/admin/register-settings.php:266
-#: tags/1.1.1/admin/register-settings.php:266
-#: tags/1.1.2/admin/register-settings.php:266
-#: tags/1.1.5/admin/register-settings.php:266
-#: tags/1.1.6/admin/register-settings.php:266
-#: tags/1.0.1/admin/register-settings.php:252
-#: tags/1.2.0/admin/register-settings.php:266
-#: tags/1.1.8/admin/register-settings.php:266
-#: tags/1.1.0/admin/register-settings.php:266
-#: tags/1.0/admin/register-settings.php:252
-msgid "Admin error email subject"
-msgstr ""
-
-#: admin/register-settings.php:273 trunk/admin/register-settings.php:273
-#: tags/1.1.9/admin/register-settings.php:273
-#: tags/1.1.3/admin/register-settings.php:273
-#: tags/1.1.7/admin/register-settings.php:273
-#: tags/1.1.4/admin/register-settings.php:273
-#: tags/1.1.1/admin/register-settings.php:273
-#: tags/1.1.2/admin/register-settings.php:273
-#: tags/1.1.5/admin/register-settings.php:273
-#: tags/1.1.6/admin/register-settings.php:273
-#: tags/1.0.1/admin/register-settings.php:259
-#: tags/1.2.0/admin/register-settings.php:273
-#: tags/1.1.8/admin/register-settings.php:273
-#: tags/1.1.0/admin/register-settings.php:273
-#: tags/1.0/admin/register-settings.php:259
-msgid "Admin error email content"
-msgstr ""
-
-#: admin/register-settings.php:282 trunk/admin/register-settings.php:282
-#: tags/1.1.9/admin/register-settings.php:282
-#: tags/1.1.3/admin/register-settings.php:282
-#: tags/1.1.7/admin/register-settings.php:282
-#: tags/1.1.4/admin/register-settings.php:282
-#: tags/1.1.1/admin/register-settings.php:282
-#: tags/1.1.2/admin/register-settings.php:282
-#: tags/1.1.5/admin/register-settings.php:282
-#: tags/1.1.6/admin/register-settings.php:282
-#: tags/1.0.1/admin/register-settings.php:268
-#: tags/1.2.0/admin/register-settings.php:282
-#: tags/1.1.8/admin/register-settings.php:282
-#: tags/1.1.0/admin/register-settings.php:282
-#: tags/1.0/admin/register-settings.php:268
-msgid "Automated emails to Stripe user after failed transaction"
-msgstr ""
-
-#: admin/register-settings.php:288 trunk/admin/register-settings.php:288
-#: tags/1.1.9/admin/register-settings.php:288
-#: tags/1.1.3/admin/register-settings.php:288
-#: tags/1.1.7/admin/register-settings.php:288
-#: tags/1.1.4/admin/register-settings.php:288
-#: tags/1.1.1/admin/register-settings.php:288
-#: tags/1.1.2/admin/register-settings.php:288
-#: tags/1.1.5/admin/register-settings.php:288
-#: tags/1.1.6/admin/register-settings.php:288
-#: tags/1.0.1/admin/register-settings.php:274
-#: tags/1.2.0/admin/register-settings.php:288
-#: tags/1.1.8/admin/register-settings.php:288
-#: tags/1.1.0/admin/register-settings.php:288
-#: tags/1.0/admin/register-settings.php:274
-msgid "Send emails to Stripe user after failed transaction"
-msgstr ""
-
-#: admin/register-settings.php:295 trunk/admin/register-settings.php:295
-#: tags/1.1.9/admin/register-settings.php:295
-#: tags/1.1.3/admin/register-settings.php:295
-#: tags/1.1.7/admin/register-settings.php:295
-#: tags/1.1.4/admin/register-settings.php:295
-#: tags/1.1.1/admin/register-settings.php:295
-#: tags/1.1.2/admin/register-settings.php:295
-#: tags/1.1.5/admin/register-settings.php:295
-#: tags/1.1.6/admin/register-settings.php:295
-#: tags/1.0.1/admin/register-settings.php:281
-#: tags/1.2.0/admin/register-settings.php:295
-#: tags/1.1.8/admin/register-settings.php:295
-#: tags/1.1.0/admin/register-settings.php:295
-#: tags/1.0/admin/register-settings.php:281
-msgid "User error email subject"
-msgstr ""
-
-#: admin/register-settings.php:302 trunk/admin/register-settings.php:302
-#: tags/1.1.9/admin/register-settings.php:302
-#: tags/1.1.3/admin/register-settings.php:302
-#: tags/1.1.7/admin/register-settings.php:302
-#: tags/1.1.4/admin/register-settings.php:302
-#: tags/1.1.1/admin/register-settings.php:302
-#: tags/1.1.2/admin/register-settings.php:302
-#: tags/1.1.5/admin/register-settings.php:302
-#: tags/1.1.6/admin/register-settings.php:302
-#: tags/1.0.1/admin/register-settings.php:288
-#: tags/1.2.0/admin/register-settings.php:302
-#: tags/1.1.8/admin/register-settings.php:302
-#: tags/1.1.0/admin/register-settings.php:302
-#: tags/1.0/admin/register-settings.php:288
-msgid "User error email content"
+#: process/create_subscription.php:193
+msgid "Setup fee "
 msgstr ""
 
 #. Name of the plugin
-#: admin/build-page.php:5 trunk/admin/build-page.php:5
-#: tags/1.1.9/admin/build-page.php:5 tags/1.1.3/admin/build-page.php:5
-#: tags/1.1.7/admin/build-page.php:5 tags/1.1.4/admin/build-page.php:5
-#: tags/1.1.1/admin/build-page.php:5 tags/1.1.2/admin/build-page.php:5
-#: tags/1.1.5/admin/build-page.php:5 tags/1.1.6/admin/build-page.php:5
-#: tags/1.0.1/admin/build-page.php:5 tags/1.2.0/admin/build-page.php:5
-#: tags/1.1.8/admin/build-page.php:5 tags/1.1.0/admin/build-page.php:5
-#: tags/1.0/admin/build-page.php:5
 msgid "Direct Stripe"
-msgstr ""
-
-#: admin/build-page.php:16 trunk/admin/build-page.php:16
-#: tags/1.1.9/admin/build-page.php:16 tags/1.1.3/admin/build-page.php:16
-#: tags/1.1.7/admin/build-page.php:16 tags/1.1.4/admin/build-page.php:16
-#: tags/1.1.1/admin/build-page.php:16 tags/1.1.2/admin/build-page.php:16
-#: tags/1.1.5/admin/build-page.php:16 tags/1.1.6/admin/build-page.php:16
-#: tags/1.0.1/admin/build-page.php:16 tags/1.2.0/admin/build-page.php:16
-#: tags/1.1.8/admin/build-page.php:16 tags/1.1.0/admin/build-page.php:16
-#: tags/1.0/admin/build-page.php:16
-msgid "General Options"
-msgstr ""
-
-#: admin/build-page.php:17 trunk/admin/build-page.php:17
-#: tags/1.1.9/admin/build-page.php:17 tags/1.1.3/admin/build-page.php:17
-#: tags/1.1.7/admin/build-page.php:17 tags/1.1.4/admin/build-page.php:17
-#: tags/1.1.1/admin/build-page.php:17 tags/1.1.2/admin/build-page.php:17
-#: tags/1.1.5/admin/build-page.php:17 tags/1.1.6/admin/build-page.php:17
-#: tags/1.0.1/admin/build-page.php:17 tags/1.2.0/admin/build-page.php:17
-#: tags/1.1.8/admin/build-page.php:17 tags/1.1.0/admin/build-page.php:17
-#: tags/1.0/admin/build-page.php:17
-msgid "Styles"
-msgstr ""
-
-#: admin/build-page.php:18 trunk/admin/build-page.php:18
-#: tags/1.1.9/admin/build-page.php:18 tags/1.1.3/admin/build-page.php:18
-#: tags/1.1.7/admin/build-page.php:18 tags/1.1.4/admin/build-page.php:18
-#: tags/1.1.1/admin/build-page.php:18 tags/1.1.2/admin/build-page.php:18
-#: tags/1.1.5/admin/build-page.php:18 tags/1.1.6/admin/build-page.php:18
-#: tags/1.0.1/admin/build-page.php:18 tags/1.2.0/admin/build-page.php:18
-#: tags/1.1.8/admin/build-page.php:18 tags/1.1.0/admin/build-page.php:18
-#: tags/1.0/admin/build-page.php:18
-msgid "Emails"
-msgstr ""
-
-#: admin/display-users.php:2 trunk/admin/display-users.php:2
-#: tags/1.1.9/admin/display-users.php:2 tags/1.1.3/admin/display-users.php:2
-#: tags/1.1.7/admin/display-users.php:2 tags/1.1.4/admin/display-users.php:2
-#: tags/1.1.1/admin/display-users.php:2 tags/1.1.2/admin/display-users.php:2
-#: tags/1.1.5/admin/display-users.php:2 tags/1.1.6/admin/display-users.php:2
-#: tags/1.0.1/admin/display-users.php:2 tags/1.2.0/admin/display-users.php:2
-#: tags/1.1.8/admin/display-users.php:2 tags/1.1.0/admin/display-users.php:2
-#: tags/1.0/admin/display-users.php:2
-msgid "Direct Stripe user infos"
-msgstr ""
-
-#: admin/display-users.php:5 trunk/admin/display-users.php:5
-#: tags/1.1.9/admin/display-users.php:5 tags/1.1.3/admin/display-users.php:5
-#: tags/1.1.7/admin/display-users.php:5 tags/1.1.4/admin/display-users.php:5
-#: tags/1.1.1/admin/display-users.php:5 tags/1.1.2/admin/display-users.php:5
-#: tags/1.1.5/admin/display-users.php:5 tags/1.1.6/admin/display-users.php:5
-#: tags/1.0.1/admin/display-users.php:5 tags/1.2.0/admin/display-users.php:5
-#: tags/1.1.8/admin/display-users.php:5 tags/1.1.0/admin/display-users.php:5
-#: tags/1.0/admin/display-users.php:5
-msgid "Direct Sripe Data"
-msgstr ""
-
-#: admin/display-users.php:6 trunk/admin/display-users.php:6
-#: tags/1.1.9/admin/display-users.php:6 tags/1.1.3/admin/display-users.php:6
-#: tags/1.1.7/admin/display-users.php:6 tags/1.1.4/admin/display-users.php:6
-#: tags/1.1.1/admin/display-users.php:6 tags/1.1.2/admin/display-users.php:6
-#: tags/1.1.5/admin/display-users.php:6 tags/1.1.6/admin/display-users.php:6
-#: tags/1.0.1/admin/display-users.php:6 tags/1.2.0/admin/display-users.php:6
-#: tags/1.1.8/admin/display-users.php:6 tags/1.1.0/admin/display-users.php:6
-#: tags/1.0/admin/display-users.php:6
-msgid "Stripe customer ID"
-msgstr ""
-
-#: admin/display-users.php:9 trunk/admin/display-users.php:9
-#: tags/1.1.9/admin/display-users.php:9 tags/1.1.3/admin/display-users.php:9
-#: tags/1.1.7/admin/display-users.php:9 tags/1.1.4/admin/display-users.php:9
-#: tags/1.1.1/admin/display-users.php:9 tags/1.1.2/admin/display-users.php:9
-#: tags/1.1.5/admin/display-users.php:9 tags/1.1.6/admin/display-users.php:9
-#: tags/1.0.1/admin/display-users.php:9 tags/1.2.0/admin/display-users.php:9
-#: tags/1.1.8/admin/display-users.php:9 tags/1.1.0/admin/display-users.php:9
-#: tags/1.0/admin/display-users.php:9
-msgid "stripe_id"
-msgstr ""
-
-#: admin/display-settings.php:30 trunk/admin/display-settings.php:29
-#: tags/1.1.9/admin/display-settings.php:29
-#: tags/1.1.3/admin/display-settings.php:29
-#: tags/1.1.7/admin/display-settings.php:29
-#: tags/1.1.4/admin/display-settings.php:29
-#: tags/1.1.1/admin/display-settings.php:29
-#: tags/1.1.2/admin/display-settings.php:29
-#: tags/1.1.5/admin/display-settings.php:29
-#: tags/1.1.6/admin/display-settings.php:29
-#: tags/1.0.1/admin/display-settings.php:29
-#: tags/1.2.0/admin/display-settings.php:29
-#: tags/1.1.8/admin/display-settings.php:29
-#: tags/1.1.0/admin/display-settings.php:29
-#: tags/1.0/admin/display-settings.php:29
-msgid "Visa card test number 4242 4242 4242 4242"
-msgstr ""
-
-#: admin/display-settings.php:31 trunk/admin/display-settings.php:30
-#: tags/1.1.9/admin/display-settings.php:30
-#: tags/1.1.3/admin/display-settings.php:30
-#: tags/1.1.7/admin/display-settings.php:30
-#: tags/1.1.4/admin/display-settings.php:30
-#: tags/1.1.1/admin/display-settings.php:30
-#: tags/1.1.2/admin/display-settings.php:30
-#: tags/1.1.5/admin/display-settings.php:30
-#: tags/1.1.6/admin/display-settings.php:30
-#: tags/1.0.1/admin/display-settings.php:30
-#: tags/1.2.0/admin/display-settings.php:30
-#: tags/1.1.8/admin/display-settings.php:30
-#: tags/1.1.0/admin/display-settings.php:30
-#: tags/1.0/admin/display-settings.php:30
-msgid "With any exp date and 3 CVV numbers"
-msgstr ""
-
-#: admin/display-settings.php:83 admin/display-settings.php:83
-#: trunk/admin/display-settings.php:81 trunk/admin/display-settings.php:81
-#: tags/1.1.9/admin/display-settings.php:81
-#: tags/1.1.9/admin/display-settings.php:81
-#: tags/1.1.7/admin/display-settings.php:81
-#: tags/1.1.7/admin/display-settings.php:81
-#: tags/1.1.5/admin/display-settings.php:81
-#: tags/1.1.5/admin/display-settings.php:81
-#: tags/1.1.6/admin/display-settings.php:81
-#: tags/1.1.6/admin/display-settings.php:81
-#: tags/1.2.0/admin/display-settings.php:81
-#: tags/1.2.0/admin/display-settings.php:81
-#: tags/1.1.8/admin/display-settings.php:81
-#: tags/1.1.8/admin/display-settings.php:81
-msgid "Select success page"
-msgstr ""
-
-#: admin/display-settings.php:99 admin/display-settings.php:99
-#: trunk/admin/display-settings.php:97 trunk/admin/display-settings.php:97
-#: tags/1.1.9/admin/display-settings.php:97
-#: tags/1.1.9/admin/display-settings.php:97
-#: tags/1.1.7/admin/display-settings.php:97
-#: tags/1.1.7/admin/display-settings.php:97
-#: tags/1.1.5/admin/display-settings.php:97
-#: tags/1.1.5/admin/display-settings.php:97
-#: tags/1.1.6/admin/display-settings.php:97
-#: tags/1.1.6/admin/display-settings.php:97
-#: tags/1.2.0/admin/display-settings.php:97
-#: tags/1.2.0/admin/display-settings.php:97
-#: tags/1.1.8/admin/display-settings.php:97
-#: tags/1.1.8/admin/display-settings.php:97
-msgid "Select error page"
-msgstr ""
-
-#: admin/display-settings.php:119 trunk/admin/display-settings.php:117
-#: tags/1.1.9/admin/display-settings.php:117
-#: tags/1.1.3/admin/display-settings.php:115
-#: tags/1.1.7/admin/display-settings.php:117
-#: tags/1.1.4/admin/display-settings.php:115
-#: tags/1.1.1/admin/display-settings.php:97
-#: tags/1.1.2/admin/display-settings.php:115
-#: tags/1.1.5/admin/display-settings.php:117
-#: tags/1.1.6/admin/display-settings.php:117
-#: tags/1.0.1/admin/display-settings.php:97
-#: tags/1.2.0/admin/display-settings.php:117
-#: tags/1.1.8/admin/display-settings.php:117
-#: tags/1.1.0/admin/display-settings.php:97
-#: tags/1.0/admin/display-settings.php:97
-msgid "Select image"
-msgstr ""
-
-#: admin/display-settings.php:149 trunk/admin/display-settings.php:147
-#: tags/1.1.9/admin/display-settings.php:147
-#: tags/1.1.3/admin/display-settings.php:145
-#: tags/1.1.7/admin/display-settings.php:147
-#: tags/1.1.4/admin/display-settings.php:145
-#: tags/1.1.1/admin/display-settings.php:127
-#: tags/1.1.2/admin/display-settings.php:145
-#: tags/1.1.5/admin/display-settings.php:147
-#: tags/1.1.6/admin/display-settings.php:147
-#: tags/1.0.1/admin/display-settings.php:120
-#: tags/1.2.0/admin/display-settings.php:147
-#: tags/1.1.8/admin/display-settings.php:147
-#: tags/1.1.0/admin/display-settings.php:127
-#: tags/1.0/admin/display-settings.php:120
-msgid "px"
-msgstr ""
-
-#: admin/display-settings.php:180 admin/display-settings.php:180
-#: trunk/admin/display-settings.php:178 trunk/admin/display-settings.php:178
-#: tags/1.1.9/admin/display-settings.php:178
-#: tags/1.1.9/admin/display-settings.php:178
-#: tags/1.1.7/admin/display-settings.php:178
-#: tags/1.1.7/admin/display-settings.php:178
-#: tags/1.1.5/admin/display-settings.php:178
-#: tags/1.1.5/admin/display-settings.php:178
-#: tags/1.1.6/admin/display-settings.php:178
-#: tags/1.1.6/admin/display-settings.php:178
-#: tags/1.2.0/admin/display-settings.php:178
-#: tags/1.2.0/admin/display-settings.php:178
-#: tags/1.1.8/admin/display-settings.php:178
-#: tags/1.1.8/admin/display-settings.php:178
-msgid "Select T&C page"
-msgstr ""
-
-#: admin/display-settings.php:319 trunk/admin/display-settings.php:318
-#: tags/1.1.9/admin/display-settings.php:318
-#: tags/1.1.3/admin/display-settings.php:269
-#: tags/1.1.7/admin/display-settings.php:318
-#: tags/1.1.4/admin/display-settings.php:278
-#: tags/1.1.1/admin/display-settings.php:251
-#: tags/1.1.2/admin/display-settings.php:269
-#: tags/1.1.5/admin/display-settings.php:318
-#: tags/1.1.6/admin/display-settings.php:318
-#: tags/1.0.1/admin/display-settings.php:244
-#: tags/1.2.0/admin/display-settings.php:318
-#: tags/1.1.8/admin/display-settings.php:318
-#: tags/1.1.0/admin/display-settings.php:251
-#: tags/1.0/admin/display-settings.php:244
-msgid "Stripe API keys"
-msgstr ""
-
-#: admin/display-settings.php:322 trunk/admin/display-settings.php:321
-#: tags/1.1.9/admin/display-settings.php:321
-#: tags/1.1.3/admin/display-settings.php:272
-#: tags/1.1.7/admin/display-settings.php:321
-#: tags/1.1.4/admin/display-settings.php:281
-#: tags/1.1.1/admin/display-settings.php:254
-#: tags/1.1.2/admin/display-settings.php:272
-#: tags/1.1.5/admin/display-settings.php:321
-#: tags/1.1.6/admin/display-settings.php:321
-#: tags/1.0.1/admin/display-settings.php:247
-#: tags/1.2.0/admin/display-settings.php:321
-#: tags/1.1.8/admin/display-settings.php:321
-#: tags/1.1.0/admin/display-settings.php:254
-#: tags/1.0/admin/display-settings.php:247
-msgid "Only enter the page's slug (URL friendly version of the post title)"
-msgstr ""
-
-#: admin/display-settings.php:325 trunk/admin/display-settings.php:324
-#: tags/1.1.9/admin/display-settings.php:324
-#: tags/1.1.3/admin/display-settings.php:275
-#: tags/1.1.7/admin/display-settings.php:324
-#: tags/1.1.4/admin/display-settings.php:284
-#: tags/1.1.1/admin/display-settings.php:257
-#: tags/1.1.2/admin/display-settings.php:275
-#: tags/1.1.5/admin/display-settings.php:324
-#: tags/1.1.6/admin/display-settings.php:324
-#: tags/1.0.1/admin/display-settings.php:250
-#: tags/1.2.0/admin/display-settings.php:324
-#: tags/1.1.8/admin/display-settings.php:324
-#: tags/1.1.0/admin/display-settings.php:257
-#: tags/1.0/admin/display-settings.php:250
-msgid "Set image for Stripe's modal form"
-msgstr ""
-
-#: admin/display-settings.php:328 trunk/admin/display-settings.php:327
-#: tags/1.1.9/admin/display-settings.php:327
-#: tags/1.1.3/admin/display-settings.php:278
-#: tags/1.1.7/admin/display-settings.php:327
-#: tags/1.1.4/admin/display-settings.php:287
-#: tags/1.1.1/admin/display-settings.php:260
-#: tags/1.1.2/admin/display-settings.php:278
-#: tags/1.1.5/admin/display-settings.php:327
-#: tags/1.1.6/admin/display-settings.php:327
-#: tags/1.0.1/admin/display-settings.php:253
-#: tags/1.2.0/admin/display-settings.php:327
-#: tags/1.1.8/admin/display-settings.php:327
-#: tags/1.1.0/admin/display-settings.php:260
-#: tags/1.0/admin/display-settings.php:253
-msgid "Only used with custom button styles enabled"
-msgstr ""
-
-#: admin/display-settings.php:331 admin/display-settings.php:337
-#: trunk/admin/display-settings.php:330 trunk/admin/display-settings.php:336
-#: tags/1.1.9/admin/display-settings.php:330
-#: tags/1.1.9/admin/display-settings.php:336
-#: tags/1.1.3/admin/display-settings.php:281
-#: tags/1.1.3/admin/display-settings.php:287
-#: tags/1.1.7/admin/display-settings.php:330
-#: tags/1.1.7/admin/display-settings.php:336
-#: tags/1.1.4/admin/display-settings.php:290
-#: tags/1.1.4/admin/display-settings.php:296
-#: tags/1.1.1/admin/display-settings.php:263
-#: tags/1.1.1/admin/display-settings.php:269
-#: tags/1.1.2/admin/display-settings.php:281
-#: tags/1.1.2/admin/display-settings.php:287
-#: tags/1.1.5/admin/display-settings.php:330
-#: tags/1.1.5/admin/display-settings.php:336
-#: tags/1.1.6/admin/display-settings.php:330
-#: tags/1.1.6/admin/display-settings.php:336
-#: tags/1.0.1/admin/display-settings.php:256
-#: tags/1.0.1/admin/display-settings.php:262
-#: tags/1.2.0/admin/display-settings.php:330
-#: tags/1.2.0/admin/display-settings.php:336
-#: tags/1.1.8/admin/display-settings.php:330
-#: tags/1.1.8/admin/display-settings.php:336
-#: tags/1.1.0/admin/display-settings.php:263
-#: tags/1.1.0/admin/display-settings.php:269
-#: tags/1.0/admin/display-settings.php:256
-#: tags/1.0/admin/display-settings.php:262
-msgid "Emails sent to WordPress system email address"
-msgstr ""
-
-#: admin/display-settings.php:334 admin/display-settings.php:340
-#: trunk/admin/display-settings.php:333 trunk/admin/display-settings.php:339
-#: tags/1.1.9/admin/display-settings.php:333
-#: tags/1.1.9/admin/display-settings.php:339
-#: tags/1.1.3/admin/display-settings.php:284
-#: tags/1.1.3/admin/display-settings.php:290
-#: tags/1.1.7/admin/display-settings.php:333
-#: tags/1.1.7/admin/display-settings.php:339
-#: tags/1.1.4/admin/display-settings.php:293
-#: tags/1.1.4/admin/display-settings.php:299
-#: tags/1.1.1/admin/display-settings.php:266
-#: tags/1.1.1/admin/display-settings.php:272
-#: tags/1.1.2/admin/display-settings.php:284
-#: tags/1.1.2/admin/display-settings.php:290
-#: tags/1.1.5/admin/display-settings.php:333
-#: tags/1.1.5/admin/display-settings.php:339
-#: tags/1.1.6/admin/display-settings.php:333
-#: tags/1.1.6/admin/display-settings.php:339
-#: tags/1.0.1/admin/display-settings.php:259
-#: tags/1.0.1/admin/display-settings.php:265
-#: tags/1.2.0/admin/display-settings.php:333
-#: tags/1.2.0/admin/display-settings.php:339
-#: tags/1.1.8/admin/display-settings.php:333
-#: tags/1.1.8/admin/display-settings.php:339
-#: tags/1.1.0/admin/display-settings.php:266
-#: tags/1.1.0/admin/display-settings.php:272
-#: tags/1.0/admin/display-settings.php:259
-#: tags/1.0/admin/display-settings.php:265
-msgid "Emails sent to Stripe user email address"
-msgstr ""
-
-#: admin/display-settings.php:343 trunk/admin/display-settings.php:342
-#: tags/1.1.9/admin/display-settings.php:342
-#: tags/1.1.3/admin/display-settings.php:293
-#: tags/1.1.7/admin/display-settings.php:342
-#: tags/1.1.4/admin/display-settings.php:302
-#: tags/1.1.1/admin/display-settings.php:275
-#: tags/1.1.2/admin/display-settings.php:293
-#: tags/1.1.5/admin/display-settings.php:342
-#: tags/1.1.6/admin/display-settings.php:342
-#: tags/1.2.0/admin/display-settings.php:342
-#: tags/1.1.8/admin/display-settings.php:342
-#: tags/1.1.0/admin/display-settings.php:275
-msgid ""
-"Name, Address, City, Zip code and country will be collected before payment"
-msgstr ""
-
-#: admin/display-settings.php:346 trunk/admin/display-settings.php:345
-#: tags/1.1.9/admin/display-settings.php:345
-#: tags/1.1.7/admin/display-settings.php:345
-#: tags/1.1.4/admin/display-settings.php:305
-#: tags/1.1.5/admin/display-settings.php:345
-#: tags/1.1.6/admin/display-settings.php:345
-#: tags/1.2.0/admin/display-settings.php:345
-#: tags/1.1.8/admin/display-settings.php:345
-msgid ""
-"Check to use custom button (Custom styles will not apply on browser Chrome "
-"for iOS)"
-msgstr ""
-
-#: admin/display-settings.php:349 trunk/admin/display-settings.php:348
-#: tags/1.1.9/admin/display-settings.php:348
-#: tags/1.1.3/admin/display-settings.php:299
-#: tags/1.1.7/admin/display-settings.php:348
-#: tags/1.1.4/admin/display-settings.php:308
-#: tags/1.1.1/admin/display-settings.php:281
-#: tags/1.1.2/admin/display-settings.php:299
-#: tags/1.1.5/admin/display-settings.php:348
-#: tags/1.1.6/admin/display-settings.php:348
-#: tags/1.0.1/admin/display-settings.php:271
-#: tags/1.2.0/admin/display-settings.php:348
-#: tags/1.1.8/admin/display-settings.php:348
-#: tags/1.1.0/admin/display-settings.php:281
-#: tags/1.0/admin/display-settings.php:271
-msgid "Set your Stripe's account currency"
-msgstr ""
-
-#: admin/shortcode_button_form.php:204
-msgid "Custom Role"
-msgstr ""
-
-#: admin/shortcode_button_form.php:206
-msgid "Add a per button custom role to user"
-msgstr ""
-
-#: tags/1.1.3/admin/register-settings.php:186
-#: tags/1.1.1/admin/register-settings.php:186
-#: tags/1.1.2/admin/register-settings.php:186
-msgid "Terms and conditions page -> slug"
-msgstr ""
-
-#: tags/1.1.3/admin/display-settings.php:296
-#: tags/1.1.1/admin/display-settings.php:278
-#: tags/1.1.2/admin/display-settings.php:296
-#: tags/1.0.1/admin/display-settings.php:268
-#: tags/1.1.0/admin/display-settings.php:278
-#: tags/1.0/admin/display-settings.php:268
-msgid "Check to use custom button"
-msgstr ""
-
-#: tags/1.0.1/admin/register-settings.php:172
-#: tags/1.1.0/admin/register-settings.php:186
-#: tags/1.0/admin/register-settings.php:172
-msgid "Terms and conditions page (slug)"
 msgstr ""
 
 #. Description of the plugin
 msgid ""
 "Use Stripe payment buttons anywhere in a WordPress website, let your users "
 "easily proceed to checkout"
-msgstr ""
-
-#. URI of the plugin
-msgid "https://github.com/New0/direct-stripe"
 msgstr ""
 
 #. Author of the plugin
