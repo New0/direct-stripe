@@ -1,6 +1,6 @@
 {
   "name": "direct-stripe",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "private": true,
   "description": "WordPress plugin for Stripe handled transactions ",
   "author": "New0 <nico@newo.fr>",
