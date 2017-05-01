@@ -1,0 +1,45 @@
+/*** Boutons stripe ****/
+.stripe-button-el {
+  display: inline;
+}
+.direct-stripe-button {
+  margin: 0 auto;
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+  background: none;
+  background-image: none;
+  background-color: #6772e5;
+  border: 1px solid #6772e5;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: transparent;
+    border-color: #6772e5;
+    color: #6772e5;
+  }
+}
+
+#donationvalue {
+  max-width: 6rem;
+}
+#directStripe_answer {
+  display: none;
+  border: thin solid #999;
+  padding: 0.4rem 0.9rem;
+  position: absolute;
+  z-index: 11111111;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
