@@ -14,6 +14,10 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
         var currency = ds_values.general_currency;
     }
 
+    if( ds_values.display_amount !== 'false' && ds_values.type !== 'subscription' {
+        var amount = ds_values.original_amount;
+    }
+
 // Set remember me option
     if( ds_values.rememberme === 'true' ) {
         var rememberme = true;
@@ -75,15 +79,17 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
     handler = stripe_checkout(ds_values);
     // Open Checkout with further options:
     handler.open({
-        locale: 'auto',
-        image: ds_values.image,
-        name: ds_values.name,
-        description: ds_values.description,
-        email: ds_values.current_email_address,
-        currency: currency,
-        billingAddress: billing,
-        shippingAddress: shipping,
-        allowRememberMe: rememberme
+        'locale': 'auto',
+        'image': ds_values.image,
+        'name': ds_values.name,
+        'description': ds_values.description,
+        'email': ds_values.current_email_address,
+        'currency': currency,
+        'panelLabel':   ds_values.panellabel,
+        'amount': amount,
+        'billingAddress': billing,
+        'shippingAddress': shipping,
+        'allowRememberMe': rememberme
     });
     e.preventDefault();
 });

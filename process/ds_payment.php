@@ -39,8 +39,12 @@ try { //Retrieve Data
     if ( !empty( $custom_role  ) && wp_roles()->is_role( $custom_role ) == false ) {
         add_role( $custom_role  , __('Direct Stripe ' . $custom_role , 'direct-stripe'), array( 'read' => true ));
     }
-
-    $currency = isset($params['currency']) ? $params['currency'] : '';
+	
+	if( !empty($params['currency']) ) {
+		$currency = $params['currency'];
+	} else {
+		$currency = $d_stripe_general['direct_stripe_currency'];
+	}
 
     $token	= isset($_POST['stripeToken']) ? $_POST['stripeToken'] : '';
     $email_address	= isset($_POST['stripeEmail']) ? $_POST['stripeEmail'] : '';

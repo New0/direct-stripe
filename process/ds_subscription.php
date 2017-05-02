@@ -1,9 +1,8 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please!' );
-
 $params = isset($_POST['params']) ? $_POST['params'] : '';
-
 $nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
+
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die( __('Security check issue', 'direct-stripe') );
 
 //  Stripe
@@ -31,17 +30,20 @@ try {
     $setup_fee	    = isset($params['setup_fee']) ? $params['setup_fee'] : '';
     $token		    = $_POST['stripeToken'];
     $email_address	= $_POST['stripeEmail'];
-    $capture	    = isset($params['capture']) ? $params['capture'] : '';
+	if( $params['capture'] === 'false' ) {
+		$capture =  false;
+	} else {
+		$capture =  true;
+	}
     $description	= isset($params['description']) ? $params['description'] : '';
 
     $custom_role    = isset($params['custom_role']) ? $params['custom_role'] : '';
     if ( !empty( $custom_role  ) && wp_roles()->is_role( $custom_role ) == false ) {
         add_role( $custom_role  , __('Direct Stripe ' . $custom_role , 'direct-stripe'), array( 'read' => true ));
     }
-
-    $new_currency =	isset($params['currency']) ? $params['currency'] : '';
-    if( isset($new_currency) && !empty($new_currency) ) {
-        $currency = $new_currency;
+    
+    if( !empty($params['currency']) ) {
+        $currency = $params['currency'];
     } else {
         $currency = $d_stripe_general['direct_stripe_currency'];
     }

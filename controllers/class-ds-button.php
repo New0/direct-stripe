@@ -49,6 +49,7 @@ class dsButton {
 			include( DSCORE_PATH . 'process/ds_subscription.php');
 			wp_die();
 		} elseif( isset( $type ) && $type === 'donation' ) {
+			$pre_amount = isset($_POST['type']) ? $_POST['type'] : '';
 			include( DSCORE_PATH . 'process/ds_donation.php');
 			wp_die();
 		} else {

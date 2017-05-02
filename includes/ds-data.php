@@ -47,6 +47,7 @@ $directStripeAttrValues = shortcode_atts( array(
  */
 //Print the amount in the modal form
 $original_amount = $directStripeAttrValues['amount'];
+
 //Query args encryption
 if( !empty( $directStripeAttrValues['amount']) ) {
 	$directStripeAttrValues['amount'] = base64_encode($directStripeAttrValues['amount']);
@@ -74,7 +75,6 @@ $params = array(
 	'amount' 		        =>	$directStripeAttrValues['amount'],
 	'original_amount'       =>  $original_amount,
 	'description' 		    =>	$directStripeAttrValues['description'],
-	'label' 		        =>	$directStripeAttrValues['label'],
 	'panellabel' 		    =>	$directStripeAttrValues['panellabel'],
 	'type' 			        =>	$directStripeAttrValues['type'],
 	'locale' 		        =>	$directStripeAttrValues['locale'],
@@ -95,10 +95,10 @@ $params = array(
 	'key'                   =>  $key,
 	'current_email_address' =>  $current_email,
 	'ajaxurl'               =>  $ajaxurl,
-	'image'                 =>  isset($d_stripe_general['direct_stripe_logo_image']) ? $d_stripe_general['direct_stripe_logo_image'] : '',
-	'general_currency'      =>  isset($d_stripe_general['direct_stripe_currency']) ? $d_stripe_general['direct_stripe_currency'] : '',
-	'general_billing'       =>  isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) ? $d_stripe_general['direct_stripe_billing_infos_checkbox'] : '',
-	'general_shipping'      =>  isset($d_stripe_general['direct_stripe_shipping_infos_checkbox']) ? $d_stripe_general['direct_stripe_shipping_infos_checkbox'] : '',
-	'general_shipping'      =>  isset($d_stripe_general['direct_stripe_rememberme_option_checkbox']) ? $d_stripe_general['direct_stripe_rememberme_option_checkbox'] : '',
+	'image'                 =>  !empty($d_stripe_general['direct_stripe_logo_image']) ? $d_stripe_general['direct_stripe_logo_image'] : '',
+	'general_currency'      =>  !empty($d_stripe_general['direct_stripe_currency']) ? $d_stripe_general['direct_stripe_currency'] : '',
+	'general_billing'       =>  !empty($d_stripe_general['direct_stripe_billing_infos_checkbox']) ? $d_stripe_general['direct_stripe_billing_infos_checkbox'] : '',
+	'general_shipping'      =>  !empty($d_stripe_general['direct_stripe_shipping_infos_checkbox']) ? $d_stripe_general['direct_stripe_shipping_infos_checkbox'] : '',
+	'general_rememberme'    =>  !empty($d_stripe_general['direct_stripe_rememberme_option_checkbox']) ? $d_stripe_general['direct_stripe_rememberme_option_checkbox'] : '',
 	'ds-nonce'		        =>  $ds_nonce
 );
