@@ -5,7 +5,6 @@
  * Date: 29/04/2017
  * Time: 18:21
  */
-
 /**
  * Retrieve options and create general data and nonce
  *
@@ -17,7 +16,6 @@ $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 $sitename = get_bloginfo('name');
 $description = get_bloginfo('description');
 $instance = uniqid('ds');
-
 // Anounce default Shortcode parameters
 $directStripeAttrValues = shortcode_atts( array(
 	'name' 			    =>	$sitename,
@@ -42,8 +40,6 @@ $directStripeAttrValues = shortcode_atts( array(
 	'shipping'          =>  '',
 	'rememberme'        =>  ''
 ), $atts, 'direct_stripe' );
-
-
 /**
  * Set conditional data for each button
  *
@@ -51,7 +47,6 @@ $directStripeAttrValues = shortcode_atts( array(
  */
 //Print the amount in the modal form
 $original_amount = $directStripeAttrValues['amount'];
-
 //Query args encryption
 if( !empty( $directStripeAttrValues['amount']) ) {
 	$directStripeAttrValues['amount'] = base64_encode($directStripeAttrValues['amount']);
@@ -67,17 +62,8 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 	$key = $d_stripe_general['direct_stripe_live_publishable_api_key'];
 }
 
-//Get test or live key
-if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
-	$key = $d_stripe_general['direct_stripe_test_publishable_api_key'];
-} else {
-	$key = $d_stripe_general['direct_stripe_live_publishable_api_key'];
-}
-
 //Set ajax url
 $ajaxurl =  admin_url( 'admin-ajax.php' );
-
-
 /**
  * Final values to send
  *
@@ -109,10 +95,10 @@ $params = array(
 	'key'                   =>  $key,
 	'current_email_address' =>  $current_email,
 	'ajaxurl'               =>  $ajaxurl,
-	'image'                 =>  $d_stripe_general['direct_stripe_logo_image'],
-	'general_currency'      =>  $d_stripe_general['direct_stripe_currency'],
-	'general_billing'       =>  $d_stripe_general['direct_stripe_billing_infos_checkbox'],
-	'general_shipping'      =>  $d_stripe_general['direct_stripe_shipping_infos_checkbox'],
-	'general_shipping'      =>  $d_stripe_general['direct_stripe_rememberme_option_checkbox'],
+	'image'                 =>  isset($d_stripe_general['direct_stripe_logo_image']) ? $d_stripe_general['direct_stripe_logo_image'] : '',
+	'general_currency'      =>  isset($d_stripe_general['direct_stripe_currency']) ? $d_stripe_general['direct_stripe_currency'] : '',
+	'general_billing'       =>  isset($d_stripe_general['direct_stripe_billing_infos_checkbox']) ? $d_stripe_general['direct_stripe_billing_infos_checkbox'] : '',
+	'general_shipping'      =>  isset($d_stripe_general['direct_stripe_shipping_infos_checkbox']) ? $d_stripe_general['direct_stripe_shipping_infos_checkbox'] : '',
+	'general_shipping'      =>  isset($d_stripe_general['direct_stripe_rememberme_option_checkbox']) ? $d_stripe_general['direct_stripe_rememberme_option_checkbox'] : '',
 	'ds-nonce'		        =>  $ds_nonce
 );

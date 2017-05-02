@@ -9,36 +9,36 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
 
    // Set currency
     if( "" !== ds_values.currency ) {
-        currency = ds_values.currency;
+        var currency = ds_values.currency;
     } else {
-        currency = ds_values.general_currency;
+        var currency = ds_values.general_currency;
     }
 
 // Set remember me option
     if( ds_values.rememberme === 'true' ) {
-        rememberme = true;
+        var rememberme = true;
     } else if( ds_values.rememberme !== 'false' && ds_values.general_rememberme === '1' ) {
-        rememberme = true;
+        var rememberme = true;
     } else {
-        rememberme = false;
+        var rememberme = false;
     }
 
 //Set billing and shipping
     if( ds_values.shipping === 'true') {
-        shipping = true;
-        billing = true;
+        var shipping = true;
+        var billing = true;
     } else if( ds_values.shipping !== 'false' && ds_values.general_shipping === '1' ) {
-        $shipping = true;
-        $billing = true;
+        var shipping = true;
+        var billing = true;
     } else if(ds_values.billing === 'true') {
-        shipping = false;
-        billing = true;
+        var shipping = false;
+        var billing = true;
     } else if( ds_values.billing !== 'true' && ds_values.general_billing === '1' ) {
-        shipping = false;
-        billing = true;
+        var shipping = false;
+        var billing = true;
     } else {
-        shipping = false;
-        billing = false;
+        var shipping = false;
+        var billing = false;
     }
 
     var numbers = /^\+?[0-9]*\.?[0-9]+$/;
@@ -83,7 +83,7 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
         currency: currency,
         billingAddress: billing,
         shippingAddress: shipping,
-        allowRememberMe: rememberme,
+        allowRememberMe: rememberme
     });
     e.preventDefault();
 });

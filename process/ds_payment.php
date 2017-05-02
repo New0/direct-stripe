@@ -1,10 +1,8 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please!' );
 $params = isset($_POST['params']) ? $_POST['params'] : '';
-$nonce = isset($params['nonce']) ? $params['nonce'] : '';
-var_dump($params);
-var_dump($nonce);
-wp_die('ok');
+$nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
+
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) wp_die( __('Security check issue', 'direct-stripe') );
 
 // Stripe
@@ -31,7 +29,11 @@ try { //Retrieve Data
     $button_id 	    = isset($params['button_id']) ? $params['button_id'] : '';
     $pre_amount 	= isset($params['amount']) ? $params['amount'] : '';
     $amount         = base64_decode($pre_amount);
-    $capture 	    = isset($params['capture']) ? $params['capture'] : '';
+	if( $params['capture'] === 'false' ) {
+		$capture =  false;
+	} else {
+		$capture =  true;
+	}
     $description	= isset($params['description']) ? $params['description'] : '';
     $custom_role    = isset($params['custom_role']) ? $params['custom_role'] : '';
     if ( !empty( $custom_role  ) && wp_roles()->is_role( $custom_role ) == false ) {
