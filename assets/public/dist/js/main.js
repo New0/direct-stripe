@@ -14,7 +14,7 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
         var currency = ds_values.general_currency;
     }
 
-    if( ds_values.display_amount !== 'false' && ds_values.type !== 'subscription' {
+    if( ds_values.display_amount !== 'false' && ds_values.type !== 'subscription') {
         var amount = ds_values.original_amount;
     }
 
