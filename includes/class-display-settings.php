@@ -88,7 +88,7 @@ class DirectStripeDisplaySettings {
         if( !empty( $d_stripe_options['direct_stripe_success_message'] ) ) {
             $initial_success_content = $d_stripe_options['direct_stripe_success_message'];
         } else {
-            $initial_success_content = _e('Successful transaction', DirectStripe::domain);
+            $initial_success_content = __('Successful transaction', 'direct-stripe');
         }
 
         wp_editor( $initial_success_content, 'direct_stripe_general_settings[direct_stripe_success_message]', $settings_success_message_content);
@@ -108,7 +108,7 @@ class DirectStripeDisplaySettings {
         if( !empty( $d_stripe_options['direct_stripe_error_message'] ) ) {
             $initial_error_content = $d_stripe_options['direct_stripe_error_message'];
         } else {
-            $initial_error_content = _e('Something went wrong...', DirectStripe::domain);
+            $initial_error_content = __('Something went wrong...', 'direct-stripe');
         }
 
         wp_editor( $initial_error_content, 'direct_stripe_general_settings[direct_stripe_error_message]', $settings_error_message_content);

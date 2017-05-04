@@ -156,7 +156,7 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	);
 	add_settings_field( 
 		'direct_stripe_shipping_infos_checkbox', 
-		__( 'Ask for shipping address (billing infos will be automatically asked for)', 'direct-stripe' ), 
+		__( 'Add shipping address option (billing address is always asked for when the shipping address option is enabled)', 'direct-stripe' ),
 		array($displaysettings, 'direct_stripe_shipping_infos_checkbox_render'), 
 		'directStripeGeneral', 
 		'direct_stripe_billing_infos_section' 

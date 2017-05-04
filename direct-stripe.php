@@ -86,6 +86,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 
         function activation_hooks() {
             register_activation_hook( self::FILE,  array( $this, 'direct_stripe_user_roles_on_activation') );
+	        //add_action( 'admin_notices', array( $this, 'plugin_activation' ) ) ;
         }
         /**
          * Add Stripe user role on plugin activation
@@ -95,7 +96,21 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         function direct_stripe_user_roles_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
         }
-
+	    /**
+	     * Add Admin notice on activation
+	     *
+	     * @since 2.0.0
+	     *
+	    public function plugin_activation() {
+		   
+				$html = '<div class="notice notice-warning is-dismissible">';
+				$html .= '<p>';
+				$html .= __( 'Direct Stripe 2.0.0 added ajax response as default behaviour, if you still want to use redirections, please, <a href="admin.php?page=direct_stripe">enable the "use redirections" checkbox</a>.', 'direct-stripe' );
+				$html .= '</p>';
+			    $html .= '</div><!-- /.updated -->';
+			echo $html;
+			
+	    }
         /**
          * Hook into actions and filters.
          *

@@ -133,9 +133,9 @@ function stripe_checkout(ds_values) {
                             jQuery('#loadingDS').hide();
                             jQuery("#directStripe_answer").html(data.message);
                             jQuery("#directStripe_answer").show();
-                            /*setTimeout(function() {
+                            setTimeout(function() {
                              jQuery("#directStripe_answer").hide();
-                             }, 10000);*/
+                             }, 10000);
                             break;
                         case '2':
                             jQuery('#loadingDS').hide();
@@ -145,9 +145,9 @@ function stripe_checkout(ds_values) {
                             jQuery('#loadingDS').hide();
                             jQuery("#directStripe_answer").html(data);
                             jQuery("#directStripe_answer").show();
-                        /*setTimeout(function() {
+                        setTimeout(function() {
                          jQuery("#directStripe_answer").hide();
-                         }, 10000);*/
+                         }, 10000);
                     }
                 }
             );
