@@ -6,7 +6,7 @@
  * Time: 14:47
  */
 // Ajax answer span
-    $direct_stripe_ajax_answer_span = '<span id="directStripe_answer"></span>';
+    $direct_stripe_ajax_answer_span = '<span id="ds-answer-' . $instance . '" class="directStripe_answer"></span>';
     echo apply_filters('direct_stripe_ajax_answer_span', $direct_stripe_ajax_answer_span );
 ?>
 

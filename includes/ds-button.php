@@ -33,7 +33,7 @@ do_action( 'direct_stripe_before_button' );
 
         <?php //T&C Check box condition
         if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
-            <br/><input type="checkbox" class="conditions" id="conditions" required/>&nbsp;
+            <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>&nbsp;
             <label for="conditions">
             <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
                 <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
