@@ -57,7 +57,7 @@ class dsCpt {
             'exclude_from_search' => true,
             'publicly_queryable'  => true,
 	        'map_meta_cap'        => true,
-            'capability_type'     => 'post',
+            'capability_type'     => 'page',
             'supports'            => array( 'title' ),
 	        'taxonomies'          => array(),
 	        'has_archive'         => true,
@@ -77,6 +77,7 @@ class dsCpt {
             'title'         => __( 'Transaction ID', DirectStripe::domain ),
             'author'        => __( 'Stripe User', DirectStripe::domain ),
             'amount'        => __( 'Amount', DirectStripe::domain ),
+            'currency'      => __( 'Currency', DirectStripe::domain ),
             'type'	        =>	__( 'Type', DirectStripe::domain ),
             'description'	=>	__( 'Description', DirectStripe::domain ),
             'date'          => __( 'Date', DirectStripe::domain )
@@ -119,6 +120,14 @@ class dsCpt {
                 else
                     printf( __( '%s', DirectStripe::domain ), $type );
                 break;
+	
+	        case 'currency' :
+		        $type = get_post_meta( get_the_ID(), 'currency', true );
+		        if ( empty( $type ) )
+			        echo __( 'None provided', DirectStripe::domain );
+		        else
+			        printf( __( '%s', DirectStripe::domain ), $type );
+		        break;
 
             /* Just break out of the switch statement for everything else. */
             default :
@@ -136,6 +145,7 @@ class dsCpt {
             'title'	        =>	'title',
             'author'        =>	'author',
             'amount'        => 	'amount',
+	        'currency'      => 	'currency',
             'type'	        =>	'type',
             'description'	=>	'description',
             'date'	        =>	'date'

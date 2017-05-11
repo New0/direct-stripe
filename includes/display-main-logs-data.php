@@ -9,6 +9,12 @@
 
 <h2><?php _e('Direct Stripe transaction data', 'direct-stripe'); ?></h2>
 <table class="form-table">
+    <tr>
+        <th><label for="email_address"><?php _e('User email address', 'direct-stripe'); ?></label></th>
+        <td>
+            <input disabled="disabled" type="text" name="email_address" id="email_address" value="<?php echo esc_attr( get_the_author_meta( 'email_address' ) ); ?>" class="infos-sup" /><br />
+        </td>
+    </tr>
 	<tr>
 		<th><label for="stripe_id"><?php _e('Stripe customer ID', 'direct-stripe'); ?></label></th>
 		<td>
@@ -26,6 +32,12 @@
         <th><label for="amount"><?php _e('Amount / Plan ID', 'direct-stripe'); ?></label></th>
         <td>
             <input disabled="disabled" type="text" name="amount" id="amount" value="<?php echo esc_attr( get_post_meta( $post->ID , 'amount', true ) ); ?>" class="infos-sup" /><br />
+        </td>
+    </tr>
+    <tr>
+        <th><label for="currency"><?php _e('Currency', 'direct-stripe'); ?></label></th>
+        <td>
+            <input disabled="disabled" type="text" name="currency" id="currency" value="<?php echo esc_attr( get_post_meta( $post->ID , 'currency', true ) ); ?>" class="infos-sup" /><br />
         </td>
     </tr>
     <tr>

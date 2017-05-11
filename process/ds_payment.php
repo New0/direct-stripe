@@ -103,6 +103,7 @@ try { //Retrieve Data
         );
 	 $postmetas = array();
 	 $postmetas['stripe_id'] = $stripe_id;
+	 $postmetas['currency'] = $currency;
 	 $postmetas['amount'] = $amount;
 	 $postmetas['type'] = __('payment','direct-stripe');
 	 $postmetas['description'] = $description;
@@ -177,7 +178,7 @@ try { //Retrieve Data
  
     $user_id = wp_insert_user( $userdata ) ;
 
-// Set the nickname
+        // Set the nickname
         wp_update_user(
             array(
                 'ID'          =>    $user_id,
@@ -185,11 +186,36 @@ try { //Retrieve Data
             )
         );
   
-// Add User roles
-        update_user_meta($user_id, 'stripe_id', $customer->id );
+        // Add User roles
         $user = new WP_User( $user_id );
         $user->add_role( 'stripe-user' );
         $user->add_role( $custom_role );
+	
+	 //Log user metas infos
+	 $usermetas = array();
+	 $usermetas['stripe_id'] = $customer->id;
+	 $usermetas['ds_billing_name'] = $_POST['billing_name'];
+	 $usermetas['ds_billing_address_country'] = $_POST['billing_address_country'];
+	 $usermetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
+	 $usermetas['ds_billing_address_state'] = $_POST['billing_address_state'];
+	 $usermetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
+	 $usermetas['ds_billing_address_city'] = $_POST['billing_address_city'];
+	 $usermetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
+	 $usermetas['ds_shipping_name'] = $_POST['shipping_name'];
+	 $usermetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
+	 $usermetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
+	 $usermetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
+	 $usermetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
+	 $usermetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
+	 $usermetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
+	
+	 foreach ( $usermetas as $key => $value ) {
+		 if ( get_user_meta( $user_id, $key, true ) ) {
+			 update_user_meta( $user_id, $key, $value );
+		 } else {
+			 add_user_meta( $user_id, $key, $value );
+		 }
+	 }
 
 //Log transaction in WordPress admin
         $post_id = wp_insert_post(
@@ -200,10 +226,32 @@ try { //Retrieve Data
                 'post_author' 	=>  $user_id
             )
         );
-        add_post_meta($post_id, 'amount', $amount);
-        add_post_meta($post_id, 'type', __('payment','direct-stripe'));
-        add_post_meta($post_id, 'description', $description );
-
+	
+	 $postmetas = array();
+	 $postmetas['stripe_id'] = $stripe_id;
+	 $postmetas['amount'] = $amount;
+	 $postmetas['currency'] = $currency;
+	 $postmetas['type'] = __('payment','direct-stripe');
+	 $postmetas['description'] = $description;
+	 $postmetas['ds_billing_name'] = $_POST['billing_name'];
+	 $postmetas['ds_billing_address_country'] = $_POST['billing_address_country'];
+	 $postmetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
+	 $postmetas['ds_billing_address_state'] = $_POST['billing_address_state'];
+	 $postmetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
+	 $postmetas['ds_billing_address_city'] = $_POST['billing_address_city'];
+	 $postmetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
+	 $postmetas['ds_shipping_name'] = $_POST['shipping_name'];
+	 $postmetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
+	 $postmetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
+	 $postmetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
+	 $postmetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
+	 $postmetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
+	 $postmetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
+	
+	 foreach ( $postmetas as $key => $value ) {
+		 add_post_meta( $post_id, $key, $value );
+	 }
+    
     }//endif user exists
 
 // Email client
