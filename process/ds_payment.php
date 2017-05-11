@@ -102,9 +102,24 @@ try { //Retrieve Data
             )
         );
 	 $postmetas = array();
+	 $postmetas['stripe_id'] = $stripe_id;
 	 $postmetas['amount'] = $amount;
 	 $postmetas['type'] = __('payment','direct-stripe');
 	 $postmetas['description'] = $description;
+	 $postmetas['ds_billing_name'] = $_POST['billing_name'];
+	 $postmetas['ds_billing_address_country'] = $_POST['billing_address_country'];
+	 $postmetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
+	 $postmetas['ds_billing_address_state'] = $_POST['billing_address_state'];
+	 $postmetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
+	 $postmetas['ds_billing_address_city'] = $_POST['billing_address_city'];
+	 $postmetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
+	 $postmetas['ds_shipping_name'] = $_POST['shipping_name'];
+	 $postmetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
+	 $postmetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
+	 $postmetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
+	 $postmetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
+	 $postmetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
+	 $postmetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
 	
 	 foreach ( $postmetas as $key => $value ) {
          add_post_meta( $post_id, $key, $value );

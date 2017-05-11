@@ -15,7 +15,7 @@
 
 <h4><?php _e('These are the lastly used billing and shipping data, please report to logs to find older billing and shipping data for a precise transaction', 'direct-stripe'); ?></h4>
 
-<h3><?php _e('Direct Sripe Billing informations', 'direct-stripe'); ?></h3>
+<h3><?php _e('Direct Stripe Billing informations', 'direct-stripe'); ?></h3>
     <table class="form-table">
         <tr>
             <!-- Billing_name -->
@@ -67,7 +67,7 @@
             </td>
 		</tr>
     </table>
-<h3><?php _e('Direct Sripe Shipping informations', 'direct-stripe'); ?></h3>
+<h3><?php _e('Direct Stripe Shipping informations', 'direct-stripe'); ?></h3>
     <table class="form-table">
         <tr>
             <!-- shipping_name -->

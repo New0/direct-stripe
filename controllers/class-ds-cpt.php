@@ -17,6 +17,8 @@ class dsCpt {
         add_action('manage_directstripelogs_posts_custom_column', array($this, 'direct_stripe_manage_logs_columns'));
         //Make custom columns sortable
         add_filter('manage_edit-directstripelogs_sortable_columns', array($this, 'direct_stripe_sortable_columns'));
+        //Print extra data into logs
+	    add_action( 'add_meta_boxes', array( $this, 'action_add_meta_boxes' ) );
     }
 
     /**
@@ -51,11 +53,14 @@ class dsCpt {
             'show_ui'             => true,
             'show_in_menu'        => 'direct_stripe',
             'show_in_nav_menus'   => true,
-            'can_export'          => false,
+            'can_export'          => true,
             'exclude_from_search' => true,
-            'publicly_queryable'  => false,
-            'capability_type'     => 'page',
-            'supports'            => array( 'title' )
+            'publicly_queryable'  => true,
+	        'map_meta_cap'        => true,
+            'capability_type'     => 'post',
+            'supports'            => array( 'title' ),
+	        'taxonomies'          => array(),
+	        'has_archive'         => true,
         );
         // Registering Direct Stripe Post Type
         register_post_type( 'Direct Stripe Logs', $args );
@@ -137,6 +142,32 @@ class dsCpt {
         );
         return $columns;
     }
+	
+	
+	/**
+	 * Add meta box to post typ to print extra logs data
+	 *
+	 * @since 2.0.0
+	 */
+	public function action_add_meta_boxes()	{
+		add_meta_box('ds_main_data_box', __('Main logs data', 'direct-stripe'), array( $this, 'render_main_meta_boxes_data' ), 'directstripelogs', 'normal', 'default');
+		add_meta_box('ds_bs_data_box', __('Billing and shipping data', 'direct-stripe'), array( $this, 'render_billing_shipping_data' ), 'directstripelogs', 'normal', 'default');
+	}
+	
+	/**
+	 * Display billing and shipping data into logs
+	 *
+	 * @since 2.0.0
+	 */
+	public function render_main_meta_boxes_data( $post ){
+		
+		include_once( DirectStripe::DIR . '/includes/display-main-logs-data.php' );
+	}
+	public function render_billing_shipping_data( $post ){
+		
+		include_once( DirectStripe::DIR . '/includes/display-bs-logs-data.php' );
+	}
+	
 }
 
 $dsCpt = new dsCpt;
