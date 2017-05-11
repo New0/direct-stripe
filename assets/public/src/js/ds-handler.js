@@ -20,13 +20,28 @@ function stripe_checkout(ds_values) {
             jQuery.post(
                 ds_values.ajaxurl,
                 {
-                    'action': 'ds_process_button',
-                    'stripeToken': token.id,
-                    'stripeEmail': token.email,
-                    'type': type,
-                    'amount': amount,
-                    'params': parobj,
-                    'args': args
+                    "action": "ds_process_button",
+                    "stripeToken": token.id,
+                    "stripeEmail": token.email,
+                    "type": type,
+                    "amount": amount,
+                    "params": parobj,
+                    // Billing name and address
+                    "billing_name": args.billing_name,
+                    "billing_address_country": args.billing_address_country,
+                    "billing_address_zip": args.billing_address_zip,
+                    "billing_address_state": args.billing_address_state,
+                    "billing_address_line1": args.billing_address_line1,
+                    "billing_address_city": args.billing_address_city,
+                    "billing_address_country_code": args.billing_address_country_code,
+                    // Shipping name and address
+                    "shipping_name": args.shipping_name,
+                    "shipping_address_country": args.shipping_address_country,
+                    "shipping_address_zip": args.shipping_address_zip,
+                    "shipping_address_state": args.shipping_address_state,
+                    "shipping_address_line1": args.shipping_address_line1,
+                    "shipping_address_city": args.shipping_address_city,
+                    "shipping_address_country_code": args.shipping_address_country_code
                 },
                 function (data) {
                     switch (data.id) {

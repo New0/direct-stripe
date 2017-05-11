@@ -101,9 +101,39 @@ try { //Retrieve Data
                 'post_author'	=>  $user_id
             )
         );
-        add_post_meta($post_id, 'amount', $amount);
-        add_post_meta($post_id, 'type', __('payment','direct-stripe') );
-        add_post_meta($post_id, 'description', $description );
+	 $postmetas = array();
+	 $postmetas['amount'] = $amount;
+	 $postmetas['type'] = __('payment','direct-stripe');
+	 $postmetas['description'] = $description;
+	
+	 foreach ( $postmetas as $key => $value ) {
+         add_post_meta( $post_id, $key, $value );
+	 }
+
+	//Log user
+	 $usermetas = array();
+	 $usermetas['ds_billing_name'] = $_POST['billing_name'];
+	 $usermetas['ds_billing_address_country'] = $_POST['billing_address_country'];
+	 $usermetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
+	 $usermetas['ds_billing_address_state'] = $_POST['billing_address_state'];
+	 $usermetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
+	 $usermetas['ds_billing_address_city'] = $_POST['billing_address_city'];
+	 $usermetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
+	 $usermetas['ds_shipping_name'] = $_POST['shipping_name'];
+	 $usermetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
+	 $usermetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
+	 $usermetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
+	 $usermetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
+	 $usermetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
+	 $usermetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
+	
+	 foreach ( $usermetas as $key => $value ) {
+		 if ( get_user_meta( $user_id, $key, true ) ) {
+			 update_user_meta( $user_id, $key, $value );
+		 } else {
+			 add_user_meta( $user_id, $key, $value );
+		 }
+	 }
 
     } else { // User doesn't exist
 // Create Stripe Customer

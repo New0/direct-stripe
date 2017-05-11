@@ -42,7 +42,7 @@ class dsButton {
 	 */
 	function direct_stripe_process_button() {
 		$type = isset($_POST['type']) ? $_POST['type'] : '';
-		if( isset( $type ) && $type === 'payment' ) {;
+		if( isset( $type ) && $type === 'payment' ) {
 			include( DSCORE_PATH . 'process/ds_payment.php');
 			wp_die();
 		} elseif( isset( $type ) && $type === 'subscription' ) {
