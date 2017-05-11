@@ -91,7 +91,7 @@ try { //Retrieve Data
             'capture'     => $capture,
             'description' => $description
         ));
-
+	 $chargeID = $charge->id;
 //Log transaction in WordPress admin
         $post_id = wp_insert_post(
             array(
@@ -103,6 +103,7 @@ try { //Retrieve Data
         );
 	 $postmetas = array();
 	 $postmetas['stripe_id'] = $stripe_id;
+	 $postmetas['charge_id'] = $chargeID;
 	 $postmetas['currency'] = $currency;
 	 $postmetas['amount'] = $amount;
 	 $postmetas['type'] = __('payment','direct-stripe');
@@ -229,6 +230,7 @@ try { //Retrieve Data
 	
 	 $postmetas = array();
 	 $postmetas['stripe_id'] = $stripe_id;
+	 $postmetas['charge_id'] = $chargeID;
 	 $postmetas['amount'] = $amount;
 	 $postmetas['currency'] = $currency;
 	 $postmetas['type'] = __('payment','direct-stripe');
@@ -273,8 +275,7 @@ try { //Retrieve Data
 
 
 // Add custom action before redirection
-    $chargeID = $charge->id;
-
+	
     do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 
   //Answer for ajax

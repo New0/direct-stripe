@@ -10,6 +10,12 @@
 <h2><?php _e('Direct Stripe transaction data', 'direct-stripe'); ?></h2>
 <table class="form-table">
     <tr>
+        <th><label for="charge_id"><?php _e('Charge object ID', 'direct-stripe'); ?></label></th>
+        <td>
+            <input disabled="disabled" type="text" name="charge_id" id="charge_id" value="<?php echo esc_attr(  get_post_meta( $post->ID , 'charge_id', true ) ); ?>" class="infos-sup" /><br />
+        </td>
+    </tr>
+    <tr>
         <th><label for="email_address"><?php _e('User email address', 'direct-stripe'); ?></label></th>
         <td>
             <input disabled="disabled" type="text" name="email_address" id="email_address" value="<?php echo esc_attr( get_the_author_meta( 'email_address' ) ); ?>" class="infos-sup" /><br />
