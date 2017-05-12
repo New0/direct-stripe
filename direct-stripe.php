@@ -138,6 +138,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
             include_once( 'controllers/class-ds-admin.php' );
             include_once( 'controllers/class-ds-button.php' );
             include_once( 'controllers/class-ds-cpt.php' );
+	        //include_once( 'controllers/class-ds-logs-taxonomies.php' );
             include_once( 'controllers/class-ds-users.php' );
         }
     }

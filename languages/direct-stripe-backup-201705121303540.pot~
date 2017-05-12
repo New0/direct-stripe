@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 13:03+0000\n"
+"POT-Creation-Date: 2017-05-12 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -652,7 +652,7 @@ msgid ""
 msgstr ""
 
 #: includes/shortcode_button_form.php:168
-msgid "Ask for Billing data"
+msgid "Ask for billing informations"
 msgstr ""
 
 #: includes/shortcode_button_form.php:169
@@ -688,7 +688,7 @@ msgid "Shipping"
 msgstr ""
 
 #: includes/shortcode_button_form.php:181
-msgid "Ask for Shipping Data"
+msgid "Ask for Shipping Addres.."
 msgstr ""
 
 #: includes/shortcode_button_form.php:190

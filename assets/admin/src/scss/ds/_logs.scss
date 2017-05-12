@@ -1,0 +1,10 @@
+.post-type-directstripelogs {
+  input,textarea {
+    &:disabled {
+      color: #32373c;
+    }
+  }
+  .infos-sup {
+    width: 25%;
+  }
+}

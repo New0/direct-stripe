@@ -98,10 +98,37 @@ try { //Retrieve Data
                 'post_title' 	=> $token,
                 'post_status' 	=> 'publish',
                 'post_type' 	=> 'Direct Stripe Logs',
-                'post_author'	=>  $user_id
+                'post_author'	=>  $user_id,
+	            'post_categories'	=>  array('payment'),
+	            'tax_input'    => array(
+		            'ds-logs-type'     => 'payment',
+	            ),
+	            'meta_input'   => array(
+		            'stripe_id'     => $stripe_id,
+		            'charge_id'     => $chargeID,
+		            'amount'        => $amount,
+		            'currency'      => $currency,
+		            'capture'      => $capture,
+		            'type'          =>  __('payment','direct-stripe'),
+		            'description'   => $description,
+		            'ds_billing_name' => $_POST['billing_name'],
+		            'ds_billing_address_country' => $_POST['billing_address_country'],
+		            'ds_billing_address_zip' => $_POST['billing_address_zip'],
+		            'ds_billing_address_state' => $_POST['billing_address_state'],
+		            'ds_billing_address_line1' => $_POST['billing_address_line1'],
+		            'ds_billing_address_city' => $_POST['billing_address_city'],
+		            'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+		            'ds_shipping_name' => $_POST['shipping_name'],
+		            'ds_shipping_address_country' => $_POST['shipping_address_country'],
+		            'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+		            'ds_shipping_address_state' => $_POST['shipping_address_state'],
+		            'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+		            'ds_shipping_address_city' => $_POST['shipping_address_city'],
+		            'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	            ),
             )
         );
-	 $postmetas = array();
+	 /*$postmetas = array();
 	 $postmetas['stripe_id'] = $stripe_id;
 	 $postmetas['charge_id'] = $chargeID;
 	 $postmetas['currency'] = $currency;
@@ -125,7 +152,7 @@ try { //Retrieve Data
 	
 	 foreach ( $postmetas as $key => $value ) {
          add_post_meta( $post_id, $key, $value );
-	 }
+	 }*/
 
 	//Log user
 	 $usermetas = array();
@@ -167,7 +194,7 @@ try { //Retrieve Data
             'capture'     => $capture,
             'description' => $description
         ));
-
+	 $chargeID = $charge->id;
 // Generate the password and create the user
         $password = wp_generate_password( 12, false );
         //$user_id = wp_create_user( $email_address, $password, $email_address );
@@ -224,11 +251,34 @@ try { //Retrieve Data
                 'post_title' 	=>  $token,
                 'post_status' 	=>  'publish',
                 'post_type' 	=>  'Direct Stripe Logs',
-                'post_author' 	=>  $user_id
+                'post_author' 	=>  $user_id,
+	            'meta_input'   => array(
+		            'stripe_id'     => $customer->id,
+					'charge_id'     => $chargeID,
+	                'amount'        => $amount,
+	                'currency'      => $currency,
+		            'capture'      => $capture,
+	                'type'          =>  __('payment','direct-stripe'),
+					 'description'   => $description,
+					 'ds_billing_name' => $_POST['billing_name'],
+					 'ds_billing_address_country' => $_POST['billing_address_country'],
+					 'ds_billing_address_zip' => $_POST['billing_address_zip'],
+					 'ds_billing_address_state' => $_POST['billing_address_state'],
+					 'ds_billing_address_line1' => $_POST['billing_address_line1'],
+					 'ds_billing_address_city' => $_POST['billing_address_city'],
+					 'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+					 'ds_shipping_name' => $_POST['shipping_name'],
+					 'ds_shipping_address_country' => $_POST['shipping_address_country'],
+					 'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+					 'ds_shipping_address_state' => $_POST['shipping_address_state'],
+					 'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+					 'ds_shipping_address_city' => $_POST['shipping_address_city'],
+					 'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	            ),
             )
         );
 	
-	 $postmetas = array();
+	 /*$postmetas = array();
 	 $postmetas['stripe_id'] = $stripe_id;
 	 $postmetas['charge_id'] = $chargeID;
 	 $postmetas['amount'] = $amount;
@@ -252,7 +302,7 @@ try { //Retrieve Data
 	
 	 foreach ( $postmetas as $key => $value ) {
 		 add_post_meta( $post_id, $key, $value );
-	 }
+	 }*/
     
     }//endif user exists
 

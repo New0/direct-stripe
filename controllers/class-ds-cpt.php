@@ -29,24 +29,24 @@ class dsCpt {
     function direct_stripe_create_post_type() {
         // Set UI labels for Custom Post Type
         $labels = array(
-            'name'                => _x( 'Direct Stripe logs', 'Post Type General Name', DirectStripe::domain ),
-            'singular_name'       => _x( 'Direct Stripe log', 'Post Type Singular Name', DirectStripe::domain ),
-            'parent_item_colon'   => __( 'Direct Stripe Parent Log', DirectStripe::domain ),
-            'all_items'           => __( 'Direct Stripe logs', DirectStripe::domain ),
-            'view_item'           => __( 'Direct Stripe log', DirectStripe::domain ),
-            'add_new_item'        => __( 'Add New Direct Stripe log', DirectStripe::domain ),
-            'add_new'             => __( 'Add New', DirectStripe::domain ),
-            'edit_item'           => __( 'Edit Direct Stripe log', DirectStripe::domain ),
-            'update_item'         => __( 'Update Direct Stripe log', DirectStripe::domain ),
-            'search_items'        => __( 'SearchDirect Stripe log', DirectStripe::domain ),
-            'not_found'           => __( 'Direct Stripe log Not Found', DirectStripe::domain ),
-            'not_found_in_trash'  => __( 'Direct Stripe log Not found in Trash', DirectStripe::domain ),
+            'name'                => _x( 'Direct Stripe logs', 'Post Type General Name', 'direct-stripe' ),
+            'singular_name'       => _x( 'Direct Stripe log', 'Post Type Singular Name', 'direct-stripe' ),
+            'parent_item_colon'   => __( 'Direct Stripe Parent Log', 'direct-stripe' ),
+            'all_items'           => __( 'Direct Stripe logs', 'direct-stripe' ),
+            'view_item'           => __( 'Direct Stripe log', 'direct-stripe' ),
+            'add_new_item'        => __( 'Add New Direct Stripe log', 'direct-stripe' ),
+            'add_new'             => __( 'Add New', 'direct-stripe' ),
+            'edit_item'           => __( 'Edit Direct Stripe log', 'direct-stripe' ),
+            'update_item'         => __( 'Update Direct Stripe log', 'direct-stripe' ),
+            'search_items'        => __( 'SearchDirect Stripe log', 'direct-stripe' ),
+            'not_found'           => __( 'Direct Stripe log Not Found', 'direct-stripe' ),
+            'not_found_in_trash'  => __( 'Direct Stripe log Not found in Trash', 'direct-stripe' ),
         );
 
         // Set other options for Direct Stripe Post Type
         $args = array(
-            'label'               => __( 'Direct Stripe logs', DirectStripe::domain ),
-            'description'         => __( 'Direct Stripe logs', DirectStripe::domain ),
+            'label'               => __( 'Direct Stripe logs', 'direct-stripe' ),
+            'description'         => __( 'Direct Stripe logs', 'direct-stripe' ),
             'labels'              => $labels,
             'hierarchical'        => false,
             'public'              => false,
@@ -55,12 +55,13 @@ class dsCpt {
             'show_in_nav_menus'   => true,
             'can_export'          => true,
             'exclude_from_search' => true,
-            'publicly_queryable'  => true,
+            'publicly_queryable'  => false,
 	        'map_meta_cap'        => true,
             'capability_type'     => 'page',
-            'supports'            => array( 'title' ),
+            'supports'            => array('nada'),
 	        'taxonomies'          => array(),
-	        'has_archive'         => true,
+	        'has_archive'         => false,
+	        'show_in_rest'        => true
         );
         // Registering Direct Stripe Post Type
         register_post_type( 'Direct Stripe Logs', $args );
@@ -74,13 +75,13 @@ class dsCpt {
     function direct_stripe_logs_columns_names( $columns ) {
         $columns = array(
             'cb'            => '<input type="checkbox" />',
-            'title'         => __( 'Transaction ID', DirectStripe::domain ),
-            'author'        => __( 'Stripe User', DirectStripe::domain ),
-            'amount'        => __( 'Amount', DirectStripe::domain ),
-            'currency'      => __( 'Currency', DirectStripe::domain ),
-            'type'	        =>	__( 'Type', DirectStripe::domain ),
-            'description'	=>	__( 'Description', DirectStripe::domain ),
-            'date'          => __( 'Date', DirectStripe::domain )
+            'title'         => __( 'Transaction ID', 'direct-stripe' ),
+            'author'        => __( 'Stripe User', 'direct-stripe' ),
+            'amount'        => __( 'Amount / Plan ID', 'direct-stripe' ),
+            'currency'      => __( 'Currency', 'direct-stripe' ),
+            'type'	        =>	__( 'Type', 'direct-stripe' ),
+            'description'	=>	__( 'Description', 'direct-stripe' ),
+            'date'          => __( 'Date', 'direct-stripe' ),
         );
         return $columns;
     }
@@ -96,37 +97,38 @@ class dsCpt {
 
             /* If displaying the 'amount' column. */
             case 'amount' :
-                $firstamount = get_post_meta( get_the_ID(), 'amount', true );
-                $secamount = $firstamount / 100;
-                $amount = number_format( $secamount, 2 );
+                $amount = get_post_meta( get_the_ID(), 'amount', true );
+                if( is_numeric($amount) ) {
+	                $amount = number_format( $amount / 100, 2 );
+                }
                 if ( empty( $amount ) )
-                    echo __( 'Unknown', DirectStripe::domain );
+                    echo __( 'Unknown', 'direct-stripe' );
                 else
-                    printf( __( '%s', DirectStripe::domain ), $amount );
+                    printf( __( '%s', 'direct-stripe' ), $amount );
                 break;
 
             case 'type' :
                 $type = get_post_meta( get_the_ID(), 'type', true );
                 if ( empty( $type ) )
-                    echo __( 'Unknown', DirectStripe::domain );
+                    echo __( 'Unknown', 'direct-stripe' );
                 else
-                    printf( __( '%s', DirectStripe::domain ), $type );
+                    printf( __( '%s', 'direct-stripe' ), $type );
                 break;
 
             case 'description' :
                 $type = get_post_meta( get_the_ID(), 'description', true );
                 if ( empty( $type ) )
-                    echo __( 'None provided', DirectStripe::domain );
+                    echo __( 'None provided', 'direct-stripe' );
                 else
-                    printf( __( '%s', DirectStripe::domain ), $type );
+                    printf( __( '%s', 'direct-stripe' ), $type );
                 break;
 	
 	        case 'currency' :
 		        $type = get_post_meta( get_the_ID(), 'currency', true );
 		        if ( empty( $type ) )
-			        echo __( 'None provided', DirectStripe::domain );
+			        echo __( 'None provided', 'direct-stripe' );
 		        else
-			        printf( __( '%s', DirectStripe::domain ), $type );
+			        printf( __( '%s', 'direct-stripe' ), $type );
 		        break;
 
             /* Just break out of the switch statement for everything else. */
@@ -152,7 +154,6 @@ class dsCpt {
         );
         return $columns;
     }
-	
 	
 	/**
 	 * Add meta box to post typ to print extra logs data

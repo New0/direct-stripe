@@ -83,8 +83,9 @@ try {
             $subscription = \Stripe\Subscription::create(array(
                 "customer" => $stripe_id,
                 "plan"     => $amount,
-                'coupon'   => $coupon,
-                'metadata'	=> array('description' => $description
+                "coupon"   => $coupon,
+                "metadata"	=> array(
+                	"description" => $description
                 )
             ));
         } else { //Coupon doesn't exist
@@ -96,6 +97,7 @@ try {
                 )
             ));
         }
+	    $subscription_id = $subscription->id;
         // Charge for setup fee
         if( !empty($setup_fee) ){
             $fee = \Stripe\Charge::create(array(
@@ -116,49 +118,92 @@ try {
                 'post_title' => $token,
                 'post_status' => 'publish',
                 'post_type' => 'Direct Stripe Logs',
-                'post_author'	=>	$user_id
+                'post_author'	=>	$user_id,
+	            'meta_input'   => array(
+		            'stripe_id'     => $stripe_id,
+		            'charge_id'     => $subscription_id,
+		            'amount'        => $amount,
+		            'currency'      => $currency,
+		            'capture'      => $capture,
+		            'coupon'      => $coupon,
+		            'type'          =>  __('Subscription','direct-stripe'),
+		            'description'   => $description,
+		            'ds_billing_name' => $_POST['billing_name'],
+		            'ds_billing_address_country' => $_POST['billing_address_country'],
+		            'ds_billing_address_zip' => $_POST['billing_address_zip'],
+		            'ds_billing_address_state' => $_POST['billing_address_state'],
+		            'ds_billing_address_line1' => $_POST['billing_address_line1'],
+		            'ds_billing_address_city' => $_POST['billing_address_city'],
+		            'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+		            'ds_shipping_name' => $_POST['shipping_name'],
+		            'ds_shipping_address_country' => $_POST['shipping_address_country'],
+		            'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+		            'ds_shipping_address_state' => $_POST['shipping_address_state'],
+		            'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+		            'ds_shipping_address_city' => $_POST['shipping_address_city'],
+		            'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	            ),
             )
         );
-
-        add_post_meta($post_id, 'amount', $plan_amount);
-        add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
-        add_post_meta($post_id, 'description', $description );
-        //Log setup_fee in WordPress admin
+	
+	    //Log setup_fee in WordPress admin
         if( !empty($setup_fee) ) {
             $post_id = wp_insert_post(
                 array(
                     'post_title' => $token,
                     'post_status' => 'publish',
                     'post_type' => 'Direct Stripe Logs',
-                    'post_author'	=>	$user_id
+                    'post_author'	=>	$user_id,
+	                'meta_input'   => array(
+		                'stripe_id'     => $stripe_id,
+		                'charge_id'     => $fee->id,
+		                'amount'        => $setup_fee,
+		                'currency'      => $currency,
+		                'capture'      => $capture,
+		                'type'          =>  __('Setup Fee','direct-stripe'),
+		                'description'   => $description,
+		                'ds_billing_name' => $_POST['billing_name'],
+		                'ds_billing_address_country' => $_POST['billing_address_country'],
+		                'ds_billing_address_zip' => $_POST['billing_address_zip'],
+		                'ds_billing_address_state' => $_POST['billing_address_state'],
+		                'ds_billing_address_line1' => $_POST['billing_address_line1'],
+		                'ds_billing_address_city' => $_POST['billing_address_city'],
+		                'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+		                'ds_shipping_name' => $_POST['shipping_name'],
+		                'ds_shipping_address_country' => $_POST['shipping_address_country'],
+		                'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+		                'ds_shipping_address_state' => $_POST['shipping_address_state'],
+		                'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+		                'ds_shipping_address_city' => $_POST['shipping_address_city'],
+		                'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	                ),
                 )
             );
-            add_post_meta($post_id, 'amount', $setup_fee);
-            add_post_meta($post_id, 'type', __('setup fee','direct-stripe') );
-            add_post_meta($post_id, 'description', __('setup_fee ', 'direct_stripe') . $description );
         }
 
     } else {  // User doesn't exist
-
+	    $customer = \Stripe\Customer::create(array(
+		    'email'   	=> $email_address,
+		    'source'  	=> $token
+	    ));
+	    $stripe_id = $customer->id;
         if( !empty($coupon) ){ //Coupon exist
-            $customer = \Stripe\Customer::create(array(
-                'email'   	=> $email_address,
-                'source'  	=> $token,
-                'plan'    	=> $amount,
-                'coupon'  	=> $coupon,
-                'metadata'	=> array(
-                    'description' => $description
-                )
-            ));
+	        $subscription = \Stripe\Subscription::create(array(
+		        "customer" => $stripe_id,
+		        "plan"     => $amount,
+		        "coupon"   => $coupon,
+		        "metadata"	=> array(
+			        "description" => $description
+		        )
+	        ));
         } else {// Coupon doesn't exist
-            $customer = \Stripe\Customer::create(array(
-                'email'   	=> $email_address,
-                'source'  	=> $token,
-                'plan'    	=> $amount,
-                'metadata'	=> array(
-                    'description' => $description
-                )
-            ));
+	        $subscription = \Stripe\Subscription::create(array(
+		        "customer" => $stripe_id,
+		        "plan"     => $amount,
+		        "metadata"	=> array(
+			        "description" => $description
+		        )
+	        ));
         }
 
         //Charge setup Fee
@@ -199,12 +244,33 @@ try {
                 'post_title' 	=>  $token,
                 'post_status' 	=>  'publish',
                 'post_type' 	=>  'Direct Stripe Logs',
-                'post_author'	=>  $user_id
+                'post_author'	=>  $user_id,
+	            'meta_input'    => array(
+		            'stripe_id'     => $stripe_id,
+		            'charge_id'     => $subscription->id,
+		            'amount'        => $amount,
+		            'currency'      => $currency,
+		            'capture'       => $capture,
+		            'coupon'        => $coupon,
+		            'type'          =>  __('Subscription','direct-stripe'),
+		            'description'   => $description,
+		            'ds_billing_name' => $_POST['billing_name'],
+		            'ds_billing_address_country' => $_POST['billing_address_country'],
+		            'ds_billing_address_zip' => $_POST['billing_address_zip'],
+		            'ds_billing_address_state' => $_POST['billing_address_state'],
+		            'ds_billing_address_line1' => $_POST['billing_address_line1'],
+		            'ds_billing_address_city' => $_POST['billing_address_city'],
+		            'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+		            'ds_shipping_name' => $_POST['shipping_name'],
+		            'ds_shipping_address_country' => $_POST['shipping_address_country'],
+		            'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+		            'ds_shipping_address_state' => $_POST['shipping_address_state'],
+		            'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+		            'ds_shipping_address_city' => $_POST['shipping_address_city'],
+		            'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	            ),
             )
         );
-        add_post_meta($post_id, 'amount', $plan_amount);
-        add_post_meta($post_id, 'type', __('subscription','direct-stripe') );
-        add_post_meta($post_id, 'description', $description );
 
         //Log setup_fee in WordPress admin
         if( !empty($setup_fee) ) {
@@ -213,12 +279,32 @@ try {
                     'post_title' 	=> $token . __(' setup_fee', 'direct_stripe'),
                     'post_status' 	=> 'publish',
                     'post_type' 	=> 'Direct Stripe Logs',
-                    'post_author'	=>  $user_id
+                    'post_author'	=>  $user_id,
+	                'meta_input'   => array(
+		                'stripe_id'     => $customer->id,
+		                'charge_id'     => $fee->id,
+		                'amount'        => $setup_fee,
+		                'currency'      => $currency,
+		                'capture'      => $capture,
+		                'type'          =>  __('Setup Fee','direct-stripe'),
+		                'description'   => $description,
+		                'ds_billing_name' => $_POST['billing_name'],
+		                'ds_billing_address_country' => $_POST['billing_address_country'],
+		                'ds_billing_address_zip' => $_POST['billing_address_zip'],
+		                'ds_billing_address_state' => $_POST['billing_address_state'],
+		                'ds_billing_address_line1' => $_POST['billing_address_line1'],
+		                'ds_billing_address_city' => $_POST['billing_address_city'],
+		                'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+		                'ds_shipping_name' => $_POST['shipping_name'],
+		                'ds_shipping_address_country' => $_POST['shipping_address_country'],
+		                'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+		                'ds_shipping_address_state' => $_POST['shipping_address_state'],
+		                'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+		                'ds_shipping_address_city' => $_POST['shipping_address_city'],
+		                'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+	                ),
                 )
             );
-            add_post_meta($post_id, 'amount', $setup_fee);
-            add_post_meta($post_id, 'type', __('setup fee','direct-stripe') );
-            add_post_meta($post_id, 'description', __('Setup fee ', 'direct_stripe') . $description );
         }
 
     }//end user doesn't exist
@@ -241,7 +327,6 @@ try {
     }
 
 // Add custom action before redirection
-    $chargeID = $charge->id;
     do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 
     //Answer for ajax

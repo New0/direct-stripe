@@ -165,7 +165,7 @@
   </div>
   <div class="ds-row">
       <div class="ds-one-third">
-          <label for="ds_billing"><?php _e('Ask for billing informations','direct-stripe');?></label>
+          <label for="ds_billing"><?php _e('Ask for Billing data','direct-stripe');?></label>
           <button class="ds_billing"><?php _e('Billing', 'direct-stripe'); ?>
               <span class="ds_button_billing"><?php _e('Ask for further billing information.', 'direct-stripe'); ?></span></button>
           <br />
@@ -178,7 +178,7 @@
       <div class="ds-one-third">
             <label for="ds_shipping"><?php _e('Ask for shipping informations','direct-stripe');?></label>
             <button class="ds_shipping"><?php _e('Shipping', 'direct-stripe'); ?>
-                <span class="ds_button_shipping"><?php _e('Ask for Shipping Addres..', 'direct-stripe'); ?></span></button>
+                <span class="ds_button_shipping"><?php _e('Ask for Shipping Data', 'direct-stripe'); ?></span></button>
             <br />
             <select id="ds_shipping">
                 <option value=""></option>

@@ -83,41 +83,40 @@ if($stripe_id) { // User exists
 		'capture'       => $capture,
 		'description'   => $description
 	));
-	
+	$chargeID = $charge->id;
 //Log transaction in WordPress admin
 	$post_id = wp_insert_post(
 		array(
 			'post_title' 	=> $token,
 			'post_status' 	=> 'publish',
 			'post_type' 	=> 'Direct Stripe Logs',
-			'post_author'	=>  $user_id
+			'post_author'	=>  $user_id,
+			'meta_input'   => array(
+				'stripe_id'     => $stripe_id,
+				'charge_id'     => $chargeID,
+				'amount'        => $amount,
+				'currency'      => $currency,
+				'capture'      => $capture,
+				'type'          =>  __('donation','direct-stripe'),
+				'description'   => $description,
+				'ds_billing_name' => $_POST['billing_name'],
+				'ds_billing_address_country' => $_POST['billing_address_country'],
+				'ds_billing_address_zip' => $_POST['billing_address_zip'],
+				'ds_billing_address_state' => $_POST['billing_address_state'],
+				'ds_billing_address_line1' => $_POST['billing_address_line1'],
+				'ds_billing_address_city' => $_POST['billing_address_city'],
+				'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+				'ds_shipping_name' => $_POST['shipping_name'],
+				'ds_shipping_address_country' => $_POST['shipping_address_country'],
+				'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+				'ds_shipping_address_state' => $_POST['shipping_address_state'],
+				'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+				'ds_shipping_address_city' => $_POST['shipping_address_city'],
+				'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+			),
 		)
 	);
-	$postmetas = array();
-	$postmetas['stripe_id'] = $stripe_id;
-	$postmetas['amount'] = $amount;
-	$postmetas['currency'] = $currency;
-	$postmetas['type'] = __('donation','direct-stripe');
-	$postmetas['description'] = $description;
-	$postmetas['ds_billing_name'] = $_POST['billing_name'];
-	$postmetas['ds_billing_address_country'] = $_POST['billing_address_country'];
-	$postmetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
-	$postmetas['ds_billing_address_state'] = $_POST['billing_address_state'];
-	$postmetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
-	$postmetas['ds_billing_address_city'] = $_POST['billing_address_city'];
-	$postmetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
-	$postmetas['ds_shipping_name'] = $_POST['shipping_name'];
-	$postmetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
-	$postmetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
-	$postmetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
-	$postmetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
-	$postmetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
-	$postmetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
-	
-	foreach ( $postmetas as $key => $value ) {
-		add_post_meta( $post_id, $key, $value );
-	}
-	
+
 	//save user metas
 	$usermetas = array();
 	$usermetas['ds_billing_name'] = $_POST['billing_name'];
@@ -157,7 +156,7 @@ if($stripe_id) { // User exists
 		'capture'       => $capture,
 		'description'   => $description
   ));
-	
+	$chargeID = $charge->id;
 // Generate the password and create the user
   $password = wp_generate_password( 12, false );
 //Create User
@@ -206,34 +205,32 @@ if($stripe_id) { // User exists
 			'post_title' => $token,
 			'post_status' => 'publish',
 			'post_type' => 'Direct Stripe Logs',
-			'post_author' =>	$user_id
+			'post_author' =>	$user_id,
+			'meta_input'   => array(
+				'stripe_id'     => $customer->id,
+				'charge_id'     => $chargeID,
+				'amount'        => $amount,
+				'currency'      => $currency,
+				'capture'      => $capture,
+				'type'          =>  __('donation','direct-stripe'),
+				'description'   => $description,
+				'ds_billing_name' => $_POST['billing_name'],
+				'ds_billing_address_country' => $_POST['billing_address_country'],
+				'ds_billing_address_zip' => $_POST['billing_address_zip'],
+				'ds_billing_address_state' => $_POST['billing_address_state'],
+				'ds_billing_address_line1' => $_POST['billing_address_line1'],
+				'ds_billing_address_city' => $_POST['billing_address_city'],
+				'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
+				'ds_shipping_name' => $_POST['shipping_name'],
+				'ds_shipping_address_country' => $_POST['shipping_address_country'],
+				'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
+				'ds_shipping_address_state' => $_POST['shipping_address_state'],
+				'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
+				'ds_shipping_address_city' => $_POST['shipping_address_city'],
+				'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+			),
 		)
 	);
-	
-	$postmetas = array();
-	$postmetas['stripe_id'] = $customer->id;
-	$postmetas['amount'] = $amount;
-	$postmetas['currency'] = $currency;
-	$postmetas['type'] = __('donation','direct-stripe');
-	$postmetas['description'] = $description;
-	$postmetas['ds_billing_name'] = $_POST['billing_name'];
-	$postmetas['ds_billing_address_country'] = $_POST['billing_address_country'];
-	$postmetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
-	$postmetas['ds_billing_address_state'] = $_POST['billing_address_state'];
-	$postmetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
-	$postmetas['ds_billing_address_city'] = $_POST['billing_address_city'];
-	$postmetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
-	$postmetas['ds_shipping_name'] = $_POST['shipping_name'];
-	$postmetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
-	$postmetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
-	$postmetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
-	$postmetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
-	$postmetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
-	$postmetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
-	
-	foreach ( $postmetas as $key => $value ) {
-		add_post_meta( $post_id, $key, $value );
-	}
 	
 }// Fin if else
 	
@@ -255,7 +252,7 @@ if($stripe_id) { // User exists
     }
 	
 // Add custom action before redirection
-	$chargeID = $charge->id;
+	
 	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 
     //Answer for ajax
