@@ -38,6 +38,7 @@ $directStripeAttrValues = shortcode_atts( array(
 	'custom_role'       =>  '',
 	'billing'           =>  '',
 	'shipping'          =>  '',
+	'tc'                =>  '',
 	'rememberme'        =>  ''
 ), $atts, 'direct_stripe' );
 /**

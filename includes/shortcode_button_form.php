@@ -25,6 +25,7 @@
         var ds_capture = jQuery("#ds_capture").val();
         var ds_billing = jQuery("#ds_billing").val();
         var ds_shipping = jQuery("#ds_shipping").val();
+        var ds_tc = jQuery("#ds_tc").val();
         var ds_rememberme = jQuery("#ds_rememberme").val();
         var ds_display_amount = jQuery("#ds_display_amount").val();
         var ds_currency = jQuery("#ds_currency").val();
@@ -67,6 +68,9 @@
         }
         if( ds_shipping !== "" ) {
             ds_button_shortcode = ds_button_shortcode + ' shipping="' + ds_shipping + '"';
+        }
+        if( ds_tc !== "" ) {
+            ds_button_shortcode = ds_button_shortcode + ' tc="' + ds_tc + '"';
         }
         if( ds_rememberme !== "" ) {
             ds_button_shortcode = ds_button_shortcode + ' rememberme="' + ds_rememberme + '"';
@@ -155,18 +159,29 @@
     </div>
   </div>
   <div class="ds-row">
-    <div class="ds-one-third">
-      <label for="ds_currency"><?php _e('Currency','direct-stripe');?></label>
-          <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
-              <span class="ds_button_infos ds_right"><?php _e('Override the currency set under Direct Stripe -> setup , and use currency per button.', 'direct-stripe'); ?></span></button>
+        <div class="ds-one-third">
+          <label for="ds_currency"><?php _e('Currency','direct-stripe');?></label>
+              <button class="ds_infos"><?php _e('infos', 'direct-stripe'); ?>
+                  <span class="ds_button_infos ds_right"><?php _e('Override the currency set under Direct Stripe -> setup , and use currency per button.', 'direct-stripe'); ?></span></button>
+              <br />
+              <input id="ds_currency" type="text" class="ds-shortcode-currency" name="ds_currency">
+        </div>
+      <div class="ds-one-third">
+          <label for="ds_tc"><?php _e('Ask for terms and conditions acceptation','direct-stripe');?></label>
+          <button class="ds_infos"><?php _e('Shipping', 'direct-stripe'); ?>
+              <span class="ds_button_infos ds_right"><?php _e('Ask for terms and conditions acceptation. T&C Text and link is editable under styles tab in Direct Stripe options page.', 'direct-stripe'); ?></span></button>
           <br />
-          <input id="ds_currency" type="text" class="ds-shortcode-currency" name="ds_currency">
+          <select id="ds_tc">
+              <option value=""></option>
+              <option value="true"><?php _e('Yes', 'direct-stripe'); ?></option>
+              <option value="false"><?php _e('No', 'direct-stripe'); ?></option>
+          </select> <br/>
       </div>
   </div>
   <div class="ds-row">
       <div class="ds-one-third">
           <label for="ds_billing"><?php _e('Ask for Billing data','direct-stripe');?></label>
-          <button class="ds_billing"><?php _e('Billing', 'direct-stripe'); ?>
+          <button class="ds_infos"><?php _e('Billing', 'direct-stripe'); ?>
               <span class="ds_button_billing"><?php _e('Ask for further billing information.', 'direct-stripe'); ?></span></button>
           <br />
           <select id="ds_billing">
@@ -177,7 +192,7 @@
       </div>
       <div class="ds-one-third">
             <label for="ds_shipping"><?php _e('Ask for shipping informations','direct-stripe');?></label>
-            <button class="ds_shipping"><?php _e('Shipping', 'direct-stripe'); ?>
+            <button class="ds_infos"><?php _e('Shipping', 'direct-stripe'); ?>
                 <span class="ds_button_shipping"><?php _e('Ask for Shipping Data', 'direct-stripe'); ?></span></button>
             <br />
             <select id="ds_shipping">
