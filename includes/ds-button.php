@@ -4,7 +4,7 @@ do_action( 'direct_stripe_before_form' );
 do_action( 'direct_stripe_before_button' );
 
 ?>
-
+<div class="direct-stripe">
     <?php //Donation condition and input
     if(  isset($directStripeAttrValues['type']) && $directStripeAttrValues['type'] === 'donation' ) {
         $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" />';
@@ -30,13 +30,12 @@ do_action( 'direct_stripe_before_button' );
 
     <button data-id="<?php echo $instance; ?>" class="<?php echo $ds_button_class; ?> direct-stripe-button-id <?php echo $instance; ?>"><?php echo esc_attr($directStripeAttrValues['label']); ?></button>
 
-
         <?php //T&C Check box condition
         if( isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === '1' ) { ?>
-            <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>&nbsp;
+            <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>
             <label for="conditions">
             <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
                 <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
             </label><br />
         <?php } ?>
-  
+</div>

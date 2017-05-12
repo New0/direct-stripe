@@ -29,4 +29,7 @@ $custom_css = "
 				-o-border-radius: $borderradius;
 				border-radius: $borderradius;
 			}
+			.loadingDS:before  {
+			    color: $maincolor;
+			}
 		";

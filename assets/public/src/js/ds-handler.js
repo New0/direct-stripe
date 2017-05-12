@@ -16,6 +16,8 @@ function stripe_checkout(ds_values) {
                 var amount = parobj.amount;
             }
 
+            var ds_answer_input = '#ds-answer-' + parobj.instance;
+
             jQuery('#loadingDS').show();
             jQuery.post(
                 ds_values.ajaxurl,
@@ -46,23 +48,25 @@ function stripe_checkout(ds_values) {
                 function (data) {
                     switch (data.id) {
                         case '1':
-                            jQuery('#loadingDS').hide();
-                            jQuery("#directStripe_answer").html(data.message);
-                            jQuery("#directStripe_answer").show();
+                            jQuery("#loadingDS").hide();
+                            jQuery(ds_answer_input).addClass("success");
+                            jQuery(ds_answer_input).html(data.message);
+                            jQuery(ds_answer_input).show();
                             setTimeout(function() {
-                             jQuery("#directStripe_answer").hide();
+                             jQuery(ds_answer_input).hide();
                              }, 10000);
                             break;
                         case '2':
-                            jQuery('#loadingDS').hide();
+                            jQuery("#loadingDS").hide();
                             window.location.replace(data.url);
                             break;
                         default:
-                            jQuery('#loadingDS').hide();
-                            jQuery("#directStripe_answer").html(data);
-                            jQuery("#directStripe_answer").show();
+                            jQuery("#loadingDS").hide();
+                            jQuery(ds_answer_input).addClass("error");
+                            jQuery(ds_answer_input).html(data);
+                            jQuery(ds_answer_input).show();
                         setTimeout(function() {
-                         jQuery("#directStripe_answer").hide();
+                         jQuery(ds_answer_input).hide();
                          }, 10000);
                     }
                 }

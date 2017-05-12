@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Direct Stripe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 13:04+0000\n"
-"PO-Revision-Date: 2017-05-12 13:04+0000\n"
+"PO-Revision-Date: 2017-05-12 13:43+0000\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.fr>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -379,7 +379,7 @@ msgstr "ID Direct Stripe"
 
 #: includes/ds-answers.php:19 includes/ds-answers.php:19
 msgid "Processing"
-msgstr "Processus d'envoi"
+msgstr "En traitement"
 
 #: includes/ds-data.php:24
 msgid "Pay with card"

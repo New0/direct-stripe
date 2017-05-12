@@ -52,7 +52,7 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
     if (jQuery(this).hasClass("ds-check-tc") && !jQuery("#ds-conditions-" + instance).is(':checked')) {
 
         jQuery(ds_answer_input).html("Please check the T&C" + "<br/>");
-        jQuery(ds_answer_input).css("color", "red");
+        jQuery(ds_answer_input).addClass("error");
         jQuery(ds_answer_input).show();
         setTimeout(function () {
             jQuery(ds_answer_input).hide();
@@ -66,7 +66,7 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
     if (jQuery(this).hasClass("ds-check-donation") && !jQuery("#donationvalue").val() && !jQuery("#donationvalue").val().match(numbers)) {
 
         jQuery(ds_answer_input).html('Please enter amount' + '<br/>');
-        jQuery(ds_answer_input).css("color", "red");
+        jQuery(ds_answer_input).addClass("error");
         jQuery(ds_answer_input).show();
         setTimeout(function () {
             jQuery(ds_answer_input).hide();

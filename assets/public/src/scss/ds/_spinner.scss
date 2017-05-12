@@ -2,12 +2,14 @@
 #loadingDS {
   position: absolute;
   z-index: 1111111111;
-  left: 50%;
-  top: 50%;
+  font-size: 1em;
+  padding: 1em;
+  background-color: #fff;
+  transform: translateY(-55%);
 
   img {
-    margin-top: 1rem;
-    margin-left: 0.5rem;
+    margin-top: 4em;
+    margin-left: 0.5em;
     display: inline-block;
     float: left;
   }
