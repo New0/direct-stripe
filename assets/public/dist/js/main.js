@@ -15,7 +15,9 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
     }
 
     if( ds_values.display_amount !== 'false' && ds_values.type !== 'subscription') {
-        var amount = ds_values.original_amount;
+        var amount = parseInt(ds_values.original_amount);
+    } else {
+        var amount = 0;
     }
 
 // Set remember me option
@@ -34,10 +36,10 @@ jQuery('.direct-stripe-button-id').on('click', function (e) {
     } else if( ds_values.shipping !== 'false' && ds_values.general_shipping === '1' ) {
         var shipping = true;
         var billing = true;
-    } else if(ds_values.billing === 'true') {
+    } else if(ds_values.billing === 'true' && ds_values.shipping !== 'true') {
         var shipping = false;
         var billing = true;
-    } else if( ds_values.billing !== 'true' && ds_values.general_billing === '1' ) {
+    } else if( ds_values.billing !== 'false' && ds_values.general_billing === '1' ) {
         var shipping = false;
         var billing = true;
     } else {
@@ -163,9 +165,9 @@ function stripe_checkout(ds_values) {
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data);
                             jQuery(ds_answer_input).show();
-                        setTimeout(function() {
+                        /*setTimeout(function() {
                          jQuery(ds_answer_input).hide();
-                         }, 10000);
+                         }, 10000);*/
                     }
                 }
             );

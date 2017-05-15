@@ -65,9 +65,9 @@ function stripe_checkout(ds_values) {
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data);
                             jQuery(ds_answer_input).show();
-                        setTimeout(function() {
+                        /*setTimeout(function() {
                          jQuery(ds_answer_input).hide();
-                         }, 10000);
+                         }, 10000);*/
                     }
                 }
             );

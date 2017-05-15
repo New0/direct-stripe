@@ -47,7 +47,11 @@ $directStripeAttrValues = shortcode_atts( array(
  * @since 2.0.0
  */
 //Print the amount in the modal form
-$original_amount = $directStripeAttrValues['amount'];
+if( is_numeric($directStripeAttrValues['amount']) ){
+	$original_amount = intval($directStripeAttrValues['amount']);
+} else {
+	$original_amount = 0;
+}
 
 //Query args encryption
 if( !empty( $directStripeAttrValues['amount']) ) {

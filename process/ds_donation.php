@@ -1,6 +1,6 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please!' );
-$params = isset($_POST['params']) ? $_POST['params'] : '';
+$extract = extract($_POST, EXTR_PREFIX_SAME, "post_");
 $nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
 
 if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die( __('Security check issue', 'direct-stripe') );
@@ -24,8 +24,8 @@ try{ //Retrieve Data
 $button_id 	    = isset($params['button_id']) ? $params['button_id'] : '';
 $pre_amount     = isset($_POST['amount']) ? $_POST['amount'] : '';
 $amount 	    = $pre_amount * 100;
-$token 		    = $_POST['stripeToken'];
-$email_address  = $_POST['stripeEmail'];
+$token 		    = $stripeToken;
+$email_address  = $stripeEmail;
 $admin_email    = get_option( 'admin_email' );
 if( $params['capture'] === 'false' ) {
 	$capture =  false;
@@ -99,40 +99,40 @@ if($stripe_id) { // User exists
 				'capture'      => $capture,
 				'type'          =>  __('donation','direct-stripe'),
 				'description'   => $description,
-				'ds_billing_name' => $_POST['billing_name'],
-				'ds_billing_address_country' => $_POST['billing_address_country'],
-				'ds_billing_address_zip' => $_POST['billing_address_zip'],
-				'ds_billing_address_state' => $_POST['billing_address_state'],
-				'ds_billing_address_line1' => $_POST['billing_address_line1'],
-				'ds_billing_address_city' => $_POST['billing_address_city'],
-				'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
-				'ds_shipping_name' => $_POST['shipping_name'],
-				'ds_shipping_address_country' => $_POST['shipping_address_country'],
-				'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
-				'ds_shipping_address_state' => $_POST['shipping_address_state'],
-				'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
-				'ds_shipping_address_city' => $_POST['shipping_address_city'],
-				'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+				'ds_billing_name' => $billing_name,
+				'ds_billing_address_country' => $billing_address_country,
+				'ds_billing_address_zip' => $billing_address_zip,
+				'ds_billing_address_state' => $billing_address_state,
+				'ds_billing_address_line1' => $billing_address_line1,
+				'ds_billing_address_city' => $billing_address_city,
+				'ds_billing_address_country_code' => $billing_address_country_code,
+				'ds_shipping_name' => $shipping_name,
+				'ds_shipping_address_country' => $shipping_address_country,
+				'ds_shipping_address_zip' => $shipping_address_zip,
+				'ds_shipping_address_state' => $shipping_address_state,
+				'ds_shipping_address_line1' => $shipping_address_line1,
+				'ds_shipping_address_city' => $shipping_address_city,
+				'ds_shipping_address_country_code' => $shipping_address_country_code,
 			),
 		)
 	);
 
 	//save user metas
 	$usermetas = array();
-	$usermetas['ds_billing_name'] = $_POST['billing_name'];
-	$usermetas['ds_billing_address_country'] = $_POST['billing_address_country'];
-	$usermetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
-	$usermetas['ds_billing_address_state'] = $_POST['billing_address_state'];
-	$usermetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
-	$usermetas['ds_billing_address_city'] = $_POST['billing_address_city'];
-	$usermetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
-	$usermetas['ds_shipping_name'] = $_POST['shipping_name'];
-	$usermetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
-	$usermetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
-	$usermetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
-	$usermetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
-	$usermetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
-	$usermetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
+	$usermetas['ds_billing_name'] = $billing_name;
+	$usermetas['ds_billing_address_country'] = $billing_address_country;
+	$usermetas['ds_billing_address_zip'] = $billing_address_zip;
+	$usermetas['ds_billing_address_state'] = $billing_address_state;
+	$usermetas['ds_billing_address_line1'] = $billing_address_line1;
+	$usermetas['ds_billing_address_city'] = $billing_address_city;
+	$usermetas['ds_billing_address_country_code'] = $billing_address_country_code;
+	$usermetas['ds_shipping_name'] = $shipping_name;
+	$usermetas['ds_shipping_address_country'] = $shipping_address_country;
+	$usermetas['ds_shipping_address_zip'] = $shipping_address_zip;
+	$usermetas['ds_shipping_address_state'] = $shipping_address_state;
+	$usermetas['ds_shipping_address_line1'] = $shipping_address_line1;
+	$usermetas['ds_shipping_address_city'] = $shipping_address_city;
+	$usermetas['ds_shipping_address_country_code'] = $shipping_address_country_code;
 	
 	foreach ( $usermetas as $key => $value ) {
 		if ( get_user_meta( $user_id, $key, true ) ) {
@@ -176,20 +176,20 @@ if($stripe_id) { // User exists
 	//Log user metas infos
 	$usermetas = array();
 	$usermetas['stripe_id'] = $customer->id;
-	$usermetas['ds_billing_name'] = $_POST['billing_name'];
-	$usermetas['ds_billing_address_country'] = $_POST['billing_address_country'];
-	$usermetas['ds_billing_address_zip'] = $_POST['billing_address_zip'];
-	$usermetas['ds_billing_address_state'] = $_POST['billing_address_state'];
-	$usermetas['ds_billing_address_line1'] = $_POST['billing_address_line1'];
-	$usermetas['ds_billing_address_city'] = $_POST['billing_address_city'];
-	$usermetas['ds_billing_address_country_code'] = $_POST['billing_address_country_code'];
-	$usermetas['ds_shipping_name'] = $_POST['shipping_name'];
-	$usermetas['ds_shipping_address_country'] = $_POST['shipping_address_country'];
-	$usermetas['ds_shipping_address_zip'] = $_POST['shipping_address_zip'];
-	$usermetas['ds_shipping_address_state'] = $_POST['shipping_address_state'];
-	$usermetas['ds_shipping_address_line1'] = $_POST['shipping_address_line1'];
-	$usermetas['ds_shipping_address_city'] = $_POST['shipping_address_city'];
-	$usermetas['ds_shipping_address_country_code'] = $_POST['shipping_address_country_code'];
+	$usermetas['ds_billing_name'] = $billing_name;
+	$usermetas['ds_billing_address_country'] = $billing_address_country;
+	$usermetas['ds_billing_address_zip'] = $billing_address_zip;
+	$usermetas['ds_billing_address_state'] = $billing_address_state;
+	$usermetas['ds_billing_address_line1'] = $billing_address_line1;
+	$usermetas['ds_billing_address_city'] = $billing_address_city;
+	$usermetas['ds_billing_address_country_code'] = $billing_address_country_code;
+	$usermetas['ds_shipping_name'] = $shipping_name;
+	$usermetas['ds_shipping_address_country'] = $shipping_address_country;
+	$usermetas['ds_shipping_address_zip'] = $shipping_address_zip;
+	$usermetas['ds_shipping_address_state'] = $shipping_address_state;
+	$usermetas['ds_shipping_address_line1'] = $shipping_address_line1;
+	$usermetas['ds_shipping_address_city'] = $shipping_address_city;
+	$usermetas['ds_shipping_address_country_code'] = $shipping_address_country_code;
 	
 	foreach ( $usermetas as $key => $value ) {
 		if ( get_user_meta( $user_id, $key, true ) ) {
@@ -214,20 +214,20 @@ if($stripe_id) { // User exists
 				'capture'      => $capture,
 				'type'          =>  __('donation','direct-stripe'),
 				'description'   => $description,
-				'ds_billing_name' => $_POST['billing_name'],
-				'ds_billing_address_country' => $_POST['billing_address_country'],
-				'ds_billing_address_zip' => $_POST['billing_address_zip'],
-				'ds_billing_address_state' => $_POST['billing_address_state'],
-				'ds_billing_address_line1' => $_POST['billing_address_line1'],
-				'ds_billing_address_city' => $_POST['billing_address_city'],
-				'ds_billing_address_country_code' => $_POST['billing_address_country_code'],
-				'ds_shipping_name' => $_POST['shipping_name'],
-				'ds_shipping_address_country' => $_POST['shipping_address_country'],
-				'ds_shipping_address_zip' => $_POST['shipping_address_zip'],
-				'ds_shipping_address_state' => $_POST['shipping_address_state'],
-				'ds_shipping_address_line1' => $_POST['shipping_address_line1'],
-				'ds_shipping_address_city' => $_POST['shipping_address_city'],
-				'ds_shipping_address_country_code' => $_POST['shipping_address_country_code'],
+				'ds_billing_name' => $billing_name,
+				'ds_billing_address_country' => $billing_address_country,
+				'ds_billing_address_zip' => $billing_address_zip,
+				'ds_billing_address_state' => $billing_address_state,
+				'ds_billing_address_line1' => $billing_address_line1,
+				'ds_billing_address_city' => $billing_address_city,
+				'ds_billing_address_country_code' => $billing_address_country_code,
+				'ds_shipping_name' => $shipping_name,
+				'ds_shipping_address_country' => $shipping_address_country,
+				'ds_shipping_address_zip' => $shipping_address_zip,
+				'ds_shipping_address_state' => $shipping_address_state,
+				'ds_shipping_address_line1' => $shipping_address_line1,
+				'ds_shipping_address_city' => $shipping_address_city,
+				'ds_shipping_address_country_code' => $shipping_address_country_code,
 			),
 		)
 	);

@@ -86,7 +86,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 
         function activation_hooks() {
             register_activation_hook( self::FILE,  array( $this, 'direct_stripe_user_roles_on_activation') );
-	        //add_action( 'admin_notices', array( $this, 'plugin_activation' ) ) ;
+	        add_action( 'activate_direct-stripe', array( $this, 'admin_notices' ) ) ;
         }
         /**
          * Add Stripe user role on plugin activation
@@ -96,12 +96,21 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         function direct_stripe_user_roles_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
         }
+        
+	    /**
+	     * Add Stripe activation alerts
+	     *
+	     * @since 2.0.0
+	     */
+	    function admin_notices() {
+		    add_action( 'admin_notices', array( $this, 'plugin_activation_alerts' ) ) ;
+	    }
 	    /**
 	     * Add Admin notice on activation
 	     *
 	     * @since 2.0.0
-	     *
-	    public function plugin_activation() {
+	     */
+	    public function plugin_activation_alerts() {
 		   
 				$html = '<div class="notice notice-warning is-dismissible">';
 				$html .= '<p>';
@@ -111,6 +120,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 			echo $html;
 			
 	    }
+
         /**
          * Hook into actions and filters.
          *
@@ -118,6 +128,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         public function init_hooks() {
             add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
+	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
         }
 
         /**
@@ -128,6 +139,27 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         public function load_translation() {
             load_plugin_textdomain( self::domain, false, plugin_basename( self::DIR ) . '/languages' );
         }
+	    
+	    /**
+	     * Add shortcut from plugins page
+	     *
+	     * @since 2.0.0
+	     */
+	    function ds_plugin_action_links($links, $file) {
+		    static $this_plugin;
+		
+		    if (!$this_plugin) {
+			    $this_plugin = plugin_basename(__FILE__);
+		    }
+		
+		    if ($file == $this_plugin) {
+			    $settings_link = '<a href="' . admin_url( 'admin.php?page=direct_stripe') . '">'.__("Settings","direct-stripe").'</a>';
+			    array_unshift($links, $settings_link);
+		    }
+		
+		    return $links;
+	    }
+	    
         /**
          * Include required core files.
          *
