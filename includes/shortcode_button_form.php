@@ -201,7 +201,7 @@
       <div class="ds-one-third">
           <label for="ds_rememberme"><?php _e('Allow remember me option','direct-stripe');?></label>
           <div class="ds_infos dashicons dashicons-editor-help">
-              <span class="ds_button_infos"><?php _e('Allow Stripe to ask user if he wants his email address to be remembered', 'direct-stripe'); ?>
+              <span class="ds_button_infos ds_right"><?php _e('Allow Stripe to ask user if he wants his email address to be remembered', 'direct-stripe'); ?>
               </span>
           </div>
       </div>

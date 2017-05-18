@@ -50,7 +50,7 @@ div#TB_window {
 }
 
 .ds_infos {
-  color: red;
+  color: grey;
   position: relative;
   display: inline-block;
   font-size: 2em;
@@ -88,9 +88,8 @@ div#TB_window {
     }
   }
 
-  .ds-row.ds_buttons {
-    margin-top: 3rem;
-    text-align: center;
-  }
-
+}
+.ds-row.ds_buttons {
+  margin-top: 3rem;
+  text-align: center;
 }
