@@ -277,7 +277,7 @@ class DirectStripeDisplaySettings {
 			'textarea_rows' => 10
 		);
 
-		wp_editor( $d_stripe_options['direct_stripe_admin_email_content'], 'direct_stripe_emails_settings[direct_stripe_admin_email_content]', $settings_admin_email_content);
+		wp_editor( $d_stripe_options['direct_stripe_admin_email_content'], 'direct_stripe_admin_email_content', $settings_admin_email_content);
 		?>
 		<!-- <textarea name='direct_stripe_emails_settings[direct_stripe_admin_email_content]'><?php echo sanitize_text_field( $d_stripe_options['direct_stripe_admin_email_content'] ); ?></textarea>-->
 	<?php
@@ -309,7 +309,7 @@ class DirectStripeDisplaySettings {
 			'textarea_rows' => 10
 		);
 
-		wp_editor( $d_stripe_options['direct_stripe_user_email_content'], 'direct_stripe_emails_settings[direct_stripe_user_email_content]', $settings_user_email_content);
+		wp_editor( $d_stripe_options['direct_stripe_user_email_content'], 'direct_stripe_user_email_content', $settings_user_email_content);
 		?>
 	<?php
 	}
@@ -342,7 +342,7 @@ class DirectStripeDisplaySettings {
 			'textarea_rows' => 10
 		);
 
-		wp_editor( $d_stripe_options['direct_stripe_admin_error_email_content'], 'direct_stripe_emails_settings[direct_stripe_admin_error_email_content]', $settings_admin_error_content);
+		wp_editor( $d_stripe_options['direct_stripe_admin_error_email_content'], 'direct_stripe_admin_error_email_content', $settings_admin_error_content);
 		?>
 	<?php
 	}
@@ -373,7 +373,7 @@ class DirectStripeDisplaySettings {
 			'textarea_rows' => 10
 		);
 
-		wp_editor( $d_stripe_options['direct_stripe_user_error_email_content'] , 'direct_stripe_emails_settings[direct_stripe_user_error_email_content]', $settings_user_error_content);
+		wp_editor( $d_stripe_options['direct_stripe_user_error_email_content'] , 'direct_stripe_user_error_email_content', $settings_user_error_content);
 		?>
 	<?php
 	}
