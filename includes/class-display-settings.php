@@ -91,7 +91,7 @@ class DirectStripeDisplaySettings {
             $initial_success_content = __('Successful transaction', 'direct-stripe');
         }
 
-        wp_editor( $initial_success_content, 'direct_stripe_general_settings[direct_stripe_success_message]', $settings_success_message_content);
+        wp_editor( $initial_success_content, 'direct_stripe_success_message', $settings_success_message_content);
 
     }
     /********* Error ajax message **********/
@@ -111,7 +111,7 @@ class DirectStripeDisplaySettings {
             $initial_error_content = __('Something went wrong...', 'direct-stripe');
         }
 
-        wp_editor( $initial_error_content, 'direct_stripe_general_settings[direct_stripe_error_message]', $settings_error_message_content);
+        wp_editor( $initial_error_content, 'direct_stripe_error_message', $settings_error_message_content);
 
     }
 
