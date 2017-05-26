@@ -34,7 +34,7 @@ Setup automated emails sent after a successful or error action on modal form sub
 
 **Option to ask for the billing and or shipping details**
 
-List of actions and filters hooks at <http://newo.me/stripe-hooks>
+List of actions and filters hooks at <https://newo.me/direct-stripe-actions-and-filters-hooks/>
 
 Ready for translations (Français déjà traduit) 
 
@@ -166,18 +166,20 @@ In progress, in the meanwhile asking yours may help to fill this section.
 1. Admin pages general options
 2. Admin page styles options
 3. Admin page emails options
-4. Admin transaction logs
+4. Logs details
+5. Add Direct Stripe shortcode button
+6. Form to generate and insert shortcode
 
 == Changelog ==
 
 =2.0.0=
 **Major code redesign with Ajax handling of transactions**
 
-* Ask Logs billing and shipping details
+* Option for billing and shipping details now stored in logs
 * Fixed bug that forced disable custom button on chrome for ios
 * Fixed T&C only with custom button, now T&C can be asked per button and with or without custom button
 
-List of actions and filters hooks at <http://newo.me/stripe-hooks>
+List of actions and filters hooks at <https://newo.me/direct-stripe-actions-and-filters-hooks/>
 
 =1.2.2=
 * Filters for emails subject
