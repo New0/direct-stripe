@@ -1,0 +1,40 @@
+/****************  Spinner **********************/
+#loadingDS {
+  position: absolute;
+  z-index: 1111111111;
+  font-size: 1em;
+  padding: 1em;
+  background-color: #fff;
+  transform: translateY(-55%);
+
+  img {
+    margin-top: 4em;
+    margin-left: 0.5em;
+    display: inline-block;
+    float: left;
+  }
+}
+
+.loadingDS {
+  position: relative;
+  color: rgba(0, 0, 0, .3);
+  font-size: 5em;
+  display: inline-block;
+  float: left;
+
+  &:before {
+    content: attr(data-text);
+    position: absolute;
+    overflow: hidden;
+    max-width: 7em;
+    white-space: nowrap;
+    color: #333;
+    animation: loading 8s linear;
+  }
+}
+
+@keyframes loading {
+  0% {
+    max-width: 0;
+  }
+}

@@ -1,77 +1,189 @@
 <?php
-/*
-Plugin Name: Direct Stripe
-Plugin URI: https://github.com/New0/direct-stripe
-Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
-Author: Nicolas Figueira
-Text Domain: direct-stripe
-Domain Path: /languages
+/**
+ * Direct Stripe
+ *
+ * @package     DirectStripe
+ * @author      Nicolas Figueira
+ * @copyright   2017 Nicolas Figueira
+ * @license     GPL-2.0+
+ *
+ * @wordpress-plugin
+ * Plugin Name: Direct Stripe
+ * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
+ * Version:     2.0.0
+ * Author:      Nicolas Figueira
+ * Author URI:  https://newo.me
+ * Text Domain: direct-stripe
+ * Domain Path: /languages
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
 
-Version: 1.2.2.1
-
-Author URI: https://newo.me
-*/
-defined( 'ABSPATH' ) or die( 'Please!' );
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 if(!defined('DSCORE_PATH')) {
-	define('DSCORE_PATH', plugin_dir_path(__FILE__));
+    define('DSCORE_PATH', plugin_dir_path(__FILE__));
 }
 if(!defined('DSCORE_URL')) {
-	define('DSCORE_URL', plugin_dir_url(__FILE__));
+    define('DSCORE_URL', plugin_dir_url(__FILE__));
 }
 if(!defined('DSCORE_BASENAME')) {
-	define('DSCORE_BASENAME', plugin_basename( __FILE__ ));
+    define('DSCORE_BASENAME', plugin_basename( __FILE__ ));
 }
 
-require_once ( DSCORE_PATH . 'includes/functions.php' );
+/**
+ * Main Direct Stripe Class.
+ *
+ * @package DirectStripe
+ * @since   2.0.0
+ */
+if ( ! class_exists( 'DirectStripe' ) ) :
 
-/* functions object */
-$directstripe = new \DirectStripeFunctions;
+    class DirectStripe {
 
-//Add user type when activating plugin
-register_activation_hook( __FILE__,  array( $directstripe, 'direct_stripe_user_roles_on_activation') );
+        /**
+         * Plugin file path.
+         *
+         * @since 2.0.0
+         * @var string
+         */
+        const FILE = __FILE__;
 
-//Translation ready
-add_action( 'init', array( $directstripe, 'direct_stripe_load_textdomain') );
+        /**
+         * Plugin directory path.
+         *
+         * @since 2.0.0
+         * @var string
+         */
+        const DIR = __DIR__;
 
-//Load admin scripts
-add_action( 'admin_enqueue_scripts', array( $directstripe, 'direct_stripe_load_admin_scripts') );
+        /**
+         * Plugin Version.
+         *
+         * @since 2.0.0
+         * @var string
+         */
+        const version = '2.0.0';
 
-//Add shortcode
-add_shortcode( 'direct-stripe', array( $directstripe, 'direct_stripe_buttons_func') );
+        /**
+         * Plugin Textdomain.
+         *
+         * @since 2.0.0
+         * @var string
+         */
+        const domain = 'direct-stripe';
 
-// Custom queries variables
-add_filter('query_vars', array( $directstripe, 'direct_stripe_query_vars') );
+        /**
+         * Plugin constructor.
+         */
+        public function __construct() {
+            $this->includes();
+            $this->init_hooks();
+            $this->activation_hooks();
+        }
 
-//Redirections Payment or Subscription
-add_action('parse_request', array( $directstripe, 'direct_stripe_parse_request') );
+        function activation_hooks() {
+            register_activation_hook( self::FILE,  array( $this, 'direct_stripe_on_activation') );
+        }
+        /**
+         * Add Stripe user role on plugin activation
+         *
+         * @since 2.0.0
+         */
+        function direct_stripe_on_activation() {
+            add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
+	        update_option('direct-stripe-notice', TRUE);
+        }
+	    
+	    /**
+         * Hook into actions and filters.
+         *
+         * @since 2.0.0
+         */
+        public function init_hooks() {
+            add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
+	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+	
+	        add_action( 'wp_ajax_dismissed_notice_handler', array( $this, 'ajax_notice_handler') );
+	        add_action( 'admin_notices', array( $this, 'plugin_activation_alerts' ) );
+        }
 
-//Users
-add_action( 'show_user_profile', array( $directstripe, 'direct_stripe_show_extra_profile_fields') );
-add_action( 'edit_user_profile', array( $directstripe, 'direct_stripe_show_extra_profile_fields') );
-add_action( 'personal_options_update', array( $directstripe, 'direct_stripe_save_extra_profile_fields') );
-add_action( 'edit_user_profile_update', array( $directstripe, 'direct_stripe_save_extra_profile_fields') );
+        /**
+         * Load plugin translation.
+         *
+         * @since 2.0.0
+         */
+        public function load_translation() {
+            load_plugin_textdomain( self::domain, false, plugin_basename( self::DIR ) . '/languages' );
+        }
+	    
+	    /**
+	     * Add shortcut from plugins page
+	     *
+	     * @since 2.0.0
+	     */
+	    function ds_plugin_action_links($links, $file) {
+		    static $this_plugin;
+		
+		    if (!$this_plugin) {
+			    $this_plugin = plugin_basename(__FILE__);
+		    }
+		
+		    if ($file == $this_plugin) {
+			    $settings_link = '<a href="' . admin_url( 'admin.php?page=direct_stripe') . '">'.__("Settings","direct-stripe").'</a>';
+			    array_unshift($links, $settings_link);
+		    }
+		
+		    return $links;
+	    }
+	
+	    /**
+	     * Add Admin notice
+	     *
+	     * @since 2.0.0
+	     */
+	    public function plugin_activation_alerts() {
+		    
+		    if ( get_option('direct-stripe-notice', FALSE ) ) {
+			    $html = '<div class="notice notice-warning direct-stripe-notice is-dismissible">';
+			    $html .= '<p>';
+			    $html .= __('Direct Stripe major update, please  <a href="admin.php?page=direct_stripe">update your settings</a> to keep using redirections pages, default behaviour changed to success/error messages.', 'direct-stripe');
+			    $html .= '</p>';
+			    $html .= '</div><!-- /.updated -->';
+			    echo $html;
+		    }
+	    }
+	    
+	    /**
+	     * AJAX handler to store the state of dismissible notices.
+	     *
+	     * @since 2.0.0
+	     */
+	    function ajax_notice_handler() {
 
-/* Create custom post type for transactions logs */
-add_action( 'init', array( $directstripe, 'direct_stripe_create_post_type' ) );
-//Rename Columns for direct Stripe Post Type
-add_filter( 'manage_edit-directstripelogs_columns', array( $directstripe, 'direct_stripe_logs_colums_names' ) );
-//Add content to custom columns
-add_action( 'manage_directstripelogs_posts_custom_column', array( $directstripe, 'direct_stripe_manage_logs_columns') );
-//Make custom columns sortable
-add_filter( 'manage_edit-directstripelogs_sortable_columns', array( $directstripe, 'direct_stripe_sortable_columns') );
+		    if ( get_option('direct-stripe-notice', FALSE) ) {
+			    delete_option('direct-stripe-notice');
+		    }
+		    wp_die();
+	    }
+	    
+        /**
+         * Include required core files.
+         *
+         * @since 2.0.0
+         */
+        public function includes() {
+            include_once( 'controllers/class-ds-scripts.php' );
+            include_once( 'controllers/class-ds-admin.php' );
+            include_once( 'controllers/class-ds-button.php' );
+            include_once( 'controllers/class-ds-cpt.php' );
+	        //include_once( 'controllers/class-ds-logs-taxonomies.php' );
+            include_once( 'controllers/class-ds-users.php' );
+        }
+    }
 
-//Custom Styles
-$d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
-if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) {
-	add_action( 'wp_enqueue_scripts', array( $directstripe, 'direct_stripe_styles_method') );
-}
+endif; //if class exists
 
-// Admin actions
-if ( is_admin() ) {
-	// Add admin settings area
-	add_action( 'admin_menu', array( $directstripe, 'direct_stripe_add_admin_menu') );
-	add_action( 'admin_init', array( $directstripe, 'direct_stripe_settings_init') );
-	add_action( 'media_buttons', array( $directstripe, 'direct_stripe_add_shortcode_button'), 20);
-	add_action( 'admin_footer', array( $directstripe, 'ds_add_mce_popup') );
-}
+$directstripe = new DirectStripe;
