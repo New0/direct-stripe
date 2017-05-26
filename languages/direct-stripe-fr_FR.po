@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 13:04+0000\n"
-"PO-Revision-Date: 2017-05-12 13:43+0000\n"
+"POT-Creation-Date: 2017-05-26 14:11+0000\n"
+"PO-Revision-Date: 2017-05-26 14:17+0000\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.fr>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -13,19 +13,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
+#: direct-stripe.php:152
+msgid ""
+"Direct Stripe major update, please  <a href=\"admin.php?page=direct_stripe\">"
+"update your settings</a> to keep using redirections pages, default behaviour "
+"changed to success/error messages."
+msgstr ""
+"Mise à jour importante de Direct Stripe veuillez <a href=\"admin.php?"
+"page=direct_stripe\">mettre à jour vos options</a> pour continuer à utiliser "
+"les pages de redirection. Par défaut Direct Stripe utilise désormais des "
+"message de succès / erreur."
+
+#: includes/shortcode_button_form.php:166
+msgid "Ask for terms and conditions acceptation"
+msgstr "Demander d'accepter les conditions"
+
 #: includes/shortcode_button_form.php:168
-msgid "Ask for Billing data"
-msgstr "Demander les données de facturation"
+msgid ""
+"Ask for terms and conditions acceptation. T&C Text and link is editable "
+"under styles tab in Direct Stripe options page."
+msgstr ""
+"Demander d'accepter les conditions. Le texte et le lien vers les conditions "
+"sont éditables depuis l'onglet styles de la page d'options Direct Stripe."
 
-#: includes/shortcode_button_form.php:181
-msgid "Ask for Shipping Data"
-msgstr "Demander les données de livraison"
+#: includes/shortcode_button_form.php:197
+msgid "Ask for Shipping Data ( It always enable billing data fields)"
+msgstr ""
+"Demander une adresse de livraison ( Toujours en supplément de l'adresse de "
+"facturation)"
 
-#: direct-stripe.php:97
+#: direct-stripe.php:96
 msgid "Stripe user"
 msgstr "Utilisateur Stripe"
 
-#: controllers/class-ds-admin.php:31 controllers/class-ds-admin.php:31
+#: direct-stripe.php:135 controllers/class-ds-admin.php:31
+#: controllers/class-ds-admin.php:31
 msgid "Settings"
 msgstr "Réglages"
 
@@ -98,7 +120,7 @@ msgstr "Montant / ID Plan"
 
 #: controllers/class-ds-cpt.php:81 includes/display-main-logs-data.php:65
 #: includes/register-settings.php:61 includes/register-settings.php:68
-#: includes/shortcode_button_form.php:159
+#: includes/shortcode_button_form.php:158
 msgid "Currency"
 msgstr "Devise"
 
@@ -106,7 +128,7 @@ msgstr "Devise"
 msgid "Type"
 msgstr "Type"
 
-#: controllers/class-ds-cpt.php:83 includes/shortcode_button_form.php:153
+#: controllers/class-ds-cpt.php:83 includes/shortcode_button_form.php:152
 msgid "Description"
 msgstr "Description"
 
@@ -584,11 +606,11 @@ msgstr "Ajouter un bouton Stripe"
 msgid "Add button"
 msgstr "Ajouter bouton"
 
-#: includes/shortcode_button_form.php:104
+#: includes/shortcode_button_form.php:108
 msgid "Main Button Options"
 msgstr "Options principales"
 
-#: includes/shortcode_button_form.php:105
+#: includes/shortcode_button_form.php:109
 msgid ""
 "The button type is required, the amount is required for \"payments\" and "
 "\"subscriptions\" type buttons."
@@ -596,44 +618,15 @@ msgstr ""
 "L'argument \"type\" du bouton est requis, l'argument \"amount\" est requis "
 "pour les \"type\" payments et subscription."
 
-#: includes/shortcode_button_form.php:110
+#: includes/shortcode_button_form.php:113
 msgid "Button Type"
 msgstr "Argument \"type\" du bouton"
 
-#: includes/shortcode_button_form.php:112
-msgid "Choose button type"
-msgstr "Choisir le type de bouton"
-
-#: includes/shortcode_button_form.php:113
-msgid "Payment"
-msgstr "Paiement"
-
-#: includes/shortcode_button_form.php:114 process/ds_subscription.php:129
-#: process/ds_subscription.php:255
-msgid "Subscription"
-msgstr "Souscription"
-
 #: includes/shortcode_button_form.php:115
-msgid "Donation"
-msgstr "Don"
-
-#: includes/shortcode_button_form.php:119
 msgid "Button Amount field"
 msgstr "Champs montant du bouton (argument \"amount\")"
 
-#: includes/shortcode_button_form.php:120
-#: includes/shortcode_button_form.php:160
-#: includes/shortcode_button_form.php:209
-#: includes/shortcode_button_form.php:216
-#: includes/shortcode_button_form.php:230
-#: includes/shortcode_button_form.php:241
-#: includes/shortcode_button_form.php:252
-#: includes/shortcode_button_form.php:265
-#: includes/shortcode_button_form.php:272
-msgid "infos"
-msgstr "infos"
-
-#: includes/shortcode_button_form.php:121
+#: includes/shortcode_button_form.php:118
 msgid ""
 "Payments type amount should be entered without commas and with decimals, Ex: "
 "500 means 5.00 . For subscriptions, enter the plan ID( preferably letters), "
@@ -643,15 +636,32 @@ msgstr ""
 "500 pou 5,00. Pour les souscriptions veuillez renseigner l'ID du plan "
 "préalablement créé dans l'admin Stripe."
 
-#: includes/shortcode_button_form.php:126
+#: includes/shortcode_button_form.php:122
 msgid "Button ID"
 msgstr "ID du bouton"
 
-#: includes/shortcode_button_form.php:132
+#: includes/shortcode_button_form.php:126
+msgid "Choose button type"
+msgstr "Choisir le type de bouton"
+
+#: includes/shortcode_button_form.php:127
+msgid "Payment"
+msgstr "Paiement"
+
+#: includes/shortcode_button_form.php:128 process/ds_subscription.php:129
+#: process/ds_subscription.php:306
+msgid "Subscription"
+msgstr "Souscription"
+
+#: includes/shortcode_button_form.php:129
+msgid "Donation"
+msgstr "Don"
+
+#: includes/shortcode_button_form.php:136
 msgid "Override general Options"
 msgstr "Écrase les options générales"
 
-#: includes/shortcode_button_form.php:133
+#: includes/shortcode_button_form.php:137
 msgid ""
 "Set a shop name and product/service description. The label is the text of "
 "the button, the panel label is the text of the text of the modal form button"
@@ -660,15 +670,15 @@ msgstr ""
 "qui ouvre le popup Stripe et panellabel au texte du bouton dans le popup "
 "stripe."
 
-#: includes/shortcode_button_form.php:138
+#: includes/shortcode_button_form.php:140
 msgid "Name"
 msgstr "Nom (argument \"name\")"
 
-#: includes/shortcode_button_form.php:142
+#: includes/shortcode_button_form.php:141
 msgid "Label"
 msgstr "Label"
 
-#: includes/shortcode_button_form.php:146
+#: includes/shortcode_button_form.php:142
 msgid "Panel Label"
 msgstr "Panel Label"
 
@@ -680,60 +690,54 @@ msgstr ""
 "Écrase la devise réglée dans Direct Stripe -> Réglages pour utiler "
 "différentes devises."
 
-#: includes/shortcode_button_form.php:169
-msgid "Billing"
-msgstr "Facturation"
-
-#: includes/shortcode_button_form.php:170
-msgid "Ask for further billing information."
-msgstr "Demander les données de facturation"
-
-#: includes/shortcode_button_form.php:174
-#: includes/shortcode_button_form.php:185
-#: includes/shortcode_button_form.php:196
-#: includes/shortcode_button_form.php:235
-#: includes/shortcode_button_form.php:246
+#: includes/shortcode_button_form.php:180
+#: includes/shortcode_button_form.php:213
+#: includes/shortcode_button_form.php:220
+#: includes/shortcode_button_form.php:227
+#: includes/shortcode_button_form.php:294
+#: includes/shortcode_button_form.php:301
 msgid "Yes"
 msgstr "Oui"
 
-#: includes/shortcode_button_form.php:175
-#: includes/shortcode_button_form.php:186
-#: includes/shortcode_button_form.php:197
-#: includes/shortcode_button_form.php:236
-#: includes/shortcode_button_form.php:247
+#: includes/shortcode_button_form.php:181
+#: includes/shortcode_button_form.php:214
+#: includes/shortcode_button_form.php:221
+#: includes/shortcode_button_form.php:228
+#: includes/shortcode_button_form.php:295
+#: includes/shortcode_button_form.php:302
 msgid "No"
 msgstr "Non"
 
-#: includes/shortcode_button_form.php:179
+#: includes/shortcode_button_form.php:188
+msgid "Ask for Billing data"
+msgstr "Demander les données de facturation"
+
+#: includes/shortcode_button_form.php:190
+msgid "Ask for further billing information."
+msgstr "Demander les données de facturation"
+
+#: includes/shortcode_button_form.php:195
 msgid "Ask for shipping informations"
 msgstr "Demander des données de livraison"
 
-#: includes/shortcode_button_form.php:180
-msgid "Shipping"
-msgstr "Livraison"
-
-#: includes/shortcode_button_form.php:190
+#: includes/shortcode_button_form.php:202
 msgid "Allow remember me option"
 msgstr "Autoriser l'option \"Se souvenir de moi\""
 
-#: includes/shortcode_button_form.php:191
-msgid "Remember me option"
-msgstr "Option \"Se souvenir de moi\""
-
-#: includes/shortcode_button_form.php:192
+#: includes/shortcode_button_form.php:204
 msgid "Allow Stripe to ask user if he wants his email address to be remembered"
 msgstr ""
 "Autoriser Stripe à demander à l'utilisateur de conserver son adresse email"
 
-#: includes/shortcode_button_form.php:203
+#: includes/shortcode_button_form.php:234
 msgid "Options for subscriptions"
 msgstr "Options pour les souscriptions"
 
-#: includes/shortcode_button_form.php:208
+#: includes/shortcode_button_form.php:239
 msgid "Coupon"
 msgstr "Coupon"
 
-#: includes/shortcode_button_form.php:210
+#: includes/shortcode_button_form.php:241
 msgid ""
 "Coupon are to be previously created in Stripe admin panel and allows you to "
 "create a discount/promotion, enter the coupon ID."
@@ -741,12 +745,12 @@ msgstr ""
 "Le coupon doit être préalablement créé dans l'admin Stripe pour renseigner "
 "ici l'ID du coupon correspondant."
 
-#: includes/shortcode_button_form.php:215 process/ds_subscription.php:163
-#: process/ds_subscription.php:289
+#: includes/shortcode_button_form.php:246 process/ds_subscription.php:163
+#: process/ds_subscription.php:340
 msgid "Setup Fee"
 msgstr "Frais d'inscription (argument setup_fee)"
 
-#: includes/shortcode_button_form.php:217
+#: includes/shortcode_button_form.php:248
 msgid ""
 "Setup Fee allows you to charge a one time fee on plan subscription "
 "activation. Enter the amount use it and charge, 500 means 5.00"
@@ -754,15 +758,15 @@ msgstr ""
 "Un frais d'inscription peut être débité à la souscription. Renseigner ici le "
 "montant ( 500 pour 5,00)"
 
-#: includes/shortcode_button_form.php:224
+#: includes/shortcode_button_form.php:265
 msgid "Extra options"
 msgstr "Options supplémentaires"
 
-#: includes/shortcode_button_form.php:229
+#: includes/shortcode_button_form.php:269
 msgid "Capture"
 msgstr "Capture"
 
-#: includes/shortcode_button_form.php:231
+#: includes/shortcode_button_form.php:271
 msgid ""
 "Set capture to \"No\" to manually create the charge from your Stripe admin "
 "panel within the next 7 days."
@@ -770,32 +774,32 @@ msgstr ""
 "Régler capture sur non pour débiter manuellement depuis l'admin Stripe sous "
 "7 jours."
 
-#: includes/shortcode_button_form.php:240
+#: includes/shortcode_button_form.php:276
 msgid "Display amount"
 msgstr "Affichage du montant (argument display_amount)"
 
-#: includes/shortcode_button_form.php:242
+#: includes/shortcode_button_form.php:278
 msgid "Set to \"No\" to hide the amount in modal form button."
 msgstr ""
 "Régler sur non pour ne pas afficher le prix dans le bouton du popup Stripe"
 
-#: includes/shortcode_button_form.php:251
+#: includes/shortcode_button_form.php:283
 msgid "Custom Role"
 msgstr "Rôle personnalisé"
 
-#: includes/shortcode_button_form.php:253
+#: includes/shortcode_button_form.php:285
 msgid "Add a per button custom role to user"
 msgstr "Ajouter un rôle personnalisé aux utilisateurs de ce bouton"
 
-#: includes/shortcode_button_form.php:260
+#: includes/shortcode_button_form.php:313
 msgid "Extra query arguments"
 msgstr "Arguments de requête supplémentaires"
 
-#: includes/shortcode_button_form.php:264
+#: includes/shortcode_button_form.php:317
 msgid "Success query arguments"
 msgstr "Arguments supplémentaires pour la redirection succes"
 
-#: includes/shortcode_button_form.php:266
+#: includes/shortcode_button_form.php:319
 msgid ""
 "Pass arguments after success button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
@@ -803,11 +807,11 @@ msgstr ""
 "Ajouter des arguments lors de la redirection succes. Format: myarg1:myvalue1,"
 "myarg2:myvalue2"
 
-#: includes/shortcode_button_form.php:271
+#: includes/shortcode_button_form.php:324
 msgid "Error query arguments"
 msgstr "Arguments supplémentaires pour la redirection erreur"
 
-#: includes/shortcode_button_form.php:273
+#: includes/shortcode_button_form.php:326
 msgid ""
 "Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
@@ -815,40 +819,40 @@ msgstr ""
 "Ajouter des arguments lors de la redirection erreur. Format: myarg1:myvalue1,"
 "myarg2:myvalue2"
 
-#: includes/shortcode_button_form.php:280
+#: includes/shortcode_button_form.php:342
 msgid "Per button success/error redirections"
 msgstr "Redirections par bouton"
 
-#: includes/shortcode_button_form.php:281
+#: includes/shortcode_button_form.php:343
 msgid ""
 "Enter the entire http address \"http://domain.ext/success-or-error-page\" ; "
 "this will override redirections globally set."
 msgstr ""
 "Renseigner l'url complète -> \"http://domain.ext/success-or-error-page\" "
 
-#: includes/shortcode_button_form.php:286
+#: includes/shortcode_button_form.php:348
 msgid "Success url"
 msgstr "URL succès"
 
-#: includes/shortcode_button_form.php:290
+#: includes/shortcode_button_form.php:351
 msgid "Error url"
 msgstr "Url erreur"
 
-#: includes/shortcode_button_form.php:296
+#: includes/shortcode_button_form.php:364
 msgid "Insert Button"
 msgstr "Insérer le bouton"
 
-#: includes/shortcode_button_form.php:297
+#: includes/shortcode_button_form.php:365
 msgid "Cancel"
 msgstr "Annuler"
 
 #: process/create_donation.php:120 process/create_donation.php:165
-#: process/ds_donation.php:100 process/ds_donation.php:215
+#: process/ds_donation.php:101 process/ds_donation.php:216
 msgid "donation"
 msgstr "don"
 
 #: process/create_payment.php:127 process/create_payment.php:172
-#: process/ds_payment.php:112 process/ds_payment.php:261
+#: process/ds_payment.php:108 process/ds_payment.php:231
 msgid "payment"
 msgstr "paiement"
 
@@ -864,7 +868,7 @@ msgstr "souscription"
 msgid "setup fee"
 msgstr "Frais de souscription "
 
-#: process/create_subscription.php:193 process/ds_subscription.php:215
+#: process/create_subscription.php:193 process/ds_subscription.php:240
 msgid "Setup fee "
 msgstr "Frais de souscription"
 

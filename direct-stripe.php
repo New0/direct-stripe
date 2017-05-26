@@ -85,43 +85,19 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         }
 
         function activation_hooks() {
-            register_activation_hook( self::FILE,  array( $this, 'direct_stripe_user_roles_on_activation') );
-	        add_action( 'activate_direct-stripe', array( $this, 'admin_notices' ) ) ;
+            register_activation_hook( self::FILE,  array( $this, 'direct_stripe_on_activation') );
         }
         /**
          * Add Stripe user role on plugin activation
          *
          * @since 2.0.0
          */
-        function direct_stripe_user_roles_on_activation() {
+        function direct_stripe_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
+	        update_option('direct-stripe-notice', TRUE);
         }
-        
+	    
 	    /**
-	     * Add Stripe activation alerts
-	     *
-	     * @since 2.0.0
-	     */
-	    function admin_notices() {
-		    add_action( 'admin_notices', array( $this, 'plugin_activation_alerts' ) ) ;
-	    }
-	    /**
-	     * Add Admin notice on activation
-	     *
-	     * @since 2.0.0
-	     */
-	    public function plugin_activation_alerts() {
-		   
-				$html = '<div class="notice notice-warning is-dismissible">';
-				$html .= '<p>';
-				$html .= __( 'Direct Stripe 2.0.0 added ajax response as default behaviour, if you still want to use redirections, please, <a href="admin.php?page=direct_stripe">enable the "use redirections" checkbox</a>.', 'direct-stripe' );
-				$html .= '</p>';
-			    $html .= '</div><!-- /.updated -->';
-			echo $html;
-			
-	    }
-
-        /**
          * Hook into actions and filters.
          *
          * @since 2.0.0
@@ -129,6 +105,9 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         public function init_hooks() {
             add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+	
+	        add_action( 'wp_ajax_dismissed_notice_handler', array( $this, 'ajax_notice_handler') );
+	        add_action( 'admin_notices', array( $this, 'plugin_activation_alerts' ) );
         }
 
         /**
@@ -158,6 +137,36 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 		    }
 		
 		    return $links;
+	    }
+	
+	    /**
+	     * Add Admin notice
+	     *
+	     * @since 2.0.0
+	     */
+	    public function plugin_activation_alerts() {
+		    
+		    if ( get_option('direct-stripe-notice', FALSE ) ) {
+			    $html = '<div class="notice notice-warning direct-stripe-notice is-dismissible">';
+			    $html .= '<p>';
+			    $html .= __('Direct Stripe major update, please  <a href="admin.php?page=direct_stripe">update your settings</a> to keep using redirections pages, default behaviour changed to success/error messages.', 'direct-stripe');
+			    $html .= '</p>';
+			    $html .= '</div><!-- /.updated -->';
+			    echo $html;
+		    }
+	    }
+	    
+	    /**
+	     * AJAX handler to store the state of dismissible notices.
+	     *
+	     * @since 2.0.0
+	     */
+	    function ajax_notice_handler() {
+
+		    if ( get_option('direct-stripe-notice', FALSE) ) {
+			    delete_option('direct-stripe-notice');
+		    }
+		    wp_die();
 	    }
 	    
         /**

@@ -20,18 +20,18 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	);
 
 	add_settings_field( 
-		'direct_stripe_secret_api_key', 
-		__( 'Live Secret API key', 'direct-stripe' ), 
-		array($displaysettings, 'direct_stripe_secret_api_key_render'), 
-		'directStripeGeneral', 
-		'direct_stripe_keys_section' 
-	);
-	add_settings_field( 
 		'direct_stripe_publishable_api_key', 
 		__( 'Live Publishable API key', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_publishable_api_key_render'), 
 		'directStripeGeneral', 
 		'direct_stripe_keys_section' 
+	);
+	add_settings_field(
+		'direct_stripe_secret_api_key',
+		__( 'Live Secret API key', 'direct-stripe' ),
+		array($displaysettings, 'direct_stripe_secret_api_key_render'),
+		'directStripeGeneral',
+		'direct_stripe_keys_section'
 	);
 	add_settings_field( 
 		'direct_stripe_checkbox_api_keys', 
@@ -41,18 +41,18 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 		'direct_stripe_keys_section' 
 	);
 	add_settings_field( 
-		'direct_stripe_test_secret_api_key', 
-		__( 'Test Secret API key', 'direct-stripe' ), 
-		array($displaysettings, 'direct_stripe_test_secret_api_key_render'), 
-		'directStripeGeneral', 
-		'direct_stripe_keys_section' 
-	);
-	add_settings_field( 
 		'direct_stripe_test_publishable_api_key', 
 		__( 'Test Publishable API key', 'direct-stripe' ), 
 		array($displaysettings, 'direct_stripe_test_publishable_api_key_render'), 
 		'directStripeGeneral', 
 		'direct_stripe_keys_section' 
+	);
+	add_settings_field(
+		'direct_stripe_test_secret_api_key',
+		__( 'Test Secret API key', 'direct-stripe' ),
+		array($displaysettings, 'direct_stripe_test_secret_api_key_render'),
+		'directStripeGeneral',
+		'direct_stripe_keys_section'
 	);
 
 //Currency

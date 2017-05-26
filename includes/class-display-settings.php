@@ -5,13 +5,6 @@ defined( 'ABSPATH' ) or die( 'Please!' );
 class DirectStripeDisplaySettings {
 	
 	/*****   Live API KEYS   *******/
-	function direct_stripe_secret_api_key_render() {
-
-	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
-    ?>
-		<input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_secret_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_secret_api_key'] ); ?>'>
-	<?php
-	}
 
 	function direct_stripe_publishable_api_key_render() {
 
@@ -19,6 +12,14 @@ class DirectStripeDisplaySettings {
 	?>
 		<input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_publishable_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_publishable_api_key'] ); ?>'>
 	<?php
+	}
+	
+	function direct_stripe_secret_api_key_render() {
+		
+		$d_stripe_options = get_option( 'direct_stripe_general_settings' );
+		?>
+        <input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_secret_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_secret_api_key'] ); ?>'>
+		<?php
 	}
 
 	/***************    Checkbox for test keys   **************************/
@@ -33,19 +34,19 @@ class DirectStripeDisplaySettings {
 	}
 
 	/********************    Test API Keys  ***************************/
-	function direct_stripe_test_secret_api_key_render() {
-
-	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
-	?>
-		<input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_test_secret_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_test_secret_api_key'] ); ?>'>
-	<?php
-	}
 	function direct_stripe_test_publishable_api_key_render() {
 
 	$d_stripe_options = get_option( 'direct_stripe_general_settings' );
 	?>
 		<input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_test_publishable_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_test_publishable_api_key'] ); ?>'>
 	<?php
+	}
+	function direct_stripe_test_secret_api_key_render() {
+		
+		$d_stripe_options = get_option( 'direct_stripe_general_settings' );
+		?>
+        <input size="35" type='text' name='direct_stripe_general_settings[direct_stripe_test_secret_api_key]' value='<?php echo esc_attr( $d_stripe_options['direct_stripe_test_secret_api_key'] ); ?>'>
+		<?php
 	}
 
 	/********************   Currency *********************/

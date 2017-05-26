@@ -31,19 +31,7 @@ class dsScripts {
                 'message' => __('Use selected image', 'direct-stripe')
             )
         );
-        /*global $direct_stripe_page;
-        if( $hook != $direct_stripe_page )
-            return;
 
-        wp_enqueue_style('direct-stripe-admin', DSCORE_URL . 'assets/dist/css/ds-options.css');
-        wp_enqueue_media();
-        wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('direct-stripe-image-script', DSCORE_URL . 'assets/dist/js/ds-script.js', array('jquery', 'wp-color-picker'), false, true );
-        wp_localize_script('direct-stripe-image-script', 'direct_stripe_image_script_vars', array(
-                'title' => __('Logo for Stripe Form', 'direct-stripe'),
-                'message' => __('Use selected image', 'direct-stripe')
-            )
-        );*/
     }
 
     /**

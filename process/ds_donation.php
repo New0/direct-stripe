@@ -24,6 +24,7 @@ try{ //Retrieve Data
 $button_id 	    = isset($params['button_id']) ? $params['button_id'] : '';
 $pre_amount     = isset($_POST['amount']) ? $_POST['amount'] : '';
 $amount 	    = $pre_amount * 100;
+$amount = apply_filters( 'ds_donation_amount', $amount);
 $token 		    = $stripeToken;
 $email_address  = $stripeEmail;
 $admin_email    = get_option( 'admin_email' );
