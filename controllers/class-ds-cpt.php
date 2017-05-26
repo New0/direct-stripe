@@ -36,9 +36,9 @@ class dsCpt {
             'view_item'           => __( 'Direct Stripe log', 'direct-stripe' ),
             'add_new_item'        => __( 'Add New Direct Stripe log', 'direct-stripe' ),
             'add_new'             => __( 'Add New', 'direct-stripe' ),
-            'edit_item'           => __( 'Edit Direct Stripe log', 'direct-stripe' ),
-            'update_item'         => __( 'Update Direct Stripe log', 'direct-stripe' ),
-            'search_items'        => __( 'SearchDirect Stripe log', 'direct-stripe' ),
+            'edit_item'           => __( 'Direct Stripe log', 'direct-stripe' ),
+            'update_item'         => __( 'Direct Stripe log', 'direct-stripe' ),
+            'search_items'        => __( 'Search Direct Stripe log', 'direct-stripe' ),
             'not_found'           => __( 'Direct Stripe log Not Found', 'direct-stripe' ),
             'not_found_in_trash'  => __( 'Direct Stripe log Not found in Trash', 'direct-stripe' ),
         );
