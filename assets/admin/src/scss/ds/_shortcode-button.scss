@@ -1,0 +1,95 @@
+/* Shortcode button */
+
+div#TB_window {
+  &.thickbox-loading {
+    height: auto !important;
+  }
+}
+#TB_ajaxContent {
+  width: auto !important;
+  height: 80vh !important;
+  overflow: scroll;
+}
+#ds_add_button {
+  .ds_buttons {
+    width: 100%;
+    text-align: center;
+  }
+  .button-primary, #ds_add_button .button-secondary {
+    margin-top: 2rem;
+  }
+}
+
+.ds-row {
+  width: 100%;
+  clear: both;
+
+  &.ds-flex {
+    display: flex;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    text-decoration: underline;
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+}
+
+.ds-only-one {
+  width: 100%;
+  margin: 1%;
+}
+.ds-one-half {
+  width: 46%;
+  margin: 1%;
+}
+.ds-one-third {
+  width: 30%;
+  margin: 1%;
+}
+
+.ds_infos {
+  color: grey;
+  position: relative;
+  display: inline-block;
+  font-size: 2em;
+
+  &:hover {
+    .ds_button_infos {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .ds_button_infos {
+    visibility: hidden;
+    width: 15rem;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: absolute;
+    z-index: 100;
+    margin-left: 1rem;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 1rem;
+    top: -100%;
+
+    &.ds_right {
+      right: 100%;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+  }
+
+}
+.ds-row.ds_buttons {
+  margin-top: 3rem;
+  text-align: center;
+}
