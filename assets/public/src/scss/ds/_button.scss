@@ -1,0 +1,68 @@
+/*** Boutons stripe ****/
+
+.stripe-button-el {
+  display: inline;
+}
+.direct-stripe-button {
+  margin: 0 auto;
+  padding: 0.7em 1.2em;
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+  background: none;
+  background-image: none;
+  background-color: #6772e5;
+  border: 1px solid #6772e5;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: transparent;
+    border-color: #6772e5;
+    color: #6772e5;
+  }
+}
+
+#donationvalue {
+  max-width: 5em;
+  display: inline;
+}
+.direct-stripe {
+  input[type="checkbox"] + label {
+    display: inline;
+  }
+}
+.directStripe_answer {
+  display: none;
+  padding: 0.4rem 0.9rem;
+  position: absolute;
+  z-index: 11111111;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+
+  &.error {
+    color: #fff;
+    background-color: red;
+  }
+  &.alert {
+    color: #fff;
+    background-color: orange;
+  }
+  &.success {
+    color: #fff;
+    background-color: green;
+  }
+}
+.direct-stripe {
+  margin: 1em;
+}

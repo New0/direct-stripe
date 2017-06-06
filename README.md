@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7.3
 
-Stable tag: 1.2.2
+Stable tag: 2.0.1
 
 License: GPLv2 or later 
 
@@ -132,6 +132,18 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+=2.0.1=
+**Fixed live key bug**
+
+=2.0.0=
+**Major code redesign with Ajax handling of transactions**
+
+* Option for billing and shipping details now stored in logs
+* Fixed bug that forced disable custom button on chrome for ios
+* Fixed T&C only with custom button, now T&C can be asked per button and with or without custom button
+
+List of actions and filters hooks at <https://newo.me/direct-stripe-actions-and-filters-hooks/>
 
 =1.2.2=
 * Filters for emails subject
