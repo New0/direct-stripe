@@ -65,7 +65,7 @@ $current_email = $current->user_email;
 if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_general['direct_stripe_checkbox_api_keys'] === '1' ) {
 	$key = $d_stripe_general['direct_stripe_test_publishable_api_key'];
 } else {
-	$key = $d_stripe_general['direct_stripe_live_publishable_api_key'];
+	$key = $d_stripe_general['direct_stripe_publishable_api_key'];
 }
 
 //Set ajax url

@@ -70,11 +70,12 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
 
         return false;
     }
-
+console.log(ds_values.key);
     handler = stripe_checkout(ds_values);
     // Open Checkout with further options:
     if( billing === false ) {
         handler.open({
+            'key': ds_values.key,
             'locale': 'auto',
             'image': ds_values.image,
             'name': ds_values.name,
@@ -88,6 +89,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         });
     } else {
         handler.open({
+            'key': ds_values.key,
             'locale': 'auto',
             'image': ds_values.image,
             'name': ds_values.name,

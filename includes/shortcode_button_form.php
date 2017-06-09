@@ -107,7 +107,7 @@
   <div class="ds-row">
       <h4><?php _e('Main Button Options','direct-stripe');?></h4>
       <p><?php _e('The button type is required, the amount is required for "payments" and "subscriptions" type buttons.', 'direct-stripe'); ?> </p>
-  </div>
+  </div><br/><br/>
 
     <div class="ds-row ds-flex">
         <label class="ds-one-third" for="ds_type"><?php _e('Button Type','direct-stripe');?></label>

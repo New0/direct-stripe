@@ -10,7 +10,11 @@
  * @wordpress-plugin
  * Plugin Name: Direct Stripe
  * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
- * Version:     2.0.0
+<<<<<<< HEAD
+ * Version:     2.0.1
+=======
+ * Version:     2.0.3
+>>>>>>> v2
  * Author:      Nicolas Figueira
  * Author URI:  https://newo.me
  * Text Domain: direct-stripe
@@ -94,7 +98,6 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         function direct_stripe_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
-	        update_option('direct-stripe-notice', TRUE);
         }
 	    
 	    /**
@@ -103,11 +106,8 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          */
         public function init_hooks() {
-            add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
+		    add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
-	
-	        add_action( 'wp_ajax_dismissed_notice_handler', array( $this, 'ajax_notice_handler') );
-	        add_action( 'admin_notices', array( $this, 'plugin_activation_alerts' ) );
         }
 
         /**
@@ -138,37 +138,8 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 		
 		    return $links;
 	    }
-	
-	    /**
-	     * Add Admin notice
-	     *
-	     * @since 2.0.0
-	     */
-	    public function plugin_activation_alerts() {
-		    
-		    if ( get_option('direct-stripe-notice', FALSE ) ) {
-			    $html = '<div class="notice notice-warning direct-stripe-notice is-dismissible">';
-			    $html .= '<p>';
-			    $html .= __('Direct Stripe major update, please  <a href="admin.php?page=direct_stripe">update your settings</a> to keep using redirections pages, default behaviour changed to success/error messages.', 'direct-stripe');
-			    $html .= '</p>';
-			    $html .= '</div><!-- /.updated -->';
-			    echo $html;
-		    }
-	    }
-	    
-	    /**
-	     * AJAX handler to store the state of dismissible notices.
-	     *
-	     * @since 2.0.0
-	     */
-	    function ajax_notice_handler() {
+		
 
-		    if ( get_option('direct-stripe-notice', FALSE) ) {
-			    delete_option('direct-stripe-notice');
-		    }
-		    wp_die();
-	    }
-	    
         /**
          * Include required core files.
          *
