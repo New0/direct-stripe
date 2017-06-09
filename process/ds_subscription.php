@@ -374,45 +374,56 @@ try {
         $email_subject = apply_filters( 'direct_stripe_success_admin_email_subject', $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id, $plan );
         $email_content = apply_filters( 'direct_stripe_success_admin_email_content', $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id, $plan );
 
-        wp_mail( $admin_address, $email_subject , $email_content, $headers );
+        wp_mail( $admin_email, $email_subject , $email_content, $headers );
     }
 
 // Add custom action before redirection
     do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
-
-    //Answer for ajax
-    if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' ) {
-
-        $success_url	= isset($params['success_url']) ? $params['error_url'] : '';
-        if ( !empty($success_url)) {
-            $s_url = $success_url;
-        } else {
-            $s_url = get_permalink( $d_stripe_general['direct_stripe_success_page'] );
-        }
-        $success_query	= isset($params['success_query']) ? $params['success_query'] : '';
-        if ( !empty($success_query)) {
-            $pres_query = $success_query;
-            preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-            $s_query = array_combine($r[1], $r[2]);
-        }
-        //Add query arguments for redirection
-        if( !empty($s_query) ) {
-            $s_url = add_query_arg( $s_query , $s_url);
-        }
-        //Redirection after success
-        $return = array(
-            'id'	=> '2',
-            'url'	=> $s_url
-        );
-
-    } else {
-
-        $return = array(
-            'id'	=> '1',
-            'message' => $d_stripe_general['direct_stripe_success_message']
-        );
-
-    }
+	
+	//Answer for ajax
+	if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['success_url']) ) {
+		
+		
+		$s_url = get_permalink($d_stripe_general['direct_stripe_success_page']);
+		$success_query = isset($params['success_query']) ? $params['success_query'] : '';
+		
+		if(!empty($success_query)) {
+			$pres_query = $success_query;
+			preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+			$s_query = array_combine($r[1], $r[2]);
+		}
+		//Add query arguments for redirection
+		if(!empty($s_query)) {
+			$s_url = add_query_arg($s_query, $s_url);
+		}
+		//Redirection after success
+		$return = array( 'id' => '2', 'url' => $s_url );
+		
+	} elseif( !empty($params['success_url']) ) {
+		
+		$s_url = isset($params['success_url']) ? $params['success_url'] : '';
+		$success_query = isset($params['success_query']) ? $params['success_query'] : '';
+		
+		if(!empty($success_query)) {
+			$pres_query = $success_query;
+			preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+			$s_query = array_combine($r[1], $r[2]);
+		}
+		//Add query arguments for redirection
+		if(!empty($s_query)) {
+			$s_url = add_query_arg($s_query, $s_url);
+		}
+		//Redirection after success
+		$return = array( 'id' => '2', 'url' => $s_url );
+		
+	} else {
+		
+		$return = array(
+			'id'	=> '1',
+			'message' => $d_stripe_general['direct_stripe_success_message']
+		);
+		
+	}
 
     wp_send_json($return);
 }
@@ -439,38 +450,48 @@ catch(Exception $e)
     do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 
 //Answer for ajax
-    if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' ) {
-
-        $error_url	= isset($params['error_url']) ? $params['error_url'] : '';
-        if ( !empty($error_url)) {
-            $e_url = $error_url;
-        } else {
-            $e_url = get_permalink( $d_stripe_general['direct_stripe_error_page'] );
-        }
-        $error_query	= isset($params['error_query']) ? $params['error_query'] : '';
-        if ( !empty($error_query)) {
-            $pres_query = $error_query;
-            preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
-            $e_query = array_combine($e[1], $e[2]);
-        }
-        //Add query arguments for redirection
-        if( !empty($e_query) ) {
-            $e_url = add_query_arg( $e_query , $e_url);
-        }
-        //Redirection after success
-        $return = array(
-            'id'	=> '2',
-            'url'	=> $e_url
-        );
-
-    } else {
-
-        $return = array(
-            'id'	=> '1',
-            'message' => $d_stripe_general['direct_stripe_error_message']
-        );
-
-    }
+	if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['error_url']) ) {
+		
+		$e_url = get_permalink($d_stripe_general['direct_stripe_error_page']);
+		$error_query = isset($params['error_query']) ? $params['error_query'] : '';
+		
+		if(!empty($error_query)) {
+			$pres_query = $error_query;
+			preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
+			$e_query = array_combine($e[1], $e[2]);
+		}
+		//Add query arguments for redirection
+		if(!empty($e_query)) {
+			$e_url = add_query_arg($e_query, $e_url);
+		}
+		//Redirection after success
+		$return = array( 'id' => '2', 'url' => $e_url );
+		
+	} elseif( !empty($params['error_url']) ) {
+		
+		$e_url	= isset($params['error_url']) ? $params['error_url'] : '';
+		$error_query = isset($params['error_query']) ? $params['error_query'] : '';
+		
+		if(!empty($error_query)) {
+			$pres_query = $error_query;
+			preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
+			$e_query = array_combine($e[1], $e[2]);
+		}
+		//Add query arguments for redirection
+		if(!empty($e_query)) {
+			$e_url = add_query_arg($e_query, $e_url);
+		}
+		//Redirection after success
+		$return = array( 'id' => '2', 'url' => $e_url );
+		
+	} else {
+		
+		$return = array(
+			'id'	=> '1',
+			'message' => $d_stripe_general['direct_stripe_error_message']
+		);
+		
+	}
 
     wp_send_json($return);
 
