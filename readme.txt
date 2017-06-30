@@ -172,6 +172,10 @@ In progress, in the meanwhile asking yours may help to fill this section.
 
 == Changelog ==
 
+=2.0.4=
+* Replaced subscription setup fee from charge to invoiceItem
+* Error messages update
+
 =2.0.3=
 **Fixed admin email on success for donations and subscriptions bug**
 
