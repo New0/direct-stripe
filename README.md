@@ -13,11 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.7.3
 
-<<<<<<< HEAD
-Stable tag: 2.0.1
-=======
-Stable tag: 2.0.2
->>>>>>> v2
+Stable tag: 2.0.4
 
 License: GPLv2 or later 
 
@@ -136,11 +132,17 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
-<<<<<<< HEAD
-=======
+
+=2.0.4=
+* Replaced subscription setup fee from charge to invoiceItem
+* Error messages update
+
+=2.0.3=
+**Fixed admin email on success for donations and subscriptions bug**
+
+
 =2.0.2=
 **Fixed redirections bug**
->>>>>>> v2
 
 =2.0.1=
 **Fixed live key bug**
