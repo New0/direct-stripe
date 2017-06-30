@@ -3,14 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "description": "WordPress plugin for Stripe handled transactions ",
-  "author": "New0 <nico@newo.fr>",
-  "license": "GPL-2.0",
+  "author": "Quench",
+  "license": "ISC",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Quench",
-  "license": "ISC",
   "devDependencies": {
     "autoprefixer": "*",
     "gulp": "*",

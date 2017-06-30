@@ -70,7 +70,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
 
         return false;
     }
-console.log(ds_values.key);
+
     handler = stripe_checkout(ds_values);
     // Open Checkout with further options:
     if( billing === false ) {

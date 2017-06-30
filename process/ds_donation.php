@@ -248,7 +248,7 @@ if($stripe_id) { // User exists
 
         $email_subject = apply_filters( 'direct_stripe_success_admin_email_subject', $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
         $email_content = apply_filters( 'direct_stripe_success_admin_email_content', $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id );
-	    
+
         wp_mail( $admin_email, $email_subject , $email_content, $headers );
     }
 	
@@ -364,7 +364,7 @@ catch(Exception $e)
 	} else {
 		
 		$return = array(
-			'id'	=> '1',
+			'id'	=> '3',
 			'message' => $d_stripe_general['direct_stripe_error_message']
 		);
 		
