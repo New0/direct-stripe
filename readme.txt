@@ -3,8 +3,8 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
-Tested up to: 4.7.5
-Stable tag: 2.O.3
+Tested up to: 4.8.0
+Stable tag: 2.O.5
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,9 @@ In progress, in the meanwhile asking yours may help to fill this section.
 6. Form to generate and insert shortcode
 
 == Changelog ==
+
+=2.0.5=
+* Doesn't register Users Stripe ID for tests transactions, this avoid to create an error if the same testing user create a live transaction and is find in WordPress admin but not in live Stripe account.
 
 =2.0.4=
 * Replaced subscription setup fee from charge to invoiceItem

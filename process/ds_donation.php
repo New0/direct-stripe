@@ -65,8 +65,11 @@ if( username_exists( $email_address ) || email_exists( $email_address ) ) {
 				'source'    => $token
 			));
 			$stripe_id = $customer->id;
-			//Update User roles
-			update_user_meta($user_id, 'stripe_id', $stripe_id);
+			//Register Stripe ID if not testing
+			if( $d_stripe_general['direct_stripe_checkbox_api_keys'] != '1' ) {
+				update_user_meta($user_id, 'stripe_id', $stripe_id);
+			}
+			//Update user roles
 			$user->add_role( 'stripe-user' );
 			$user->add_role( $custom_role );
 		}
@@ -176,7 +179,9 @@ if($stripe_id) { // User exists
 	
 	//Log user metas infos
 	$usermetas = array();
-	$usermetas['stripe_id'] = $customer->id;
+	if( $d_stripe_general['direct_stripe_checkbox_api_keys'] != '1' ) {
+		$usermetas['stripe_id'] = $customer->id;
+	}
 	$usermetas['ds_billing_name'] = $billing_name;
 	$usermetas['ds_billing_address_country'] = $billing_address_country;
 	$usermetas['ds_billing_address_zip'] = $billing_address_zip;
