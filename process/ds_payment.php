@@ -71,9 +71,11 @@ try { //Retrieve Data
             ));
 
             $stripe_id = $customer->id;
-
-            //Update user roles
-            update_user_meta($user_id, 'stripe_id', $stripe_id);
+            //Register Stripe ID if not testing
+			if( $d_stripe_general['direct_stripe_checkbox_api_keys'] != '1' ) {
+				update_user_meta($user_id, 'stripe_id', $stripe_id);
+			}
+			//Update user roles
             $user->add_role( 'stripe-user' );
             $user->add_role( $custom_role );
         }
@@ -191,7 +193,9 @@ try { //Retrieve Data
 	
 		 //Log user metas infos
 		 $usermetas = array();
-		 $usermetas['stripe_id'] = $customer->id;
+		 if( $d_stripe_general['direct_stripe_checkbox_api_keys'] != '1' ) {
+		 	$usermetas['stripe_id'] = $customer->id;
+		 }
 		 $usermetas['ds_billing_name'] = $billing_name;
 		 $usermetas['ds_billing_address_country'] = $billing_address_country;
 		 $usermetas['ds_billing_address_zip'] = $billing_address_zip;
