@@ -34,6 +34,8 @@
         var ds_error_query = jQuery("#ds_error_query").val();
         var ds_success_url = jQuery("#ds_success_url").val();
         var ds_error_url = jQuery("#ds_error_url").val();
+        var ds_zero_decimal = jQuery("#ds_zero_decimal").val();
+        
 
         var ds_button_shortcode = '[direct-stripe type="' + ds_type + '"';
         if( ds_amount !== "" ) {
@@ -59,6 +61,9 @@
         }
         if( ds_setup_fee !== "" ) {
             ds_button_shortcode = ds_button_shortcode + ' setup_fee="' + ds_setup_fee + '"';
+        }
+        if( ds_zero_decimal !== "" ) {
+            ds_button_shortcode = ds_button_shortcode + ' zero_decimal="' + ds_zero_decimal + '"';
         }
         if( ds_capture !== "" ) {
             ds_button_shortcode = ds_button_shortcode + ' capture="' + ds_capture + '"';
@@ -258,9 +263,31 @@
             <input id="ds_setup_fee" type="text" class="ds-shortcode-setup-fee" name="ds_setup_fee">
         </div>
     </div>
-    
+
     <hr/>
-    
+    <div class="ds-row">
+        <h4><?php _e('Options for donations','direct-stripe');?></h4>
+    </div>
+    <div class="ds-row ds-flex">
+        <div class="ds-one-third">
+            <label for="ds_zero_decimal"><?php _e('Zero-decimal currencies','direct-stripe');?></label>
+            <div class="ds_infos dashicons dashicons-editor-help">
+                <span class="ds_button_infos"><?php _e('Set to "Yes" to let users input Zero decimal currencies values.', 'direct-stripe'); ?>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ds-row ds-flex">
+        <div class="ds-one-third">
+            <select id="ds_zero_decimal">
+                <option value=""></option>
+                <option value="true"><?php _e('Yes', 'direct-stripe'); ?></option>
+                <option value="false"><?php _e('No', 'direct-stripe'); ?></option>
+            </select>
+        </div>
+    </div>
+        
+    <hr/>
     <div class="ds-row">
         <h4><?php _e('Extra options','direct-stripe');?></h4>
     </div>
