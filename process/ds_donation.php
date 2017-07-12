@@ -23,7 +23,11 @@ if( isset($d_stripe_general['direct_stripe_checkbox_api_keys']) && $d_stripe_gen
 try{ //Retrieve Data
 $button_id 	    = isset($params['button_id']) ? $params['button_id'] : '';
 $pre_amount     = isset($_POST['amount']) ? $_POST['amount'] : '';
-$amount 	    = $pre_amount * 100;
+if ( isset($params['zero_decimal']) && $params['zero_decimal'] === "true" ) {
+	$amount = $pre_amount;
+} else {
+	$amount = $pre_amount * 100;
+}
 $amount = apply_filters( 'ds_donation_amount', $amount);
 $token 		    = $stripeToken;
 $email_address  = $stripeEmail;

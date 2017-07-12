@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.8.0
 
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 
 License: GPLv2 or later 
 
@@ -132,6 +132,10 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+=2.0.6=
+* Added argument zero_decimal to shortcode to use zero decimal amount values in donation
+
 
 =2.0.5=
 * Doesn't register Users Stripe ID for tests transactions, this avoid to create an error if the same testing user create a live transaction and is find in WordPress admin but not in live Stripe account.
