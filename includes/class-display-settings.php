@@ -195,9 +195,15 @@ class DirectStripeDisplaySettings {
 	/*********  Checkbox for stylesheet **********/
 	function direct_stripe_use_custom_styles_render() {
 	$d_stripe_options = get_option( 'direct_stripe_styles_settings' );
+    $checked = $d_stripe_options['direct_stripe_use_custom_styles'];
 	?>
-		<input type='checkbox' name='direct_stripe_styles_settings[direct_stripe_use_custom_styles]' value='1' <?php checked( isset ( $d_stripe_options['direct_stripe_use_custom_styles'] ), 1 ); ?> />
-	<?php
+        <p><input type='radio' name='direct_stripe_styles_settings[direct_stripe_use_custom_styles]' value='3' <?php if( $checked != '1' && $checked != '2' ) { ?> checked <?php }; ?> />
+            Do not set styles</p>
+        <p><input type='radio' name='direct_stripe_styles_settings[direct_stripe_use_custom_styles]' value='2' <?php if( $checked === '2') { ?> checked <?php }; ?> />
+            Use default stripe styles</p>
+        <p><input type='radio' name='direct_stripe_styles_settings[direct_stripe_use_custom_styles]' value='1' <?php if( $checked === '1') { ?> checked <?php }; ?> />
+            Use styles set underneath</p>
+		<?php
 	}
 	//Main button color
 	function direct_stripe_main_color_style_render() {
@@ -474,7 +480,7 @@ class DirectStripeDisplaySettings {
 		}
 		// Make sure isauthorized is only true or false (0 or 1)
 		if( isset($input['direct_stripe_use_custom_styles']) && !empty($input['direct_stripe_use_custom_styles']) ) {
-			$input['direct_stripe_use_custom_styles'] = '1';
+			$input['direct_stripe_use_custom_styles'] = sanitize_text_field( $input['direct_stripe_use_custom_styles'] );
 		}
 		if( isset($input['direct_stripe_use_tc_checkbox']) && !empty($input['direct_stripe_use_tc_checkbox']) ) {
 			$input['direct_stripe_use_tc_checkbox'] = '1';

@@ -178,7 +178,7 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 	);
 	add_settings_field( 
 		'direct_stripe_use_custom_styles', 
-		__( 'Use custom styles', 'direct-stripe' ), 
+		__( 'Choose button styles', 'direct-stripe' ),
 		array($displaysettings, 'direct_stripe_use_custom_styles_render'), 
 		'directStripeStyles', 
 		'direct_stripe_styles_section' 

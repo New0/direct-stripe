@@ -14,7 +14,9 @@ do_action( 'direct_stripe_before_button' );
 
     <?php //Custom styles button conditions
     if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) {
-        $ds_button_class = 'direct-stripe-button';
+	    $ds_button_class = 'direct-stripe-button';
+    } elseif( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '2' ) {
+	    $ds_button_class = 'original-stripe-button';
      } else {
         $ds_button_class = 'stripe-button-ds';
      }
