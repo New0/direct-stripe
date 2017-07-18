@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: stripe, stripe button ,custom stripe button, stripe modal form, stripe checkout, direct checkout, payments, donations, subscriptions, payments button, credit card, checkout button
 Requires at least: 4.2
 Tested up to: 4.8.0
-Stable tag: 2.O.6
+Stable tag: 2.O.7
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,9 @@ In progress, in the meanwhile asking yours may help to fill this section.
 6. Form to generate and insert shortcode
 
 == Changelog ==
+
+=2.0.7=
+* Restored original Stripe styles as an option in settings
 
 =2.0.6=
 * Added argument zero_decimal to shortcode to use zero decimal amount values in donation

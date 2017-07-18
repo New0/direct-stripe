@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.8.0
 
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 
 License: GPLv2 or later 
 
@@ -132,6 +132,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+=2.0.7=
+* Restored original Stripe styles as an option in settings
 
 =2.0.6=
 * Added argument zero_decimal to shortcode to use zero decimal amount values in donation
