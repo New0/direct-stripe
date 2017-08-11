@@ -10,6 +10,8 @@ if( ! class_exists( 'Stripe\Stripe' ) ) {
     require_once(DSCORE_PATH . 'stripe/init.php');
 }
 
+do_action( 'direct_stripe_before_payment_process' );
+
 //$args = isset($args) ? $args : '';
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
@@ -85,15 +87,26 @@ try { //Retrieve Data
     }
 
  if($stripe_id) { // User exists
-		//Charge
-        $charge = \Stripe\Charge::create(array(
-            'customer'    => $stripe_id,
-            'amount'      => $amount,
-            'currency'    => $currency,
-            'capture'     => $capture,
-            'description' => $description
-        ));
-	 $chargeID = $charge->id;
+		//Create Charge
+       $charge_action = apply_filters('ds_charge_action_payment', 
+	   		'\Stripe\Charge::create'
+	   );
+		$charge_content = apply_filters('ds_charge_content_payment', 
+			array(
+				'customer'    => $stripe_id,
+				'amount'      => $amount,
+				'currency'    => $currency,
+				'capture'     => $capture,
+				'description' => $description
+			),
+			$token, $stripe_id, $amount, $currency, $capture, $description
+		);
+		
+		$charge = $charge_action($charge_content);
+		
+		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description );
+
+		$chargeID = $charge->id;
 	 
 	//Log transaction in WordPress admin
     $postparams = array(
@@ -160,14 +173,23 @@ try { //Retrieve Data
         ));
     
 		//Create Charge
-        $charge = \Stripe\Charge::create(array(
-            'customer'    => $customer->id,
-            'amount'      => $amount,
-            'currency'    => $currency,
-            'capture'     => $capture,
-            'description' => $description
-        ));
-	    $chargeID = $charge->id;
+       $charge_action = apply_filters('ds_charge_action_payment', 
+	   		'\Stripe\Charge::create'
+	   );
+		$charge_content = apply_filters('ds_charge_content_payment', 
+			array(
+				'customer'    => $stripe_id,
+				'amount'      => $amount,
+				'currency'    => $currency,
+				'capture'     => $capture,
+				'description' => $description
+			),
+			$token, $stripe_id, $amount, $currency, $capture, $description
+		);
+        $charge = $charge_action($charge_content);
+		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description );
+
+		$chargeID = $charge->id;
 		// Generate the password and create the user
         $password = wp_generate_password( 12, false );
         //$user_id = wp_create_user( $email_address, $password, $email_address );
@@ -274,7 +296,7 @@ try { //Retrieve Data
 
 // Add custom action before redirection
 	
-    do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id, $token );
+    do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id );
 
   //Answer for ajax
 	if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['success_url']) ) {
@@ -344,7 +366,7 @@ catch(Exception $e)
     }
 
 // Add custom action before redirection
-    do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id, $token );
+    do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id );
 
 //Answer for ajax
     if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['error_url']) ) {
