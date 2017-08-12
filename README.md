@@ -13,7 +13,7 @@ Requires at least: 4.2
 
 Tested up to: 4.8.0
 
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 
 License: GPLv2 or later 
 
@@ -132,6 +132,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog == 
+
+=2.0.8=
+* Added the token to the 5th parameter for the 'direct_stripe_before_success_redirection' filter
 
 =2.0.7=
 * Restored original Stripe styles as an option in settings

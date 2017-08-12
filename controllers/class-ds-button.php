@@ -31,8 +31,7 @@ class dsButton {
 		ob_start();
 		include( DSCORE_PATH . 'includes/ds-button.php');
 		include( DSCORE_PATH . 'includes/ds-answers.php');
-		return ob_get_clean();
-		
+		return ob_get_clean();		
 	}
 	
 	/**

@@ -383,7 +383,7 @@ try {
 	}
 
 // Add custom action before redirection
-	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id, $subscription);
+	do_action( 'direct_stripe_before_success_redirection', $chargeID, $post_id, $button_id, $user_id, $token, $subscription);
 	
 	//Answer for ajax
 	if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['success_url']) ) {
@@ -452,7 +452,7 @@ catch(Exception $e)
 	}
 
 // Add custom action before redirection
-	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id, $subscription );
+	do_action( 'direct_stripe_before_error_redirection',  $chargeID, $post_id, $button_id, $user_id, $token, $subscription );
 
 //Answer for ajax
 	if( isset($d_stripe_general['direct_stripe_use_redirections'])  && $d_stripe_general['direct_stripe_use_redirections'] === '1' && empty($params['error_url']) ) {
