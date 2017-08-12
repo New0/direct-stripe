@@ -88,23 +88,19 @@ try { //Retrieve Data
 
  if($stripe_id) { // User exists
 		//Create Charge
-       $charge_action = apply_filters('ds_charge_action_payment', 
-	   		'\Stripe\Charge::create'
-	   );
-		$charge_content = apply_filters('ds_charge_content_payment', 
-			array(
+        $charge_action = apply_filters('ds_charge_action_payment', '\Stripe\Charge::create', $button_id );
+		$charge_content = apply_filters('ds_charge_content_payment', array(
 				'customer'    => $stripe_id,
 				'amount'      => $amount,
 				'currency'    => $currency,
 				'capture'     => $capture,
 				'description' => $description
 			),
-			$token, $stripe_id, $amount, $currency, $capture, $description
+			$token, $stripe_id, $amount, $currency, $capture, $description, $button_id
 		);
-		
 		$charge = $charge_action($charge_content);
 		
-		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description );
+		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description, $button_id );
 
 		$chargeID = $charge->id;
 	 
@@ -114,28 +110,28 @@ try { //Retrieve Data
         'post_status' 	=> 'publish',
         'post_type' 	=> 'Direct Stripe Logs',
         'post_author'	=>  $user_id,
-        'meta_input'   => array(
-            'stripe_id'     => $stripe_id,
-            'charge_id'     => $chargeID,
-            'amount'        => $amount,
-            'currency'      => $currency,
-            'capture'      => $capture,
-            'type'          =>  __('payment','direct-stripe'),
-            'description'   => $description,
-            'ds_billing_name' => $billing_name,
-            'ds_billing_address_country' => $billing_address_country,
-            'ds_billing_address_zip' => $billing_address_zip,
-            'ds_billing_address_state' => $billing_address_state,
-            'ds_billing_address_line1' => $billing_address_line1,
-            'ds_billing_address_city' => $billing_address_city,
-            'ds_billing_address_country_code' => $billing_address_country_code,
-            'ds_shipping_name' => $shipping_name,
-            'ds_shipping_address_country' => $shipping_address_country,
-            'ds_shipping_address_zip' => $shipping_address_zip,
-            'ds_shipping_address_state' => $shipping_address_state,
-            'ds_shipping_address_line1' => $shipping_address_line1,
-            'ds_shipping_address_city' => $shipping_address_city,
-            'ds_shipping_address_country_code' => $shipping_address_country_code,
+        'meta_input'   	=> array(
+            'stripe_id'     					=> $stripe_id,
+            'charge_id'     					=> $chargeID,
+            'amount'        					=> $amount,
+            'currency'      					=> $currency,
+            'capture'      						=> $capture,
+            'type'          					=>  __('payment','direct-stripe'),
+            'description'   					=> $description,
+            'ds_billing_name' 					=> $billing_name,
+            'ds_billing_address_country' 		=> $billing_address_country,
+            'ds_billing_address_zip' 			=> $billing_address_zip,
+            'ds_billing_address_state' 			=> $billing_address_state,
+            'ds_billing_address_line1' 			=> $billing_address_line1,
+            'ds_billing_address_city' 			=> $billing_address_city,
+            'ds_billing_address_country_code' 	=> $billing_address_country_code,
+            'ds_shipping_name' 					=> $shipping_name,
+            'ds_shipping_address_country' 		=> $shipping_address_country,
+            'ds_shipping_address_zip' 			=> $shipping_address_zip,
+            'ds_shipping_address_state'			=> $shipping_address_state,
+            'ds_shipping_address_line1' 		=> $shipping_address_line1,
+            'ds_shipping_address_city' 			=> $shipping_address_city,
+            'ds_shipping_address_country_code' 	=> $shipping_address_country_code,
         ),
     );
 	 $post_id = wp_insert_post( $postparams );
@@ -249,27 +245,27 @@ try { //Retrieve Data
                 'post_type' 	=>  'Direct Stripe Logs',
                 'post_author' 	=>  $user_id,
 	            'meta_input'   => array(
-		            'stripe_id'     => $customer->id,
-					'charge_id'     => $chargeID,
-	                'amount'        => $amount,
-	                'currency'      => $currency,
-		            'capture'      => $capture,
-	                'type'          =>  __('payment','direct-stripe'),
-		            'description'   => $description,
-		            'ds_billing_name' => $billing_name,
-		            'ds_billing_address_country' => $billing_address_country,
-		            'ds_billing_address_zip' => $billing_address_zip,
-		            'ds_billing_address_state' => $billing_address_state,
-		            'ds_billing_address_line1' => $billing_address_line1,
-		            'ds_billing_address_city' => $billing_address_city,
-		            'ds_billing_address_country_code' => $billing_address_country_code,
-		            'ds_shipping_name' => $shipping_name,
-		            'ds_shipping_address_country' => $shipping_address_country,
-		            'ds_shipping_address_zip' => $shipping_address_zip,
-		            'ds_shipping_address_state' => $shipping_address_state,
-		            'ds_shipping_address_line1' => $shipping_address_line1,
-		            'ds_shipping_address_city' => $shipping_address_city,
-		            'ds_shipping_address_country_code' => $shipping_address_country_code,
+		            'stripe_id'     					=> $customer->id,
+					'charge_id'     					=> $chargeID,
+	                'amount'        					=> $amount,
+	                'currency'      					=> $currency,
+		            'capture'      						=> $capture,
+	                'type'          					=>  __('payment','direct-stripe'),
+		            'description'   					=> $description,
+		            'ds_billing_name' 					=> $billing_name,
+		            'ds_billing_address_country' 		=> $billing_address_country,
+		            'ds_billing_address_zip' 			=> $billing_address_zip,
+		            'ds_billing_address_state' 			=> $billing_address_state,
+		            'ds_billing_address_line1' 			=> $billing_address_line1,
+		            'ds_billing_address_city' 			=> $billing_address_city,
+		            'ds_billing_address_country_code' 	=> $billing_address_country_code,
+		            'ds_shipping_name' 					=> $shipping_name,
+		            'ds_shipping_address_country' 		=> $shipping_address_country,
+		            'ds_shipping_address_zip' 			=> $shipping_address_zip,
+		            'ds_shipping_address_state' 		=> $shipping_address_state,
+		            'ds_shipping_address_line1' 		=> $shipping_address_line1,
+		            'ds_shipping_address_city' 			=> $shipping_address_city,
+		            'ds_shipping_address_country_code' 	=> $shipping_address_country_code,
 	            ),
             )
         );
