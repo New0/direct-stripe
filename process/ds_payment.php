@@ -167,23 +167,21 @@ try { //Retrieve Data
             'email'     => $email_address,
             'source'    => $token
         ));
-    
+	
 		//Create Charge
-       $charge_action = apply_filters('ds_charge_action_payment', 
-	   		'\Stripe\Charge::create'
-	   );
-		$charge_content = apply_filters('ds_charge_content_payment', 
-			array(
-				'customer'    => $stripe_id,
+        $charge_action = apply_filters('ds_charge_action_payment', '\Stripe\Charge::create', $button_id );
+		$charge_content = apply_filters('ds_charge_content_payment', array(
+				'customer'    => $customer->id,
 				'amount'      => $amount,
 				'currency'    => $currency,
 				'capture'     => $capture,
 				'description' => $description
 			),
-			$token, $stripe_id, $amount, $currency, $capture, $description
+			$token, $stripe_id, $amount, $currency, $capture, $description, $button_id
 		);
-        $charge = $charge_action($charge_content);
-		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description );
+		$charge = $charge_action($charge_content);
+		
+		do_action( 'ds_after_charge_payment_process', $charge, $token, $stripe_id, $amount, $currency, $capture, $description, $button_id );
 
 		$chargeID = $charge->id;
 		// Generate the password and create the user
