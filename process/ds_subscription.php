@@ -7,7 +7,7 @@ if (! wp_verify_nonce($nonce, 'direct-stripe-nonce') ) die( __('Security check i
 
 //  Stripe
 if( ! class_exists( 'Stripe\Stripe' ) ) {
-	require_once(DSCORE_PATH . 'stripe/init.php');
+    require_once('vendor/autoload.php');
 }
 $d_stripe_general = get_option( 'direct_stripe_general_settings' );
 $d_stripe_emails = get_option( 'direct_stripe_emails_settings' );
@@ -365,7 +365,7 @@ try {
 		
 	}//end user doesn't exist
 
-// Email client
+// Email admin-app
 	if(  isset($d_stripe_emails['direct_stripe_user_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === '1' ) {
 		
 		$email_subject = apply_filters( 'direct_stripe_success_user_email_subject', $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id, $plan );
@@ -434,7 +434,7 @@ try {
 }
 catch(Exception $e)
 {
-//Email client
+//Email admin-app
 	if( isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === '1' ) {
 		
 		$email_subject = apply_filters( 'direct_stripe_error_user_email_subject', $d_stripe_emails['direct_stripe_user_error_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id, $plan);

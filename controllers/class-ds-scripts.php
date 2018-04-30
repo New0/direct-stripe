@@ -22,15 +22,58 @@ class dsScripts {
      */
     function direct_stripe_load_admin_scripts( $hook ) {
 
-        wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', true );
+
+        wp_register_style(
+            'vuetifystyle',
+            'https://unpkg.com/vuetify/dist/vuetify.min.css'
+        );
+        wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks', 'vuetifystyle' ) );
         wp_enqueue_media();
         wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('direct-stripe-admin-script', DSCORE_URL . 'assets/admin/dist/js/main.min.js', array('jquery', 'wp-color-picker'), true, true );
-        wp_localize_script('direct-stripe-admin-script', 'direct_stripe_image_script_vars', array(
-                'title' => __('Logo for Stripe Form', 'direct-stripe'),
-                'message' => __('Use selected image', 'direct-stripe')
+
+        wp_register_script(
+            'vue',
+            'https://unpkg.com/vue@2.5.16/dist/vue.js'
+        );
+        wp_register_script(
+            'vue-custom-element',
+            'https://unpkg.com/vue-custom-element@1.3.0/dist/vue-custom-element.js',
+            array( 'vue' )
+        );
+        wp_register_script(
+            'vuetify',
+            'https://unpkg.com/vuetify/dist/vuetify.js',
+            array( 'vue' )
+        );
+
+
+        wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array(), ('0.0.1'), true );
+        wp_localize_script('direct-stripe-admin-app', 'direct_stripe_admin_app_vars', array(
+                'strings' => array(
+                    'saved' => __( 'Settings Saved', 'text-domain' ),
+                    'error' => __( 'Error', 'text-domain' )
+                ),
+                'dsCorePath' => DSCORE_PATH,
+                'dsCoreUrl' => DSCORE_URL,
+                'api'     => array(
+                    'url'   => esc_url_raw( rest_url( 'direct-stripe/v1/settings' ) ),
+                    'nonce' => wp_create_nonce( 'wp_rest' )
+                )
             )
         );
+        wp_enqueue_script('direct-stripe-admin-script', DSCORE_URL . 'assets/admin/dist/js/main.min.js', array('jquery', 'wp-color-picker', 'wp-blocks', 'wp-element',  'vue', 'vue-custom-element', 'vuetify' ), ('1.0.0'), true );
+        wp_localize_script('direct-stripe-admin-script', 'direct_stripe_image_script_vars', array(
+                'title' => __('Logo for Stripe Form', 'direct-stripe'),
+                'message' => __('Use selected image', 'direct-stripe'),
+
+            )
+        );
+
+
+        register_block_type( 'direct-stripe/stripe-button-block', array(
+            'editor_script' => 'direct-stripe-admin-script',
+            'editor_style' => 'direct-stripe-admin-style',
+        ) );
 
     }
 

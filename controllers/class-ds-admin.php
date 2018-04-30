@@ -30,10 +30,11 @@ class dsAdmin {
         $direct_stripe_page = add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'assets/admin/dist/img/logo_stripe_white.svg' );
         add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
     }
-        //Build admin settings page
-        function direct_stripe_options_page() {
-            include( DSCORE_PATH . '/includes/build-page.php');
-        }
+
+    //Build admin settings page
+    function direct_stripe_options_page() {
+        include( DSCORE_PATH . '/admin-app/index.html');
+    }
 
     /**
      * Register settings
