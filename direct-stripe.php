@@ -81,7 +81,6 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         public function __construct() {
             $this->includes();
             $this->init_hooks();
-            $this->api_init();
             $this->activation_hooks();
         }
 
@@ -136,17 +135,6 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 		    return $links;
 	    }
 
-        /**
-         * Add custom Rest Route
-         *
-         * @since 2.0.0
-         */
-        function api_init() {
-            add_action('rest_api_init', function () {
-                include_once( 'controllers/class-ds-api.php' );
-            });
-        }
-		
 
         /**
          * Include required core files.
@@ -154,6 +142,8 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          */
         public function includes() {
+            include_once( 'controllers/class-ds-api-settings.php' );
+            include_once( 'controllers/class-ds-api.php' );
             include_once( 'controllers/class-ds-scripts.php' );
             include_once( 'controllers/class-ds-admin.php' );
             include_once( 'controllers/class-ds-button.php' );

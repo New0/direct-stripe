@@ -23,35 +23,20 @@ class dsScripts {
     function direct_stripe_load_admin_scripts( $hook ) {
 
 
-        wp_register_style(
-            'vuetifystyle',
-            'https://unpkg.com/vuetify/dist/vuetify.min.css'
-        );
-        wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks', 'vuetifystyle' ) );
+        wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks' ) );
         wp_enqueue_media();
         wp_enqueue_style('wp-color-picker');
 
         wp_register_script(
             'vue',
             'https://unpkg.com/vue@2.5.16/dist/vue.js'
+        //PROD 'https://cdn.jsdelivr.net/npm/vue'
         );
-        wp_register_script(
-            'vue-custom-element',
-            'https://unpkg.com/vue-custom-element@1.3.0/dist/vue-custom-element.js',
-            array( 'vue' )
-        );
-        wp_register_script(
-            'vuetify',
-            'https://unpkg.com/vuetify/dist/vuetify.js',
-            array( 'vue' )
-        );
-
-
-        wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array(), ('0.0.1'), true );
-        wp_localize_script('direct-stripe-admin-app', 'direct_stripe_admin_app_vars', array(
+        wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array('jquery'), ('0.0.1'), true );
+        wp_localize_script('direct-stripe-admin-app', 'ds_admin_app_vars', array(
                 'strings' => array(
-                    'saved' => __( 'Settings Saved', 'text-domain' ),
-                    'error' => __( 'Error', 'text-domain' )
+                    'saved' => __( 'Settings Saved', 'direct-stripe' ),
+                    'error' => __( 'Error', 'direct-stripe' )
                 ),
                 'dsCorePath' => DSCORE_PATH,
                 'dsCoreUrl' => DSCORE_URL,

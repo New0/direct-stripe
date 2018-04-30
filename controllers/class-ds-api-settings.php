@@ -1,35 +1,43 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nahuel
- * Date: 30/04/2018
- * Time: 15:04
- */
-
-class Ds_api_Settings {
+class DS_API_Settings {
     /**
-     * Option key to save settings
+     * Option key to save general settings
      *
      * @var string
      */
-    protected static $option_key = '_ds_settings';
+    protected static $ds_general_key = 'direct_stripe_general_settings';
+    /**
+     * Option key to save styles settings
+     *
+     * @var string
+     */
+    protected static $ds_styles_key = 'direct_stripe_styles_settings';
+    /**
+     * Option key to save emails settings
+     *
+     * @var string
+     */
+    protected static $ds_emails_key = 'direct_stripe_emails_settings';
     /**
      * Default settings
      *
      * @var array
      */
-    protected static $defaults = array(
-        'industry' => 'lumber',
-        'amount' => 42
-    );
+    protected static $defaults = array();
     /**
      * Get saved settings
      *
      * @return array
      */
     public static function get_settings(){
-        $saved = get_option( self::$option_key, array() );
-        if( ! is_array( $saved ) || ! empty( $saved )){
+
+        $ds_general = get_option( self::$ds_general_key, array() );
+        $ds_styles = get_option( self::$ds_styles_key, array() );
+        $ds_emails = get_option( self::$ds_emails_key, array() );
+
+        $saved = array_merge($ds_general, $ds_styles, $ds_emails );
+
+        if( ! is_array( $saved ) || empty( $saved )){
             return self::$defaults;
         }
         return wp_parse_args( $saved, self::$defaults );
@@ -41,13 +49,28 @@ class Ds_api_Settings {
      *
      * @param array $settings
      */
-    public static function save_settings( array  $settings ){
-        //remove any non-allowed indexes before save
+    public static function save_settings( $settings ){
+
+        $ds_general = get_option( self::$ds_general_key, array() );
+        $ds_styles = get_option( self::$ds_styles_key, array() );
+        $ds_emails = get_option( self::$ds_emails_key, array() );
+
         foreach ( $settings as $i => $setting ){
-            if( ! array_key_exists( $setting, self::$defaults ) ){
-                unset( $settings[ $i ] );
+            if( $setting != null ) {
+                if( array_key_exists( $i, $ds_general ) ){
+                    $ds_general[$i] = $setting;
+                    update_option( self::$ds_general_key, $ds_general );
+                } else if( array_key_exists( $i, $ds_styles ) ){
+                    $ds_styles[$i] = $setting;
+                    update_option( self::$ds_styles_key, $ds_general );
+                }
+                else if( array_key_exists( $i, $ds_emails ) ){
+                    $ds_emails[$i] = $setting;
+                    update_option( self::$ds_emails_key, $ds_general );
+                }
             }
         }
-        update_option( self::$option_key, $settings );
+
     }
 }
+$dsapisettings = new \DS_API_Settings;

@@ -1,35 +1,79 @@
 <template>
-  <div id="app">
-    <img v-bind:src="path" >
-    <h1>{{ msg }}</h1>
-      <div v-for="currency in info" class="currency">
-          {{currency.description}}
-          <span class="lighten">
-      <span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}
-    </span>
-      </div>
+    <div id="app">
+       <v-app>
 
-  </div>
+           <v-container fluid>
+               <v-layout row>
+                   <v-flex xs4>
+                       <v-subheader>{{ds_test_p_key}}</v-subheader>
+                   </v-flex>
+                   <v-flex xs8>
+                       <v-text-field
+                               v-on:change="saving('direct_stripe_test_publishable_api_key', $event)"
+                               v-bind:name="ds_test_p_key"
+                               v-bind:label="ds_test_p_key"
+                               v-bind:value="ds_test_p_key"
+                               single-line
+                       ></v-text-field>
+                   </v-flex>
+               </v-layout>
+               <v-layout row>
+                   <v-flex xs4>
+                       <v-subheader>{{ds_test_s_key}}</v-subheader>
+                   </v-flex>
+                   <v-flex xs8>
+                       <v-text-field
+                               v-on:change="saving('direct_stripe_test_secret_api_key', $event)"
+                               v-bind:name="ds_test_s_key"
+                               v-bind:label="ds_test_s_key"
+                               v-bind:value="ds_test_s_key"
+                               single-line
+                       ></v-text-field>
+                   </v-flex>
+               </v-layout>
+           </v-container>
+
+       </v-app>
+    </div>
+
 </template>
 
 <script>
 import axios from 'axios';
 
-const dsaav = direct_stripe_admin_app_vars.dsCoreUrl + 'admin-app/dist/logo.png';
+const logo = ds_admin_app_vars.dsCoreUrl + 'admin-app/dist/logo.png';
+
+const API_URL = ds_admin_app_vars.api.url;
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      path: dsaav,
-      info: null
+      path: logo,
+      ds_test_p_key: '',
+      ds_test_s_key: ''
     }
   },
   mounted () {
     axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .then(response => ( this.info = response.data.bpi ))
+      .get(API_URL)
+      .then(response => (
+        this.ds_test_p_key = response.data.direct_stripe_test_publishable_api_key,
+        this.ds_test_s_key = response.data.direct_stripe_test_secret_api_key
+      ))
+      .catch(error => console.log(error))
+  },
+  methods: {
+    saving: function (message, event) {
+
+      const req_url = API_URL + '?' + message + '=' + event;
+        axios
+        .post(req_url )
+        .then(response => (
+          console.log(response)
+        ))
+        .catch(error => console.log(error))
+    }
   }
 }
 </script>

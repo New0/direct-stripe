@@ -3,7 +3,7 @@
   "description": "Vue.js app for tirect Stripe settings interfacehe settings interface",
   "version": "1.0.0",
   "author": "New0 Nicolas Figueira",
-  "license": "MIT",
+  "license": "GPL2",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
@@ -30,6 +30,7 @@
     "sass-loader": "^6.0.6",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
+    "vuetify": "^1.0.17",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   }
