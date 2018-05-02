@@ -2,9 +2,8 @@
 class DS_API {
 
     public function __construct() {
-        add_action('rest_api_init', array( $this, 'add_routes' ) );
+        add_action('rest_api_init', array($this, 'add_routes'));
     }
-
 
     /**
      * Add routes
@@ -17,7 +16,7 @@ class DS_API {
                 'methods'         => 'POST',
                 'callback'        => array( $this, 'update_settings' ),
                 'args' => $fields,
-                'permissions_callback' => array( $this, 'permissions' )
+                'permission_callback' => array( $this, 'permissions' )
             )
         );
         register_rest_route( 'direct-stripe/v1', '/settings',
@@ -26,7 +25,7 @@ class DS_API {
                 'callback'        => array( $this, 'get_settings' ),
                 'args'            => array(
                 ),
-                'permissions_callback' => array( $this, 'permissions' )
+                'permission_callback' => array( $this, 'permissions' )
             )
         );
     }
@@ -36,8 +35,14 @@ class DS_API {
      * @return bool
      */
     public function permissions(){
-        return current_user_can( 'manage_options' );
+
+        $user_id = apply_filters( 'determine_current_user', false );
+        wp_set_current_user( $user_id );
+
+        return current_user_can('edit_others_posts');
     }
+
+
     /**
      * Update settings
      *

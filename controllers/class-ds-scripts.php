@@ -22,6 +22,11 @@ class dsScripts {
      */
     function direct_stripe_load_admin_scripts( $hook ) {
 
+        $screen = get_current_screen();
+        if( $screen->id === 'toplevel_page_direct_stripe' ){
+            wp_enqueue_style( 'direct-stripe-admin-app-vuetify', DSCORE_URL . 'admin-app/dist/css/vuetify.css' );
+            wp_enqueue_style( 'direct-stripe-admin-app-icons', DSCORE_URL . 'admin-app/dist/css/material-design-icons.css' );
+        }
 
         wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks' ) );
         wp_enqueue_media();
@@ -55,10 +60,11 @@ class dsScripts {
         );
 
 
-        register_block_type( 'direct-stripe/stripe-button-block', array(
+       /* register_block_type( 'direct-stripe/stripe-button-block', array(
             'editor_script' => 'direct-stripe-admin-script',
             'editor_style' => 'direct-stripe-admin-style',
         ) );
+       */
 
     }
 

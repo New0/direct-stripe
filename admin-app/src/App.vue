@@ -30,6 +30,24 @@
                                single-line
                        ></v-text-field>
                    </v-flex>
+                   <ul>
+                       <li v-for="(input, index) in inputs">
+                           <input type="text" v-model="input.one.cool"> - {{ input.one.name }}
+                           <button @click="deleteRow(index)">Delete</button>
+                       </li>
+                   </ul>
+                   <v-btn
+                           color="pink"
+                           dark
+                           small
+                           absolute
+                           bottom
+                           left
+                           fab
+                           @click="addRow"
+                   >
+                       <v-icon>add</v-icon>
+                   </v-btn>
                </v-layout>
            </v-container>
 
@@ -41,6 +59,7 @@
 <script>
 import axios from 'axios';
 
+
 const logo = ds_admin_app_vars.dsCoreUrl + 'admin-app/dist/logo.png';
 
 const API_URL = ds_admin_app_vars.api.url;
@@ -49,6 +68,7 @@ export default {
   name: 'app',
   data () {
     return {
+      inputs: [],
       path: logo,
       ds_test_p_key: '',
       ds_test_s_key: ''
@@ -70,9 +90,20 @@ export default {
         axios
         .post(req_url )
         .then(response => (
-          console.log(response)
+          console.log('Saved !')
         ))
         .catch(error => console.log(error))
+    },
+    addRow() {
+      this.inputs.push({
+        one: {
+          name: 'name',
+          cool: 'coolos'
+        }
+      })
+    },
+    deleteRow(index) {
+      this.inputs.splice(index,1)
     }
   }
 }
