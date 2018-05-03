@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name: Direct Stripe
  * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
- * Version:     2.0.8
+ * Version:     2.1.0.b
  * Author:      Nicolas Figueira
  * Author URI:  https://newo.me
  * Text Domain: direct-stripe
@@ -65,7 +65,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          * @var string
          */
-        const version = '2.0.0';
+        const version = '2.1.0.b';
 
         /**
          * Plugin Textdomain.
@@ -103,7 +103,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         public function init_hooks() {
 		    add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
-	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+	        add_filter( 'plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
         }
 
         /**
@@ -156,3 +156,4 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 endif; //if class exists
 
 $directstripe = new DirectStripe;
+
