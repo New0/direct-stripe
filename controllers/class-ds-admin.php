@@ -14,7 +14,7 @@ class dsAdmin {
         if ( is_admin() ) {
             // Add admin settings area
             add_action( 'admin_menu', array( $this, 'direct_stripe_add_admin_menu') );
-            add_action( 'admin_init', array( $this, 'direct_stripe_settings_init') );
+            //add_action( 'admin_init', array( $this, 'direct_stripe_settings_init') );
             add_action( 'media_buttons', array( $this, 'direct_stripe_add_shortcode_button'), 20);
             add_action( 'admin_footer', array( $this, 'direct_stripe_mce_popup') );
         }

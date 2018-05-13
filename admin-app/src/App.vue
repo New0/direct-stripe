@@ -1,114 +1,110 @@
 <template>
-    <div id="app">
+
        <v-app>
 
-           <v-container fluid>
-               <v-layout row>
-                   <v-flex xs4>
-                       <v-subheader>{{ds_test_p_key}}</v-subheader>
-                   </v-flex>
-                   <v-flex xs8>
-                       <v-text-field
-                               v-on:change="saving('direct_stripe_test_publishable_api_key', $event)"
-                               v-bind:name="ds_test_p_key"
-                               v-bind:label="ds_test_p_key"
-                               v-bind:value="ds_test_p_key"
-                               single-line
-                       ></v-text-field>
-                   </v-flex>
-               </v-layout>
-               <v-layout row>
-                   <v-flex xs4>
-                       <v-subheader>{{ds_test_s_key}}</v-subheader>
-                   </v-flex>
-                   <v-flex xs8>
-                       <v-text-field
-                               v-on:change="saving('direct_stripe_test_secret_api_key', $event)"
-                               v-bind:name="ds_test_s_key"
-                               v-bind:label="ds_test_s_key"
-                               v-bind:value="ds_test_s_key"
-                               single-line
-                       ></v-text-field>
-                   </v-flex>
-                   <ul>
-                       <li v-for="(input, index) in inputs">
-                           <input type="text" v-model="input.one.cool"> - {{ input.one.name }}
-                           <button @click="deleteRow(index)">Delete</button>
-                       </li>
-                   </ul>
-                   <v-btn
-                           color="pink"
-                           dark
-                           small
-                           absolute
-                           bottom
-                           left
-                           fab
-                           @click="addRow"
+           <div>
+
+               <v-tabs
+                       icons-and-text
+                       v-model="active"
+               >
+                   <v-tab
+                           v-bind:key="globalSettings"
+                           ripple
                    >
-                       <v-icon>add</v-icon>
-                   </v-btn>
-               </v-layout>
-           </v-container>
+                       Global Settings
+                       <v-icon>settings</v-icon>
+                   </v-tab>
+                   <v-tab-item
+                           v-bind:key="globalSettings"
+                   >
+                       <globalSettings></globalSettings>
+                   </v-tab-item>
+                   <v-tab
+                           v-bind:key="stylesSettings"
+                           ripple
+                   >
+                       Styles Settings
+                       <v-icon>styles</v-icon>
+                   </v-tab>
+                   <v-tab-item
+                           v-bind:key="stylesSettings"
+                   >
+                       <stylesSettings></stylesSettings>
+                   </v-tab-item>
+                   <v-tab
+                           v-bind:key="emailsSettings"
+                           ripple
+                   >
+                       Emails Settings
+                       <v-icon>emails</v-icon>
+                   </v-tab>
+                   <v-tab-item
+                           v-bind:key="emailsSettings"
+                   >
+                       <emailsSettings></emailsSettings>
+                   </v-tab-item>
+                   <v-tab
+                           v-bind:key="buttonsSettings"
+                           ripple
+                   >
+                       Buttons Settings
+                       <v-icon>payment</v-icon>
+                   </v-tab>
+                   <v-tab-item
+                           v-bind:key="buttonsSettings"
+                   >
+                       <buttonsSettings></buttonsSettings>
+                   </v-tab-item>
+               </v-tabs>
+
+           </div>
 
        </v-app>
-    </div>
+
 
 </template>
 
 <script>
-import axios from 'axios';
-
-
-const logo = ds_admin_app_vars.dsCoreUrl + 'admin-app/dist/logo.png';
-
-const API_URL = ds_admin_app_vars.api.url;
+import globalSettings from './components/globalSettings.vue';
+import stylesSettings from './components/stylesSettings.vue';
+import emailsSettings from './components/emailsSettings.vue';
+import buttonsSettings from './components/buttonsSettings.vue';
 
 export default {
   name: 'app',
+  components: {
+    globalSettings,
+    stylesSettings,
+    emailsSettings,
+    buttonsSettings
+  },
   data () {
     return {
-      inputs: [],
-      path: logo,
-      ds_test_p_key: '',
-      ds_test_s_key: ''
-    }
-  },
-  mounted () {
-    axios
-      .get(API_URL)
-      .then(response => (
-        this.ds_test_p_key = response.data.direct_stripe_test_publishable_api_key,
-        this.ds_test_s_key = response.data.direct_stripe_test_secret_api_key
-      ))
-      .catch(error => console.log(error))
-  },
-  methods: {
-    saving: function (message, event) {
-
-      const req_url = API_URL + '?' + message + '=' + event;
-        axios
-        .post(req_url )
-        .then(response => (
-          console.log('Saved !')
-        ))
-        .catch(error => console.log(error))
-    },
-    addRow() {
-      this.inputs.push({
-        one: {
-          name: 'name',
-          cool: 'coolos'
-        }
-      })
-    },
-    deleteRow(index) {
-      this.inputs.splice(index,1)
+      active: null,
     }
   }
 }
 </script>
 
 <style lang="scss">
+    #app {
+        background-color: #F1F1F1;
+    }
+    .theme--light {
+        .tabs__bar {
+            background-color: #F1F1F1;
+        }
+    }
+    .option {
+        + .option-saved {
+            display: none;
+        }
+        &.active {
+            + .option-saved {
+                display: block;
+            }
+        }
+    }
 
 </style>

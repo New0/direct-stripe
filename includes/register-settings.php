@@ -10,6 +10,8 @@ $displaysettings = new \DirectStripeDisplaySettings;
 register_setting( 'directStripeGeneral', 'direct_stripe_general_settings', array( array($displaysettings, 'direct_stripe_general_settings_validation'), 'show_in_rest' => true ) );
 register_setting( 'directStripeStyles', 'direct_stripe_styles_settings', array( array($displaysettings, 'direct_stripe_styles_settings_validation'), 'show_in_rest' => true ) );
 register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array( array($displaysettings, 'direct_stripe_emails_settings_validation'), 'show_in_rest' => true ) );
+register_setting( 'directStripeButtons', 'direct_stripe_buttons', array( array($displaysettings, 'direct_stripe_buttons_validation'), 'show_in_rest' => true, 'default' => 'buttons' ) );
+
 //Register sections and settings fields
 	// API keys section
 	add_settings_section(

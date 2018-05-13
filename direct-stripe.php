@@ -94,6 +94,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         function direct_stripe_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
+
         }
 	    
 	    /**
@@ -145,6 +146,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
             include_once( 'controllers/class-ds-api-settings.php' );
             include_once( 'controllers/class-ds-api.php' );
             include_once( 'controllers/class-ds-scripts.php' );
+            include_once( 'controllers/class-ds-block.php' );
             include_once( 'controllers/class-ds-admin.php' );
             include_once( 'controllers/class-ds-button.php' );
             include_once( 'controllers/class-ds-cpt.php' );

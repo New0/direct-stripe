@@ -19,36 +19,57 @@ gulp.task('admin-images', function(){
         .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
         .pipe(gulp.dest('assets/admin/dist/img/'));
 });
+gulp.task('block-images', function(){
+    gulp.src('assets/block-assets/src/img/**/*')
+        .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+        .pipe(gulp.dest('assets/block-assets/dist/img/'));
+});
 
 gulp.task('public-styles', function(){
-    var options = {
-        outputStyle: 'compressed',
-    };
-    gulp.src(['assets/public/src/scss/**/*.scss'])
-        .pipe(plumber({
-            errorHandler: function (error) {
-                console.log(error.message);
-                this.emit('end');
-            }}))
-        .pipe(sass(options))
-        .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
-        .pipe(gulp.dest('assets/public/dist/css/'))
+var options = {
+    outputStyle: 'compressed',
+};
+gulp.src(['assets/public/src/scss/**/*.scss'])
+    .pipe(plumber({
+        errorHandler: function (error) {
+            console.log(error.message);
+            this.emit('end');
+        }}))
+    .pipe(sass(options))
+    .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
+    .pipe(gulp.dest('assets/public/dist/css/'))
 });
 
 gulp.task('admin-styles', function(){
-    var options = {
-        outputStyle: 'compressed',
-    };
-    gulp.src(['assets/admin/src/scss/**/*.scss'])
-        .pipe(plumber({
-            errorHandler: function (error) {
-                console.log(error.message);
-                this.emit('end');
-            }}))
-        .pipe(sass(options))
-        .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
-        .pipe(gulp.dest('assets/admin/dist/css/'))
+var options = {
+    outputStyle: 'compressed',
+};
+gulp.src(['assets/admin/src/scss/**/*.scss'])
+    .pipe(plumber({
+        errorHandler: function (error) {
+            console.log(error.message);
+            this.emit('end');
+        }}))
+    .pipe(sass(options))
+    .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
+    .pipe(gulp.dest('assets/admin/dist/css/'))
 });
+
+gulp.task('block-styles', function(){
+var options = {
+    outputStyle: 'compressed',
+};
+gulp.src(['assets/block-assets/src/scss/**/*.scss'])
+    .pipe(plumber({
+        errorHandler: function (error) {
+            console.log(error.message);
+            this.emit('end');
+        }}))
+    .pipe(sass(options))
+    .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
+    .pipe(gulp.dest('assets/block-assets/dist/css/'))
+});
+
 
 gulp.task('public-scripts', function(){
     return gulp.src('assets/public/src/js/**/*.js')
@@ -78,11 +99,28 @@ gulp.task('admin-scripts', function(){
         .pipe(gulp.dest('assets/admin/dist/js/'))
 });
 
+gulp.task('block-scripts', function(){
+    return gulp.src('assets/block-assets/src/js/**/*.js')
+        .pipe(plumber({
+            errorHandler: function (error) {
+                console.log(error.message);
+                this.emit('end');
+            }}))
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest('assets/block-assets/dist/js/'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('assets/block-assets/dist/js/'))
+});
+
 gulp.task('direct-stripe', function(){
     gulp.watch("assets/public/src/scss/**/*.scss", ['public-styles']);
     gulp.watch("assets/admin/src/scss/**/*.scss", ['admin-styles']);
+    gulp.watch("assets/block-assets/src/scss/**/*.scss", ['block-styles']);
     gulp.watch("assets/public/src/img/**/*", ['public-images']);
     gulp.watch("assets/admin/src/img/**/*", ['admin-images']);
+    gulp.watch("assets/block-assets/src/img/**/*", ['block-images']);
     gulp.watch("assets/public/src/js/**/*.js", ['public-scripts']);
     gulp.watch("assets/admin/src/js/**/*.js", ['admin-scripts']);
+    gulp.watch("assets/block-assets/src/js/**/*.js", ['block-scripts']);
 });

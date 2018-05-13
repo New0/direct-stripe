@@ -1,4 +1,3 @@
-
 /**
  * Created by nfigueira on 10/05/2017.
  */
@@ -6,7 +5,7 @@
 jQuery(".direct-stripe-button-id").on("click", function (e) {
 
     var instance = jQuery( this ).data("id");
-    var ds_values = window[instance];
+    var ds_values = window[instance]; 
 
     // Set currency
     if( "" !== ds_values.currency ) {
