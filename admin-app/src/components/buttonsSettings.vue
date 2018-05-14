@@ -19,7 +19,6 @@
 
             <span>Sélectionné : {{ selectedButton.type }} / {{ selectedButton.value}}</span>
 
-
         </v-flex>
     </v-layout>
 
