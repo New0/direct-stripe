@@ -38,7 +38,7 @@ class DS_API {
                 'permission_callback' => array( $this, 'permissions' )
             )
         );
-        register_rest_route( 'direct-stripe/v1', '/buttons/',
+        register_rest_route( 'direct-stripe/v1', '/buttons',
             array(
                 'methods'         => 'GET',
                 'callback'        => array( $this, 'get_buttons' ),
@@ -71,9 +71,33 @@ class DS_API {
      * @param WP_REST_Request $request
      */
     public function update_settings( WP_REST_Request $request ){
+
+
+        $nonce = $request->get_param( '_dsnonce' );
+
+        if ( ! wp_verify_nonce( $nonce, 'ds_rest' ) ) {
+            return array(
+                'text'  =>  'Something went wrong, check nonces...',
+                'error'  =>  true
+            );
+        }
+
         $settings = array(
-            'direct_stripe_test_publishable_api_key' => $request->get_param( 'direct_stripe_test_publishable_api_key' ),
-            'direct_stripe_test_secret_api_key' => $request->get_param( 'direct_stripe_test_secret_api_key' )
+            'direct_stripe_live_publishable_api_key'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_publishable_api_key' ) ),
+            'direct_stripe_live_secret_api_key'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_secret_api_key' ) ),
+            'direct_stripe_checkbox_api_keys'           =>  sanitize_text_field( $request->get_param( 'direct_stripe_checkbox_api_keys' ) ),
+            'direct_stripe_test_publishable_api_key'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_test_publishable_api_key' ) ),
+            'direct_stripe_test_secret_api_key'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_test_secret_api_key' ) ),
+            'direct_stripe_currency'                    =>  sanitize_text_field( $request->get_param( 'direct_stripe_currency' ) ),
+            'direct_stripe_success_message'             =>  sanitize_text_field( $request->get_param( 'direct_stripe_success_message' ) ),
+            'direct_stripe_error_message'               =>  sanitize_text_field( $request->get_param( 'direct_stripe_error_message' ) ),
+            'direct_stripe_use_redirections'            =>  sanitize_text_field( $request->get_param( 'direct_stripe_use_redirections' ) ),
+            'direct_stripe_success_page'                =>  esc_url_raw( $request->get_param( 'direct_stripe_success_page' ) ),
+            'direct_stripe_error_page'                  =>  esc_url_raw( $request->get_param( 'direct_stripe_error_page' ) ),
+            'direct_stripe_logo_image'                  =>  esc_url_raw( $request->get_param( 'direct_stripe_logo_image' ) ),
+            'direct_stripe_billing_infos_checkbox'      =>  sanitize_text_field( $request->get_param( 'direct_stripe_billing_infos_checkbox' ) ),
+            'direct_stripe_shipping_infos_checkbox'     =>  sanitize_text_field( $request->get_param( 'direct_stripe_shipping_infos_checkbox' ) ),
+            'direct_stripe_rememberme_option_checkbox'  =>  sanitize_text_field( $request->get_param( 'direct_stripe_rememberme_option_checkbox' ) ),
         );
         DS_API_Settings::save_settings( $settings );
         return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );

@@ -45,17 +45,12 @@ registerBlockType( 'direct-stripe/payment-button', {
       return [
                 isSelected && (
                 <BlockControls key="controls">
-                  <AlignmentToolbar
-                    value={alignment}
-                    onChange={onChangeAlignment}
-                  />
-
-                  <select value={buttonItem} onChange={onChangeButton}>
-                    <option>Select Button</option>
-                    {Buttons.map(item => (
-                      <option value={item.value}>{item.text}</option>
-                    ))}
-                  </select>
+                   <select value={buttonItem} onChange={onChangeButton}>
+                      <option>Select Button</option>
+                      {Buttons.map(item => (
+                        <option value={item.value}>{item.text}</option>
+                      ))}
+                    </select>
                 </BlockControls>
               ),
             <button>{content.label}</button>
@@ -70,3 +65,10 @@ registerBlockType( 'direct-stripe/payment-button', {
   }
 
 } );
+
+/*  Alignment Toolbar to return
+ <!-- <AlignmentToolbar
+    value={alignment}
+    onChange={onChangeAlignment}
+  /> -->
+*/

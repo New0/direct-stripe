@@ -1,6 +1,6 @@
 # admin-app
 
-> Vue.js app for tirect Stripe settings interfacehe settings interface
+> Vue.js app for Direct Stripe settings interface
 
 ## Build Setup
 

@@ -126,10 +126,6 @@ registerBlockType('direct-stripe/payment-button', {
     return [isSelected && wp.element.createElement(
       BlockControls,
       { key: 'controls' },
-      wp.element.createElement(AlignmentToolbar, {
-        value: alignment,
-        onChange: onChangeAlignment
-      }),
       wp.element.createElement(
         'select',
         { value: buttonItem, onChange: onChangeButton },
@@ -162,6 +158,13 @@ registerBlockType('direct-stripe/payment-button', {
   }
 
 });
+
+/*  Alignment Toolbar to return
+ <!-- <AlignmentToolbar
+    value={alignment}
+    onChange={onChangeAlignment}
+  /> -->
+*/
 
 /***/ })
 /******/ ]);

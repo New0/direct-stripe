@@ -48,19 +48,25 @@
         )
     },
     methods: {
-      saving: function (index, button) {
+      saveSetting: function (message, event) {
 
-        const but = JSON.stringify(button)
+        let el = jQuery('#save-result');
 
-        const req_url = API_BUTTONS + '?id=' + but + '&data=' + but;
+        function bubble(){
+          el[0].classList.add('active')
+          setTimeout(() => {
+            el[0].classList.remove('active')
+          }, 3000)
+        }
+
+        const req_url = SETTINGS + '?' + message + '=' + event;
 
         axios
           .post(req_url)
           .then(response => (
-            console.log(but)
+            bubble()
           ))
           .catch(error => console.log(error))
-
       },
       addButton (newButton, event) {
 

@@ -12,24 +12,12 @@ if ( ! class_exists( 'DSBlock' ) ) :
             //add_action( 'enqueue_block_assets', array( $this, 'ds_enqueue_block_assets') );
         }
 
-
-        function ds_render_block_buttons( $attributes ) {
-            $ds_buttons = get_option( 'direct_stripe_buttons' );
-            if ( count( $ds_buttons ) === 0 ) {
-                return 'No Button';
-            }
-
-            var_dump($attributes);
-
-            return 'ok';
-        }
-
         function ds_enqueue_block_assets() {
 
             wp_register_script(
                 'direct-stripe-block-script',
                 DSCORE_URL . 'assets/block-assets/dist/js/main.js',
-                array( 'wp-blocks', 'wp-element', 'wp-component' )
+                array( 'wp-blocks', 'wp-element', 'wp-component', 'wp-i18n' )
             );
 
         }

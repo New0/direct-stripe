@@ -23,8 +23,5 @@
     "gulp-uglify": "*",
     "postcss": "*",
     "graceful-fs": "*"
-  },
-  "dependencies": {
-    "axios": "^0.18.0"
   }
 }

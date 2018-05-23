@@ -1,8 +1,8 @@
 {
   "name": "admin-app",
-  "description": "Vue.js app for tirect Stripe settings interfacehe settings interface",
+  "description": "Vue.js app for Direct Stripe settings interface",
   "version": "1.0.0",
-  "author": "New0 Nicolas Figueira",
+  "author": "New0 Nico Figueira",
   "license": "GPL2",
   "private": true,
   "scripts": {
@@ -21,20 +21,17 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.7.0",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.1.5",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
-    "material-design-icons-iconfont": "^3.0.3",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "vue-loader": "^13.0.5",
-    "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.4.4",
-    "vuetify": "^1.0.17",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3",
-    "webpack-dev-server": "^3.1.4"
+    "vuetify": "^1.0.18",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }

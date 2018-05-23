@@ -25,11 +25,72 @@ class DS_API_Settings {
      */
     protected static $ds_buttons_key = 'direct_stripe_buttons';
     /**
+     * Default global settings
+     *
+     * @var array
+     */
+    protected static $empty = array( '0' => 'No Options saved' );
+    /**
+     * Default global settings
+     *
+     * @var array
+     */
+    protected static $ds_general_defaults = array(
+        'direct_stripe_live_publishable_api_key'    =>  '',
+        'direct_stripe_live_secret_api_key'         =>  '',
+        'direct_stripe_checkbox_api_keys'           =>  '',
+        'direct_stripe_test_publishable_api_key'    =>  '',
+        'direct_stripe_test_secret_api_key'         =>  '',
+        'direct_stripe_currency'                    =>  '',
+        'direct_stripe_success_message'             =>  '',
+        'direct_stripe_error_message'               =>  '',
+        'direct_stripe_use_redirections'            =>  '',
+        'direct_stripe_success_page'                =>  '',
+        'direct_stripe_error_page'                  =>  '',
+        'direct_stripe_logo_image'                  =>  '',
+        'direct_stripe_billing_infos_checkbox'      =>  '',
+        'direct_stripe_shipping_infos_checkbox'     =>  '',
+        'direct_stripe_rememberme_option_checkbox'  =>  ''
+    );
+    /**
+     * Default  styles settings
+     *
+     * @var array
+     */
+    protected static $ds_styles_defaults = array(
+        'direct_stripe_use_custom_styles'           =>  '',
+        'direct_stripe_main_color_style'            =>  '',
+        'direct_stripe_border_radius'               =>  '',
+        'direct_stripe_tc_text'                     =>  '',
+        'direct_stripe_tc_link_text'                =>  '',
+        'direct_stripe_tc_link'                     =>  ''
+    );
+    /**
+     * Default emails settings
+     *
+     * @var array
+     */
+    protected static $ds_emails_defaults = array(
+        'direct_stripe_admin_email_subject'         =>  '',
+        'direct_stripe_admin_email_content'         =>  '',
+        'direct_stripe_user_email_subject'          =>  '',
+        'direct_stripe_user_email_content'          =>  '',
+        'direct_stripe_admin_error_email_subject'   =>  '',
+        'direct_stripe_admin_error_email_content'   =>  '',
+        'direct_stripe_user_error_email_subject'    =>  '',
+        'direct_stripe_user_error_email_content'    =>  ''
+    );
+    /**
      * Default settings
      *
      * @var array
      */
-    protected static $defaults = array('No Option saved');
+    public static function defaults() {
+
+        $defaults = array_merge( self::$ds_general_defaults, self::$ds_styles_defaults, self::$ds_emails_defaults );
+
+        return $defaults;
+    }
     /**
      * Merge all saved settings
      *
@@ -53,11 +114,12 @@ class DS_API_Settings {
     public static function get_settings(){
 
         $saved = self::merge_saved_settings();
+        $defaults = self::defaults();
 
         if( ! is_array( $saved ) || empty( $saved )){
-            return self::$defaults;
+            return $defaults;
         }
-        return wp_parse_args( $saved, self::$defaults );
+        return wp_parse_args( $saved, $defaults );
     }
     /**
      * Get saved buttons
@@ -94,7 +156,7 @@ class DS_API_Settings {
         $saved = get_option( self::$ds_buttons_key, array( 'ds-0' => $example ) );
 
         if( ! is_array( $saved ) || empty( $saved )){
-            return self::$defaults;
+            return self::$empty;
         }
         return $saved;
     }
@@ -108,9 +170,26 @@ class DS_API_Settings {
      */
     public static function save_settings( $settings ){
 
-        $ds_general = get_option( self::$ds_general_key, array() );
-        $ds_styles = get_option( self::$ds_styles_key, array() );
-        $ds_emails = get_option( self::$ds_emails_key, array() );
+        if( get_option( self::$ds_general_key, array() ) ) {
+            $saved_general = get_option( self::$ds_general_key, array() );
+            $ds_general =  wp_parse_args( $saved_general, self::$ds_general_defaults );
+        } else {
+            $ds_general = self::$ds_general_defaults;
+        }
+        if( get_option( self::$ds_styles_key, array() ) ) {
+            $saved_styles = get_option( self::$ds_styles_key, array() );
+            $ds_styles = wp_parse_args( $saved_styles, self::$ds_styles_defaults );
+        } else {
+            $ds_styles = self::$ds_styles_defaults;
+        }
+        if( get_option( self::$ds_emails_key, array() ) ) {
+            $saved_emails = get_option( self::$ds_emails_key, array() );
+            $ds_emails = wp_parse_args( $saved_emails, self::$ds_emails_defaults );
+        } else {
+            $ds_emails = self::$ds_emails_defaults;
+        }
+
+
 
         foreach ( $settings as $i => $setting ){
             if( $setting != null ) {
@@ -140,9 +219,9 @@ class DS_API_Settings {
 
         $ds_buttons = get_option( self::$ds_buttons_key, array() );
 
-            $ds_buttons[$id] = $data;
+        $ds_buttons[$id] = $data;
 
-            update_option( self::$ds_buttons_key, $ds_buttons );
+        update_option( self::$ds_buttons_key, $ds_buttons );
 
     }
 }
