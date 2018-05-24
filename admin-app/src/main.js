@@ -9,6 +9,9 @@ import axios from 'axios';
 const SETTINGS = ds_admin_app_vars.api.settings;
 const nonce = ds_admin_app_vars.api.nonce;
 
+/**
+ * Function to save settings
+ */
 Vue.mixin({
   methods: {
     saveSetting: function (message, event) {
@@ -40,7 +43,10 @@ Vue.mixin({
   }
 })
 
-var dsAdminApp = new Vue({
+/**
+ * Init App
+ */
+let dsAdminApp = new Vue({
   el: '#ds-admin-app',
   render: h => h(App)
 })

@@ -24,10 +24,11 @@ class dsScripts {
         $screen = get_current_screen();
         if( $screen->id === 'toplevel_page_direct_stripe' ){
 
-            wp_enqueue_style( 'ds-vuetify', DSCORE_URL . 'admin-app/dist/css/vuetify.css' );
-            wp_enqueue_style( 'direct-stripe-admin-app-icons', DSCORE_URL . 'admin-app/dist/css/material-design-icons.css' );
+            wp_enqueue_style( 'ds-vuetify', DSCORE_URL . 'admin-app/src/assets/css/vuetify.css' );
+            wp_enqueue_style( 'direct-stripe-admin-app-icons', DSCORE_URL . 'admin-app/src/assets/css/material-design-icons.css' );
+            wp_enqueue_style('wp-color-picker');
             wp_enqueue_media();
-            wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array('jquery'), ('0.0.1'), true );
+            wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array('jquery', 'wp-color-picker'), ('0.0.1'), true );
             wp_localize_script('direct-stripe-admin-app', 'ds_admin_app_vars', self::direct_stripe_localization() );
             /*
             wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks' ) );
@@ -109,8 +110,8 @@ class dsScripts {
                 'customButtonStyles'    =>  __( 'Custom button styles', 'direct-stripe' ),
                 'stylesRadioNo'         =>  __( 'Do not set styles', 'direct-stripe' ),
                 'styleRadioStripe'      =>  __( 'Use default stripe styles', 'direct-stripe' ),
-                'styleRadioDS'          =>  __( 'Use styles set underneath', 'direct-stripe' ),
-                'choseButtonStyles'     =>  __( 'Choose button styles', 'direct-stripe' ),
+                'styleRadioDS'          =>  __( 'Use styles set below', 'direct-stripe' ),
+                'chooseButtonStyles'    =>  __( 'Choose button styles', 'direct-stripe' ),
                 'mainColor'             =>  __( 'Main Color', 'direct-stripe' ),
                 'borderRadius'          =>  __( 'Border radius', 'direct-stripe' ),
                 'termsAndConditions'    =>  __( 'Terms and conditions', 'direct-stripe' ),

@@ -45,14 +45,18 @@ if ( ! class_exists( 'DSBlock' ) ) :
                 )
             );
 
-            register_block_type( 'direct-stripe/payment-button', array(
-                'editor_script' => 'direct-stripe-block-script',
-                'script' => 'direct-stripe-block-script',
-                /*'render_callback' => array( $this, 'ds_render_block_buttons' ),
-                'attributes' => array(
-                    'cool' => ''
-                )*/
-            ) );
+
+            if ( function_exists('register_block_type') ) {
+                register_block_type( 'direct-stripe/payment-button', array(
+                    'editor_script' => 'direct-stripe-block-script',
+                    'script' => 'direct-stripe-block-script',
+                    /*'render_callback' => array( $this, 'ds_render_block_buttons' ),
+                    'attributes' => array(
+                        'cool' => ''
+                    )*/
+                ) );
+            }
+
         }
 
     }

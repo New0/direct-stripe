@@ -98,6 +98,8 @@ class DS_API {
             'direct_stripe_billing_infos_checkbox'      =>  sanitize_text_field( $request->get_param( 'direct_stripe_billing_infos_checkbox' ) ),
             'direct_stripe_shipping_infos_checkbox'     =>  sanitize_text_field( $request->get_param( 'direct_stripe_shipping_infos_checkbox' ) ),
             'direct_stripe_rememberme_option_checkbox'  =>  sanitize_text_field( $request->get_param( 'direct_stripe_rememberme_option_checkbox' ) ),
+            'direct_stripe_use_custom_styles'           =>  sanitize_text_field( $request->get_param( 'direct_stripe_use_custom_styles' ) ),
+            'direct_stripe_main_color_style'            =>  sanitize_text_field( $request->get_param( 'direct_stripe_main_color_style' ) ),
         );
         DS_API_Settings::save_settings( $settings );
         return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );

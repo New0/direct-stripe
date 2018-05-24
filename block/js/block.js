@@ -61,7 +61,7 @@ registerBlockType( 'direct-stripe/payment-button', {
   save: props => {
     return (
       <button>{props.attributes.content.label}</button>
-    );
+    )
   }
 
 } );

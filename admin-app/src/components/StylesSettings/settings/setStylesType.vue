@@ -1,12 +1,42 @@
 <template>
     <div>
 
-        <div>
-            <v-layout row>
-                <v-flex xs12>
-                    <h3>{{text.customButtonStyles}}</h3>
-                </v-flex>
-            </v-layout>
+        <v-layout row>
+            <v-flex xs12>
+                <h3>{{text.customButtonStyles}}</h3>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row>
+
+            <v-flex md2>
+                <h3>{{text.chooseButtonStyles}}</h3>
+            </v-flex>
+
+            <v-flex md3>
+                <v-radio-group
+                        v-on:change="saveSetting('direct_stripe_use_custom_styles', $event)"
+                        v-model="styleMode"
+                >
+                    <v-radio
+                            :label="text.stylesRadioNo"
+                            value="3"
+                            :key="3"
+                    ></v-radio>
+                    <v-radio
+                            :label="text.styleRadioStripe"
+                            value="2"
+                            :key="2"
+                    ></v-radio>
+                    <v-radio
+                            :label="text.styleRadioDS"
+                            value="1"
+                            :key="1"
+                    ></v-radio>
+                </v-radio-group>
+            </v-flex>
+
+        </v-layout>
 
     </div>
 </template>
@@ -23,7 +53,7 @@
       return {
         allData: '',
         text: strings,
-        testMode: false
+        styleMode: ''
       }
     },
     mounted () {
@@ -32,37 +62,16 @@
         .then(response => {
           this.allData = response.data;
 
-          if( response.data.direct_stripe_checkbox_api_keys === 'false' ) {
-            this.testMode = false;
-          } else if ( response.data.direct_stripe_checkbox_api_keys === 'true' ) {
-            this.testMode = true;
+          if( response.data.direct_stripe_use_custom_styles === '3' ) {
+            this.styleMode = '3';
+          } else if ( response.data.direct_stripe_use_custom_styles === '2' ) {
+            this.styleMode = '2';
+          } else if ( response.data.direct_stripe_use_custom_styles === '1' ) {
+            this.styleMode = '1';
           }
 
         })
         .catch(error => console.log(error))
-    },
-    methods: {
-      saveSetting: function (message, event) {
-
-        let el = jQuery('#save-result');
-
-        function bubble(){
-          el[0].classList.add('active')
-          setTimeout(() => {
-            el[0].classList.remove('active')
-          }, 3000)
-        }
-
-        const req_url = SETTINGS + '?' + message + '=' + event;
-
-        axios
-          .post(req_url)
-          .then(response => {
-            console.log(response);
-            bubble()
-          })
-          .catch(error => console.log(error))
-      }
     }
   }
 </script>
