@@ -1,92 +1,190 @@
 <template>
+    <div>
 
-    <v-layout row>
-        <v-flex xs12 sm6 offset-sm3>
+        <v-layout row mb-3>
+            <v-flex xs12>
 
-            <h2>Create Button</h2>
+                <h2>{{ text.buttonsSettings }}</h2>
 
-            <input type="text" v-model="newButton">
-            <v-button class="option" v-on:click="addButton(newButton, $event)">Add button</v-button>
-            <span class="option-saved">{{optionSaved}}</span>
+                <div>{{ text.createButtonsTitle}}</div>
 
-            <h2>Edit Button</h2>
+                <input type="text" v-model="newButton">
+                <v-btn color="success" class="option" v-on:click="pushButton( newButton, null, null, null )">{{ text.createButtons }}</v-btn>
 
-            <select label="Select button" v-model="selectedButton">
+            </v-flex>
+        </v-layout>
 
-                <option v-for="button in buttons" v-bind:value="button">{{ button.text }}</option>
+        <hr />
 
-            </select>
+        <v-layout row>
+            <v-flex md2>
 
-            <span>Sélectionné : {{ selectedButton.type }} / {{ selectedButton.value}}</span>
+                <h2>{{ text.editButtonTitle }}</h2>
 
-        </v-flex>
-    </v-layout>
+                <v-select
+                        v-on:change="setSettings( $event )"
+                        class="ds-select-button"
+                        :label="text.selectButton"
+                        v-model="selectedButton"
+                        :items="buttons"
+                >
+                </v-select>
+            </v-flex>
+            <v-flex md-4>
 
+                <h3 v-if="selectedButton != null">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
+                <h3 v-else>{{ text.currentlySelectedNo }}</h3>
+
+            </v-flex>
+
+            <v-flex v-if="selectedButton != null" md-4>
+
+                <v-btn color="warning" class="option" v-on:click.native="show = !show">{{ text.deleteButton }}</v-btn>
+
+                <v-tooltip v-model="show" top absolute>
+                    <span>{{ text.defdeleteButton }}</span>
+                    <v-btn color="error" v-on:click="deleteButton( selectedButton )">{{ text.yes }}</v-btn>
+                    <v-btn color="info" v-on:click.native="show = !show">{{ text.no }}</v-btn>
+                </v-tooltip>
+
+
+            </v-flex>
+
+        </v-layout>
+
+        <div v-if="selectedButton != null">
+
+            <v-layout row>
+                <v-flex xs12>
+
+                    <h3>{{ text.buttonMainOptions }}</h3>
+                    <p>{{ text.buttonMainDescription }}</p>
+
+                </v-flex>
+            </v-layout>
+
+            <v-layout row>
+
+                <v-flex md4 pa-3>
+                    <label for="buttonType">{{ text.typeLabel }}</label>
+                    <v-select
+                            id="buttonType"
+                            :label="text.selectButtonType"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
+                            :items="buttonTypes"
+                            v-model="buttonType"
+                            class="input-group--focused"
+                            single-line
+                    ></v-select>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="buttonAmount">{{ text.valueAmountLabel }}</label>
+                    <v-text-field
+                            id="buttonAmount"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'amount' , $event)"
+                            :name="selectedButton.amount"
+                            :value="selectedButton.amount"
+                            v-model="selectedButton.amount"
+                            :hint="text.valueAmountHint"
+                    ></v-text-field>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="buttonIDValue">{{ text.valueIDLabel }}</label>
+                    <v-text-field
+                            id="buttonIDValue"
+                            :name="selectedButton.value"
+                            :value="selectedButton.value"
+                            disabled
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+
+        </div>
+
+    </div>
 </template>
 
 <script>
   import axios from 'axios';
 
   const API_BUTTONS = ds_admin_app_vars.api.buttons;
+  const strings = ds_admin_app_vars.strings;
+  const nonce = ds_admin_app_vars.api.nonce;
 
   export default {
-    name: 'buttonsSettings',
+    name: 'buttonSettings',
     data() {
       return {
+        show: false,
+        text: strings,
         buttons: [],
-        selectedButton: {},
+        selectedButton: null,
         newButton: '',
-        optionSaved: 'Saved !'
+        buttonTypes: [
+          {
+            'text': 'Payment',
+            'value': 'payment'
+          },
+          {
+            'text': 'Subscription',
+            'value': 'subscription'
+          },
+          {
+            'text': 'Donation',
+            'value': 'donation'
+          }
+        ],
+        buttonType: '',
+        rules: {
+          required: (value) => !!value || strings.requiredField,
+          email: (value) => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          }
+        }
       }
     },
     mounted () {
       axios
         .get(API_BUTTONS)
-        .then(response => (
-              this.buttons = Object.values( response.data )
-            )
+        .then(response => {
+            let allButtons = this.buttons;
+            jQuery.each( response.data, function( key, value ) {
+                let button = {
+                  'text': value.text,
+                  'id': value.value,
+                  'value': value
+                }
+                allButtons.push( button );
+            });
+            this.buttons = allButtons;
+          }
         )
     },
     methods: {
-      saveSetting: function (message, event) {
+      pushButton ( newButton, button, setting, event ) {
 
-        let el = jQuery('#save-result');
+        if( typeof button === "undefined" || button === null ) { //Create Button
 
-        function bubble(){
-          el[0].classList.add('active')
-          setTimeout(() => {
-            el[0].classList.remove('active')
-          }, 3000)
-        }
-
-        const req_url = SETTINGS + '?' + message + '=' + event;
-
-        axios
-          .post(req_url)
-          .then(response => (
-            bubble()
-          ))
-          .catch(error => console.log(error))
-      },
-      addButton (newButton, event) {
-
-        function uniqueNumber() {
-          let date = Date.now();
-          if (date <= uniqueNumber.previous) {
-            date = ++uniqueNumber.previous;
-          } else {
-            uniqueNumber.previous = date;
+          function uniqueNumber() {
+            let date = Date.now();
+            if (date <= uniqueNumber.previous) {
+              date = ++uniqueNumber.previous;
+            } else {
+              uniqueNumber.previous = date;
+            }
+            return date;
           }
-          return date;
-        }
-        uniqueNumber.previous = 0;
-        function ID(){
-          return uniqueNumber();
-        }
+          uniqueNumber.previous = 0;
+          function ID(){
+            return uniqueNumber();
+          }
 
-        const buttonID = "ds-" + ID();
+          let buttonID = "ds-" + ID();
 
-        const defaultData = {
+          const defaultData = {
             text: newButton,
             value: buttonID,
             type: "Payment",
@@ -110,44 +208,139 @@
             error_query: "error query_args",
             success_url: "custom success url",
             error_url: "custom error url"
-        };
-        this.buttons.push( defaultData );
+          };
+          this.buttons.push(  {
+            'text': defaultData.text,
+            'id': buttonID,
+            'value': defaultData
+            }
+          );
 
-        const button = this.buttons.find( function(element) {
-            return element.value === buttonID;
+          const button = this.buttons.find( function(element) {
+            return element.id === buttonID;
           });
+          const but = JSON.stringify(button.value);
 
-        const but = JSON.stringify(button);
+          const req_url = API_BUTTONS + '?id=' + buttonID + '&data=' + but + '&_dsnonce=' + nonce;
 
-        const req_url = API_BUTTONS + '?id=' + buttonID + '&data=' + but;
+          let el = jQuery('#save-result');
+          function bubble(){
+            el[0].classList.add('active')
+            setTimeout(() => {
+              el[0].classList.remove('active')
+            }, 3000)
+          }
 
-        let el = event.target;
+          axios
+            .post(req_url)
+            .then( response => {
+              console.log(response);
+                if (typeof response.data === "undefined" || response.data === null) {
+                  bubble()
+                } else {
+                  console.log(response);
+                  if (response.data.error === true) {
+                    console.log(response.data.text);
+                  }
+                }
+              }
+            )
+            .catch ( error => {
+                console.log(error);
+                    if (typeof error.data.message === "undefined" || error.data.message === null) {
+                        console.log(error.message);
+                    }
+                }
+            )
 
+
+
+        } else { //Edit Button
+
+          if( typeof setting === 'undefined' || setting === null ) {
+            return;
+          }
+
+          button[setting] = event;
+          this.buttons.push(
+            {
+            'text': button.text,
+            'value': button
+            }
+          );
+
+          const but = JSON.stringify(button);
+          const req_url = API_BUTTONS + '?id=' + button.value + '&data=' + but + '&_dsnonce=' + nonce;
+
+          let el = jQuery('#save-result');
+          function bubble(){
+            el[0].classList.add('active')
+            setTimeout(() => {
+              el[0].classList.remove('active')
+            }, 3000)
+          }
+
+          axios
+            .post(req_url)
+            .then(response => {
+              console.log(response);
+                if (typeof response.data === "undefined" || response.data === null) {
+                  bubble()
+                } else {
+                  console.log(response);
+                  if (response.data.error === true) {
+                    console.log(response.data.text);
+                  }
+                }
+              }
+            )
+            .catch(error => {
+                console.log(error)
+                  if (typeof error.message === "undefined" || error.message === null) {
+                    console.log(error.data.message);
+                  }
+                }
+            )
+
+        }
+
+      },
+      deleteButton: function( button ) {
+        console.log( button.value );
+
+        let el = jQuery('#save-result');
         function bubble(){
-          el.classList.add('active')
+          el[0].classList.add('active')
           setTimeout(() => {
-            el.classList.remove('active')
+            el[0].classList.remove('active')
           }, 3000)
         }
 
+        const req_url = API_BUTTONS + '?id=' + button.value + '&delete=yes&_dsnonce=' + nonce;
         axios
           .post(req_url)
-          .then(response => (
-                bubble()
-            )
+          .then(response => {
+              if (typeof response.data === "undefined" || response.data === null) {
+                bubble();
+              } else {
+                if (response.data.error === true) {
+                  console.log(response.data.text);
+                }
+              }
+            }
           )
           .catch(error => console.log(error))
-
+        //Interface actions
+        this.buttons.pop(button);
+        this.show = false;
       },
-      deleteButton (index) {
-        this.buttons.splice(index, 1)
+      setSettings: function( event ) {
+        this.buttonType = event.type;
       }
-
     }
   }
-
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

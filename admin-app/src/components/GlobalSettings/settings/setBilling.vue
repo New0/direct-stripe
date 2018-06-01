@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <hr />
         <v-layout row>
             <v-flex xs12>
                 <h3>{{text.billingInformation}}</h3>

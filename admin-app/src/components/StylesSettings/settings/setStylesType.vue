@@ -10,7 +10,7 @@
         <v-layout row>
 
             <v-flex md2>
-                <h3>{{text.chooseButtonStyles}}</h3>
+                <p>{{text.chooseButtonStyles}}</p>
             </v-flex>
 
             <v-flex md3>

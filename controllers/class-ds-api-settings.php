@@ -61,6 +61,7 @@ class DS_API_Settings {
         'direct_stripe_use_custom_styles'           =>  '',
         'direct_stripe_main_color_style'            =>  '',
         'direct_stripe_border_radius'               =>  '',
+        'direct_stripe_use_tc_checkbox'             =>  '',
         'direct_stripe_tc_text'                     =>  '',
         'direct_stripe_tc_link_text'                =>  '',
         'direct_stripe_tc_link'                     =>  ''
@@ -71,12 +72,16 @@ class DS_API_Settings {
      * @var array
      */
     protected static $ds_emails_defaults = array(
+        'direct_stripe_admin_emails_checkbox'       =>  '',
         'direct_stripe_admin_email_subject'         =>  '',
         'direct_stripe_admin_email_content'         =>  '',
+        'direct_stripe_user_emails_checkbox'        =>  '',
         'direct_stripe_user_email_subject'          =>  '',
         'direct_stripe_user_email_content'          =>  '',
+        'direct_stripe_admin_error_emails_checkbox' =>  '',
         'direct_stripe_admin_error_email_subject'   =>  '',
         'direct_stripe_admin_error_email_content'   =>  '',
+        'direct_stripe_user_error_emails_checkbox'  =>  '',
         'direct_stripe_user_error_email_subject'    =>  '',
         'direct_stripe_user_error_email_content'    =>  ''
     );
@@ -211,17 +216,21 @@ class DS_API_Settings {
     /**
      * Save buttons
      *
-     * Array keys must be whitelisted (IE must be keys of self::$defaults
-     *
-     * @param array $settings
+     * @param array $buttons
      */
-    public static function save_buttons( $id, $data ){
+    public static function save_buttons( $id, $data, $delete ){
 
         $ds_buttons = get_option( self::$ds_buttons_key, array() );
 
-        $ds_buttons[$id] = $data;
-
-        update_option( self::$ds_buttons_key, $ds_buttons );
+        if( array_key_exists( $id, $ds_buttons ) && $delete === 'yes' ) {
+            unset( $ds_buttons[$id] );
+            update_option( self::$ds_buttons_key, $ds_buttons );
+        } else {
+            if( $data ) {
+                $ds_buttons[$id] = $data;
+                update_option( self::$ds_buttons_key, $ds_buttons );
+            }
+        }
 
     }
 }

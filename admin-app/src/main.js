@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuetify from 'vuetify'
+import axios from 'axios';
 
 Vue.use(Vuetify)
-
-import axios from 'axios';
 
 const SETTINGS = ds_admin_app_vars.api.settings;
 const nonce = ds_admin_app_vars.api.nonce;

@@ -9,14 +9,15 @@ class DS_API {
      * Add routes
      */
     public function add_routes( ) {
-        $fields = self::ds_options();
-        $buttons= self::ds_buttons();
+        //$fields = self::ds_options();
+        //$buttons = self::ds_buttons();
 
         register_rest_route( 'direct-stripe/v1', '/settings',
             array(
                 'methods'         => 'POST',
                 'callback'        => array( $this, 'update_settings' ),
-                'args' => $fields,
+                'args'            => array(
+                ),
                 'permission_callback' => array( $this, 'permissions' )
             )
         );
@@ -72,7 +73,6 @@ class DS_API {
      */
     public function update_settings( WP_REST_Request $request ){
 
-
         $nonce = $request->get_param( '_dsnonce' );
 
         if ( ! wp_verify_nonce( $nonce, 'ds_rest' ) ) {
@@ -100,6 +100,23 @@ class DS_API {
             'direct_stripe_rememberme_option_checkbox'  =>  sanitize_text_field( $request->get_param( 'direct_stripe_rememberme_option_checkbox' ) ),
             'direct_stripe_use_custom_styles'           =>  sanitize_text_field( $request->get_param( 'direct_stripe_use_custom_styles' ) ),
             'direct_stripe_main_color_style'            =>  sanitize_text_field( $request->get_param( 'direct_stripe_main_color_style' ) ),
+            'direct_stripe_border_radius'               =>  sanitize_text_field( $request->get_param( 'direct_stripe_border_radius' ) ),
+            'direct_stripe_use_tc_checkbox'             =>  sanitize_text_field( $request->get_param( 'direct_stripe_use_tc_checkbox' ) ),
+            'direct_stripe_tc_text'                     =>  sanitize_text_field( $request->get_param( 'direct_stripe_tc_text' ) ),
+            'direct_stripe_tc_link_text'                =>  sanitize_text_field( $request->get_param( 'direct_stripe_tc_link_text' ) ),
+            'direct_stripe_tc_link'                     =>  esc_url_raw( $request->get_param( 'direct_stripe_tc_link' ) ),
+            'direct_stripe_admin_emails_checkbox'       =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_emails_checkbox' ) ),
+            'direct_stripe_admin_email_subject'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_email_subject' ) ),
+            'direct_stripe_admin_email_content'         =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_admin_email_content' ) ),
+            'direct_stripe_user_emails_checkbox'        =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_emails_checkbox' ) ),
+            'direct_stripe_user_email_subject'          =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_email_subject' ) ),
+            'direct_stripe_user_email_content'          =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_user_email_content' ) ),
+            'direct_stripe_admin_error_emails_checkbox' =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_error_emails_checkbox' ) ),
+            'direct_stripe_admin_error_email_subject'   =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_error_email_subject' ) ),
+            'direct_stripe_admin_error_email_content'   =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_admin_error_email_content' ) ),
+            'direct_stripe_user_error_emails_checkbox'  =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_error_emails_checkbox' ) ),
+            'direct_stripe_user_error_email_subject'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_error_email_subject' ) ),
+            'direct_stripe_user_error_email_content'    =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_user_error_email_content' ) ),
         );
         DS_API_Settings::save_settings( $settings );
         return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );
@@ -120,10 +137,31 @@ class DS_API {
      */
     public function update_buttons( WP_REST_Request $request ){
 
-        $id = $request->get_param( 'id' );
-        $data = json_decode( $request->get_param( 'data' ) );
+        $nonce = $request->get_param( '_dsnonce' );
 
-        DS_API_Settings::save_buttons( $id, $data );
+        if ( ! wp_verify_nonce( $nonce, 'ds_rest' ) ) {
+            return array(
+                'text'  =>  'Something went wrong, check nonces...',
+                'error'  =>  true
+            );
+        }
+
+        if( $request->get_param( 'id' ) ) {
+            $id = $request->get_param( 'id' );
+        } else  {
+            $id = null;
+        }
+        if( $request->get_param( 'delete' ) && $request->get_param( 'delete' ) === 'yes' ) {
+            $delete = 'yes';
+        } else  {
+            $delete = null;
+            if( $request->get_param( 'data' ) ) {
+                $data = json_decode( $request->get_param( 'data' ) );
+            } else  {
+                $data = null;
+            }
+        }
+        DS_API_Settings::save_buttons( $id, $data, $delete );
         return rest_ensure_response( DS_API_Settings::get_buttons())->set_status( 201 );
     }
     /**
@@ -155,6 +193,7 @@ class DS_API {
         );
         return $options;
     }
+
     public function ds_buttons() {
         $buttons = array(
             'type' => 'json_object',

@@ -67,6 +67,7 @@
   const SETTINGS = ds_admin_app_vars.api.settings;
   const PAGES = ds_admin_app_vars.api.pages;
   const strings = ds_admin_app_vars.strings;
+
   export default {
     name: 'setRedirection',
     data () {
