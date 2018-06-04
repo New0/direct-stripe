@@ -55,11 +55,18 @@
         <div v-if="selectedButton != null">
 
             <v-layout row>
-                <v-flex xs12>
+                <v-flex md8 xs12>
 
                     <h3>{{ text.buttonMainOptions }}</h3>
-                    <p>{{ text.buttonMainDescription }}</p>
 
+                </v-flex>
+                <v-flex md4>
+                    <p id="buttonIDValue">{{ text.valueIDLabel }} : {{selectedButton.value }}</p>
+                </v-flex>
+            </v-layout>
+            <v-layout>
+                <v-flex>
+                    <p>{{ text.buttonMainDescription }}</p>
                 </v-flex>
             </v-layout>
 
@@ -91,13 +98,339 @@
                 </v-flex>
 
                 <v-flex md4 pa-3>
-                    <label for="buttonIDValue">{{ text.valueIDLabel }}</label>
+                    <label for="buttonCSSID">{{ text.valueCSSIDLabel }}</label>
                     <v-text-field
-                            id="buttonIDValue"
-                            :name="selectedButton.value"
-                            :value="selectedButton.value"
-                            disabled
+                            id="buttonCSSID"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'button_id' , $event)"
+                            :name="selectedButton.button_id"
+                            :value="selectedButton.button_id"
+                            v-model="selectedButton.button_id"
+                            :hint="text.valueCSSIDHint"
                     ></v-text-field>
+                </v-flex>
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.overrideGeneralOptions }}</h3>
+            </v-layout>
+            <v-layout>
+                <p>{{ text.buttonSettingsOverride }}</p>
+            </v-layout>
+
+            <v-layout>
+                <v-flex md4 pa-3>
+                    <label for="dsButtonName">{{ text.buttonName }}</label>
+                    <v-text-field
+                            id="dsButtonName"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'name' , $event)"
+                            :name="selectedButton.name"
+                            :value="selectedButton.name"
+                            v-model="selectedButton.name"
+                    ></v-text-field>
+                </v-flex>
+                <v-flex md4 pa-3>
+                    <label for="buttonLabel">{{ text.buttonLabel }}</label>
+                    <v-text-field
+                            id="buttonLabel"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'label' , $event)"
+                            :name="selectedButton.label"
+                            :value="selectedButton.label"
+                            v-model="selectedButton.label"
+                    ></v-text-field>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="buttonPanelLabel">{{ text.buttonPanelLabel }}</label>
+                    <v-text-field
+                            id="buttonPanelLabel"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'panellabel' , $event)"
+                            :name="selectedButton.panellabel"
+                            :value="selectedButton.panellabel"
+                            v-model="selectedButton.panellabel"
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+
+            <v-layout>
+                <v-flex md8 pa-3>
+                    <label for="dsButtonDescription">{{ text.buttonDescription }}</label>
+                    <v-text-field
+                            id="dsButtonDescription"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'description' , $event)"
+                            :name="selectedButton.description"
+                            :value="selectedButton.description"
+                            v-model="selectedButton.description"
+                            multi-line
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+
+            <v-layout>
+
+                <v-flex md2 pa-3>
+                    <v-select
+                            id="dsButtonCurrency"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'currency' , $event)"
+                            v-bind:items="currencies"
+                            v-bind:label="text.buttonCurrency"
+                            v-model="selectedButton.currency"
+                            class="input-group--focused"
+                            single-line
+                            :hint="text.hintButtonCurrency"
+                    ></v-select>
+                </v-flex>
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonTC"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'tc' , $event)"
+                                    v-bind:label="text.tc"
+                                    v-model="selectedButton.tc"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.hintButtonTC }}</span>
+                    </v-tooltip>
+                </v-flex>
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonBilling"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'billing' , $event)"
+                                    v-bind:label="text.billing"
+                                    v-model="selectedButton.billing"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.hintButtonBilling }}</span>
+                    </v-tooltip>
+                </v-flex>
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonShipping"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'shipping' , $event)"
+                                    v-bind:label="text.shipping"
+                                    v-model="selectedButton.shipping"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.hintButtonShipping }}</span>
+                    </v-tooltip>
+                </v-flex>
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonRM"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'rememberme' , $event)"
+                                    v-bind:label="text.rm"
+                                    v-model="selectedButton.rememberme"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.hintButtonRm}}</span>
+                    </v-tooltip>
+                </v-flex>
+
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.overSubscriptionSet }}</h3>
+            </v-layout>
+
+            <v-layout>
+                <v-flex md4 pa-3>
+                    <label for="buttonCoupon">{{ text.buttonCoupon }}</label>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-text-field
+                                    id="buttonCoupon"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'coupon' , $event)"
+                                    :name="selectedButton.coupon"
+                                    :value="selectedButton.coupon"
+                                    v-model="selectedButton.coupon"
+                            ></v-text-field>
+                        </span>
+                        <span>{{ text.hintButtonCoupon}}</span>
+                    </v-tooltip>
+                </v-flex>
+                <v-flex md4 pa-3>
+                    <label for="buttonSetupFee">{{ text.SetupFee }}</label>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-text-field
+                                    id="buttonSetupFee"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'setup_fee' , $event)"
+                                    :name="selectedButton.setup_fee"
+                                    :value="selectedButton.setup_fee"
+                                    v-model="selectedButton.setup_fee"
+                            ></v-text-field>
+                        </span>
+                        <span>{{ text.hintButtonSetupFee }}</span>
+                    </v-tooltip>
+                </v-flex>
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.overDonationSet }}</h3>
+            </v-layout>
+
+            <v-layout>
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonZD"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'zero_decimal' , $event)"
+                                    v-bind:label="text.dsButtonZeroDecimal"
+                                    v-model="selectedButton.zero_decimal"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.hintButtonZeroDecimal }}</span>
+                    </v-tooltip>
+                </v-flex>
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.extraOptions }}</h3>
+            </v-layout>
+
+            <v-layout>
+
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonCapture"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'capture' , $event)"
+                                    v-bind:label="text.dsButtonCapture"
+                                    v-model="selectedButton.capture"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.dsHintButtonCapture }}</span>
+                    </v-tooltip>
+                </v-flex>
+
+                <v-flex md2 pa-3>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-switch
+                                    id="dsButtonDisplayAmount"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'display_amount' , $event)"
+                                    v-bind:label="text.dsButtonDisplayAmount"
+                                    v-model="selectedButton.display_amount"
+                                    single-line
+                            ></v-switch>
+                        </span>
+                        <span>{{ text.dsButDAHint}}</span>
+                    </v-tooltip>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="dsButCustomRole">{{ text.dsButCustomRole }}</label>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-text-field
+                                    id="dsButCustomRole"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'custom_role' , $event)"
+                                    :name="selectedButton.custom_role"
+                                    :value="selectedButton.custom_role"
+                                    v-model="selectedButton.custom_role"
+                            ></v-text-field>
+                        </span>
+                        <span>{{ text.dsButCustomRoleHint }}</span>
+                    </v-tooltip>
+                </v-flex>
+
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.dsButExtraQueryArgs }}</h3>
+            </v-layout>
+
+            <v-layout>
+
+                <v-flex md4 pa-3>
+                    <label for="dsButSuccessQArgs">{{ text.dsButSuccessQArgs }}</label>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-text-field
+                                    id="dsButSuccessQArgs"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'success_query' , $event)"
+                                    :name="selectedButton.success_query"
+                                    :value="selectedButton.success_query"
+                                    v-model="selectedButton.success_query"
+                            ></v-text-field>
+                        </span>
+                        <span>{{ text.dsButSuccessQArgsHint }}</span>
+                    </v-tooltip>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="dsButErrorQArgs">{{ text.dsButErrorQArgs }}</label>
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                            <v-text-field
+                                    id="dsButErrorQArgs"
+                                    v-on:change="pushButton( selectedButton.text, selectedButton, 'error_query' , $event)"
+                                    :name="selectedButton.error_query"
+                                    :value="selectedButton.error_query"
+                                    v-model="selectedButton.error_query"
+                            ></v-text-field>
+                        </span>
+                        <span>{{ text.dsButErrorQArgsHint }}</span>
+                    </v-tooltip>
+                </v-flex>
+
+            </v-layout>
+
+            <hr/>
+
+            <v-layout>
+                <h3>{{ text.dsButRedirections }}</h3>
+            </v-layout>
+            <v-layout>
+                <p>{{ text.dsButRedirectionsDesc }}</p>
+            </v-layout>
+
+            <v-layout>
+
+                <v-flex md4 pa-3>
+                    <label for="dsButSuccessRed">{{ text.dsButSuccessRed }}</label>
+                        <v-text-field
+                                id="dsButSuccessRed"
+                                v-on:change="pushButton( selectedButton.text, selectedButton, 'success_url' , $event)"
+                                :name="selectedButton.success_url"
+                                :value="selectedButton.success_url"
+                                v-model="selectedButton.success_url"
+                        ></v-text-field>
+                </v-flex>
+
+                <v-flex md4 pa-3>
+                    <label for="dsButErrorRed">{{ text.dsButErrorRed }}</label>
+                        <v-text-field
+                                id="dsButErrorRed"
+                                v-on:change="pushButton( selectedButton.text, selectedButton, 'error_url' , $event)"
+                                :name="selectedButton.error_url"
+                                :value="selectedButton.error_url"
+                                v-model="selectedButton.error_url"
+                        ></v-text-field>
                 </v-flex>
             </v-layout>
 
@@ -143,7 +476,10 @@
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             return pattern.test(value) || 'Invalid e-mail.'
           }
-        }
+        },
+        currencies: [
+          'USD', 'EUR', 'GBP','AUD', 'CAD', 'JPY', 'DKK', 'NOK', 'SEK', 'SGD', 'HKD', 'CHF', 'MXN', 'BRL', 'NZD'
+        ]
       }
     },
     mounted () {
@@ -189,19 +525,20 @@
             value: buttonID,
             type: "Payment",
             amount: 1000,
-            button_id: "My Button",
+            button_id: "MyButton",
+            name: "Company Name",
             description: "Description",
             label: "Label",
             panellabel: "Panel Label",
             coupon: "Coupon",
             setup_fee: null,
-            zero_decimal: "false",
-            capture: "true",
-            billing: "false",
-            shipping: "false",
-            tc: "false",
-            rememberme: "true",
-            display_amount: "false",
+            zero_decimal: false,
+            capture: true,
+            billing: false,
+            shipping: false,
+            tc: false,
+            rememberme: false,
+            display_amount: false,
             currency: "USD",
             custom_role: null,
             success_query: "success query_args",
@@ -283,7 +620,6 @@
           axios
             .post(req_url)
             .then(response => {
-              console.log(response);
                 if (typeof response.data === "undefined" || response.data === null) {
                   bubble()
                 } else {

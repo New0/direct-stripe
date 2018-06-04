@@ -11,7 +11,7 @@
         <v-flex md2>
            <p>{{text.currency}}</p>
         </v-flex>
-        <v-flex md1>
+        <v-flex md2>
             <v-select
                     v-on:change="saveSetting('direct_stripe_currency', $event)"
                     v-bind:items="currencies"
