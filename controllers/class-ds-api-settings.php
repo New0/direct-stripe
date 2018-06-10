@@ -198,7 +198,7 @@ class DS_API_Settings {
 
 
         foreach ( $settings as $i => $setting ){
-            if( $setting != null ) {
+            if( isset( $setting ) ) {
                 if( array_key_exists( $i, $ds_general ) ){
                     $ds_general[$i] = $setting;
                     update_option( self::$ds_general_key, $ds_general );

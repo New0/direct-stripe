@@ -82,6 +82,10 @@ class DS_API {
             );
         }
 
+        $set = $request->get_params();
+        $key = key( $set );
+        $value = reset($set);
+
         $settings = array(
             'direct_stripe_live_publishable_api_key'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_publishable_api_key' ) ),
             'direct_stripe_live_secret_api_key'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_secret_api_key' ) ),
@@ -118,7 +122,38 @@ class DS_API {
             'direct_stripe_user_error_email_subject'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_error_email_subject' ) ),
             'direct_stripe_user_error_email_content'    =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_user_error_email_content' ) ),
         );
-        DS_API_Settings::save_settings( $settings );
+        $booleans = array( 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
+            'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
+            'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox'
+        );
+        $texts = array( 'direct_stripe_live_publishable_api_key', 'direct_stripe_live_secret_api_key',
+            'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',
+            'direct_stripe_success_message', 'direct_stripe_error_message', 'direct_stripe_use_custom_styles',
+            'direct_stripe_main_color_style', 'direct_stripe_border_radius', 'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
+            'direct_stripe_tc_link', 'direct_stripe_admin_email_subject', 'direct_stripe_user_email_subject',
+            'direct_stripe_admin_error_email_subject', 'direct_stripe_user_error_email_subject'
+        );
+        $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
+        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content' );
+        if ( in_array( $key, $booleans ) ) {
+            $setting = array(
+                $key => filter_var( $value, FILTER_VALIDATE_BOOLEAN )
+            );
+        } else if ( in_array( $key, $texts ) ) {
+            $setting = array(
+                $key => sanitize_text_field( $value )
+            );
+        } else if ( in_array( $key, $urls) ) {
+            $setting = array(
+                $key => esc_url_raw(  $value )
+            );
+        } else if ( in_array( $key, $post_kses) ) {
+            $setting = array(
+                $key => wp_filter_post_kses( $value )
+            );
+        }
+
+        DS_API_Settings::save_settings( $setting );
         return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );
     }
     /**

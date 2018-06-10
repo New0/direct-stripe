@@ -84,10 +84,10 @@
         .then(response => {
           this.allData = response.data;
 
-          if( response.data.direct_stripe_use_redirections === false ) {
-            this.useRedirections = false;
-          } else if ( response.data.direct_stripe_use_redirections === true ) {
+          if( response.data.direct_stripe_use_redirections === true ) {
             this.useRedirections = true;
+          } else {
+            this.useRedirections = false;
           }
 
           this.successPage = response.data.direct_stripe_success_page;
