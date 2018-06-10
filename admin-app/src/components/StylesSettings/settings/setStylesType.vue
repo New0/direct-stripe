@@ -1,19 +1,19 @@
 <template>
     <div>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12>
                 <h3>{{text.customButtonStyles}}</h3>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
 
-            <v-flex md2>
+            <v-flex md2 xs12>
                 <p>{{text.chooseButtonStyles}}</p>
             </v-flex>
 
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-radio-group
                         v-on:change="saveSetting('direct_stripe_use_custom_styles', $event)"
                         v-model="styleMode"

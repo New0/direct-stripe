@@ -5,7 +5,6 @@
         <setCallbacks></setCallbacks>
         <setRedirection></setRedirection>
         <setLogo></setLogo>
-        <setBilling></setBilling>
     </v-container>
 </template>
 
@@ -25,7 +24,7 @@
       'setCallbacks': setCallbacks,
       'setRedirection': setRedirection,
       'setLogo': setLogo,
-      'setBilling': setBilling
+     // 'setBilling': setBilling
     }
   }
 </script>

@@ -136,14 +136,14 @@ class DS_API_Settings {
             "text": "Example button", 
             "value": 0, 
             "type":"Payment",
-            "amount": 1000,
+            "amount": "1000",
             "button_id": "MyButton", 
             "name": "Company Name"
             "description": "Description",
-            "label": "Label",
-            "panellabel": "Panel Label", 
-            "coupon": "Coupon",
-            "setup_fee": null,
+            "label": "Payment",
+            "panellabel": "Confirm payment", 
+            "coupon": "",
+            "setup_fee": "",
             "zero_decimal": false,
             "capture": true,
             "billing": false,
@@ -152,11 +152,11 @@ class DS_API_Settings {
             "rememberme": false,
             "display_amount": false,
             "currency": "USD",
-            "custom_role": null,
-            "success_query": "success query_args",
-            "error_query": "error query_args",
-            "success_url": "custom success url",
-            "error_url": "custom error url"
+            "custom_role": "",
+            "success_query": "",
+            "error_query": "",
+            "success_url": "",
+            "error_url": ""
         }' );
 
         $saved = get_option( self::$ds_buttons_key, array( 'ds-0' => $example ) );

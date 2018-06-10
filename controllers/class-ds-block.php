@@ -9,16 +9,21 @@ if ( ! class_exists( 'DSBlock' ) ) :
          */
         public function __construct() {
             add_action( 'init', array( $this, 'ds_block' ) );
-            //add_action( 'enqueue_block_assets', array( $this, 'ds_enqueue_block_assets') );
         }
 
-        function ds_enqueue_block_assets() {
+        function ds_render_block_buttons( $atts ) {
 
-            wp_register_script(
-                'direct-stripe-block-script',
-                DSCORE_URL . 'assets/block-assets/dist/js/main.js',
-                array( 'wp-blocks', 'wp-element', 'wp-component', 'wp-i18n' )
-            );
+            //Set up data
+            include( DSCORE_PATH . 'includes/ds-data.php');
+            //Enqueue JS and send parameters
+            wp_localize_script('direct-stripe-handler-script', $instance, $params);
+            wp_enqueue_script('direct-stripe-checkout-script');
+            wp_enqueue_script('direct-stripe-handler-script');
+
+            ob_start();
+            include( DSCORE_PATH . 'includes/ds-button.php');
+            include( DSCORE_PATH . 'includes/ds-answers.php');
+            return ob_get_clean();
 
         }
 
@@ -50,10 +55,13 @@ if ( ! class_exists( 'DSBlock' ) ) :
                 register_block_type( 'direct-stripe/payment-button', array(
                     'editor_script' => 'direct-stripe-block-script',
                     'script' => 'direct-stripe-block-script',
-                    /*'render_callback' => array( $this, 'ds_render_block_buttons' ),
+                    'render_callback' => array( $this, 'ds_render_block_buttons' ),
                     'attributes' => array(
-                        'cool' => ''
-                    )*/
+                        'value' => array(
+                            'type'      =>  'string',
+                            'default'   =>  '0'
+                        )
+                    )
                 ) );
             }
 

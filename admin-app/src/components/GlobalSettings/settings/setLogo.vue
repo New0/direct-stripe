@@ -1,17 +1,17 @@
 <template>
     <div>
         <hr/>
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12>
                 <h3>{{text.modalFormLogo}}</h3>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.selectImage}}</p>
             </v-flex>
-            <v-flex md2>
+            <v-flex md2 xs12>
                 <v-btn
                         v-on:click="open_media_uploader_image()"
                 >{{text.selectImage}}</v-btn>
@@ -20,7 +20,7 @@
                 >{{text.removeImage}}</v-btn>
             </v-flex>
 
-            <v-flex md4>
+            <v-flex md4 xs12>
                 <div id="dsModalLogo">
                     <img v-bind:src="attachmentURL" v-bind:alt="text.altAttachment" />
                 </div>

@@ -2,29 +2,29 @@
     <div>
         <hr />
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <h3>{{text.termsAndConditions}}</h3>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md2>
                 <p>{{text.useTC}}</p>
             </v-flex>
-            <v-flex md1>
-                <v-checkbox
+            <v-flex md1 offset-md1 offset-xs0>
+                <v-switch
                         v-on:change="saveSetting( 'direct_stripe_use_tc_checkbox', $event )"
                         v-model="tcMode"
-                ></v-checkbox>
+                ></v-switch>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.tcText}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_tc_text', $event )"
                         v-bind:name="allData.direct_stripe_tc_text"
@@ -36,11 +36,11 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.tcTextLinked}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_tc_link_text', $event )"
                         v-bind:name="allData.direct_stripe_tc_link_text"
@@ -52,11 +52,11 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.tcPage}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-select
                         v-on:change="saveSetting('direct_stripe_tc_link', $event)"
                         :items="tcPages"
@@ -96,9 +96,9 @@
 
           this.allData = response.data;
 
-          if( response.data.direct_stripe_use_tc_checkbox === 'false' ) {
+          if( response.data.direct_stripe_use_tc_checkbox === false ) {
             this.testMode = false;
-          } else if ( response.data.direct_stripe_use_tc_checkbox === 'true' ) {
+          } else if ( response.data.direct_stripe_use_tc_checkbox === true ) {
             this.testMode = true;
           }
 

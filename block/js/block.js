@@ -12,7 +12,6 @@ registerBlockType( 'direct-stripe/payment-button', {
   title: __( 'Stripe Payment button' ),
   category: 'common',
   icon: 'money',
-
   attributes: {
     buttonItem: {
       type: 'string'
@@ -25,18 +24,23 @@ registerBlockType( 'direct-stripe/payment-button', {
       default: {
         label: __('Button not set')
       }
+    },
+    value: {
+      type: 'string',
+      default: '0'
     }
   },
 
   edit: props => {
       const { isSelected, attributes, setAttributes } = props;
-      const { alignment, buttonItem, content } = attributes;
+      const { alignment, buttonItem, content, value } = attributes;
 
       const onChangeButton = updatedButton => {
-        setAttributes( { buttonItem: updatedButton.target.value } );
-        const newContent = Buttons.filter(button => button.value === updatedButton.target.value );
-        setAttributes( { content: newContent[0] } );
-      };
+        setAttributes({buttonItem: updatedButton.target.value});
+        const newContent = Buttons.filter(button => button.value === updatedButton.target.value);
+        setAttributes({content: newContent[0]});
+        setAttributes({value: newContent[0]['value']});
+      }
 
       const onChangeAlignment =  updatedAlignment =>  {
         setAttributes( { alignment: updatedAlignment } );
@@ -45,7 +49,7 @@ registerBlockType( 'direct-stripe/payment-button', {
       return [
                 isSelected && (
                 <BlockControls key="controls">
-                   <select value={buttonItem} onChange={onChangeButton}>
+                   <select value={value} onChange={onChangeButton}>
                       <option>Select Button</option>
                       {Buttons.map(item => (
                         <option value={item.value}>{item.text}</option>
@@ -53,15 +57,13 @@ registerBlockType( 'direct-stripe/payment-button', {
                     </select>
                 </BlockControls>
               ),
-            <button>{content.label}</button>
+            <button value={content.value}>{content.label}</button>
           ];
 
   },
 
   save: props => {
-    return (
-      <button>{props.attributes.content.label}</button>
-    )
+    return null;
   }
 
 } );

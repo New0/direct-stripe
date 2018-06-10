@@ -2,7 +2,7 @@
     <div>
         <hr />
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12>
 
                 <h3>{{text.errorAdminEmailTitle}}</h3>
@@ -10,25 +10,25 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md2>
 
                 <p>{{text.checkEAE}}</p>
 
             </v-flex>
             <v-flex md1>
-                <v-checkbox
+                <v-switch
                         v-on:change="saveSetting( 'direct_stripe_admin_error_emails_checkbox', $event )"
                         v-model="eaeMode"
-                ></v-checkbox>
+                ></v-switch>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.adminEEmailSubject}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_admin_error_email_subject', $event )"
                         v-bind:name="allData.direct_stripe_admin_error_email_subject"
@@ -39,13 +39,13 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
 
                 <p>{{text.adminEEmailContent}}</p>
 
             </v-flex>
-            <v-flex md4>
+            <v-flex md4 xs12>
                 <v-text-field
                         v-on:change="saveSetting('direct_stripe_admin_error_email_content', $event)"
                         v-bind:name="allData.direct_stripe_admin_error_email_content"
@@ -81,9 +81,9 @@
         .then(response => {
           this.allData = response.data;
 
-          if( response.data.direct_stripe_admin_error_emails_checkbox === 'false' ) {
+          if( response.data.direct_stripe_admin_error_emails_checkbox === false ) {
             this.eaeMode = false;
-          } else if ( response.data.direct_stripe_admin_error_emails_checkbox === 'true' ) {
+          } else if ( response.data.direct_stripe_admin_error_emails_checkbox === true ) {
             this.eaeMode = true;
           }
 

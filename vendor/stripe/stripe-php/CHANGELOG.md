@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.7.4 - 2018-05-29
+* [#480](https://github.com/stripe/stripe-php/pull/480) PHPDoc changes for API version 2018-05-21 and the addition of the new `CHARGE_EXPIRED` event type
+
+## 6.7.3 - 2018-05-28
+* [#479](https://github.com/stripe/stripe-php/pull/479) Fix unnecessary traits on `\Stripe\InvoiceLineItem`
+
+## 6.7.2 - 2018-05-28
+* [#471](https://github.com/stripe/stripe-php/pull/471) Add `OBJECT_NAME` constant to all API resource classes, add `\Stripe\InvoiceLineItem` class
+
+## 6.7.1 - 2018-05-13
+* [#468](https://github.com/stripe/stripe-php/pull/468) Update fields in PHP docs for accuracy
+
+## 6.7.0 - 2018-05-09
+* [#466](https://github.com/stripe/stripe-php/pull/466) Add support for issuer fraud records
+
 ## 6.6.0 - 2018-04-11
 * [#460](https://github.com/stripe/stripe-php/pull/460) Add support for flexible billing primitives
 

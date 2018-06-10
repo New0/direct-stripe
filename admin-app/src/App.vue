@@ -135,4 +135,19 @@
   .input-group--text-field-box:not(.input-group--textarea).input-group--multi-line .input-group__input {
       padding-top: 0;
   }
+  .input-group--text-field {
+    padding-top: 5px;
+
+      label {
+          top: 0;
+      }
+  }
+  .input-group {
+    &.input-group--selection-controls {
+      &.switch {
+        padding-top: 10px;
+      }
+    }
+  }
+
 </style>

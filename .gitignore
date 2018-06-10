@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
+vendor/
 npm-debug.log
 yarn-error.log
 
@@ -9,3 +10,5 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
+
+./vendor

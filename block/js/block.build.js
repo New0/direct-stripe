@@ -86,7 +86,6 @@ registerBlockType('direct-stripe/payment-button', {
   title: __('Stripe Payment button'),
   category: 'common',
   icon: 'money',
-
   attributes: {
     buttonItem: {
       type: 'string'
@@ -99,6 +98,10 @@ registerBlockType('direct-stripe/payment-button', {
       default: {
         label: __('Button not set')
       }
+    },
+    value: {
+      type: 'string',
+      default: '0'
     }
   },
 
@@ -108,7 +111,8 @@ registerBlockType('direct-stripe/payment-button', {
         setAttributes = props.setAttributes;
     var alignment = attributes.alignment,
         buttonItem = attributes.buttonItem,
-        content = attributes.content;
+        content = attributes.content,
+        value = attributes.value;
 
 
     var onChangeButton = function onChangeButton(updatedButton) {
@@ -117,6 +121,7 @@ registerBlockType('direct-stripe/payment-button', {
         return button.value === updatedButton.target.value;
       });
       setAttributes({ content: newContent[0] });
+      setAttributes({ value: newContent[0]['value'] });
     };
 
     var onChangeAlignment = function onChangeAlignment(updatedAlignment) {
@@ -128,7 +133,7 @@ registerBlockType('direct-stripe/payment-button', {
       { key: 'controls' },
       wp.element.createElement(
         'select',
-        { value: buttonItem, onChange: onChangeButton },
+        { value: value, onChange: onChangeButton },
         wp.element.createElement(
           'option',
           null,
@@ -144,17 +149,13 @@ registerBlockType('direct-stripe/payment-button', {
       )
     ), wp.element.createElement(
       'button',
-      null,
+      { value: content.value },
       content.label
     )];
   },
 
   save: function save(props) {
-    return wp.element.createElement(
-      'button',
-      null,
-      props.attributes.content.label
-    );
+    return null;
   }
 
 });

@@ -5,9 +5,9 @@ $is_post_edit_page = in_array(basename($_SERVER['PHP_SELF']), array('post.php', 
 if( !$is_post_edit_page) {
   return;
 } else {
-
+    add_thickbox();
       ?>
-     <a href="#TB_inline?width=480&inlineId=ds_add_button" class="thickbox button ds_media_link" id="add_ds" title="<?php _e('Add Stripe button', 'direct-stripe') ?>">
+     <a href="#TB_inline?width=480&inlineId=ds_add_button&modal=true" class="thickbox button ds_media_link" id="add_ds" title="<?php _e('Add Stripe button', 'direct-stripe') ?>">
          <img src="<?php echo DSCORE_URL; ?>assets/admin/dist/img/stripe-logo-black.svg" width="auto" height="20" ><?php _e('Add button', 'direct-stripe') ?>
      </a>
     <?php

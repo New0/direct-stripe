@@ -1,7 +1,7 @@
 <template>
     <div>
         <hr/>
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12>
 
                 <h3>{{text.redirection}}</h3>
@@ -9,28 +9,25 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md2>
 
-                <p>{{text.selectSuccessPage}}</p>
+                <p>{{text.useRedirectionPages}}</p>
 
             </v-flex>
             <v-flex md1>
-                <v-checkbox
+                <v-switch
                         v-on:change="saveSetting( 'direct_stripe_use_redirections', $event )"
                         v-model="useRedirections"
-                ></v-checkbox>
-            </v-flex>
-            <v-flex md4>
-                <span>{{text.successPage}}</span>
+                ></v-switch>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.successPage}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-select
                         v-on:change="saveSetting('direct_stripe_success_page', $event)"
                         :items="successPages"
@@ -42,11 +39,11 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.errorPage}}</p>
             </v-flex>
-            <v-flex md3>
+            <v-flex md3 xs12>
                 <v-select
                         v-on:change="saveSetting('direct_stripe_error_page', $event)"
                         :items="errorPages"
@@ -87,9 +84,9 @@
         .then(response => {
           this.allData = response.data;
 
-          if( response.data.direct_stripe_use_redirections === 'false' ) {
+          if( response.data.direct_stripe_use_redirections === false ) {
             this.useRedirections = false;
-          } else if ( response.data.direct_stripe_use_redirections === 'true' ) {
+          } else if ( response.data.direct_stripe_use_redirections === true ) {
             this.useRedirections = true;
           }
 

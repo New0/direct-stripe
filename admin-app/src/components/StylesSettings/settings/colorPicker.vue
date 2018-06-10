@@ -2,13 +2,13 @@
     <div>
         <hr />
 
-        <v-layout row>
+        <v-layout row wrap>
 
-            <v-flex md2>
+            <v-flex md2 xs12>
                 <h3>{{text.mainColor}}</h3>
             </v-flex>
 
-            <v-flex md4>
+            <v-flex md4 xs12>
 
                 <input class="ds-show-color" v-bind:style="{ backgroundColor: dscolor }" />
 

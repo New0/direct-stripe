@@ -5,7 +5,7 @@
 jQuery(".direct-stripe-button-id").on("click", function (e) {
 
     var instance = jQuery( this ).data("id");
-    var ds_values = window[instance]; 
+    var ds_values = window[instance];
 
     // Set currency
     if( "" !== ds_values.currency ) {
@@ -19,26 +19,20 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     } else {
         var amount = 0;
     }
-
-// Set remember me option
-    if( ds_values.rememberme === "true" ) {
-        var rememberme = true;
-    } else if( ds_values.rememberme !== "false" && ds_values.general_rememberme === "1" ) {
-        var rememberme = true;
+    if( ds_values.billing === "1" || ds_values.billing === "true" ) {
+        billing = true;
     } else {
-        var rememberme = false;
+        billing = false;
     }
-
-//Set billing and shipping
-    if( ds_values.shipping === "true" || ds_values.billing !== "false" && ds_values.shipping !== "false" && ds_values.general_shipping === "1" ) {
-        var shipping = true;
-        var billing = true;
-    } else if(ds_values.billing === "true" && ds_values.shipping !== "true" || ds_values.billing !== "false" && ds_values.general_billing === "1" ) {
-        var shipping = false;
-        var billing = true;
+    if( ds_values.shipping === "1" || ds_values.shipping === "true" ) {
+        shipping = true;
     } else {
-        var billing = false;
-        var shipping = false;
+        shipping = false;
+    }
+    if( ds_values.rememberme === "1" || ds_values.rememberme === "true" ) {
+        rememberme = true;
+    } else {
+        rememberme = false;
     }
 
     var numbers = /^\+?[0-9]*\.?[0-9]+$/;
@@ -47,7 +41,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     //Check T&C have been checked
     if (jQuery(this).hasClass("ds-check-tc") && !jQuery("#ds-conditions-" + instance).is(":checked")) {
 
-        jQuery(ds_answer_input).html("Please check the T&C" + "<br/>");
+        jQuery(ds_answer_input).html( direct_stripe_script_vars.text.checkTC + "<br/>");
         jQuery(ds_answer_input).addClass("error");
         jQuery(ds_answer_input).show();
         setTimeout(function () {
@@ -55,13 +49,12 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         }, 10000);
 
         return false;
-
     }
 
     //Check donation amount is fulfilled
     if (jQuery(this).hasClass("ds-check-donation") && !jQuery("#donationvalue").val() && !jQuery("#donationvalue").val().match(numbers)) {
 
-        jQuery(ds_answer_input).html("Please enter amount" + "<br/>");
+        jQuery(ds_answer_input).html( direct_stripe_script_vars.text.enterAmount + "<br/>");
         jQuery(ds_answer_input).addClass("error");
         jQuery(ds_answer_input).show();
         setTimeout(function () {
@@ -72,36 +65,34 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     }
 
     handler = stripe_checkout(ds_values);
-    // Open Checkout with further options:
-    if( billing === false ) {
-        handler.open({
-            'key': ds_values.key,
-            'locale': 'auto',
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel':   ds_values.panellabel,
-            'amount': amount,
-            'billingAddress': billing,
-            'allowRememberMe': rememberme
-        });
+    if( billing !== false ) {
+      handler.open({
+        'key': ds_values.key,
+        'locale': 'auto',
+        'image': ds_values.image,
+        'name': ds_values.name,
+        'description': ds_values.description,
+        'email': ds_values.current_email_address,
+        'currency': currency,
+        'panelLabel':   ds_values.panellabel,
+        'amount': amount,
+        'billingAddress': billing,
+        'shippingAddress': shipping,
+        'allowRememberMe': rememberme
+      });
     } else {
-        handler.open({
-            'key': ds_values.key,
-            'locale': 'auto',
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel':   ds_values.panellabel,
-            'amount': amount,
-            'billingAddress': billing,
-            'shippingAddress': shipping,
-            'allowRememberMe': rememberme
-        });
+      handler.open({
+        'key': ds_values.key,
+        'locale': 'auto',
+        'image': ds_values.image,
+        'name': ds_values.name,
+        'description': ds_values.description,
+        'email': ds_values.current_email_address,
+        'currency': currency,
+        'panelLabel': ds_values.panellabel,
+        'amount': amount,
+        'allowRememberMe': rememberme
+      });
     }
 
     e.preventDefault();

@@ -1,21 +1,21 @@
 <template>
 <div>
     <hr/>
-    <v-layout row>
-        <v-flex md3>
+    <v-layout row wrap>
+        <v-flex md3 xs12>
 
             <h3>{{text.bubbleMessages}}</h3>
 
         </v-flex>
     </v-layout>
 
-    <v-layout row>
-        <v-flex md3>
+    <v-layout row wrap>
+        <v-flex md3 xs12>
 
             <h3>{{text.successBubble}}</h3>
 
         </v-flex>
-        <v-flex md4>
+        <v-flex md4 xs12>
             <v-text-field
                     v-on:change="saveSetting('direct_stripe_success_message', $event)"
                     v-bind:name="allData.direct_stripe_success_message"
@@ -27,13 +27,13 @@
         </v-flex>
     </v-layout>
 
-    <v-layout row>
-        <v-flex md3>
+    <v-layout row wrap>
+        <v-flex md3 xs12>
 
             <h3>{{text.errorBubble}}</h3>
 
         </v-flex>
-        <v-flex md4>
+        <v-flex md4 xs12>
             <v-text-field
                     v-on:change="saveSetting('direct_stripe_error_message', $event)"
                     v-bind:name="allData.direct_stripe_error_message"

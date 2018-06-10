@@ -1,10 +1,10 @@
 <template>
     <div>
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
                 <p>{{text.borderRadius}}</p>
             </v-flex>
-            <v-flex md1>
+            <v-flex md1 xs6>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_border_radius', $event )"
                         v-bind:name="borderRadius"
@@ -13,7 +13,7 @@
                         single-line
                 ></v-text-field>
             </v-flex>
-            <v-flex md2>
+            <v-flex md2 xs6>
                 <p>px</p>
             </v-flex>
         </v-layout>

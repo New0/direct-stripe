@@ -1,13 +1,13 @@
 <template>
     <div>
         <hr />
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12>
                 <h3>{{text.billingInformation}}</h3>
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md3>
                 <p>{{text.billingAddress}}</p>
             </v-flex>
@@ -22,7 +22,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md3>
                 <p>{{text.shippingAddress}}</p>
             </v-flex>
@@ -38,7 +38,7 @@
         </v-layout>
 
 
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex md3>
                 <p>{{text.rememberMe}}</p>
             </v-flex>
@@ -77,17 +77,17 @@
         .get(SETTINGS)
         .then(response => {
 
-          if( response.data.direct_stripe_billing_infos_checkbox === 'false' ) {
+          if( response.data.direct_stripe_billing_infos_checkbox === false ) {
             this.billingMode = false;
-          } else if ( response.data.direct_stripe_billing_infos_checkbox === 'true' ) {
+          } else if ( response.data.direct_stripe_billing_infos_checkbox === true ) {
             this.billingMode = true;
-          } else if ( response.data.direct_stripe_shipping_infos_checkbox === 'false' ) {
+          } else if ( response.data.direct_stripe_shipping_infos_checkbox === false ) {
             this.shippingMode = false;
-          } else if ( response.data.direct_stripe_shipping_infos_checkbox === 'true' ) {
+          } else if ( response.data.direct_stripe_shipping_infos_checkbox === true ) {
             this.shippingMode = true;
-          } else if ( response.data.direct_stripe_rememberme_option_checkbox === 'false' ) {
+          } else if ( response.data.direct_stripe_rememberme_option_checkbox === false ) {
             this.remembermeMode = false;
-          } else if ( response.data.direct_stripe_rememberme_option_checkbox=== 'true' ) {
+          } else if ( response.data.direct_stripe_rememberme_option_checkbox=== true ) {
             this.remembermeMode = true;
           }
 

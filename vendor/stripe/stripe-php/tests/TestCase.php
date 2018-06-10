@@ -13,7 +13,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /** @var string original API key */
     protected $origApiKey;
 
-    /** @var string original admin-app ID */
+    /** @var string original client ID */
     protected $origClientId;
 
     /** @var string original API version */
@@ -22,7 +22,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /** @var string original account ID */
     protected $origAccountId;
 
-    /** @var object HTTP admin-app mocker */
+    /** @var object HTTP client mocker */
     protected $clientMock;
 
     protected function setUp()
@@ -41,10 +41,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
         Stripe::setApiVersion(null);
         Stripe::setAccountId(null);
 
-        // Set up the HTTP admin-app mocker
+        // Set up the HTTP client mocker
         $this->clientMock = $this->getMock('\Stripe\HttpClient\ClientInterface');
 
-        // By default, use the real HTTP admin-app
+        // By default, use the real HTTP client
         ApiRequestor::setHttpClient(HttpClient\CurlClient::instance());
     }
 
@@ -122,9 +122,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Prepares the admin-app mocker for an invocation of the `request` method.
+     * Prepares the client mocker for an invocation of the `request` method.
      * This helper method is used by both `expectsRequest` and `stubRequest` to
-     * prepare the admin-app mocker to expect an invocation of the `request` method
+     * prepare the client mocker to expect an invocation of the `request` method
      * with the provided arguments.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)

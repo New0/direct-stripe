@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <v-layout row mb-3>
+        <v-layout row  wrap mb-3>
             <v-flex xs12>
 
                 <h2>{{ text.buttonsSettings }}</h2>
@@ -16,8 +16,8 @@
 
         <hr />
 
-        <v-layout row>
-            <v-flex md2>
+        <v-layout row wrap>
+            <v-flex md2 xs12>
 
                 <h2>{{ text.editButtonTitle }}</h2>
 
@@ -30,18 +30,18 @@
                 >
                 </v-select>
             </v-flex>
-            <v-flex md-4>
+            <v-flex md-4 xs12>
 
                 <h3 v-if="selectedButton != null">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
                 <h3 v-else>{{ text.currentlySelectedNo }}</h3>
 
             </v-flex>
 
-            <v-flex v-if="selectedButton != null" md-4>
+            <v-flex v-if="selectedButton != null" md-4 xs12>
 
                 <v-btn color="warning" class="option" v-on:click.native="show = !show">{{ text.deleteButton }}</v-btn>
 
-                <v-tooltip v-model="show" top absolute>
+                <v-tooltip v-model="show" left fixed>
                     <span>{{ text.defdeleteButton }}</span>
                     <v-btn color="error" v-on:click="deleteButton( selectedButton )">{{ text.yes }}</v-btn>
                     <v-btn color="info" v-on:click.native="show = !show">{{ text.no }}</v-btn>
@@ -54,14 +54,27 @@
 
         <div v-if="selectedButton != null">
 
-            <v-layout row>
+            <v-layout ow wrap>
+                <v-flex md4 xs12>
+                    <p id="buttonIDValue">{{ text.valueIDLabel }} : {{selectedButton.value }}</p>
+                </v-flex>
+                <v-flex md4 pa-3 xs12>
+                    <label for="dsButtonName">{{ text.buttonName }}</label>
+                    <v-text-field
+                            id="dsButtonName"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'name' , $event)"
+                            :name="selectedButton.name"
+                            :value="selectedButton.name"
+                            v-model="selectedButton.name"
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+
+            <v-layout row wrap>
                 <v-flex md8 xs12>
 
                     <h3>{{ text.buttonMainOptions }}</h3>
 
-                </v-flex>
-                <v-flex md4>
-                    <p id="buttonIDValue">{{ text.valueIDLabel }} : {{selectedButton.value }}</p>
                 </v-flex>
             </v-layout>
             <v-layout>
@@ -70,9 +83,9 @@
                 </v-flex>
             </v-layout>
 
-            <v-layout row>
+            <v-layout row wrap>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonType">{{ text.typeLabel }}</label>
                     <v-select
                             id="buttonType"
@@ -85,8 +98,10 @@
                     ></v-select>
                 </v-flex>
 
-                <v-flex md4 pa-3>
-                    <label for="buttonAmount">{{ text.valueAmountLabel }}</label>
+                <v-flex md4 pa-3 xs12>
+                    <label v-if="buttonType === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
+                    <label v-if="buttonType === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
+                    <label v-if="buttonType === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
                     <v-text-field
                             id="buttonAmount"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'amount' , $event)"
@@ -94,10 +109,11 @@
                             :value="selectedButton.amount"
                             v-model="selectedButton.amount"
                             :hint="text.valueAmountHint"
+                            :disabled="buttonType === 'donation'"
                     ></v-text-field>
                 </v-flex>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonCSSID">{{ text.valueCSSIDLabel }}</label>
                     <v-text-field
                             id="buttonCSSID"
@@ -112,25 +128,16 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.overrideGeneralOptions }}</h3>
             </v-layout>
             <v-layout>
                 <p>{{ text.buttonSettingsOverride }}</p>
             </v-layout>
 
-            <v-layout>
-                <v-flex md4 pa-3>
-                    <label for="dsButtonName">{{ text.buttonName }}</label>
-                    <v-text-field
-                            id="dsButtonName"
-                            v-on:change="pushButton( selectedButton.text, selectedButton, 'name' , $event)"
-                            :name="selectedButton.name"
-                            :value="selectedButton.name"
-                            v-model="selectedButton.name"
-                    ></v-text-field>
-                </v-flex>
-                <v-flex md4 pa-3>
+            <v-layout row wrap>
+
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonLabel">{{ text.buttonLabel }}</label>
                     <v-text-field
                             id="buttonLabel"
@@ -141,7 +148,7 @@
                     ></v-text-field>
                 </v-flex>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonPanelLabel">{{ text.buttonPanelLabel }}</label>
                     <v-text-field
                             id="buttonPanelLabel"
@@ -151,10 +158,8 @@
                             v-model="selectedButton.panellabel"
                     ></v-text-field>
                 </v-flex>
-            </v-layout>
 
-            <v-layout>
-                <v-flex md8 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButtonDescription">{{ text.buttonDescription }}</label>
                     <v-text-field
                             id="dsButtonDescription"
@@ -165,11 +170,12 @@
                             multi-line
                     ></v-text-field>
                 </v-flex>
+
             </v-layout>
 
-            <v-layout>
+            <v-layout row wrap>
 
-                <v-flex md2 pa-3>
+                <v-flex md2 pa-3 xs12>
                     <v-select
                             id="dsButtonCurrency"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'currency' , $event)"
@@ -181,8 +187,8 @@
                             :hint="text.hintButtonCurrency"
                     ></v-select>
                 </v-flex>
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonTC"
@@ -192,11 +198,11 @@
                                     single-line
                             ></v-switch>
                         </span>
-                        <span>{{ text.hintButtonTC }}</span>
+                        <span class="pb-3">{{ text.hintButtonTC }}</span>
                     </v-tooltip>
                 </v-flex>
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonBilling"
@@ -206,11 +212,11 @@
                                     single-line
                             ></v-switch>
                         </span>
-                        <span>{{ text.hintButtonBilling }}</span>
+                        <span class="pb-3">{{ text.hintButtonBilling }}</span>
                     </v-tooltip>
                 </v-flex>
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonShipping"
@@ -223,8 +229,8 @@
                         <span>{{ text.hintButtonShipping }}</span>
                     </v-tooltip>
                 </v-flex>
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonRM"
@@ -242,14 +248,14 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.overSubscriptionSet }}</h3>
             </v-layout>
 
-            <v-layout>
-                <v-flex md4 pa-3>
+            <v-layout row wrap>
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonCoupon">{{ text.buttonCoupon }}</label>
-                    <v-tooltip bottom>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-text-field
                                     id="buttonCoupon"
@@ -262,9 +268,9 @@
                         <span>{{ text.hintButtonCoupon}}</span>
                     </v-tooltip>
                 </v-flex>
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="buttonSetupFee">{{ text.SetupFee }}</label>
-                    <v-tooltip bottom>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-text-field
                                     id="buttonSetupFee"
@@ -281,13 +287,13 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.overDonationSet }}</h3>
             </v-layout>
 
             <v-layout>
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonZD"
@@ -304,14 +310,14 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.extraOptions }}</h3>
             </v-layout>
 
-            <v-layout>
+            <v-layout row wrap>
 
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonCapture"
@@ -325,8 +331,8 @@
                     </v-tooltip>
                 </v-flex>
 
-                <v-flex md2 pa-3>
-                    <v-tooltip bottom>
+                <v-flex md2 pa-3 xs12>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-switch
                                     id="dsButtonDisplayAmount"
@@ -340,9 +346,9 @@
                     </v-tooltip>
                 </v-flex>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButCustomRole">{{ text.dsButCustomRole }}</label>
-                    <v-tooltip bottom>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-text-field
                                     id="dsButCustomRole"
@@ -360,15 +366,15 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.dsButExtraQueryArgs }}</h3>
             </v-layout>
 
-            <v-layout>
+            <v-layout row wrap>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButSuccessQArgs">{{ text.dsButSuccessQArgs }}</label>
-                    <v-tooltip bottom>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-text-field
                                     id="dsButSuccessQArgs"
@@ -382,9 +388,9 @@
                     </v-tooltip>
                 </v-flex>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButErrorQArgs">{{ text.dsButErrorQArgs }}</label>
-                    <v-tooltip bottom>
+                    <v-tooltip left>
                         <span slot="activator">
                             <v-text-field
                                     id="dsButErrorQArgs"
@@ -402,16 +408,16 @@
 
             <hr/>
 
-            <v-layout>
+            <v-layout row wrap>
                 <h3>{{ text.dsButRedirections }}</h3>
             </v-layout>
-            <v-layout>
+            <v-layout row wrap>
                 <p>{{ text.dsButRedirectionsDesc }}</p>
             </v-layout>
 
-            <v-layout>
+            <v-layout row wrap>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButSuccessRed">{{ text.dsButSuccessRed }}</label>
                         <v-text-field
                                 id="dsButSuccessRed"
@@ -422,7 +428,7 @@
                         ></v-text-field>
                 </v-flex>
 
-                <v-flex md4 pa-3>
+                <v-flex md4 pa-3 xs12>
                     <label for="dsButErrorRed">{{ text.dsButErrorRed }}</label>
                         <v-text-field
                                 id="dsButErrorRed"
@@ -457,15 +463,15 @@
         newButton: '',
         buttonTypes: [
           {
-            'text': 'Payment',
+            'text': strings.dsPaymentType,
             'value': 'payment'
           },
           {
-            'text': 'Subscription',
+            'text': strings.dsSubscriptionType,
             'value': 'subscription'
           },
           {
-            'text': 'Donation',
+            'text': strings.dsDonationType,
             'value': 'donation'
           }
         ],
@@ -474,7 +480,7 @@
           required: (value) => !!value || strings.requiredField,
           email: (value) => {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return pattern.test(value) || 'Invalid e-mail.'
+            return pattern.test(value) || text.dsInvalidEmail
           }
         },
         currencies: [
@@ -502,6 +508,11 @@
     methods: {
       pushButton ( newButton, button, setting, event ) {
 
+        if( ! newButton ){
+          console.log('Empty name!!');
+          return;
+        }
+
         if( typeof button === "undefined" || button === null ) { //Create Button
 
           function uniqueNumber() {
@@ -528,10 +539,10 @@
             button_id: "MyButton",
             name: "Company Name",
             description: "Description",
-            label: "Label",
-            panellabel: "Panel Label",
-            coupon: "Coupon",
-            setup_fee: null,
+            label: "Payment",
+            panellabel: "Confirm payment",
+            coupon: "",
+            setup_fee: "",
             zero_decimal: false,
             capture: true,
             billing: false,
@@ -540,11 +551,11 @@
             rememberme: false,
             display_amount: false,
             currency: "USD",
-            custom_role: null,
-            success_query: "success query_args",
-            error_query: "error query_args",
-            success_url: "custom success url",
-            error_url: "custom error url"
+            custom_role: "",
+            success_query: "",
+            error_query: "",
+            success_url: "",
+            error_url: ""
           };
           this.buttons.push(  {
             'text': defaultData.text,
@@ -571,11 +582,9 @@
           axios
             .post(req_url)
             .then( response => {
-              console.log(response);
                 if (typeof response.data === "undefined" || response.data === null) {
                   bubble()
                 } else {
-                  console.log(response);
                   if (response.data.error === true) {
                     console.log(response.data.text);
                   }
@@ -623,7 +632,6 @@
                 if (typeof response.data === "undefined" || response.data === null) {
                   bubble()
                 } else {
-                  console.log(response);
                   if (response.data.error === true) {
                     console.log(response.data.text);
                   }
@@ -642,7 +650,6 @@
 
       },
       deleteButton: function( button ) {
-        console.log( button.value );
 
         let el = jQuery('#save-result');
         function bubble(){
@@ -666,8 +673,14 @@
             }
           )
           .catch(error => console.log(error))
+
         //Interface actions
-        this.buttons.pop(button);
+        this.buttons.find( function(element, index, array) {
+          if( element.id === button.value) {
+            array.splice( index, 1);
+          }
+          console.log(index);
+        });
         this.show = false;
       },
       setSettings: function( event ) {

@@ -1,17 +1,17 @@
 <template>
 <div>
     <hr/>
-    <v-layout row>
+    <v-layout row wrap>
         <v-flex xs12>
             <h3>{{text.currency}}</h3>
         </v-flex>
     </v-layout>
 
-    <v-layout row>
-        <v-flex md2>
+    <v-layout row wrap>
+        <v-flex md2 xs12>
            <p>{{text.currency}}</p>
         </v-flex>
-        <v-flex md2>
+        <v-flex md2 xs12>
             <v-select
                     v-on:change="saveSetting('direct_stripe_currency', $event)"
                     v-bind:items="currencies"
