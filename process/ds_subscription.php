@@ -150,7 +150,7 @@ try {
 	$subscription_id = $subscription->id;
 
 	//infos
-	$plan = \Stripe\Product::retrieve( $amount );
+	$plan = $subscription->plan;
 	$plan_amount = $plan->amount;
 
 	if( $d_stripe_general['direct_stripe_checkbox_api_keys'] != true ) {

@@ -29,6 +29,9 @@ try { //Retrieve Data
     $button_id 	    = isset($params['button_id']) ? $params['button_id'] : '';
     $pre_amount 	= isset($params['amount']) ? $params['amount'] : '';
     $amount         = base64_decode($pre_amount);
+    if( isset( $params['value'] ) && $params['value'] != '0' ) {
+    	$amount = $amount * 100;
+    }
 	if( $params['capture'] === 'false' ) {
 		$capture =  false;
 	} else {

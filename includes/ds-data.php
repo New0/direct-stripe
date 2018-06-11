@@ -144,8 +144,12 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
      * @since 2.0.0
      */
     //Print the amount in the modal form
+    //Check IF amount contains a comma and replace it wit dot
+    if( strpos( $ds_button->amount , ',') !== false ) {
+        $ds_button->amount = str_replace(',', '.', $ds_button->amount );
+    }
     if( is_numeric( $ds_button->amount ) ){
-        $original_amount = intval( $ds_button->amount );
+        $original_amount = $ds_button->amount * 100;
     } else {
         $original_amount = 0;
     }
@@ -161,6 +165,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
      * @since 2.0.0
      */
     $params = array(
+        'value'                 =>  !empty($ds_button->value) ? $ds_button->value : '',
         'name' 			        =>	!empty($ds_button->name) ? $ds_button->name : '',
         'amount' 		        =>	!empty($ds_button->amount) ? $ds_button->amount : '',
         'original_amount'       =>  !empty($original_amount) ? $original_amount : '',

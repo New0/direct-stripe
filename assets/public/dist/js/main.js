@@ -2,6 +2,15 @@
  * Created by nfigueira on 10/05/2017.
  */
 
+jQuery( "#donationvalue" ).keyup(function(e) {
+
+  var instance = jQuery( this ).data("donation-input-id");
+  var ds_values = window[instance];
+
+  ds_values.original_amount = e.target.value;
+
+});
+
 jQuery(".direct-stripe-button-id").on("click", function (e) {
 
     var instance = jQuery( this ).data("id");
@@ -14,8 +23,14 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         var currency = ds_values.general_currency;
     }
 
-    if( ds_values.display_amount !== "false" && ds_values.type !== "subscription") {
+    if( ds_values.display_amount !== "false" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
         var amount = parseInt(ds_values.original_amount);
+    } else if( ds_values.type === "donation" ) {
+        if( ds_values.zero_decimal === "1" || ds_values.zero_decimal === "true"  ) {
+          var amount = ds_values.original_amount
+        } else {
+          var amount = ds_values.original_amount * 100;
+        }
     } else {
         var amount = 0;
     }

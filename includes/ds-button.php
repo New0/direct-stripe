@@ -18,7 +18,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
 <div class="direct-stripe">
     <?php //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
-        $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" />';
+        $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" data-donation-input-id="' . $instance . '" />';
        echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input  );
      }
      ?>
