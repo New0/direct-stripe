@@ -51,7 +51,6 @@ class DS_API {
 
     }
 
-
     /**
      * Check request permissions
      *
@@ -64,7 +63,6 @@ class DS_API {
 
         return current_user_can('edit_others_posts');
     }
-
 
     /**
      * Update settings
@@ -83,45 +81,13 @@ class DS_API {
         }
 
         $set = $request->get_params();
-        $key = key( $set );
-        $value = reset($set);
+        if( isset( $set ) ) {
+            $key = key( $set );
+        }
+        if( isset( $key ) ) {
+            $value = reset($set);
+        }
 
-        $settings = array(
-            'direct_stripe_live_publishable_api_key'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_publishable_api_key' ) ),
-            'direct_stripe_live_secret_api_key'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_live_secret_api_key' ) ),
-            'direct_stripe_checkbox_api_keys'           =>  filter_var( $request->get_param( 'direct_stripe_checkbox_api_keys' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_test_publishable_api_key'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_test_publishable_api_key' ) ),
-            'direct_stripe_test_secret_api_key'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_test_secret_api_key' ) ),
-            'direct_stripe_currency'                    =>  sanitize_text_field( $request->get_param( 'direct_stripe_currency' ) ),
-            'direct_stripe_success_message'             =>  sanitize_text_field( $request->get_param( 'direct_stripe_success_message' ) ),
-            'direct_stripe_error_message'               =>  sanitize_text_field( $request->get_param( 'direct_stripe_error_message' ) ),
-            'direct_stripe_use_redirections'            =>  filter_var( $request->get_param( 'direct_stripe_use_redirections' ),FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_success_page'                =>  esc_url_raw( $request->get_param( 'direct_stripe_success_page' ) ),
-            'direct_stripe_error_page'                  =>  esc_url_raw( $request->get_param( 'direct_stripe_error_page' ) ),
-            'direct_stripe_logo_image'                  =>  esc_url_raw( $request->get_param( 'direct_stripe_logo_image' ) ),
-            //'direct_stripe_billing_infos_checkbox'      =>  filter_var( $request->get_param( 'direct_stripe_billing_infos_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            //'direct_stripe_shipping_infos_checkbox'     =>  filter_var( $request->get_param( 'direct_stripe_shipping_infos_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            //'direct_stripe_rememberme_option_checkbox'  =>  filter_var( $request->get_param( 'direct_stripe_rememberme_option_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_use_custom_styles'           =>  sanitize_text_field( $request->get_param( 'direct_stripe_use_custom_styles' ) ),
-            'direct_stripe_main_color_style'            =>  sanitize_text_field( $request->get_param( 'direct_stripe_main_color_style' ) ),
-            'direct_stripe_border_radius'               =>  sanitize_text_field( $request->get_param( 'direct_stripe_border_radius' ) ),
-            //'direct_stripe_use_tc_checkbox'             =>  filter_var( $request->get_param( 'direct_stripe_use_tc_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_tc_text'                     =>  sanitize_text_field( $request->get_param( 'direct_stripe_tc_text' ) ),
-            'direct_stripe_tc_link_text'                =>  sanitize_text_field( $request->get_param( 'direct_stripe_tc_link_text' ) ),
-            'direct_stripe_tc_link'                     =>  esc_url_raw( $request->get_param( 'direct_stripe_tc_link' ) ),
-            'direct_stripe_admin_emails_checkbox'       =>  filter_var( $request->get_param( 'direct_stripe_admin_emails_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_admin_email_subject'         =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_email_subject' ) ),
-            'direct_stripe_admin_email_content'         =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_admin_email_content' ) ),
-            'direct_stripe_user_emails_checkbox'        =>  filter_var( $request->get_param( 'direct_stripe_user_emails_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_user_email_subject'          =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_email_subject' ) ),
-            'direct_stripe_user_email_content'          =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_user_email_content' ) ),
-            'direct_stripe_admin_error_emails_checkbox' =>  filter_var( $request->get_param( 'direct_stripe_admin_error_emails_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_admin_error_email_subject'   =>  sanitize_text_field( $request->get_param( 'direct_stripe_admin_error_email_subject' ) ),
-            'direct_stripe_admin_error_email_content'   =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_admin_error_email_content' ) ),
-            'direct_stripe_user_error_emails_checkbox'  =>  filter_var( $request->get_param( 'direct_stripe_user_error_emails_checkbox' ), FILTER_VALIDATE_BOOLEAN ),
-            'direct_stripe_user_error_email_subject'    =>  sanitize_text_field( $request->get_param( 'direct_stripe_user_error_email_subject' ) ),
-            'direct_stripe_user_error_email_content'    =>  wp_filter_post_kses( $request->get_param( 'direct_stripe_user_error_email_content' ) ),
-        );
         $booleans = array( 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
             'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
             'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox'
@@ -135,6 +101,7 @@ class DS_API {
         );
         $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
         $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content' );
+
         if ( in_array( $key, $booleans ) ) {
             $setting = array(
                 $key => filter_var( $value, FILTER_VALIDATE_BOOLEAN )
@@ -156,6 +123,7 @@ class DS_API {
         DS_API_Settings::save_settings( $setting );
         return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );
     }
+
     /**
      * Get settings via API
      *
