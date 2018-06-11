@@ -373,11 +373,18 @@ catch(Exception $e)
 		$return = array( 'id' => '2', 'url' => $e_url );
 		
 	} else {
-		
-		$return = array(
-			'id'	=> '3',
-			'message' => $d_stripe_general['direct_stripe_error_message']
-		);
+
+		if( ! empty( $d_stripe_general['direct_stripe_error_message'] ) ) {
+            $return = array(
+                'id'	=> '3',
+                'message' => $d_stripe_general['direct_stripe_error_message']
+            );
+		} else {
+            $return = array(
+                'id'	=> '3',
+                'message' => $e->getMessage()
+            );
+		}
 		
 	}
 	

@@ -94,13 +94,15 @@ class DS_API {
         );
         $texts = array( 'direct_stripe_live_publishable_api_key', 'direct_stripe_live_secret_api_key',
             'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',
-            'direct_stripe_success_message', 'direct_stripe_error_message', 'direct_stripe_use_custom_styles',
-            'direct_stripe_main_color_style', 'direct_stripe_border_radius', 'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
+            'direct_stripe_use_custom_styles', 'direct_stripe_main_color_style', 'direct_stripe_border_radius',
+            'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
             'direct_stripe_tc_link', 'direct_stripe_admin_email_subject', 'direct_stripe_user_email_subject',
             'direct_stripe_admin_error_email_subject', 'direct_stripe_user_error_email_subject'
         );
         $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
-        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content' );
+        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_error_message',
+            'direct_stripe_success_message', 'direct_stripe_user_error_email_content'
+        );
 
         if ( in_array( $key, $booleans ) ) {
             $setting = array(
@@ -112,11 +114,11 @@ class DS_API {
             );
         } else if ( in_array( $key, $urls) ) {
             $setting = array(
-                $key => esc_url_raw(  $value )
+                $key => esc_url( $value )
             );
         } else if ( in_array( $key, $post_kses) ) {
             $setting = array(
-                $key => wp_filter_post_kses( $value )
+                $key => wp_kses_post( $value )
             );
         }
 
