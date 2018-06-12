@@ -30,35 +30,33 @@
                 >
                 </v-select>
             </v-flex>
-            <v-flex md-4 xs12>
+
+            <v-flex md4 xs12 text-xs-center>
 
                 <h3 v-if="selectedButton != null">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
                 <h3 v-else>{{ text.currentlySelectedNo }}</h3>
 
             </v-flex>
 
-            <v-flex v-if="selectedButton != null" md-4 xs12>
+            <v-flex v-if="selectedButton != null" md4 xs12 text-xs-center>
+                <v-menu transition="slide-x-transition">
+                    <v-btn slot="activator" color="warning" class="option">{{ text.deleteButton }}</v-btn>
 
-                <v-btn color="warning" class="option" v-on:click.native="show = !show">{{ text.deleteButton }}</v-btn>
-
-                <v-tooltip v-model="show" left fixed>
-                    <span>{{ text.defdeleteButton }}</span>
-                    <v-btn color="error" v-on:click="deleteButton( selectedButton )">{{ text.yes }}</v-btn>
-                    <v-btn color="info" v-on:click.native="show = !show">{{ text.no }}</v-btn>
-                </v-tooltip>
-
-
+                    <v-card>
+                        <p>{{ text.defDeleteButton }}</p>
+                        <v-btn color="error" v-on:click="deleteButton( selectedButton )">{{ text.yes }}</v-btn>
+                        <v-btn color="info" v-on:click.native="show = !show">{{ text.no }}</v-btn>
+                    </v-card>
+                </v-menu>
             </v-flex>
 
         </v-layout>
 
         <div v-if="selectedButton != null">
 
-            <v-layout ow wrap>
-                <v-flex md4 xs12>
-                    <p id="buttonIDValue">{{ text.valueIDLabel }} : {{selectedButton.value }}</p>
-                </v-flex>
-                <v-flex md4 pa-3 xs12>
+            <v-layout row wrap>
+
+                <v-flex md3 pa-3 xs12>
                     <label for="dsButtonName">{{ text.buttonName }}</label>
                     <v-text-field
                             id="dsButtonName"
@@ -68,6 +66,10 @@
                             v-model="selectedButton.name"
                     ></v-text-field>
                 </v-flex>
+                <v-flex md4 xs12 text-xs-center>
+                    <p id="buttonIDValue">{{ text.valueIDLabel }} : {{selectedButton.value }}</p>
+                </v-flex>
+
             </v-layout>
 
             <v-layout row wrap>
@@ -679,7 +681,6 @@
           if( element.id === button.value) {
             array.splice( index, 1);
           }
-          console.log(index);
         });
         this.show = false;
       },

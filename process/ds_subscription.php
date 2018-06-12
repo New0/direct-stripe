@@ -317,7 +317,7 @@ try {
 }
 catch(Exception $e)
 {
-//Email admin-app
+//Email user
 	if( isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox'])  && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true ) {
 		
 		$email_subject = apply_filters( 'direct_stripe_error_user_email_subject', $d_stripe_emails['direct_stripe_user_error_email_subject'], $token, $amount, $currency, $email_address, $description, $user_id, $button_id, $plan);

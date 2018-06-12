@@ -66,7 +66,7 @@ $directStripeAttrValues = shortcode_atts( array(
 /*
  * Check if the shortcode is given a value argument
  *
- * If not, values still can be retrieved the old way with shortcode arguments
+ * If not, values still can be retrieved the old way from shortcode arguments
  *
  * @since 2.1.0
  */
