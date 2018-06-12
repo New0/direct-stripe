@@ -369,7 +369,7 @@ msgstr "Adresse email utilisateur"
 
 #: includes/display-main-logs-data.php:31 includes/display-users.php:8
 msgid "Stripe customer ID"
-msgstr "ID client Stripe"
+msgstr "ID admin-app Stripe"
 
 #: includes/display-main-logs-data.php:34 includes/display-users.php:11
 msgid "stripe_id"

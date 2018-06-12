@@ -458,6 +458,7 @@ class DirectStripeDisplaySettings {
 		if( isset($input['direct_stripe_billing_infos_checkbox']) && !empty($input['direct_stripe_billing_infos_checkbox']) ) {
 			$input['direct_stripe_billing_infos_checkbox'] = '1';
 		}
+
 		return $input;
 	}
 	public function direct_stripe_styles_settings_validation( $input ) {

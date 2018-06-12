@@ -14,7 +14,7 @@ class dsAdmin {
         if ( is_admin() ) {
             // Add admin settings area
             add_action( 'admin_menu', array( $this, 'direct_stripe_add_admin_menu') );
-            add_action( 'admin_init', array( $this, 'direct_stripe_settings_init') );
+            //add_action( 'admin_init', array( $this, 'direct_stripe_settings_init') );
             add_action( 'media_buttons', array( $this, 'direct_stripe_add_shortcode_button'), 20);
             add_action( 'admin_footer', array( $this, 'direct_stripe_mce_popup') );
         }
@@ -30,10 +30,12 @@ class dsAdmin {
         $direct_stripe_page = add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'assets/admin/dist/img/logo_stripe_white.svg' );
         add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
     }
-        //Build admin settings page
-        function direct_stripe_options_page() {
-            include( DSCORE_PATH . '/includes/build-page.php');
-        }
+
+    //Build admin settings page
+    function direct_stripe_options_page() {
+        //include( DSCORE_PATH . '/includes/build-page.php');
+        include( DSCORE_PATH . 'admin-app/index.html');
+    }
 
     /**
      * Register settings

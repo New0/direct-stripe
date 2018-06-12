@@ -172,6 +172,11 @@ In progress, in the meanwhile asking yours may help to fill this section.
 
 == Changelog ==
 
+2.1.0.b
+* Gutenberg block
+* Vue js app for options page
+* Create buttons from Direct Stripe Options page
+
 =2.0.8=
 * Added the token to the 5th parameter for the 'direct_stripe_before_success_redirection' filter
 

@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) or die( 'Please!' );
 
 //Styles from the admin settings page
 $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
-$maincolor = $d_stripe_styles['direct_stripe_main_color_style'];
+$maincolor = '#' . $d_stripe_styles['direct_stripe_main_color_style'];
 $borderradius = $d_stripe_styles['direct_stripe_border_radius'] . 'px';
 
 $custom_css = "

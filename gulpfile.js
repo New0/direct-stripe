@@ -21,34 +21,35 @@ gulp.task('admin-images', function(){
 });
 
 gulp.task('public-styles', function(){
-    var options = {
-        outputStyle: 'compressed',
-    };
-    gulp.src(['assets/public/src/scss/**/*.scss'])
-        .pipe(plumber({
-            errorHandler: function (error) {
-                console.log(error.message);
-                this.emit('end');
-            }}))
-        .pipe(sass(options))
-        .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
-        .pipe(gulp.dest('assets/public/dist/css/'))
+var options = {
+    outputStyle: 'compressed',
+};
+gulp.src(['assets/public/src/scss/**/*.scss'])
+    .pipe(plumber({
+        errorHandler: function (error) {
+            console.log(error.message);
+            this.emit('end');
+        }}))
+    .pipe(sass(options))
+    .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
+    .pipe(gulp.dest('assets/public/dist/css/'))
 });
 
 gulp.task('admin-styles', function(){
-    var options = {
-        outputStyle: 'compressed',
-    };
-    gulp.src(['assets/admin/src/scss/**/*.scss'])
-        .pipe(plumber({
-            errorHandler: function (error) {
-                console.log(error.message);
-                this.emit('end');
-            }}))
-        .pipe(sass(options))
-        .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
-        .pipe(gulp.dest('assets/admin/dist/css/'))
+var options = {
+    outputStyle: 'compressed',
+};
+gulp.src(['assets/admin/src/scss/**/*.scss'])
+    .pipe(plumber({
+        errorHandler: function (error) {
+            console.log(error.message);
+            this.emit('end');
+        }}))
+    .pipe(sass(options))
+    .pipe(postcss([ autoprefixer({ browsers: ['last 5 versions'] }) ]))
+    .pipe(gulp.dest('assets/admin/dist/css/'))
 });
+
 
 gulp.task('public-scripts', function(){
     return gulp.src('assets/public/src/js/**/*.js')
