@@ -12,7 +12,7 @@
         </v-flex>
         <v-flex md3 xs12>
             <v-text-field
-                    v-on:change="saveSetting( 'direct_stripe_live_publishable_api_key', $event )"
+                    v-on:change="saveSetting( 'direct_stripe_publishable_api_key', $event )"
                     v-bind:name="allData.direct_stripe_live_publishable_api_key"
                     v-bind:label="allData.direct_stripe_live_publishable_api_key"
                     v-bind:value="allData.direct_stripe_live_publishable_api_key"
@@ -28,7 +28,7 @@
         </v-flex>
         <v-flex md3 xs12>
             <v-text-field
-                    v-on:change="saveSetting( 'direct_stripe_live_secret_api_key', $event )"
+                    v-on:change="saveSetting( 'direct_stripe_secret_api_key', $event )"
                     v-bind:name="allData.direct_stripe_live_secret_api_key"
                     v-bind:label="allData.direct_stripe_live_secret_api_key"
                     v-bind:value="allData.direct_stripe_live_secret_api_key"

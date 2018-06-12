@@ -36,8 +36,8 @@ class DS_API_Settings {
      * @var array
      */
     protected static $ds_general_defaults = array(
-        'direct_stripe_live_publishable_api_key'    =>  '',
-        'direct_stripe_live_secret_api_key'         =>  '',
+        'direct_stripe_publishable_api_key'    =>  '',
+        'direct_stripe_secret_api_key'         =>  '',
         'direct_stripe_checkbox_api_keys'           =>  '',
         'direct_stripe_test_publishable_api_key'    =>  '',
         'direct_stripe_test_secret_api_key'         =>  '',

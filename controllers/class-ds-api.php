@@ -92,7 +92,7 @@ class DS_API {
             'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
             'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox'
         );
-        $texts = array( 'direct_stripe_live_publishable_api_key', 'direct_stripe_live_secret_api_key',
+        $texts = array( 'direct_stripe_publishable_api_key', 'direct_stripe_secret_api_key',
             'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',
             'direct_stripe_use_custom_styles', 'direct_stripe_main_color_style', 'direct_stripe_border_radius',
             'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
