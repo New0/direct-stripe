@@ -56,11 +56,13 @@ try { //Retrieve Data
     //Check if user exists
     if( username_exists( $email_address ) || email_exists( $email_address ) ) {
         $user = get_user_by( 'email', $email_address );
-        $stripe_id = get_user_meta( $user->id, 'stripe_id', true );
-        $check_stripe_user = \Stripe\Customer::retrieve($stripe_id);
         $user_id = $user->id;
+        $stripe_id = get_user_meta( $user->id, 'stripe_id', true );
+        if( !empty($stripe_id)) {
+            $check_stripe_user = \Stripe\Customer::retrieve($stripe_id);
+        }
 
-        if ( !empty( $stripe_id ) && !empty( $check_stripe_user )  ) {//User exists and have a Stripe ID
+        if ( !empty( $stripe_id ) && isset( $check_stripe_user )  ) {//User exists and have a Stripe ID
             //Update user roles
             $user->add_role( 'stripe-user' );
             $user->add_role( $custom_role );
