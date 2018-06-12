@@ -4,21 +4,13 @@ Stripe payment button for WordPress
 === Direct Stripe ===
 
 Contributors: Nicolas Figueira
-
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
-
-Tags: payment button, stripe button , stripe, custom stripe button, stripe modal form, stripe checkout, direct checkout, easy payments, receive payments, accept credit cards, accept payments
-
+Tags: payment button, stripe button, stripe, custom stripe button, stripe modal form, stripe checkout, direct checkout, easy payments, receive payments, accept credit cards, accept payments
 Requires at least: 4.2
-
-Tested up to: 4.9.7
-
+Tested up to: 4.9.6
 Stable tag: 2.1.0
-
 License: GPLv2 or later 
-
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
 
 Stripe payment buttons for WordPress, Stripe modal form, custom styles, automated emails
 
