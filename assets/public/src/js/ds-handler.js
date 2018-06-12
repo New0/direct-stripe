@@ -63,7 +63,7 @@ function stripe_checkout(ds_values) {
                         default:
                             jQuery("#loadingDS").hide();
                             jQuery(ds_answer_input).addClass("error");
-                            jQuery(ds_answer_input).html(data);
+                            jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
                         setTimeout(function() {
                          jQuery(ds_answer_input).hide();

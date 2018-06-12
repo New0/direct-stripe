@@ -7,9 +7,11 @@ require_once (  DSCORE_PATH . '/includes/class-display-settings.php' );
 $displaysettings = new \DirectStripeDisplaySettings;
 
 //Register options by sections / page (one option field in options table each)
-register_setting( 'directStripeGeneral', 'direct_stripe_general_settings', array($displaysettings, 'direct_stripe_general_settings_validation') );
-register_setting( 'directStripeStyles', 'direct_stripe_styles_settings', array($displaysettings, 'direct_stripe_styles_settings_validation') );
-register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($displaysettings, 'direct_stripe_emails_settings_validation') );
+register_setting( 'directStripeGeneral', 'direct_stripe_general_settings', array( array($displaysettings, 'direct_stripe_general_settings_validation'), 'show_in_rest' => true ) );
+register_setting( 'directStripeStyles', 'direct_stripe_styles_settings', array( array($displaysettings, 'direct_stripe_styles_settings_validation'), 'show_in_rest' => true ) );
+register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array( array($displaysettings, 'direct_stripe_emails_settings_validation'), 'show_in_rest' => true ) );
+register_setting( 'directStripeButtons', 'direct_stripe_buttons', array( array($displaysettings, 'direct_stripe_buttons_validation'), 'show_in_rest' => true, 'default' => 'buttons' ) );
+
 //Register sections and settings fields
 	// API keys section
 	add_settings_section(
@@ -349,3 +351,4 @@ register_setting( 'directStripeEmails', 'direct_stripe_emails_settings', array($
 		'directStripeEmails', 
 		'direct_stripe_user_error_emails_section' 
 	);
+

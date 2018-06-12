@@ -10,13 +10,19 @@
  * @wordpress-plugin
  * Plugin Name: Direct Stripe
  * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
- * Version:     2.0.8
+ * Version:     2.1.0
  * Author:      Nicolas Figueira
  * Author URI:  https://newo.me
  * Text Domain: direct-stripe
  * Domain Path: /languages
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Direct Stripe use MIT Licensed libraries ( https://opensource.org/licenses/MIT ) :
+ * VueJS : https://github.com/vuejs/vue
+ * Axios : https://github.com/axios/axios
+ * Vuetify  : https://github.com/vuetifyjs/vuetify
+ *
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -65,7 +71,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          * @var string
          */
-        const version = '2.0.0';
+        const version = '2.1.0';
 
         /**
          * Plugin Textdomain.
@@ -94,6 +100,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         function direct_stripe_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
+
         }
 	    
 	    /**
@@ -103,7 +110,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         public function init_hooks() {
 		    add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
-	        add_filter('plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+	        add_filter( 'plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
         }
 
         /**
@@ -134,7 +141,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 		
 		    return $links;
 	    }
-		
+
 
         /**
          * Include required core files.
@@ -142,7 +149,10 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          */
         public function includes() {
+            include_once( 'controllers/class-ds-api-settings.php' );
+            include_once( 'controllers/class-ds-api.php' );
             include_once( 'controllers/class-ds-scripts.php' );
+            include_once( 'controllers/class-ds-block.php' );
             include_once( 'controllers/class-ds-admin.php' );
             include_once( 'controllers/class-ds-button.php' );
             include_once( 'controllers/class-ds-cpt.php' );
@@ -154,3 +164,4 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 endif; //if class exists
 
 $directstripe = new DirectStripe;
+
