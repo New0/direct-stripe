@@ -1,36 +1,43 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-26 14:11+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Direct Stripe\n"
+"POT-Creation-Date: 2018-06-19 15:29+0200\n"
+"PO-Revision-Date: 2018-06-19 15:28+0200\n"
+"Last-Translator: New0 Nicolas Figueira <nico@newo.fr>\n"
+"Language-Team: New0 Nicolas Figueira <nico@newo.fr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco - https://localise.biz/"
+"X-Generator: Poedit 2.0.8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: direct-stripe.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: direct-stripe.php:96
-msgid "Stripe user"
-msgstr ""
-
-#: direct-stripe.php:135 controllers/class-ds-admin.php:31
-#: controllers/class-ds-admin.php:31
+#: controllers/class-ds-admin.php:31 direct-stripe.php:138
 msgid "Settings"
 msgstr ""
 
-#: direct-stripe.php:152
-msgid ""
-"Direct Stripe major update, please  <a href=\"admin.php?page=direct_stripe\">"
-"update your settings</a> to keep using redirections pages, default behaviour "
-"changed to success/error messages."
+#: controllers/class-ds-api.php:78
+msgid "Something went wrong, check nonces..."
 msgstr ""
 
-#: controllers/class-ds-button.php:56
+#: controllers/class-ds-block.php:40
+msgid "Settings Saved"
+msgstr ""
+
+#: controllers/class-ds-block.php:41 includes/localized-texts.php:15
+msgid "Error"
+msgstr ""
+
+#: controllers/class-ds-button.php:55
 msgid "Button type argument was not recognized"
 msgstr ""
 
@@ -53,7 +60,8 @@ msgstr ""
 msgid "Direct Stripe logs"
 msgstr ""
 
-#: controllers/class-ds-cpt.php:36
+#: controllers/class-ds-cpt.php:36 controllers/class-ds-cpt.php:39
+#: controllers/class-ds-cpt.php:40
 msgid "Direct Stripe log"
 msgstr ""
 
@@ -65,16 +73,8 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#: controllers/class-ds-cpt.php:39
-msgid "Edit Direct Stripe log"
-msgstr ""
-
-#: controllers/class-ds-cpt.php:40
-msgid "Update Direct Stripe log"
-msgstr ""
-
 #: controllers/class-ds-cpt.php:41
-msgid "SearchDirect Stripe log"
+msgid "Search Direct Stripe log"
 msgstr ""
 
 #: controllers/class-ds-cpt.php:42
@@ -98,16 +98,16 @@ msgid "Amount / Plan ID"
 msgstr ""
 
 #: controllers/class-ds-cpt.php:81 includes/display-main-logs-data.php:65
-#: includes/register-settings.php:61 includes/register-settings.php:68
-#: includes/shortcode_button_form.php:158
+#: includes/localized-texts.php:30 includes/localized-texts.php:106
+#: includes/register-settings.php:63 includes/register-settings.php:70
 msgid "Currency"
 msgstr ""
 
-#: controllers/class-ds-cpt.php:82
+#: controllers/class-ds-cpt.php:82 includes/localized-texts.php:93
 msgid "Type"
 msgstr ""
 
-#: controllers/class-ds-cpt.php:83 includes/shortcode_button_form.php:152
+#: controllers/class-ds-cpt.php:83 includes/localized-texts.php:105
 msgid "Description"
 msgstr ""
 
@@ -167,93 +167,111 @@ msgstr ""
 msgid "Transaction type"
 msgstr ""
 
-#: controllers/class-ds-scripts.php:30
-msgid "Logo for Stripe Form"
+#: controllers/class-ds-scripts.php:72
+msgid "Please check the T&C"
 msgstr ""
 
-#: controllers/class-ds-scripts.php:31
-msgid "Use selected image"
+#: controllers/class-ds-scripts.php:73
+msgid "Please enter amount"
 msgstr ""
 
-#: includes/class-display-settings.php:30
-msgid "Visa card test number 4242 4242 4242 4242"
+#: controllers/class-ds-users.php:26 direct-stripe.php:102
+msgid "Stripe user"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: includes/build-page.php:5
+msgid "Direct Stripe"
+msgstr ""
+
+#: includes/build-page.php:16
+msgid "General Options"
+msgstr ""
+
+#: includes/build-page.php:17
+msgid "Styles"
+msgstr ""
+
+#: includes/build-page.php:18
+msgid "Emails"
 msgstr ""
 
 #: includes/class-display-settings.php:31
+msgid "Visa card test number 4242 4242 4242 4242"
+msgstr ""
+
+#: includes/class-display-settings.php:32 includes/localized-texts.php:27
 msgid "With any exp date and 3 CVV numbers"
 msgstr ""
 
-#: includes/class-display-settings.php:91
+#: includes/class-display-settings.php:92 includes/localized-texts.php:33
 msgid "Successful transaction"
 msgstr ""
 
-#: includes/class-display-settings.php:111
+#: includes/class-display-settings.php:112 includes/localized-texts.php:35
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/class-display-settings.php:133
-#: includes/class-display-settings.php:133
+#: includes/class-display-settings.php:134
 msgid "Select success page"
 msgstr ""
 
-#: includes/class-display-settings.php:149
-#: includes/class-display-settings.php:149
+#: includes/class-display-settings.php:150
 msgid "Select error page"
 msgstr ""
 
-#: includes/class-display-settings.php:169
+#: includes/class-display-settings.php:170 includes/localized-texts.php:41
 msgid "Select image"
 msgstr ""
 
-#: includes/class-display-settings.php:213
+#: includes/class-display-settings.php:220
 msgid "px"
 msgstr ""
 
-#: includes/class-display-settings.php:244
-#: includes/class-display-settings.php:244
+#: includes/class-display-settings.php:251 includes/localized-texts.php:60
 msgid "Select T&C page"
 msgstr ""
 
-#: includes/class-display-settings.php:383
+#: includes/class-display-settings.php:390
 msgid "Stripe API keys"
 msgstr ""
 
-#: includes/class-display-settings.php:386
+#: includes/class-display-settings.php:393
 msgid "Messages to print when transactions completed"
 msgstr ""
 
-#: includes/class-display-settings.php:389
+#: includes/class-display-settings.php:396
 msgid "Use check box to use redirections"
 msgstr ""
 
-#: includes/class-display-settings.php:392
+#: includes/class-display-settings.php:399
 msgid "Set image for Stripe's modal form"
 msgstr ""
 
-#: includes/class-display-settings.php:395
+#: includes/class-display-settings.php:402
 msgid "Set up T&C options"
 msgstr ""
 
-#: includes/class-display-settings.php:398
-#: includes/class-display-settings.php:404
+#: includes/class-display-settings.php:405
+#: includes/class-display-settings.php:411
 msgid "Emails sent to WordPress system email address"
 msgstr ""
 
-#: includes/class-display-settings.php:401
-#: includes/class-display-settings.php:407
+#: includes/class-display-settings.php:408
+#: includes/class-display-settings.php:414
 msgid "Emails sent to Stripe user email address"
 msgstr ""
 
-#: includes/class-display-settings.php:410
+#: includes/class-display-settings.php:417
 msgid ""
 "Name, Address, City, Zip code and country will be collected before payment"
 msgstr ""
 
-#: includes/class-display-settings.php:413
+#: includes/class-display-settings.php:420
 msgid "Check to use custom button"
 msgstr ""
 
-#: includes/class-display-settings.php:416
+#: includes/class-display-settings.php:423
 msgid "Set your Stripe's account currency"
 msgstr ""
 
@@ -375,194 +393,536 @@ msgstr ""
 msgid "Direct Sripe ID"
 msgstr ""
 
-#: includes/ds-answers.php:19 includes/ds-answers.php:19
+#: includes/ds-answers.php:19
 msgid "Processing"
 msgstr ""
 
-#: includes/ds-data.php:24
+#: includes/ds-data.php:43
 msgid "Pay with card"
 msgstr ""
 
-#: includes/ds-data.php:25
+#: includes/ds-data.php:44
 msgid "Pay"
 msgstr ""
 
-#: includes/register-settings.php:17
+#: includes/localized-texts.php:11
+msgid "Required field"
+msgstr ""
+
+#: includes/localized-texts.php:12
+msgid "Yes"
+msgstr ""
+
+#: includes/localized-texts.php:13
+msgid "No"
+msgstr ""
+
+#: includes/localized-texts.php:14
+msgid "Saved"
+msgstr ""
+
+#: includes/localized-texts.php:16
+msgid "Select"
+msgstr ""
+
+#: includes/localized-texts.php:17
+msgid "Global Settings"
+msgstr ""
+
+#: includes/localized-texts.php:18
+msgid "Styles Settings"
+msgstr ""
+
+#: includes/localized-texts.php:19
+msgid "Emails Settings"
+msgstr ""
+
+#: includes/localized-texts.php:20
+msgid "Buttons Settings"
+msgstr ""
+
+#: includes/localized-texts.php:21 includes/register-settings.php:19
 msgid "Set API keys"
 msgstr ""
 
-#: includes/register-settings.php:24
-msgid "Live Secret API key"
-msgstr ""
-
-#: includes/register-settings.php:31
+#: includes/localized-texts.php:22 includes/register-settings.php:26
 msgid "Live Publishable API key"
 msgstr ""
 
-#: includes/register-settings.php:38
+#: includes/localized-texts.php:23 includes/register-settings.php:33
+msgid "Live Secret API key"
+msgstr ""
+
+#: includes/localized-texts.php:24 includes/register-settings.php:40
 msgid "Use test keys / mode"
 msgstr ""
 
-#: includes/register-settings.php:45
-msgid "Test Secret API key"
+#: includes/localized-texts.php:25
+msgid "Enable test mode and use test card numbers"
 msgstr ""
 
-#: includes/register-settings.php:52
+#: includes/localized-texts.php:26
+msgid "Ex: Visa card test number 4242 4242 4242 4242"
+msgstr ""
+
+#: includes/localized-texts.php:28 includes/register-settings.php:47
 msgid "Test Publishable API key"
 msgstr ""
 
-#: includes/register-settings.php:77
+#: includes/localized-texts.php:29 includes/register-settings.php:54
+msgid "Test Secret API key"
+msgstr ""
+
+#: includes/localized-texts.php:31 includes/register-settings.php:79
 msgid "Success and error messages"
 msgstr ""
 
-#: includes/register-settings.php:85
+#: includes/localized-texts.php:32 includes/register-settings.php:87
 msgid "Success message"
 msgstr ""
 
-#: includes/register-settings.php:92
+#: includes/localized-texts.php:34 includes/register-settings.php:94
 msgid "Error message"
 msgstr ""
 
-#: includes/register-settings.php:102
-msgid "Landing pages"
-msgstr ""
-
-#: includes/register-settings.php:108
+#: includes/localized-texts.php:36 includes/register-settings.php:110
 msgid "Redirect users to success or error pages when transaction completed"
 msgstr ""
 
-#: includes/register-settings.php:115
+#: includes/localized-texts.php:37
+msgid "Use redirections instead of Ajax response"
+msgstr ""
+
+#: includes/localized-texts.php:38 includes/register-settings.php:117
 msgid "Success page"
 msgstr ""
 
-#: includes/register-settings.php:123
+#: includes/localized-texts.php:39 includes/register-settings.php:125
 msgid "Error page"
 msgstr ""
 
-#: includes/register-settings.php:132
+#: includes/localized-texts.php:40 includes/register-settings.php:134
 msgid "Modal form logo / image"
 msgstr ""
 
-#: includes/register-settings.php:138
+#: includes/localized-texts.php:42 includes/register-settings.php:140
 msgid "Current logo / image"
 msgstr ""
 
-#: includes/register-settings.php:146
+#: includes/localized-texts.php:43
+msgid "Select or Upload Media Of Your Chosen Persuasion"
+msgstr ""
+
+#: includes/localized-texts.php:44
+msgid "Use this media"
+msgstr ""
+
+#: includes/localized-texts.php:45
+msgid "Remove Image"
+msgstr ""
+
+#: includes/localized-texts.php:46
+msgid "Image for Modal Form"
+msgstr ""
+
+#: includes/localized-texts.php:47 includes/register-settings.php:148
 msgid "Billing information"
 msgstr ""
 
-#: includes/register-settings.php:152
+#: includes/localized-texts.php:48 includes/register-settings.php:154
 msgid "Ask for address in modal Form"
 msgstr ""
 
-#: includes/register-settings.php:159
+#: includes/localized-texts.php:49 includes/register-settings.php:161
 msgid ""
 "Add shipping address option (billing address is always asked for when the "
 "shipping address option is enabled)"
 msgstr ""
 
-#: includes/register-settings.php:166
+#: includes/localized-texts.php:50 includes/register-settings.php:168
 msgid "Allow remember me Stripe option in modal Form"
 msgstr ""
 
-#: includes/register-settings.php:175
+#: includes/localized-texts.php:51 includes/register-settings.php:177
 msgid "Custom button styles"
 msgstr ""
 
-#: includes/register-settings.php:181
-msgid "Use custom styles"
+#: includes/localized-texts.php:52
+msgid "Do not set styles"
 msgstr ""
 
-#: includes/register-settings.php:188
+#: includes/localized-texts.php:53
+msgid "Use default stripe styles"
+msgstr ""
+
+#: includes/localized-texts.php:54
+msgid "Use styles set below"
+msgstr ""
+
+#: includes/localized-texts.php:55 includes/register-settings.php:183
+msgid "Choose button styles"
+msgstr ""
+
+#: includes/localized-texts.php:56 includes/register-settings.php:190
 msgid "Main Color"
 msgstr ""
 
-#: includes/register-settings.php:195
+#: includes/localized-texts.php:57 includes/register-settings.php:197
 msgid "Border radius"
 msgstr ""
 
-#: includes/register-settings.php:204
+#: includes/localized-texts.php:58 includes/register-settings.php:206
 msgid "Terms and conditions"
 msgstr ""
 
-#: includes/register-settings.php:210
+#: includes/localized-texts.php:59 includes/register-settings.php:212
 msgid "Use Terms and Conditions checkbox"
 msgstr ""
 
-#: includes/register-settings.php:217
+#: includes/localized-texts.php:61 includes/register-settings.php:219
 msgid "Terms and conditions text"
 msgstr ""
 
-#: includes/register-settings.php:224
+#: includes/localized-texts.php:62 includes/register-settings.php:226
 msgid "Terms and conditions link text"
 msgstr ""
 
-#: includes/register-settings.php:231
+#: includes/localized-texts.php:63 includes/register-settings.php:233
 msgid "Terms and conditions page"
 msgstr ""
 
-#: includes/register-settings.php:240
+#: includes/localized-texts.php:64 includes/register-settings.php:242
 msgid "Automated emails to admin after successful transactions"
 msgstr ""
 
-#: includes/register-settings.php:246
+#: includes/localized-texts.php:65 includes/register-settings.php:248
 msgid "Send emails to admin after successful transaction"
 msgstr ""
 
-#: includes/register-settings.php:253
+#: includes/localized-texts.php:66 includes/register-settings.php:255
 msgid "Admin email subject"
 msgstr ""
 
-#: includes/register-settings.php:260
+#: includes/localized-texts.php:67 includes/register-settings.php:262
 msgid "Admin email content"
 msgstr ""
 
-#: includes/register-settings.php:269
+#: includes/localized-texts.php:68 includes/register-settings.php:271
 msgid "Automated emails to Stripe user after successful transactions"
 msgstr ""
 
-#: includes/register-settings.php:275
+#: includes/localized-texts.php:69 includes/register-settings.php:277
 msgid "Send emails to Stripe user after successful transaction"
 msgstr ""
 
-#: includes/register-settings.php:282
+#: includes/localized-texts.php:70 includes/register-settings.php:284
 msgid "User email subject"
 msgstr ""
 
-#: includes/register-settings.php:289
+#: includes/localized-texts.php:71 includes/register-settings.php:291
 msgid "User email content"
 msgstr ""
 
-#: includes/register-settings.php:298
+#: includes/localized-texts.php:72 includes/register-settings.php:300
 msgid "Automated emails to admin after failed transaction"
 msgstr ""
 
-#: includes/register-settings.php:304
+#: includes/localized-texts.php:73 includes/register-settings.php:306
 msgid "Send emails to admin after failed transaction"
 msgstr ""
 
-#: includes/register-settings.php:311
+#: includes/localized-texts.php:74 includes/register-settings.php:313
 msgid "Admin error email subject"
 msgstr ""
 
-#: includes/register-settings.php:318
+#: includes/localized-texts.php:75 includes/register-settings.php:320
 msgid "Admin error email content"
 msgstr ""
 
-#: includes/register-settings.php:327
+#: includes/localized-texts.php:76 includes/register-settings.php:329
 msgid "Automated emails to Stripe user after failed transaction"
 msgstr ""
 
-#: includes/register-settings.php:333
+#: includes/localized-texts.php:77 includes/register-settings.php:335
 msgid "Send emails to Stripe user after failed transaction"
 msgstr ""
 
-#: includes/register-settings.php:340
+#: includes/localized-texts.php:78 includes/register-settings.php:342
 msgid "User error email subject"
 msgstr ""
 
-#: includes/register-settings.php:347
+#: includes/localized-texts.php:79 includes/register-settings.php:349
 msgid "User error email content"
+msgstr ""
+
+#: includes/localized-texts.php:80
+msgid "Manage Stripe buttons"
+msgstr ""
+
+#: includes/localized-texts.php:81
+msgid "Write a name and click create Button"
+msgstr ""
+
+#: includes/localized-texts.php:82
+msgid "Create button"
+msgstr ""
+
+#: includes/localized-texts.php:83
+msgid "Edit Buttons"
+msgstr ""
+
+#: includes/localized-texts.php:84
+msgid "Selected button"
+msgstr ""
+
+#: includes/localized-texts.php:85
+msgid "Select Button"
+msgstr ""
+
+#: includes/localized-texts.php:86
+msgid "Delete Button"
+msgstr ""
+
+#: includes/localized-texts.php:87
+msgid "This will permantly remove this Button"
+msgstr ""
+
+#: includes/localized-texts.php:88
+msgid "Main button Options"
+msgstr ""
+
+#: includes/localized-texts.php:89
+msgid ""
+"L'argument \"type\" du bouton est requis, l'argument \"amount\" est requis "
+"pour les \"type\" payments et subscription."
+msgstr ""
+
+#: includes/localized-texts.php:90
+msgid "Select Button Type"
+msgstr ""
+
+#: includes/localized-texts.php:91
+msgid "Currently selected"
+msgstr ""
+
+#: includes/localized-texts.php:92
+msgid "No Button Selected"
+msgstr ""
+
+#: includes/localized-texts.php:94
+msgid "Unique ID"
+msgstr ""
+
+#: includes/localized-texts.php:95
+msgid "Amount"
+msgstr ""
+
+#: includes/localized-texts.php:96
+msgid "Plan ID"
+msgstr ""
+
+#: includes/localized-texts.php:97
+msgid "Donation amount is set by user"
+msgstr ""
+
+#: includes/localized-texts.php:98
+msgid ""
+"For subscriptions, enter the pricing plan ID of a product, created in Stripe "
+"admin panel."
+msgstr ""
+
+#: includes/localized-texts.php:99
+msgid "Add a CSS ID to the button"
+msgstr ""
+
+#: includes/localized-texts.php:100
+msgid "Override general Options"
+msgstr ""
+
+#: includes/localized-texts.php:101
+msgid ""
+"Set a shop name and product/service description. The label is the text of "
+"the button, the panel label is the text of the text of the modal form button"
+msgstr ""
+
+#: includes/localized-texts.php:102
+msgid "Name"
+msgstr ""
+
+#: includes/localized-texts.php:103
+msgid "Label"
+msgstr ""
+
+#: includes/localized-texts.php:104
+msgid "Panel Label"
+msgstr ""
+
+#: includes/localized-texts.php:107
+msgid ""
+"Override the currency set under Direct Stripe -> setup , and use currency "
+"per button."
+msgstr ""
+
+#: includes/localized-texts.php:108
+msgid "T&C"
+msgstr ""
+
+#: includes/localized-texts.php:109
+msgid ""
+"Ask for terms and conditions acceptation. T&C Text and link is editable "
+"under styles tab in Direct Stripe options page."
+msgstr ""
+
+#: includes/localized-texts.php:110
+msgid "Billing"
+msgstr ""
+
+#: includes/localized-texts.php:111
+msgid "Ask for further billing information."
+msgstr ""
+
+#: includes/localized-texts.php:112
+msgid "Shipping"
+msgstr ""
+
+#: includes/localized-texts.php:113
+msgid "Ask for Shipping Data ( It always enable billing data fields)"
+msgstr ""
+
+#: includes/localized-texts.php:114
+msgid "Remember me"
+msgstr ""
+
+#: includes/localized-texts.php:115
+msgid "Allow Stripe to ask user if he wants his email address to be remembered"
+msgstr ""
+
+#: includes/localized-texts.php:116
+msgid "Options for subscriptions"
+msgstr ""
+
+#: includes/localized-texts.php:117
+msgid "Coupon"
+msgstr ""
+
+#: includes/localized-texts.php:118
+msgid ""
+"Coupon are to be previously created in Stripe admin panel and allows you to "
+"create a discount/promotion, enter the coupon ID."
+msgstr ""
+
+#: includes/localized-texts.php:119 process/ds_subscription.php:207
+msgid "Setup Fee"
+msgstr ""
+
+#: includes/localized-texts.php:120
+msgid ""
+"Setup Fee allows you to charge a one time fee on plan subscription "
+"activation. Enter the amount use it and charge, 500 means 5.00"
+msgstr ""
+
+#: includes/localized-texts.php:121
+msgid "Options for donations"
+msgstr ""
+
+#: includes/localized-texts.php:122
+msgid "Zero-decimal currencies"
+msgstr ""
+
+#: includes/localized-texts.php:123
+msgid "Set to \"Yes\" to let users input Zero decimal currencies values."
+msgstr ""
+
+#: includes/localized-texts.php:124
+msgid "Extra options"
+msgstr ""
+
+#: includes/localized-texts.php:125
+msgid "Capture"
+msgstr ""
+
+#: includes/localized-texts.php:126
+msgid ""
+"Set capture to \"No\" to manually create the charge from your Stripe admin "
+"panel within the next 7 days."
+msgstr ""
+
+#: includes/localized-texts.php:127
+msgid "Display amount"
+msgstr ""
+
+#: includes/localized-texts.php:128
+msgid "Set to \"No\" to hide the amount in modal form button."
+msgstr ""
+
+#: includes/localized-texts.php:129
+msgid "Custom Role"
+msgstr ""
+
+#: includes/localized-texts.php:130
+msgid "Add a per button custom role to user"
+msgstr ""
+
+#: includes/localized-texts.php:131
+msgid "Extra query arguments"
+msgstr ""
+
+#: includes/localized-texts.php:132
+msgid "Success query arguments"
+msgstr ""
+
+#: includes/localized-texts.php:133
+msgid ""
+"Pass arguments after success button action. Format: myarg1:myvalue1,myarg2:"
+"myvalue2"
+msgstr ""
+
+#: includes/localized-texts.php:134
+msgid "Error query arguments"
+msgstr ""
+
+#: includes/localized-texts.php:135
+msgid ""
+"Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:"
+"myvalue2"
+msgstr ""
+
+#: includes/localized-texts.php:136
+msgid "Per button success/error redirections"
+msgstr ""
+
+#: includes/localized-texts.php:137
+msgid ""
+"Enter the entire http address \"http://domain.ext/success-or-error-page\" ; "
+"this will override redirections globally set."
+msgstr ""
+
+#: includes/localized-texts.php:138
+msgid "Success url"
+msgstr ""
+
+#: includes/localized-texts.php:139
+msgid "Error url"
+msgstr ""
+
+#: includes/localized-texts.php:140
+msgid "Invalid e-mail."
+msgstr ""
+
+#: includes/localized-texts.php:141
+msgid "Payment"
+msgstr ""
+
+#: includes/localized-texts.php:142 process/ds_subscription.php:173
+msgid "Subscription"
+msgstr ""
+
+#: includes/localized-texts.php:143
+msgid "Donation"
+msgstr ""
+
+#: includes/register-settings.php:104
+msgid "Landing pages"
 msgstr ""
 
 #: includes/shortcode_button.php:10
@@ -573,261 +933,24 @@ msgstr ""
 msgid "Add button"
 msgstr ""
 
-#: includes/shortcode_button_form.php:108
-msgid "Main Button Options"
+#: includes/shortcode_button_form.php:5
+msgid "Select Direct Stripe Button"
 msgstr ""
 
-#: includes/shortcode_button_form.php:109
-msgid ""
-"The button type is required, the amount is required for \"payments\" and "
-"\"subscriptions\" type buttons."
+#: includes/shortcode_button_form.php:6
+msgid "Buttons are to be set at Direct Stripe -> Settings / Buttons"
 msgstr ""
 
-#: includes/shortcode_button_form.php:113
-msgid "Button Type"
+#: includes/shortcode_button_form.php:22
+msgid "Set a button at Direct Stripe -> Settings / Buttons"
 msgstr ""
 
-#: includes/shortcode_button_form.php:115
-msgid "Button Amount field"
-msgstr ""
-
-#: includes/shortcode_button_form.php:118
-msgid ""
-"Payments type amount should be entered without commas and with decimals, Ex: "
-"500 means 5.00 . For subscriptions, enter the plan ID( preferably letters), "
-"previously created in Stripe admin panel."
-msgstr ""
-
-#: includes/shortcode_button_form.php:122
-msgid "Button ID"
-msgstr ""
-
-#: includes/shortcode_button_form.php:126
-msgid "Choose button type"
-msgstr ""
-
-#: includes/shortcode_button_form.php:127
-msgid "Payment"
-msgstr ""
-
-#: includes/shortcode_button_form.php:128 process/ds_subscription.php:129
-#: process/ds_subscription.php:306
-msgid "Subscription"
-msgstr ""
-
-#: includes/shortcode_button_form.php:129
-msgid "Donation"
-msgstr ""
-
-#: includes/shortcode_button_form.php:136
-msgid "Override general Options"
-msgstr ""
-
-#: includes/shortcode_button_form.php:137
-msgid ""
-"Set a shop name and product/service description. The label is the text of "
-"the button, the panel label is the text of the text of the modal form button"
-msgstr ""
-
-#: includes/shortcode_button_form.php:140
-msgid "Name"
-msgstr ""
-
-#: includes/shortcode_button_form.php:141
-msgid "Label"
-msgstr ""
-
-#: includes/shortcode_button_form.php:142
-msgid "Panel Label"
-msgstr ""
-
-#: includes/shortcode_button_form.php:161
-msgid ""
-"Override the currency set under Direct Stripe -> setup , and use currency "
-"per button."
-msgstr ""
-
-#: includes/shortcode_button_form.php:166
-msgid "Ask for terms and conditions acceptation"
-msgstr ""
-
-#: includes/shortcode_button_form.php:168
-msgid ""
-"Ask for terms and conditions acceptation. T&C Text and link is editable "
-"under styles tab in Direct Stripe options page."
-msgstr ""
-
-#: includes/shortcode_button_form.php:180
-#: includes/shortcode_button_form.php:213
-#: includes/shortcode_button_form.php:220
-#: includes/shortcode_button_form.php:227
-#: includes/shortcode_button_form.php:294
-#: includes/shortcode_button_form.php:301
-msgid "Yes"
-msgstr ""
-
-#: includes/shortcode_button_form.php:181
-#: includes/shortcode_button_form.php:214
-#: includes/shortcode_button_form.php:221
-#: includes/shortcode_button_form.php:228
-#: includes/shortcode_button_form.php:295
-#: includes/shortcode_button_form.php:302
-msgid "No"
-msgstr ""
-
-#: includes/shortcode_button_form.php:188
-msgid "Ask for Billing data"
-msgstr ""
-
-#: includes/shortcode_button_form.php:190
-msgid "Ask for further billing information."
-msgstr ""
-
-#: includes/shortcode_button_form.php:195
-msgid "Ask for shipping informations"
-msgstr ""
-
-#: includes/shortcode_button_form.php:197
-msgid "Ask for Shipping Data ( It always enable billing data fields)"
-msgstr ""
-
-#: includes/shortcode_button_form.php:202
-msgid "Allow remember me option"
-msgstr ""
-
-#: includes/shortcode_button_form.php:204
-msgid "Allow Stripe to ask user if he wants his email address to be remembered"
-msgstr ""
-
-#: includes/shortcode_button_form.php:234
-msgid "Options for subscriptions"
-msgstr ""
-
-#: includes/shortcode_button_form.php:239
-msgid "Coupon"
-msgstr ""
-
-#: includes/shortcode_button_form.php:241
-msgid ""
-"Coupon are to be previously created in Stripe admin panel and allows you to "
-"create a discount/promotion, enter the coupon ID."
-msgstr ""
-
-#: includes/shortcode_button_form.php:246 process/ds_subscription.php:163
-#: process/ds_subscription.php:340
-msgid "Setup Fee"
-msgstr ""
-
-#: includes/shortcode_button_form.php:248
-msgid ""
-"Setup Fee allows you to charge a one time fee on plan subscription "
-"activation. Enter the amount use it and charge, 500 means 5.00"
-msgstr ""
-
-#: includes/shortcode_button_form.php:265
-msgid "Extra options"
-msgstr ""
-
-#: includes/shortcode_button_form.php:269
-msgid "Capture"
-msgstr ""
-
-#: includes/shortcode_button_form.php:271
-msgid ""
-"Set capture to \"No\" to manually create the charge from your Stripe admin "
-"panel within the next 7 days."
-msgstr ""
-
-#: includes/shortcode_button_form.php:276
-msgid "Display amount"
-msgstr ""
-
-#: includes/shortcode_button_form.php:278
-msgid "Set to \"No\" to hide the amount in modal form button."
-msgstr ""
-
-#: includes/shortcode_button_form.php:283
-msgid "Custom Role"
-msgstr ""
-
-#: includes/shortcode_button_form.php:285
-msgid "Add a per button custom role to user"
-msgstr ""
-
-#: includes/shortcode_button_form.php:313
-msgid "Extra query arguments"
-msgstr ""
-
-#: includes/shortcode_button_form.php:317
-msgid "Success query arguments"
-msgstr ""
-
-#: includes/shortcode_button_form.php:319
-msgid ""
-"Pass arguments after success button action. Format: myarg1:myvalue1,myarg2:"
-"myvalue2"
-msgstr ""
-
-#: includes/shortcode_button_form.php:324
-msgid "Error query arguments"
-msgstr ""
-
-#: includes/shortcode_button_form.php:326
-msgid ""
-"Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:"
-"myvalue2"
-msgstr ""
-
-#: includes/shortcode_button_form.php:342
-msgid "Per button success/error redirections"
-msgstr ""
-
-#: includes/shortcode_button_form.php:343
-msgid ""
-"Enter the entire http address \"http://domain.ext/success-or-error-page\" ; "
-"this will override redirections globally set."
-msgstr ""
-
-#: includes/shortcode_button_form.php:348
-msgid "Success url"
-msgstr ""
-
-#: includes/shortcode_button_form.php:351
-msgid "Error url"
-msgstr ""
-
-#: includes/shortcode_button_form.php:364
+#: includes/shortcode_button_form.php:30
 msgid "Insert Button"
 msgstr ""
 
-#: includes/shortcode_button_form.php:365
+#: includes/shortcode_button_form.php:31
 msgid "Cancel"
-msgstr ""
-
-#: process/create_donation.php:120 process/create_donation.php:165
-#: process/ds_donation.php:101 process/ds_donation.php:216
-msgid "donation"
-msgstr ""
-
-#: process/create_payment.php:127 process/create_payment.php:172
-#: process/ds_payment.php:108 process/ds_payment.php:231
-msgid "payment"
-msgstr ""
-
-#: process/create_subscription.php:128 process/ds_subscription.php:107
-msgid "One time setup fee "
-msgstr ""
-
-#: process/create_subscription.php:147 process/create_subscription.php:229
-msgid "subscription"
-msgstr ""
-
-#: process/create_subscription.php:160 process/create_subscription.php:242
-msgid "setup fee"
-msgstr ""
-
-#: process/create_subscription.php:193 process/ds_subscription.php:240
-msgid "Setup fee "
 msgstr ""
 
 #: process/ds_donation.php:6 process/ds_payment.php:6
@@ -835,20 +958,33 @@ msgstr ""
 msgid "Security check issue"
 msgstr ""
 
-#. Name of the plugin
-msgid "Direct Stripe"
+#: process/ds_donation.php:44 process/ds_payment.php:43
+#: process/ds_subscription.php:42
+msgid "Direct Stripe "
 msgstr ""
 
-#. Description of the plugin
+#: process/ds_donation.php:137
+msgid "donation"
+msgstr ""
+
+#: process/ds_payment.php:139
+msgid "payment"
+msgstr ""
+
+#: process/ds_subscription.php:121
+msgid "One time setup fee "
+msgstr ""
+
+#. Description of the plugin/theme
 msgid ""
 "Use Stripe payment buttons anywhere in a WordPress website, let your users "
 "easily proceed to checkout"
 msgstr ""
 
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Nicolas Figueira"
 msgstr ""
 
-#. Author URI of the plugin
+#. Author URI of the plugin/theme
 msgid "https://newo.me"
 msgstr ""
