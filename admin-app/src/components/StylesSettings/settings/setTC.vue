@@ -7,7 +7,7 @@
                 <h3>{{text.termsAndConditions}}</h3>
             </v-flex>
         </v-layout>
-
+<!--
         <v-layout row wrap>
             <v-flex md2>
                 <p>{{text.useTC}}</p>
@@ -19,7 +19,7 @@
                 ></v-switch>
             </v-flex>
         </v-layout>
-
+-->
         <v-layout row wrap>
             <v-flex md2 xs12>
                 <p>{{text.tcText}}</p>

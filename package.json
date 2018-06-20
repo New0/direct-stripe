@@ -10,18 +10,25 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "autoprefixer": "*",
-    "gulp": "*",
+    "autoprefixer": "^8.6.2",
+    "graceful-fs": "*",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "*",
     "gulp-cache": "*",
     "gulp-concat": "*",
     "gulp-imagemin": "*",
     "gulp-plumber": "*",
     "gulp-postcss": "*",
-    "gulp-rename": "*",
+    "gulp-rename": "^1.3.0",
     "gulp-sass": "*",
     "gulp-uglify": "*",
-    "postcss": "*",
-    "graceful-fs": "*"
+    "postcss": "*"
+  },
+  "dependencies": {
+    "hoek": "^5.0.3",
+    "minimatch": "^3.0.2",
+    "randomatic": "^3.0.0",
+    "stringstream": "0.0.6",
+    "tunnel-agent": "^0.6.0"
   }
 }
