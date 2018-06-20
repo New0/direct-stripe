@@ -48,7 +48,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
             <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>
             <label for="conditions">
             <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
-                <a target="_blank" href="<?php echo get_permalink($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
+                <a target="_blank" href="<?php echo esc_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
             </label><br />
         <?php } ?>
 </div>
