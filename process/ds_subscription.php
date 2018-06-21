@@ -112,43 +112,27 @@ try {
 		
 	// Charge for setup fee
 	if( !empty( $setup_fee) ){
-		$plan = \Stripe\Product::retrieve($amount);
-		$plan_currency = $plan->currency;
 		$fee = \Stripe\InvoiceItem::create(array(
 			"customer" => $stripe_id,
 			"amount" => $setup_fee,
-			"currency" => $plan_currency,
+			"currency" => $currency,
 			"description" => __('One time setup fee ', 'direct-stripe') . $description
 		));
 	}
 
 	// create new subscription to plan
-	if( !empty($coupon) ){ //Coupon exist
-		$subscription = \Stripe\Subscription::create(array(
-            "customer" => $stripe_id,
-            "items" => array(
-                array(
-                    "plan" => $amount,
-                ),
+	$subscription = \Stripe\Subscription::create(array(
+        "customer" => $stripe_id,
+        "items" => array(
+            array(
+                "plan" => $amount,
             ),
-			"coupon"   => $coupon,
-			"metadata"	=> array(
-				"description" => $description
-			)
-		));
-	} else { //Coupon doesn't exist
-		$subscription = \Stripe\Subscription::create(array(
-            "customer" => $stripe_id,
-            "items" => array(
-                array(
-                    "plan" => $amount,
-                ),
-            ),
-			"metadata"	=> array(
-				"description" => $description
-			)
-		));
-	}
+        ),
+		"coupon"   => $coupon,
+		"metadata"	=> array(
+			"description" => $description
+		)
+	));
 	$subscription_id = $subscription->id;
 
 	//infos
