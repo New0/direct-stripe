@@ -40,7 +40,9 @@ class dsButton {
 	 * @since 2.0.0
 	 */
 	function direct_stripe_process_button() {
-		$type = isset($_POST['type']) ? $_POST['type'] : '';
+        include( DSCORE_PATH . 'process/ds_process_transactions.php');
+        wp_die();
+		/*$type = isset($_POST['type']) ? $_POST['type'] : '';
 		if( isset( $type ) && $type === 'payment' ) {
 			include( DSCORE_PATH . 'process/ds_payment.php');
 			wp_die();
@@ -53,7 +55,7 @@ class dsButton {
 			wp_die();
 		} else {
 			wp_die( __('Button type argument was not recognized', 'direct-stripe') );
-		}
+		}*/
 	}
 }
 $dsButton = new dsButton;

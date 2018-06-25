@@ -90,7 +90,8 @@ class DS_API {
 
         $booleans = array( 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
             'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
-            'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox'
+            'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox',
+            'direct_stripe_check_records'
         );
         $texts = array( 'direct_stripe_publishable_api_key', 'direct_stripe_secret_api_key',
             'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',

@@ -5,6 +5,7 @@
         <setCallbacks></setCallbacks>
         <setRedirection></setRedirection>
         <setLogo></setLogo>
+        <setRecords></setRecords>
     </v-container>
 </template>
 
@@ -14,7 +15,7 @@
   import setCallbacks from './settings/setCallbacks.vue';
   import setRedirection from './settings/setRedirection.vue';
   import setLogo from './settings/setLogo.vue';
-  import setBilling from './settings/setBilling.vue';
+  import setRecords from './settings/setRecords.vue';
 
   export default {
     name: 'globalSettings',
@@ -24,7 +25,7 @@
       'setCallbacks': setCallbacks,
       'setRedirection': setRedirection,
       'setLogo': setLogo,
-     // 'setBilling': setBilling
+      'setRecords': setRecords
     }
   }
 </script>
