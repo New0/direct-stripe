@@ -40,7 +40,7 @@ class ds_process_functions
         if( username_exists( $email_address ) || email_exists( $email_address ) ) {
             $user = get_user_by( 'email', $email_address );
             $user_id = $user->ID;
-            $stripe_id = get_user_meta( $user->ID, 'stripe_id', true );
+            $stripe_id = get_user_meta( $user_id, 'stripe_id', true );
             if( !empty($stripe_id)) {
                 $check_stripe_user = \Stripe\Customer::retrieve($stripe_id);
             }
@@ -86,7 +86,6 @@ class ds_process_functions
             if ($d_stripe_general['direct_stripe_check_records'] !== true) {
                 // Generate the password and create the user
                 $password = wp_generate_password(12, false);
-                //$user_id = wp_create_user( $email_address, $password, $email_address );
                 $userdata = array(
                     'user_login' => $email_address,
                     'user_pass'  => $password,
@@ -141,7 +140,8 @@ class ds_process_functions
             $meta_input['ds_billing_address_line1']        = $logsdata['ds_billing_address_line1'];
             $meta_input['ds_billing_address_city']         = $logsdata['ds_billing_address_city'];
             $meta_input['ds_billing_address_country_code'] = $logsdata['ds_billing_address_country_code'];
-        } elseif( $params['shipping'] === '1' ) {
+        }
+        if( $params['shipping'] === '1' ) {
             $meta_input['ds_shipping_name']                 = $logsdata['ds_shipping_name'];
             $meta_input['ds_shipping_address_country']      = $logsdata['ds_shipping_address_country'];
             $meta_input['ds_shipping_address_zip']          = $logsdata['ds_shipping_address_zip'];
@@ -180,22 +180,21 @@ class ds_process_functions
             $meta_input['ds_billing_address_line1']        = $logsdata['ds_billing_address_line1'];
             $meta_input['ds_billing_address_city']         = $logsdata['ds_billing_address_city'];
             $meta_input['ds_billing_address_country_code'] = $logsdata['ds_billing_address_country_code'];
-        } elseif( $params['shipping'] === '1' ) {
-            $meta_input['ds_shipping_name']                  = $logsdata['ds_shipping_name'];
-            $meta_input['ds_shipping_address_country']       = $logsdata['ds_shipping_address_country'];
-            $meta_input['ds_shipping_address_zip']           = $logsdata['ds_shipping_address_zip'];
-            $meta_input['ds_shipping_address_state']         = $logsdata['ds_shipping_address_state'];
-            $meta_input['ds_shipping_address_line1']         = $logsdata['ds_shipping_address_line1'];
-            $meta_input['ds_shipping_address_city']          = $logsdata['ds_shipping_address_city'];
-            $meta_input['ds_shipping_address_country_code']  = $logsdata['ds_shipping_address_country_code'];
+        }
+        if( $params['shipping'] === '1' ) {
+            $meta_input['ds_shipping_name']                 = $logsdata['ds_shipping_name'];
+            $meta_input['ds_shipping_address_country']      = $logsdata['ds_shipping_address_country'];
+            $meta_input['ds_shipping_address_zip']          = $logsdata['ds_shipping_address_zip'];
+            $meta_input['ds_shipping_address_state']        = $logsdata['ds_shipping_address_state'];
+            $meta_input['ds_shipping_address_line1']        = $logsdata['ds_shipping_address_line1'];
+            $meta_input['ds_shipping_address_city']         = $logsdata['ds_shipping_address_city'];
+            $meta_input['ds_shipping_address_country_code'] = $logsdata['ds_shipping_address_country_code'];
         }
 
         foreach ( $meta_input as $key => $value) {
-            if ( get_user_meta( $user['user_id'], $key, true) ) {
-                update_user_meta( $user['user_id'], $key, $value );
-            } else {
-                add_user_meta( $user['user_id'], $key, $value );
-            }
+
+            update_user_meta( $user['user_id'], $key, $value );
+
         }
 
     }

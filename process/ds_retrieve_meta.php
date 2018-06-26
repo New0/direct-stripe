@@ -9,15 +9,19 @@ if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
 
     $logsdata = array(
         'token'                            => $token,
-        'user_id'                          => $user['user_id'],
-        'stripe_id'                        => $user['stripe_id'],
         'amount'                           => $amount,
         'currency'                         => $currency,
         'capture'                          => $capture,
         'type'                             => $params['type'],
         'description'                      => $description,
     );
-
+    if( $user) {
+        $logsdata['user_id'] = $user['user_id'];
+        $logsdata['stripe_id'] = $user['stripe_id'];
+    }
+    if( $params['type'] === 'subscription' ){
+        $logsdata['coupon'] = $coupon;
+    }
     if( $charge ) {
         $logsdata['charge_id'] = $charge->id;
     } elseif( $subscription ) {
@@ -34,7 +38,8 @@ if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
         $logsdata['ds_billing_address_line1']         = isset($billing_address_line1) ? $billing_address_line1 : '';
         $logsdata['ds_billing_address_city']          = isset($billing_address_city) ? $billing_address_city : '';
         $logsdata['ds_billing_address_country_code']  = isset($billing_address_country_code) ? $billing_address_country_code : '';
-    } elseif( $params['shipping'] === '1' ){
+    }
+    if( $params['shipping'] === '1' ){
         $logsdata['ds_shipping_name']                 = isset($shipping_name) ? $shipping_name : '';
         $logsdata['ds_shipping_address_country']      = isset($shipping_address_country) ? $shipping_address_country : '';
         $logsdata['ds_shipping_address_zip']          = isset($shipping_address_zip) ? $shipping_address_zip : '';
