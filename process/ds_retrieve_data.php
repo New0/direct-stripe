@@ -8,10 +8,12 @@
 
 extract($_POST, EXTR_PREFIX_SAME, "post_");
 
+$nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
+if ( ! wp_verify_nonce($nonce, 'direct-stripe-nonce')) {
+    wp_die(__('Security check issue', 'direct-stripe'));
+}
+
 $d_stripe_general = get_option('direct_stripe_general_settings');
-$d_stripe_emails  = get_option('direct_stripe_emails_settings');
-$headers          = array('Content-Type: text/html; charset=UTF-8');
-$admin_email = get_option('admin_email');
 
 $button_id  = isset($params['button_id']) ? $params['button_id'] : '';
 $token         = isset($stripeToken) ? $stripeToken : '';
@@ -56,32 +58,4 @@ if ( ! empty($params['currency'])) {
     $currency = $params['currency'];
 } else {
     $currency = $d_stripe_general['direct_stripe_currency'];
-}
-
-if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
-    $logsdata = array(
-        'token'                            => $token,
-        'user_id'                          => $user['user_id'],
-        'stripe_id'                        => $user['stripe_id'],
-        'charge_id'                        => $charge->id,
-        'amount'                           => $amount,
-        'currency'                         => $currency,
-        'capture'                          => $capture,
-        'type'                             => $params['type'],
-        'description'                      => $description,
-        'ds_billing_name'                  => $billing_name,
-        'ds_billing_address_country'       => $billing_address_country,
-        'ds_billing_address_zip'           => $billing_address_zip,
-        'ds_billing_address_state'         => $billing_address_state,
-        'ds_billing_address_line1'         => $billing_address_line1,
-        'ds_billing_address_city'          => $billing_address_city,
-        'ds_billing_address_country_code'  => $billing_address_country_code,
-        'ds_shipping_name'                 => $shipping_name,
-        'ds_shipping_address_country'      => $shipping_address_country,
-        'ds_shipping_address_zip'          => $shipping_address_zip,
-        'ds_shipping_address_state'        => $shipping_address_state,
-        'ds_shipping_address_line1'        => $shipping_address_line1,
-        'ds_shipping_address_city'         => $shipping_address_city,
-        'ds_shipping_address_country_code' => $shipping_address_country_code,
-    );
 }

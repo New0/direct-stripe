@@ -31,17 +31,15 @@ class ds_process_transactions {
     function ds_process()
     {
         //Retrieve Data
-        require_once( DSCORE_PATH . 'process/ds_process_data.php');
+        require_once( DSCORE_PATH . 'process/ds_retrieve_data.php');
 
-        $nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
-        if ( ! wp_verify_nonce($nonce, 'direct-stripe-nonce')) {
-            wp_die(__('Security check issue', 'direct-stripe'));
-        }
-
+        //Process API Keys
         \ds_process_functions::api_keys( $d_stripe_general );
 
+        //Process User
         $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
 
+        //Process Transaction
         try {
 
             // Charge for setup fee
@@ -52,19 +50,17 @@ class ds_process_transactions {
                     "description" => __('One time setup fee ', 'direct-stripe') . $description
                 );
                 if($user === false ) {
-                    $setupfeedata[] = array(
-                        'source'        => $token
-                    );
+                    $setupfeedata['source' ] = $token;
                 } else {
-                    $setupfeedata[] = array(
-                        'customer'    => $user['stripe_id']
-                    );
+                    $setupfeedata['customer'] = $user['stripe_id'];
                 }
                 $fee = \Stripe\InvoiceItem::create( $setupfeedata );
             }
 
             //Charge
             if( $params['type'] === 'payment' || $params['type'] === 'donation') {
+
+                $subscription = false;
 
                 $chargerdata = array(
                     'amount'      => $amount,
@@ -73,17 +69,16 @@ class ds_process_transactions {
                     'description' => $description
                 );
                 if($user === false ) {
-                    $chargerdata[] = array(
-                        'source'        => $token
-                    );
+                    $chargerdata['source' ] = $token;
                 } else {
-                    $chargerdata[] = array(
-                        'customer'    => $user['stripe_id']
-                    );
+                    $chargerdata['customer'] = $user['stripe_id'];
                 }
                 $charge   = \Stripe\Charge::create( $chargerdata );
 
             } elseif( $params['type'] === 'subscription' ) {
+
+                $charge = false;
+
                 // create new subscription to plan
                 $subscriptiondata = array(
                     "items" => array(
@@ -97,21 +92,17 @@ class ds_process_transactions {
                     )
                 );
                 if($user === false ) {
-                    $subscriptiondata[] = array(
-                        'source'        => $token
-                    );
+                    $subscriptiondata['source' ] = $token;
                 } else {
-                    $subscriptiondata[] = array(
-                        'customer'    => $user['stripe_id']
-                    );
+                    $subscriptiondata['customer'] = $user['stripe_id'];
                 }
                 $subscription = \Stripe\Subscription::create( $subscriptiondata );
 
-                $subscription_id = $subscription->id;
+                /*$subscription_id = $subscription->id;
 
                 //infos
                 $plan = $subscription->plan;
-                $plan_amount = $plan->amount;
+                $plan_amount = $plan->amount;*/
             }
 
 
@@ -120,174 +111,37 @@ class ds_process_transactions {
             error_log("Something wrong happened:" . $e->getMessage() );
         }
 
-        if( $charge || $subscription ) {
-
-            if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
-                $post_id  = \ds_process_functions::logs_meta( $logsdata );
-
-                //$usermeta = \ds_process_functions::user_meta( $logsdata );
+        //Retrieve Meta Data
+        require_once( DSCORE_PATH . 'process/ds_retrieve_meta.php');
+        //Process Meta Data
+        if( $charge && $d_stripe_general['direct_stripe_check_records'] !== true || $subscription && $d_stripe_general['direct_stripe_check_records'] !== true ) {
+            $post_id = \ds_process_functions::logs_meta( $logsdata, $params );
+            if( $user ){
+                $user_id = \ds_process_functions::user_meta( $logsdata, $params, $user );
             }
-
-
-            // Email admin-app
-            if (isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true) {
-                $email_subject = apply_filters('direct_stripe_success_user_email_subject',
-                    $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency, $email_address,
-                    $description, $user_id, $button_id);
-                $email_content = apply_filters('direct_stripe_success_user_email_content',
-                    $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency, $email_address,
-                    $description, $user_id, $button_id);
-
-                wp_mail($email_address, $email_subject, $email_content, $headers);
-            }
-            // Email admin
-            if (isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true) {
-
-                $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
-                    $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency, $email_address,
-                    $description, $user_id, $button_id);
-                $email_content = apply_filters('direct_stripe_success_admin_email_content',
-                    $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency, $email_address,
-                    $description, $user_id, $button_id);
-
-                wp_mail($admin_email, $email_subject, $email_content, $headers);
-            }
-
-
-            // Add custom action before redirection
-
-            do_action('direct_stripe_before_success_redirection', $charge->id, $post_id, $button_id, $user_id, $token);
-
-            //Answer for ajax
-            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
-
-
-                $s_url         = get_permalink($d_stripe_general['direct_stripe_success_page']);
-                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
-
-                if ( ! empty($success_query)) {
-                    $pres_query = $success_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-                    $s_query = array_combine($r[1], $r[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($s_query)) {
-                    $s_url = add_query_arg($s_query, $s_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $s_url);
-
-            } elseif ( ! empty($params['success_url'])) {
-
-                $s_url         = isset($params['success_url']) ? $params['success_url'] : '';
-                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
-
-                if ( ! empty($success_query)) {
-                    $pres_query = $success_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-                    $s_query = array_combine($r[1], $r[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($s_query)) {
-                    $s_url = add_query_arg($s_query, $s_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $s_url);
-
-            } else {
-
-                $return = array(
-                    'id'      => '1',
-                    'message' => $d_stripe_general['direct_stripe_success_message']
-                );
-
-            }
-
-            wp_send_json($return);
-
         } else {
-            //Email admin-app
-            if (isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true) {
-
-                $email_subject = apply_filters('direct_stripe_error_user_email_subject',
-                    $d_stripe_emails['direct_stripe_user_error_email_subject'], $token, $amount, $currency,
-                    $email_address, $description, $user_id, $button_id);
-                $email_content = apply_filters('direct_stripe_error_user_email_content',
-                    $d_stripe_emails['direct_stripe_user_error_email_content'], $token, $amount, $currency,
-                    $email_address, $description, $user_id, $button_id);
-
-                wp_mail($email_address, $email_subject, $email_content, $headers);
-            }
-            //Email admin
-            if (isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === true) {
-
-                $email_subject = apply_filters('direct_stripe_error_admin_email_subject',
-                    $d_stripe_emails['direct_stripe_admin_error_email_subject'], $token, $amount, $currency,
-                    $email_address, $description, $user_id, $button_id);
-                $email_content = apply_filters('direct_stripe_error_admin_email_content',
-                    $d_stripe_emails['direct_stripe_admin_error_email_content'], $token, $amount, $currency,
-                    $email_address, $description, $user_id, $button_id);
-
-                wp_mail($admin_email, $email_subject, $email_content, $headers);
-            }
-
-            // Add custom action before redirection
-            do_action('direct_stripe_before_error_redirection', $charge->id, $post_id, $button_id, $user_id, $token);
-
-            //Answer for ajax
-            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
-
-                $e_url       = get_permalink($d_stripe_general['direct_stripe_error_page']);
-                $error_query = isset($params['error_query']) ? $params['error_query'] : '';
-
-                if ( ! empty($error_query)) {
-                    $pres_query = $error_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
-                    $e_query = array_combine($e[1], $e[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($e_query)) {
-                    $e_url = add_query_arg($e_query, $e_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $e_url);
-
-            } elseif ( ! empty($params['error_url'])) {
-
-                $e_url       = isset($params['error_url']) ? $params['error_url'] : '';
-                $error_query = isset($params['error_query']) ? $params['error_query'] : '';
-
-                if ( ! empty($error_query)) {
-                    $pres_query = $error_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $e);
-                    $e_query = array_combine($e[1], $e[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($e_query)) {
-                    $e_url = add_query_arg($e_query, $e_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $e_url);
-
-            } else {
-
-                if ( ! empty($d_stripe_general['direct_stripe_error_message'])) {
-                    $return = array(
-                        'id'      => '3',
-                        'message' => $d_stripe_general['direct_stripe_error_message']
-                    );
-                } else {
-                    $return = array(
-                        'id'      => '3',
-                        'message' => $e->getMessage()
-                    );
-                }
-
-            }
-
-            wp_send_json($return);
-
+            $post_id = false;
+            $user_id = false;
         }
+
+        //Process emails
+        if( $charge ) {
+            $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+        } elseif( $subscription ) {
+            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+        } else {
+            $email = \ds_process_functions::process_emails( $e, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+        }
+
+        //Process answer
+        if( $charge ) {
+            $answer = \ds_process_functions::process_answer( $button_id, $charge, $token, $params, $d_stripe_general, $post_id, $user_id );
+        } elseif( $subscription ) {
+            $answer = \ds_process_functions::process_answer( $button_id, $subscription, $token, $params, $d_stripe_general, $post_id, $user_id);
+        } else {
+            $answer = \ds_process_functions::process_answer( $button_id, $e, $token, $params, $d_stripe_general, $post_id , $user_id);
+        }
+
     }
 
 
