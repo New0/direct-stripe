@@ -67,20 +67,15 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var __ = wp.i18n.__;
 var registerBlockType = wp.blocks.registerBlockType;
 var _wp$editor = wp.editor,
     RichText = _wp$editor.RichText,
     BlockControls = _wp$editor.BlockControls,
     AlignmentToolbar = _wp$editor.AlignmentToolbar;
-var withAPIData = wp.components.withAPIData;
-/*let Buttons = [];
-jQuery.ajax({
-  url: ds_admin_block_vars.api.buttons,
-}).done(function( response ) {
-  Buttons = Object.values( response );
-});
-*/
+var _wp$components = wp.components,
+    withAPIData = _wp$components.withAPIData,
+    Spinner = _wp$components.Spinner;
+
 
 registerBlockType('direct-stripe/payment-button', {
   title: ds_admin_block_vars.strings.title,
@@ -91,7 +86,8 @@ registerBlockType('direct-stripe/payment-button', {
       type: 'string'
     },
     alignment: {
-      type: 'string'
+      type: 'string',
+      default: 'none'
     },
     content: {
       type: 'object',
@@ -106,30 +102,52 @@ registerBlockType('direct-stripe/payment-button', {
   },
 
   edit: withAPIData(function (props) {
-    var isSelected = props.isSelected,
-        attributes = props.attributes,
-        setAttributes = props.setAttributes;
+    return {
+      apiButtons: '/direct-stripe/v1/buttons'
+    };
+  })(function (_ref) {
+    var apiButtons = _ref.apiButtons,
+        isSelected = _ref.isSelected,
+        attributes = _ref.attributes,
+        setAttributes = _ref.setAttributes,
+        className = _ref.className;
+
+    //const { isSelected, attributes, setAttributes } = props;
     var alignment = attributes.alignment,
         buttonItem = attributes.buttonItem,
         content = attributes.content,
         value = attributes.value;
 
 
-    var apiButtons = ds_admin_block_vars.api.buttons;
-    var Buttons = Object.values(apiButtons);
-    console.log(apiButtons);
-    console.log(Buttons);
+    if (!apiButtons.data) {
+      return wp.element.createElement(
+        'p',
+        { className: className },
+        wp.element.createElement(Spinner, null),
+        ds_admin_block_vars.strings.loading
+      );
+    }
+    if (0 === apiButtons.data.length) {
+      return ds_admin_block_vars.strings.noData;
+    }
+
+    var Buttons = [];
+    Buttons = Object.values(apiButtons.data);
+
     var onChangeButton = function onChangeButton(updatedButton) {
       setAttributes({ buttonItem: updatedButton.target.value });
       var newContent = Buttons.filter(function (button) {
         return button.value === updatedButton.target.value;
       });
-      setAttributes({ content: newContent[0] });
-      setAttributes({ value: newContent[0]['value'] });
+      if (typeof newContent[0] !== 'undefined') {
+        setAttributes({ content: newContent[0] });
+        setAttributes({ value: newContent[0]['value'] });
+      }
     };
 
     var onChangeAlignment = function onChangeAlignment(updatedAlignment) {
       setAttributes({ alignment: updatedAlignment });
+      console.log(alignment);
     };
 
     return [isSelected && wp.element.createElement(
@@ -137,11 +155,11 @@ registerBlockType('direct-stripe/payment-button', {
       { key: 'controls' },
       wp.element.createElement(
         'select',
-        { value: value, onChange: onChangeButton },
+        { 'class': className, value: value, onChange: onChangeButton },
         wp.element.createElement(
           'option',
           null,
-          'Select Button'
+          ds_admin_block_vars.strings.selectButton
         ),
         Buttons.map(function (item) {
           return wp.element.createElement(
@@ -150,11 +168,19 @@ registerBlockType('direct-stripe/payment-button', {
             item.text
           );
         })
-      )
+      ),
+      wp.element.createElement(AlignmentToolbar, {
+        value: alignment,
+        onChange: onChangeAlignment
+      })
     ), wp.element.createElement(
-      'button',
-      { value: content.value },
-      content.label
+      'div',
+      { style: { textAlign: alignment } },
+      wp.element.createElement(
+        'button',
+        { 'class': className, value: content.value },
+        content.label
+      )
     )];
   }),
 
@@ -163,13 +189,6 @@ registerBlockType('direct-stripe/payment-button', {
   }
 
 });
-
-/*  Alignment Toolbar to return
- <!-- <AlignmentToolbar
-    value={alignment}
-    onChange={onChangeAlignment}
-  /> -->
-*/
 
 /***/ })
 /******/ ]);

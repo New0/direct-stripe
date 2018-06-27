@@ -65,4 +65,18 @@
 }
 .direct-stripe {
   margin: 1em;
+
+
+  &.ds-left {
+    margin: 0 auto 0 0;
+    text-align: left;
+  }
+  &.ds-center {
+    margin: 0 auto;
+    text-align: center,
+  }
+  &.ds-right {
+    margin: 0 0 0 auto;
+    text-align: right;
+  }
 }

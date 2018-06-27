@@ -31,5 +31,5 @@ $custom_css = "
 			}
 			.loadingDS:before  {
 			    color: $maincolor;
-			}
+			}			
 		";
