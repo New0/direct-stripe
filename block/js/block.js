@@ -1,15 +1,21 @@
 const { __ } = wp.i18n;
-const { registerBlockType, BlockControls, AlignmentToolbar, RichText } = wp.blocks;
-
-let Buttons = [];
+const { registerBlockType } = wp.blocks;
+const {
+  RichText,
+  BlockControls,
+  AlignmentToolbar,
+} = wp.editor;
+const { withAPIData } = wp.components;
+/*let Buttons = [];
 jQuery.ajax({
   url: ds_admin_block_vars.api.buttons,
 }).done(function( response ) {
   Buttons = Object.values( response );
 });
+*/
 
 registerBlockType( 'direct-stripe/payment-button', {
-  title: __( 'Stripe Payment button' ),
+  title: ds_admin_block_vars.strings.title,
   category: 'common',
   icon: 'money',
   attributes: {
@@ -22,7 +28,7 @@ registerBlockType( 'direct-stripe/payment-button', {
     content: {
       type: 'object',
       default: {
-        label: __('Button not set')
+        label: ds_admin_block_vars.strings.contentDefault
       }
     },
     value: {
@@ -31,10 +37,14 @@ registerBlockType( 'direct-stripe/payment-button', {
     }
   },
 
-  edit: props => {
+  edit: withAPIData( props => {
       const { isSelected, attributes, setAttributes } = props;
       const { alignment, buttonItem, content, value } = attributes;
 
+      let apiButtons = ds_admin_block_vars.api.buttons;
+      let Buttons = Object.values( apiButtons );
+    console.log( apiButtons );
+    console.log( Buttons );
       const onChangeButton = updatedButton => {
         setAttributes({buttonItem: updatedButton.target.value});
         const newContent = Buttons.filter(button => button.value === updatedButton.target.value);
@@ -60,7 +70,7 @@ registerBlockType( 'direct-stripe/payment-button', {
             <button value={content.value}>{content.label}</button>
           ];
 
-  },
+  }),
 
   save: props => {
     return null;

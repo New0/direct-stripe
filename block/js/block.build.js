@@ -68,22 +68,22 @@
 /***/ (function(module, exports) {
 
 var __ = wp.i18n.__;
-var _wp$blocks = wp.blocks,
-    registerBlockType = _wp$blocks.registerBlockType,
-    BlockControls = _wp$blocks.BlockControls,
-    AlignmentToolbar = _wp$blocks.AlignmentToolbar,
-    RichText = _wp$blocks.RichText;
-
-
-var Buttons = [];
+var registerBlockType = wp.blocks.registerBlockType;
+var _wp$editor = wp.editor,
+    RichText = _wp$editor.RichText,
+    BlockControls = _wp$editor.BlockControls,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar;
+var withAPIData = wp.components.withAPIData;
+/*let Buttons = [];
 jQuery.ajax({
-  url: ds_admin_block_vars.api.buttons
-}).done(function (response) {
-  Buttons = Object.values(response);
+  url: ds_admin_block_vars.api.buttons,
+}).done(function( response ) {
+  Buttons = Object.values( response );
 });
+*/
 
 registerBlockType('direct-stripe/payment-button', {
-  title: __('Stripe Payment button'),
+  title: ds_admin_block_vars.strings.title,
   category: 'common',
   icon: 'money',
   attributes: {
@@ -96,7 +96,7 @@ registerBlockType('direct-stripe/payment-button', {
     content: {
       type: 'object',
       default: {
-        label: __('Button not set')
+        label: ds_admin_block_vars.strings.contentDefault
       }
     },
     value: {
@@ -105,7 +105,7 @@ registerBlockType('direct-stripe/payment-button', {
     }
   },
 
-  edit: function edit(props) {
+  edit: withAPIData(function (props) {
     var isSelected = props.isSelected,
         attributes = props.attributes,
         setAttributes = props.setAttributes;
@@ -115,6 +115,10 @@ registerBlockType('direct-stripe/payment-button', {
         value = attributes.value;
 
 
+    var apiButtons = ds_admin_block_vars.api.buttons;
+    var Buttons = Object.values(apiButtons);
+    console.log(apiButtons);
+    console.log(Buttons);
     var onChangeButton = function onChangeButton(updatedButton) {
       setAttributes({ buttonItem: updatedButton.target.value });
       var newContent = Buttons.filter(function (button) {
@@ -152,7 +156,7 @@ registerBlockType('direct-stripe/payment-button', {
       { value: content.value },
       content.label
     )];
-  },
+  }),
 
   save: function save(props) {
     return null;

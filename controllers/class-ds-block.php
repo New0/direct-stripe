@@ -8,7 +8,7 @@ if ( ! class_exists( 'DSBlock' ) ) :
          * Block init
          */
         public function __construct() {
-            add_action( 'init', array( $this, 'ds_block' ) );
+            add_action( 'init', array( $this, 'ds_block_register' ) );
         }
 
         function ds_render_block_buttons( $atts ) {
@@ -27,18 +27,20 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
         }
 
-        function ds_block() {
+        function ds_block_register() {
 
             wp_register_script(
                 'direct-stripe-block-script',
                 DSCORE_URL . 'block/js/block.build.js',
-                array( 'wp-blocks', 'wp-element', 'jquery', 'wp-components' )
+                array( 'wp-blocks', 'wp-element', 'jquery', 'wp-components', 'wp-editor' )
             );
 
             wp_localize_script('direct-stripe-block-script', 'ds_admin_block_vars', array(
                     'strings' => array(
-                        'saved' => __( 'Settings Saved', 'direct-stripe' ),
-                        'error' => __( 'Error', 'direct-stripe' )
+                        'saved'             =>  __( 'Settings Saved', 'direct-stripe' ),
+                        'error'             =>  __( 'Error', 'direct-stripe' ),
+                        'title'             =>  __( 'Stripe Payment button', 'direct-stripe' ),
+                        'contentDefault'    =>  __( 'Button not set', 'direct-stripe' )
                     ),
                     'dsCorePath' => DSCORE_PATH,
                     'dsCoreUrl' => DSCORE_URL,
@@ -72,4 +74,4 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
 endif; //if class exists
 
-$dsblock= new DSBlock;
+$dsblock = new DSBlock;
