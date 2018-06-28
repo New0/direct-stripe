@@ -30,26 +30,10 @@ class dsScripts {
             wp_enqueue_media();
             wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array('jquery', 'wp-color-picker'), ('0.0.1'), true );
             wp_localize_script('direct-stripe-admin-app', 'ds_admin_app_vars', self::direct_stripe_localization() );
-/*
-            wp_enqueue_style( 'direct-stripe-admin-style', DSCORE_URL . 'assets/admin/dist/css/style.css', array( 'wp-blocks' ) );
-
-            wp_enqueue_style('wp-color-picker');
-*/
 
         }
 
         wp_enqueue_script('direct-stripe-admin-script', DSCORE_URL . 'assets/admin/dist/js/main.js', array( 'jquery' ), ('1.0.0'), true );
-       /* wp_localize_script('direct-stripe-admin-script', 'direct_stripe_admin_script_vars', array(
-                'api'   => array(
-                    'buttons'       =>  esc_url_raw( rest_url( 'direct-stripe/v1/buttons' ) ),
-                    'nonce'         =>  wp_create_nonce( 'ds_rest' ),
-                ),
-                'text'  => array(
-                    'emptyType'     => __( 'Please select a type', 'direct-stripe' ),
-                    'emptyAmount'   => __( 'Please select an amount for payment type or plan ID for subscription type', 'direct-stripe' ),
-                )
-            )
-        );*/
 
     }
 
@@ -80,7 +64,7 @@ class dsScripts {
     /**
      * Texts for js files
      *
-     * @since 2.0.0
+     * @since 2.1.0
      */
     function direct_stripe_localization() {
         include( DSCORE_PATH . 'includes/localized-texts.php');

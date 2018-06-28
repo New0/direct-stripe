@@ -1,15 +1,17 @@
-const { __ } = wp.i18n;
-const { registerBlockType, BlockControls, AlignmentToolbar, RichText } = wp.blocks;
+const { registerBlockType } = wp.blocks;
+const {
+  RichText,
+  BlockControls,
+  AlignmentToolbar,
+} = wp.editor;
+const {
+  withAPIData,
+  Spinner
+} = wp.components;
 
-let Buttons = [];
-jQuery.ajax({
-  url: ds_admin_block_vars.api.buttons,
-}).done(function( response ) {
-  Buttons = Object.values( response );
-});
 
 registerBlockType( 'direct-stripe/payment-button', {
-  title: __( 'Stripe Payment button' ),
+  title: ds_admin_block_vars.strings.title,
   category: 'common',
   icon: 'money',
   attributes: {
@@ -18,11 +20,12 @@ registerBlockType( 'direct-stripe/payment-button', {
     },
     alignment: {
       type: 'string',
+      default: 'none'
     },
     content: {
       type: 'object',
       default: {
-        label: __('Button not set')
+        label: ds_admin_block_vars.strings.contentDefault
       }
     },
     value: {
@@ -31,15 +34,38 @@ registerBlockType( 'direct-stripe/payment-button', {
     }
   },
 
-  edit: props => {
-      const { isSelected, attributes, setAttributes } = props;
+  edit: withAPIData( props => {
+    return {
+      apiButtons: '/direct-stripe/v1/buttons'
+    };
+  } )(  ( { apiButtons, isSelected, attributes, setAttributes, className } ) => {
+      //const { isSelected, attributes, setAttributes } = props;
       const { alignment, buttonItem, content, value } = attributes;
+
+      if ( ! apiButtons.data ) {
+        return (
+          <p className={className} >
+            <Spinner />
+            { ds_admin_block_vars.strings.loading }
+        </p>
+        );
+      }
+      if ( 0 === apiButtons.data.length ) {
+        return (
+          ds_admin_block_vars.strings.noData
+        );
+      }
+
+      let Buttons = [];
+      Buttons = Object.values( apiButtons.data );
 
       const onChangeButton = updatedButton => {
         setAttributes({buttonItem: updatedButton.target.value});
         const newContent = Buttons.filter(button => button.value === updatedButton.target.value);
-        setAttributes({content: newContent[0]});
-        setAttributes({value: newContent[0]['value']});
+        if( typeof newContent[0] !== 'undefined' ) {
+          setAttributes({content: newContent[0]});
+          setAttributes({value: newContent[0]['value']});
+        }
       }
 
       const onChangeAlignment =  updatedAlignment =>  {
@@ -49,28 +75,27 @@ registerBlockType( 'direct-stripe/payment-button', {
       return [
                 isSelected && (
                 <BlockControls key="controls">
-                   <select value={value} onChange={onChangeButton}>
-                      <option>Select Button</option>
+                   <select class={className} value={value} onChange={onChangeButton}>
+                      <option>{ds_admin_block_vars.strings.selectButton}</option>
                       {Buttons.map(item => (
                         <option value={item.value}>{item.text}</option>
                       ))}
                     </select>
+                    <AlignmentToolbar
+                    value={alignment}
+                    onChange={onChangeAlignment}
+                    />
                 </BlockControls>
               ),
-            <button value={content.value}>{content.label}</button>
+            <div style={ { textAlign: alignment } }>
+              <button class={className} value={content.value}>{content.label}</button>
+            </div>
           ];
 
-  },
+  }),
 
   save: props => {
     return null;
   }
 
 } );
-
-/*  Alignment Toolbar to return
- <!-- <AlignmentToolbar
-    value={alignment}
-    onChange={onChangeAlignment}
-  /> -->
-*/

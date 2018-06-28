@@ -90,7 +90,8 @@ class DS_API {
 
         $booleans = array( 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
             'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
-            'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox'
+            'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox',
+            'direct_stripe_check_records'
         );
         $texts = array( 'direct_stripe_publishable_api_key', 'direct_stripe_secret_api_key',
             'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',
@@ -101,7 +102,7 @@ class DS_API {
         );
         $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
         $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_error_message',
-            'direct_stripe_success_message', 'direct_stripe_user_error_email_content'
+            'direct_stripe_success_message', 'direct_stripe_user_error_email_content', 'direct_stripe_admin_error_email_content'
         );
 
         if ( in_array( $key, $booleans ) ) {

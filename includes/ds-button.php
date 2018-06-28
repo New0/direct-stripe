@@ -14,8 +14,18 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
     $ds_button = (object) $directStripeAttrValues;
 }
 
+$ds_class = 'direct-stripe';
+if( isset( $atts['alignment'] ) ) {
+    if( $atts['alignment'] === 'left' ){
+        $ds_class .= ' ds-left';
+    } elseif( $atts['alignment'] === 'center' ) {
+        $ds_class .= ' ds-center';
+    } elseif( $atts['alignment'] === 'right' ) {
+        $ds_class .= ' ds-right';
+    }
+}
 ?>
-<div class="direct-stripe">
+<div class="<?php echo $ds_class; ?>">
     <?php //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
         $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" data-donation-input-id="' . $instance . '" />';

@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) or die( 'Please!' );
 
 //Access functions that display settings values in admin from the class made in display-settings.php
-require_once (  DSCORE_PATH . '/includes/class-display-settings.php' );
+require_once( DSCORE_PATH . '/includes/class-display-settings.php' );
 $displaysettings = new \DirectStripeDisplaySettings;
 
 //Register options by sections / page (one option field in options table each)

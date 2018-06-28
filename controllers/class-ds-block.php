@@ -8,7 +8,7 @@ if ( ! class_exists( 'DSBlock' ) ) :
          * Block init
          */
         public function __construct() {
-            add_action( 'init', array( $this, 'ds_block' ) );
+            add_action( 'init', array( $this, 'ds_block_register' ) );
         }
 
         function ds_render_block_buttons( $atts ) {
@@ -27,25 +27,23 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
         }
 
-        function ds_block() {
+        function ds_block_register() {
 
             wp_register_script(
                 'direct-stripe-block-script',
                 DSCORE_URL . 'block/js/block.build.js',
-                array( 'wp-blocks', 'wp-element', 'jquery', 'wp-components' )
+                array( 'wp-blocks', 'wp-components', 'wp-editor' )
             );
 
             wp_localize_script('direct-stripe-block-script', 'ds_admin_block_vars', array(
                     'strings' => array(
-                        'saved' => __( 'Settings Saved', 'direct-stripe' ),
-                        'error' => __( 'Error', 'direct-stripe' )
-                    ),
-                    'dsCorePath' => DSCORE_PATH,
-                    'dsCoreUrl' => DSCORE_URL,
-                    'api'     => array(
-                        'settings'   => esc_url_raw( rest_url( 'direct-stripe/v1/settings' ) ),
-                        'buttons'    => esc_url_raw( rest_url( 'direct-stripe/v1/buttons' ) ),
-                        'nonce' => wp_create_nonce( 'wp_rest' )
+                        'saved'             =>  __( 'Settings Saved', 'direct-stripe' ),
+                        'error'             =>  __( 'Error', 'direct-stripe' ),
+                        'title'             =>  __( 'Stripe Payment button', 'direct-stripe' ),
+                        'contentDefault'    =>  __( 'Button not set', 'direct-stripe' ),
+                        'loading'           =>  __( 'Loading Buttons', 'direct-stripe' ),
+                        'noData'            =>  __( 'No Buttons found', 'direct-stripe' ),
+                        'selectButton'      =>  __( 'Select Button', 'direct-stripe' )
                     )
                 )
             );
@@ -60,6 +58,10 @@ if ( ! class_exists( 'DSBlock' ) ) :
                         'value' => array(
                             'type'      =>  'string',
                             'default'   =>  '0'
+                        ),
+                        'alignment' =>  array(
+                            'type'      =>  'string',
+                            'default'   =>  'none'
                         )
                     )
                 ) );
@@ -72,4 +74,4 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
 endif; //if class exists
 
-$dsblock= new DSBlock;
+$dsblock = new DSBlock;

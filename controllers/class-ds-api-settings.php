@@ -48,6 +48,7 @@ class DS_API_Settings {
         'direct_stripe_success_page'                =>  '',
         'direct_stripe_error_page'                  =>  '',
         'direct_stripe_logo_image'                  =>  '',
+        'direct_stripe_check_records'               =>  '',
         'direct_stripe_billing_infos_checkbox'      =>  '',
         'direct_stripe_shipping_infos_checkbox'     =>  '',
         'direct_stripe_rememberme_option_checkbox'  =>  ''
