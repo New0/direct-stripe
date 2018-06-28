@@ -98,15 +98,17 @@ class ds_process_transactions {
                 }
                 $subscription = \Stripe\Subscription::create( $subscriptiondata );
 
-                /*$subscription_id = $subscription->id;
-
-                //infos
-                $plan = $subscription->plan;
-                $plan_amount = $plan->amount;*/
             }
 
 
         } catch (Exception $e) {
+
+            if( ! isset( $charge ) ) {
+                $charge = false;
+            } elseif( ! isset( $subscription ) ) {
+                $subscription = false;
+            }
+
             $e = $e;
             error_log("Something wrong happened:" . $e->getMessage() );
         }
@@ -126,20 +128,20 @@ class ds_process_transactions {
 
         //Process emails
         if( $charge ) {
-            $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+            $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         } elseif( $subscription ) {
-            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $amount, $currency, $currency, $email_address, $description, $user, $post_id );
         } else {
-            $email = \ds_process_functions::process_emails( $e, $token, $button_id, $currency, $currency, $email_address, $description, $user, $post_id );
+            $email = \ds_process_functions::process_emails( $e, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         }
 
         //Process answer
         if( $charge ) {
-            $answer = \ds_process_functions::process_answer( $button_id, $charge, $token, $params, $d_stripe_general, $post_id, $user_id );
+            $answer = \ds_process_functions::process_answer( $charge, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } elseif( $subscription ) {
-            $answer = \ds_process_functions::process_answer( $button_id, $subscription, $token, $params, $d_stripe_general, $post_id, $user_id);
+            $answer = \ds_process_functions::process_answer( $subscription, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } else {
-            $answer = \ds_process_functions::process_answer( $button_id, $e, $token, $params, $d_stripe_general, $post_id , $user_id);
+            $answer = \ds_process_functions::process_answer( $e, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         }
 
     }

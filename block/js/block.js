@@ -70,7 +70,6 @@ registerBlockType( 'direct-stripe/payment-button', {
 
       const onChangeAlignment =  updatedAlignment =>  {
         setAttributes( { alignment: updatedAlignment } );
-        console.log(alignment);
       }
 
       return [

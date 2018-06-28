@@ -211,15 +211,17 @@ class ds_process_functions
         $headers          = array('Content-Type: text/html; charset=UTF-8');
         $admin_email = get_option('admin_email');
 
-        if( $answer['object'] === 'charge' || $answer['object'] === 'subscription' ) {
+        if( $answer->object === 'charge' || $answer->object === 'subscription' ) {
 
-            // Email admin-app
+            // Email user
             if (isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true) {
                 $email_subject = apply_filters('direct_stripe_success_user_email_subject',
-                    $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency, $email_address,
+                    $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency,
+                    $email_address,
                     $description, $user, $button_id);
                 $email_content = apply_filters('direct_stripe_success_user_email_content',
-                    $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency, $email_address,
+                    $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency,
+                    $email_address,
                     $description, $user, $button_id);
 
                 wp_mail($email_address, $email_subject, $email_content, $headers);
@@ -228,18 +230,21 @@ class ds_process_functions
             if (isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true) {
 
                 $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
-                    $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency, $email_address,
+                    $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency,
+                    $email_address,
                     $description, $user, $button_id);
                 $email_content = apply_filters('direct_stripe_success_admin_email_content',
-                    $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency, $email_address,
+                    $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency,
+                    $email_address,
                     $description, $user, $button_id);
 
                 wp_mail($admin_email, $email_subject, $email_content, $headers);
+
             }
 
         } else {
 
-            //Email admin-app
+            //Email user
             if (isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true) {
 
                 $email_subject = apply_filters('direct_stripe_error_user_email_subject',
@@ -275,12 +280,13 @@ class ds_process_functions
      *
      * @since 2.2.3
      */
-    public static function process_answer( $button_id, $answer, $token, $params, $d_stripe_general, $post_id, $user_id ) {
+    public static function process_answer( $answer, $button_id, $token, $params, $d_stripe_general, $user, $post_id ) {
 
-        if( $answer['object'] === 'charge' || $answer['object'] === 'subscription'  ) {
+        if( $answer->object === 'charge' || $answer->object === 'subscription'  ) {
 
             // Add custom action before redirection
-            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id, $user_id, $token);
+            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id,
+                $user['user_id'], $token);
 
             //Answer for ajax
             if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
@@ -320,19 +326,20 @@ class ds_process_functions
 
             } else {
 
-                    $return = array(
-                        'id'      => '1',
-                        'message' => $d_stripe_general['direct_stripe_success_message']
-                    );
+                $return = array(
+                    'id'      => '1',
+                    'message' => $d_stripe_general['direct_stripe_success_message']
+                );
 
-                }
+            }
 
             wp_send_json($return);
+
 
         } else {
 
             // Add custom action before redirection
-            do_action('direct_stripe_before_error_redirection', $charge->id, $post_id, $button_id, $user_id, $token);
+            do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'], $token);
 
             //Answer for ajax
             if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
@@ -379,7 +386,7 @@ class ds_process_functions
                 } else {
                     $return = array(
                         'id'      => '3',
-                        'message' => $e->getMessage()
+                        'message' => $answer->getMessage()
                     );
                 }
 

@@ -147,7 +147,6 @@ registerBlockType('direct-stripe/payment-button', {
 
     var onChangeAlignment = function onChangeAlignment(updatedAlignment) {
       setAttributes({ alignment: updatedAlignment });
-      console.log(alignment);
     };
 
     return [isSelected && wp.element.createElement(
