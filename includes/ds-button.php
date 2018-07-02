@@ -1,7 +1,7 @@
 <?php
 // Shortcode output
 do_action( 'direct_stripe_before_form' );
-do_action( 'direct_stripe_before_button' );
+do_action( 'direct_stripe_before_button', $button_id );
 
 /*
  * Check if the shortcode is given a value argument
@@ -34,7 +34,7 @@ echo $str_before;
     //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
         $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" data-donation-input-id="' . $instance . '" />';
-       echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input  );
+       echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input, $instance, $button_id );
      }
      ?>
 
@@ -54,7 +54,7 @@ echo $str_before;
         $ds_button_class .= ' ds-check-donation';
     }
     //Button Class
-    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class );
+    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $button_id, $instance );
 
     //Button ID
     if ( !empty( $ds_button->button_id ) ) {
@@ -62,44 +62,6 @@ echo $str_before;
     } else {
         $button_id = $instance;
     }
-
-    //Allowed HTML For Button
-    $allowed_html = array(
-        'a' => array(
-            'href' => array(),
-            'title' => array(),
-            'id'    =>  array(),
-            'class' =>     array()
-        ),
-        'img'  => array(
-            'href' => array(),
-            'alt' => array(),
-            'id'    =>  array(),
-            'class' =>     array()
-        ),
-        'button'    =>  array(
-            'data-id' => array(),
-            'id'    =>  array(),
-            'class' =>     array(),
-            'data'  =>  array()
-        ),
-        'div'  => array(
-            'data-id' => array(),
-            'id'    =>  array(),
-            'class' =>     array(),
-            'data'  =>  array()
-        ),
-        'span'    =>  array(
-            'data-id' => array(),
-            'id'    =>  array(),
-            'class' =>     array(),
-            'data'  =>  array()
-        ),
-        'br' => array(),
-        'em' => array(),
-        'strong' => array(),
-    );
-    $allowed_html = apply_filters( 'direct-stripe_div_before', $allowed_html );
 
     //Button
     $button = '<button id="' . $button_id . '" data-id="' . $instance . '" class="' . $ds_button_class . $instance . '">' . esc_attr( $ds_button->label ) . '</button>';
@@ -120,4 +82,4 @@ $str_after = "</div>";
 $str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
 echo $str_after;
 
-do_action( 'direct_stripe_after_button' );
+do_action( 'direct_stripe_after_button', $button_id  );
