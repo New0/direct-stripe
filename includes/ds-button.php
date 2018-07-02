@@ -1,8 +1,4 @@
 <?php
-// Shortcode output
-do_action( 'direct_stripe_before_form' );
-do_action( 'direct_stripe_before_button', $button_id );
-
 /*
  * Check if the shortcode is given a value argument
  *
@@ -13,6 +9,16 @@ do_action( 'direct_stripe_before_button', $button_id );
 if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '0' ) {
     $ds_button = (object) $directStripeAttrValues;
 }
+//Button ID
+if ( !empty( $ds_button->button_id ) ) {
+    $button_id = $ds_button->button_id;
+} else {
+    $button_id = $instance;
+}
+
+// Opening actions
+do_action( 'direct_stripe_before_form' );
+do_action( 'direct_stripe_before_button', $button_id);
 
 //Button Alignment
 $ds_class = 'direct-stripe';
@@ -28,7 +34,7 @@ if( isset( $atts['alignment'] ) ) {
 
 //Opening Div
 $str_before = '<div class="' . $ds_class . '">';
-$str_before = apply_filters( 'direct_stripe_div_before', $str_before, $ds_button->button_id, $ds_class );
+$str_before = apply_filters( 'direct_stripe_div_before', $str_before, $button_id, $ds_class );
 echo $str_before;
 
     //Donation condition and input
@@ -54,14 +60,7 @@ echo $str_before;
         $ds_button_class .= ' ds-check-donation';
     }
     //Button Class
-    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $button_id, $instance );
-
-    //Button ID
-    if ( !empty( $ds_button->button_id ) ) {
-        $button_id = $ds_button->button_id;
-    } else {
-        $button_id = $instance;
-    }
+    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $ds_button->button_id, $instance );
 
     //Button
     $button = '<button id="' . $button_id . '" data-id="' . $instance . '" class="' . $ds_button_class . $instance . '">' . esc_attr( $ds_button->label ) . '</button>';
