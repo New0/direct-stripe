@@ -1,8 +1,4 @@
 <?php
-// Shortcode output
-do_action( 'direct_stripe_before_form' );
-do_action( 'direct_stripe_before_button' );
-
 /*
  * Check if the shortcode is given a value argument
  *
@@ -13,7 +9,18 @@ do_action( 'direct_stripe_before_button' );
 if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '0' ) {
     $ds_button = (object) $directStripeAttrValues;
 }
+//Button ID
+if ( !empty( $ds_button->button_id ) ) {
+    $button_id = $ds_button->button_id;
+} else {
+    $button_id = $instance;
+}
 
+// Opening actions
+do_action( 'direct_stripe_before_form' );
+do_action( 'direct_stripe_before_button', $button_id);
+
+//Button Alignment
 $ds_class = 'direct-stripe';
 if( isset( $atts['alignment'] ) ) {
     if( $atts['alignment'] === 'left' ){
@@ -24,22 +31,26 @@ if( isset( $atts['alignment'] ) ) {
         $ds_class .= ' ds-right';
     }
 }
-?>
-<div class="<?php echo $ds_class; ?>">
-    <?php //Donation condition and input
+
+//Opening Div
+$str_before = '<div class="' . $ds_class . '">';
+$str_before = apply_filters( 'direct_stripe_div_before', $str_before, $button_id, $ds_class );
+echo $str_before;
+
+    //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
         $direct_stripe_donation_input = '<input type="number" name="donationvalue" id="donationvalue" data-donation-input-id="' . $instance . '" />';
-       echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input  );
+       echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input, $instance, $button_id );
      }
      ?>
 
     <?php //Custom styles button conditions
     if( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '1' ) {
-	    $ds_button_class = 'direct-stripe-button';
+	    $ds_button_class = 'direct-stripe-button direct-stripe-button-id ';
     } elseif( isset($d_stripe_styles['direct_stripe_use_custom_styles']) && $d_stripe_styles['direct_stripe_use_custom_styles'] === '2' ) {
-	    $ds_button_class = 'original-stripe-button';
+	    $ds_button_class = 'original-stripe-button direct-stripe-button-id ';
      } else {
-        $ds_button_class = 'stripe-button-ds';
+        $ds_button_class = 'stripe-button-ds direct-stripe-button-id ';
      }
     //T&C Check box condition
     if( isset($ds_button->tc ) && $ds_button->tc === true || isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === true && isset( $ds_button->tc ) && $ds_button->tc !== false ) {
@@ -48,17 +59,26 @@ if( isset( $atts['alignment'] ) ) {
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
         $ds_button_class .= ' ds-check-donation';
     }
-        $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class );
-    ?>
+    //Button Class
+    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $ds_button->button_id, $instance );
 
-    <button <?php if ( !empty( $ds_button->button_id ) ) { ?>id="<?php echo $ds_button->button_id; ?>"<?php } ?> data-id="<?php echo $instance; ?>" class="<?php echo $ds_button_class; ?> direct-stripe-button-id <?php echo $instance; ?>"><?php echo esc_attr( $ds_button->label ); ?></button>
+    //Button
+    $button = '<button id="' . $button_id . '" data-id="' . $instance . '" class="' . $ds_button_class . $instance . '">' . esc_attr( $ds_button->label ) . '</button>';
+    $button = apply_filters( 'direct_stripe_button', $button, $instance, $button_id, $ds_button_class);
+    echo $button;
 
-        <?php //T&C Check box condition
-        if( isset( $ds_button->tc ) && $ds_button->tc === true || isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === true && isset( $ds_button->tc ) && $ds_button->tc !== false ) { ?>
-            <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>
-            <label for="conditions">
-            <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
-                <a target="_blank" href="<?php echo esc_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
-            </label><br />
-        <?php } ?>
-</div>
+    //T&C Check box condition
+    if( isset( $ds_button->tc ) && $ds_button->tc === true || isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === true && isset( $ds_button->tc ) && $ds_button->tc !== false ) { ?>
+        <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>
+        <label for="conditions">
+        <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
+            <a target="_blank" href="<?php echo esc_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
+        </label><br />
+    <?php }
+
+//Closing Div
+$str_after = "</div>";
+$str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
+echo $str_after;
+
+do_action( 'direct_stripe_after_button', $button_id  );
