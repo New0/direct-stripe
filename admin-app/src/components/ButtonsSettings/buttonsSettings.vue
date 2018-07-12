@@ -97,7 +97,6 @@
                             id="buttonType"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
                             :items="buttonTypes"
-                            :value="buttonType"
                             v-model="buttonType"
                     ></v-select>
                 </v-flex>
