@@ -10,30 +10,25 @@
         </v-layout>
 
         <v-layout row wrap>
-            <v-flex md2>
-
-                <p>{{text.checkSAE}}</p>
-
-            </v-flex>
-            <v-flex md1>
+            <v-flex>
                 <v-switch
                         v-on:change="saveSetting( 'direct_stripe_admin_emails_checkbox', $event )"
                         v-model="saeMode"
+                        :label="text.checkSAE"
                 ></v-switch>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.adminSEmailSubject}}</p>
+                <label for="emailAdminSubjectSuccess">{{text.adminSEmailSubject}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_admin_email_subject', $event )"
                         v-bind:name="allData.direct_stripe_admin_email_subject"
-                        v-bind:label="allData.direct_stripe_admin_email_subject"
                         v-bind:value="allData.direct_stripe_admin_email_subject"
-                        single-line
+                        id="emailAdminSubjectSuccess"
                 ></v-text-field>
             </v-flex>
         </v-layout>
@@ -41,18 +36,18 @@
         <v-layout row wrap>
             <v-flex md2 xs12>
 
-                <p>{{text.adminSEmailContent}}</p>
+                <label for="emailAdminContentSuccess">{{text.adminSEmailContent}}</label>
 
             </v-flex>
             <v-flex md4 xs12>
-                <v-text-field
+                <v-textarea
                         v-on:change="saveSetting('direct_stripe_admin_email_content', $event)"
                         v-bind:name="allData.direct_stripe_admin_email_content"
                         v-bind:placeholder="allData.direct_stripe_admin_email_content"
                         v-bind:value="allData.direct_stripe_admin_email_content"
-                        box
-                        multi-line
-                ></v-text-field>
+                        id="emailAdminContentSuccess"
+                        solo
+                ></v-textarea>
             </v-flex>
         </v-layout>
 

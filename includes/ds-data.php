@@ -128,7 +128,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         'ds-nonce'		        =>  !empty($ds_nonce) ? $ds_nonce : ''
     );
 
-}  else {
+} else {
 
     if( get_option( 'direct_stripe_buttons' ) ) {
         $ds_buttons = get_option( 'direct_stripe_buttons' );

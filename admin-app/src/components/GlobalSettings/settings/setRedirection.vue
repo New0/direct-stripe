@@ -10,22 +10,18 @@
         </v-layout>
 
         <v-layout row wrap>
-            <v-flex md2>
-
-                <p>{{text.useRedirectionPages}}</p>
-
-            </v-flex>
-            <v-flex md1>
+            <v-flex>
                 <v-switch
                         v-on:change="saveSetting( 'direct_stripe_use_redirections', $event )"
                         v-model="useRedirections"
+                        :label="text.useRedirectionPages"
                 ></v-switch>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.successPage}}</p>
+                <label for="successPage">{{text.successPage}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-select
@@ -33,15 +29,15 @@
                         :items="successPages"
                         :label="text.textSelect"
                         v-model="successPage"
-                        class="input-group--focused"
-                        single-line
+                        solo
+                        id="successPage"
                 ></v-select>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.errorPage}}</p>
+                <label for="errorPage">{{text.errorPage}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-select
@@ -49,12 +45,12 @@
                         :items="errorPages"
                         :label="text.textSelect"
                         v-model="errorPage"
-                        class="input-group--focused"
-                        single-line
+                        solo
+                        id="errorPage"
                 ></v-select>
             </v-flex>
         </v-layout>
-
+        <br/>
     </div>
 </template>
 

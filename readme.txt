@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe button, stripe, custom stripe button, credit cards, donations, subscriptions, stripe modal form, stripe checkout, direct checkout, easy payments, receive payments, accept credit cards, donation button, accept payments
 Requires at least: 4.2
 Tested up to: 4.9.6
-Stable tag: 2.1.5
+Stable tag: 2.1.5.1
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog ==
+
+=2.1.5.1=
+* Fixed T&C bug
 
 =2.1.5=
 * New markup Hooks

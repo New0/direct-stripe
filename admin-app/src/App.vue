@@ -76,7 +76,7 @@
   const strings = ds_admin_app_vars.strings;
 
   export default {
-    name: 'app',
+    name: 'dsAdmin',
     components: {
       globalSettings,
       stylesSettings,
@@ -94,60 +94,80 @@
 </script>
 
 <style lang="scss">
-  #app {
-    background-color: #F1F1F1;
-  }
-  .theme--light {
-    .tabs__bar {
-      background-color: #F1F1F1;
-    }
-  }
-  .option {
-    + .option-saved {
-      display: none;
-    }
-    &.active {
-      + .option-saved {
-        display: block;
-      }
-    }
-  }
-  #save-result {
-      position: fixed;
-      left: 50%;
-      top: 15%;
-      z-index: 1111111111;
-      transform: translateX(-110%);
+    #app {
+        background-color: #F1F1F1;
+        color: #32373C;
+        font-size: 1.143rem;
 
-    > .option-saved {
-        display: none;
-        color:  #8bc34a;
-        padding: 0.6rem 1rem;
-        background-color: #fff;
-        border: thin solid #8bc34a;
-    }
-    &.active {
-      > .option-saved {
-        display: block;
-      }
-    }
-  }
-  .input-group--text-field-box:not(.input-group--textarea).input-group--multi-line .input-group__input {
-      padding-top: 0;
-  }
-  .input-group--text-field {
-    padding-top: 5px;
+        label, p {
+          color: #32373C;
+          font-size: 1.143rem;
+        }
 
-      label {
-          top: 0;
-      }
-  }
-  .input-group {
-    &.input-group--selection-controls {
-      &.switch {
-        padding-top: 10px;
-      }
+        .primary-, .accent- {
+            &-text {
+                color: #0073AA !important;
+            }
+        }
+        a {
+
+            &:active, &:hover {
+                color: #0073AA !important;
+            }
+
+        }
+        textarea, input[type="text"] {
+            box-shadow: none;
+            border: none;
+        }
+        .v-tabs__container {
+            background-color: #F1F1F1;
+        }
+        .v-tabs__item--active {
+            border-bottom: solid thin #0073AA;
+        }
+
+        .option {
+            + .option-saved {
+                display: none;
+            }
+            &.active {
+                + .option-saved {
+                    display: block;
+                }
+            }
+        }
+        #save-result {
+            position: fixed;
+            left: 50%;
+            top: 15%;
+            z-index: 1111111111;
+            transform: translateX(-110%);
+
+            > .option-saved {
+                display: none;
+                font-size: 1.8rem;
+                color:  #32373C;
+                padding: 0.6rem 1rem;
+                background-color: #C7E8CA;
+                border: thin solid #C7E8CA;
+            }
+            &.active {
+                > .option-saved {
+                    display: block;
+                }
+            }
+        }
+        .v-input {
+            margin-top: 0;
+        }
+        .v-select__selection + input {
+            visibility: hidden;
+        }
+        .v-text-field input {
+            padding: 8px;
+        }
+
     }
-  }
 
 </style>

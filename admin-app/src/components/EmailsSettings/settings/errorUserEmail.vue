@@ -4,37 +4,30 @@
 
         <v-layout row wrap>
             <v-flex xs12>
-
                 <h3>{{text.errorUserEmailTitle}}</h3>
-
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
-            <v-flex md2>
-
-                <p>{{text.checkEUE}}</p>
-
-            </v-flex>
-            <v-flex md1>
+            <v-flex>
                 <v-switch
                         v-on:change="saveSetting( 'direct_stripe_user_error_emails_checkbox', $event )"
                         v-model="eaeMode"
+                        :label="text.checkEUE"
                 ></v-switch>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.userEEmailSubject}}</p>
+                <label for="emailUserSubjectError">{{text.userEEmailSubject}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_user_error_email_subject', $event )"
                         v-bind:name="allData.direct_stripe_auser_error_email_subject"
-                        v-bind:label="allData.direct_stripe_user_error_email_subject"
                         v-bind:value="allData.direct_stripe_user_error_email_subject"
-                        single-line
+                        id="emailUserSubjectError"
                 ></v-text-field>
             </v-flex>
         </v-layout>
@@ -42,18 +35,18 @@
         <v-layout row wrap>
             <v-flex md2 xs12>
 
-                <p>{{text.userEEmailContent}}</p>
+                <label for="emailUserContentError">{{text.userEEmailContent}}</label>
 
             </v-flex>
             <v-flex md4 xs12>
-                <v-text-field
+                <v-textarea
                         v-on:change="saveSetting('direct_stripe_user_error_email_content', $event)"
                         v-bind:name="allData.direct_stripe_user_error_email_content"
                         v-bind:placeholder="allData.direct_stripe_user_error_email_content"
                         v-bind:value="allData.direct_stripe_user_error_email_content"
-                        box
-                        multi-line
-                ></v-text-field>
+                        id="emailUserContentError"
+                        solo
+                ></v-textarea>
             </v-flex>
         </v-layout>
 

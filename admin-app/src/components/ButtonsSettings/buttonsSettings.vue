@@ -2,16 +2,19 @@
     <div>
 
         <v-layout row  wrap mb-3>
-            <v-flex xs12>
-
+            <v-flex xs12 mb-3>
                 <h2>{{ text.buttonsSettings }}</h2>
 
-                <div>{{ text.createButtonsTitle}}</div>
-
-                <input type="text" v-model="newButton">
-                <v-btn color="success" class="option" v-on:click="pushButton( newButton, null, null, null )">{{ text.createButtons }}</v-btn>
-
+                <label for="new-button-name">{{ text.createButtonsTitle}}</label>
             </v-flex>
+
+            <v-flex md2 xs12 pt-2>
+                <v-text-field id="new-button-name" v-model="newButton" ></v-text-field>
+            </v-flex>
+            <v-flex>
+                <v-btn type="submit" color="success" class="option" v-on:click="pushButton( newButton, null, null, null )">{{ text.createButtons }}</v-btn>
+            </v-flex>
+
         </v-layout>
 
         <hr />
@@ -20,15 +23,16 @@
             <v-flex md2 xs12>
 
                 <h2>{{ text.editButtonTitle }}</h2>
-
-                <v-select
+                <label for="buttonSelection">{{text.selectButton}}</label>
+                <v-combobox
                         v-on:change="setSettings( $event )"
                         class="ds-select-button"
-                        :label="text.selectButton"
                         v-model="selectedButton"
+                        :value="selectedButton"
                         :items="buttons"
-                >
-                </v-select>
+                        id="buttonSelection"
+                        solo
+                ></v-combobox>
             </v-flex>
 
             <v-flex md4 xs12 text-xs-center>
@@ -91,12 +95,10 @@
                     <label for="buttonType">{{ text.typeLabel }}</label>
                     <v-select
                             id="buttonType"
-                            :label="text.selectButtonType"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
                             :items="buttonTypes"
+                            :value="buttonType"
                             v-model="buttonType"
-                            class="input-group--focused"
-                            single-line
                     ></v-select>
                 </v-flex>
 
@@ -163,14 +165,14 @@
 
                 <v-flex md4 pa-3 xs12>
                     <label for="dsButtonDescription">{{ text.buttonDescription }}</label>
-                    <v-text-field
+                    <v-textarea
                             id="dsButtonDescription"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'description' , $event)"
                             :name="selectedButton.description"
                             :value="selectedButton.description"
                             v-model="selectedButton.description"
-                            multi-line
-                    ></v-text-field>
+                            solo
+                    ></v-textarea>
                 </v-flex>
 
             </v-layout>
@@ -286,6 +288,8 @@
                     </v-tooltip>
                 </v-flex>
             </v-layout>
+
+            <div id="dsFullSubscriptions"></div>
 
             <hr/>
 
@@ -496,14 +500,8 @@
         .then(response => {
             let allButtons = this.buttons;
             jQuery.each( response.data, function( key, value ) {
-                let button = {
-                  'text': value.text,
-                  'id': value.value,
-                  'value': value
-                }
-                allButtons.push( button );
+              allButtons.push( value  );
             });
-            this.buttons = allButtons;
           }
         )
     },
@@ -610,12 +608,7 @@
           }
 
           button[setting] = event;
-          this.buttons.push(
-            {
-            'text': button.text,
-            'value': button
-            }
-          );
+          this.buttons.push( button );
 
           const but = JSON.stringify(button);
           const req_url = API_BUTTONS + '?id=' + button.value + '&data=' + but + '&_dsnonce=' + nonce;

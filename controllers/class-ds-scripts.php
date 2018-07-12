@@ -24,9 +24,9 @@ class dsScripts {
         $screen = get_current_screen();
         if( $screen->id === 'toplevel_page_direct_stripe' ){
 
-            wp_enqueue_style( 'ds-vuetify', DSCORE_URL . 'admin-app/src/assets/css/vuetify.min.css' );
+            //wp_enqueue_style( 'ds-vuetify', DSCORE_URL . 'admin-app/src/assets/css/vuetify.min.css' );
             wp_enqueue_style( 'direct-stripe-admin-app-icons', DSCORE_URL . 'admin-app/src/assets/css/material-design-icons.css' );
-            wp_enqueue_style('wp-color-picker');
+            wp_enqueue_style( 'wp-color-picker');
             wp_enqueue_media();
             wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'admin-app/dist/build.js', array('jquery', 'wp-color-picker'), ('0.0.1'), true );
             wp_localize_script('direct-stripe-admin-app', 'ds_admin_app_vars', self::direct_stripe_localization() );

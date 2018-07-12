@@ -2,19 +2,18 @@
     <div>
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.borderRadius}}</p>
+                <label for="dsBorderRadius">{{text.borderRadius}}</label>
             </v-flex>
             <v-flex md1 xs6>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_border_radius', $event )"
                         v-bind:name="borderRadius"
-                        v-bind:label="borderRadius"
                         v-bind:value="borderRadius"
-                        single-line
+                        id="dsBorderRadius"
                 ></v-text-field>
             </v-flex>
             <v-flex md2 xs6>
-                <p>px</p>
+                <p class="pl-2">px</p>
             </v-flex>
         </v-layout>
     </div>
