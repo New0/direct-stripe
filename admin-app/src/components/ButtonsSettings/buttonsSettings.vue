@@ -25,7 +25,6 @@
                 <h2>{{ text.editButtonTitle }}</h2>
                 <label for="buttonSelection">{{text.selectButton}}</label>
                 <v-combobox
-                        v-on:change="setSettings( $event )"
                         class="ds-select-button"
                         v-model="selectedButton"
                         :items="buttons"
@@ -97,15 +96,15 @@
                             id="buttonType"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
                             :items="buttonTypes"
-                            v-model="buttonType"
+                            v-model="selectedButton.type"
                     ></v-select>
                 </v-flex>
 
                 <v-flex md4 pa-3 xs12>
-                    <label v-if="buttonType === null" for="buttonAmount">{{ text.typeLabel }}</label>
-                    <label v-if="buttonType === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
-                    <label v-if="buttonType === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
-                    <label v-if="buttonType === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
+                    <label v-if="selectedButton.type === null" for="buttonAmount">{{ text.typeLabel }}</label>
+                    <label v-if="selectedButton.type === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
+                    <label v-if="selectedButton.type === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
+                    <label v-if="selectedButton.type === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
                     <v-text-field
                             id="buttonAmount"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'amount' , $event)"
@@ -113,7 +112,7 @@
                             :value="selectedButton.amount"
                             v-model="selectedButton.amount"
                             :hint="text.valueAmountHint"
-                            :disabled="buttonType === 'donation'"
+                            :disabled="selectedButton.type === 'donation'"
                     ></v-text-field>
                 </v-flex>
 
@@ -481,7 +480,6 @@
             'value': 'donation'
           }
         ],
-        buttonType: '',
         rules: {
           required: (value) => !!value || strings.requiredField,
           email: (value) => {
@@ -673,17 +671,16 @@
         //Interface actions
         this.selectedButton = null;
         this.show = false;
-        this.buttons.find( function(element, index, buttons) {
+        this.buttons.find( function(element, index, arr) {
           if( element.value === button.value ) {
-            buttons.splice( index, 1  );
-            console.log(buttons);
+            arr.splice( index, 1 );
           }
         });
 
-      },
-      setSettings: function( event ) {
-        this.buttonType = event.type;
       }
+      /*setSettings: function( event ) {
+        this.buttonType = event.type;
+      }*/
     }
   }
 </script>
