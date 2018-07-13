@@ -134,7 +134,14 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         $ds_buttons = get_option( 'direct_stripe_buttons' );
     }
     if( $ds_buttons ) {
-        $ds_button = $ds_buttons[ $directStripeAttrValues['value'] ];
+        if( array_key_exists( $directStripeAttrValues['value'], $ds_buttons ) ) {
+            $ds_button = $ds_buttons[ $directStripeAttrValues['value'] ];
+        } else {
+            $params = null;
+            $ds_button  = null;
+            return;
+        }
+
     }
 
 

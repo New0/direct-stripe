@@ -2,7 +2,7 @@
 Stripe payment button for WordPress
 
 === Direct Stripe ===
-Contributors: Nicolas Figueira
+Contributors: Nicolas Figueira, New0, nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe button, stripe, custom stripe button, credit cards, donations, subscriptions, stripe modal form, stripe checkout, direct checkout, easy payments, receive payments, accept credit cards, donation button, accept payments
 Requires at least: 4.2

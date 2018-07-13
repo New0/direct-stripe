@@ -499,8 +499,13 @@
         .then(response => {
             let allButtons = this.buttons;
             jQuery.each( response.data, function( key, value ) {
-              allButtons.push( value  );
+              if( value !== null ) {
+                allButtons.push( value );
+              }
             });
+            if( allButtons.length !== 0 ) {
+              this.buttons = allButtons;
+            }
           }
         )
     },
@@ -556,17 +561,12 @@
             success_url: "",
             error_url: ""
           };
-          this.buttons.push(  {
-            'text': defaultData.text,
-            'id': buttonID,
-            'value': defaultData
-            }
-          );
+          this.buttons.push( defaultData );
 
           const button = this.buttons.find( function(element) {
             return element.id === buttonID;
           });
-          const but = JSON.stringify(button.value);
+          const but = JSON.stringify(button);
 
           const req_url = API_BUTTONS + '?id=' + buttonID + '&data=' + but + '&_dsnonce=' + nonce;
 

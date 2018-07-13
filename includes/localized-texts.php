@@ -139,6 +139,7 @@ $texts = array(
         'dsPaymentType'         =>  __( 'Payment', 'direct-stripe' ),
         'dsSubscriptionType'    =>  __( 'Subscription', 'direct-stripe' ),
         'dsDonationType'        =>  __( 'Donation', 'direct-stripe' ),
+        'emptyButtonsData'      =>  __( 'No button set, please create a button', 'direct-stripe' ),
     ),
     'dsCorePath'    => DSCORE_PATH,
     'dsCoreUrl'     => DSCORE_URL,

@@ -15,6 +15,11 @@ if ( !empty( $ds_button->button_id ) ) {
 } else {
     $button_id = $instance;
 }
+if( !empty( $ds_button->label ) ){
+    $label = $ds_button->label;
+} else {
+    $label = __( 'Undefined button value, check settings', 'direct-stripe' );
+}
 
 // Opening actions
 do_action( 'direct_stripe_before_form' );
@@ -60,10 +65,10 @@ echo $str_before;
         $ds_button_class .= ' ds-check-donation';
     }
     //Button Class
-    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $ds_button->button_id, $instance );
+    $ds_button_class = apply_filters('direct_stripe_button_class', $ds_button_class, $button_id, $instance );
 
     //Button
-    $button = '<button id="' . $button_id . '" data-id="' . $instance . '" class="' . $ds_button_class . ' ' . $instance . '">' . esc_attr( $ds_button->label ) . '</button>';
+    $button = '<button id="' . $button_id . '" data-id="' . $instance . '" class="' . $ds_button_class . ' ' . $instance . '">' . esc_attr( $label ) . '</button>';
     $button = apply_filters( 'direct_stripe_button', $button, $instance, $button_id, $ds_button_class);
     echo $button;
 
