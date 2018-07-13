@@ -54,7 +54,7 @@ class ds_process_transactions {
                 } else {
                     $setupfeedata['customer'] = $user['stripe_id'];
                 }
-                $setupfeedata = apply_filters( 'direct_stripe_setup_fee_data', $setupfeedata, $user, $token );
+                $setupfeedata = apply_filters( 'direct_stripe_setup_fee_data', $setupfeedata, $user, $token, $setup_fee, $currency, $description );
                 $fee = \Stripe\InvoiceItem::create( $setupfeedata );
             }
 
@@ -74,7 +74,7 @@ class ds_process_transactions {
                 } else {
                     $chargerdata['customer'] = $user['stripe_id'];
                 }
-                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token );
+                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description );
                 $charge   = \Stripe\Charge::create( $chargerdata );
 
             } elseif( $params['type'] === 'subscription' ) {
@@ -98,7 +98,7 @@ class ds_process_transactions {
                 } else {
                     $subscriptiondata['customer'] = $user['stripe_id'];
                 }
-                $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token );
+                $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
                 $subscription = \Stripe\Subscription::create( $subscriptiondata );
 
             }
