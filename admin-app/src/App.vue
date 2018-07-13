@@ -19,6 +19,7 @@
         </v-tab>
         <v-tab-item
                 v-bind:key="globalSettings"
+                id="global-settings"
         >
           <globalSettings></globalSettings>
         </v-tab-item>
@@ -31,6 +32,7 @@
         </v-tab>
         <v-tab-item
                 v-bind:key="stylesSettings"
+                id="styles-settings"
         >
           <stylesSettings></stylesSettings>
         </v-tab-item>
@@ -43,6 +45,7 @@
         </v-tab>
         <v-tab-item
                 v-bind:key="emailsSettings"
+                id="email-settings"
         >
           <emailsSettings></emailsSettings>
         </v-tab-item>
@@ -55,6 +58,7 @@
         </v-tab>
         <v-tab-item
                 v-bind:key="buttonsSettings"
+                id="buttons-settings"
         >
           <buttonsSettings></buttonsSettings>
         </v-tab-item>

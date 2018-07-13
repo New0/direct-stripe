@@ -297,7 +297,7 @@
             </v-layout>
 
             <v-layout>
-                <v-flex md2 pa-3 xs12>
+                <v-flex pa-3 xs12>
                     <v-tooltip left>
                         <span slot="activator">
                             <v-switch

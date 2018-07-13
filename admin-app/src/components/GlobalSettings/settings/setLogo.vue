@@ -9,7 +9,7 @@
 
         <v-layout row wrap>
 
-            <v-flex md2 xs12>
+            <v-flex md3 xs12>
                 <v-btn
                         v-on:click="open_media_uploader_image()"
                 >{{text.selectImage}}</v-btn>
@@ -53,9 +53,9 @@
     mounted () {
       axios
         .get(SETTINGS)
-        .then(response => (
-          this.attachmentURL = response.data.direct_stripe_logo_image
-        ))
+        .then(response => {
+          this.attachmentURL = response.data.direct_stripe_logo_image;
+        })
         .catch(error => console.log(error))
     },
     methods: {
