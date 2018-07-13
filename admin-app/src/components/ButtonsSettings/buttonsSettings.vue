@@ -28,21 +28,21 @@
                         v-on:change="setSettings( $event )"
                         class="ds-select-button"
                         v-model="selectedButton"
-                        :value="selectedButton"
                         :items="buttons"
                         id="buttonSelection"
+                        autocomplete="on"
                         solo
                 ></v-combobox>
             </v-flex>
 
             <v-flex md4 xs12 text-xs-center>
 
-                <h3 v-if="selectedButton != null">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
+                <h3 v-if="selectedButton != null && selectedButton.name != null ">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
                 <h3 v-else>{{ text.currentlySelectedNo }}</h3>
 
             </v-flex>
 
-            <v-flex v-if="selectedButton != null" md4 xs12 text-xs-center>
+            <v-flex v-if="selectedButton != null && selectedButton.name != null" md4 xs12 text-xs-center>
                 <v-menu transition="slide-x-transition">
                     <v-btn slot="activator" color="warning" class="option">{{ text.deleteButton }}</v-btn>
 
@@ -56,7 +56,7 @@
 
         </v-layout>
 
-        <div v-if="selectedButton != null">
+        <div v-if="selectedButton != null && selectedButton.name != null">
 
             <v-layout row wrap>
 
@@ -102,6 +102,7 @@
                 </v-flex>
 
                 <v-flex md4 pa-3 xs12>
+                    <label v-if="buttonType === null" for="buttonAmount">{{ text.typeLabel }}</label>
                     <label v-if="buttonType === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
                     <label v-if="buttonType === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
                     <label v-if="buttonType === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
@@ -564,7 +565,7 @@
           this.buttons.push( defaultData );
 
           const button = this.buttons.find( function(element) {
-            return element.id === buttonID;
+            return element.value === buttonID;
           });
           const but = JSON.stringify(button);
 
@@ -582,6 +583,7 @@
             .post(req_url)
             .then( response => {
                 if (typeof response.data === "undefined" || response.data === null) {
+                  this.newButton = '';
                   bubble()
                 } else {
                   if (response.data.error === true) {
@@ -597,7 +599,6 @@
                     }
                 }
             )
-
 
 
         } else { //Edit Button
@@ -668,13 +669,17 @@
           )
           .catch(error => console.log(error))
 
+
         //Interface actions
-        this.buttons.find( function(element, index, array) {
-          if( element.id === button.value) {
-            array.splice( index, 1);
+        this.selectedButton = null;
+        this.show = false;
+        this.buttons.find( function(element, index, buttons) {
+          if( element.value === button.value ) {
+            buttons.splice( index, 1  );
+            console.log(buttons);
           }
         });
-        this.show = false;
+
       },
       setSettings: function( event ) {
         this.buttonType = event.type;
