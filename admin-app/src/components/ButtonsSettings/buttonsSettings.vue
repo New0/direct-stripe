@@ -678,9 +678,6 @@
         });
 
       }
-      /*setSettings: function( event ) {
-        this.buttonType = event.type;
-      }*/
     }
   }
 </script>
