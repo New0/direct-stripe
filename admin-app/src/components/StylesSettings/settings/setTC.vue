@@ -3,7 +3,7 @@
         <hr />
 
         <v-layout row wrap>
-            <v-flex md2 xs12>
+            <v-flex md4 xs12>
                 <h3>{{text.termsAndConditions}}</h3>
             </v-flex>
         </v-layout>
@@ -22,48 +22,43 @@
 -->
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.tcText}}</p>
+                <label for="tcText">{{text.tcText}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_tc_text', $event )"
                         v-bind:name="allData.direct_stripe_tc_text"
-                        v-bind:label="allData.direct_stripe_tc_text"
                         v-bind:value="allData.direct_stripe_tc_text"
-                        v-bind:id="allData.direct_stripe_tc_text"
-                        single-line
+                        id="tcText"
                 ></v-text-field>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.tcTextLinked}}</p>
+                <label for="tcTextLinked">{{text.tcTextLinked}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-text-field
                         v-on:change="saveSetting( 'direct_stripe_tc_link_text', $event )"
                         v-bind:name="allData.direct_stripe_tc_link_text"
-                        v-bind:label="allData.direct_stripe_tc_link_text"
                         v-bind:value="allData.direct_stripe_tc_link_text"
-                        v-bind:id="allData.direct_stripe_tc_link_text"
-                        single-line
+                        id="tcTextLinked"
                 ></v-text-field>
             </v-flex>
         </v-layout>
 
         <v-layout row wrap>
             <v-flex md2 xs12>
-                <p>{{text.tcPage}}</p>
+                <label for="tcPage">{{text.tcPage}}</label>
             </v-flex>
             <v-flex md3 xs12>
                 <v-select
                         v-on:change="saveSetting('direct_stripe_tc_link', $event)"
                         :items="tcPages"
-                        :label="text.textSelect"
                         v-model="tcPage"
-                        class="input-group--focused"
-                        single-line
+                        solo
+                        id="tcPage"
                 ></v-select>
             </v-flex>
         </v-layout>

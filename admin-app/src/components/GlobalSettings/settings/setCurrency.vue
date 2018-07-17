@@ -9,7 +9,7 @@
 
     <v-layout row wrap>
         <v-flex md2 xs12>
-           <p>{{text.currency}}</p>
+           <label for="textCurrency">{{text.currency}}</label>
         </v-flex>
         <v-flex md2 xs12>
             <v-select
@@ -17,8 +17,8 @@
                     v-bind:items="currencies"
                     v-bind:label="text.textSelect"
                     v-model="currency"
-                    class="input-group--focused"
-                    single-line
+                    solo
+                    id="textCurrency"
             ></v-select>
         </v-flex>
     </v-layout>

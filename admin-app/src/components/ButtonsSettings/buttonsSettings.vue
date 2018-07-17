@@ -2,16 +2,19 @@
     <div>
 
         <v-layout row  wrap mb-3>
-            <v-flex xs12>
-
+            <v-flex xs12 mb-3>
                 <h2>{{ text.buttonsSettings }}</h2>
 
-                <div>{{ text.createButtonsTitle}}</div>
-
-                <input type="text" v-model="newButton">
-                <v-btn color="success" class="option" v-on:click="pushButton( newButton, null, null, null )">{{ text.createButtons }}</v-btn>
-
+                <label for="new-button-name">{{ text.createButtonsTitle}}</label>
             </v-flex>
+
+            <v-flex md2 xs12 pt-2>
+                <v-text-field id="new-button-name" v-model="newButton" ></v-text-field>
+            </v-flex>
+            <v-flex>
+                <v-btn type="submit" color="success" class="option" v-on:click="pushButton( newButton, null, null, null )">{{ text.createButtons }}</v-btn>
+            </v-flex>
+
         </v-layout>
 
         <hr />
@@ -20,25 +23,25 @@
             <v-flex md2 xs12>
 
                 <h2>{{ text.editButtonTitle }}</h2>
-
-                <v-select
-                        v-on:change="setSettings( $event )"
+                <label for="buttonSelection">{{text.selectButton}}</label>
+                <v-combobox
                         class="ds-select-button"
-                        :label="text.selectButton"
                         v-model="selectedButton"
                         :items="buttons"
-                >
-                </v-select>
+                        id="buttonSelection"
+                        autocomplete="on"
+                        solo
+                ></v-combobox>
             </v-flex>
 
             <v-flex md4 xs12 text-xs-center>
 
-                <h3 v-if="selectedButton != null">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
+                <h3 v-if="selectedButton != null && selectedButton.name != null ">{{ text.currentlySelected }} : {{ selectedButton.text }}</h3>
                 <h3 v-else>{{ text.currentlySelectedNo }}</h3>
 
             </v-flex>
 
-            <v-flex v-if="selectedButton != null" md4 xs12 text-xs-center>
+            <v-flex v-if="selectedButton != null && selectedButton.name != null" md4 xs12 text-xs-center>
                 <v-menu transition="slide-x-transition">
                     <v-btn slot="activator" color="warning" class="option">{{ text.deleteButton }}</v-btn>
 
@@ -52,7 +55,7 @@
 
         </v-layout>
 
-        <div v-if="selectedButton != null">
+        <div v-if="selectedButton != null && selectedButton.name != null">
 
             <v-layout row wrap>
 
@@ -91,19 +94,17 @@
                     <label for="buttonType">{{ text.typeLabel }}</label>
                     <v-select
                             id="buttonType"
-                            :label="text.selectButtonType"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
                             :items="buttonTypes"
-                            v-model="buttonType"
-                            class="input-group--focused"
-                            single-line
+                            v-model="selectedButton.type"
                     ></v-select>
                 </v-flex>
 
                 <v-flex md4 pa-3 xs12>
-                    <label v-if="buttonType === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
-                    <label v-if="buttonType === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
-                    <label v-if="buttonType === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
+                    <label v-if="selectedButton.type === null" for="buttonAmount">{{ text.typeLabel }}</label>
+                    <label v-if="selectedButton.type === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
+                    <label v-if="selectedButton.type === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
+                    <label v-if="selectedButton.type === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
                     <v-text-field
                             id="buttonAmount"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'amount' , $event)"
@@ -111,7 +112,7 @@
                             :value="selectedButton.amount"
                             v-model="selectedButton.amount"
                             :hint="text.valueAmountHint"
-                            :disabled="buttonType === 'donation'"
+                            :disabled="selectedButton.type === 'donation'"
                     ></v-text-field>
                 </v-flex>
 
@@ -163,14 +164,14 @@
 
                 <v-flex md4 pa-3 xs12>
                     <label for="dsButtonDescription">{{ text.buttonDescription }}</label>
-                    <v-text-field
+                    <v-textarea
                             id="dsButtonDescription"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'description' , $event)"
                             :name="selectedButton.description"
                             :value="selectedButton.description"
                             v-model="selectedButton.description"
-                            multi-line
-                    ></v-text-field>
+                            solo
+                    ></v-textarea>
                 </v-flex>
 
             </v-layout>
@@ -287,6 +288,8 @@
                 </v-flex>
             </v-layout>
 
+            <div id="dsFullSubscriptions"></div>
+
             <hr/>
 
             <v-layout row wrap>
@@ -294,7 +297,7 @@
             </v-layout>
 
             <v-layout>
-                <v-flex md2 pa-3 xs12>
+                <v-flex pa-3 xs12>
                     <v-tooltip left>
                         <span slot="activator">
                             <v-switch
@@ -477,7 +480,6 @@
             'value': 'donation'
           }
         ],
-        buttonType: '',
         rules: {
           required: (value) => !!value || strings.requiredField,
           email: (value) => {
@@ -496,14 +498,13 @@
         .then(response => {
             let allButtons = this.buttons;
             jQuery.each( response.data, function( key, value ) {
-                let button = {
-                  'text': value.text,
-                  'id': value.value,
-                  'value': value
-                }
-                allButtons.push( button );
+              if( value !== null ) {
+                allButtons.push( value );
+              }
             });
-            this.buttons = allButtons;
+            if( allButtons.length !== 0 ) {
+              this.buttons = allButtons;
+            }
           }
         )
     },
@@ -559,17 +560,12 @@
             success_url: "",
             error_url: ""
           };
-          this.buttons.push(  {
-            'text': defaultData.text,
-            'id': buttonID,
-            'value': defaultData
-            }
-          );
+          this.buttons.push( defaultData );
 
           const button = this.buttons.find( function(element) {
-            return element.id === buttonID;
+            return element.value === buttonID;
           });
-          const but = JSON.stringify(button.value);
+          const but = JSON.stringify(button);
 
           const req_url = API_BUTTONS + '?id=' + buttonID + '&data=' + but + '&_dsnonce=' + nonce;
 
@@ -585,6 +581,7 @@
             .post(req_url)
             .then( response => {
                 if (typeof response.data === "undefined" || response.data === null) {
+                  this.newButton = '';
                   bubble()
                 } else {
                   if (response.data.error === true) {
@@ -602,7 +599,6 @@
             )
 
 
-
         } else { //Edit Button
 
           if( typeof setting === 'undefined' || setting === null ) {
@@ -610,12 +606,7 @@
           }
 
           button[setting] = event;
-          this.buttons.push(
-            {
-            'text': button.text,
-            'value': button
-            }
-          );
+          this.buttons.push( button );
 
           const but = JSON.stringify(button);
           const req_url = API_BUTTONS + '?id=' + button.value + '&data=' + but + '&_dsnonce=' + nonce;
@@ -676,16 +667,16 @@
           )
           .catch(error => console.log(error))
 
+
         //Interface actions
-        this.buttons.find( function(element, index, array) {
-          if( element.id === button.value) {
-            array.splice( index, 1);
+        this.selectedButton = null;
+        this.show = false;
+        this.buttons.find( function(element, index, arr) {
+          if( element.value === button.value ) {
+            arr.splice( index, 1 );
           }
         });
-        this.show = false;
-      },
-      setSettings: function( event ) {
-        this.buttonType = event.type;
+
       }
     }
   }

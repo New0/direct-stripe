@@ -3,47 +3,42 @@
     <hr/>
     <v-layout row wrap>
         <v-flex md3 xs12>
-
             <h3>{{text.bubbleMessages}}</h3>
-
         </v-flex>
     </v-layout>
 
     <v-layout row wrap>
-        <v-flex md3 xs12>
-
-            <h3>{{text.successBubble}}</h3>
-
+        <v-flex md2 xs12>
+            <label for="successBubble">{{text.successBubble}}</label>
         </v-flex>
         <v-flex md4 xs12>
-            <v-text-field
+            <v-textarea
                     v-on:change="saveSetting('direct_stripe_success_message', $event)"
                     v-bind:name="allData.direct_stripe_success_message"
                     v-bind:placeholder="allData.direct_stripe_success_message"
                     v-bind:value="allData.direct_stripe_success_message"
-                    box
-                    multi-line
-            ></v-text-field>
+                    id="successBubble"
+                    solo
+            ></v-textarea>
         </v-flex>
     </v-layout>
 
     <v-layout row wrap>
-        <v-flex md3 xs12>
-
-            <h3>{{text.errorBubble}}</h3>
-
+        <v-flex md2 xs12>
+            <label for="errorBubble">{{text.errorBubble}}</label>
         </v-flex>
         <v-flex md4 xs12>
-            <v-text-field
+            <v-textarea
                     v-on:change="saveSetting('direct_stripe_error_message', $event)"
                     v-bind:name="allData.direct_stripe_error_message"
                     v-bind:placeholder="allData.direct_stripe_error_message"
                     v-bind:value="allData.direct_stripe_error_message"
-                    box
-                    multi-line
-            ></v-text-field>
+                    solo
+                    id="errorBubble"
+            ></v-textarea>
         </v-flex>
     </v-layout>
+    <br/>
 </div>
 </template>
 

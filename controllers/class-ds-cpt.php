@@ -52,6 +52,7 @@ class dsCpt {
             'public'              => false,
             'show_ui'             => true,
             'show_in_menu'        => 'direct_stripe',
+            'menu_position'       => '50',
             'show_in_nav_menus'   => true,
             'can_export'          => true,
             'exclude_from_search' => true,

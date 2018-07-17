@@ -1,9 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import Vuetify from 'vuetify'
+import '@babel/polyfill';
+import Vue from 'vue';
+//import './plugins/vuetify';
+import dsAdmin from './App.vue';
+import Vuetify from 'vuetify';
 import axios from 'axios';
+import 'vuetify/dist/vuetify.min.css';
+//import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: "#32373C",
+  }
+});
 
 const SETTINGS = ds_admin_app_vars.api.settings;
 const nonce = ds_admin_app_vars.api.nonce;
@@ -47,5 +55,5 @@ Vue.mixin({
  */
 let dsAdminApp = new Vue({
   el: '#ds-admin-app',
-  render: h => h(App)
+  render: h => h(dsAdmin)
 })

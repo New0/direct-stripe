@@ -10,13 +10,14 @@
         <v-layout row wrap>
 
             <v-flex md2 xs12>
-                <p>{{text.chooseButtonStyles}}</p>
+                <label for="stylesType">{{text.chooseButtonStyles}}</label>
             </v-flex>
 
             <v-flex md3 xs12>
                 <v-radio-group
                         v-on:change="saveSetting('direct_stripe_use_custom_styles', $event)"
                         v-model="styleMode"
+                        id="stylesType"
                 >
                     <v-radio
                             :label="text.stylesRadioNo"

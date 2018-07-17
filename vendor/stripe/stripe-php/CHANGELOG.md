@@ -1,5 +1,26 @@
 # Changelog
 
+## 6.10.2 - 2018-07-11
+* [#494](https://github.com/stripe/stripe-php/pull/494) Enable HTTP/2 support
+
+## 6.10.1 - 2018-07-10
+* [#493](https://github.com/stripe/stripe-php/pull/493) Add PHPDoc for `auto_advance` on `\Stripe\Invoice`
+
+## 6.10.0 - 2018-06-28
+* [#488](https://github.com/stripe/stripe-php/pull/488) Add support for `$appPartnerId` to `Stripe::setAppInfo()`
+
+## 6.9.0 - 2018-06-28
+* [#487](https://github.com/stripe/stripe-php/pull/487) Add support for payment intents
+
+## 6.8.2 - 2018-06-24
+* [#486](https://github.com/stripe/stripe-php/pull/486) Make `Account.deauthorize()` return the `StripeObject` from the API
+
+## 6.8.1 - 2018-06-13
+* [#472](https://github.com/stripe/stripe-php/pull/472) Added phpDoc for `ApiRequestor` and others, especially regarding thrown errors
+
+## 6.8.0 - 2018-06-13
+* [#481](https://github.com/stripe/stripe-php/pull/481) Add new `\Stripe\Discount` and `\Stripe\OrderItem` classes, add more PHPDoc describing object attributes
+
 ## 6.7.4 - 2018-05-29
 * [#480](https://github.com/stripe/stripe-php/pull/480) PHPDoc changes for API version 2018-05-21 and the addition of the new `CHARGE_EXPIRED` event type
 

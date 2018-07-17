@@ -5,18 +5,17 @@
         <v-layout row wrap>
 
             <v-flex md2 xs12>
-                <h3>{{text.mainColor}}</h3>
+                <label for="mainColor">{{text.mainColor}}</label>
             </v-flex>
 
             <v-flex md4 xs12>
 
-                <input class="ds-show-color" v-bind:style="{ backgroundColor: dscolor }" />
+                <div class="ds-show-color"><span v-bind:style="{ backgroundColor: dscolor, width: '5rem', height: '2rem' }"></span></div>
 
                 <input
                         class='direct-stripe-color-field'
                         type="text"
-                        v-model="dscolor"
-                        :value="dscolor"
+                        id="mainColor"
                 />
 
             </v-flex>
@@ -90,7 +89,10 @@
 <style>
 
     .ds-show-color {
-        width: 2rem;
+        width: 3rem;
+        height: 1rem;
+        display: block;
+        position: relative;
     }
 
     .wp-picker-container .wp-color-result.button {

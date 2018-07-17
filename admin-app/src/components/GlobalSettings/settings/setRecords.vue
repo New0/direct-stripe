@@ -8,14 +8,12 @@
         </v-layout>
 
         <v-layout row wrap>
-            <v-flex md1>
+            <v-flex>
                 <v-switch
                         v-on:change="saveSetting( 'direct_stripe_check_records', $event )"
                         v-model="recordsMode"
+                        :label="text.recordsMore"
                 ></v-switch>
-            </v-flex>
-            <v-flex>
-                <p>{{text.recordsMore}}</p>
             </v-flex>
         </v-layout>
 

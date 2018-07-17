@@ -8,25 +8,28 @@
         </v-layout>
 
         <v-layout row wrap>
-            <v-flex md2 xs12>
-                <p>{{text.selectImage}}</p>
-            </v-flex>
-            <v-flex md2 xs12>
+
+            <v-flex md3 xs12>
                 <v-btn
                         v-on:click="open_media_uploader_image()"
                 >{{text.selectImage}}</v-btn>
                 <v-btn
                         v-on:click="remove_attachment()"
                 >{{text.removeImage}}</v-btn>
+
             </v-flex>
 
             <v-flex md4 xs12>
                 <div id="dsModalLogo">
-                    <img v-bind:src="attachmentURL" v-bind:alt="text.altAttachment" />
+                    <img class="Header-logoImage"
+                         :alt="text.altAttachment"
+                         :src="attachmentURL"
+                    />
                 </div>
             </v-flex>
 
         </v-layout>
+        <br/><br/>
     </div>
 </template>
 
@@ -50,9 +53,9 @@
     mounted () {
       axios
         .get(SETTINGS)
-        .then(response => (
-          this.attachmentURL = response.data.direct_stripe_logo_image
-        ))
+        .then(response => {
+          this.attachmentURL = response.data.direct_stripe_logo_image;
+        })
         .catch(error => console.log(error))
     },
     methods: {
@@ -121,8 +124,25 @@
 
 <style lang="scss" scoped>
     #dsModalLogo {
-        img {
-            max-width: 100%;
+        border: 3px solid #fff;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.18),0 2px 2px 0 rgba(0,0,0,.08);
+
+        .Header-logoImage {
+            width: 64px;
+            height: 64px;
+            margin: 1px;
+            border-radius: 100%;
+            background: #fff;
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-image: none;
+            background-size: auto auto;
+            background-position: 50% 50%;
+            background-size: cover;
+            display: inline-block;
         }
     }
 </style>
