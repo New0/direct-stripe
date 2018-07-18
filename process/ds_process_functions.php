@@ -32,7 +32,7 @@ class ds_process_functions
      */
     public static function check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params ){
 
-        if( $d_stripe_general['direct_stripe_check_records'] === true && $params['type'] !== 'subscription' ) {
+        if( $d_stripe_general['direct_stripe_check_records'] === true ) {
             return false;
         }
 
@@ -43,14 +43,15 @@ class ds_process_functions
             $stripe_id = get_user_meta( $user_id, 'stripe_id', true );
             if( !empty($stripe_id)) {
                 $check_stripe_user = \Stripe\Customer::retrieve($stripe_id);
+                $check_stripe_user ->source = $token;
+                $check_stripe_user ->save();
             }
 
             if ( !empty( $stripe_id ) && isset( $check_stripe_user )  ) {//User exists and have a Stripe ID
 
                 //Update user roles if records are allowed
                 if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
-                    $user->add_role('stripe-user');
-                    $user->add_role($custom_role);
+                    self::ds_add_roles( $user, $custom_role );
                 }
 
             } else {// User exists but doesn't have a Stripe ID
@@ -69,8 +70,7 @@ class ds_process_functions
                         update_user_meta($user_id, 'stripe_id', $stripe_id);
                     }
                     //Update user roles
-                    $user->add_role('stripe-user');
-                    $user->add_role($custom_role);
+                    self::ds_add_roles( $user, $custom_role );
                 }
             }
 
@@ -101,13 +101,14 @@ class ds_process_functions
 
                 // Add User roles
                 $user = new WP_User($user_id);
-                $user->add_role('stripe-user');
-                $user->add_role($custom_role);
+                //Update user roles
+                self::ds_add_roles( $user, $custom_role );
 
             } else {
                 $user_id = false;
             }
         }
+
         $user = array(
             'user_id'   =>  $user_id,
             'stripe_id' =>  $stripe_id
@@ -397,5 +398,18 @@ class ds_process_functions
         }
     }
 
+    /**
+     * Add customer roles to user
+     *
+     * @since 2.2.7
+     */
+    public static function  ds_add_roles( $user, $custom_role ) {
+        if( user_can($user, 'stripe-user' ) === false ) {
+            $user->add_role('stripe-user');
+        }
+        if( !empty($custom_role) ){
+            $user->add_role($custom_role);
+        }
+    }
 
 }
