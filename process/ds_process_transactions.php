@@ -49,7 +49,7 @@ class ds_process_transactions {
                     "currency" => $currency,
                     "description" => __('One time setup fee ', 'direct-stripe') . $description
                 );
-                if($user === false ) {
+                if( $user === false ) {
                     $setupfeedata['source' ] = $token;
                 } else {
                     $setupfeedata['customer'] = $user['stripe_id'];
@@ -69,7 +69,7 @@ class ds_process_transactions {
                     'capture'     => $capture,
                     'description' => $description
                 );
-                if($user === false ) {
+                if( $user === false ) {
                     $chargerdata['source' ] = $token;
                 } else {
                     $chargerdata['customer'] = $user['stripe_id'];
@@ -93,7 +93,7 @@ class ds_process_transactions {
                         "description" => $description
                     )
                 );
-                if($user === false ) {
+                if( $user === false ) {
                     $subscriptiondata['source' ] = $token;
                 } else {
                     $subscriptiondata['customer'] = $user['stripe_id'];
