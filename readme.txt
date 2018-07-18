@@ -1,7 +1,7 @@
 ﻿=== Direct Stripe ===
 Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
-Tags: payments, stripe button, stripe, custom stripe button, credit cards, donations, subscriptions, stripe modal form, stripe checkout, direct checkout, easy payments, receive payments, accept credit cards, donation button, accept payments
+Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
 Tested up to: 4.9.6
 Stable tag: 2.1.6
