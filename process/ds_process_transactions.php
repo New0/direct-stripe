@@ -92,13 +92,9 @@ class ds_process_transactions {
                     "coupon"   => $coupon,
                     "metadata"	=> array(
                         "description" => $description
-                    )
+                    ),
+                    'customer'  =>  $user['stripe_id']
                 );
-                if( $user === false ) {
-                    $subscriptiondata['source' ] = $token;
-                } else {
-                    $subscriptiondata['customer'] = $user['stripe_id'];
-                }
                 $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
                 $subscription = \Stripe\Subscription::create( $subscriptiondata );
 
