@@ -38,7 +38,7 @@ Vue.mixin({
         .post(req_url)
         .then(response => {
           if( typeof response.data === "undefined" || response.data === null ) {
-            bubble()
+            bubble();
           } else {
             if (response.data.error === true ){
               console.log( response.data.text );

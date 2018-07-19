@@ -42,15 +42,51 @@
             </v-flex>
 
             <v-flex v-if="selectedButton != null && selectedButton.name != null" md4 xs12 text-xs-center>
-                <v-menu transition="slide-x-transition">
-                    <v-btn slot="activator" color="warning" class="option">{{ text.deleteButton }}</v-btn>
+                <v-btn
+                        color="warning"
+                        dark
+                        @click.stop="dialog = true"
+                        class="option"
+                >
+                    {{ text.deleteButton }}
+                </v-btn>
 
+                <v-dialog
+                        v-model="dialog"
+                        max-width="290"
+                >
                     <v-card>
-                        <p>{{ text.defDeleteButton }}</p>
-                        <v-btn color="error" v-on:click="deleteButton( selectedButton )">{{ text.yes }}</v-btn>
-                        <v-btn color="info" v-on:click.native="show = !show">{{ text.no }}</v-btn>
+                        <v-card-title class="headline">{{ text.titDeleteButton }}</v-card-title>
+                        <v-card-text>
+                            {{ text.defDeleteButton }}
+                        </v-card-text>
+                        <v-card-text>
+                            {{ text.queDeleteButton }}
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                    color="info"
+                                    flat="flat"
+                                    @click="dialog = false"
+                            >
+                                {{ text.no }}
+                            </v-btn>
+
+                            <v-btn
+                                    color="error"
+                                    flat="flat"
+                                    @click="deleteButton( selectedButton )"
+                            >
+                                {{ text.yes }}
+                            </v-btn>
+                        </v-card-actions>
                     </v-card>
-                </v-menu>
+                </v-dialog>
+
+
+
+
             </v-flex>
 
         </v-layout>
@@ -461,7 +497,7 @@
     name: 'buttonSettings',
     data() {
       return {
-        show: false,
+        dialog: false,
         text: strings,
         buttons: [],
         selectedButton: null,
@@ -670,7 +706,7 @@
 
         //Interface actions
         this.selectedButton = null;
-        this.show = false;
+        this.dialog = false;
         this.buttons.find( function(element, index, arr) {
           if( element.value === button.value ) {
             arr.splice( index, 1 );
