@@ -215,31 +215,55 @@ class ds_process_functions
         if( $answer->object === 'charge' || $answer->object === 'subscription' ) {
 
             // Email user
-            if (isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true) {
+            if ( isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true ) {
                 $email_subject = apply_filters('direct_stripe_success_user_email_subject',
-                    $d_stripe_emails['direct_stripe_user_email_subject'], $token, $amount, $currency,
-                    $email_address,
-                    $description, $user, $button_id);
+                                                $d_stripe_emails['direct_stripe_user_email_subject'],
+                                                $token,
+                                                $amount,
+                                                $currency,
+                                                $email_address,
+                                                $description,
+                                                $user,
+                                                $button_id
+                                            );
                 $email_content = apply_filters('direct_stripe_success_user_email_content',
-                    $d_stripe_emails['direct_stripe_user_email_content'], $token, $amount, $currency,
-                    $email_address,
-                    $description, $user, $button_id);
+                                                $d_stripe_emails['direct_stripe_user_email_content'],
+                                                $token,
+                                                $amount,
+                                                $currency,
+                                                $email_address,
+                                                $description,
+                                                $user,
+                                                $button_id
+                                            );
 
-                wp_mail($email_address, $email_subject, $email_content, $headers);
+                wp_mail( $email_address, $email_subject, $email_content, $headers );
             }
             // Email admin
-            if (isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true) {
+            if ( isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true ) {
 
                 $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
-                    $d_stripe_emails['direct_stripe_admin_email_subject'], $token, $amount, $currency,
-                    $email_address,
-                    $description, $user, $button_id);
+                                                $d_stripe_emails['direct_stripe_admin_email_subject'],
+                                                $token,
+                                                $amount,
+                                                $currency,
+                                                $email_address,
+                                                $description,
+                                                $user,
+                                                $button_id
+                                            );
                 $email_content = apply_filters('direct_stripe_success_admin_email_content',
-                    $d_stripe_emails['direct_stripe_admin_email_content'], $token, $amount, $currency,
-                    $email_address,
-                    $description, $user, $button_id);
+                                                $d_stripe_emails['direct_stripe_admin_email_content'],
+                                                $token,
+                                                $amount,
+                                                $currency,
+                                                $email_address,
+                                                $description,
+                                                $user,
+                                                $button_id
+                                            );
 
-                wp_mail($admin_email, $email_subject, $email_content, $headers);
+                wp_mail( $admin_email, $email_subject, $email_content, $headers );
 
             }
 
