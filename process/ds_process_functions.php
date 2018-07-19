@@ -32,22 +32,25 @@ class ds_process_functions
      */
     public static function check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params ){
 
-        if( $d_stripe_general['direct_stripe_check_records'] === true && $params['type'] !== 'subscription' ) {
-            return false;
-        }
-
         //Check if user exists in WordPress
         if( username_exists( $email_address ) || email_exists( $email_address ) ) {
             $user = get_user_by( 'email', $email_address );
             $user_id = $user->ID;
-            $stripe_id = get_user_meta( $user_id, 'stripe_id', true );
-            if( !empty($stripe_id)) {
-                $check_stripe_user = \Stripe\Customer::retrieve($stripe_id);
-                $check_stripe_user->source = $token;
-                $check_stripe_user->save();
+            $s_customer_id = get_user_meta( $user_id, 'stripe_id', true );
+            if( !empty( $s_customer_id ) ) {
+                $check_stripe_user = \Stripe\Customer::retrieve( $s_customer_id );
+
+                if( !empty( $check_stripe_user ) ) {
+                    $stripe_id = $s_customer_id;
+                    $check_stripe_user->source = $token;
+                    $check_stripe_user->save();
+                } else {
+                    $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+                }
+
             }
 
-            if ( !empty( $stripe_id ) && isset( $check_stripe_user )  ) {//User exists and have a Stripe ID
+            if ( !empty( $s_customer_id ) && isset( $check_stripe_user )  ) {//User exists and have a Stripe ID
 
                 //Update user roles if records are allowed
                 if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
@@ -57,11 +60,7 @@ class ds_process_functions
             } else {// User exists but doesn't have a Stripe ID
 
                 //Create Stripe customer
-                $customer = \Stripe\Customer::create(array(
-                    'email' => $email_address,
-                    'source'  => $token
-                ));
-                $stripe_id = $customer->id;
+                $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
 
                 //Register Stripe ID if Allowed
                 if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
@@ -83,13 +82,10 @@ class ds_process_functions
                 $user_id = false;
                 $check_user->data[0]->source = $token;
                 $check_user->data[0]->save();
+
             } else {
                 // Create Stripe Customer
-                $customer  = \Stripe\Customer::create(array(
-                    'email'  => $email_address,
-                    'source' => $token
-                ));
-                $stripe_id = $customer->id;
+                $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
 
                 if ( $d_stripe_general['direct_stripe_check_records'] !== true ) {
                     // Generate the password and create the user
@@ -444,6 +440,21 @@ class ds_process_functions
         if( !empty($custom_role) ){
             $user->add_role($custom_role);
         }
+    }
+
+    /**
+     * Add customer roles to user
+     *
+     * @since 2.2.7
+     */
+    public static function  ds_create_stripe_customer( $email_address, $token ) {
+        //Create Stripe customer
+        $customer  = \Stripe\Customer::create(array(
+            'email'  => $email_address,
+            'source' => $token
+        ));
+
+        return $customer->id;
     }
 
 }
