@@ -5,7 +5,23 @@
     <div>
         <div id="save-result">
             <span class="option-saved">{{text.settingSaved}}</span>
+            <!--<v-snackbar
+                    v-model="snackbar"
+                    color="#C7E8CA"
+                    timeout="4000"
+                    top="true"
+            >
+              {{ text.settingSaved }}
+            </v-snackbar>-->
         </div>
+        <!--<div id="loading">
+            <v-progress-circular
+                    v-model="loading"
+                    indeterminate
+                    color="primary"
+            ></v-progress-circular>
+        </div>-->
+
       <v-tabs
               icons-and-text
               v-model="active"
@@ -90,7 +106,9 @@
     data () {
       return {
         active: null,
-        text: strings
+        text: strings,
+        snackbar: false,
+        loading: false
       }
     }
   }

@@ -64,13 +64,14 @@ class ds_process_transactions {
                 $subscription = false;
 
                 $chargerdata = array(
-                    'amount'      => $amount,
-                    'currency'    => $currency,
-                    'capture'     => $capture,
-                    'description' => $description
+                    'amount'        => $amount,
+                    'currency'      => $currency,
+                    'capture'       => $capture,
+                    'description'   => $description
                 );
                 if( $user === false ) {
                     $chargerdata['source' ] = $token;
+                    $chargerdata['receipt_email'] = $email_address;
                 } else {
                     $chargerdata['customer'] = $user['stripe_id'];
                 }
@@ -133,7 +134,7 @@ class ds_process_transactions {
         if( $charge ) {
             $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         } elseif( $subscription ) {
-            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $amount, $currency, $currency, $email_address, $description, $user, $post_id );
+            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         } else {
             $email = \ds_process_functions::process_emails( $e, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         }

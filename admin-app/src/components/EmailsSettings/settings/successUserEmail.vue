@@ -44,7 +44,7 @@
                 <v-textarea
                         v-on:change="saveSetting('direct_stripe_user_email_content', $event)"
                         v-bind:name="allData.direct_stripe_user_email_content"
-                        v-bind:placeholder="allData.direct_stripe_user_email_content"
+                        v-bind:value="allData.direct_stripe_user_email_content"
                         id="userEmailContentSuccess"
                         solo
                 ></v-textarea>
