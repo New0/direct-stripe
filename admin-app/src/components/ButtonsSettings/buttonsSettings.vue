@@ -546,9 +546,10 @@
     },
     methods: {
       pushButton ( newButton, button, setting, event ) {
-
+        jQuery('#load-result').addClass('active');
         if( ! newButton ){
           console.log('Empty name!!');
+          jQuery('#load-result').removeClass('active');
           return;
         }
 
@@ -618,10 +619,12 @@
             .then( response => {
                 if (typeof response.data === "undefined" || response.data === null) {
                   this.newButton = '';
+                  jQuery('#load-result').removeClass('active');
                   bubble()
                 } else {
                   if (response.data.error === true) {
                     console.log(response.data.text);
+                    jQuery('#load-result').removeClass('active');
                   }
                 }
               }
@@ -630,6 +633,7 @@
                 console.log(error);
                     if (typeof error.data.message === "undefined" || error.data.message === null) {
                         console.log(error.message);
+                      jQuery('#load-result').removeClass('active');
                     }
                 }
             )
@@ -659,10 +663,12 @@
             .post(req_url)
             .then(response => {
                 if (typeof response.data === "undefined" || response.data === null) {
+                  jQuery('#load-result').removeClass('active');
                   bubble()
                 } else {
                   if (response.data.error === true) {
                     console.log(response.data.text);
+                    jQuery('#load-result').removeClass('active');
                   }
                 }
               }
@@ -671,6 +677,7 @@
                 console.log(error)
                   if (typeof error.message === "undefined" || error.message === null) {
                     console.log(error.data.message);
+                    jQuery('#load-result').removeClass('active');
                   }
                 }
             )
@@ -679,6 +686,8 @@
 
       },
       deleteButton: function( button ) {
+
+        jQuery('#load-result').addClass('active');
 
         let el = jQuery('#save-result');
         function bubble(){
@@ -693,15 +702,20 @@
           .post(req_url)
           .then(response => {
               if (typeof response.data === "undefined" || response.data === null) {
+                jQuery('#load-result').removeClass('active');
                 bubble();
               } else {
                 if (response.data.error === true) {
                   console.log(response.data.text);
+                  jQuery('#load-result').removeClass('active');
                 }
               }
             }
           )
-          .catch(error => console.log(error))
+          .catch(error => {
+            console.log(error);
+            jQuery('#load-result').removeClass('active');
+          })
 
 
         //Interface actions

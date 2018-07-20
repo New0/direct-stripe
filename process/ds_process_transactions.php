@@ -119,7 +119,8 @@ class ds_process_transactions {
         if( $charge && $d_stripe_general['direct_stripe_check_records'] !== true || $subscription && $d_stripe_general['direct_stripe_check_records'] !== true ) {
             $post_id = \ds_process_functions::logs_meta( $logsdata, $params );
             if( $user ){
-                $user_id = \ds_process_functions::user_meta( $logsdata, $params, $user );
+                $user_meta = \ds_process_functions::user_meta( $logsdata, $params, $user );
+                $user_id = $user['user_id'];
             }
         } else {
             $post_id = false;

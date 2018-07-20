@@ -443,7 +443,7 @@ class ds_process_functions
     }
 
     /**
-     * Add customer roles to user
+     * Create Stripe customer and set default source
      *
      * @since 2.2.7
      */

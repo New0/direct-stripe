@@ -55,11 +55,14 @@
         .get(SETTINGS)
         .then(response => {
           this.attachmentURL = response.data.direct_stripe_logo_image;
+          jQuery('#load-result').removeClass('active');
         })
         .catch(error => console.log(error))
     },
     methods: {
       open_media_uploader_image: function () {
+
+        jQuery('#load-result').addClass('active');
 
         media_uploader = wp.media({
           title: this.text.wpMediaTitle,
@@ -76,9 +79,9 @@
           let el = jQuery('#save-result');
 
           function bubble(){
-            el[0].classList.add('active')
+            el.addClass('active')
             setTimeout(() => {
-              el[0].classList.remove('active')
+              el.removeClass('active')
             }, 3000)
           }
 
@@ -87,23 +90,29 @@
           axios
             .post(req_url)
             .then(response => {
-              bubble()
-             jQuery(imgContainer).attr( "src", attachment.url);
+                jQuery(imgContainer).attr( "src", attachment.url);
+                jQuery('#load-result').removeClass('active');
+                bubble();
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                jQuery('#load-result').removeClass('active');
+            })
 
         });
 
         media_uploader.open();
       },
       remove_attachment: function () {
+
+        jQuery('#load-result').addClass('active');
         let imgContainer = jQuery('#dsModalLogo img');
         let el = jQuery('#save-result');
 
         function bubble(){
-          el[0].classList.add('active')
+          el.addClass('active')
           setTimeout(() => {
-            el[0].classList.remove('active')
+            el.removeClass('active')
           }, 3000)
         }
 
@@ -112,10 +121,14 @@
         axios
           .post(req_url)
           .then(response => {
+            jQuery('#load-result').removeClass('active');
             bubble()
             jQuery(imgContainer).attr( "src", "#");
           })
-          .catch(error => console.log(error))
+          .catch(error => {
+            console.log(error);
+            jQuery('#load-result').removeClass('active');
+          })
 
       }
     }
