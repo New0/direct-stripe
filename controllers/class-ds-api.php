@@ -159,6 +159,7 @@ class DS_API {
         }
         if( $request->get_param( 'delete' ) && $request->get_param( 'delete' ) === 'yes' ) {
             $delete = 'yes';
+            $data = false;
         } else  {
             $delete = null;
             if( $request->get_param( 'data' ) ) {
