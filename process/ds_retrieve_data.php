@@ -42,7 +42,7 @@ if( $params['type'] === 'payment' ) {
 }
 
 /****  Options ****/
-if ($params['capture'] === 'false') {
+if ($params['capture'] === 'true') {
     $capture = false;
 } else {
     $capture = true;
