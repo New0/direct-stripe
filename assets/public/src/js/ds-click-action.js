@@ -23,17 +23,18 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         var currency = ds_values.general_currency;
     }
 
-    if( ds_values.display_amount !== "false" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
+    if( ds_values.display_amount !== "" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
         var amount = parseInt(ds_values.original_amount);
-    } else if( ds_values.type === "donation" ) {
+    } else if( ds_values.display_amount !== "" && ds_values.type === "donation" ) {
         if( ds_values.zero_decimal === "1" || ds_values.zero_decimal === "true"  ) {
-          var amount = ds_values.original_amount
+          var amount = parseInt(ds_values.original_amount);
         } else {
-          var amount = ds_values.original_amount * 100;
+          var amount = parseInt(ds_values.original_amount) * 100;
         }
     } else {
         var amount = 0;
     }
+
     if( ds_values.billing === "1" || ds_values.billing === "true" ) {
         billing = true;
     } else {
@@ -48,6 +49,11 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         rememberme = true;
     } else {
         rememberme = false;
+    }
+    if( ds_values.capture === "" || ds_values.capture === "false" ) {
+      ds_values.capture = false;
+    } else {
+      ds_values.capture = true;
     }
 
     var numbers = /^\+?[0-9]*\.?[0-9]+$/;

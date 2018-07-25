@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
 Tested up to: 4.9.6
-Stable tag: 2.1.7
+Stable tag: 2.1.7.1
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog ==
+
+=2.1.7.1=
+* Fixes issue with capture, display amount and zero decimal settings
 
 =2.1.7=
 * Improved admin app Delete button modal and loading animation
