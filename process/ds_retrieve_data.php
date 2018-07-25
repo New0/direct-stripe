@@ -28,7 +28,7 @@ if( $params['type'] === 'payment' ) {
     }
 } elseif( $params['type'] === 'donation' ) {
     $pre_amount     = isset($_POST['amount']) ? $_POST['amount'] : '';
-    if ( isset($params['zero_decimal']) && $params['zero_decimal'] === "true" ) {
+    if ( isset($params['zero_decimal']) && $params['zero_decimal'] === "1" || isset($params['zero_decimal']) && $params['zero_decimal'] === "true" ) {
         $amount = $pre_amount;
     } else {
         $amount = $pre_amount * 100;
@@ -42,7 +42,7 @@ if( $params['type'] === 'payment' ) {
 }
 
 /****  Options ****/
-if ($params['capture'] === 'true') {
+if ($params['capture'] === false || $params['capture'] === 'false' ) {
     $capture = false;
 } else {
     $capture = true;
