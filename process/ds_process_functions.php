@@ -218,62 +218,7 @@ class ds_process_functions
         $headers          = array('Content-Type: text/html; charset=UTF-8');
         $admin_email = get_option('admin_email');
 
-        if( $answer->object === 'charge' || $answer->object === 'subscription' ) {
-
-            // Email user
-            if ( isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true ) {
-                $email_subject = apply_filters('direct_stripe_success_user_email_subject',
-                                                $d_stripe_emails['direct_stripe_user_email_subject'],
-                                                $token,
-                                                $amount,
-                                                $currency,
-                                                $email_address,
-                                                $description,
-                                                $user,
-                                                $button_id
-                                            );
-                $email_content = apply_filters('direct_stripe_success_user_email_content',
-                                                $d_stripe_emails['direct_stripe_user_email_content'],
-                                                $token,
-                                                $amount,
-                                                $currency,
-                                                $email_address,
-                                                $description,
-                                                $user,
-                                                $button_id
-                                            );
-
-                wp_mail( $email_address, $email_subject, $email_content, $headers );
-            }
-            // Email admin
-            if ( isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true ) {
-
-                $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
-                                                $d_stripe_emails['direct_stripe_admin_email_subject'],
-                                                $token,
-                                                $amount,
-                                                $currency,
-                                                $email_address,
-                                                $description,
-                                                $user,
-                                                $button_id
-                                            );
-                $email_content = apply_filters('direct_stripe_success_admin_email_content',
-                                                $d_stripe_emails['direct_stripe_admin_email_content'],
-                                                $token,
-                                                $amount,
-                                                $currency,
-                                                $email_address,
-                                                $description,
-                                                $user,
-                                                $button_id
-                                            );
-
-                wp_mail( $admin_email, $email_subject, $email_content, $headers );
-
-            }
-
-        } else {
+        if( ! isset( $answer->object ) ) {
 
             //Email user
             if (isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true) {
@@ -301,6 +246,61 @@ class ds_process_functions
                 wp_mail($admin_email, $email_subject, $email_content, $headers);
             }
 
+        } else {
+
+            // Email user
+            if ( isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true ) {
+                $email_subject = apply_filters('direct_stripe_success_user_email_subject',
+                    $d_stripe_emails['direct_stripe_user_email_subject'],
+                    $token,
+                    $amount,
+                    $currency,
+                    $email_address,
+                    $description,
+                    $user,
+                    $button_id
+                );
+                $email_content = apply_filters('direct_stripe_success_user_email_content',
+                    $d_stripe_emails['direct_stripe_user_email_content'],
+                    $token,
+                    $amount,
+                    $currency,
+                    $email_address,
+                    $description,
+                    $user,
+                    $button_id
+                );
+
+                wp_mail( $email_address, $email_subject, $email_content, $headers );
+            }
+            // Email admin
+            if ( isset($d_stripe_emails['direct_stripe_admin_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_emails_checkbox'] === true ) {
+
+                $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
+                    $d_stripe_emails['direct_stripe_admin_email_subject'],
+                    $token,
+                    $amount,
+                    $currency,
+                    $email_address,
+                    $description,
+                    $user,
+                    $button_id
+                );
+                $email_content = apply_filters('direct_stripe_success_admin_email_content',
+                    $d_stripe_emails['direct_stripe_admin_email_content'],
+                    $token,
+                    $amount,
+                    $currency,
+                    $email_address,
+                    $description,
+                    $user,
+                    $button_id
+                );
+
+                wp_mail( $admin_email, $email_subject, $email_content, $headers );
+
+            }
+
         }
 
     }
@@ -313,61 +313,7 @@ class ds_process_functions
      */
     public static function process_answer( $answer, $button_id, $token, $params, $d_stripe_general, $user, $post_id ) {
 
-        if( $answer->object === 'charge' || $answer->object === 'subscription'  ) {
-
-            // Add custom action before redirection
-            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id,
-                $user['user_id'], $token);
-
-            //Answer for ajax
-            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
-
-
-                $s_url         = get_permalink($d_stripe_general['direct_stripe_success_page']);
-                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
-
-                if ( ! empty($success_query)) {
-                    $pres_query = $success_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-                    $s_query = array_combine($r[1], $r[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($s_query)) {
-                    $s_url = add_query_arg($s_query, $s_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $s_url);
-
-            } elseif ( ! empty($params['success_url'])) {
-
-                $s_url         = isset($params['success_url']) ? $params['success_url'] : '';
-                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
-
-                if ( ! empty($success_query)) {
-                    $pres_query = $success_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-                    $s_query = array_combine($r[1], $r[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($s_query)) {
-                    $s_url = add_query_arg($s_query, $s_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $s_url);
-
-            } else {
-
-                $return = array(
-                    'id'      => '1',
-                    'message' => $d_stripe_general['direct_stripe_success_message']
-                );
-
-            }
-
-            wp_send_json($return);
-
-
-        } else {
+        if( ! isset( $answer->object )  ) {
 
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'], $token);
@@ -375,7 +321,7 @@ class ds_process_functions
             //Answer for ajax
             if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
 
-                $e_url       = get_permalink($d_stripe_general['direct_stripe_error_page']);
+                $e_url       = isset($d_stripe_general['direct_stripe_error_page']) ? $d_stripe_general['direct_stripe_error_page'] : '' ;
                 $error_query = isset($params['error_query']) ? $params['error_query'] : '';
 
                 if ( ! empty($error_query)) {
@@ -420,6 +366,59 @@ class ds_process_functions
                         'message' => $answer->getMessage()
                     );
                 }
+
+            }
+
+            wp_send_json($return);
+
+
+        } else {
+
+            // Add custom action before redirection
+            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id,
+                $user['user_id'], $token);
+
+            //Answer for ajax
+            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
+
+                $s_url         =  isset($d_stripe_general['direct_stripe_success_page']) ? $d_stripe_general['direct_stripe_success_page'] : '';
+                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
+
+                if ( ! empty($success_query)) {
+                    $pres_query = $success_query;
+                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+                    $s_query = array_combine($r[1], $r[2]);
+                }
+                //Add query arguments for redirection
+                if ( ! empty($s_query)) {
+                    $s_url = add_query_arg($s_query, $s_url);
+                }
+                //Redirection after success
+                $return = array('id' => '2', 'url' => $s_url);
+
+            } elseif ( ! empty($params['success_url']) ) {
+
+                $s_url         = isset($params['success_url']) ? $params['success_url'] : '';
+                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
+
+                if ( ! empty($success_query)) {
+                    $pres_query = $success_query;
+                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+                    $s_query = array_combine($r[1], $r[2]);
+                }
+                //Add query arguments for redirection
+                if ( ! empty($s_query)) {
+                    $s_url = add_query_arg($s_query, $s_url);
+                }
+                //Redirection after success
+                $return = array('id' => '2', 'url' => $s_url);
+
+            } else {
+
+                $return = array(
+                    'id'      => '1',
+                    'message' => $d_stripe_general['direct_stripe_success_message']
+                );
 
             }
 
