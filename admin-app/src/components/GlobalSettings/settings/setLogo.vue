@@ -62,8 +62,6 @@
     methods: {
       open_media_uploader_image: function () {
 
-        jQuery('#load-result').addClass('active');
-
         media_uploader = wp.media({
           title: this.text.wpMediaTitle,
           button: {
@@ -84,7 +82,7 @@
               el.removeClass('active')
             }, 3000)
           }
-
+          jQuery('#load-result').addClass('active');
           const req_url = SETTINGS + '?direct_stripe_logo_image=' + attachment.url + '&_dsnonce=' + nonce;
 
           axios
