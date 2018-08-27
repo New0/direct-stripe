@@ -127,6 +127,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         'instance'		        =>  !empty($instance) ? $instance : '',
         'ds-nonce'		        =>  !empty($ds_nonce) ? $ds_nonce : ''
     );
+    $params = apply_filters( 'ds_filter_params', $params );
 
 } else {
 
@@ -201,5 +202,6 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         'instance'		        =>  isset($instance) ? $instance : '',
         'ds-nonce'		        =>  isset($ds_nonce) ? $ds_nonce : ''
     );
+    $params = apply_filters( 'ds_filter_params', $params );
 
 }
