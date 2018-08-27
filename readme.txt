@@ -3,100 +3,98 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
-Tested up to: 4.9.6
-Stable tag: 2.1.7.2
+Tested up to: 4.9.8
+Stable tag: 2.1.7.3
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Stripe payment buttons for WordPress, Stripe modal form, custom styles, automated emails
-
-Stripe buttons. High conversion checkout without leaving your site! Payments, donations, subscriptions! Styling, T&C and automated emails options!
-
-
 == Description ==
-**Payments, donations and subscriptions!**
+#Simple Payments, Donations and Subscriptions using Stripe
 
-**High conversion Stripe checkout buttons, easily start charging without leaving your website.**
+###High conversion Stripe checkout buttons, easily start charging without users leaving your website, Styling, T&C and automated emails options!
 
-Automatically recognize email address of logged-in users
+#####Gutenberg ready since 2.1.0, simply insert Direct Stripe buttons using a block !!
 
-Customize the button looks.
+Features :
 
-!! Gutenberg ready, simply insert Direct Stripe buttons using a block !!
+- Automatically recognize email address of logged-in users
 
-GDPR / Terms and conditions checkbox option
+- Customize the button looks, use Stripe styles or your theme's button styles.
 
-Setup automated emails sent after a successful or error action on modal form submission
+- GDPR / Terms and conditions checkbox option
 
-**Set up landing pages after payments or errors**
+- Setup automated emails sent after a successful and failed transactions
 
-**Choose whether to log users and transactions in WordPress admin**
+- Set up landing/redirection pages or set the success/error text for transaction responses
 
-**Option to ask for the billing details**
+- Choose whether to log users and transactions in WordPress admin ( If used, this needs to apply GDPR )
 
-Ready for translations
+- Option to ask for the billing details
 
-###New Settings page with a per button settings panels
+- Marketers can easily add query data to redirections
+
+- Ready for translations
+
+####New Settings interface since 2.1.0, it includes button configuration from the settings page
 
 
 ###Global Setup
 
 Log in to your stripe's account or create one at https://dashboard.stripe.com/register
 
-=>Configure settings in admin panel :
-
-**-> Direct Stripe -> Settings**
+######=> Configure settings in WordPress administration panel at Direct Stripe -> Settings
 
 
-**->General settings :**
+#####General settings :
 
-    - Enter your Stripe API keys ( find them at https://dashboard.stripe.com/account/apikeys )
-    - Option for test mode / keys
-    - Set your stripe's account currency
-    - Choose a success and error pages
-    - Choose a logo for your Stripes modal forms
-
-
-**-> Styles Settings :**
-
-    - Choose to use custom buton
-    - Set custom button main colors
-    - Set custom button borders radius
-    - Choose to use a T&C checkbox
-    - Set texts and link to T&C pages
+* Enter your Stripe API keys ( find them at https://dashboard.stripe.com/account/apikeys )
+* Option for test mode / keys
+* Set your stripe's account currency
+* Choose a success and error pages
+* Choose a logo for your Stripes modal forms
 
 
-**-> Emails Settings :**
+#####Styles Settings :
 
-	- Choose to use automated emails for successful payments to admin
-    - Set Email subject and content
-    - Choose to use automated emails for successful payments to Stripe's user
-    - Set Email subject and content
-    - Choose to use automated emails for unsuccessful payments to admin
-    - Set Email subject and content
-    - Choose to use automated emails for unsuccessful payments to Stripe's user
-
-**-> Buttons Settings :**
-
-    - create buttons from a settings page
-    - Insert buttons in the content area with a simple button
-    - Direct Stripe is Gutenberg ready, a Gutenberg block is available for Gutenberg users
+- Choose to use custom buton
+- Set custom button main colors
+- Set custom button borders radius
+- Choose to use a T&C checkbox
+- Set texts and link to T&C pages
 
 
-Actions and Filter hooks available for developers <https://newo.me/direct-stripe-actions-and-filters-hooks/>
+#####Emails Settings :
+
+- Choose to use automated emails for successful payments to admin
+- Set Email subject and content
+- Choose to use automated emails for successful payments to Stripe's user
+- Set Email subject and content
+- Choose to use automated emails for unsuccessful payments to admin
+- Set Email subject and content
+- Choose to use automated emails for unsuccessful payments to Stripe's user
+
+#####Buttons Settings :
+
+- Create buttons from a settings page
+- Insert buttons in the content area with a simple button
+- Direct Stripe is Gutenberg ready, a Gutenberg block is available for Gutenberg users
+
+
+######Actions and Filter hooks available for developers <https://newo.me/direct-stripe-actions-and-filters-hooks/>***
 
 == Installation ==
 
-1.0 Upload the plugin files to the /wp-content/plugins/direct-stripe directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the /wp-content/plugins/direct-stripe directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress
+3. Log in to your stripe's account or create one at https://dashboard.stripe.com/register
+4. Configure settings and buttons in admin panel
 
-1.1 Activate the plugin through the 'Plugins' screen in WordPress
-
-Log in to your stripe's account or create one at https://dashboard.stripe.com/register
-
-=>Configure settings and buttons in admin panel
 
 
 == Changelog ==
+
+=2.1.7.3=
+*Really fix redirection issue (2.1.7.2 didn't push the fix)
 
 =2.1.7.2=
 * Fix Redirection bug
