@@ -12,7 +12,7 @@ class ds_process_functions
     /**
      * Set API Keys
      *
-     * @since 2.2.3
+     * @since 2.1.3
      */
     public static function api_keys( $d_stripe_general  ){
 
@@ -28,7 +28,7 @@ class ds_process_functions
     /**
      * Check if a stripe_id is registered or create Stripe user and return a $stripe ID
      *
-     * @since 2.2.3
+     * @since 2.1.3
      */
     public static function check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params ){
 
@@ -73,44 +73,22 @@ class ds_process_functions
                 }
             }
 
-        } else { // User doesn't exist
+        } else { // WP User doesn't exist
 
             $check_user = \Stripe\Customer::all( array( "email" => $email_address) );
 
             if ( !empty( $check_user->data ) ) {
                 $stripe_id = $check_user->data[0]->id;
-                $user_id = false;
                 $check_user->data[0]->source = $token;
                 $check_user->data[0]->save();
+
+                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role );
 
             } else {
                 // Create Stripe Customer
                 $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
-
-                if ( $d_stripe_general['direct_stripe_check_records'] !== true ) {
-                    // Generate the password and create the user
-                    $password = wp_generate_password(12, false);
-                    $userdata = array(
-                        'user_login' => $email_address,
-                        'user_pass'  => $password,
-                        'user_email' => $email_address,
-                        'nickname'   => $email_address
-                    );
-                    $user_id  = wp_insert_user($userdata);
-
-                    //Register Stripe ID if not testing
-                    if ($d_stripe_general['direct_stripe_checkbox_api_keys'] !== true) {
-                        update_user_meta($user_id, 'stripe_id', $stripe_id);
-                    }
-
-                    // Add User roles
-                    $user = new WP_User($user_id);
-                    //Update user roles
-                    self::ds_add_roles( $user, $custom_role );
-
-                } else {
-                    $user_id = false;
-                }
+                //  WP user
+                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role );
             }
 
         }
@@ -126,7 +104,7 @@ class ds_process_functions
     /**
      * Set logs data during transaction
      *
-     * @since 2.2.3
+     * @since 2.1.3
      */
     public static function logs_meta( $logsdata, $params ){
 
@@ -210,7 +188,7 @@ class ds_process_functions
     /**
      * Process emails
      *
-     * @since 2.2.3
+     * @since 2.1.3
      */
     public static function process_emails( $answer, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id ) {
 
@@ -309,7 +287,7 @@ class ds_process_functions
     /**
      * Process answer
      *
-     * @since 2.2.3
+     * @since 2.1.3
      */
     public static function process_answer( $answer, $button_id, $token, $params, $d_stripe_general, $user, $post_id ) {
 
@@ -430,7 +408,7 @@ class ds_process_functions
     /**
      * Add customer roles to user
      *
-     * @since 2.2.7
+     * @since 2.1.7
      */
     public static function  ds_add_roles( $user, $custom_role ) {
         if( user_can($user, 'stripe-user' ) === false ) {
@@ -444,7 +422,7 @@ class ds_process_functions
     /**
      * Create Stripe customer and set default source
      *
-     * @since 2.2.7
+     * @since 2.1.7
      */
     public static function  ds_create_stripe_customer( $email_address, $token ) {
         //Create Stripe customer
@@ -454,6 +432,41 @@ class ds_process_functions
         ));
 
         return $customer->id;
+    }
+
+    /**
+     * Create Stripe customer and set default source
+     *
+     * @since 2.1.8
+     */
+    public static function  ds_create_wp_user( $email_address, $d_stripe_general, $custom_role )
+    {
+        if ($d_stripe_general['direct_stripe_check_records'] !== true) {
+            // Generate the password and create the user
+            $password = wp_generate_password(12, false);
+            $userdata = array(
+                'user_login' => $email_address,
+                'user_pass'  => $password,
+                'user_email' => $email_address,
+                'nickname'   => $email_address
+            );
+            $user_id  = wp_insert_user($userdata);
+
+            //Register Stripe ID if not testing
+            if ($d_stripe_general['direct_stripe_checkbox_api_keys'] !== true) {
+                update_user_meta($user_id, 'stripe_id', $stripe_id);
+            }
+
+            // Add User roles
+            $user = new WP_User($user_id);
+            //Update user roles
+            self::ds_add_roles($user, $custom_role);
+
+        } else {
+            $user_id = false;
+        }
+
+        return $user_id;
     }
 
 }
