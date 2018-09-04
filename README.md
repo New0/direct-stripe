@@ -7,7 +7,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
 Tested up to: 4.9.8
-Stable tag: 2.1.7.3
+Stable tag: 2.1.8
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,11 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog ==
+
+=2.1.8=
+*Reset the loading spinner in the admin app
+*Fix create a wp user when a user is found in Stripe customers
+*Added the Filter Hook ds_filter_params 
 
 =2.1.7.3=
 *Really fix redirection issue (2.1.7.2 didn't push the fix)
