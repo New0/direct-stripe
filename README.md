@@ -7,7 +7,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
 Tested up to: 4.9.8
-Stable tag: 2.1.8
+Stable tag: 2.1.9
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,13 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 
 == Changelog ==
+
+=2.1.9=
+*Fix Gutenberg block since withApiData was deprecated
+*Added styles to buttons in the Gutenberg editor
+*Stripe API Update
+*Add $button_id to 'direct_stripe_charge_data' filter hook
+
 
 =2.1.8=
 *Reset the loading spinner in the admin app
