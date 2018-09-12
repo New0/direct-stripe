@@ -35,6 +35,9 @@ class dsScripts {
 
         wp_enqueue_script('direct-stripe-admin-script', DSCORE_URL . 'assets/admin/dist/js/main.js', array( 'jquery' ), ('1.0.0'), true );
 
+        wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'assets/public/dist/css/style.css' );
+        include( DSCORE_PATH . 'includes/styles.php');
+        wp_add_inline_style( 'direct-stripe-style', $custom_css );
     }
 
     /**
