@@ -75,7 +75,7 @@ class ds_process_transactions {
                 } else {
                     $chargerdata['customer'] = $user['stripe_id'];
                 }
-                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description );
+                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id );
                 $charge   = \Stripe\Charge::create( $chargerdata );
 
             } elseif( $params['type'] === 'subscription' ) {
