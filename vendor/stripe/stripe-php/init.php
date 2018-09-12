@@ -98,6 +98,8 @@ require(dirname(__FILE__) . '/lib/Product.php');
 require(dirname(__FILE__) . '/lib/Recipient.php');
 require(dirname(__FILE__) . '/lib/RecipientTransfer.php');
 require(dirname(__FILE__) . '/lib/Refund.php');
+require(dirname(__FILE__) . '/lib/Reporting/ReportRun.php');
+require(dirname(__FILE__) . '/lib/Reporting/ReportType.php');
 require(dirname(__FILE__) . '/lib/SKU.php');
 require(dirname(__FILE__) . '/lib/Sigma/ScheduledQueryRun.php');
 require(dirname(__FILE__) . '/lib/Source.php');
@@ -110,6 +112,7 @@ require(dirname(__FILE__) . '/lib/Topup.php');
 require(dirname(__FILE__) . '/lib/Transfer.php');
 require(dirname(__FILE__) . '/lib/TransferReversal.php');
 require(dirname(__FILE__) . '/lib/UsageRecord.php');
+require(dirname(__FILE__) . '/lib/UsageRecordSummary.php');
 
 // OAuth
 require(dirname(__FILE__) . '/lib/OAuth.php');

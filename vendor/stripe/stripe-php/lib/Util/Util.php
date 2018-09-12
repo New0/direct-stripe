@@ -113,6 +113,8 @@ abstract class Util
             \Stripe\Recipient::OBJECT_NAME => 'Stripe\\Recipient',
             \Stripe\RecipientTransfer::OBJECT_NAME => 'Stripe\\RecipientTransfer',
             \Stripe\Refund::OBJECT_NAME => 'Stripe\\Refund',
+            \Stripe\Reporting\ReportRun::OBJECT_NAME => 'Stripe\\Reporting\\ReportRun',
+            \Stripe\Reporting\ReportType::OBJECT_NAME => 'Stripe\\Reporting\\ReportType',
             \Stripe\SKU::OBJECT_NAME => 'Stripe\\SKU',
             \Stripe\Sigma\ScheduledQueryRun::OBJECT_NAME => 'Stripe\\Sigma\\ScheduledQueryRun',
             \Stripe\Source::OBJECT_NAME => 'Stripe\\Source',
@@ -125,6 +127,7 @@ abstract class Util
             \Stripe\Transfer::OBJECT_NAME => 'Stripe\\Transfer',
             \Stripe\TransferReversal::OBJECT_NAME => 'Stripe\\TransferReversal',
             \Stripe\UsageRecord::OBJECT_NAME => 'Stripe\\UsageRecord',
+            \Stripe\UsageRecordSummary::OBJECT_NAME => 'Stripe\\UsageRecordSummary',
         ];
         if (self::isList($resp)) {
             $mapped = [];

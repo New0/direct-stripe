@@ -39,7 +39,7 @@ if ( ! class_exists( 'DSBlock' ) ) :
                     'strings' => array(
                         'saved'             =>  __( 'Settings Saved', 'direct-stripe' ),
                         'error'             =>  __( 'Error', 'direct-stripe' ),
-                        'title'             =>  __( 'Stripe Payment button', 'direct-stripe' ),
+                        'title'             =>  __( 'Direct Stripe button', 'direct-stripe' ),
                         'contentDefault'    =>  __( 'Button not set', 'direct-stripe' ),
                         'loading'           =>  __( 'Loading Buttons', 'direct-stripe' ),
                         'noData'            =>  __( 'No Buttons found', 'direct-stripe' ),
@@ -50,7 +50,7 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
 
             if ( function_exists('register_block_type') ) {
-                register_block_type( 'direct-stripe/payment-button', array(
+                register_block_type( 'direct-stripe/direct-stripe-button', array(
                     'editor_script' => 'direct-stripe-block-script',
                     'script' => 'direct-stripe-block-script',
                     'render_callback' => array( $this, 'ds_render_block_buttons' ),
