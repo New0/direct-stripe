@@ -58,8 +58,18 @@ class ds_process_transactions {
                 $fee = \Stripe\InvoiceItem::create( $setupfeedata );
             }
 
-            //Charge
-            if( $params['type'] === 'payment' || $params['type'] === 'donation') {
+            if( $params['type'] === 'update' ) { //update
+                $subscription = false;
+                $charge = false;
+
+                $update_card = array(
+                    'user'  =>  $user,
+                    'text'  =>  $amount,
+                    'type'  =>  'card_update'
+                );
+
+
+            } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') { //Charge
 
                 $subscription = false;
 
@@ -78,7 +88,7 @@ class ds_process_transactions {
                 $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id );
                 $charge   = \Stripe\Charge::create( $chargerdata );
 
-            } elseif( $params['type'] === 'subscription' ) {
+            } elseif( $params['type'] === 'subscription' ) { //Subscriptions
 
                 $charge = false;
 
@@ -141,6 +151,8 @@ class ds_process_transactions {
             $answer = \ds_process_functions::process_answer( $charge, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } elseif( $subscription ) {
             $answer = \ds_process_functions::process_answer( $subscription, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
+        } elseif( $update_card ) {
+            $answer = \ds_process_functions::process_answer( $update_card, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } else {
             $answer = \ds_process_functions::process_answer( $e, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         }

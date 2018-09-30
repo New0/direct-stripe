@@ -296,6 +296,14 @@ class ds_process_functions
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'], $token);
 
+            if($answer['type'] === 'card_update') {
+                $return = array(
+                    'id'      => '1',
+                    'message' => $answer['text']
+                );
+                wp_send_json($return);
+            }
+
             //Answer for ajax
             if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
 

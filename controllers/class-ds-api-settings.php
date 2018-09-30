@@ -136,7 +136,7 @@ class DS_API_Settings {
         $example = json_decode( '{ 
             "text": "Example button", 
             "value": 0, 
-            "type":"Payment",
+            "type":"payment",
             "amount": "1000",
             "button_id": "MyButton", 
             "name": "Company Name"

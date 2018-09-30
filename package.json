@@ -13,15 +13,15 @@
     "autoprefixer": "^8.6.5",
     "graceful-fs": "*",
     "gulp": "*",
-    "gulp-autoprefixer": "*",
+    "gulp-autoprefixer": "^6.0.0",
     "gulp-cache": "*",
     "gulp-concat": "*",
     "gulp-imagemin": "*",
     "gulp-plumber": "*",
-    "gulp-postcss": "*",
-    "gulp-rename": "*",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "*",
-    "gulp-uglify": "*",
-    "postcss": "*"
+    "gulp-uglify": "^3.0.1",
+    "postcss": "^7.0.4"
   }
 }

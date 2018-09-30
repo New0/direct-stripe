@@ -39,6 +39,9 @@ if( $params['type'] === 'payment' ) {
     $amount     = base64_decode($pre_amount);
     $coupon     = isset($params['coupon']) ? $params['coupon'] : '';
     $setup_fee  = isset($params['setup_fee']) ? $params['setup_fee'] : '';
+} elseif( $params['type'] === 'update' ) {
+    $pre_amount = isset($params['amount']) ? $params['amount'] : '';
+    $amount    = base64_decode($pre_amount);
 }
 
 /****  Options ****/

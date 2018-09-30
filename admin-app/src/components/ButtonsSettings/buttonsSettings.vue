@@ -128,6 +128,7 @@
 
                 <v-flex md4 pa-3 xs12>
                     <label for="buttonType">{{ text.typeLabel }}</label>
+                    <p v-if="selectedButton.type === 'update'">{{ text.UpdateCardNotice}}</p>
                     <v-select
                             id="buttonType"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'type' , $event)"
@@ -141,6 +142,7 @@
                     <label v-if="selectedButton.type === 'payment'" for="buttonAmount">{{ text.valueAmountLabel }}</label>
                     <label v-if="selectedButton.type === 'subscription'" for="buttonAmount">{{ text.valueSubscriptionLabel }}</label>
                     <label v-if="selectedButton.type === 'donation'" for="buttonAmount">{{ text.valueDonationLabel }}</label>
+                    <label v-if="selectedButton.type === 'update'" for="buttonAmount">{{ text.valueUpdateLabel }}</label>
                     <v-text-field
                             id="buttonAmount"
                             v-on:change="pushButton( selectedButton.text, selectedButton, 'amount' , $event)"
@@ -514,6 +516,10 @@
           {
             'text': strings.dsDonationType,
             'value': 'donation'
+          },
+          {
+            'text': strings.dsUpdateType,
+            'value': 'update'
           }
         ],
         rules: {
@@ -574,7 +580,7 @@
           const defaultData = {
             text: newButton,
             value: buttonID,
-            type: "Payment",
+            type: "payment",
             amount: 1000,
             button_id: "MyButton",
             name: "Company Name",
