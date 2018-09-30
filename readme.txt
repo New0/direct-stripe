@@ -93,6 +93,12 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 
 == Changelog ==
 
+=2.1.10=
+*Add an Update card button type
+*Restored default button type to payment
+*Updated French translation
+*Stripe API Update
+
 =2.1.9=
 *Fix Gutenberg block since withApiData was deprecated
 *Added styles to buttons in the Gutenberg editor
