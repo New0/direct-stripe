@@ -1,11 +1,10 @@
 import '@babel/polyfill';
 import Vue from 'vue';
-//import './plugins/vuetify';
 import dsAdmin from './App.vue';
 import Vuetify from 'vuetify';
 import axios from 'axios';
 import 'vuetify/dist/vuetify.min.css';
-//import 'material-design-icons-iconfont/dist/material-design-icons.css';
+//import 'material-design-icons-iconfont/dist/material-design-icons.scss';
 
 Vue.use(Vuetify, {
   theme: {

@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
-"POT-Creation-Date: 2018-07-13 14:34+0200\n"
-"PO-Revision-Date: 2018-07-13 15:59+0200\n"
+"POT-Creation-Date: 2018-09-30 16:18+0200\n"
+"PO-Revision-Date: 2018-09-30 16:20+0200\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language-Team: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.9\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -38,8 +38,8 @@ msgid "Error"
 msgstr "Erreur"
 
 #: controllers/class-ds-block.php:42
-msgid "Stripe Payment button"
-msgstr "Bouton de paiement Stripe"
+msgid "Direct Stripe button"
+msgstr "Bouton Direct Stripe"
 
 #: controllers/class-ds-block.php:43
 msgid "Button not set"
@@ -114,16 +114,16 @@ msgid "Amount / Plan ID"
 msgstr "Montant / Plan ID"
 
 #: controllers/class-ds-cpt.php:82 includes/display-main-logs-data.php:65
-#: includes/localized-texts.php:30 includes/localized-texts.php:104
+#: includes/localized-texts.php:30 includes/localized-texts.php:106
 #: includes/register-settings.php:63 includes/register-settings.php:70
 msgid "Currency"
 msgstr "Devise"
 
-#: controllers/class-ds-cpt.php:83 includes/localized-texts.php:91
+#: controllers/class-ds-cpt.php:83 includes/localized-texts.php:93
 msgid "Type"
 msgstr "Type"
 
-#: controllers/class-ds-cpt.php:84 includes/localized-texts.php:103
+#: controllers/class-ds-cpt.php:84 includes/localized-texts.php:105
 msgid "Description"
 msgstr "Description"
 
@@ -183,11 +183,11 @@ msgstr "Tous les types d'entrées"
 msgid "Transaction type"
 msgstr "Type transaction"
 
-#: controllers/class-ds-scripts.php:56
+#: controllers/class-ds-scripts.php:59
 msgid "Please check the T&C"
 msgstr "Veuillez accepter les conditions"
 
-#: controllers/class-ds-scripts.php:57
+#: controllers/class-ds-scripts.php:60
 msgid "Please enter amount"
 msgstr "Veuillez saisir le montant"
 
@@ -703,10 +703,22 @@ msgid "This will permantly remove this Button"
 msgstr "Le bouton sera définitivement supprimé"
 
 #: includes/localized-texts.php:86
+msgid ""
+"Please make sure the button is not in use in the content, this action is NOT "
+"reversible."
+msgstr ""
+"Veuillez vous assurer que ce bouton n'est plus utilisé, cette action est "
+"irréversible."
+
+#: includes/localized-texts.php:87
+msgid "Do you want to delete this button ?"
+msgstr "Voulez-vous supprimer ce bouton ?"
+
+#: includes/localized-texts.php:88
 msgid "Main button Options"
 msgstr "Options du Bouton"
 
-#: includes/localized-texts.php:87
+#: includes/localized-texts.php:89
 msgid ""
 "L'argument \"type\" du bouton est requis, l'argument \"amount\" est requis "
 "pour les \"type\" payments et subscription."
@@ -714,35 +726,35 @@ msgstr ""
 "Argument « type » du bouton est requis, argument « montant » est requis pour "
 "les types \"Paiement\" et \"Souscription\""
 
-#: includes/localized-texts.php:88
+#: includes/localized-texts.php:90
 msgid "Select Button Type"
 msgstr "Sélectionnez le type de bouton"
 
-#: includes/localized-texts.php:89
+#: includes/localized-texts.php:91
 msgid "Currently selected"
 msgstr "Actuellement sélectionné"
 
-#: includes/localized-texts.php:90
+#: includes/localized-texts.php:92
 msgid "No Button Selected"
 msgstr "Aucun bouton sélectionné"
 
-#: includes/localized-texts.php:92
+#: includes/localized-texts.php:94
 msgid "Unique ID"
 msgstr "Identifiant unique"
 
-#: includes/localized-texts.php:93
+#: includes/localized-texts.php:95
 msgid "Amount"
 msgstr "Montant"
 
-#: includes/localized-texts.php:94
+#: includes/localized-texts.php:96
 msgid "Plan ID"
 msgstr "ID du plan"
 
-#: includes/localized-texts.php:95
+#: includes/localized-texts.php:97
 msgid "Donation amount is set by user"
 msgstr "Le montant du don est défini par l’utilisateur"
 
-#: includes/localized-texts.php:96
+#: includes/localized-texts.php:98
 msgid ""
 "For subscriptions, enter the pricing plan ID of a product, created in Stripe "
 "admin panel."
@@ -750,15 +762,15 @@ msgstr ""
 "Pour les abonnements, entrez l’ID de plan tarifaire d’un produit, créé dans "
 "l'admin Stripe."
 
-#: includes/localized-texts.php:97
+#: includes/localized-texts.php:99
 msgid "Add a CSS ID to the button"
 msgstr "Ajouter un ID CSS au bouton"
 
-#: includes/localized-texts.php:98
+#: includes/localized-texts.php:100
 msgid "Override general Options"
 msgstr "Prends le dessus des options générales"
 
-#: includes/localized-texts.php:99
+#: includes/localized-texts.php:101
 msgid ""
 "Set a shop name and product/service description. The label is the text of "
 "the button, the panel label is the text of the text of the modal form button"
@@ -767,19 +779,19 @@ msgstr ""
 "\"Label\" est le texte du bouton, le \"Panel Label est le texte du bouton du "
 "formulaire Stripe"
 
-#: includes/localized-texts.php:100
+#: includes/localized-texts.php:102
 msgid "Name"
 msgstr "Nom"
 
-#: includes/localized-texts.php:101
+#: includes/localized-texts.php:103
 msgid "Label"
 msgstr "Label"
 
-#: includes/localized-texts.php:102
+#: includes/localized-texts.php:104
 msgid "Panel Label"
 msgstr "Panel Label"
 
-#: includes/localized-texts.php:105
+#: includes/localized-texts.php:107
 msgid ""
 "Override the currency set under Direct Stripe -> setup , and use currency "
 "per button."
@@ -787,11 +799,11 @@ msgstr ""
 "Remplacez la devise définie sous Direct Stripe -> configuration et utilisez "
 "la devise par bouton."
 
-#: includes/localized-texts.php:106
+#: includes/localized-texts.php:108
 msgid "T&C"
 msgstr "Conditions générales"
 
-#: includes/localized-texts.php:107
+#: includes/localized-texts.php:109
 msgid ""
 "Ask for terms and conditions acceptation. T&C Text and link is editable "
 "under styles tab in Direct Stripe options page."
@@ -799,42 +811,42 @@ msgstr ""
 "Demander l’acceptation des conditions générales. Les texte et lien sont "
 "modifiables sous l’onglet styles."
 
-#: includes/localized-texts.php:108
+#: includes/localized-texts.php:110
 msgid "Billing"
 msgstr "Facturation"
 
-#: includes/localized-texts.php:109
+#: includes/localized-texts.php:111
 msgid "Ask for further billing information."
 msgstr "Demander les détails de facturation."
 
-#: includes/localized-texts.php:110
+#: includes/localized-texts.php:112
 msgid "Shipping"
 msgstr "Livraison"
 
-#: includes/localized-texts.php:111
+#: includes/localized-texts.php:113
 msgid "Ask for Shipping Data ( It always enable billing data fields)"
 msgstr ""
 "Demander les détails de livraison (elle active toujours les champs de "
 "données de facturation)"
 
-#: includes/localized-texts.php:112
+#: includes/localized-texts.php:114
 msgid "Remember me"
 msgstr "Se souvenir de moi"
 
-#: includes/localized-texts.php:113
+#: includes/localized-texts.php:115
 msgid "Allow Stripe to ask user if he wants his email address to be remembered"
 msgstr ""
 "Demander à l'utilisateur s’il veut que Stripe se souvienne de l'adresse email"
 
-#: includes/localized-texts.php:114
+#: includes/localized-texts.php:116
 msgid "Options for subscriptions"
 msgstr "Options pour les souscriptions"
 
-#: includes/localized-texts.php:115
+#: includes/localized-texts.php:117
 msgid "Coupon"
 msgstr "Coupon"
 
-#: includes/localized-texts.php:116
+#: includes/localized-texts.php:118
 msgid ""
 "Coupon are to be previously created in Stripe admin panel and allows you to "
 "create a discount/promotion, enter the coupon ID."
@@ -842,11 +854,11 @@ msgstr ""
 "Les coupons doivent être précédemment créés dans l' admin Stripe et vous "
 "permet de créer un rabais/promotionnel, saisissez l'ID du coupon."
 
-#: includes/localized-texts.php:117
+#: includes/localized-texts.php:119
 msgid "Setup Fee"
 msgstr "Frais de paramétrage"
 
-#: includes/localized-texts.php:118
+#: includes/localized-texts.php:120
 msgid ""
 "Setup Fee allows you to charge a one time fee on plan subscription "
 "activation. Enter the amount use it and charge, 500 means 5.00"
@@ -854,28 +866,28 @@ msgstr ""
 "Frais de paramétrage vous permet de facturer une taxe à l’activation d'une "
 "souscription. Entrer le montant comme suit 500 pour 5,00"
 
-#: includes/localized-texts.php:119
+#: includes/localized-texts.php:121
 msgid "Options for donations"
 msgstr "Options de dons"
 
-#: includes/localized-texts.php:120
+#: includes/localized-texts.php:122
 msgid "Zero-decimal currencies"
 msgstr "Devises zéro décimale"
 
-#: includes/localized-texts.php:121
+#: includes/localized-texts.php:123
 msgid "Set to \"Yes\" to let users input Zero decimal currencies values."
 msgstr ""
 "Permettre aux utilisateurs d’entrée des valeurs pour devises non-décimales.."
 
-#: includes/localized-texts.php:122
+#: includes/localized-texts.php:124
 msgid "Extra options"
 msgstr "Options supplémentaires"
 
-#: includes/localized-texts.php:123
+#: includes/localized-texts.php:125
 msgid "Capture"
 msgstr "Capturer"
 
-#: includes/localized-texts.php:124
+#: includes/localized-texts.php:126
 msgid ""
 "Set capture to \"No\" to manually create the charge from your Stripe admin "
 "panel within the next 7 days."
@@ -883,54 +895,54 @@ msgstr ""
 "Créer manuellement la charge dans l’administration Stripe dans les 7 "
 "prochains jours."
 
-#: includes/localized-texts.php:125
+#: includes/localized-texts.php:127
 msgid "Display amount"
 msgstr "Affichage du montant"
 
-#: includes/localized-texts.php:126
+#: includes/localized-texts.php:128
 msgid "Will display the amount in the modal form's button"
 msgstr ""
 "La valeur « No » pour cacher le montant dans le bouton formulaire modal"
 
-#: includes/localized-texts.php:127
+#: includes/localized-texts.php:129
 msgid "Custom Role"
 msgstr "Rôle personnalisé"
 
-#: includes/localized-texts.php:128
+#: includes/localized-texts.php:130
 msgid "Add a per button custom role to user"
 msgstr "Ajouter une par rôle personnalisé à l'utilisateur"
 
-#: includes/localized-texts.php:129
+#: includes/localized-texts.php:131
 msgid "Extra query arguments"
 msgstr "Arguments de requête supplémentaire"
 
-#: includes/localized-texts.php:130
+#: includes/localized-texts.php:132
 msgid "Success query arguments"
 msgstr "Arguments de requête de succès"
 
-#: includes/localized-texts.php:131
+#: includes/localized-texts.php:133
 msgid ""
 "Pass arguments after success button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
 msgstr ""
 "Passer des arguments après succès. Format : myarg1:myvalue1, myarg2:myvalue2"
 
-#: includes/localized-texts.php:132
+#: includes/localized-texts.php:134
 msgid "Error query arguments"
 msgstr "Arguments de requête erreur"
 
-#: includes/localized-texts.php:133
+#: includes/localized-texts.php:135
 msgid ""
 "Pass arguments after error button action. Format: myarg1:myvalue1,myarg2:"
 "myvalue2"
 msgstr ""
 "Passer des arguments après  erreur. Format : myarg1:myvalue1, myarg2:myvalue2"
 
-#: includes/localized-texts.php:134
+#: includes/localized-texts.php:136
 msgid "Per button success/error redirections"
 msgstr "Redirections de succès/erreur part bouton"
 
-#: includes/localized-texts.php:135
+#: includes/localized-texts.php:137
 msgid ""
 "Enter the entire http address \"http://domain.ext/success-or-error-page\" ; "
 "this will override redirections globally set."
@@ -938,31 +950,39 @@ msgstr ""
 "Entrez l’adresse http entière « http://domain.ext/success-or-error-page » ; "
 "Cela remplacera les redirections globalement défini."
 
-#: includes/localized-texts.php:136
+#: includes/localized-texts.php:138
 msgid "Success url"
 msgstr "URL de redirection après Succès"
 
-#: includes/localized-texts.php:137
+#: includes/localized-texts.php:139
 msgid "Error url"
 msgstr "URL de redirection après Erreur"
 
-#: includes/localized-texts.php:138
+#: includes/localized-texts.php:140
 msgid "Invalid e-mail."
 msgstr "Email invalide."
 
-#: includes/localized-texts.php:139
+#: includes/localized-texts.php:141
 msgid "Payment"
 msgstr "Paiement"
 
-#: includes/localized-texts.php:140
+#: includes/localized-texts.php:142
 msgid "Subscription"
 msgstr "Abonnement"
 
-#: includes/localized-texts.php:141
+#: includes/localized-texts.php:143
 msgid "Donation"
 msgstr "Don"
 
-#: includes/localized-texts.php:142
+#: includes/localized-texts.php:144
+msgid "Update card"
+msgstr "Mise à jour de carte"
+
+#: includes/localized-texts.php:145
+msgid "Enter the text to display after card update"
+msgstr "Texte à utiliser après la mise à jour de carte"
+
+#: includes/localized-texts.php:146
 msgid "No button set, please create a button"
 msgstr "Aucun bouton, veuillez créer un bouton"
 
@@ -1026,7 +1046,7 @@ msgstr "Frais d’installation "
 msgid "Security check issue"
 msgstr "Problème de vérification de sécurité"
 
-#: process/ds_retrieve_data.php:54
+#: process/ds_retrieve_data.php:57
 msgid "Direct Stripe "
 msgstr "Direct Stripe "
 
@@ -1045,6 +1065,9 @@ msgstr "Nicolas Figueira"
 #. Author URI of the plugin/theme
 msgid "https://newo.me"
 msgstr "https://newo.me"
+
+#~ msgid "Stripe Payment button"
+#~ msgstr "Bouton de paiement Stripe"
 
 #~ msgid "Button type argument was not recognized"
 #~ msgstr "Argument du type de bouton n’a pas été reconnu"
