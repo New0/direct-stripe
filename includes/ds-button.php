@@ -73,13 +73,15 @@ echo $str_before;
     echo $button;
 
     //T&C Check box condition
-    if( isset( $ds_button->tc ) && $ds_button->tc === true || isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === true && isset( $ds_button->tc ) && $ds_button->tc !== false ) { ?>
-        <br/><input type="checkbox" class="ds-conditions" id="ds-conditions-<?php echo $instance; ?>" required/>
+    if( isset( $ds_button->tc ) && $ds_button->tc === true || isset($d_stripe_styles['direct_stripe_use_tc_checkbox']) && $d_stripe_styles['direct_stripe_use_tc_checkbox'] === true && isset( $ds_button->tc ) && $ds_button->tc !== false ) {
+        $tc_cond = '<br/><input type="checkbox" class="ds-conditions" id="ds-conditions-' . $instance . '" required/>
         <label for="conditions">
-        <?php echo esc_attr($d_stripe_styles['direct_stripe_tc_text']); ?>
-            <a target="_blank" href="<?php echo esc_url($d_stripe_styles['direct_stripe_tc_link']); ?>"><?php  echo $d_stripe_styles['direct_stripe_tc_link_text']; ?></a>
-        </label><br />
-    <?php }
+        ' . esc_attr($d_stripe_styles['direct_stripe_tc_text']) . '
+            <a target="_blank" href="' . esc_url($d_stripe_styles['direct_stripe_tc_link']) . '">' . $d_stripe_styles['direct_stripe_tc_link_text'] . '</a>
+        </label><br />';
+        $tc_cond= apply_filters( 'direct_stripe_tc_conditions', $tc_cond, $button_id, $instance, $d_stripe_styles['direct_stripe_tc_text'], $d_stripe_styles['direct_stripe_tc_link'], $d_stripe_styles['direct_stripe_tc_link_text'] );
+        echo $tc_cond;
+    }
 
 //Closing Div
 $str_after = "</div>";
