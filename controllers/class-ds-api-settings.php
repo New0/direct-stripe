@@ -65,7 +65,8 @@ class DS_API_Settings {
         'direct_stripe_use_tc_checkbox'             =>  '',
         'direct_stripe_tc_text'                     =>  '',
         'direct_stripe_tc_link_text'                =>  '',
-        'direct_stripe_tc_link'                     =>  ''
+        'direct_stripe_tc_link'                     =>  '',
+        'direct_stripe_tc_error_bubble'             =>  ''
     );
     /**
      * Default emails settings

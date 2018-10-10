@@ -63,6 +63,20 @@
             </v-flex>
         </v-layout>
 
+        <v-layout row wrap>
+            <v-flex md2 xs12>
+                <label for="tcErrorBubble">{{text.tcErrorBubble}}</label>
+            </v-flex>
+            <v-flex md3 xs12>
+                <v-text-field
+                        v-on:change="saveSetting( 'direct_stripe_tc_error_bubble', $event )"
+                        v-bind:name="allData.direct_stripe_tc_error_bubble"
+                        v-bind:value="allData.direct_stripe_tc_error_bubble"
+                        id="tcErrorBubble"
+                ></v-text-field>
+            </v-flex>
+        </v-layout>
+
     </div>
 </template>
 

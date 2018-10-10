@@ -143,8 +143,9 @@ $texts = array(
         'dsDonationType'        =>  __( 'Donation', 'direct-stripe' ),
         'dsUpdateType'          =>  __( 'Update card', 'direct-stripe' ),
         'valueUpdateLabel'      =>  __( 'Enter the text to display after card update', 'direct-stripe' ),
-        'UpdateCardNotice'     =>  __( 'This will work when users have a Stripe ID, otherwise it will add a Customer and a Card', 'direct-stripe' ),
+        'UpdateCardNotice'      =>  __( 'This will work when users have a Stripe ID, otherwise it will add a Customer and a Card', 'direct-stripe' ),
         'emptyButtonsData'      =>  __( 'No button set, please create a button', 'direct-stripe' ),
+        'tcErrorBubble'         =>  __( 'Text used in error bubble when button is clicked before checking T&C')
     ),
     'dsCorePath'    => DSCORE_PATH,
     'dsCoreUrl'     => DSCORE_URL,
