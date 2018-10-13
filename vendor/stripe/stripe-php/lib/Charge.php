@@ -29,7 +29,6 @@ namespace Stripe;
  * @property string $order
  * @property mixed $outcome
  * @property bool $paid
- * @property string $payment_intent
  * @property string $receipt_email
  * @property string $receipt_number
  * @property bool $refunded

@@ -127,8 +127,6 @@ class CurlClient implements ClientInterface
             $opts = $this->defaultOptions;
         }
 
-        $params = Util\Util::objectsToIds($params);
-
         if ($method == 'get') {
             if ($hasFile) {
                 throw new Error\Api(
@@ -162,7 +160,7 @@ class CurlClient implements ClientInterface
         }
 
         // Create a callback to capture HTTP headers for the response
-        $rheaders = new Util\CaseInsensitiveArray();
+        $rheaders = [];
         $headerCallback = function ($curl, $header_line) use (&$rheaders) {
             // Ignore the HTTP request line (HTTP/1.1 200 OK)
             if (strpos($header_line, ":") === false) {

@@ -1,20 +1,5 @@
 # Changelog
 
-## 6.19.4 - 2018-10-11
-* [#534](https://github.com/stripe/stripe-php/pull/534) Fix PSR-4 autoloading for `\Stripe\FileUpload` class alias
-
-## 6.19.3 - 2018-10-09
-* [#530](https://github.com/stripe/stripe-php/pull/530) Add constants for `flow` (`FLOW_*`), `status` (`STATUS_*`) and `usage` (`USAGE_*`) on `\Stripe\Source`
-
-## 6.19.2 - 2018-10-08
-* [#531](https://github.com/stripe/stripe-php/pull/531) Store HTTP response headers in case-insensitive array
-
-## 6.19.1 - 2018-09-25
-* [#526](https://github.com/stripe/stripe-php/pull/526) Ignore null values in request parameters
-
-## 6.19.0 - 2018-09-24
-* [#523](https://github.com/stripe/stripe-php/pull/523) Add support for Stripe Terminal
-
 ## 6.18.0 - 2018-09-24
 * [#520](https://github.com/stripe/stripe-php/pull/520) Rename `\Stripe\FileUpload` to `\Stripe\File`
 

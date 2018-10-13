@@ -22,8 +22,6 @@ namespace Stripe;
  * @property mixed $shipping
  * @property Collection $sources
  * @property Collection $subscriptions
- * @property mixed $tax_info
- * @property mixed $tax_info_verification
  *
  * @package Stripe
  */

@@ -123,9 +123,6 @@ abstract class Util
             \Stripe\Subscription::OBJECT_NAME => 'Stripe\\Subscription',
             \Stripe\SubscriptionItem::OBJECT_NAME => 'Stripe\\SubscriptionItem',
             \Stripe\ThreeDSecure::OBJECT_NAME => 'Stripe\\ThreeDSecure',
-            \Stripe\Terminal\ConnectionToken::OBJECT_NAME => 'Stripe\\Terminal\\ConnectionToken',
-            \Stripe\Terminal\Location::OBJECT_NAME => 'Stripe\\Terminal\\Location',
-            \Stripe\Terminal\Reader::OBJECT_NAME => 'Stripe\\Terminal\\Reader',
             \Stripe\Token::OBJECT_NAME => 'Stripe\\Token',
             \Stripe\Topup::OBJECT_NAME => 'Stripe\\Topup',
             \Stripe\Transfer::OBJECT_NAME => 'Stripe\\Transfer',
@@ -203,38 +200,6 @@ abstract class Util
                 $result |= ord($a[$i]) ^ ord($b[$i]);
             }
             return ($result == 0);
-        }
-    }
-
-    /**
-     * Recursively goes through an array of parameters. If a parameter is an instance of
-     * ApiResource, then it is replaced by the resource's ID.
-     * Also clears out null values.
-     *
-     * @param mixed $h
-     * @return mixed
-     */
-    public static function objectsToIds($h)
-    {
-        if ($h instanceof \Stripe\ApiResource) {
-            return $h->id;
-        } elseif (static::isList($h)) {
-            $results = [];
-            foreach ($h as $v) {
-                array_push($results, static::objectsToIds($v));
-            }
-            return $results;
-        } elseif (is_array($h)) {
-            $results = [];
-            foreach ($h as $k => $v) {
-                if (is_null($v)) {
-                    continue;
-                }
-                $results[$k] = static::objectsToIds($v);
-            }
-            return $results;
-        } else {
-            return $h;
         }
     }
 
