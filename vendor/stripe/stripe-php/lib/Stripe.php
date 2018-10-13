@@ -22,7 +22,7 @@ class Stripe
     public static $connectBase = 'https://connect.stripe.com';
 
     // @var string The base URL for the Stripe API uploads endpoint.
-    public static $apiUploadBase = 'https://files.stripe.com';
+    public static $apiUploadBase = 'https://uploads.stripe.com';
 
     // @var string|null The version of the Stripe API to use for requests.
     public static $apiVersion = null;
@@ -52,7 +52,7 @@ class Stripe
     // @var float Initial delay between retries, in seconds
     private static $initialNetworkRetryDelay = 0.5;
 
-    const VERSION = '6.18.0';
+    const VERSION = '6.17.0';
 
     /**
      * @return string The API key used for requests.
