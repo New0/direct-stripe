@@ -54,9 +54,15 @@ class dsScripts {
 	    wp_register_script('direct-stripe-checkout-script',  '//checkout.stripe.com/checkout.js' );
         wp_register_script('direct-stripe-handler-script', DSCORE_URL . 'assets/public/dist/js/main.min.js', array('jquery' ), false, false);
 
+        $style_settings = get_option( 'direct_stripe_styles_settings' );
+        if( isset($style_settings['direct_stripe_tc_error_bubble']) && !empty($style_settings['direct_stripe_tc_error_bubble']) ){
+            $checkTC = $style_settings['direct_stripe_tc_error_bubble'];
+        } else {
+            $checkTC = 'Please check the T&C';
+        }
         wp_localize_script('direct-stripe-handler-script', 'direct_stripe_script_vars', array(
                 'text'  => array(
-                    'checkTC'       => __( 'Please check the T&C', 'direct-stripe' ),
+                    'checkTC'       => __( $checkTC, 'direct-stripe' ),
                     'enterAmount'   => __( 'Please enter amount', 'direct-stripe' ),
                 )
             )

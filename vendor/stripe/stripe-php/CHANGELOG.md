@@ -1,5 +1,29 @@
 # Changelog
 
+## 6.19.4 - 2018-10-11
+* [#534](https://github.com/stripe/stripe-php/pull/534) Fix PSR-4 autoloading for `\Stripe\FileUpload` class alias
+
+## 6.19.3 - 2018-10-09
+* [#530](https://github.com/stripe/stripe-php/pull/530) Add constants for `flow` (`FLOW_*`), `status` (`STATUS_*`) and `usage` (`USAGE_*`) on `\Stripe\Source`
+
+## 6.19.2 - 2018-10-08
+* [#531](https://github.com/stripe/stripe-php/pull/531) Store HTTP response headers in case-insensitive array
+
+## 6.19.1 - 2018-09-25
+* [#526](https://github.com/stripe/stripe-php/pull/526) Ignore null values in request parameters
+
+## 6.19.0 - 2018-09-24
+* [#523](https://github.com/stripe/stripe-php/pull/523) Add support for Stripe Terminal
+
+## 6.18.0 - 2018-09-24
+* [#520](https://github.com/stripe/stripe-php/pull/520) Rename `\Stripe\FileUpload` to `\Stripe\File`
+
+## 6.17.2 - 2018-09-18
+* [#522](https://github.com/stripe/stripe-php/pull/522) Fix warning when adding a new additional owner to an existing array
+
+## 6.17.1 - 2018-09-14
+* [#517](https://github.com/stripe/stripe-php/pull/517) Integer-index encode all sequential arrays
+
 ## 6.17.0 - 2018-09-05
 * [#514](https://github.com/stripe/stripe-php/pull/514) Add support for reporting resources
 
