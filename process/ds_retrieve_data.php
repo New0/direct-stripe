@@ -6,12 +6,10 @@
  * Time: 19:48
  */
 
-extract($_POST, EXTR_PREFIX_SAME, "post_");
+//Security check
+check_ajax_referer( 'direct-stripe-nonce','ds_nonce' );
 
-$nonce = isset($params['ds-nonce']) ? $params['ds-nonce'] : '';
-if ( ! wp_verify_nonce($nonce, 'direct-stripe-nonce')) {
-    wp_die(__('Security check issue', 'direct-stripe'));
-}
+extract($_POST, EXTR_PREFIX_SAME, "post_");
 
 $d_stripe_general = get_option('direct_stripe_general_settings');
 
