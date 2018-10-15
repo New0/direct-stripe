@@ -125,7 +125,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         'general_shipping'      =>  !empty($d_stripe_general['direct_stripe_shipping_infos_checkbox']) ? $d_stripe_general['direct_stripe_shipping_infos_checkbox'] : '',
         'general_rememberme'    =>  !empty($d_stripe_general['direct_stripe_rememberme_option_checkbox']) ? $d_stripe_general['direct_stripe_rememberme_option_checkbox'] : '',
         'instance'		        =>  !empty($instance) ? $instance : '',
-        'ds-nonce'		        =>  !empty($ds_nonce) ? $ds_nonce : ''
+        'ds_nonce'		        =>  !empty($ds_nonce) ? $ds_nonce : ''
     );
     $params = apply_filters( 'ds_filter_params', $params );
 
@@ -200,7 +200,7 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         'ajaxurl'               =>  isset($ajaxurl) ? $ajaxurl : '',
         'image'                 =>  isset($d_stripe_general['direct_stripe_logo_image']) ? $d_stripe_general['direct_stripe_logo_image'] : '',
         'instance'		        =>  isset($instance) ? $instance : '',
-        'ds-nonce'		        =>  isset($ds_nonce) ? $ds_nonce : ''
+        'ds_nonce'		        =>  isset($ds_nonce) ? $ds_nonce : ''
     );
     $params = apply_filters( 'ds_filter_params', $params );
 

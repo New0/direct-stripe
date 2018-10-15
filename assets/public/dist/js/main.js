@@ -152,6 +152,7 @@ function stripe_checkout(ds_values) {
                     'type': type,
                     'amount': amount,
                     'params': parobj,
+                    'ds_nonce':parobj.ds_nonce,
                     // Billing name and address
                     'billing_name': args.billing_name,
                     'billing_address_country': args.billing_address_country,
