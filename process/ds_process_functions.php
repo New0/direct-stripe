@@ -291,23 +291,15 @@ class ds_process_functions
      */
     public static function process_answer( $answer, $button_id, $token, $params, $d_stripe_general, $user, $post_id ) {
 
-        if( ! isset( $answer->object )  ) {
+        if( isset( $answer->jsonBody['error'] )  ) { //Transaction failed
 
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'], $token);
 
-            if($answer['type'] === 'card_update') {
-                $return = array(
-                    'id'      => '1',
-                    'message' => $answer['text']
-                );
-                wp_send_json($return);
-            }
-
             //Answer for ajax
-            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
+            if ( ! empty($params['error_url'])) {
 
-                $e_url       = isset($d_stripe_general['direct_stripe_error_page']) ? $d_stripe_general['direct_stripe_error_page'] : '' ;
+                $e_url       = isset($params['error_url']) ? $params['error_url'] : '';
                 $error_query = isset($params['error_query']) ? $params['error_query'] : '';
 
                 if ( ! empty($error_query)) {
@@ -322,9 +314,9 @@ class ds_process_functions
                 //Redirection after success
                 $return = array('id' => '2', 'url' => $e_url);
 
-            } elseif ( ! empty($params['error_url'])) {
+            } else if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
 
-                $e_url       = isset($params['error_url']) ? $params['error_url'] : '';
+                $e_url       = isset($d_stripe_general['direct_stripe_error_page']) ? $d_stripe_general['direct_stripe_error_page'] : '' ;
                 $error_query = isset($params['error_query']) ? $params['error_query'] : '';
 
                 if ( ! empty($error_query)) {
@@ -358,31 +350,14 @@ class ds_process_functions
             wp_send_json($return);
 
 
-        } else {
+        } else { //Transaction succeeded
 
             // Add custom action before redirection
             do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id,
                 $user['user_id'], $token);
 
             //Answer for ajax
-            if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
-
-                $s_url         =  isset($d_stripe_general['direct_stripe_success_page']) ? $d_stripe_general['direct_stripe_success_page'] : '';
-                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
-
-                if ( ! empty($success_query)) {
-                    $pres_query = $success_query;
-                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
-                    $s_query = array_combine($r[1], $r[2]);
-                }
-                //Add query arguments for redirection
-                if ( ! empty($s_query)) {
-                    $s_url = add_query_arg($s_query, $s_url);
-                }
-                //Redirection after success
-                $return = array('id' => '2', 'url' => $s_url);
-
-            } elseif ( ! empty($params['success_url']) ) {
+            if ( ! empty($params['success_url']) ) {
 
                 $s_url         = isset($params['success_url']) ? $params['success_url'] : '';
                 $success_query = isset($params['success_query']) ? $params['success_query'] : '';
@@ -399,11 +374,35 @@ class ds_process_functions
                 //Redirection after success
                 $return = array('id' => '2', 'url' => $s_url);
 
+
+            } else if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['success_url'])) {
+
+                $s_url         =  isset($d_stripe_general['direct_stripe_success_page']) ? $d_stripe_general['direct_stripe_success_page'] : '';
+                $success_query = isset($params['success_query']) ? $params['success_query'] : '';
+
+                if ( ! empty($success_query)) {
+                    $pres_query = $success_query;
+                    preg_match_all("/([^,= ]+):([^,= ]+)/", $pres_query, $r);
+                    $s_query = array_combine($r[1], $r[2]);
+                }
+                //Add query arguments for redirection
+                if ( ! empty($s_query)) {
+                    $s_url = add_query_arg($s_query, $s_url);
+                }
+                //Redirection after success
+                $return = array('id' => '2', 'url' => $s_url);
+
             } else {
+
+                if( $answer['type'] === "card_update" && !empty( $answer['text'] ) ) {
+                    $success_message = $answer['text'];
+                } else {
+                    $success_message = $d_stripe_general['direct_stripe_success_message'];
+                }
 
                 $return = array(
                     'id'      => '1',
-                    'message' => $d_stripe_general['direct_stripe_success_message']
+                    'message' => $success_message
                 );
 
             }
