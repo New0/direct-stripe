@@ -45,7 +45,12 @@ class ds_process_functions
                     $check_stripe_user->source = $token;
                     $check_stripe_user->save();
                 } else {
-                    $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+                    //Register Stripe ID if allowed and not testing
+                    if( $d_stripe_general['direct_stripe_check_records'] !== true && $d_stripe_general['direct_stripe_checkbox_api_keys'] !== true) {
+                        $stripe_id = self::ds_create_stripe_customer( $email_address, $token );       
+                    } else {
+                        $stripe_id = '';
+                    }
                 }
 
             }
