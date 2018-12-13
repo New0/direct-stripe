@@ -94,18 +94,17 @@ Log in to your stripe's account or create one at https://dashboard.stripe.com/re
 4. Configure settings and buttons in admin panel
 
 Minimal steps :
+
 - Copy API keys from the Stripe dashboard under Developers -> API keys
-- Paste Stripe API keys in your WordPress admin at Direct Stripe -> settings under the Global settings tab
-( I recommend copying live and test keys at once, then simply use the test option to use test keys).
 
-- Create a button under the Buttons Settings tab
-( the button requires at least a type and an amount in order to work => ( amount if the type is payment, Princing Plan ID if the type is a subscription and nothing if the type is Donation ) )
+- Paste Stripe API keys in your WordPress admin at Direct Stripe -> settings under the Global settings tab ( I recommend copying live and test keys at once, then simply use the test option to use test keys).
 
-- Go to the page/post you want to insert a button into and select the Direct Stripe Gutenberg Block, then select the button to display within the block.
-( in the case you already didn't switch to Gutenberg editor, use the Direct Stripe button on top of the editor to insert the button)
+- Create a button under the Buttons Settings tab ( the button requires at least a type and an amount in order to work => ( amount if the type is payment, Princing Plan ID if the type is a subscription and nothing if the type is Donation ) )
 
-You can also insert direct stripe buttons using a shortcode [direct-stripe id="ds-154185704588"] (useful for widgets and templates)
-(  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
+- Go to the page/post you want to insert a button into and select the Direct Stripe Gutenberg Block, then select the button to display within the block. ( in the case you use the old editor, use the Direct Stripe button on top of the editor to insert the button)
+
+You can also insert direct stripe buttons using a shortcode [direct-stripe id="ds-154185704588"] (useful for widgets and templates) (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
+
 
 == Changelog ==
 
