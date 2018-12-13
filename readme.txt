@@ -97,10 +97,10 @@ Minimal steps :
 - Create a button under the Buttons Settings tab
 ( the button requires at least a type and an amount in order to work => ( amount if the type is payment, Princing Plan ID if the type is a subscription and nothing if the type is Donation ) )
 
-- Go to the page/post you want to insert a button into and use the Direct Stripe button on top of the editor to insert the button
-( in the case you already switched to Gutenberg editor, I created a block that will help insert Direct Stripe buttons. )
+- Go to the page/post you want to insert a button into and select the Direct Stripe Gutenberg Block, then select the button to display within the block.
+( in the case you already didn't switch to Gutenberg editor, use the Direct Stripe button on top of the editor to insert the button)
 
-You can also insert direct stripe buttons in widget using the shortcode [direct-stripe id="ds-154185704588"]
+You can also insert direct stripe buttons using a shortcode [direct-stripe id="ds-154185704588"] (useful for widgets and templates)
 (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
 
 
