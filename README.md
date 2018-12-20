@@ -103,7 +103,7 @@ Minimal steps :
 
 - Go to the page/post you want to insert a button into and select the Direct Stripe Gutenberg Block, then select the button to display within the block. ( in the case you use the old editor, use the Direct Stripe button on top of the editor to insert the button)
 
-You can also insert direct stripe buttons using a shortcode [direct-stripe id="ds-154185704588"] (useful for widgets and templates) (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
+You can also insert direct stripe buttons using a shortcode [direct-stripe value="ds-154185704588"] (useful for widgets and templates) (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
 
 
 == Changelog ==
