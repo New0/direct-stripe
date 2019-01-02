@@ -64,8 +64,15 @@ class ds_process_functions
 
             } else {// User exists but doesn't have a Stripe ID
 
-                //Create Stripe customer
-                $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+				$check_user = \Stripe\Customer::all( array( "email" => $email_address) );
+
+				if(empty($check_user->data)){//Create Stripe customer
+					$stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+				} else { //Or update stripe customer
+					$stripe_id = $check_user->data[0]->id;
+					$check_user->data[0]->source = $token;
+					$check_user->data[0]->save();
+				}
 
                 //Register Stripe ID if Allowed
                 if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
