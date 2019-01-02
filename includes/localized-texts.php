@@ -6,6 +6,14 @@
  * Time: 11:25
  */
 
+$emailsIntroCode = '
+<h1>First title</h1>
+<h2>Second title</h2>
+<p>Paragraph</p>
+Extra line<br/>
+Other line
+';
+
 $texts = array(
     'strings' => array(
         'requiredField'         =>  __( 'Required field', 'direct-stripe' ),
@@ -145,7 +153,9 @@ $texts = array(
         'valueUpdateLabel'      =>  __( 'Enter the text to display after card update', 'direct-stripe' ),
         'UpdateCardNotice'      =>  __( 'This will work when users have a Stripe ID, otherwise it will add a Customer and a Card', 'direct-stripe' ),
         'emptyButtonsData'      =>  __( 'No button set, please create a button', 'direct-stripe' ),
-        'tcErrorBubble'         =>  __( 'Text used in error bubble when button is clicked before checking T&C')
+        'tcErrorBubble'         =>  __( 'Text used in error bubble when button is clicked before checking T&C', 'direct-stripe' ),
+		'emailsIntro'			=>  __( 'Emails content textareas support html:', 'direct-stripe' ),
+		'emailsIntroCode'		=>  __( $emailsIntroCode, 'direct-stripe'),
     ),
     'dsCorePath'    => DSCORE_PATH,
     'dsCoreUrl'     => DSCORE_URL,
