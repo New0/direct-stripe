@@ -49,6 +49,7 @@ require(dirname(__FILE__) . '/lib/ApiOperations/Update.php');
 
 // Plumbing
 require(dirname(__FILE__) . '/lib/ApiResponse.php');
+require(dirname(__FILE__) . '/lib/RequestTelemetry.php');
 require(dirname(__FILE__) . '/lib/StripeObject.php');
 require(dirname(__FILE__) . '/lib/ApiRequestor.php');
 require(dirname(__FILE__) . '/lib/ApiResource.php');
@@ -56,6 +57,7 @@ require(dirname(__FILE__) . '/lib/SingletonApiResource.php');
 
 // Stripe API Resources
 require(dirname(__FILE__) . '/lib/Account.php');
+require(dirname(__FILE__) . '/lib/AccountLink.php');
 require(dirname(__FILE__) . '/lib/AlipayAccount.php');
 require(dirname(__FILE__) . '/lib/ApplePayDomain.php');
 require(dirname(__FILE__) . '/lib/ApplicationFee.php');
@@ -67,6 +69,7 @@ require(dirname(__FILE__) . '/lib/BitcoinReceiver.php');
 require(dirname(__FILE__) . '/lib/BitcoinTransaction.php');
 require(dirname(__FILE__) . '/lib/Card.php');
 require(dirname(__FILE__) . '/lib/Charge.php');
+require(dirname(__FILE__) . '/lib/CheckoutSession.php');
 require(dirname(__FILE__) . '/lib/Collection.php');
 require(dirname(__FILE__) . '/lib/CountrySpec.php');
 require(dirname(__FILE__) . '/lib/Coupon.php');
@@ -95,13 +98,17 @@ require(dirname(__FILE__) . '/lib/OrderItem.php');
 require(dirname(__FILE__) . '/lib/OrderReturn.php');
 require(dirname(__FILE__) . '/lib/PaymentIntent.php');
 require(dirname(__FILE__) . '/lib/Payout.php');
+require(dirname(__FILE__) . '/lib/Person.php');
 require(dirname(__FILE__) . '/lib/Plan.php');
 require(dirname(__FILE__) . '/lib/Product.php');
+require(dirname(__FILE__) . '/lib/Radar/ValueList.php');
+require(dirname(__FILE__) . '/lib/Radar/ValueListItem.php');
 require(dirname(__FILE__) . '/lib/Recipient.php');
 require(dirname(__FILE__) . '/lib/RecipientTransfer.php');
 require(dirname(__FILE__) . '/lib/Refund.php');
 require(dirname(__FILE__) . '/lib/Reporting/ReportRun.php');
 require(dirname(__FILE__) . '/lib/Reporting/ReportType.php');
+require(dirname(__FILE__) . '/lib/Review.php');
 require(dirname(__FILE__) . '/lib/SKU.php');
 require(dirname(__FILE__) . '/lib/Sigma/ScheduledQueryRun.php');
 require(dirname(__FILE__) . '/lib/Source.php');
@@ -124,4 +131,5 @@ require(dirname(__FILE__) . '/lib/OAuth.php');
 
 // Webhooks
 require(dirname(__FILE__) . '/lib/Webhook.php');
+require(dirname(__FILE__) . '/lib/WebhookEndpoint.php');
 require(dirname(__FILE__) . '/lib/WebhookSignature.php');

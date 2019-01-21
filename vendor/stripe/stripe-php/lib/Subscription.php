@@ -13,10 +13,11 @@ namespace Stripe;
  * @property bool $cancel_at_period_end
  * @property int $canceled_at
  * @property int $created
- * @property int current_period_end
- * @property int current_period_start
+ * @property int $current_period_end
+ * @property int $current_period_start
  * @property string $customer
  * @property int $days_until_due
+ * @property string $default_source
  * @property Discount $discount
  * @property int $ended_at
  * @property Collection $items

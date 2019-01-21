@@ -14,6 +14,7 @@ namespace Stripe;
  * @property string $application
  * @property int $application_fee
  * @property int $canceled_at
+ * @property string $cancellation_reason
  * @property string $capture_method
  * @property Collection $charges
  * @property string $client_secret
@@ -22,6 +23,7 @@ namespace Stripe;
  * @property string $currency
  * @property string $customer
  * @property string $description
+ * @property mixed $last_payment_error
  * @property bool $livemode
  * @property StripeObject $metadata
  * @property mixed $next_source_action
@@ -57,7 +59,7 @@ class PaymentIntent extends ApiResource
     public function cancel($params = null, $options = null)
     {
         $url = $this->instanceUrl() . '/cancel';
-        list($response, $opts) = $this->_request('post', $url);
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;
     }
@@ -71,7 +73,7 @@ class PaymentIntent extends ApiResource
     public function capture($params = null, $options = null)
     {
         $url = $this->instanceUrl() . '/capture';
-        list($response, $opts) = $this->_request('post', $url);
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;
     }
@@ -85,7 +87,7 @@ class PaymentIntent extends ApiResource
     public function confirm($params = null, $options = null)
     {
         $url = $this->instanceUrl() . '/confirm';
-        list($response, $opts) = $this->_request('post', $url);
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;
     }
