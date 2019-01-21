@@ -15,7 +15,7 @@ do_action( 'direct_stripe_after_script_tag' );
 do_action( 'direct_stripe_after_form' );
 
 //Spinner for ajax process
-$begin = '<div id="loadingDS" style="display:none;">';
+$begin = '<div id="loadingDS-' . $instance . '" style="display:none;">';
 $text = '<h2 class="loadingDS" data-text="' . __('Processing', 'direct-stripe') . '">' . __('Processing', 'direct-stripe') . '</h2>';
 $dots = '<img src="' . DSCORE_URL . 'assets/public/dist/img/three-dots.svg" width="60" alt="">';
 $end = '</div>';

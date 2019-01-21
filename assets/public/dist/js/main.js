@@ -141,8 +141,9 @@ function stripe_checkout(ds_values) {
             }
 
             var ds_answer_input = "#ds-answer-" + parobj.instance;
+            var ds_loading_span = "#loadingDS-" + parobj.instance;
 
-            jQuery("#loadingDS").show();
+            jQuery(ds_loading_span).show();
             jQuery.post(
                 ds_values.ajaxurl,
                 {
@@ -173,7 +174,7 @@ function stripe_checkout(ds_values) {
                 function (data) {
                     switch (data.id) {
                         case "1":
-                            jQuery("#loadingDS").hide();
+                            jQuery(ds_loading_span).hide();
                             jQuery(ds_answer_input).addClass("success");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
@@ -182,11 +183,11 @@ function stripe_checkout(ds_values) {
                              }, 10000);
                             break;
                         case "2":
-                            jQuery("#loadingDS").hide();
+                            jQuery(ds_loading_span).hide();
                             window.location.assign(data.url);
                             break;
                         default:
-                            jQuery("#loadingDS").hide();
+                            jQuery(ds_loading_span).hide();
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
