@@ -1,14 +1,14 @@
 /****************  Spinner **********************/
-#loadingDS {
+.loadingDS-container {
   position: absolute;
   z-index: 1111111111;
   font-size: 1em;
   padding: 1em;
   background-color: #fff;
-  transform: translateY(-55%);
+  transform: translateY(-100%);
 
   img {
-    margin-top: 4em;
+    margin-top: 5em;
     margin-left: 0.5em;
     display: inline-block;
     float: left;

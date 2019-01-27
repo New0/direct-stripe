@@ -3,8 +3,8 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
-Tested up to: 5.0
-Stable tag: 2.1.11
+Tested up to: 5.0.3
+Stable tag: 2.1.12
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,14 @@ You can also insert direct stripe buttons using a shortcode [direct-stripe value
 
 
 == Changelog ==
+
+=2.1.12=
+*Add filter to disable Gutenberg block (in case of page builder use like cornerstone)
+*Add notice for Display Amount working only for Payment and Donation buttons types.
+*Make the processing animation dependant on the button
+*Update Stripe API
+
+More about Actions and filter hooks available at https://newo.me/direct-stripe-actions-and-filters-hooks/
 
 =2.1.11=
 *Fix Fix update customer when WP user exists but Stripe ID isn't stored

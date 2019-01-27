@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name: Direct Stripe
  * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
- * Version:     2.1.11
+ * Version:     2.1.12
  * Author:      Nicolas Figueira
  * Author URI:  https://newo.me
  * Text Domain: direct-stripe
@@ -71,7 +71,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          * @var string
          */
-        const version = '2.1.11';
+        const version = '2.1.12';
 
         /**
          * Plugin Textdomain.
@@ -142,6 +142,17 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 		    return $links;
 	    }
 
+		/**
+		 * Filter the Gutenberg Block
+		 *
+		 * @since 2.1.12
+		 *
+		 * @return bool $enqueue Whether to enqueue block or not.
+		 */
+		public static function should_load_gutenberg_block(){
+			return apply_filters( 'direct_stripe_should_load_gutenberg_block', true );
+		}
+
 
         /**
          * Include required core files.
@@ -149,10 +160,13 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          */
         public function includes() {
+			$ds_load_block = self::should_load_gutenberg_block();
             include_once( 'controllers/class-ds-api-settings.php' );
             include_once( 'controllers/class-ds-api.php' );
             include_once( 'controllers/class-ds-scripts.php' );
-            include_once( 'controllers/class-ds-block.php' );
+            if($ds_load_block){
+				include_once( 'controllers/class-ds-block.php' );
+			}
             include_once( 'controllers/class-ds-admin.php' );
             include_once( 'controllers/class-ds-button.php' );
             include_once( 'controllers/class-ds-cpt.php' );

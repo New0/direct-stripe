@@ -49,6 +49,7 @@
   -moz-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
+  transform: translateY(-100%);
 
   &.error {
     color: #fff;
