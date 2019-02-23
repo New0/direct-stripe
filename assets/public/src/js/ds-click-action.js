@@ -89,7 +89,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     if( billing !== false ) {
       handler.open({
         'key': ds_values.key,
-        'locale': 'auto',
+        'locale': ds_values.locale,
         'image': ds_values.image,
         'name': ds_values.name,
         'description': ds_values.description,
@@ -104,7 +104,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     } else {
       handler.open({
         'key': ds_values.key,
-        'locale': 'auto',
+        'locale': ds_values.locale,
         'image': ds_values.image,
         'name': ds_values.name,
         'description': ds_values.description,

@@ -1,4 +1,4 @@
-import '@babel/polyfill';
+import '@babel/polyfill/noConflict';
 import Vue from 'vue';
 import dsAdmin from './App.vue';
 import Vuetify from 'vuetify';
