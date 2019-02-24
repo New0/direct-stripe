@@ -284,6 +284,18 @@
                         <span>{{ text.hintButtonRm}}</span>
                     </v-tooltip>
                 </v-flex>
+                <v-flex md2 pa-3 xs12>
+                    <v-select
+                            id="dsButtonLocale"
+                            v-on:change="pushButton( selectedButton.text, selectedButton, 'locale' , $event)"
+                            v-bind:items="locales"
+                            v-bind:label="text.buttonLocale"
+                            v-model="selectedButton.locale"
+                            class=""
+                            single-line
+                            :hint="text.hintButtonLocale"
+                    ></v-select>
+                </v-flex>
 
             </v-layout>
 
@@ -531,7 +543,10 @@
         },
         currencies: [
           'USD', 'EUR', 'GBP','AUD', 'CAD', 'JPY', 'DKK', 'NOK', 'SEK', 'SGD', 'HKD', 'CHF', 'MXN', 'BRL', 'NZD'
-        ]
+        ],
+          locales: [
+          	'zh', 'da', 'nl', 'en', 'fi', 'fr', 'de', 'it', 'ja', 'no', 'es', 'sv'
+          ]
       }
     },
     mounted () {
@@ -578,30 +593,27 @@
           let buttonID = "ds-" + ID();
 
           const defaultData = {
-            text: newButton,
-            value: buttonID,
-            type: "payment",
-            amount: 1000,
-            button_id: "MyButton",
-            name: "Company Name",
-            description: "Description",
-            label: "Payment",
-            panellabel: "Confirm payment",
-            coupon: "",
-            setup_fee: "",
-            zero_decimal: false,
-            capture: true,
-            billing: false,
-            shipping: false,
-            tc: false,
-            rememberme: false,
-            display_amount: false,
-            currency: "USD",
-            custom_role: "",
-            success_query: "",
-            error_query: "",
-            success_url: "",
-            error_url: ""
+                text: newButton,
+                value: buttonID,
+                type: "payment",
+                amount: 1000,
+                button_id: "MyButton",
+                name: "Company Name",
+                description: "Description",
+                label: "Payment",
+                panellabel: "Confirm payment",
+                coupon: "",
+                setup_fee: "",
+                zero_decimal: false,
+                capture: true,
+                billing: false,
+                shipping: false,
+                tc: false,
+                rememberme: false,
+                display_amount: false,
+                currency: "USD",
+                locale: "auto",
+
           };
           this.buttons.push( defaultData );
 

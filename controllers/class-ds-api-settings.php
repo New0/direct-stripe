@@ -154,6 +154,7 @@ class DS_API_Settings {
             "rememberme": false,
             "display_amount": false,
             "currency": "USD",
+            "locale": "auto",
             "custom_role": "",
             "success_query": "",
             "error_query": "",
