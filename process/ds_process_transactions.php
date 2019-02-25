@@ -59,6 +59,7 @@ class ds_process_transactions {
             }
 
             if( $params['type'] === 'update' ) { //update
+            	
                 $subscription = false;
                 $charge = false;
 
@@ -72,6 +73,7 @@ class ds_process_transactions {
             } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') { //Charge
 
                 $subscription = false;
+				$update_card  = false;
 
                 $chargerdata = array(
                     'amount'        => $amount,
@@ -91,6 +93,7 @@ class ds_process_transactions {
             } elseif( $params['type'] === 'subscription' ) { //Subscriptions
 
                 $charge = false;
+				$update_card  = false;
 
                 // create new subscription to plan
                 $subscriptiondata = array(
