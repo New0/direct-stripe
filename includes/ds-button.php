@@ -58,7 +58,7 @@ echo $str_before;
         $ds_button_class = 'stripe-button-ds direct-stripe-button-id ';
      }
     //T&C Check box condition
-    if( isset( $ds_button->tc ) && $ds_button->tc !== false ) {
+    if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false && $ds_button->tc !== "false" && $ds_button->tc !== "0") {
         $ds_button_class .= ' ds-check-tc';
     }
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
@@ -73,7 +73,7 @@ echo $str_before;
     echo $button;
 
     //T&C Check box condition
-    if( isset( $ds_button->tc ) && $ds_button->tc !== false ) {
+    if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false && $ds_button->tc !== "false" && $ds_button->tc !== "0") {
         $tc_cond = '<br/><input type="checkbox" class="ds-conditions" id="ds-conditions-' . $instance . '" required/>
         <label for="conditions">
         ' . esc_attr($d_stripe_styles['direct_stripe_tc_text']) . '
