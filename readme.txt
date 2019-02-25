@@ -107,7 +107,7 @@ You can also insert direct stripe buttons using a shortcode `[direct-stripe valu
 =2.1.13=
 * Fix old shortcode T&C condition issue
 * Add option for locale language in button settings
-*
+* Declare $update_button when not updating button
 
 =2.1.12=
 * Add filter to disable Gutenberg block (in case of page builder use like cornerstone)
