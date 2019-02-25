@@ -3,8 +3,8 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
-Tested up to: 5.0.3
-Stable tag: 2.1.12
+Tested up to: 5.1.0
+Stable tag: 2.1.13
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,54 +99,59 @@ Minimal steps :
 
 - Go to the page/post you want to insert a button into and select the Direct Stripe Gutenberg Block, then select the button to display within the block. ( in the case you use the old editor, use the Direct Stripe button on top of the editor to insert the button)
 
-You can also insert direct stripe buttons using a shortcode [direct-stripe value="ds-154185704588"] (useful for widgets and templates) (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
+You can also insert direct stripe buttons using a shortcode `[direct-stripe value="ds-154185704588"]` (useful for widgets and templates) (  ds-1541857045880 being the unique ID of the button created at Direct Stripe settings under the Buttons Settings tab )
 
 
 == Changelog ==
 
+=2.1.13=
+* Fix old shortcode T&C condition issue
+* Add option for locale language in button settings
+*
+
 =2.1.12=
-*Add filter to disable Gutenberg block (in case of page builder use like cornerstone)
-*Add notice for Display Amount working only for Payment and Donation buttons types.
-*Make the processing animation dependant on the button
-*Update Stripe API
+* Add filter to disable Gutenberg block (in case of page builder use like cornerstone)
+* Add notice for Display Amount working only for Payment and Donation buttons types.
+* Make the processing animation dependant on the button
+* Update Stripe API
 
 More about Actions and filter hooks available at https://newo.me/direct-stripe-actions-and-filters-hooks/
 
 =2.1.11=
-*Fix Fix update customer when WP user exists but Stripe ID isn't stored
-*Admin App Emails Intro Notice
+* Fix Fix update customer when WP user exists but Stripe ID isn't stored
+* Admin App Emails Intro Notice
 
 =2.1.10.3=
-*Fix testing with user logged in that has a stripe ID set that created issues
+* Fix testing with user logged in that has a stripe ID set that created issues
 
 =2.1.10.2=
-*Fix transaction failing issues
-*Tested up to 5.0.0
+* Fix transaction failing issues
+* Tested up to 5.0.0
 
 =2.1.10.1=
 *Rewrote the nonce verification for Ajax
 
 =2.1.10=
-*Added an Update card button type
-*Added the T&C error bubble text as an option in styles settings panel
-*Added a T&C filter hook 'direct_stripe_tc_conditions'
-*Restored default button type to payment
-*Updated French translation
-*Stripe API Update
+* Added an Update card button type
+* Added the T&C error bubble text as an option in styles settings panel
+* Added a T&C filter hook 'direct_stripe_tc_conditions'
+* Restored default button type to payment
+* Updated French translation
+* Stripe API Update
 
 =2.1.9=
-*Fix Gutenberg block since withApiData was deprecated
-*Added styles to buttons in the Gutenberg editor
-*Stripe API Update
-*Add $button_id to 'direct_stripe_charge_data' filter hook
+* Fix Gutenberg block since withApiData was deprecated
+* Added styles to buttons in the Gutenberg editor
+* Stripe API Update
+* Add $button_id to 'direct_stripe_charge_data' filter hook
 
 =2.1.8=
-*Reset the loading spinner in the admin app
-*Fix create a wp user when a user is found in Stripe customers
-*Added the Filter Hook ds_filter_params 
+* Reset the loading spinner in the admin app
+* Fix create a wp user when a user is found in Stripe customers
+* Added the Filter Hook ds_filter_params
 
 =2.1.7.3=
-*Really fix redirection issue (2.1.7.2 didn't push the fix)
+* Really fix redirection issue (2.1.7.2 didn't push the fix)
 
 =2.1.7.2=
 * Fix Redirection bug
