@@ -29,7 +29,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         if( ds_values.zero_decimal === "1" || ds_values.zero_decimal === "true"  ) {
           var amount = parseInt(ds_values.original_amount);
         } else {
-          var amount = parseInt(ds_values.original_amount) * 100;
+			var amount = ds_values.original_amount * 100;
         }
     } else {
         var amount = 0;
