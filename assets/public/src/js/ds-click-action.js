@@ -2,16 +2,21 @@
  * Created by nfigueira on 10/05/2017.
  */
 
-jQuery( "#donationvalue" ).keyup(function(e) {
+function setDonationAmount(){
 
-  var instance = jQuery( this ).data("donation-input-id");
-  var ds_values = window[instance];
+	jQuery( ".donationvalue" ).each( function(){
+		var instance = jQuery(this).data("donation-input-id");
+		var donation = this.value;
+		var ds_values = window[instance];
+		ds_values.original_amount = donation;
+    });
 
-  ds_values.original_amount = e.target.value;
+}
 
-});
 
 jQuery(".direct-stripe-button-id").on("click", function (e) {
+
+	setDonationAmount();
 
     var instance = jQuery( this ).data("id");
     var ds_values = window[instance];
@@ -27,9 +32,9 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         var amount = parseInt(ds_values.original_amount);
     } else if( ds_values.display_amount !== "" && ds_values.type === "donation" ) {
         if( ds_values.zero_decimal === "1" || ds_values.zero_decimal === "true"  ) {
-          var amount = parseInt(ds_values.original_amount);
+			var amount = parseInt(ds_values.original_amount);
         } else {
-			var amount = ds_values.original_amount * 100;
+			var amount = parseFloat(ds_values.original_amount * 100);
         }
     } else {
         var amount = 0;
@@ -73,7 +78,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     }
 
     //Check donation amount is fulfilled
-    if (jQuery(this).hasClass("ds-check-donation") && !jQuery("#donationvalue").val() && !jQuery("#donationvalue").val().match(numbers)) {
+    if (jQuery(this).hasClass("ds-check-donation") && !jQuery("#donationvalue-" + instance).val() && !jQuery("#donationvalue-" + instance).val().match(numbers)) {
 
         jQuery(ds_answer_input).html( direct_stripe_script_vars.text.enterAmount + "<br/>");
         jQuery(ds_answer_input).addClass("error");

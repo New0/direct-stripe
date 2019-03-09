@@ -11,7 +11,7 @@ function stripe_checkout(ds_values) {
 
             var type = parobj["type"];
             if (type === "donation") {
-                var amount = jQuery("#donationvalue").val();
+                var amount = jQuery("#donationvalue-" + parobj.instance).val();
             } else {
                 var amount = parobj.amount;
             }
