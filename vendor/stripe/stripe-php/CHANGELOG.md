@@ -1,5 +1,29 @@
 # Changelog
 
+## 6.30.5 - 2019-03-11
+* [#607](https://github.com/stripe/stripe-php/pull/607) Correctly handle case where a metadata key is called `metadata`
+
+## 6.30.4 - 2019-02-27
+* [#602](https://github.com/stripe/stripe-php/pull/602) Add `subscription_schedule` to `Subscription` for PHPDoc.
+
+## 6.30.3 - 2019-02-26
+* [#603](https://github.com/stripe/stripe-php/pull/603) Improve PHPDoc on the `Source` object to cover all types of Sources currently supported.
+
+## 6.30.2 - 2019-02-25
+* [#601](https://github.com/stripe/stripe-php/pull/601) Fix PHPDoc across multiple resources and add support for new events.
+
+## 6.30.1 - 2019-02-16
+* [#599](https://github.com/stripe/stripe-php/pull/599) Fix PHPDoc for `SubscriptionSchedule` and `SubscriptionScheduleRevision`
+
+## 6.30.0 - 2019-02-12
+* [#590](https://github.com/stripe/stripe-php/pull/590) Add support for `SubscriptionSchedule` and `SubscriptionScheduleRevision`
+
+## 6.29.3 - 2019-01-31
+* [#592](https://github.com/stripe/stripe-php/pull/592) Some more PHPDoc fixes
+
+## 6.29.2 - 2019-01-31
+* [#591](https://github.com/stripe/stripe-php/pull/591) Fix PHPDoc for nested resources
+
 ## 6.29.1 - 2019-01-25
 * [#566](https://github.com/stripe/stripe-php/pull/566) Fix dangling message contents
 * [#586](https://github.com/stripe/stripe-php/pull/586) Don't overwrite `CURLOPT_HTTP_VERSION` option
