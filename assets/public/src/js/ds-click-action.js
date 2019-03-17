@@ -2,18 +2,15 @@
  * Created by nfigueira on 10/05/2017.
  */
 
-jQuery( "#donationvalue" ).keyup(function(e) {
-
-  var instance = jQuery( this ).data("donation-input-id");
-  var ds_values = window[instance];
-
-  ds_values.original_amount = e.target.value;
-
-});
-
+//Start process on button Click
 jQuery(".direct-stripe-button-id").on("click", function (e) {
-
+    //Get unique button ID
     var instance = jQuery( this ).data("id");
+    //Set amount value for donation buttons
+    if(jQuery(".donationvalue").length > 0){
+        setDonationValue(instance);    
+    }
+    //Get Button Values
     var ds_values = window[instance];
 
     // Set currency
@@ -22,98 +19,66 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     } else {
         var currency = ds_values.general_currency;
     }
+    //Prepare values for Stripe
+    var billing = ds_values.billing === "1" || ds_values.billing === "true",
+    shipping = ds_values.shipping === "1" || ds_values.shipping === "true",
+    rememberme = ds_values.rememberme === "1" || ds_values.rememberme === "true",
+    numbers = /^\+?[0-9]*\.?[0-9]+$/,
+    ds_answer_input = "#ds-answer-" + instance;
 
+    //Set amount
     if( ds_values.display_amount !== "" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
         var amount = parseInt(ds_values.original_amount);
     } else if( ds_values.display_amount !== "" && ds_values.type === "donation" ) {
         if( ds_values.zero_decimal === "1" || ds_values.zero_decimal === "true"  ) {
           var amount = parseInt(ds_values.original_amount);
         } else {
-          var amount = parseInt(ds_values.original_amount) * 100;
+          var amount = parseFloat(ds_values.original_amount * 100);
         }
     } else {
         var amount = 0;
     }
 
-    if( ds_values.billing === "1" || ds_values.billing === "true" ) {
-        billing = true;
-    } else {
-        billing = false;
-    }
-    if( ds_values.shipping === "1" || ds_values.shipping === "true" ) {
-        shipping = true;
-    } else {
-        shipping = false;
-    }
-    if( ds_values.rememberme === "1" || ds_values.rememberme === "true" ) {
-        rememberme = true;
-    } else {
-        rememberme = false;
-    }
-    if( ds_values.capture === "" || ds_values.capture === "false" ) {
-      ds_values.capture = false;
-    } else {
-      ds_values.capture = true;
-    }
-
-    var numbers = /^\+?[0-9]*\.?[0-9]+$/;
-    var ds_answer_input = "#ds-answer-" + instance;
-
     //Check T&C have been checked
-    if (jQuery(this).hasClass("ds-check-tc") && !jQuery("#ds-conditions-" + instance).is(":checked")) {
-
-        jQuery(ds_answer_input).html( direct_stripe_script_vars.text.checkTC + "<br/>");
-        jQuery(ds_answer_input).addClass("error");
-        jQuery(ds_answer_input).show();
-        setTimeout(function () {
-            jQuery(ds_answer_input).hide();
-        }, 10000);
-
+    var tcState = checkTC(this, instance),
+    donationInputState = checkDonationInput(this, ds_values, numbers);
+    if(tcState){
+        returnError(ds_answer_input, direct_stripe_script_vars, 'emptyTc');
         return false;
-    }
-
-    //Check donation amount is fulfilled
-    if (jQuery(this).hasClass("ds-check-donation") && !jQuery("#donationvalue").val() && !jQuery("#donationvalue").val().match(numbers)) {
-
-        jQuery(ds_answer_input).html( direct_stripe_script_vars.text.enterAmount + "<br/>");
-        jQuery(ds_answer_input).addClass("error");
-        jQuery(ds_answer_input).show();
-        setTimeout(function () {
-            jQuery(ds_answer_input).hide();
-        }, 10000);
-
-        return false;
+    } else if(donationInputState){
+       returnError(ds_answer_input, direct_stripe_script_vars, 'emptyDonation');
+       return false;
     }
 
     handler = stripe_checkout(ds_values);
     if( billing !== false ) {
-      handler.open({
-        'key': ds_values.key,
-        'locale': ds_values.locale,
-        'image': ds_values.image,
-        'name': ds_values.name,
-        'description': ds_values.description,
-        'email': ds_values.current_email_address,
-        'currency': currency,
-        'panelLabel':   ds_values.panellabel,
-        'amount': amount,
-        'billingAddress': billing,
-        'shippingAddress': shipping,
-        'allowRememberMe': rememberme
-      });
+        handler.open({
+            'key': ds_values.key,
+            'locale': ds_values.locale,
+            'image': ds_values.image,
+            'name': ds_values.name,
+            'description': ds_values.description,
+            'email': ds_values.current_email_address,
+            'currency': currency,
+            'panelLabel':   ds_values.panellabel,
+            'amount': amount,
+            'billingAddress': billing,
+            'shippingAddress': shipping,
+            'allowRememberMe': rememberme
+        });
     } else {
-      handler.open({
-        'key': ds_values.key,
-        'locale': ds_values.locale,
-        'image': ds_values.image,
-        'name': ds_values.name,
-        'description': ds_values.description,
-        'email': ds_values.current_email_address,
-        'currency': currency,
-        'panelLabel': ds_values.panellabel,
-        'amount': amount,
-        'allowRememberMe': rememberme
-      });
+        handler.open({
+            'key': ds_values.key,
+            'locale': ds_values.locale,
+            'image': ds_values.image,
+            'name': ds_values.name,
+            'description': ds_values.description,
+            'email': ds_values.current_email_address,
+            'currency': currency,
+            'panelLabel': ds_values.panellabel,
+            'amount': amount,
+            'allowRememberMe': rememberme
+        });
     }
 
     e.preventDefault();

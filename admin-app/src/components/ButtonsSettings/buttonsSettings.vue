@@ -216,18 +216,37 @@
 
             <v-layout row wrap>
 
-                <v-flex md2 pa-3 xs12>
-                    <v-select
-                            id="dsButtonCurrency"
-                            v-on:change="pushButton( selectedButton.text, selectedButton, 'currency' , $event)"
-                            v-bind:items="currencies"
-                            v-bind:label="text.buttonCurrency"
-                            v-model="selectedButton.currency"
-                            class="input-group--focused"
-                            single-line
-                            :hint="text.hintButtonCurrency"
-                    ></v-select>
-                </v-flex>
+              <v-flex md4 pa-3 xs12>
+                <label for="dsButtonLocale">{{ text.buttonLocale }}</label>
+                <v-select
+                        id="dsButtonLocale"
+                        v-on:change="pushButton( selectedButton.text, selectedButton, 'locale' , $event)"
+                        v-bind:items="locales"
+                        v-bind:label="text.buttonLocale"
+                        v-model="selectedButton.locale"
+                        class="input-group--focused"
+                        single-line
+                        :hint="text.hintButtonLocale"
+                ></v-select>
+              </v-flex>
+                
+              <v-flex md4 pa-3 xs12>
+                <label for="dsButtonCurrency">{{ text.buttonCurrency }}</label>
+                <v-select
+                        id="dsButtonCurrency"
+                        v-on:change="pushButton( selectedButton.text, selectedButton, 'currency' , $event)"
+                        v-bind:items="currencies"
+                        v-bind:label="text.buttonCurrency"
+                        v-model="selectedButton.currency"
+                        class="input-group--focused"
+                        single-line
+                        :hint="text.hintButtonCurrency"
+                ></v-select>
+              </v-flex>
+
+            </v-layout>
+
+            <v-layout row wrap>
                 <v-flex md2 pa-3 xs12>
                     <v-tooltip left>
                         <span slot="activator">
@@ -283,18 +302,6 @@
                         </span>
                         <span>{{ text.hintButtonRm}}</span>
                     </v-tooltip>
-                </v-flex>
-                <v-flex md2 pa-3 xs12>
-                    <v-select
-                            id="dsButtonLocale"
-                            v-on:change="pushButton( selectedButton.text, selectedButton, 'locale' , $event)"
-                            v-bind:items="locales"
-                            v-bind:label="text.buttonLocale"
-                            v-model="selectedButton.locale"
-                            class=""
-                            single-line
-                            :hint="text.hintButtonLocale"
-                    ></v-select>
                 </v-flex>
 
             </v-layout>
@@ -597,7 +604,7 @@
                 value: buttonID,
                 type: "payment",
                 amount: 1000,
-                button_id: "MyButton",
+                button_id: buttonID,
                 name: "Company Name",
                 description: "Description",
                 label: "Payment",

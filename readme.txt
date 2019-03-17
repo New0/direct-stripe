@@ -4,7 +4,7 @@ Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.2
 Tested up to: 5.1.0
-Stable tag: 2.1.13
+Stable tag: 2.1.14
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,15 @@ You can also insert direct stripe buttons using a shortcode `[direct-stripe valu
 
 
 == Changelog ==
+
+=2.1.14=
+* Fix decimals on amount displayed within the modal form button for Donation button types.
+* Allows support for multiple donations buttons on same page
+* Support for locale language in Button settings
+* Refactor JS process
+* Stripe API update
+* Updated pot reference for translations
+* Updated french translation
 
 =2.1.13=
 * Fix old shortcode T&C condition issue

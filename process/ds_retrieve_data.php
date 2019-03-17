@@ -25,7 +25,7 @@ if( $params['type'] === 'payment' ) {
         $amount = $amount * 100;
     }
 } elseif( $params['type'] === 'donation' ) {
-    $pre_amount     = isset($_POST['amount']) ? $_POST['amount'] : '';
+    $pre_amount = isset($_POST['amount']) ? $_POST['amount'] : '';
     if ( isset($params['zero_decimal']) && $params['zero_decimal'] === "1" || isset($params['zero_decimal']) && $params['zero_decimal'] === "true" ) {
         $amount = $pre_amount;
     } else {
