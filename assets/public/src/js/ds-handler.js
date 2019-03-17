@@ -6,20 +6,21 @@ function stripe_checkout(ds_values) {
     var handler = StripeCheckout.configure({
         key: ds_values.key,
         token: function(token, args) {
+           
+            var parobj = ds_values,
+            type = parobj["type"];
 
-            var parobj = ds_values;
+            var ds_answer_input = "#ds-answer-" + parobj.instance,
+            ds_loading_span = "#loadingDS-" + parobj.instance;
 
-            var type = parobj["type"];
-            if (type === "donation") {
-                var amount = jQuery("#donationvalue-" + parobj.instance).val();
+            if(type === "donation") {
+                var amount = setDonationValue(parobj.instance);
             } else {
                 var amount = parobj.amount;
             }
 
-            var ds_answer_input = "#ds-answer-" + parobj.instance;
-            var ds_loading_span = "#loadingDS-" + parobj.instance;
-
             jQuery(ds_loading_span).show();
+            
             jQuery.post(
                 ds_values.ajaxurl,
                 {
