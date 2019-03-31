@@ -44,7 +44,7 @@ echo $str_before;
 
     //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
-        $direct_stripe_donation_input = '<input lang="en" type="number" step="0.01" min="1" name="donationvalue" id="donationvalue-' . $instance . '" class="donationvalue" data-donation-input-id="' . $instance . '" />';
+        $direct_stripe_donation_input = '<input lang="en" type="number" step="0.01" min="1" name="donationvalue" id="donationvalue-' . $button_id . '" class="donationvalue" data-donation-input-id="' . $button_id . '" />';
        echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input, $instance, $button_id );
      }
      ?>
