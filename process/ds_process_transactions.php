@@ -145,6 +145,8 @@ class ds_process_transactions {
             $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         } elseif( $subscription ) {
             $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
+        } elseif( $update_card ) {
+            $answer = \ds_process_functions::process_answer( $update_card,  $token, $button_id, $currency, $email_address, $description, $user, $post_id );
         } else {
             $email = \ds_process_functions::process_emails( $e, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
         }
