@@ -75,7 +75,7 @@ echo $str_before;
     //T&C Check box condition
     if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false && $ds_button->tc !== "false" && $ds_button->tc !== "0") {
         $tc_cond = '<br/><input type="checkbox" class="ds-conditions" id="ds-conditions-' . $instance . '" required/>
-        <label for="conditions">
+        <label for="ds-conditions-' . $instance . '">
         ' . esc_attr($d_stripe_styles['direct_stripe_tc_text']) . '
             <a target="_blank" href="' . esc_url($d_stripe_styles['direct_stripe_tc_link']) . '">' . $d_stripe_styles['direct_stripe_tc_link_text'] . '</a>
         </label><br />';
