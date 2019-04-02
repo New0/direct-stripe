@@ -9,6 +9,7 @@
 if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '0' ) {
     $ds_button = (object) $directStripeAttrValues;
 }
+
 //Button ID
 if ( !empty( $ds_button->button_id ) ) {
     $button_id = $ds_button->button_id;
@@ -44,7 +45,7 @@ echo $str_before;
 
     //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
-        $direct_stripe_donation_input = '<input lang="en" type="number" step="0.01" min="1" name="donationvalue" id="donationvalue-' . $button_id . '" class="donationvalue" data-donation-input-id="' . $button_id . '" />';
+        $direct_stripe_donation_input = '<input lang="en" type="number" step="0.01" min="1" name="donationvalue" id="donationvalue-' . $instance . '" class="donationvalue" data-donation-input-id="' . $instance . '" />';
        echo apply_filters('direct_stripe_donation_input', $direct_stripe_donation_input, $instance, $button_id );
      }
      ?>
@@ -74,7 +75,7 @@ echo $str_before;
 
     //T&C Check box condition
     if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false && $ds_button->tc !== "false" && $ds_button->tc !== "0") {
-        $tc_cond = '<br/><input type="checkbox" class="ds-conditions" id="ds-conditions-' . $instance . '" required/>
+        $tc_cond = '<br/><input type="checkbox" class="ds-conditions ' . $instance . '" id="ds-conditions-' . $instance . '" required/>
         <label for="ds-conditions-' . $instance . '">
         ' . esc_attr($d_stripe_styles['direct_stripe_tc_text']) . '
             <a target="_blank" href="' . esc_url($d_stripe_styles['direct_stripe_tc_link']) . '">' . $d_stripe_styles['direct_stripe_tc_link_text'] . '</a>

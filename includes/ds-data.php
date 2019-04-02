@@ -15,7 +15,6 @@ $d_stripe_styles = get_option( 'direct_stripe_styles_settings' );
 $ds_nonce = wp_create_nonce  ('direct-stripe-nonce');
 $sitename = get_bloginfo('name');
 $description = get_bloginfo('description');
-$instance = uniqid('ds');
 // Get email address if current user is logged in
 $current = wp_get_current_user();
 $current_email = $current->user_email;
@@ -71,6 +70,9 @@ $directStripeAttrValues = shortcode_atts( array(
  * @since 2.1.0
  */
 if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '0' ) {
+
+    //Set instance value for old DS format
+    $instance = uniqid('ds');
 
     /**
      * Set conditional data for each button
@@ -146,7 +148,14 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
 
     }
 
-
+    //Set instance value for new DS format
+    if(isset($ds_button->value)){
+        $instance = $ds_button->value;
+        if(substr($instance, 0, 3) === 'ds-'){
+            $instance = str_replace("-", "", $instance);
+        }
+    }
+    
     /**
      * Set conditional data for each button
      *
