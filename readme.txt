@@ -104,6 +104,11 @@ You can also insert direct stripe buttons using a shortcode `[direct-stripe valu
 
 == Changelog ==
 
+=2.1.15=
+* Fix issue saving settings with & symbol
+* Fix accessibility issue with t&c conditions label
+* Added: emils support for update card types of button
+
 =2.1.14=
 * Fix decimals on amount displayed within the modal form button for Donation button types.
 * Allows support for multiple donations buttons on same page
