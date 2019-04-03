@@ -99,11 +99,11 @@ class DS_API {
             'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
             'direct_stripe_tc_link', 'direct_stripe_admin_email_subject', 'direct_stripe_user_email_subject',
             'direct_stripe_admin_error_email_subject', 'direct_stripe_user_error_email_subject', 'direct_stripe_tc_error_bubble',
-			'direct_stripe_button_locale'
+			'direct_stripe_button_locale', 'direct_stripe_error_message', 'direct_stripe_success_message'
         );
         $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
-        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_error_message',
-            'direct_stripe_success_message', 'direct_stripe_user_error_email_content', 'direct_stripe_admin_error_email_content'
+        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content',
+         'direct_stripe_admin_error_email_content'
         );
 
         if ( in_array( $key, $booleans ) ) {

@@ -597,7 +597,7 @@
             return uniqueNumber();
           }
 
-          let buttonID = "ds-" + ID();
+          let buttonID = "ds" + ID();
 
           const defaultData = {
                 text: newButton,
@@ -627,7 +627,7 @@
           const button = this.buttons.find( function(element) {
             return element.value === buttonID;
           });
-          const but = JSON.stringify(button);
+          const but = encodeURIComponent(JSON.stringify( button ) );
 
           const req_url = API_BUTTONS + '?id=' + buttonID + '&data=' + but + '&_dsnonce=' + nonce;
 
@@ -673,7 +673,7 @@
           button[setting] = event;
           this.buttons.push( button );
 
-          const but = JSON.stringify(button);
+          const but = encodeURIComponent( JSON.stringify( button) );
           const req_url = API_BUTTONS + '?id=' + button.value + '&data=' + but + '&_dsnonce=' + nonce;
 
           let el = jQuery('#save-result');

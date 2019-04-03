@@ -33,6 +33,8 @@ Vue.mixin({
         }, 3000 )
       }
 
+      event = encodeURIComponent(event);
+
       const req_url = SETTINGS + '?' + message + '=' + event + '&_dsnonce=' + nonce;
 
       axios
