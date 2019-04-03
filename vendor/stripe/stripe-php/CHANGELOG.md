@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.31.3 - 2019-04-02
+* [#623](https://github.com/stripe/stripe-php/pull/623) Only use HTTP/2 with curl >= 7.60.0
+
+## 6.31.2 - 2019-03-25
+* [#619](https://github.com/stripe/stripe-php/pull/619) Fix PHPDoc return types for list methods for nested resources
+
+## 6.31.1 - 2019-03-22
+* [#612](https://github.com/stripe/stripe-php/pull/612) Add a lot of constants
+* [#614](https://github.com/stripe/stripe-php/pull/614) Add missing subscription status constants
+
+## 6.31.0 - 2019-03-18
+* [#600](https://github.com/stripe/stripe-php/pull/600) Add support for the `PaymentMethod` resource and APIs
+* [#606](https://github.com/stripe/stripe-php/pull/606) Add support for retrieving a Checkout `Session`
+* [#611](https://github.com/stripe/stripe-php/pull/611) Add support for deleting a Terminal `Location` and `Reader`
+
 ## 6.30.5 - 2019-03-11
 * [#607](https://github.com/stripe/stripe-php/pull/607) Correctly handle case where a metadata key is called `metadata`
 
