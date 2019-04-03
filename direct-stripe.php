@@ -178,4 +178,3 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 endif; //if class exists
 
 $directstripe = new DirectStripe;
-
