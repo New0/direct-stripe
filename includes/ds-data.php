@@ -154,6 +154,8 @@ if( ! $directStripeAttrValues['value'] || $directStripeAttrValues['value'] === '
         if(substr($instance, 0, 3) === 'ds-'){
             $instance = str_replace("-", "", $instance);
         }
+    }else{
+        $instance = uniqid('ds');
     }
     
     /**
