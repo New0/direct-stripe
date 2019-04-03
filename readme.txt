@@ -2,9 +2,9 @@
 Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
-Requires at least: 4.2
+Requires at least: 4.7
 Tested up to: 5.1.1
-Stable tag: 2.1.14
+Stable tag: 2.1.15
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
