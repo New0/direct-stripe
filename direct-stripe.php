@@ -85,9 +85,28 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * Plugin constructor.
          */
         public function __construct() {
+
+            if ( ! class_exists('Stripe\Stripe')) {
+                require self::DIR . '/vendor/autoload.php';
+            }
+
             $this->includes();
             $this->init_hooks();
             $this->activation_hooks();
+            $this->register_stripe_app();
+        }
+
+        /**
+         * Register Stripe App https://stripe.com/docs/building-plugins#setappinfo
+         * 
+         * @since 3.0.0
+         */
+        function register_stripe_app() {
+            \Stripe\Stripe::setAppInfo(
+                "WordPress DirectStripePlugin",
+                self::version,
+                "https://wordpress.org/plugins/direct-stripe/"
+              );
         }
 
         function activation_hooks() {
@@ -100,7 +119,6 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         function direct_stripe_on_activation() {
             add_role( 'stripe-user', __('Stripe user', 'direct-stripe'), array( 'read' => true ));
-
         }
 	    
 	    /**
