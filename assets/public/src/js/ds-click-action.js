@@ -64,7 +64,8 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
             'amount': amount,
             'billingAddress': billing,
             'shippingAddress': shipping,
-            'allowRememberMe': rememberme
+            'allowRememberMe': rememberme,
+            'zipCode': true
         });
     } else {
         handler.open({
@@ -77,7 +78,8 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
             'currency': currency,
             'panelLabel': ds_values.panellabel,
             'amount': amount,
-            'allowRememberMe': rememberme
+            'allowRememberMe': rememberme,
+            'zipCode': true
         });
     }
 
