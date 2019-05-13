@@ -4,7 +4,11 @@
 
 //Start process on button Click
 jQuery(".direct-stripe-button-id").on("click", function (e) {
-    //Get unique button ID
+    //if(striperr){
+      //  console.log(jQuery("#example-5"));
+      //  jQuery("#example-5").addClass("ds-active");
+   // } else {
+        //Get unique button ID
     var instance = jQuery( this ).data("id");
     //Set amount value for donation buttons
     if(jQuery(".donationvalue").length > 0){

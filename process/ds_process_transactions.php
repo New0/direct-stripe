@@ -73,22 +73,38 @@ class ds_process_transactions {
             } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') { //Charge
 
                 $subscription = false;
-				$update_card  = false;
+                $update_card  = false;
+
+                $payment_method = \Stripe\PaymentMethod::create([
+                    'type' => 'card',
+                    'card' => [
+                      'number' => '4000000000003220',
+                      'exp_month' => 4,
+                      'exp_year' => 2020,
+                      'cvc' => '314'
+                    ]
+                  ]);
+                
+                if($capture === true){
+                    $capture_method = 'automatic';
+                } else {
+                    $capture_method = 'manual';
+                }
 
                 $chargerdata = array(
-                    'amount'        => $amount,
-                    'currency'      => $currency,
-                    'capture'       => $capture,
-                    'description'   => $description
+                    'amount'            => $amount,
+                    'currency'          => $currency,
+                    'payment_method'    => $payment_method->id,
+                    'capture_method'    => $capture_method,
+                    'description'       => $description
                 );
-                if( $user === false ) {
-                    $chargerdata['source' ] = $token;
-                    $chargerdata['receipt_email'] = $email_address;
-                } else {
+                if( $user !== false ) {
                     $chargerdata['customer'] = $user['stripe_id'];
                 }
-                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id );
-                $charge   = \Stripe\Charge::create( $chargerdata );
+                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
+                $charge  = \Stripe\PaymentIntent::create( $chargerdata );
+                $charge->confirm();
+
 
             } elseif( $params['type'] === 'subscription' ) { //Subscriptions
 
