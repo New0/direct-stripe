@@ -37,11 +37,11 @@ if( isset( $atts['alignment'] ) ) {
         $ds_class .= ' ds-right';
     }
 }
-/*
-//Opening Div
-$str_before = '<div class="' . $ds_class . '">';
-$str_before = apply_filters( 'direct_stripe_div_before', $str_before, $button_id, $ds_class );
-echo $str_before;
+
+    //Opening Div
+    $str_before = '<div class="' . $ds_class . '">';
+    $str_before = apply_filters( 'direct_stripe_div_before', $str_before, $button_id, $ds_class );
+    echo $str_before;
 
     //Donation condition and input
     if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
@@ -84,17 +84,15 @@ echo $str_before;
         echo $tc_cond;
     }
 
-//Closing Div
-$str_after = "</div>";
-$str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
-echo $str_after;
-*/
-?>
-<!-- Trigger/Open The Modal -->
-<button id="ds-Btn">Open Modal</button>
+    //Closing Div
+    $str_after = "</div>";
+    $str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
+    echo $str_after;
 
+
+?>
 <!-- The Modal -->
-<div id="ds-Modal" class="ds-modal">
+<div id="modal-<?php echo $instance ?>" class="ds-modal">
 
   <!-- Modal content -->
   <div class="ds-modal-content">
@@ -103,7 +101,7 @@ echo $str_after;
         <div class="ds-form">
 
             <div class="cell example example5" id="example-5">
-                <form>
+                <form data-id="<?php echo $instance; ?>">
                     <div id="example5-paymentRequest">
                         <!--Stripe paymentRequestButton Element inserted here-->
                     </div>

@@ -4,12 +4,16 @@
 
 //Start process on button Click
 jQuery(".direct-stripe-button-id").on("click", function (e) {
-    //if(striperr){
-      //  console.log(jQuery("#example-5"));
-      //  jQuery("#example-5").addClass("ds-active");
-   // } else {
-        //Get unique button ID
+
+    //Get unique button ID
     var instance = jQuery( this ).data("id");
+
+    //Check if instance number isset
+    if(instance.length <= 0){
+        console.log("DS instance button missing");
+        return;
+    }
+
     //Set amount value for donation buttons
     if(jQuery(".donationvalue").length > 0){
         setDonationValue(instance);    
@@ -54,7 +58,9 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
        return false;
     }
 
-    handler = stripe_checkout(ds_values);
+    //Modal events
+    modalEvent(instance);
+    /*handler = stripe_checkout(ds_values);
     if( billing !== false ) {
         handler.open({
             'key': ds_values.key,
@@ -84,7 +90,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
             'allowRememberMe': rememberme
         });
     }
-
+*/
     e.preventDefault();
 });
 // Close Checkout on page navigation:

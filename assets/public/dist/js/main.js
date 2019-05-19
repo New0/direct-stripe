@@ -1,43 +1,189 @@
-(function() {
+'use strict';
 
-    // Get the modal
-    var modal = document.getElementById('ds-Modal');
+var stripe = Stripe(direct_stripe_script_vars.p_key);
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("ds-Btn");
+function registerElements(elements, exampleName) {
+  var formClass = '.' + exampleName;
+  var example = document.querySelector(formClass);
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("ds-close")[0];
+  var form = example.querySelector('form');
+  var resetButton = example.querySelector('a.reset');
+  var error = form.querySelector('.error');
+  var errorMessage = error.querySelector('.message');
 
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+  //Get unique button ID
+  var instance = jQuery( form  ).data("id");
+  //Get Button Values
+  var ds_values = window[instance];
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+  function enableInputs() {
+    Array.prototype.forEach.call(
+      form.querySelectorAll(
+        "input[type='text'], input[type='email'], input[type='tel']"
+      ),
+      function(input) {
+        input.removeAttribute('disabled');
+      }
+    );
+  }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+  function disableInputs() {
+    Array.prototype.forEach.call(
+      form.querySelectorAll(
+        "input[type='text'], input[type='email'], input[type='tel']"
+      ),
+      function(input) {
+        input.setAttribute('disabled', 'true');
+      }
+    );
+  }
+
+  function triggerBrowserValidation() {
+    // The only way to trigger HTML5 form validation UI is to fake a user submit
+    // event.
+    console.log("triggerBrowserValidation");
+    var submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.style.display = 'none';
+    form.appendChild(submit);
+    submit.click();
+    submit.remove();
+  }
+
+  // Listen for errors from each Element, and show error messages in the UI.
+  var savedErrors = {};
+  elements.forEach(function(element, idx) {
+    element.on('change', function(event) {
+      if (event.error) {
+        error.classList.add('visible');
+        savedErrors[idx] = event.error.message;
+        errorMessage.innerText = event.error.message;
+      } else {
+        savedErrors[idx] = null;
+
+        // Loop over the saved errors and find the first one, if any.
+        var nextError = Object.keys(savedErrors)
+          .sort()
+          .reduce(function(maybeFoundError, key) {
+            return maybeFoundError || savedErrors[key];
+          }, null);
+
+        if (nextError) {
+          // Now that they've fixed the current error, show another one.
+          errorMessage.innerText = nextError;
+        } else {
+          // The user fixed the last error; no more errors.
+          error.classList.remove('visible');
         }
-    } 
-})();
+      }
+    });
+  });
+
+  // Listen on the form's 'submit' handler...
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Trigger HTML5 validation UI on the form if any of the inputs fail
+    // validation.
+    var plainInputsValid = true;
+    Array.prototype.forEach.call(form.querySelectorAll('input'), function(
+      input
+    ) {
+      if (input.checkValidity && !input.checkValidity()) {
+        plainInputsValid = false;
+        return;
+      }
+    });
+    if (!plainInputsValid) {
+      triggerBrowserValidation();
+      return;
+    }
+
+    // Show a loading screen...
+    example.classList.add('submitting');
+
+    // Disable all inputs.
+    disableInputs();
+
+    // Gather additional customer data we may have collected in our form.
+    var name = form.querySelector('#' + exampleName + '-name');
+    var email = form.querySelector('#' + exampleName + '-email');
+    var address1 = form.querySelector('#' + exampleName + '-address');
+    var city = form.querySelector('#' + exampleName + '-city');
+    var state = form.querySelector('#' + exampleName + '-state');
+    var zip = form.querySelector('#' + exampleName + '-zip');
+    var additionalData = {
+      "name": name ? name.value : undefined,
+      "email": email? email.value : undefined,
+      "address": {
+        "line1": address1 ? address1.value : undefined,
+        "city": city ? city.value : undefined,
+        "state": state ? state.value : undefined,
+        "postal_code": zip ? zip.value : undefined,
+      }
+      
+    };
+
+    // Use Stripe.js to create a token. We only need to pass in one Element
+    // from the Element group in order to create a token. We can also pass
+    // in the additional customer data we collected in our form.
+    stripe.createPaymentMethod('card', elements[0], {
+      billing_details: additionalData
+    }).then(function(resultP) {
+     
+      console.log(resultP);
+      if (resultP.error) {
+        // Show error in payment form
+         enableInputs();
+         errorMessage.innerText = resultP.error.message;
+      } else {
+
+        stripe.createToken(elements[0], {}).then(function(resultT) {
+          if (resultT.token) {
+            stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)
+          }
+        });
+      
+      } 
+    });
+    
+  });
+
+  resetButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Resetting the form (instead of setting the value to `''` for each input)
+    // helps us clear webkit autofill styles.
+    form.reset();
+
+    // Clear each Element.
+    elements.forEach(function(element) {
+      element.clear();
+    });
+
+    // Reset error state as well.
+    error.classList.remove('visible');
+
+    // Resetting the form does not un-disable inputs, so we need to do it separately:
+    enableInputs();
+    example.classList.remove('submitted');
+  });
+}
 /**
  * Created by nfigueira on 10/05/2017.
  */
 
 //Start process on button Click
 jQuery(".direct-stripe-button-id").on("click", function (e) {
-    //if(striperr){
-      //  console.log(jQuery("#example-5"));
-      //  jQuery("#example-5").addClass("ds-active");
-   // } else {
-        //Get unique button ID
+
+    //Get unique button ID
     var instance = jQuery( this ).data("id");
+
+    //Check if instance number isset
+    if(instance.length <= 0){
+        console.log("DS instance button missing");
+        return;
+    }
+
     //Set amount value for donation buttons
     if(jQuery(".donationvalue").length > 0){
         setDonationValue(instance);    
@@ -82,7 +228,9 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
        return false;
     }
 
-    handler = stripe_checkout(ds_values);
+    //Modal events
+    modalEvent(instance);
+    /*handler = stripe_checkout(ds_values);
     if( billing !== false ) {
         handler.open({
             'key': ds_values.key,
@@ -112,7 +260,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
             'allowRememberMe': rememberme
         });
     }
-
+*/
     e.preventDefault();
 });
 // Close Checkout on page navigation:
@@ -126,7 +274,7 @@ window.addEventListener("popstate", function () {
       // Stripe's examples are localized to specific languages, but if
       // you wish to have Elements automatically detect your user's locale,
       // use `locale: 'auto'` instead.
-      locale: window.__exampleLocale
+      locale: 'auto'
     });
   
     /**
@@ -178,7 +326,9 @@ window.addEventListener("popstate", function () {
         }
       ]
     });
+
     paymentRequest.on("token", function(result) {
+      console.log("result"+result);
       var example = document.querySelector(".example5");
       example.querySelector(".token").innerText = result.token.id;
       example.classList.add("submitted");
@@ -193,7 +343,7 @@ window.addEventListener("popstate", function () {
         }
       }
     });
-  
+
     paymentRequest.canMakePayment().then(function(result) {
       if (result) {
         document.querySelector(".example5 .card-only").style.display = "none";
@@ -206,89 +356,112 @@ window.addEventListener("popstate", function () {
     });
   
     registerElements([card], "example5");
-  })();
+
+})();
   
 /**
  * Created by nfigueira on 13/04/2017.
  */
 
-function stripe_checkout(ds_values) {
-    var handler = StripeCheckout.configure({
-        key: ds_values.key,
-        token: function(token, args) {
+function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
            
-            var parobj = ds_values,
-            type = parobj["type"];
+    var example = document.querySelector(".example5");
 
-            var ds_answer_input = "#ds-answer-" + parobj.instance,
-            ds_loading_span = "#loadingDS-" + parobj.instance;
+    var parobj = ds_values,
+    type = parobj["type"];
 
-            if(type === "donation") {
-                var amount = setDonationValue(parobj.instance);
-            } else {
-                var amount = parobj.amount;
-            }
+    var ds_answer_input = "#ds-answer-" + parobj.instance,
+    ds_loading_span = "#loadingDS-" + parobj.instance;
 
-            jQuery(ds_loading_span).show();
-            
+    if(type === "donation") {
+        var amount = setDonationValue(parobj.instance);
+    } else {
+        var amount = parobj.amount;
+    }
+
+    //jQuery(ds_loading_span).show();
+    console.log(paymentMethodID);
+    jQuery.post(
+        ds_values.ajaxurl,
+        {
+            'action': 'ds_process_button',
+            'stripeToken': token.id,
+            'paymentMethodID': paymentMethodID,
+            'stripeEmail': token.email,
+            'type': type,
+            'amount': amount,
+            'params': parobj,
+            'ds_nonce':parobj.ds_nonce
+        },
+        function(data) {
+            console.log(data);
+            handleServerResponse(data, ds_values);
+        }
+    );
+}
+
+function handleServerResponse(response, ds_values) {
+    console.log(response);
+    if (response.error) {
+      // Show error from server on payment form
+    } else if (response.requires_action) {
+      // Use Stripe.js to handle required card action
+      stripe.handleCardAction(
+        response.payment_intent_client_secret
+      ).then(function(result) {
+        if (result.error) {
+          // Show error in payment form
+        } else {
+          // The card action has been handled
+          // The PaymentIntent can be confirmed again on the server
             jQuery.post(
                 ds_values.ajaxurl,
                 {
                     'action': 'ds_process_button',
-                    'stripeToken': token.id,
-                    'stripeEmail': token.email,
-                    'type': type,
-                    'amount': amount,
-                    'params': parobj,
-                    'ds_nonce':parobj.ds_nonce,
-                    // Billing name and address
-                    'billing_name': args.billing_name,
-                    'billing_address_country': args.billing_address_country,
-                    'billing_address_zip': args.billing_address_zip,
-                    'billing_address_state': args.billing_address_state,
-                    'billing_address_line1': args.billing_address_line1,
-                    'billing_address_city': args.billing_address_city,
-                    'billing_address_country_code': args.billing_address_country_code,
-                    // Shipping name and address
-                    'shipping_name': args.shipping_name,
-                    'shipping_address_country': args.shipping_address_country,
-                    'shipping_address_zip': args.shipping_address_zip,
-                    'shipping_address_state': args.shipping_address_state,
-                    'shipping_address_line1': args.shipping_address_line1,
-                    'shipping_address_city': args.shipping_address_city,
-                    'shipping_address_country_code': args.shipping_address_country_code
+                    'paymentIntentID': result.paymentIntent.id,
+                    'params': ds_values,
+                    'ds_nonce': ds_values.ds_nonce
                 },
-                function (data) {
+                function(data) {
+                
                     switch (data.id) {
                         case "1":
-                            jQuery(ds_loading_span).hide();
+                            //jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("success");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
                             setTimeout(function() {
-                             jQuery(ds_answer_input).hide();
-                             }, 10000);
+                                jQuery(ds_answer_input).hide();
+                                }, 10000);
+                                
                             break;
                         case "2":
-                            jQuery(ds_loading_span).hide();
+                            //jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             window.location.assign(data.url);
                             break;
                         default:
-                            jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
                         setTimeout(function() {
-                         jQuery(ds_answer_input).hide();
-                         }, 10000);
+                            jQuery(ds_answer_input).hide();
+                            }, 10000);
                     }
+                
                 }
             );
         }
-
-    });
-    return handler;
-}
+      });
+    } else {
+      // Show success message
+    }
+  }
 
 //Set Values for donation buttons
 function setDonationValue(instance){
@@ -320,4 +493,27 @@ function returnError(ds_answer_input, direct_stripe_script_vars, error){
     setTimeout(function () {
         jQuery(ds_answer_input).hide();
     }, 10000);
+}
+
+//Open / Cose modal window that holds the form
+function modalEvent( instance) {
+    //Get Modal Form
+    var modal = document.getElementById("modal-"+ instance);
+    //Open Modal Form
+    modal.style.display = "block";
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("ds-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
 }

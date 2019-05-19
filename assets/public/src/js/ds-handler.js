@@ -2,80 +2,102 @@
  * Created by nfigueira on 13/04/2017.
  */
 
-function stripe_checkout(ds_values) {
-    var handler = StripeCheckout.configure({
-        key: ds_values.key,
-        token: function(token, args) {
+function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
            
-            var parobj = ds_values,
-            type = parobj["type"];
+    var example = document.querySelector(".example5");
 
-            var ds_answer_input = "#ds-answer-" + parobj.instance,
-            ds_loading_span = "#loadingDS-" + parobj.instance;
+    var parobj = ds_values,
+    type = parobj["type"];
 
-            if(type === "donation") {
-                var amount = setDonationValue(parobj.instance);
-            } else {
-                var amount = parobj.amount;
-            }
+    var ds_answer_input = "#ds-answer-" + parobj.instance,
+    ds_loading_span = "#loadingDS-" + parobj.instance;
 
-            jQuery(ds_loading_span).show();
-            
+    if(type === "donation") {
+        var amount = setDonationValue(parobj.instance);
+    } else {
+        var amount = parobj.amount;
+    }
+
+    //jQuery(ds_loading_span).show();
+    console.log(paymentMethodID);
+    jQuery.post(
+        ds_values.ajaxurl,
+        {
+            'action': 'ds_process_button',
+            'stripeToken': token.id,
+            'paymentMethodID': paymentMethodID,
+            'stripeEmail': token.email,
+            'type': type,
+            'amount': amount,
+            'params': parobj,
+            'ds_nonce':parobj.ds_nonce
+        },
+        function(data) {
+            console.log(data);
+            handleServerResponse(data, ds_values);
+        }
+    );
+}
+
+function handleServerResponse(response, ds_values) {
+    console.log(response);
+    if (response.error) {
+      // Show error from server on payment form
+    } else if (response.requires_action) {
+      // Use Stripe.js to handle required card action
+      stripe.handleCardAction(
+        response.payment_intent_client_secret
+      ).then(function(result) {
+        if (result.error) {
+          // Show error in payment form
+        } else {
+          // The card action has been handled
+          // The PaymentIntent can be confirmed again on the server
             jQuery.post(
                 ds_values.ajaxurl,
                 {
                     'action': 'ds_process_button',
-                    'stripeToken': token.id,
-                    'stripeEmail': token.email,
-                    'type': type,
-                    'amount': amount,
-                    'params': parobj,
-                    'ds_nonce':parobj.ds_nonce,
-                    // Billing name and address
-                    'billing_name': args.billing_name,
-                    'billing_address_country': args.billing_address_country,
-                    'billing_address_zip': args.billing_address_zip,
-                    'billing_address_state': args.billing_address_state,
-                    'billing_address_line1': args.billing_address_line1,
-                    'billing_address_city': args.billing_address_city,
-                    'billing_address_country_code': args.billing_address_country_code,
-                    // Shipping name and address
-                    'shipping_name': args.shipping_name,
-                    'shipping_address_country': args.shipping_address_country,
-                    'shipping_address_zip': args.shipping_address_zip,
-                    'shipping_address_state': args.shipping_address_state,
-                    'shipping_address_line1': args.shipping_address_line1,
-                    'shipping_address_city': args.shipping_address_city,
-                    'shipping_address_country_code': args.shipping_address_country_code
+                    'paymentIntentID': result.paymentIntent.id,
+                    'params': ds_values,
+                    'ds_nonce': ds_values.ds_nonce
                 },
-                function (data) {
+                function(data) {
+                
                     switch (data.id) {
                         case "1":
-                            jQuery(ds_loading_span).hide();
+                            //jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("success");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
                             setTimeout(function() {
-                             jQuery(ds_answer_input).hide();
-                             }, 10000);
+                                jQuery(ds_answer_input).hide();
+                                }, 10000);
+                                
                             break;
                         case "2":
-                            jQuery(ds_loading_span).hide();
+                            //jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             window.location.assign(data.url);
                             break;
                         default:
-                            jQuery(ds_loading_span).hide();
+                            example.classList.remove('submitting');
+                            example.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
                         setTimeout(function() {
-                         jQuery(ds_answer_input).hide();
-                         }, 10000);
+                            jQuery(ds_answer_input).hide();
+                            }, 10000);
                     }
+                
                 }
             );
         }
-
-    });
-    return handler;
-}
+      });
+    } else {
+      // Show success message
+    }
+  }

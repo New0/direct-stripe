@@ -36,6 +36,15 @@ class ds_process_transactions {
         //Process API Keys
         \ds_process_functions::api_keys( $d_stripe_general );
 
+        if ( !empty($payment_intent_id) ) {
+            $intent = \Stripe\PaymentIntent::retrieve(
+              $payment_intent_id
+            );
+            $intent->confirm();
+
+            \ds_process_functions::ds_generatePaymentResponse($intent);
+        }
+
         //Process User
         $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
 
@@ -74,37 +83,28 @@ class ds_process_transactions {
 
                 $subscription = false;
                 $update_card  = false;
-
-                $payment_method = \Stripe\PaymentMethod::create([
-                    'type' => 'card',
-                    'card' => [
-                      'number' => '4000000000003220',
-                      'exp_month' => 4,
-                      'exp_year' => 2020,
-                      'cvc' => '314'
-                    ]
-                  ]);
                 
                 if($capture === true){
                     $capture_method = 'automatic';
                 } else {
                     $capture_method = 'manual';
                 }
-
-                $chargerdata = array(
-                    'amount'            => $amount,
-                    'currency'          => $currency,
-                    'payment_method'    => $payment_method->id,
-                    'capture_method'    => $capture_method,
-                    'description'       => $description
-                );
-                if( $user !== false ) {
-                    $chargerdata['customer'] = $user['stripe_id'];
+                if ( !empty($payment_method_id) ) {
+                    $chargerdata = array(
+                        'payment_method'    => $payment_method_id,
+                        'amount'            => $amount,
+                        'currency'          => $currency,
+                        'description'       => $description,
+                        'confirmation_method' => 'manual',
+                        'confirm' => true,
+                    );
+                    if( $user !== false ) {
+                        $chargerdata['customer'] = $user['stripe_id'];
+                    }
+                    $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
+                    $intent  = \Stripe\PaymentIntent::create( $chargerdata );
+                    \ds_process_functions::ds_generatePaymentResponse($intent);
                 }
-                $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
-                $charge  = \Stripe\PaymentIntent::create( $chargerdata );
-                $charge->confirm();
-
 
             } elseif( $params['type'] === 'subscription' ) { //Subscriptions
 

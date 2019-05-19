@@ -15,6 +15,8 @@ $d_stripe_general = get_option('direct_stripe_general_settings');
 
 $button_id  = isset($params['button_id']) ? $params['button_id'] : '';
 $token         = isset($stripeToken) ? $stripeToken : '';
+$payment_method_id = isset($paymentMethodID) ? $paymentMethodID : '';
+$payment_intent_id = isset($paymentIntentID) ? $paymentIntentID : '';
 $email_address = isset($stripeEmail) ? $stripeEmail : '';
 
 /****  Amount ****/

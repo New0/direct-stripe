@@ -105,9 +105,15 @@ class ds_process_functions
 
         }
 
+        if(isset($stripe_id)){
+            $check_stripe_user = \Stripe\Customer::retrieve( $stripe_id );
+            $card = $check_stripe_user->sources->data[0]->id;
+        }
+
         $user = array(
             'user_id'   =>  $user_id,
-            'stripe_id' =>  $stripe_id
+            'stripe_id' =>  $stripe_id,
+            'card'      => $card
         );
         return $user;
 
@@ -429,7 +435,7 @@ class ds_process_functions
      *
      * @since 2.1.7
      */
-    public static function  ds_add_roles( $user, $custom_role ) {
+    public static function ds_add_roles( $user, $custom_role ) {
         if( user_can($user, 'stripe-user' ) === false ) {
             $user->add_role('stripe-user');
         }
@@ -443,7 +449,7 @@ class ds_process_functions
      *
      * @since 2.1.7
      */
-    public static function  ds_create_stripe_customer( $email_address, $token ) {
+    public static function ds_create_stripe_customer( $email_address, $token ) {
         //Create Stripe customer
         $customer  = \Stripe\Customer::create(array(
             'email'  => $email_address,
@@ -458,7 +464,7 @@ class ds_process_functions
      *
      * @since 2.1.8
      */
-    public static function  ds_create_wp_user( $email_address, $d_stripe_general, $custom_role )
+    public static function ds_create_wp_user( $email_address, $d_stripe_general, $custom_role )
     {
         if ($d_stripe_general['direct_stripe_check_records'] !== true) {
             // Generate the password and create the user
@@ -487,5 +493,38 @@ class ds_process_functions
 
         return $user_id;
     }
+
+    /**
+     * Handle response for 3D Secure
+     *
+     * @since 2.2.0
+     */
+    public static function ds_generatePaymentResponse($intent) {
+        if ($intent->status == 'requires_action' &&
+            $intent->next_action->type == 'use_stripe_sdk') {
+            # Tell the client to handle the action
+            wp_send_json( array(
+                'requires_action' => true,
+                'payment_intent_client_secret' => $intent->client_secret
+                )
+            );
+        } else if ($intent->status == 'succeeded') {
+            # The payment didn’t need any additional actions and completed!
+            # Handle post-payment fulfillment
+            wp_send_json( array(
+                'id'      => '1',
+                'message' => 'success'
+                )
+            );
+        } else {
+            # Invalid status
+            http_response_code(500);
+            wp_send_json( array(
+                'id'      => '3',
+                'message' => 'Invalid PaymentIntent status'
+                )
+            ) ; 
+        }
+      }
 
 }
