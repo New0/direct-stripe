@@ -103,7 +103,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         function register_stripe_app() {
             \Stripe\Stripe::setAppInfo(
-                "WordPress DirectStripePlugin",
+                "WordPress Direct Stripe Plugin",
                 self::version,
                 "https://wordpress.org/plugins/direct-stripe/"
               );
