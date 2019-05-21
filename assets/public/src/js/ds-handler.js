@@ -27,6 +27,7 @@ function stripe_checkout(ds_values) {
                     'action': 'ds_process_button',
                     'stripeToken': token.id,
                     'stripeEmail': token.email,
+                    'zipCode': true,
                     'type': type,
                     'amount': amount,
                     'params': parobj,
