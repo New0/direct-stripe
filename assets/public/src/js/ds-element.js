@@ -1,4 +1,4 @@
-(function() {
+function buildElement(instance) {
     "use strict";
   
     var elements = stripe.elements({
@@ -35,7 +35,7 @@
         }
       }
     });
-    card.mount("#example5-card");
+    card.mount("#ds-element-"+instance+"-card");
   
     /**
      * Payment Request Element
@@ -59,8 +59,7 @@
     });
 
     paymentRequest.on("token", function(result) {
-      console.log("result"+result);
-      var example = document.querySelector(".example5");
+      var example = document.querySelector("."+instance);
       example.querySelector(".token").innerText = result.token.id;
       example.classList.add("submitted");
       result.complete("success");
@@ -77,16 +76,16 @@
 
     paymentRequest.canMakePayment().then(function(result) {
       if (result) {
-        document.querySelector(".example5 .card-only").style.display = "none";
+        document.querySelector("."+instance+" .card-only").style.display = "none";
         document.querySelector(
-          ".example5 .payment-request-available"
+          "."+instance+" .payment-request-available"
         ).style.display =
           "block";
-        paymentRequestElement.mount("#example5-paymentRequest");
+        paymentRequestElement.mount("#ds-element-"+instance+"-paymentRequest");
       }
     });
   
-    registerElements([card], "example5");
+    registerElements([card], "ds-element-"+instance);
 
-})();
+}
   

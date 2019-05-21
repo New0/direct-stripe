@@ -2,12 +2,14 @@
 
 var stripe = Stripe(direct_stripe_script_vars.p_key);
 
-function registerElements(elements, exampleName) {
-  var formClass = '.' + exampleName;
-  var example = document.querySelector(formClass);
+function registerElements(elements, elementName) {
 
-  var form = example.querySelector('form');
-  var resetButton = example.querySelector('a.reset');
+  var formClass = '.' + elementName;
+  var dsProcess = document.querySelector(formClass);
+
+  var form = dsProcess.querySelector('form');
+
+  var resetButton = dsProcess.querySelector('a.reset');
   var error = form.querySelector('.error');
   var errorMessage = error.querySelector('.message');
 
@@ -41,7 +43,6 @@ function registerElements(elements, exampleName) {
   function triggerBrowserValidation() {
     // The only way to trigger HTML5 form validation UI is to fake a user submit
     // event.
-    console.log("triggerBrowserValidation");
     var submit = document.createElement('input');
     submit.type = 'submit';
     submit.style.display = 'none';
@@ -100,18 +101,18 @@ function registerElements(elements, exampleName) {
     }
 
     // Show a loading screen...
-    example.classList.add('submitting');
+    dsProcess.classList.add('submitting');
 
     // Disable all inputs.
     disableInputs();
 
     // Gather additional customer data we may have collected in our form.
-    var name = form.querySelector('#' + exampleName + '-name');
-    var email = form.querySelector('#' + exampleName + '-email');
-    var address1 = form.querySelector('#' + exampleName + '-address');
-    var city = form.querySelector('#' + exampleName + '-city');
-    var state = form.querySelector('#' + exampleName + '-state');
-    var zip = form.querySelector('#' + exampleName + '-zip');
+    var name = form.querySelector('#' + elementName + '-name');
+    var email = form.querySelector('#' + elementName + '-email');
+    var address1 = form.querySelector('#' + elementName + '-address');
+    var city = form.querySelector('#' + elementName + '-city');
+    var state = form.querySelector('#' + elementName + '-state');
+    var zip = form.querySelector('#' + elementName + '-zip');
     var additionalData = {
       "name": name ? name.value : undefined,
       "email": email? email.value : undefined,
@@ -131,7 +132,6 @@ function registerElements(elements, exampleName) {
       billing_details: additionalData
     }).then(function(resultP) {
      
-      console.log(resultP);
       if (resultP.error) {
         // Show error in payment form
          enableInputs();
@@ -165,6 +165,6 @@ function registerElements(elements, exampleName) {
 
     // Resetting the form does not un-disable inputs, so we need to do it separately:
     enableInputs();
-    example.classList.remove('submitted');
+    dsProcess.classList.remove('submitted');
   });
 }

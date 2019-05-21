@@ -81,8 +81,12 @@ if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false &
     ' . esc_attr($d_stripe_styles['direct_stripe_tc_text']) . '
         <a target="_blank" href="' . esc_url($d_stripe_styles['direct_stripe_tc_link']) . '">' . $d_stripe_styles['direct_stripe_tc_link_text'] . '</a>
     </label><br />';
-    $tc_cond= apply_filters( 'direct_stripe_tc_conditions', $tc_cond, $button_id, $instance, $d_stripe_styles['direct_stripe_tc_text'], $d_stripe_styles['direct_stripe_tc_link'], $d_stripe_styles['direct_stripe_tc_link_text'] );
+    $tc_cond = apply_filters( 'direct_stripe_tc_conditions', $tc_cond, $button_id, $instance, $d_stripe_styles['direct_stripe_tc_text'], $d_stripe_styles['direct_stripe_tc_link'], $d_stripe_styles['direct_stripe_tc_link_text'] );
     echo $tc_cond;
+}
+
+if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
+    echo '<input type="hidden" class="dsDonationValue-' . $instance. '" value=""/>';
 }
 
 //Closing Div
@@ -90,10 +94,21 @@ $str_after = "</div>";
 $str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
 echo $str_after;
 
-$ds_billing_element = apply_filters('ds_billing_element', include('ds-billing-element.php'), $instance, $ds_button );
+$ds_modal_name = apply_filters('ds_modal_name', include('elements/ds-modal-name.php'), $instance, $ds_button );
 
-$ds_shipping_element = apply_filters('ds_shipping_element', include('ds-shipping-element.php'), $instance, $ds_button );
+$ds_billing_element = apply_filters('ds_billing_element', include('elements/ds-billing-element.php'), $instance, $ds_button );
 
-echo apply_filters('ds_modal_element', include('ds-modal-element.php'), $instance, $ds_button, $ds_billing_element, $ds_shipping_element );
+$ds_shipping_element = apply_filters('ds_shipping_element', include('elements/ds-shipping-element.php'), $instance, $ds_button );
+
+$ds_card_element = apply_filters('ds_card_element', include('elements/ds-card-element.php'), $instance, $ds_button );
+
+$ds_modal_button = apply_filters('ds_modal_button', include('elements/ds-modal-button.php'), $instance, $ds_button );
+
+$ds_modal_error = apply_filters('ds_modal_error', include('elements/ds-modal-error.php'), $instance, $ds_button );
+
+$ds_modal_success = apply_filters('ds_modal_success', include('elements/ds-modal-success.php'), $instance, $ds_button );
+
+echo apply_filters('ds_modal_element', include('elements/ds-modal-element.php'), 
+$instance, $ds_button, $ds_modal_name, $ds_billing_element, $ds_shipping_element, $ds_modal_button, $ds_modal_error, $ds_modal_success );
 
 do_action( 'direct_stripe_after_button', $button_id  );

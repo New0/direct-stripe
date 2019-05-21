@@ -58,6 +58,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
        return false;
     }
 
+    buildElement(instance);
     //Modal events
     modalEvent(instance);
     /*handler = stripe_checkout(ds_values);

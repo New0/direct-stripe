@@ -2,6 +2,8 @@
 function setDonationValue(instance){
     var ds_values = window[instance];
     ds_values.original_amount = jQuery("#donationvalue-"+instance).val();
+    jQuery(".dsDonationValue-"+instance).val(ds_values.original_amount);
+    jQuery(".ds-modal-button-"+instance+" > .ds-modal-amount").html(ds_values.original_amount);
     return ds_values.original_amount;
  }
 

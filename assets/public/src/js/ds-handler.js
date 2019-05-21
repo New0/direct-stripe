@@ -3,13 +3,13 @@
  */
 
 function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
-           
-    var example = document.querySelector(".example5");
+
+    var dsProcess = document.querySelector(".ds-element-"+ds_values.instance);
 
     var parobj = ds_values,
     type = parobj["type"];
 
-    var ds_answer_input = "#ds-answer-" + parobj.instance,
+    var ds_answer_input = "#ds-answer-" + parobj.instance
     ds_loading_span = "#loadingDS-" + parobj.instance;
 
     if(type === "donation") {
@@ -19,7 +19,6 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
     }
 
     //jQuery(ds_loading_span).show();
-    console.log(paymentMethodID);
     jQuery.post(
         ds_values.ajaxurl,
         {
@@ -33,14 +32,16 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
             'ds_nonce':parobj.ds_nonce
         },
         function(data) {
-            console.log(data);
             handleServerResponse(data, ds_values);
         }
     );
 }
 
 function handleServerResponse(response, ds_values) {
-    console.log(response);
+
+  var dsProcess = document.querySelector(".ds-element-"+ds_values.instance),
+  ds_answer_input = "#ds-answer-" + ds_values.instance;
+
     if (response.error) {
       // Show error from server on payment form
     } else if (response.requires_action) {
@@ -66,8 +67,8 @@ function handleServerResponse(response, ds_values) {
                     switch (data.id) {
                         case "1":
                             //jQuery(ds_loading_span).hide();
-                            example.classList.remove('submitting');
-                            example.classList.add('submitted');
+                            dsProcess.classList.remove('submitting');
+                            dsProcess.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("success");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();
@@ -78,13 +79,13 @@ function handleServerResponse(response, ds_values) {
                             break;
                         case "2":
                             //jQuery(ds_loading_span).hide();
-                            example.classList.remove('submitting');
-                            example.classList.add('submitted');
+                            dsProcess.classList.remove('submitting');
+                            dsProcess.classList.add('submitted');
                             window.location.assign(data.url);
                             break;
                         default:
-                            example.classList.remove('submitting');
-                            example.classList.add('submitted');
+                            dsProcess.classList.remove('submitting');
+                            dsProcess.classList.add('submitted');
                             jQuery(ds_answer_input).addClass("error");
                             jQuery(ds_answer_input).html(data.message);
                             jQuery(ds_answer_input).show();

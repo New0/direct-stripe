@@ -21,7 +21,8 @@
  * Direct Stripe use MIT Licensed libraries ( https://opensource.org/licenses/MIT ) :
  * VueJS : https://github.com/vuejs/vue
  * Axios : https://github.com/axios/axios
- * Vuetify  : https://github.com/vuetifyjs/vuetify
+ * Vuetify : https://github.com/vuetifyjs/vuetify
+ * Stripe PHP : https://github.com/stripe/stripe-php
  *
  */
 

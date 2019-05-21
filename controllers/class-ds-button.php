@@ -13,6 +13,7 @@ class dsButton {
 		//Process button
 		add_action( 'wp_ajax_ds_process_button',  array( $this, 'direct_stripe_process_button') );
 		add_action( 'wp_ajax_nopriv_ds_process_button',  array( $this, 'direct_stripe_process_button') );
+		
 	}
 	
 	/**
