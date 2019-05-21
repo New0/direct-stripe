@@ -94,6 +94,10 @@ $str_after = "</div>";
 $str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
 echo $str_after;
 
+$ds_modal_image = apply_filters('ds_modal_image', include('elements/ds-modal-image.php'), $instance, $ds_button, $d_stripe_general );
+
+$ds_company_element = apply_filters('ds_company_element', include('elements/ds-company-element.php'), $instance, $ds_button );
+
 $ds_modal_name = apply_filters('ds_modal_name', include('elements/ds-modal-name.php'), $instance, $ds_button );
 
 $ds_billing_element = apply_filters('ds_billing_element', include('elements/ds-billing-element.php'), $instance, $ds_button );
@@ -109,6 +113,7 @@ $ds_modal_error = apply_filters('ds_modal_error', include('elements/ds-modal-err
 $ds_modal_success = apply_filters('ds_modal_success', include('elements/ds-modal-success.php'), $instance, $ds_button );
 
 echo apply_filters('ds_modal_element', include('elements/ds-modal-element.php'), 
-$instance, $ds_button, $ds_modal_name, $ds_billing_element, $ds_shipping_element, $ds_modal_button, $ds_modal_error, $ds_modal_success );
+$instance, $ds_button, $ds_modal_name, $ds_billing_element, $ds_shipping_element, $ds_modal_button, $ds_modal_error,
+ $ds_modal_success, $ds_company_element, $ds_modal_image );
 
 do_action( 'direct_stripe_after_button', $button_id  );

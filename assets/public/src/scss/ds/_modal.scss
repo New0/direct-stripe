@@ -17,7 +17,7 @@
   &-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
     max-width: calc(6 * (100vw / 12) - 28px);
     width: 80%; /* Could be more or less, depending on screen size */
@@ -31,15 +31,16 @@
   
 /* The Close Button */
 .ds-close {
-  color: #aaa;
+  color: #fff;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  padding: 0 15px;
 }
 
 .ds-close:hover,
 .ds-close:focus {
-  color: black;
+  color: #777;
   text-decoration: none;
   cursor: pointer;
 } 

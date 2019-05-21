@@ -1,4 +1,4 @@
-#example5-paymentRequest {
+.element-paymentRequest {
   //max-width: 500px;
   width: 100%;
   margin-bottom: 10px;
@@ -6,6 +6,7 @@
 .ds-element {
   &.in-form{
     background-color: #9169d8;
+    padding: 15px 0;
 
     * {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -15,10 +16,40 @@
 
     form {
       margin: 0 auto;
+
+      img {
+        max-height: 100px;
+        max-width: 100px;
+        border-radius: 50%;
+        margin: 0 auto;
+        border: solid 2px #fff;
+      }
+      .ds-company-name {
+        width: 100%;
+        text-align: center;
+
+        p {
+          width: 100%;
+          text-align: center;
+          font-size: 130%;
+          color: #fff;
+        }  
+      }
+      .ds-product-description {
+        width: 100%;
+        text-align: center;
+
+        p {
+          width: 100%;
+          text-align: center;
+          font-size: 110%;
+          color: #fff;
+        }
+      }
     }
 
     fieldset {
-      border: 1px solid #b5a4ed;
+      border: 1px solid #fff;
       padding: 15px;
       border-radius: 6px;
 
@@ -28,7 +59,7 @@
         text-align: center;
         font-size: 14px;
         font-weight: 500;
-        color: #cdd0f8;
+        color: #fff;
         background-color: #9169d8;
 
         & + * {
@@ -59,7 +90,7 @@
 
     label {
       width: 100%;
-      color: #cdd0f8;
+      color: #fff;
       font-size: 13px;
       font-weight: 500;
       overflow: hidden;
@@ -72,19 +103,19 @@
       color: #fff;
       background: transparent;
       padding: 5px 0 6px 0;
-      border-bottom: 1px solid #a988ec;
+      border-bottom: 1px solid #eee;
       transition: border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
       &::-webkit-input-placeholder {
-        color: #bfaef6;
+        color: #777;
       }
 
       &::-moz-placeholder {
-        color: #bfaef6;
+        color: #777;
       }
 
       &:-ms-input-placeholder {
-        color: #bfaef6;
+        color: #777;
       }
       &.StripeElement--focus,
       &:focus {
@@ -92,10 +123,10 @@
       }
 
       &.StripeElement--invalid {
-        border-color: #ffc7ee;
+        border-color: #fff;
       }
       &:-webkit-autofill {
-        -webkit-text-fill-color: #fce883;
+        -webkit-text-fill-color: #fff;
         transition: background-color 100000000s;
         -webkit-animation: 1ms void-animation-out;
       }
@@ -104,7 +135,7 @@
 
     select {
       &:-webkit-autofill {
-      -webkit-text-fill-color: #fce883;
+      -webkit-text-fill-color: #fff;
         transition: background-color 100000000s;
         -webkit-animation: 1ms void-animation-out;
       }
@@ -145,10 +176,12 @@
       border-radius: 6px;
       color: #9169d8;
       font-weight: 500;
+      border: solid thin #fff;
       cursor: pointer;
 
-      &:active {
-        background-color: #cdd0f8;
+      &:active, &:hover {
+        background-color: #9169d8;
+        color: #fff;
       }
     }
 
@@ -170,7 +203,7 @@
     .success {
       .icon {
         .border {
-          stroke: #bfaef6;
+          stroke: #fff;
         }
         .checkmark {
           stroke: #fff;
@@ -182,7 +215,7 @@
       }
 
       .message {
-        color: #cdd0f8;
+        color: #fff;
       }
 
       .reset {
