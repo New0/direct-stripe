@@ -39,8 +39,8 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                         $ds_modal_form_complete .= '
                         <div class="row">
                             <div class="field">
-                                <label for="ds-element-' . $instance . '-email" data-tid="ds-element.form.email_label">Email</label>
-                                <input id="ds-element-' . $instance . '-email" data-tid="ds-element.form.email_placeholder" class="input" type="text" placeholder="example@domain.ext" required="" autocomplete="email">
+                                <input id="ds-element-' . $instance . '-email" class="input" type="text" required="" autocomplete="email">
+                                <label for="ds-element-' . $instance . '-email" data-tid="ds-element.form.email_label">' . __('Email', 'direct-stripe') . '</label>
                             </div>
                         </div>';
 

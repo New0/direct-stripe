@@ -6,9 +6,9 @@
  */
 return '
 <div class="row">
-    <div class="field">
+    <div class="field">      
+        <input id="ds-element-' . $instance . '-name"  class="input" type="text" required="" autocomplete="name" name="name">
         <label for="ds-element-' . $instance . '-name" data-tid="ds-element.form.name_label">' . __( 'Name', 'direct-stripe') .'</label>
-        <input id="ds-element-' . $instance . '-name" data-tid="ds-element.form.name_placeholder" class="input" type="text" placeholder="Jane Doe" required="" autocomplete="name">
     </div>
 </div>
 ';

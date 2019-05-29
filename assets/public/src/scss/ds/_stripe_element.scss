@@ -18,8 +18,8 @@
       margin: 0 auto;
 
       img {
-        max-height: 100px;
-        max-width: 100px;
+        height: 100px;
+        width: 100px;
         border-radius: 50%;
         margin: 0 auto;
         border: solid 2px #fff;
@@ -82,6 +82,7 @@
     .field {
       position: relative;
       width: 100%;
+      margin-bottom: 1em;
 
       & + .field {
         margin-left: 10px;
@@ -96,15 +97,30 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      position:absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      transition: 0.2s ease all; 
+      -moz-transition: 0.2s ease all; 
+      -webkit-transition: 0.2s ease all;
+
+      &.dsCardElement {
+        top: -1.5em;
+      }
+    }
+
+    input:focus ~ label, input:valid ~ label {
+      top:-1em;
+      color:#fff;
     }
 
     .input {
       width: 100%;
       color: #fff;
       background: transparent;
-      padding: 5px 0 6px 0;
+      padding: 5px;
       border-bottom: 1px solid #eee;
-      transition: border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
       &::-webkit-input-placeholder {
         color: #777;

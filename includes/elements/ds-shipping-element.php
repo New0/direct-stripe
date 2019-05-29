@@ -8,28 +8,28 @@ return '
 <div class="row ds_form_title" data-locale-reversible="">' . __('Shipping information', 'direct-stripe') . '</div>
 <div class="row" data-locale-reversible="">
     <div class="field">
-        <label for="ds-element-' . $instance . '-sh-phone" data-tid="ds-element.form.phone_label">Phone</label>
-        <input id="ds-element-' . $instance . '-sh-phone" data-tid="ds-element.form.phone_placeholder" class="input" type="text" placeholder="(941) 555-0123" required="" autocomplete="tel">
+        <input id="ds-element-' . $instance . '-sh-phone" data-tid="ds-element.form.shipping_phone_placeholder" class="input" type="text" required="" autocomplete="tel">
+        <label for="ds-element-' . $instance . '-sh-phone" data-tid="ds-element.form.shipping_phone_label">' . __('Phone', 'direct-stripe') . '</label>
     </div>
 </div>
 <div class="row" data-locale-reversible="">
     <div class="field">
-        <label for="ds-element-' . $instance . '-sh-address" data-tid="ds-element.form.address_label">Address</label>
-        <input id="ds-element-' . $instance . '-sh-address" data-tid="ds-element.form.address_placeholder" class="input" type="text" placeholder="185 Berry St" required="" autocomplete="address-line1">
+        <input id="ds-element-' . $instance . '-sh-address" data-tid="ds-element.form.shipping_address_placeholder" class="input" type="text" required="" autocomplete="address-line1">
+        <label for="ds-element-' . $instance . '-sh-address" data-tid="ds-element.form.shipping_address_label">' . __('Address', 'direct-stripe') . '</label>
     </div>
 </div>
 <div class="row" data-locale-reversible="">
     <div class="field">
-        <label for="ds-element-' . $instance . '-sh-city" data-tid="ds-element.form.city_label">City</label>
-        <input id="ds-element-' . $instance . '-sh-city" data-tid="elements_examples.form.city_placeholder" class="input" type="text" placeholder="San Francisco" required="" autocomplete="address-level2">
+        <input id="ds-element-' . $instance . '-sh-city" data-tid="elements_examples.form.shipping_city_placeholder" class="input" type="text" required="" autocomplete="address-level2">
+        <label for="ds-element-' . $instance . '-sh-city" data-tid="ds-element.form.shipping_city_label">' . __('City', 'direct-stripe') . '</label>
     </div>
     <div class="field">
-        <label for="ds-element-' . $instance . '-sh-state" data-tid="ds-element.form.state_label">State</label>
-        <input id="example5-state" data-tid="elements_examples.form.state_placeholder" class="input empty" type="text" placeholder="CA" required="" autocomplete="address-level1">
+        <input id="example5-state" data-tid="elements_examples.form.shipping_state_placeholder" class="input empty" type="text" required="" autocomplete="address-level1">
+        <label for="ds-element-' . $instance . '-sh-state" data-tid="ds-element.form.shipping_state_label">' . __('State', 'direct-stripe') . '</label>
     </div>
     <div class="field">
-        <label for="ds-element-' . $instance . '-sh-zip" data-tid="ds-element.form.postal_code_label">ZIP</label>
-        <input id="ds-element-' . $instance . '-sh-zip" data-tid="ds-element.form.postal_code_placeholder" class="input empty" type="text" placeholder="94107" required="" autocomplete="postal-code">
+        <input id="ds-element-' . $instance . '-sh-zip" data-tid="ds-element.form.shipping_postal_code_placeholder" class="input empty" type="text" required="" autocomplete="postal-code">
+        <label for="ds-element-' . $instance . '-sh-zip" data-tid="ds-element.form.shipping_postal_code_label">' . __('ZIP', 'direct-stripe') .'</label>
     </div>
 </div>
 ';
