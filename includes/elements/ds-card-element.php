@@ -6,6 +6,7 @@
  */
 
 return '
+<hr />
 <div class="row ds_form_title" data-locale-reversible="">' . __('Card details', 'direct-stripe') . '</div>
 <div class="row">
     <div class="field dsCardField">

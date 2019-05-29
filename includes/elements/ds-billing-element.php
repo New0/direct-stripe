@@ -5,6 +5,7 @@
  * @since 2.0.0
  */
 return '
+<hr />
 <div class="row ds_form_title" data-locale-reversible="">' . __('Billing information', 'direct-stripe') . '</div>
 <div class="row" data-locale-reversible="">
     <div class="field">

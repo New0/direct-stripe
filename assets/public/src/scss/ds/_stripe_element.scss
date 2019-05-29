@@ -4,14 +4,24 @@
   margin-bottom: 10px;
 }
 .ds-element {
-  &.in-form{
+  &.in-form {
     background-color: #9169d8;
     padding: 15px 0;
+    color: #fff;
 
     * {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 400;
+    }
+
+    hr {
+      background-color: #fff;
+      border: 0;
+      height: 1px;
+      margin-top: 1rem;
+      max-width: 50%;
+      text-align: center;
     }
 
     form {
@@ -121,11 +131,38 @@
         top: -1.5em;
       }
     }
+    
+    .shippingData {
+      margin-top: 1.5em;
+      -webkit-animation: 1ms void-animation-out;
+      -webkit-appearance: checkbox;
+      -moz-appearance: checkbox;
+      appearance: checkbox;
+      outline: initial;
+      border-style: initial;
+      border-radius: initial;
+
+      ~ .dsShippingDetails {
+        display: none;
+        transition: all 5ms;
+      }
+      &:checked {
+        ~ .dsShippingDetails {
+          display: block;
+        }
+      }
+    }
 
     input:focus ~ label, input:valid ~ label {
       top:-1em;
       color:#fff;
       font-size: 10px;
+
+      &.shippingDataLabel {
+        position: relative;
+        font-size: 14px;
+        top: -0.1em;
+      }
     }
 
     .input {
@@ -256,4 +293,19 @@
 
   }
 }
-  
+.entry {
+  .entry-content {
+    .ds-element {
+      &.in-form {
+        hr {
+          background-color: #fff;
+          border: 0;
+          height: 1px;
+          max-width: 50%;
+          text-align: center;
+          margin: 1rem auto 0px;
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
  * HTML for Modal success element
  */
 return '
-<div class="success">
+<div class="' . $instance . '-success success">
     <div class="icon">
         <svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
         <circle class="border" cx="42" cy="42" r="40" stroke-linecap="round" stroke-width="4" stroke="#000" fill="none"></circle>
