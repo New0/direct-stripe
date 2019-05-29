@@ -5,11 +5,11 @@
  * @since 2.0.0
  */
 return '
-<div class="row ds_form_title" data-locale-reversible="">' . __('Shipping information', 'direct-stripe') . '</div>
+<div class="row ds_form_title" data-locale-reversible="">' . __('Billing information', 'direct-stripe') . '</div>
 <div class="row" data-locale-reversible="">
     <div class="field">
-        <label for="ds-element-' . $instance . '-phone" data-tid="ds-element.form.phone_label">Phone</label>
-        <input id="ds-element-' . $instance . '-phone" data-tid="ds-element.form.phone_placeholder" class="input" type="text" placeholder="(941) 555-0123" required="" autocomplete="tel">
+        <input id="ds-element-' . $instance . '-phone" data-tid="ds-element.form.phone_placeholder" class="input" type="text" required="" autocomplete="tel">
+        <label for="ds-element-' . $instance . '-phone" data-tid="ds-element.form.phone_label">' . __('Phone', 'direct-stripe') . '</label>
     </div>
 </div>
 <div class="row" data-locale-reversible="">

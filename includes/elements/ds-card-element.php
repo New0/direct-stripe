@@ -6,8 +6,9 @@
  */
 
 return '
+<div class="row ds_form_title" data-locale-reversible="">' . __('Card details', 'direct-stripe') . '</div>
 <div class="row">
-    <div class="field">
+    <div class="field dsCardField">
         
         <div id="ds-element-' . $instance .'-card" class="input StripeElement StripeElement--empty">
             <div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: medium none !important; display: block !important; background: transparent none repeat scroll 0% 0% !important; position: relative !important; opacity: 1 !important;">
@@ -15,7 +16,7 @@ return '
                 <input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: medium none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent none repeat scroll 0% 0% !important; pointer-events: none !important; font-size: 16px !important;">
             </div>
         </div>
-        <label class="dsCardElement" for="ds-element-' . $instance .'-card" data-tid="ds-element.form.card_label">' . __('Card', 'direct-stripe') . '</label>
+
     </div>
 </div>
 ';
