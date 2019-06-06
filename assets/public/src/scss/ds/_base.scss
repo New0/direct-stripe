@@ -31,6 +31,7 @@
                 pointer-events: none;
             }  
         }
+
         .success {
             pointer-events: all;
 
@@ -40,13 +41,8 @@
                 .border,
                 .checkmark {
                     opacity: 1;
-                    stroke-dashoffset: 0 !important;
                 }
-            }
-
-            > * {
-                opacity: 1;
-                transform: none !important;
+                
             }
 
             > :nth-child(2) {
@@ -62,58 +58,29 @@
             }
 
         }
-    }   
+    } 
 
-    .caption {
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        width: 100%;
-        top: 100%;
-        left: 0;
-        padding: 15px 10px 0;
-        color: #aab7c4;
-        font-family: Roboto, "Open Sans", "Segoe UI", sans-serif;
-        font-size: 15px;
-        font-weight: 500;
-
-        * {
-            font-family: inherit;
-            font-size: inherit;
-            font-weight: inherit;
-        }
-
-        .no-charge {
-            color: #fff;
-            margin-right: 10px;
-        }
-
-        a {
-            &.source {
-                text-align: right;
-                color: inherit;
-                transition: color 0.1s ease-in-out;
-                margin-left: 10px;
-
-                &:hover {
-                    color: #e5ae67;
-                }
-
-                &:active {
-                    color: #438b69;
-                }
-
-                svg {
-                    margin-right: 10px;
-
-                    path {
-                        fill: currentColor;
-                    }
-                }
+    &.submitting {
+        .success {
+            .border,
+            .checkmark {
+                stroke-dashoffset: 60 !important;
             }
         }
     }
+    &.submitted {
+        .success {
+            > * {
+                opacity: 1;
+            }
 
+            .border,
+            .checkmark {
+                stroke-dashoffset: 0 !important;
+            }
+        }
+    }
+   
     form {
         position: relative;
         width: 100%;
@@ -133,7 +100,7 @@
         input:-ms-input-placeholder {
             opacity: 1;
         }
-    }
+    } 
 
     .error {
         display: -ms-flexbox;
@@ -169,7 +136,7 @@
             margin-right: 10px;
         }
     }
-
+    
     .success {
         display: -ms-flexbox;
         display: flex;
@@ -203,14 +170,14 @@
 
             svg {
                 will-change: transform;
-
-                .border {
-                    stroke-dasharray: 251;
-                    stroke-dashoffset: 62.75;
-                    transform-origin: 50% 50%;
-                    transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-                    animation: spin 1s linear infinite;
-                }
+            }
+            
+            .border {
+                stroke-dasharray: 251;
+                stroke-dashoffset: 62.75;
+                transform-origin: 50% 50%;
+                transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+                animation: spin 1s linear infinite;
             }
 
             .checkmark {
