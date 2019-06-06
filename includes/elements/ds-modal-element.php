@@ -57,9 +57,8 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                                               
                     $ds_modal_form_complete .= '
                     </fieldset>
-                    ' . $ds_modal_error . $ds_modal_success . '
+                    ' . $ds_modal_error  . $ds_modal_success . '
                 </form>
-                
             </div>
         </div><!-- .ds-form -->
 

@@ -9,7 +9,7 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
     var parobj = ds_values,
     type = parobj["type"];
 
-    var ds_answer_input = "#ds-answer-" + parobj.instance
+    var ds_answer_input = "#ds-answer-" + parobj.instance,
     ds_loading_span = "#loadingDS-" + parobj.instance;
 
     if(type === "donation") {
@@ -43,6 +43,7 @@ function handleServerResponse(response, ds_values) {
   ds_answer_input = "#ds-answer-" + ds_values.instance;
 
     if (response.error) {
+      console.log(response);
       // Show error from server on payment form
     } else if (response.requires_action) {
       // Use Stripe.js to handle required card action

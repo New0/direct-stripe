@@ -10,6 +10,7 @@ function registerElements(elements, elementName) {
   var form = dsProcess.querySelector('form');
 
   var resetButton = dsProcess.querySelector('a.reset');
+
   var error = form.querySelector('.error');
   var errorMessage = error.querySelector('.message');
 
@@ -102,7 +103,7 @@ function registerElements(elements, elementName) {
 
     // Show a loading screen...
     dsProcess.classList.add('submitting');
-
+console.log(dsProcess.classList);
     // Disable all inputs.
     disableInputs();
 
@@ -139,7 +140,9 @@ function registerElements(elements, elementName) {
       } else {
 
         stripe.createToken(elements[0], {}).then(function(resultT) {
+          console.log(resultT);
           if (resultT.token) {
+
             stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)
           }
         });

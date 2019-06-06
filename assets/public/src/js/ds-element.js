@@ -23,10 +23,10 @@ function buildElement(instance) {
           fontSmoothing: "antialiased",
   
           "::placeholder": {
-            color: "#BFAEF6"
+            color: "#fff"
           },
           ":-webkit-autofill": {
-            color: "#fce883"
+            color: "#fff"
           }
         },
         invalid: {
@@ -36,54 +36,6 @@ function buildElement(instance) {
       }
     });
     card.mount("#ds-element-"+instance+"-card");
-  
-    /**
-     * Payment Request Element
-     */
-    var paymentRequest = stripe.paymentRequest({
-      country: "US",
-      currency: "usd",
-      total: {
-        amount: 2500,
-        label: "Total"
-      },
-      requestShipping: true,
-      shippingOptions: [
-        {
-          id: "free-shipping",
-          label: "Free shipping",
-          detail: "Arrives in 5 to 7 days",
-          amount: 0
-        }
-      ]
-    });
-
-    paymentRequest.on("token", function(result) {
-      var example = document.querySelector("."+instance);
-      example.querySelector(".token").innerText = result.token.id;
-      example.classList.add("submitted");
-      result.complete("success");
-    });
-  
-    var paymentRequestElement = elements.create("paymentRequestButton", {
-      paymentRequest: paymentRequest,
-      style: {
-        paymentRequestButton: {
-          theme: "light"
-        }
-      }
-    });
-
-    paymentRequest.canMakePayment().then(function(result) {
-      if (result) {
-        document.querySelector("."+instance+" .card-only").style.display = "none";
-        document.querySelector(
-          "."+instance+" .payment-request-available"
-        ).style.display =
-          "block";
-        paymentRequestElement.mount("#ds-element-"+instance+"-paymentRequest");
-      }
-    });
   
     registerElements([card], "ds-element-"+instance);
 

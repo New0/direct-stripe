@@ -110,23 +110,26 @@ class ds_process_transactions {
 
                 $charge = false;
 				$update_card  = false;
-
-                // create new subscription to plan
-                $subscriptiondata = array(
-                    "items" => array(
-                        array(
-                            "plan" => $amount,
+                if ( !empty($payment_method_id) ) {
+                    // create new subscription to plan
+                    $subscriptiondata = array(
+                        "items" => array(
+                            array(
+                                "plan" => $amount,
+                            ),
                         ),
-                    ),
-                    "coupon"   => $coupon,
-                    "metadata"	=> array(
-                        "description" => $description
-                    ),
-                    'customer'  =>  $user['stripe_id']
-                );
-                $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
-                $subscription = \Stripe\Subscription::create( $subscriptiondata );
-
+                        "coupon"   => $coupon,
+                        "metadata"	=> array(
+                            "description" => $description
+                        ),
+                        "default_payment_method"    => $payment_method_id,
+                        "customer"  => $user['stripe_id'],
+                        "expand[]"  => "latest_invoice.payment_intent"
+                    );
+                    $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
+                    $subscription = \Stripe\Subscription::create( $subscriptiondata );
+                    \ds_process_functions::ds_generatePaymentResponse($subscription );
+                }
             }
 
 
@@ -169,13 +172,13 @@ class ds_process_transactions {
 
         //Process answer
         if( $charge ) {
-            $answer = \ds_process_functions::process_answer( $charge, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
+            //$answer = \ds_process_functions::process_answer( $charge, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } elseif( $subscription ) {
-            $answer = \ds_process_functions::process_answer( $subscription, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
+            //$answer = \ds_process_functions::process_answer( $subscription, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } elseif( $update_card ) {
             $answer = \ds_process_functions::process_answer( $update_card, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         } else {
-            $answer = \ds_process_functions::process_answer( $e, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
+           // $answer = \ds_process_functions::process_answer( $e, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
         }
 
     }

@@ -105,7 +105,7 @@ function buildElement(instance) {
       // Stripe's examples are localized to specific languages, but if
       // you wish to have Elements automatically detect your user's locale,
       // use `locale: 'auto'` instead.
-      locale: 'es'
+      locale: 'auto'
     });
   
     /**
@@ -123,10 +123,10 @@ function buildElement(instance) {
           fontSmoothing: "antialiased",
   
           "::placeholder": {
-            color: "#BFAEF6"
+            color: "#fff"
           },
           ":-webkit-autofill": {
-            color: "#fce883"
+            color: "#fff"
           }
         },
         invalid: {
@@ -136,54 +136,6 @@ function buildElement(instance) {
       }
     });
     card.mount("#ds-element-"+instance+"-card");
-  
-    /**
-     * Payment Request Element
-     */
-    var paymentRequest = stripe.paymentRequest({
-      country: "US",
-      currency: "usd",
-      total: {
-        amount: 2500,
-        label: "Total"
-      },
-      requestShipping: true,
-      shippingOptions: [
-        {
-          id: "free-shipping",
-          label: "Free shipping",
-          detail: "Arrives in 5 to 7 days",
-          amount: 0
-        }
-      ]
-    });
-
-    paymentRequest.on("token", function(result) {
-      var example = document.querySelector("."+instance);
-      example.querySelector(".token").innerText = result.token.id;
-      example.classList.add("submitted");
-      result.complete("success");
-    });
-  
-    var paymentRequestElement = elements.create("paymentRequestButton", {
-      paymentRequest: paymentRequest,
-      style: {
-        paymentRequestButton: {
-          theme: "light"
-        }
-      }
-    });
-
-    paymentRequest.canMakePayment().then(function(result) {
-      if (result) {
-        document.querySelector("."+instance+" .card-only").style.display = "none";
-        document.querySelector(
-          "."+instance+" .payment-request-available"
-        ).style.display =
-          "block";
-        paymentRequestElement.mount("#ds-element-"+instance+"-paymentRequest");
-      }
-    });
   
     registerElements([card], "ds-element-"+instance);
 
@@ -200,7 +152,7 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
     var parobj = ds_values,
     type = parobj["type"];
 
-    var ds_answer_input = "#ds-answer-" + parobj.instance
+    var ds_answer_input = "#ds-answer-" + parobj.instance,
     ds_loading_span = "#loadingDS-" + parobj.instance;
 
     if(type === "donation") {
@@ -234,6 +186,7 @@ function handleServerResponse(response, ds_values) {
   ds_answer_input = "#ds-answer-" + ds_values.instance;
 
     if (response.error) {
+      console.log(response);
       // Show error from server on payment form
     } else if (response.requires_action) {
       // Use Stripe.js to handle required card action
@@ -306,6 +259,7 @@ function registerElements(elements, elementName) {
   var form = dsProcess.querySelector('form');
 
   var resetButton = dsProcess.querySelector('a.reset');
+
   var error = form.querySelector('.error');
   var errorMessage = error.querySelector('.message');
 
@@ -398,7 +352,7 @@ function registerElements(elements, elementName) {
 
     // Show a loading screen...
     dsProcess.classList.add('submitting');
-
+console.log(dsProcess.classList);
     // Disable all inputs.
     disableInputs();
 
@@ -435,7 +389,9 @@ function registerElements(elements, elementName) {
       } else {
 
         stripe.createToken(elements[0], {}).then(function(resultT) {
+          console.log(resultT);
           if (resultT.token) {
+
             stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)
           }
         });

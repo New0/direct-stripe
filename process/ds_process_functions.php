@@ -500,14 +500,17 @@ class ds_process_functions
      * @since 2.2.0
      */
     public static function ds_generatePaymentResponse($intent) {
-        if ($intent->status == 'requires_action' &&
-            $intent->next_action->type == 'use_stripe_sdk') {
+        if (
+            $intent->status == 'requires_action' && $intent->next_action->type == 'use_stripe_sdk' ||
+            $intent->status == 'incomplete' && $intent->object === "subscription" 
+            ) {
             # Tell the client to handle the action
             wp_send_json( array(
                 'requires_action' => true,
                 'payment_intent_client_secret' => $intent->client_secret
                 )
             );
+
         } else if ($intent->status == 'succeeded') {
             # The payment didn’t need any additional actions and completed!
             # Handle post-payment fulfillment
