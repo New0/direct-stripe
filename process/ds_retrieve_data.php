@@ -6,9 +6,6 @@
  * Time: 19:48
  */
 
-//Security check
-check_ajax_referer( 'direct-stripe-nonce','ds_nonce' );
-
 extract($_POST, EXTR_PREFIX_SAME, "post_");
 
 $d_stripe_general = get_option('direct_stripe_general_settings');

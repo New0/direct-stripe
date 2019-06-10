@@ -103,7 +103,7 @@ function registerElements(elements, elementName) {
 
     // Show a loading screen...
     dsProcess.classList.add('submitting');
-console.log(dsProcess.classList);
+
     // Disable all inputs.
     disableInputs();
 
@@ -140,7 +140,6 @@ console.log(dsProcess.classList);
       } else {
 
         stripe.createToken(elements[0], {}).then(function(resultT) {
-          console.log(resultT);
           if (resultT.token) {
 
             stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)

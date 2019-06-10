@@ -30,11 +30,25 @@ class ds_process_transactions {
      */
     function ds_process()
     {
+        //Security check
+        check_ajax_referer( 'direct-stripe-nonce', 'ds_nonce' );
+
         //Retrieve Data
         require_once( DSCORE_PATH . 'process/ds_retrieve_data.php');
 
         //Process API Keys
         \ds_process_functions::api_keys( $d_stripe_general );
+
+        //Process User
+        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
+
+        //Set of data for answers
+        $resultData = [ 
+            'email_address'     => $email_address,
+            'general_options'   => $d_stripe_general,
+            'params'            => $params,
+            'user'              => $user
+        ];
 
         if ( !empty($payment_intent_id) ) {
             $intent = \Stripe\PaymentIntent::retrieve(
@@ -42,11 +56,8 @@ class ds_process_transactions {
             );
             $intent->confirm();
 
-            \ds_process_functions::ds_generatePaymentResponse($intent);
+            \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
         }
-
-        //Process User
-        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
 
         //Process Transaction
         try {
@@ -67,22 +78,20 @@ class ds_process_transactions {
                 $fee = \Stripe\InvoiceItem::create( $setupfeedata );
             }
 
-            if( $params['type'] === 'update' ) { //update
-            	
-                $subscription = false;
-                $charge = false;
+            //Process Update Type
+            if( $params['type'] === 'update' ) { 
 
-                $update_card = array(
+                $intent = [
                     'user'  =>  $user,
                     'text'  =>  $amount,
-                    'type'  =>  'card_update'
-                );
+                    'type'  =>  'card_update',
+                    'status'=> 'succeeded'
+                ];
 
+                \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
 
-            } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') { //Charge
-
-                $subscription = false;
-                $update_card  = false;
+            //Process payment and donation Type
+            } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') {
                 
                 if($capture === true){
                     $capture_method = 'automatic';
@@ -103,86 +112,38 @@ class ds_process_transactions {
                     }
                     $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
                     $intent  = \Stripe\PaymentIntent::create( $chargerdata );
-                    \ds_process_functions::ds_generatePaymentResponse($intent);
+                    \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
                 }
 
-            } elseif( $params['type'] === 'subscription' ) { //Subscriptions
+            //Process subscription Type
+            } elseif( $params['type'] === 'subscription' && !empty($payment_method_id) ) {
+               
+                // create new subscription to plan
+                $subscriptiondata = [
+                    "items" => [
+                        [
+                            "plan" => $amount,
+                        ],
+                    ],
+                    "coupon"   => $coupon,
+                    "metadata"	=> [
+                        "description" => $description
+                    ],
+                    "customer"  => $user['stripe_id'],
+                    "expand[]"  => "latest_invoice.payment_intent"
+                ];
+                $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
+                $subscription = \Stripe\Subscription::create( $subscriptiondata );
+                \ds_process_functions::ds_generatePaymentResponse( $subscription, $resultData );
 
-                $charge = false;
-				$update_card  = false;
-                if ( !empty($payment_method_id) ) {
-                    // create new subscription to plan
-                    $subscriptiondata = array(
-                        "items" => array(
-                            array(
-                                "plan" => $amount,
-                            ),
-                        ),
-                        "coupon"   => $coupon,
-                        "metadata"	=> array(
-                            "description" => $description
-                        ),
-                        "default_payment_method"    => $payment_method_id,
-                        "customer"  => $user['stripe_id'],
-                        "expand[]"  => "latest_invoice.payment_intent"
-                    );
-                    $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
-                    $subscription = \Stripe\Subscription::create( $subscriptiondata );
-                    \ds_process_functions::ds_generatePaymentResponse($subscription );
-                }
             }
-
 
         } catch (Exception $e) {
-
-            if( ! isset( $charge ) ) {
-                $charge = false;
-            } elseif( ! isset( $subscription ) ) {
-                $subscription = false;
-            }
-
             $e = $e;
             error_log("Something wrong happened:" . $e->getMessage() );
         }
 
-        //Retrieve Meta Data
-        require_once( DSCORE_PATH . 'process/ds_retrieve_meta.php');
-        //Process Meta Data
-        if( $charge && $d_stripe_general['direct_stripe_check_records'] !== true || $subscription && $d_stripe_general['direct_stripe_check_records'] !== true ) {
-            $post_id = \ds_process_functions::logs_meta( $logsdata, $params );
-            if( $user ){
-                $user_meta = \ds_process_functions::user_meta( $logsdata, $params, $user );
-                $user_id = $user['user_id'];
-            }
-        } else {
-            $post_id = false;
-            $user_id = false;
-        }
-
-        //Process emails
-        if( $charge ) {
-            $email = \ds_process_functions::process_emails( $charge, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
-        } elseif( $subscription ) {
-            $email = \ds_process_functions::process_emails( $subscription, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
-        } elseif( $update_card ) {
-            $answer = \ds_process_functions::process_answer( $update_card,  $token, $button_id, $currency, $email_address, $description, $user, $post_id );
-        } else {
-            $email = \ds_process_functions::process_emails( $e, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id );
-        }
-
-        //Process answer
-        if( $charge ) {
-            //$answer = \ds_process_functions::process_answer( $charge, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
-        } elseif( $subscription ) {
-            //$answer = \ds_process_functions::process_answer( $subscription, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
-        } elseif( $update_card ) {
-            $answer = \ds_process_functions::process_answer( $update_card, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
-        } else {
-           // $answer = \ds_process_functions::process_answer( $e, $button_id, $token, $params, $d_stripe_general, $user, $post_id );
-        }
-
     }
-
 
 }
 $dsProcess = new ds_process_transactions;

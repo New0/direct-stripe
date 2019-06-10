@@ -208,7 +208,7 @@ class ds_process_functions
      *
      * @since 2.1.3
      */
-    public static function process_emails( $answer, $token, $button_id, $amount, $currency, $email_address, $description, $user, $post_id ) {
+    public static function process_emails( $answer, $button_id, $amount, $currency, $email_address, $description, $user, $post_id ) {
 
         $d_stripe_emails  = get_option('direct_stripe_emails_settings');
         $headers          = array('Content-Type: text/html; charset=UTF-8');
@@ -220,10 +220,10 @@ class ds_process_functions
             if (isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true) {
 
                 $email_subject = apply_filters('direct_stripe_error_user_email_subject',
-                    $d_stripe_emails['direct_stripe_user_error_email_subject'], $token, $amount, $currency,
+                    $d_stripe_emails['direct_stripe_user_error_email_subject'], $amount, $currency,
                     $email_address, $description, $user, $button_id);
                 $email_content = apply_filters('direct_stripe_error_user_email_content',
-                    $d_stripe_emails['direct_stripe_user_error_email_content'], $token, $amount, $currency,
+                    $d_stripe_emails['direct_stripe_user_error_email_content'], $amount, $currency,
                     $email_address, $description, $user, $button_id);
 
                 wp_mail($email_address, $email_subject, $email_content, $headers);
@@ -233,10 +233,10 @@ class ds_process_functions
             if (isset($d_stripe_emails['direct_stripe_admin_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] === true) {
 
                 $email_subject = apply_filters('direct_stripe_error_admin_email_subject',
-                    $d_stripe_emails['direct_stripe_admin_error_email_subject'], $token, $amount, $currency,
+                    $d_stripe_emails['direct_stripe_admin_error_email_subject'], $amount, $currency,
                     $email_address, $description, $user, $button_id);
                 $email_content = apply_filters('direct_stripe_error_admin_email_content',
-                    $d_stripe_emails['direct_stripe_admin_error_email_content'], $token, $amount, $currency,
+                    $d_stripe_emails['direct_stripe_admin_error_email_content'], $amount, $currency,
                     $email_address, $description, $user, $button_id);
 
                 wp_mail($admin_email, $email_subject, $email_content, $headers);
@@ -248,7 +248,6 @@ class ds_process_functions
             if ( isset($d_stripe_emails['direct_stripe_user_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_emails_checkbox'] === true ) {
                 $email_subject = apply_filters('direct_stripe_success_user_email_subject',
                     $d_stripe_emails['direct_stripe_user_email_subject'],
-                    $token,
                     $amount,
                     $currency,
                     $email_address,
@@ -258,7 +257,6 @@ class ds_process_functions
                 );
                 $email_content = apply_filters('direct_stripe_success_user_email_content',
                     $d_stripe_emails['direct_stripe_user_email_content'],
-                    $token,
                     $amount,
                     $currency,
                     $email_address,
@@ -274,7 +272,6 @@ class ds_process_functions
 
                 $email_subject = apply_filters('direct_stripe_success_admin_email_subject',
                     $d_stripe_emails['direct_stripe_admin_email_subject'],
-                    $token,
                     $amount,
                     $currency,
                     $email_address,
@@ -284,7 +281,6 @@ class ds_process_functions
                 );
                 $email_content = apply_filters('direct_stripe_success_admin_email_content',
                     $d_stripe_emails['direct_stripe_admin_email_content'],
-                    $token,
                     $amount,
                     $currency,
                     $email_address,
@@ -307,7 +303,7 @@ class ds_process_functions
      *
      * @since 2.1.3
      */
-    public static function process_answer( $answer, $button_id, $token, $params, $d_stripe_general, $user, $post_id ) {
+    public static function process_answer( $answer, $button_id, $params, $d_stripe_general, $user, $post_id ) {
 
         if( isset( $answer->jsonBody['error'] )  ) { //Transaction failed
 
@@ -371,8 +367,7 @@ class ds_process_functions
         } else { //Transaction succeeded
 
             // Add custom action before redirection
-            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id,
-                $user['user_id'], $token);
+            do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id, $user['user_id'] );
 
             //Answer for ajax
             if ( ! empty($params['success_url']) ) {
@@ -499,35 +494,82 @@ class ds_process_functions
      *
      * @since 2.2.0
      */
-    public static function ds_generatePaymentResponse($intent) {
-        if (
-            $intent->status == 'requires_action' && $intent->next_action->type == 'use_stripe_sdk' ||
-            $intent->status == 'incomplete' && $intent->object === "subscription" 
-            ) {
-            # Tell the client to handle the action
+    public static function ds_generatePaymentResponse($intent, $resultData) {
+        if ( $intent->status === "requires_action" && $intent->next_action->type === "use_stripe_sdk" ) {
+            // Tell the client to handle the action
             wp_send_json( array(
                 'requires_action' => true,
-                'payment_intent_client_secret' => $intent->client_secret
+                'payment_intent_client_secret' => $intent->client_secret,
+                'action_type'   => 'requires_action'
                 )
             );
+        } else if ( $intent->status === "incomplete" && $intent->object === "subscription" ) {
 
-        } else if ($intent->status == 'succeeded') {
-            # The payment didn’t need any additional actions and completed!
-            # Handle post-payment fulfillment
+            $client_secret = $intent->latest_invoice->payment_intent->client_secret;
+            // Tell the client to complete payment
             wp_send_json( array(
-                'id'      => '1',
-                'message' => 'success'
+                'requires_action' => true,
+                'payment_intent_client_secret' => $client_secret,
+                'action_type'   => 'incomplete'
                 )
             );
+        } else if ( $intent->status === "succeeded" ) {
+            // Process completed get answer
+            pre_process_answer($intent, $resultData);
+
         } else {
             # Invalid status
             http_response_code(500);
-            wp_send_json( array(
+            wp_send_json([
                 'id'      => '3',
                 'message' => 'Invalid PaymentIntent status'
-                )
-            ) ; 
+            ]); 
         }
       }
 
+
+
+    /**
+     * Pre process answers and emails
+     *
+     * @since 2.2.0
+     */
+    public static function pre_process_answer($intent, $resultData){
+        $return = array(
+            'id'      => '1',
+            'message' => 'success'
+        );
+        wp_send_json($return);
+        /*
+        //Process Meta Data
+        if( $resultData['general_options']['direct_stripe_check_records'] !== true ) {
+             //Retrieve Meta Data
+            require_once( DSCORE_PATH . 'process/ds_retrieve_meta.php');
+
+            $post_id = self::logs_meta( $logsdata, $params );
+            if( $resultData['user'] ){
+                $user_meta = self::user_meta( $logsdata, $params, $resultData['user'] );
+                $user_id = $resultData['user']['user_id'];
+            }
+        } else {
+            $post_id = false;
+            $user_id = false;
+        }
+
+        //Process emails
+        if( $intent ) {
+            $email = self::process_emails( $intent, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
+        } else {
+            $email = self::process_emails( $e, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
+        }
+
+        //Process answer
+        if( $intent ) {
+            $answer = self::process_answer( $intent, $button_id, $params, $resultData['general_options'], $resultData['user'], $post_id );
+        } else {
+            $answer = self::process_answer( $e, $button_id, $params, $resultData['general_options'], $resultData['user'], $post_id );
+        }
+        */
+    }
+ 
 }
