@@ -63,7 +63,6 @@ function processResult(result, ds_values){
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
   ds_answer_input = "#ds-answer-" + ds_values.instance;
 
-  console.log(result);
   if ( result.paymentIntent.status === "requires_confirmation") {
       jQuery.post(
           ds_values.ajaxurl,

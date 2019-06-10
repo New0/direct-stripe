@@ -515,7 +515,7 @@ class ds_process_functions
             );
         } else if ( $intent->status === "succeeded" ) {
             // Process completed get answer
-            pre_process_answer($intent, $resultData);
+            self::pre_process_answer($intent, $resultData);
 
         } else {
             # Invalid status

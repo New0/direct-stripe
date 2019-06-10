@@ -39,15 +39,10 @@ class ds_process_transactions {
         //Process API Keys
         \ds_process_functions::api_keys( $d_stripe_general );
 
-        //Process User
-        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
-
         //Set of data for answers
-        $resultData = [ 
-            'email_address'     => $email_address,
+        $resultData = [
             'general_options'   => $d_stripe_general,
-            'params'            => $params,
-            'user'              => $user
+            'params'            => $params
         ];
 
         if ( !empty($payment_intent_id) ) {
@@ -58,6 +53,9 @@ class ds_process_transactions {
 
             \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
         }
+
+        //Process User
+        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
 
         //Process Transaction
         try {
