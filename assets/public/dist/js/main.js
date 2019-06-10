@@ -188,7 +188,7 @@ function handleServerResponse(response, ds_values) {
     stripe.handleCardPayment(
       response.payment_intent_client_secret
     ).then(function(result){
-      displayFinalResult(result, ds_values);
+      processResult(result, ds_values);
     });
   } else if (response.requires_action && response.action_type === "requires_action") {
     // Use Stripe.js to handle required card action
@@ -206,21 +206,32 @@ function processResult(result, ds_values){
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
   ds_answer_input = "#ds-answer-" + ds_values.instance;
 
-  console.log(result);
-  if ( result.paymentIntent.status === "requires_confirmation") {
+  if ( result.paymentIntent.status === "requires_confirmation" ) {
       jQuery.post(
-          ds_values.ajaxurl,
-          {
-              'action': 'ds_process_button',
-              'paymentIntentID': result.paymentIntent.id,
-              'params': ds_values,
-              'ds_nonce': ds_values.ds_nonce
-          },
-          function(data) {
-            console.log(data);
-            displayFinalResult(data, ds_values);
-          }
+        ds_values.ajaxurl,
+        {
+          'action': 'ds_process_button',
+          'paymentIntentID': result.paymentIntent.id,
+          'params': ds_values,
+          'ds_nonce': ds_values.ds_nonce
+        },
+        function(data) {
+          displayFinalResult(data, ds_values);
+        }
       );
+  } else if ( result.paymentIntent.status === "succeeded" ) {
+    jQuery.post(
+      ds_values.ajaxurl,
+      {
+        'action': 'ds_process_button',
+        'paymentIntentSucceeded': result.paymentIntent,
+        'params': ds_values,
+        'ds_nonce': ds_values.ds_nonce
+      },
+      function(data) {
+        displayFinalResult(data, ds_values);
+      }
+    );
   } else {
     console.log("elseProcess");
     displayFinalResult(result, ds_values);
@@ -230,6 +241,7 @@ function processResult(result, ds_values){
 function displayFinalResult(data,  ds_values){
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
   ds_answer_input = "#ds-answer-" + ds_values.instance;
+  
   switch (data.id) {
     case "1":
       dsProcess.classList.remove('submitting');

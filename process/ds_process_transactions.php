@@ -45,6 +45,7 @@ class ds_process_transactions {
             'params'            => $params
         ];
 
+        //Confirm Payment Intent Server side and display answers
         if ( !empty($payment_intent_id) ) {
             $intent = \Stripe\PaymentIntent::retrieve(
               $payment_intent_id
@@ -52,6 +53,11 @@ class ds_process_transactions {
             $intent->confirm();
 
             \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
+
+        //Payment Intent already confirmed on frontend, display answers
+        } else if( !empty( $paymentIntentSucceeded ) ) {
+            $intent = (object) $paymentIntentSucceeded;
+            \ds_process_functions::ds_generatePaymentResponse( $intent, $resultData );
         }
 
         //Process User
