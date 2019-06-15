@@ -165,19 +165,13 @@ class ds_process_transactions {
                 }
                 if( $params['shipping'] === '1' ) {
                     $subscriptiondata["metadata"]  = [
-                        [
-                            "shipping" => [
-                                "name"  => $logsdata['ds_shipping_name'],
-                                "phone" => $logsdata['ds_shipping_address_phone'],
-                                "address"   => [
-                                    "line1"         => $logsdata['ds_shipping_address_line1'],
-                                    "city"          => $logsdata['ds_shipping_address_city'],
-                                    "country"       => $logsdata['ds_shipping_address_country_code'],
-                                    "postal_code"   => $logsdata['ds_shipping_address_zip'],
-                                    "state"         => $logsdata['ds_shipping_address_state']
-                                ]
-                            ]
-                        ]
+                        "shipping_name"                  => $logsdata['ds_shipping_name'],
+                        "shipping_phone"                 => $logsdata['ds_shipping_address_phone'],
+                        "shipping_address_line1"         => $logsdata['ds_shipping_address_line1'],
+                        "shipping_address_city"          => $logsdata['ds_shipping_address_city'],
+                        "shipping_address_country"       => $logsdata['ds_shipping_address_country_code'],
+                        "shipping_address_postal_code"   => $logsdata['ds_shipping_address_zip'],
+                        "shipping_address_state"         => $logsdata['ds_shipping_address_state']
                     ];
                 }
                 $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
