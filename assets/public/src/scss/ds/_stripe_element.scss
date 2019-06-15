@@ -143,17 +143,18 @@
       border-radius: initial;
 
       ~ .dsShippingDetails {
-        display: none;
+        display: block;
         transition: all 5ms;
       }
       &:checked {
         ~ .dsShippingDetails {
-          display: block;
+          display: none;
         }
       }
     }
 
-    input:focus ~ label, input:valid ~ label {
+    input:focus ~ label, input:valid ~ label,
+    select:focus ~ label, select:valid ~ label {
       top:-1em;
       color:#fff;
       font-size: 10px;
@@ -215,6 +216,11 @@
         text-overflow: ellipsis;
         padding-right: 20px;
       }
+    }
+
+    option {
+      background-color: #9169d8;
+      border-bottom: thin solid #fff;
     }
 
     .StripeElement--webkit-autofill {

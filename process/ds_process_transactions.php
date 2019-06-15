@@ -39,29 +39,40 @@ class ds_process_transactions {
         //Process API Keys
         \ds_process_functions::api_keys( $d_stripe_general );
 
-        //Set of data for answers
-        $resultData = [
-            'general_options'   => $d_stripe_general,
-            'params'            => $params
-        ];
+        
 
         //Confirm Payment Intent Server side and display answers
-        if ( !empty($payment_intent_id) ) {
+        if ( !empty($payment_intent_id) && !empty( get_transient('ds_data' . $button_id) ) ) {
             $intent = \Stripe\PaymentIntent::retrieve(
               $payment_intent_id
             );
             $intent->confirm();
 
-            \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
+            $resultData = get_transient('ds_data' . $button_id);
+            delete_transient('ds_data' . $button_id);
+            
+            \ds_process_functions::ds_generatePaymentResponse( $intent, $resultData );
 
         //Payment Intent already confirmed on frontend, display answers
-        } else if( !empty( $paymentIntentSucceeded ) ) {
+        } else if( !empty( $paymentIntentSucceeded ) && !empty( get_transient('ds_data' . $button_id) ) ) {
             $intent = (object) $paymentIntentSucceeded;
+            $resultData = get_transient('ds_data' . $button_id);
+            delete_transient('ds_data' . $button_id);
+
             \ds_process_functions::ds_generatePaymentResponse( $intent, $resultData );
         }
 
         //Process User
-        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params );
+        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $logsdata, $params );
+
+        //Set of data for answers
+        $resultData = [
+            'general_options'   => $d_stripe_general,
+            'params'            => $params,
+            'logsdata'          => $logsdata,
+            'user'              => $user
+        ];
+        set_transient('ds_data' . $button_id, $resultData, 600 );
 
         //Process Transaction
         try {
@@ -89,7 +100,7 @@ class ds_process_transactions {
                     'user'  =>  $user,
                     'text'  =>  $amount,
                     'type'  =>  'card_update',
-                    'status'=> 'succeeded'
+                    'status'=>  'succeeded'
                 ];
 
                 \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
@@ -103,16 +114,30 @@ class ds_process_transactions {
                     $capture_method = 'manual';
                 }
                 if ( !empty($payment_method_id) ) {
-                    $chargerdata = array(
-                        'payment_method'    => $payment_method_id,
-                        'amount'            => $amount,
-                        'currency'          => $currency,
-                        'description'       => $description,
-                        'confirmation_method' => 'manual',
-                        'confirm' => true,
-                    );
+                    $chargerdata = [
+                        'payment_method'        => $payment_method_id,
+                        'amount'                => $amount,
+                        'currency'              => $currency,
+                        'description'           => $description,
+                        'confirm'               => true,
+                        'confirmation_method'   => 'manual',
+                        'capture_method'        => $capture_method,
+                    ];
                     if( $user !== false ) {
                         $chargerdata['customer'] = $user['stripe_id'];
+                    }
+                    if( $params['shipping'] === '1' ) {
+                        $chargerdata["shipping"]  = [
+                            "name"  => $logsdata['ds_shipping_name'],
+                            "phone" => $logsdata['ds_shipping_address_phone'],
+                            "address"   => [
+                                "line1"         => $logsdata['ds_shipping_address_line1'],
+                                "city"          => $logsdata['ds_shipping_address_city'],
+                                "country"       => $logsdata['ds_shipping_address_country_code'],
+                                "postal_code"   => $logsdata['ds_shipping_address_zip'],
+                                "state"         => $logsdata['ds_shipping_address_state']
+                            ]
+                        ];
                     }
                     $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
                     $intent  = \Stripe\PaymentIntent::create( $chargerdata );
@@ -129,13 +154,32 @@ class ds_process_transactions {
                             "plan" => $amount,
                         ],
                     ],
-                    "coupon"   => $coupon,
+                    "coupon"    => $coupon,
                     "metadata"	=> [
                         "description" => $description
                     ],
-                    "customer"  => $user['stripe_id'],
                     "expand[]"  => "latest_invoice.payment_intent"
                 ];
+                if( $user !== false ) {
+                    $subscriptiondata['customer'] = $user['stripe_id'];
+                }
+                if( $params['shipping'] === '1' ) {
+                    $subscriptiondata["metadata"]  = [
+                        [
+                            "shipping" => [
+                                "name"  => $logsdata['ds_shipping_name'],
+                                "phone" => $logsdata['ds_shipping_address_phone'],
+                                "address"   => [
+                                    "line1"         => $logsdata['ds_shipping_address_line1'],
+                                    "city"          => $logsdata['ds_shipping_address_city'],
+                                    "country"       => $logsdata['ds_shipping_address_country_code'],
+                                    "postal_code"   => $logsdata['ds_shipping_address_zip'],
+                                    "state"         => $logsdata['ds_shipping_address_state']
+                                ]
+                            ]
+                        ]
+                    ];
+                }
                 $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
                 $subscription = \Stripe\Subscription::create( $subscriptiondata );
                 \ds_process_functions::ds_generatePaymentResponse( $subscription, $resultData );
@@ -145,6 +189,7 @@ class ds_process_transactions {
         } catch (Exception $e) {
             $e = $e;
             error_log("Something wrong happened:" . $e->getMessage() );
+            \ds_process_functions::pre_process_answer($e, $resultData);
         }
 
     }

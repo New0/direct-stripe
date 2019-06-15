@@ -43,11 +43,6 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                         }
 
                         if( $ds_button->shipping === true ){
-                            $ds_modal_form_complete .= '
-                                <hr />
-                                <input id="shippingData-' . $instance . '" class="shippingData" type="checkbox" name="shippingData" value="shippingData">
-                                <label for="shippingData-' . $instance . '" class="shippingDataLabel">' . __('Add different shipping details', 'direct-stripe') . '</label>
-                            ';
                             $ds_modal_form_complete .= $ds_shipping_element;
                         }
 

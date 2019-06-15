@@ -58,40 +58,10 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
        return false;
     }
 
-    buildElement(instance);
+    buildElement(instance, ds_values);
     //Modal events
     modalEvent(instance);
-    /*handler = stripe_checkout(ds_values);
-    if( billing !== false ) {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel':   ds_values.panellabel,
-            'amount': amount,
-            'billingAddress': billing,
-            'shippingAddress': shipping,
-            'allowRememberMe': rememberme
-        });
-    } else {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel': ds_values.panellabel,
-            'amount': amount,
-            'allowRememberMe': rememberme
-        });
-    }
-*/
+
     e.preventDefault();
 });
 // Close Checkout on page navigation:

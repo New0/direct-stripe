@@ -30,7 +30,7 @@ class ds_process_functions
      *
      * @since 2.1.3
      */
-    public static function check_user_process( $email_address, $d_stripe_general, $custom_role, $token, $params ){
+    public static function check_user_process( $email_address, $d_stripe_general, $custom_role, $logsdata, $params ){
 
         //Check if user exists in WordPress
         if( username_exists( $email_address ) || email_exists( $email_address ) ) {
@@ -42,12 +42,12 @@ class ds_process_functions
 
                 if( !empty( $check_stripe_user ) ) {
                     $stripe_id = $s_customer_id;
-                    $check_stripe_user->source = $token;
+                    $check_stripe_user->source = $logsdata['token'];
                     $check_stripe_user->save();
                 } else {
                     //Register Stripe ID if allowed and not testing
                     if( $d_stripe_general['direct_stripe_check_records'] !== true && $d_stripe_general['direct_stripe_checkbox_api_keys'] !== true) {
-                        $stripe_id = self::ds_create_stripe_customer( $email_address, $token );       
+                        $stripe_id = self::ds_create_stripe_customer( $email_address, $logsdata );       
                     } else {
                         $stripe_id = '';
                     }
@@ -55,22 +55,24 @@ class ds_process_functions
 
             }
 
-            if ( !empty( $s_customer_id ) && isset( $check_stripe_user )  ) {//User exists and have a Stripe ID
+            //User exists and have a Stripe ID
+            if ( !empty( $s_customer_id ) && isset( $check_stripe_user )  ) {
 
                 //Update user roles if records are allowed
                 if( $d_stripe_general['direct_stripe_check_records'] !== true ) {
                     self::ds_add_roles( $user, $custom_role );
                 }
 
-            } else {// User exists but doesn't have a Stripe ID
+            // User exists but doesn't have a Stripe ID
+            } else {
 
 				$check_user = \Stripe\Customer::all( array( "email" => $email_address) );
 
 				if(empty($check_user->data)){//Create Stripe customer
-					$stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+					$stripe_id = self::ds_create_stripe_customer( $email_address, $logsdata );
 				} else { //Or update stripe customer
 					$stripe_id = $check_user->data[0]->id;
-					$check_user->data[0]->source = $token;
+					$check_user->data[0]->source = $logsdata['token'];
 					$check_user->data[0]->save();
 				}
 
@@ -85,36 +87,37 @@ class ds_process_functions
                 }
             }
 
-        } else { // WP User doesn't exist
+        // WP User doesn't exist
+        } else { 
 
             $check_user = \Stripe\Customer::all( array( "email" => $email_address) );
 
             if ( !empty( $check_user->data ) ) {
                 $stripe_id = $check_user->data[0]->id;
-                $check_user->data[0]->source = $token;
+                $check_user->data[0]->source = $logsdata['token'];
                 $check_user->data[0]->save();
 
-                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role );
+                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role, $stripe_id );
 
             } else {
                 // Create Stripe Customer
-                $stripe_id = self::ds_create_stripe_customer( $email_address, $token );
+                $stripe_id = self::ds_create_stripe_customer( $email_address, $logsdata );
                 //  WP user
-                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role );
+                $user_id = self::ds_create_wp_user( $email_address, $d_stripe_general, $custom_role, $stripe_id );
             }
 
         }
 
-        if(isset($stripe_id)){
-            $check_stripe_user = \Stripe\Customer::retrieve( $stripe_id );
-            $card = $check_stripe_user->sources->data[0]->id;
+        $user = array(
+            'user_id'   => $user_id,
+            'stripe_id' => $stripe_id
+        );
+        
+        //Associate billing details if used
+        if( $params['billing'] === '1' || $params['shipping'] === '1' ) {
+            self::ds_billing_stripe_customer($user, $logsdata);
         }
 
-        $user = array(
-            'user_id'   =>  $user_id,
-            'stripe_id' =>  $stripe_id,
-            'card'      => $card
-        );
         return $user;
 
     }
@@ -305,10 +308,11 @@ class ds_process_functions
      */
     public static function process_answer( $answer, $button_id, $params, $d_stripe_general, $user, $post_id ) {
 
-        if( isset( $answer->jsonBody['error'] )  ) { //Transaction failed
+        //Transaction failed
+        if( isset( $answer->jsonBody['error'] )  ) {
 
             // Add custom action before redirection
-            do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'], $token);
+            do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id'] );
 
             //Answer for ajax
             if ( ! empty($params['error_url'])) {
@@ -364,7 +368,8 @@ class ds_process_functions
             wp_send_json($return);
 
 
-        } else { //Transaction succeeded
+        //Transaction succeeded
+        } else { 
 
             // Add custom action before redirection
             do_action('direct_stripe_before_success_redirection', $answer->id, $post_id, $button_id, $user['user_id'] );
@@ -444,12 +449,14 @@ class ds_process_functions
      *
      * @since 2.1.7
      */
-    public static function ds_create_stripe_customer( $email_address, $token ) {
+    public static function ds_create_stripe_customer( $email_address, $logsdata ) {
         //Create Stripe customer
-        $customer  = \Stripe\Customer::create(array(
-            'email'  => $email_address,
-            'source' => $token
-        ));
+        $customer  = \Stripe\Customer::create([
+            'email'     => $email_address,
+            'source'    => $logsdata['token'],
+            'name'      => $logsdata['ds_billing_name'],
+            'phone'     => $logsdata['ds_billing_phone']
+        ]);
 
         return $customer->id;
     }
@@ -459,7 +466,7 @@ class ds_process_functions
      *
      * @since 2.1.8
      */
-    public static function ds_create_wp_user( $email_address, $d_stripe_general, $custom_role )
+    public static function ds_create_wp_user( $email_address, $d_stripe_general, $custom_role, $stripe_id )
     {
         if ($d_stripe_general['direct_stripe_check_records'] !== true) {
             // Generate the password and create the user
@@ -535,29 +542,39 @@ class ds_process_functions
      * @since 2.2.0
      */
     public static function pre_process_answer($intent, $resultData){
-        $return = array(
-            'id'      => '1',
-            'message' => 'success'
-        );
-        wp_send_json($return);
-        /*
+        
+        
         //Process Meta Data
         if( $resultData['general_options']['direct_stripe_check_records'] !== true ) {
-             //Retrieve Meta Data
-            require_once( DSCORE_PATH . 'process/ds_retrieve_meta.php');
 
-            $post_id = self::logs_meta( $logsdata, $params );
-            if( $resultData['user'] ){
-                $user_meta = self::user_meta( $logsdata, $params, $resultData['user'] );
+            $resultData['logsdata']['user_id'] = $resultData['user']['user_id'];
+            $resultData['logsdata']['stripe_id'] = $resultData['user']['stripe_id'];
+            $resultData['logsdata']['charge_id'] = $intent->id;
+
+            //Save logs as post
+            $post_id = self::logs_meta( $resultData['logsdata'],  $resultData['params'] );
+
+            if( $resultData['user'] ) {
+
+                $user_meta = self::user_meta($resultData['logsdata'], $resultData['params'], $resultData['user'] );
                 $user_id = $resultData['user']['user_id'];
+                
             }
+
         } else {
             $post_id = false;
             $user_id = false;
         }
 
+        wp_send_json( array(
+            'id'      => '1',
+            'message' => 'success_message'
+        ));
+      
         //Process emails
+        /*
         if( $intent ) {
+            $logsdata['charge_id'] = $intent->id;
             $email = self::process_emails( $intent, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
         } else {
             $email = self::process_emails( $e, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
@@ -570,6 +587,37 @@ class ds_process_functions
             $answer = self::process_answer( $e, $button_id, $params, $resultData['general_options'], $resultData['user'], $post_id );
         }
         */
+        
+    }
+
+    /**
+     * Set Billing infos to customer
+     * 
+     * @since 2.2.0
+     * 
+     * @param array $user holds Stripe customer ID and WP user ID
+     * @param array $logsdata holds data from the billing section of the form
+     * @param array $params holds data from the settings
+     * 
+     */
+    public static function ds_billing_stripe_customer($user, $logsdata) {
+
+        if( !empty($user['stripe_id']) ){
+
+            \Stripe\Customer::update( 
+                $user['stripe_id'],
+                [
+                    'address'   => [
+                        'line1'         => $logsdata['ds_billing_address_line1'],
+                        'city'          => $logsdata['ds_billing_address_city'],
+                        'country'       => $logsdata['ds_billing_address_country_code'],
+                        'postal_code'   => $logsdata['ds_billing_address_zip'],
+                        'state'         => $logsdata['ds_billing_address_state']
+                    ]
+                ]
+            );
+        }            
+        
     }
  
 }

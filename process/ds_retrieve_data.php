@@ -15,7 +15,7 @@ $token         = isset($stripeToken) ? $stripeToken : '';
 $payment_method_id = isset($paymentMethodID) ? $paymentMethodID : '';
 $payment_intent_id = isset($paymentIntentID) ? $paymentIntentID : '';
 $payment_intent_succeeded = isset($paymentIntentSucceeded) ? $paymentIntentSucceeded : '';
-$email_address = isset($stripeEmail) ? $stripeEmail : '';
+$email_address = isset($allData['billingDetails']['email']) ? $allData['billingDetails']['email'] : '';
 
 /****  Amount ****/
 if( $params['type'] === 'payment' ) {
@@ -59,4 +59,33 @@ if ( ! empty($params['currency'])) {
     $currency = $params['currency'];
 } else {
     $currency = $d_stripe_general['direct_stripe_currency'];
+}
+
+$logsdata = [
+    'token'         => $token,
+    'amount'        => $amount,
+    'currency'      => $currency,
+    'capture'       => $capture,
+    'type'          => $params['type'],
+    'description'   => $description,
+    'user_email'    => $email_address
+];
+
+if( $params['billing'] === '1' || $params['shipping'] === '1' ){
+    $logsdata['ds_billing_name']                  = isset($allData['billingDetails']['name']) ? $allData['billingDetails']['name'] : '';
+    $logsdata['ds_billing_phone']                 = isset($allData['billingDetails']['phone']) ? $allData['billingDetails']['phone'] : '';
+    $logsdata['ds_billing_address_zip']           = isset($allData['billingDetails']['address']['postal_code']) ? $allData['billingDetails']['address']['postal_code'] : '';
+    $logsdata['ds_billing_address_state']         = isset($allData['billingDetails']['address']['state']) ? $allData['billingDetails']['address']['state'] : '';
+    $logsdata['ds_billing_address_line1']         = isset($allData['billingDetails']['address']['line1']) ? $allData['billingDetails']['address']['line1'] : '';
+    $logsdata['ds_billing_address_city']          = isset($allData['billingDetails']['address']['city']) ? $allData['billingDetails']['address']['city'] : '';
+    $logsdata['ds_billing_address_country_code']  = isset($allData['billingDetails']['country']) ? $allData['billingDetails']['country'] : '';
+}
+if( $params['shipping'] === '1' ){
+    $logsdata['ds_shipping_name']                 = isset($allData['shippingDetails']['name']) ? $allData['shippingDetails']['name'] : $logsdata['ds_billing_name'];
+    $logsdata['ds_shipping_address_phone']        = isset($allData['shippingDetails']['phone']) ? $allData['shippingDetails']['phone'] : $logsdata['ds_billing_phone'] ;
+    $logsdata['ds_shipping_address_zip']          = isset($allData['shippingDetails']['postal_code']) ? $allData['shippingDetails']['postal_code'] : $logsdata['ds_billing_address_zip'];
+    $logsdata['ds_shipping_address_state']        = isset($allData['shippingDetails']['state']) ? $allData['shippingDetails']['state'] : $logsdata['ds_billing_address_state'];
+    $logsdata['ds_shipping_address_line1']        = isset($allData['shippingDetails']['line1']) ? $allData['shippingDetails']['line1'] : $logsdata['ds_billing_address_line1'];
+    $logsdata['ds_shipping_address_city']         = isset($allData['shippingDetails']['city']) ? $allData['shippingDetails']['city'] : $logsdata['ds_billing_address_city'];
+    $logsdata['ds_shipping_address_country_code'] = isset($allData['shippingDetails']['country']) ? $allData['shippingDetails']['country'] : $logsdata['ds_billing_address_country_code'];
 }

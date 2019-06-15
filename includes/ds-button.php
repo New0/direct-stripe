@@ -94,6 +94,8 @@ $str_after = "</div>";
 $str_after = apply_filters( 'direct_stripe_div_after', $str_after, $button_id );
 echo $str_after;
 
+$ds_countries = apply_filters('ds_countries_listed', include('elements/ds-countries-listed.php'), $instance, $ds_button);
+
 $ds_modal_image = apply_filters('ds_modal_image', include('elements/ds-modal-image.php'), $instance, $ds_button, $d_stripe_general );
 
 $ds_company_element = apply_filters('ds_company_element', include('elements/ds-company-element.php'), $instance, $ds_button );
@@ -102,9 +104,9 @@ $ds_modal_name = apply_filters('ds_modal_name', include('elements/ds-modal-name.
 
 $ds_modal_email = apply_filters('ds_modal_email', include('elements/ds-modal-email.php'), $instance, $ds_button );
 
-$ds_billing_element = apply_filters('ds_billing_element', include('elements/ds-billing-element.php'), $instance, $ds_button );
+$ds_billing_element = apply_filters('ds_billing_element', include('elements/ds-billing-element.php'), $instance, $ds_button, $ds_countries );
 
-$ds_shipping_element = apply_filters('ds_shipping_element', include('elements/ds-shipping-element.php'), $instance, $ds_button );
+$ds_shipping_element = apply_filters('ds_shipping_element', include('elements/ds-shipping-element.php'), $instance, $ds_button, $ds_countries );
 
 $ds_card_element = apply_filters('ds_card_element', include('elements/ds-card-element.php'), $instance, $ds_button );
 

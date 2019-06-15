@@ -110,29 +110,50 @@ function registerElements(elements, elementName) {
     // Gather additional customer data we may have collected in our form.
     var name = form.querySelector('#' + elementName + '-name');
     var email = form.querySelector('#' + elementName + '-email');
+    var phone = form.querySelector('#' + elementName + '-phone');
     var address1 = form.querySelector('#' + elementName + '-address');
     var city = form.querySelector('#' + elementName + '-city');
     var state = form.querySelector('#' + elementName + '-state');
     var zip = form.querySelector('#' + elementName + '-zip');
-    var additionalData = {
+    var country = form.querySelector('#' + elementName + '-country');
+    var billingDetails = {
       "name": name ? name.value : undefined,
-      "email": email? email.value : undefined,
+      "email": email ? email.value : undefined,
+      "phone": phone ? phone.value : undefined,
       "address": {
         "line1": address1 ? address1.value : undefined,
         "city": city ? city.value : undefined,
         "state": state ? state.value : undefined,
         "postal_code": zip ? zip.value : undefined,
+        "country": country ? country.value : undefined
       }
-      
     };
-
+     // Gather additional customer data we may have collected in our form.
+     var shName = form.querySelector('#' + elementName + '-sh-name');
+     var shAddress = form.querySelector('#' + elementName + '-sh-address');
+     var shCity = form.querySelector('#' + elementName + '-sh-city');
+     var shState = form.querySelector('#' + elementName + '-sh-state');
+     var shZip = form.querySelector('#' + elementName + '-sh-zip');
+     var shCountry = form.querySelector('#' + elementName + '-sh-country');
+     var shippingDetails = {
+        "name": shName ? shName.value : undefined,
+        "line1": shAddress ? shAddress.value : '',
+        "city": shCity ? shCity.value : '',
+        "state": shState ? shState.value : '',
+        "postal_code": shZip ? shZip.value : '',
+        "country": shCountry ? shCountry.value : undefined
+    };
+    var additionalData = {
+      'billingDetails': billingDetails, 
+      'shippingDetails': shippingDetails
+    };
+    
     // Use Stripe.js to create a token. We only need to pass in one Element
     // from the Element group in order to create a token. We can also pass
     // in the additional customer data we collected in our form.
     stripe.createPaymentMethod('card', elements[0], {
-      billing_details: additionalData
+      billing_details: billingDetails
     }).then(function(resultP) {
-     
       if (resultP.error) {
         // Show error in payment form
          enableInputs();
@@ -141,8 +162,7 @@ function registerElements(elements, elementName) {
 
         stripe.createToken(elements[0], {}).then(function(resultT) {
           if (resultT.token) {
-
-            stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)
+            stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id);
           }
         });
       

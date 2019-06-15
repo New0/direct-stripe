@@ -107,7 +107,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
                 "WordPress Direct Stripe Plugin",
                 self::version,
                 "https://wordpress.org/plugins/direct-stripe/"
-              );
+            );
         }
 
         function activation_hooks() {

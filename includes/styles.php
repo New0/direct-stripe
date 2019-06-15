@@ -55,6 +55,8 @@ $custom_css = "
 			.ds-element.in-form button:hover {
 				color: #fff;
 				background-color: $maincolor;
-				
 			}
+			.ds-element.in-form option {
+				background-color: $maincolor;
+			  }
 		";

@@ -58,89 +58,58 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
        return false;
     }
 
-    buildElement(instance);
+    buildElement(instance, ds_values);
     //Modal events
     modalEvent(instance);
-    /*handler = stripe_checkout(ds_values);
-    if( billing !== false ) {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel':   ds_values.panellabel,
-            'amount': amount,
-            'billingAddress': billing,
-            'shippingAddress': shipping,
-            'allowRememberMe': rememberme
-        });
-    } else {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel': ds_values.panellabel,
-            'amount': amount,
-            'allowRememberMe': rememberme
-        });
-    }
-*/
+
     e.preventDefault();
 });
 // Close Checkout on page navigation:
 window.addEventListener("popstate", function () {
     handler.close();
 });
-function buildElement(instance) {
-    "use strict";
-  
-    var elements = stripe.elements({
-      // Stripe's examples are localized to specific languages, but if
-      // you wish to have Elements automatically detect your user's locale,
-      // use `locale: 'auto'` instead.
-      locale: 'auto'
-    });
-  
-    /**
-     * Card Element
-     */
-    var card = elements.create("card", {
-      iconStyle: "solid",
-      style: {
-        base: {
-          iconColor: "#fff",
-          color: "#fff",
-          fontWeight: 400,
-          fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
-          fontSize: "16px",
-          fontSmoothing: "antialiased",
-  
-          "::placeholder": {
-            color: "#fff"
-          },
-          ":-webkit-autofill": {
-            color: "#fff"
-          }
+function buildElement(instance, ds_values) {
+  "use strict";
+
+  var elements = stripe.elements({
+    // Stripe's examples are localized to specific languages, but if
+    // you wish to have Elements automatically detect your user's locale,
+    // use `locale: 'auto'` instead.
+    locale: ds_values.locale
+  });
+
+  /**
+   * Card Element
+   */
+  var card = elements.create("card", {
+    iconStyle: "solid",
+    style: {
+      base: {
+        iconColor: "#fff",
+        color: "#fff",
+        fontWeight: 400,
+        fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+        fontSize: "16px",
+        fontSmoothing: "antialiased",
+
+        "::placeholder": {
+          color: "#fff"
         },
-        invalid: {
-          iconColor: "#FFC7EE",
-          color: "#FFC7EE"
+        ":-webkit-autofill": {
+          color: "#fff"
         }
+      },
+      invalid: {
+        iconColor: "#FFC7EE",
+        color: "#FFC7EE"
       }
-    });
-    card.mount("#ds-element-"+instance+"-card");
-  
-    registerElements([card], "ds-element-"+instance);
+    }
+  });
+  card.mount("#ds-element-"+instance+"-card");
+
+  registerElements([card], "ds-element-"+instance);
 
 }
-  
 /**
  * Created by nfigueira on 13/04/2017.
  * Rewritten 10/06/2019 for DS 2.2.0
@@ -167,7 +136,7 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
             'action': 'ds_process_button',
             'stripeToken': token.id,
             'paymentMethodID': paymentMethodID,
-            'stripeEmail': token.email,
+            'allData': additionalData,
             'type': type,
             'amount': amount,
             'params': parobj,
@@ -382,29 +351,50 @@ function registerElements(elements, elementName) {
     // Gather additional customer data we may have collected in our form.
     var name = form.querySelector('#' + elementName + '-name');
     var email = form.querySelector('#' + elementName + '-email');
+    var phone = form.querySelector('#' + elementName + '-phone');
     var address1 = form.querySelector('#' + elementName + '-address');
     var city = form.querySelector('#' + elementName + '-city');
     var state = form.querySelector('#' + elementName + '-state');
     var zip = form.querySelector('#' + elementName + '-zip');
-    var additionalData = {
+    var country = form.querySelector('#' + elementName + '-country');
+    var billingDetails = {
       "name": name ? name.value : undefined,
-      "email": email? email.value : undefined,
+      "email": email ? email.value : undefined,
+      "phone": phone ? phone.value : undefined,
       "address": {
         "line1": address1 ? address1.value : undefined,
         "city": city ? city.value : undefined,
         "state": state ? state.value : undefined,
         "postal_code": zip ? zip.value : undefined,
+        "country": country ? country.value : undefined
       }
-      
     };
-
+     // Gather additional customer data we may have collected in our form.
+     var shAddress = form.querySelector('#' + elementName + '-sh-address');
+     var shCity = form.querySelector('#' + elementName + '-sh-city');
+     var shState = form.querySelector('#' + elementName + '-sh-state');
+     var shZip = form.querySelector('#' + elementName + '-sh-zip');
+     var shCountry = form.querySelector('#' + elementName + '-sh-country');
+     var shippingDetails = {
+       "shipping_address": {
+          "line1": shAddress ? shAddress.value : '',
+          "city": shCity ? shCity.value : '',
+          "state": shState ? shState.value : '',
+          "postal_code": shZip ? shZip.value : '',
+          "country": shCountry ? shCountry.value : undefined
+       }
+     };
+    var additionalData = {
+      'billingDetails': billingDetails, 
+      'shippingDetails': shippingDetails
+    };
+    
     // Use Stripe.js to create a token. We only need to pass in one Element
     // from the Element group in order to create a token. We can also pass
     // in the additional customer data we collected in our form.
     stripe.createPaymentMethod('card', elements[0], {
-      billing_details: additionalData
+      billing_details: billingDetails
     }).then(function(resultP) {
-     
       if (resultP.error) {
         // Show error in payment form
          enableInputs();
@@ -413,8 +403,7 @@ function registerElements(elements, elementName) {
 
         stripe.createToken(elements[0], {}).then(function(resultT) {
           if (resultT.token) {
-
-            stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id)
+            stripe_checkout(resultT.token, ds_values, additionalData, resultP.paymentMethod.id);
           }
         });
       

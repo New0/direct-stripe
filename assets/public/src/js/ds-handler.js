@@ -24,7 +24,7 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
             'action': 'ds_process_button',
             'stripeToken': token.id,
             'paymentMethodID': paymentMethodID,
-            'stripeEmail': token.email,
+            'allData': additionalData,
             'type': type,
             'amount': amount,
             'params': parobj,
