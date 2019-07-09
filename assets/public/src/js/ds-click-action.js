@@ -19,7 +19,8 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         setDonationValue(instance);    
     }
     //Get Button Values
-    var ds_values = window[instance];
+    var ds_values = window[instance],
+    direct_stripe_script_vars = window[direct_stripe_script_vars];
 
     // Set currency
     if( "" !== ds_values.currency ) {

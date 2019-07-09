@@ -33,7 +33,7 @@ function returnError(ds_answer_input, direct_stripe_script_vars, error){
 }
 
 //Open / Cose modal window that holds the form
-function modalEvent( instance) {
+function modalEvent( instance ) {
     //Get Modal Form
     var modal = document.getElementById("modal-"+ instance);
     //Open Modal Form

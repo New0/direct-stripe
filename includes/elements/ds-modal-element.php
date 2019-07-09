@@ -33,10 +33,12 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                         <legend class="card-only" data-tid="ds-element.form.pay_with_card">' . __('Pay with card', 'direct-stripe') . '</legend>
                         <legend class="payment-request-available" data-tid="elements_ds-element.form.enter_card_manually">' . __('Or enter card details', 'direct-stripe') . '</legend>
                         ';
-
-                        $ds_modal_form_complete .= $ds_modal_name;
                         
                         $ds_modal_form_complete .= $ds_modal_email;
+
+                        if( $ds_button->billing === true || $ds_button->shipping === true ){
+                            $ds_modal_form_complete .= $ds_modal_name;
+                        }
 
                         if( $ds_button->billing === true || $ds_button->shipping === true ){
                             $ds_modal_form_complete .= $ds_billing_element;

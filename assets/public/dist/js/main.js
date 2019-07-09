@@ -19,7 +19,8 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
         setDonationValue(instance);    
     }
     //Get Button Values
-    var ds_values = window[instance];
+    var ds_values = window[instance],
+    direct_stripe_script_vars = window[direct_stripe_script_vars];
 
     // Set currency
     if( "" !== ds_values.currency ) {
@@ -369,21 +370,24 @@ function registerElements(elements, elementName) {
         "country": country ? country.value : undefined
       }
     };
+
      // Gather additional customer data we may have collected in our form.
+     var shName = form.querySelector('#' + elementName + '-sh-name');
+     var shPhone = form.querySelector('#' + elementName + '-sh-phone');
      var shAddress = form.querySelector('#' + elementName + '-sh-address');
      var shCity = form.querySelector('#' + elementName + '-sh-city');
      var shState = form.querySelector('#' + elementName + '-sh-state');
      var shZip = form.querySelector('#' + elementName + '-sh-zip');
      var shCountry = form.querySelector('#' + elementName + '-sh-country');
      var shippingDetails = {
-       "shipping_address": {
-          "line1": shAddress ? shAddress.value : '',
-          "city": shCity ? shCity.value : '',
-          "state": shState ? shState.value : '',
-          "postal_code": shZip ? shZip.value : '',
-          "country": shCountry ? shCountry.value : undefined
-       }
-     };
+        "name": shName ? shName.value : undefined,
+        "phone": shPhone ? shPhone.value : undefined,
+        "line1": shAddress ? shAddress.value : undefined,
+        "city": shCity ? shCity.value : undefined,
+        "state": shState ? shState.value : undefined,
+        "postal_code": shZip ? shZip.value : undefined,
+        "country": shCountry ? shCountry.value : undefined
+    };
     var additionalData = {
       'billingDetails': billingDetails, 
       'shippingDetails': shippingDetails
@@ -466,7 +470,7 @@ function returnError(ds_answer_input, direct_stripe_script_vars, error){
 }
 
 //Open / Cose modal window that holds the form
-function modalEvent( instance) {
+function modalEvent( instance ) {
     //Get Modal Form
     var modal = document.getElementById("modal-"+ instance);
     //Open Modal Form

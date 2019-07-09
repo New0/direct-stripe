@@ -14,7 +14,7 @@ $shipping = '
     <div class="row" data-locale-reversible="">
         <div class="field">      
             <input id="ds-element-' . $instance . '-sh-name"  class="input" type="text" autocomplete="name" name="shipping_name">
-            <label for="ds-element-' . $instance . '--sh-name" data-tid="ds-element.form.shipping_name_label">' . __( 'Name', 'direct-stripe') .'</label>
+            <label for="ds-element-' . $instance . '-sh-name" data-tid="ds-element.form.shipping_name_label">' . __( 'Name', 'direct-stripe') .'</label>
         </div>
     </div>
     <div class="row" data-locale-reversible="">
@@ -41,7 +41,7 @@ $shipping = '
     </div>
     <div class="row" data-locale-reversible="">
         <div class="field">
-            <input id="eds-element-' . $instance . '-sh-state" data-tid="elements_examples.form.shipping_state_placeholder" class="input empty" type="text" autocomplete="address-level1">
+            <input id="ds-element-' . $instance . '-sh-state" data-tid="elements_examples.form.shipping_state_placeholder" class="input empty" type="text" autocomplete="address-level1">
             <label for="ds-element-' . $instance . '-sh-state" data-tid="ds-element.form.shipping_state_label">' . __('State', 'direct-stripe') . '</label>
         </div>
         <div class="field">

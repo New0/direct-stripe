@@ -136,10 +136,12 @@ class ds_process_functions
             'currency'                         => $logsdata['currency'],
             'capture'                          => $logsdata['capture'],
             'type'                             => $logsdata['type'],
-            'description'                      => $logsdata['description']
+            'description'                      => $logsdata['description'],
+            'coupon'                           => $logsdata['coupon']
         );
         if( $params['billing'] === '1' || $params['shipping'] === '1' ) {
             $meta_input['ds_billing_name']                 = $logsdata['ds_billing_name'];
+            $meta_input['ds_billing_phone']                = $logsdata['ds_billing_phone'];
             $meta_input['ds_billing_address_zip']          = $logsdata['ds_billing_address_zip'];
             $meta_input['ds_billing_address_state']        = $logsdata['ds_billing_address_state'];
             $meta_input['ds_billing_address_line1']        = $logsdata['ds_billing_address_line1'];
@@ -148,6 +150,7 @@ class ds_process_functions
         }
         if( $params['shipping'] === '1' ) {
             $meta_input['ds_shipping_name']                 = $logsdata['ds_shipping_name'];
+            $meta_input['ds_shipping_phone']                = $logsdata['ds_shipping_phone'];
             $meta_input['ds_shipping_address_zip']          = $logsdata['ds_shipping_address_zip'];
             $meta_input['ds_shipping_address_state']        = $logsdata['ds_shipping_address_state'];
             $meta_input['ds_shipping_address_line1']        = $logsdata['ds_shipping_address_line1'];
@@ -178,6 +181,7 @@ class ds_process_functions
         $meta_input = array();
         if( $params['billing'] === '1' || $params['shipping'] === '1' ) {
             $meta_input['ds_billing_name']                 = $logsdata['ds_billing_name'];
+            $meta_input['ds_billing_phone']                = $logsdata['ds_billing_phone'];
             $meta_input['ds_billing_address_zip']          = $logsdata['ds_billing_address_zip'];
             $meta_input['ds_billing_address_state']        = $logsdata['ds_billing_address_state'];
             $meta_input['ds_billing_address_line1']        = $logsdata['ds_billing_address_line1'];
@@ -186,6 +190,7 @@ class ds_process_functions
         }
         if( $params['shipping'] === '1' ) {
             $meta_input['ds_shipping_name']                 = $logsdata['ds_shipping_name'];
+            $meta_input['ds_shipping_phone']                = $logsdata['ds_shipping_phone'];
             $meta_input['ds_shipping_address_zip']          = $logsdata['ds_shipping_address_zip'];
             $meta_input['ds_shipping_address_state']        = $logsdata['ds_shipping_address_state'];
             $meta_input['ds_shipping_address_line1']        = $logsdata['ds_shipping_address_line1'];
@@ -498,6 +503,7 @@ class ds_process_functions
      * @since 2.2.0
      */
     public static function ds_generatePaymentResponse($intent, $resultData) {
+
         if ( $intent->status === "requires_action" && $intent->next_action->type === "use_stripe_sdk" ) {
             // Tell the client to handle the action
             wp_send_json( array(

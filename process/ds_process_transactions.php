@@ -40,7 +40,6 @@ class ds_process_transactions {
         \ds_process_functions::api_keys( $d_stripe_general );
 
         
-
         //Confirm Payment Intent Server side and display answers
         if ( !empty($payment_intent_id) && !empty( get_transient('ds_data' . $button_id) ) ) {
             $intent = \Stripe\PaymentIntent::retrieve(
@@ -166,7 +165,7 @@ class ds_process_transactions {
                 if( $params['shipping'] === '1' ) {
                     $subscriptiondata["metadata"]  = [
                         "shipping_name"                  => $logsdata['ds_shipping_name'],
-                        "shipping_phone"                 => $logsdata['ds_shipping_address_phone'],
+                        "shipping_phone"                 => $logsdata['ds_shipping_phone'],
                         "shipping_address_line1"         => $logsdata['ds_shipping_address_line1'],
                         "shipping_address_city"          => $logsdata['ds_shipping_address_city'],
                         "shipping_address_country"       => $logsdata['ds_shipping_address_country_code'],

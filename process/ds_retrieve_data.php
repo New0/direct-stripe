@@ -43,7 +43,7 @@ if( $params['type'] === 'payment' ) {
 }
 
 /****  Options ****/
-if ($params['capture'] === false || $params['capture'] === 'false' ) {
+if ($params['capture'] === false || $params['capture'] === 'false' || empty($params['capture']) ) {
     $capture = false;
 } else {
     $capture = true;
@@ -78,14 +78,18 @@ if( $params['billing'] === '1' || $params['shipping'] === '1' ){
     $logsdata['ds_billing_address_state']         = isset($allData['billingDetails']['address']['state']) ? $allData['billingDetails']['address']['state'] : '';
     $logsdata['ds_billing_address_line1']         = isset($allData['billingDetails']['address']['line1']) ? $allData['billingDetails']['address']['line1'] : '';
     $logsdata['ds_billing_address_city']          = isset($allData['billingDetails']['address']['city']) ? $allData['billingDetails']['address']['city'] : '';
-    $logsdata['ds_billing_address_country_code']  = isset($allData['billingDetails']['country']) ? $allData['billingDetails']['country'] : '';
+    $logsdata['ds_billing_address_country_code']  = isset($allData['billingDetails']['address']['country']) ? $allData['billingDetails']['address']['country'] : '';
 }
 if( $params['shipping'] === '1' ){
-    $logsdata['ds_shipping_name']                 = isset($allData['shippingDetails']['name']) ? $allData['shippingDetails']['name'] : $logsdata['ds_billing_name'];
-    $logsdata['ds_shipping_address_phone']        = isset($allData['shippingDetails']['phone']) ? $allData['shippingDetails']['phone'] : $logsdata['ds_billing_phone'] ;
-    $logsdata['ds_shipping_address_zip']          = isset($allData['shippingDetails']['postal_code']) ? $allData['shippingDetails']['postal_code'] : $logsdata['ds_billing_address_zip'];
-    $logsdata['ds_shipping_address_state']        = isset($allData['shippingDetails']['state']) ? $allData['shippingDetails']['state'] : $logsdata['ds_billing_address_state'];
-    $logsdata['ds_shipping_address_line1']        = isset($allData['shippingDetails']['line1']) ? $allData['shippingDetails']['line1'] : $logsdata['ds_billing_address_line1'];
-    $logsdata['ds_shipping_address_city']         = isset($allData['shippingDetails']['city']) ? $allData['shippingDetails']['city'] : $logsdata['ds_billing_address_city'];
-    $logsdata['ds_shipping_address_country_code'] = isset($allData['shippingDetails']['country']) ? $allData['shippingDetails']['country'] : $logsdata['ds_billing_address_country_code'];
+    $logsdata['ds_shipping_name']                 = !empty($allData['shippingDetails']['name']) ? $allData['shippingDetails']['name'] : $logsdata['ds_billing_name'];
+    $logsdata['ds_shipping_phone']                = !empty($allData['shippingDetails']['phone']) ? $allData['shippingDetails']['phone'] : $logsdata['ds_billing_phone'] ;
+    $logsdata['ds_shipping_address_zip']          = !empty($allData['shippingDetails']['postal_code']) ? $allData['shippingDetails']['postal_code'] : $logsdata['ds_billing_address_zip'];
+    $logsdata['ds_shipping_address_state']        = !empty($allData['shippingDetails']['state']) ? $allData['shippingDetails']['state'] : $logsdata['ds_billing_address_state'];
+    $logsdata['ds_shipping_address_line1']        = !empty($allData['shippingDetails']['line1']) ? $allData['shippingDetails']['line1'] : $logsdata['ds_billing_address_line1'];
+    $logsdata['ds_shipping_address_city']         = !empty($allData['shippingDetails']['city']) ? $allData['shippingDetails']['city'] : $logsdata['ds_billing_address_city'];
+    $logsdata['ds_shipping_address_country_code'] = !empty($allData['shippingDetails']['country']) ? $allData['shippingDetails']['country'] : $logsdata['ds_billing_address_country_code'];
+}
+
+if( $params['type'] === 'subscription' ){
+    $logsdata['coupon'] = $coupon;
 }
