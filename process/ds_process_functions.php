@@ -212,13 +212,20 @@ class ds_process_functions
      *
      * @since 2.1.3
      */
-    public static function process_emails( $answer, $button_id, $amount, $currency, $email_address, $description, $user, $post_id ) {
+    public static function process_emails( $d_stripe_emails, $answer, $resultData, $post_id ) {
 
-        $d_stripe_emails  = get_option('direct_stripe_emails_settings');
-        $headers          = array('Content-Type: text/html; charset=UTF-8');
-        $admin_email = get_option('admin_email');
+        $button_id      = $resultData["params"]["button_id"];
+        $amount         = $resultData["logsdata"]["amount"];
+        $currency       = $resultData["logsdata"]["currency"]; 
+        $email_address  = $resultData["logsdata"]["user_email"];
+        $description    = $resultData["logsdata"]["description"]; 
+        $user           = $resultData["user"];
+        $post_id        = $resultData["post_id"];
 
-        if( ! isset( $answer->object ) ) {
+        $headers        = array('Content-Type: text/html; charset=UTF-8');
+        $admin_email    = get_option('admin_email');
+
+        if( isset( $answer->jsonBody['error'] ) ) {
 
             //Email user
             if (isset($d_stripe_emails['direct_stripe_user_error_emails_checkbox']) && $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] === true) {
@@ -522,17 +529,14 @@ class ds_process_functions
                 'action_type'   => 'incomplete'
                 )
             );
-        } else if ( $intent->status === "succeeded" ) {
+        } else if ( $intent->status === "succeeded" || $intent->status === "requires_capture" ) {
             // Process completed get answer
             self::pre_process_answer($intent, $resultData);
 
         } else {
             # Invalid status
             http_response_code(500);
-            wp_send_json([
-                'id'      => '3',
-                'message' => 'Invalid PaymentIntent status'
-            ]); 
+            self::pre_process_answer($intent, $resultData);
         }
       }
 
@@ -568,28 +572,19 @@ class ds_process_functions
             $user_id = false;
         }
 
-        wp_send_json( array(
-            'id'      => '1',
-            'message' => 'success_message'
-        ));
-      
-        //Process emails
-        /*
-        if( $intent ) {
-            $logsdata['charge_id'] = $intent->id;
-            $email = self::process_emails( $intent, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
-        } else {
-            $email = self::process_emails( $e, $button_id, $amount, $currency, $email_address, $description, $resultData['user'], $post_id );
+        //Process Emails
+        $d_stripe_emails = get_option('direct_stripe_emails_settings');
+        if ( $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] 
+            || $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] 
+            || $d_stripe_emails['direct_stripe_user_success_emails_checkbox'] 
+            || $d_stripe_emails['direct_stripe_admin_success_emails_checkbox']
+        ) {
+            self::process_emails( $d_stripe_emails, $intent, $resultData, $post_id );
         }
 
         //Process answer
-        if( $intent ) {
-            $answer = self::process_answer( $intent, $button_id, $params, $resultData['general_options'], $resultData['user'], $post_id );
-        } else {
-            $answer = self::process_answer( $e, $button_id, $params, $resultData['general_options'], $resultData['user'], $post_id );
-        }
-        */
-        
+        self::process_answer( $intent, $resultData['params']['button_id'], $resultData['params'], $resultData['general_options'], $resultData['user'], $post_id );
+    
     }
 
     /**

@@ -38,8 +38,6 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
 
 function handleServerResponse(response, ds_values) {
 
-  var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
-  ds_answer_input = "#ds-answer-" + ds_values.instance;
   if (response.requires_action && response.action_type === "incomplete") {
     // Use Stripe.js to handle required card action
     stripe.handleCardPayment(
@@ -54,14 +52,14 @@ function handleServerResponse(response, ds_values) {
     ).then(function(result){
       processResult(result, ds_values);
     });
+  } else if ( typeof response === "object" && typeof response.id !== "undefined" ) {
+        displayFinalResult(response, ds_values);
   } else {
     processResult(response, ds_values);
   }
 }
 
 function processResult(result, ds_values){
-  var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
-  ds_answer_input = "#ds-answer-" + ds_values.instance;
 
   if ( result.paymentIntent.status === "requires_confirmation" ) {
       jQuery.post(
@@ -93,6 +91,7 @@ function processResult(result, ds_values){
     console.log("elseProcess");
     displayFinalResult(result, ds_values);
   }
+
 }
 
 function displayFinalResult(data,  ds_values){
