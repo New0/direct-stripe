@@ -67,6 +67,8 @@ class ds_process_transactions {
         //Set of data for answers
         $resultData = [
             'general_options'   => $d_stripe_general,
+            'emails_options'     => $d_stripe_emails,
+            'styles_options'     => $d_stripe_styles,
             'params'            => $params,
             'logsdata'          => $logsdata,
             'user'              => $user

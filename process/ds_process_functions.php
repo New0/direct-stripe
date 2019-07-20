@@ -220,7 +220,6 @@ class ds_process_functions
         $email_address  = $resultData["logsdata"]["user_email"];
         $description    = $resultData["logsdata"]["description"]; 
         $user           = $resultData["user"];
-        $post_id        = $resultData["post_id"];
 
         $headers        = array('Content-Type: text/html; charset=UTF-8');
         $admin_email    = get_option('admin_email');
@@ -573,13 +572,12 @@ class ds_process_functions
         }
 
         //Process Emails
-        $d_stripe_emails = get_option('direct_stripe_emails_settings');
-        if ( $d_stripe_emails['direct_stripe_user_error_emails_checkbox'] 
-            || $d_stripe_emails['direct_stripe_admin_error_emails_checkbox'] 
-            || $d_stripe_emails['direct_stripe_user_success_emails_checkbox'] 
-            || $d_stripe_emails['direct_stripe_admin_success_emails_checkbox']
+        if ( $resultData['emails_options']['direct_stripe_user_error_emails_checkbox'] 
+            || $resultData['emails_options']['direct_stripe_admin_error_emails_checkbox'] 
+            || $resultData['emails_options']['direct_stripe_user_success_emails_checkbox'] 
+            || $resultData['emails_options']['direct_stripe_admin_success_emails_checkbox']
         ) {
-            self::process_emails( $d_stripe_emails, $intent, $resultData, $post_id );
+            self::process_emails( $resultData['emails_options'], $intent, $resultData, $post_id );
         }
 
         //Process answer
