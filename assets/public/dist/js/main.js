@@ -20,7 +20,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     }
     //Get Button Values
     var ds_values = window[instance],
-    direct_stripe_script_vars = window[direct_stripe_script_vars];
+    ds_script_vars = direct_stripe_script_vars;
 
     // Set currency
     if( "" !== ds_values.currency ) {
@@ -33,7 +33,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     shipping = ds_values.shipping === "1" || ds_values.shipping === "true",
     rememberme = ds_values.rememberme === "1" || ds_values.rememberme === "true",
     numbers = /^\+?[0-9]*\.?[0-9]+$/,
-    ds_answer_input = "#ds-answer-" + instance;
+    ds_answer_input = "#ds-pre-answer-" + instance;
 
     //Set amount
     if( ds_values.display_amount !== "" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
@@ -52,10 +52,10 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     var tcState = checkTC(this, instance),
     donationInputState = checkDonationInput(this, ds_values, numbers);
     if(tcState){
-        returnError(ds_answer_input, direct_stripe_script_vars, 'emptyTc');
+        returnError(ds_answer_input, ds_script_vars, 'emptyTc');
         return false;
     } else if(donationInputState){
-       returnError(ds_answer_input, direct_stripe_script_vars, 'emptyDonation');
+       returnError(ds_answer_input, ds_script_vars, 'emptyDonation');
        return false;
     }
 
@@ -174,12 +174,27 @@ function handleServerResponse(response, ds_values) {
 
 function processResult(result, ds_values){
 
-  if ( result.paymentIntent.status === "requires_confirmation" ) {
+  if(typeof result.paymentIntent !== "undefined") {
+
+    if ( result.paymentIntent.status === "requires_confirmation" ) {
+        jQuery.post(
+          ds_values.ajaxurl,
+          {
+            'action': 'ds_process_button',
+            'paymentIntentID': result.paymentIntent.id,
+            'params': ds_values,
+            'ds_nonce': ds_values.ds_nonce
+          },
+          function(data) {
+            displayFinalResult(data, ds_values);
+          }
+        );
+    } else if ( result.paymentIntent.status === "succeeded" ) {
       jQuery.post(
         ds_values.ajaxurl,
         {
           'action': 'ds_process_button',
-          'paymentIntentID': result.paymentIntent.id,
+          'paymentIntentSucceeded': result.paymentIntent,
           'params': ds_values,
           'ds_nonce': ds_values.ds_nonce
         },
@@ -187,29 +202,22 @@ function processResult(result, ds_values){
           displayFinalResult(data, ds_values);
         }
       );
-  } else if ( result.paymentIntent.status === "succeeded" ) {
-    jQuery.post(
-      ds_values.ajaxurl,
-      {
-        'action': 'ds_process_button',
-        'paymentIntentSucceeded': result.paymentIntent,
-        'params': ds_values,
-        'ds_nonce': ds_values.ds_nonce
-      },
-      function(data) {
-        displayFinalResult(data, ds_values);
-      }
-    );
+    }
+
   } else {
-    console.log("elseProcess");
     displayFinalResult(result, ds_values);
   }
 
 }
 
 function displayFinalResult(data,  ds_values){
+  
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
-  ds_answer_input = "#ds-answer-" + ds_values.instance;
+  ds_answer_input = document.querySelector("#ds-answer-" + ds_values.instance),
+  success_input = document.querySelector("#ds-success-answer-" + ds_values.instance),
+  error_div = document.querySelector("." + ds_values.instance + "-error"),
+  error_input = document.querySelector("#ds-error-answer-" + ds_values.instance),
+  form = document.querySelector(".ds-element-" + ds_values.instance + " > form ");
   
   switch (data.id) {
     case "1":
@@ -217,6 +225,7 @@ function displayFinalResult(data,  ds_values){
       dsProcess.classList.add('submitted');
       jQuery(ds_answer_input).addClass("success");
       jQuery(ds_answer_input).html(data.message);
+      jQuery(success_input).html(data.message);
       jQuery(ds_answer_input).show();
       setTimeout(function() {
         jQuery(ds_answer_input).hide();
@@ -228,11 +237,20 @@ function displayFinalResult(data,  ds_values){
       window.location.assign(data.url);
       break;
     default:
-        console.log("elseDisplay");
+      console.log(error_div);
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('error');
+      form.classList.add('hide');
+      error_div.classList.add('visible');
       jQuery(ds_answer_input).addClass("error");
-      jQuery(ds_answer_input).html(data.message);
+      if(typeof data.error.message !== "undefined"){
+        jQuery(error_input).html(data.error.message);
+        jQuery(ds_answer_input).html(data.message);
+      } else if(typeof data.message !== "undefined"){
+        jQuery(error_input).html(data.message);
+        jQuery(ds_answer_input).html(data.message);
+      }
+      
       jQuery(ds_answer_input).show();
       setTimeout(function() {
           jQuery(ds_answer_input).hide();
@@ -250,8 +268,6 @@ function registerElements(elements, elementName) {
 
   var form = dsProcess.querySelector('form');
 
-  var resetButton = dsProcess.querySelector('a.reset');
-
   var error = form.querySelector('.error');
   var errorMessage = error.querySelector('.message');
 
@@ -259,6 +275,9 @@ function registerElements(elements, elementName) {
   var instance = jQuery( form  ).data("id");
   //Get Button Values
   var ds_values = window[instance];
+
+  //Reset trigger
+  var resetButton = dsProcess.querySelector('a.reset-' + instance);
 
   function enableInputs() {
     Array.prototype.forEach.call(
@@ -455,11 +474,13 @@ function setDonationValue(instance){
  
  //Stop process
 function returnError(ds_answer_input, direct_stripe_script_vars, error){
+    console.log(ds_answer_input);
     if(error === 'emptyTc'){
         text = direct_stripe_script_vars.text.checkTC;
     } else if(error === 'emptyDonation') {
         text = direct_stripe_script_vars.text.enterAmount;
     }
+    
     jQuery(ds_answer_input).html( text + "<br/>");
     jQuery(ds_answer_input).addClass("error");
     jQuery(ds_answer_input).show();

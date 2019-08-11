@@ -19,11 +19,13 @@ function setDonationValue(instance){
  
  //Stop process
 function returnError(ds_answer_input, direct_stripe_script_vars, error){
+    console.log(ds_answer_input);
     if(error === 'emptyTc'){
         text = direct_stripe_script_vars.text.checkTC;
     } else if(error === 'emptyDonation') {
         text = direct_stripe_script_vars.text.enterAmount;
     }
+    
     jQuery(ds_answer_input).html( text + "<br/>");
     jQuery(ds_answer_input).addClass("error");
     jQuery(ds_answer_input).show();

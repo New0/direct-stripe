@@ -100,6 +100,10 @@
         input:-ms-input-placeholder {
             opacity: 1;
         }
+
+        &.hide {
+            display: none;
+        }
     } 
 
     .error {
@@ -125,6 +129,14 @@
             transform: none;
         }
 
+        > * {
+            transition-property: opacity, transform;
+            transition-duration: 0.35s;
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
         .message {
             font-size: inherit;
         }
@@ -135,6 +147,20 @@
             margin-top: -1px;
             margin-right: 10px;
         }
+
+        .reset {
+            padding-top: 1rem;
+
+            &:active {
+                transition-duration: 0.15s;
+                transition-delay: 0s;
+                opacity: 0.65;
+            }
+            svg {
+                will-change: transform;
+            }
+        }
+        
     }
     
     .success {
@@ -205,6 +231,8 @@
         }
 
         .reset {
+            padding-top: 1rem;
+
             &:active {
                 transition-duration: 0.15s;
                 transition-delay: 0s;

@@ -61,12 +61,27 @@ function handleServerResponse(response, ds_values) {
 
 function processResult(result, ds_values){
 
-  if ( result.paymentIntent.status === "requires_confirmation" ) {
+  if(typeof result.paymentIntent !== "undefined") {
+
+    if ( result.paymentIntent.status === "requires_confirmation" ) {
+        jQuery.post(
+          ds_values.ajaxurl,
+          {
+            'action': 'ds_process_button',
+            'paymentIntentID': result.paymentIntent.id,
+            'params': ds_values,
+            'ds_nonce': ds_values.ds_nonce
+          },
+          function(data) {
+            displayFinalResult(data, ds_values);
+          }
+        );
+    } else if ( result.paymentIntent.status === "succeeded" ) {
       jQuery.post(
         ds_values.ajaxurl,
         {
           'action': 'ds_process_button',
-          'paymentIntentID': result.paymentIntent.id,
+          'paymentIntentSucceeded': result.paymentIntent,
           'params': ds_values,
           'ds_nonce': ds_values.ds_nonce
         },
@@ -74,29 +89,22 @@ function processResult(result, ds_values){
           displayFinalResult(data, ds_values);
         }
       );
-  } else if ( result.paymentIntent.status === "succeeded" ) {
-    jQuery.post(
-      ds_values.ajaxurl,
-      {
-        'action': 'ds_process_button',
-        'paymentIntentSucceeded': result.paymentIntent,
-        'params': ds_values,
-        'ds_nonce': ds_values.ds_nonce
-      },
-      function(data) {
-        displayFinalResult(data, ds_values);
-      }
-    );
+    }
+
   } else {
-    console.log("elseProcess");
     displayFinalResult(result, ds_values);
   }
 
 }
 
 function displayFinalResult(data,  ds_values){
+  
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
-  ds_answer_input = "#ds-answer-" + ds_values.instance;
+  ds_answer_input = document.querySelector("#ds-answer-" + ds_values.instance),
+  success_input = document.querySelector("#ds-success-answer-" + ds_values.instance),
+  error_div = document.querySelector("." + ds_values.instance + "-error"),
+  error_input = document.querySelector("#ds-error-answer-" + ds_values.instance),
+  form = document.querySelector(".ds-element-" + ds_values.instance + " > form ");
   
   switch (data.id) {
     case "1":
@@ -104,6 +112,7 @@ function displayFinalResult(data,  ds_values){
       dsProcess.classList.add('submitted');
       jQuery(ds_answer_input).addClass("success");
       jQuery(ds_answer_input).html(data.message);
+      jQuery(success_input).html(data.message);
       jQuery(ds_answer_input).show();
       setTimeout(function() {
         jQuery(ds_answer_input).hide();
@@ -115,11 +124,20 @@ function displayFinalResult(data,  ds_values){
       window.location.assign(data.url);
       break;
     default:
-        console.log("elseDisplay");
+      console.log(error_div);
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('error');
+      form.classList.add('hide');
+      error_div.classList.add('visible');
       jQuery(ds_answer_input).addClass("error");
-      jQuery(ds_answer_input).html(data.message);
+      if(typeof data.error.message !== "undefined"){
+        jQuery(error_input).html(data.error.message);
+        jQuery(ds_answer_input).html(data.message);
+      } else if(typeof data.message !== "undefined"){
+        jQuery(error_input).html(data.message);
+        jQuery(ds_answer_input).html(data.message);
+      }
+      
       jQuery(ds_answer_input).show();
       setTimeout(function() {
           jQuery(ds_answer_input).hide();

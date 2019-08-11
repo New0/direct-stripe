@@ -20,7 +20,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     }
     //Get Button Values
     var ds_values = window[instance],
-    direct_stripe_script_vars = window[direct_stripe_script_vars];
+    ds_script_vars = direct_stripe_script_vars;
 
     // Set currency
     if( "" !== ds_values.currency ) {
@@ -33,7 +33,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     shipping = ds_values.shipping === "1" || ds_values.shipping === "true",
     rememberme = ds_values.rememberme === "1" || ds_values.rememberme === "true",
     numbers = /^\+?[0-9]*\.?[0-9]+$/,
-    ds_answer_input = "#ds-answer-" + instance;
+    ds_answer_input = "#ds-pre-answer-" + instance;
 
     //Set amount
     if( ds_values.display_amount !== "" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
@@ -52,10 +52,10 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     var tcState = checkTC(this, instance),
     donationInputState = checkDonationInput(this, ds_values, numbers);
     if(tcState){
-        returnError(ds_answer_input, direct_stripe_script_vars, 'emptyTc');
+        returnError(ds_answer_input, ds_script_vars, 'emptyTc');
         return false;
     } else if(donationInputState){
-       returnError(ds_answer_input, direct_stripe_script_vars, 'emptyDonation');
+       returnError(ds_answer_input, ds_script_vars, 'emptyDonation');
        return false;
     }
 

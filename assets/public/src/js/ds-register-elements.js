@@ -9,8 +9,6 @@ function registerElements(elements, elementName) {
 
   var form = dsProcess.querySelector('form');
 
-  var resetButton = dsProcess.querySelector('a.reset');
-
   var error = form.querySelector('.error');
   var errorMessage = error.querySelector('.message');
 
@@ -18,6 +16,9 @@ function registerElements(elements, elementName) {
   var instance = jQuery( form  ).data("id");
   //Get Button Values
   var ds_values = window[instance];
+
+  //Reset trigger
+  var resetButton = dsProcess.querySelector('a.reset-' + instance);
 
   function enableInputs() {
     Array.prototype.forEach.call(
