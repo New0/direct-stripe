@@ -43,8 +43,13 @@ $str_before = '<div class="' . $ds_class . '">';
 $str_before = apply_filters( 'direct_stripe_div_before', $str_before, $button_id, $ds_class );
 echo $str_before;
 
-echo '<span id="ds-pre-answer-' . $instance . '" class="answer directStripe_pre_answer"></span>';
-
+//Bubble to display errors for unchecked T&C or empty amount in donation input field
+if(
+    isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false && $ds_button->tc !== "false" && $ds_button->tc !== "0"
+    || $ds_button->type === 'donation' 
+) {
+echo apply_filters('direct_stripe_validation_bubble', '<span id="ds-pre-answer-' . $button_id . '" class="answer direct-stripe_validation"></span>', $button_id, $instance );
+}
 //Donation condition and input
 if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
     $direct_stripe_donation_input = '<input lang="en" type="number" step="0.01" min="1" name="donationvalue" id="donationvalue-' . $instance . '" class="donationvalue" data-donation-input-id="' . $instance . '" />';
@@ -88,7 +93,7 @@ if(isset($ds_button->tc) && !empty($ds_button->tc) && $ds_button->tc !== false &
 }
 
 if(  isset( $ds_button->type ) && $ds_button->type === 'donation' ) {
-    echo '<input type="hidden" class="dsDonationValue-' . $instance. '" value=""/>';
+    echo '<input type="hidden" class="dsDonationValue-' . $button_id . '" value=""/>';
 }
 
 //Closing Div

@@ -58,3 +58,12 @@
     text-align: right;
   }
 }
+
+.answer {
+  display: none;
+  position: absolute;
+  color: #fff;
+  background-color: #ff0000;
+  padding: 0.2em 0.7em;
+  transform: translate(5%, -105%);
+}
