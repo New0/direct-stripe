@@ -100,7 +100,6 @@ function processResult(result, ds_values){
 function displayFinalResult(data,  ds_values){
   
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
-  ds_answer_input = document.querySelector("#ds-answer-" + ds_values.instance),
   success_input = document.querySelector("#ds-success-answer-" + ds_values.instance),
   error_div = document.querySelector("." + ds_values.instance + "-error"),
   error_input = document.querySelector("#ds-error-answer-" + ds_values.instance),
@@ -110,13 +109,7 @@ function displayFinalResult(data,  ds_values){
     case "1":
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('submitted');
-      jQuery(ds_answer_input).addClass("success");
-      jQuery(ds_answer_input).html(data.message);
       jQuery(success_input).html(data.message);
-      jQuery(ds_answer_input).show();
-      setTimeout(function() {
-        jQuery(ds_answer_input).hide();
-      }, 10000);  
       break;
     case "2":
       dsProcess.classList.remove('submitting');
@@ -125,22 +118,17 @@ function displayFinalResult(data,  ds_values){
       break;
     default:
       console.log(error_div);
+      console.log(data);
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('error');
-      form.classList.add('hide');
-      error_div.classList.add('visible');
+      //form.classList.add('hide');
+      //error_div.classList.add('visible');
       jQuery(ds_answer_input).addClass("error");
       if(typeof data.error.message !== "undefined"){
         jQuery(error_input).html(data.error.message);
-        jQuery(ds_answer_input).html(data.message);
       } else if(typeof data.message !== "undefined"){
         jQuery(error_input).html(data.message);
-        jQuery(ds_answer_input).html(data.message);
       }
       
-      jQuery(ds_answer_input).show();
-      setTimeout(function() {
-          jQuery(ds_answer_input).hide();
-      }, 10000);
   }
 }
