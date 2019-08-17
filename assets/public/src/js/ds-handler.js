@@ -110,8 +110,7 @@ function displayFinalResult(data,  ds_values){
       window.location.assign(data.url);
       break;
     default:
-
-      console.log(data);
+      
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('error');
 
