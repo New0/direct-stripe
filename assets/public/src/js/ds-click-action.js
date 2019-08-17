@@ -4,14 +4,23 @@
 
 //Start process on button Click
 jQuery(".direct-stripe-button-id").on("click", function (e) {
+
     //Get unique button ID
     var instance = jQuery( this ).data("id");
+
+    //Check if instance number isset
+    if(instance.length <= 0){
+        console.log("DS instance button missing");
+        return;
+    }
+
     //Set amount value for donation buttons
     if(jQuery(".donationvalue").length > 0){
         setDonationValue(instance);    
     }
     //Get Button Values
-    var ds_values = window[instance];
+    var ds_values = window[instance],
+    ds_script_vars = direct_stripe_script_vars;
 
     // Set currency
     if( "" !== ds_values.currency ) {
@@ -24,7 +33,7 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     shipping = ds_values.shipping === "1" || ds_values.shipping === "true",
     rememberme = ds_values.rememberme === "1" || ds_values.rememberme === "true",
     numbers = /^\+?[0-9]*\.?[0-9]+$/,
-    ds_answer_input = "#ds-answer-" + instance;
+    ds_answer_input = "#ds-pre-answer-" + instance;
 
     //Set amount
     if( ds_values.display_amount !== "" && ds_values.type !== "subscription" && ds_values.type !== "donation" ) {
@@ -43,43 +52,16 @@ jQuery(".direct-stripe-button-id").on("click", function (e) {
     var tcState = checkTC(this, instance),
     donationInputState = checkDonationInput(this, ds_values, numbers);
     if(tcState){
-        returnError(ds_answer_input, direct_stripe_script_vars, 'emptyTc');
+        returnError(ds_answer_input, ds_script_vars, 'emptyTc');
         return false;
     } else if(donationInputState){
-       returnError(ds_answer_input, direct_stripe_script_vars, 'emptyDonation');
+       returnError(ds_answer_input, ds_script_vars, 'emptyDonation');
        return false;
     }
 
-    handler = stripe_checkout(ds_values);
-    if( billing !== false ) {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel':   ds_values.panellabel,
-            'amount': amount,
-            'billingAddress': billing,
-            'shippingAddress': shipping,
-            'allowRememberMe': rememberme
-        });
-    } else {
-        handler.open({
-            'key': ds_values.key,
-            'locale': ds_values.locale,
-            'image': ds_values.image,
-            'name': ds_values.name,
-            'description': ds_values.description,
-            'email': ds_values.current_email_address,
-            'currency': currency,
-            'panelLabel': ds_values.panellabel,
-            'amount': amount,
-            'allowRememberMe': rememberme
-        });
-    }
+    buildElement(instance, ds_values);
+    //Modal events
+    modalEvent(instance);
 
     e.preventDefault();
 });

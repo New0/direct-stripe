@@ -1,5 +1,62 @@
 # Changelog
 
+## 6.37.0 - 2019-05-23
+* [#663](https://github.com/stripe/stripe-php/pull/663) Add support for `radar.early_fraud_warning` resource
+
+## 6.36.0 - 2019-05-22
+* [#661](https://github.com/stripe/stripe-php/pull/661) Add constants for new TaxId types
+* [#662](https://github.com/stripe/stripe-php/pull/662) Add constants for BalanceTransaction types
+
+## 6.35.2 - 2019-05-20
+* [#655](https://github.com/stripe/stripe-php/pull/655) Add constants for payment intent statuses
+* [#659](https://github.com/stripe/stripe-php/pull/659) Fix PHPDoc for various nested Account actions
+* [#660](https://github.com/stripe/stripe-php/pull/660) Fix various PHPDoc
+
+## 6.35.1 - 2019-05-20
+* [#658](https://github.com/stripe/stripe-php/pull/658) Use absolute value when checking timestamp tolerance
+
+## 6.35.0 - 2019-05-14
+* [#651](https://github.com/stripe/stripe-php/pull/651) Add support for the Capability resource and APIs
+
+## 6.34.6 - 2019-05-13
+* [#654](https://github.com/stripe/stripe-php/pull/654) Fix typo in definition of `Event::PAYMENT_METHOD_ATTACHED` constant
+
+## 6.34.5 - 2019-05-06
+* [#647](https://github.com/stripe/stripe-php/pull/647) Set the return type to static for more operations
+
+## 6.34.4 - 2019-05-06
+* [#650](https://github.com/stripe/stripe-php/pull/650) Add missing constants for Event types
+
+## 6.34.3 - 2019-05-01
+* [#644](https://github.com/stripe/stripe-php/pull/644) Update return type to `static` to improve static analysis
+* [#645](https://github.com/stripe/stripe-php/pull/645) Fix constant for `payment_intent.payment_failed`
+
+## 6.34.2 - 2019-04-26
+* [#642](https://github.com/stripe/stripe-php/pull/642) Fix an issue where existing idempotency keys would be overwritten when using automatic retries
+
+## 6.34.1 - 2019-04-25
+* [#640](https://github.com/stripe/stripe-php/pull/640) Add missing phpdocs 
+
+## 6.34.0 - 2019-04-24
+* [#626](https://github.com/stripe/stripe-php/pull/626) Add support for the `TaxRate` resource and APIs
+* [#639](https://github.com/stripe/stripe-php/pull/639) Fix multiple phpdoc issues
+
+## 6.33.0 - 2019-04-22
+* [#630](https://github.com/stripe/stripe-php/pull/630) Add support for the `TaxId` resource and APIs
+
+## 6.32.1 - 2019-04-19
+* [#636](https://github.com/stripe/stripe-php/pull/636) Correct type of `$personId` in PHPDoc
+
+## 6.32.0 - 2019-04-18
+* [#621](https://github.com/stripe/stripe-php/pull/621) Add support for `CreditNote`
+
+## 6.31.5 - 2019-04-12
+* [#628](https://github.com/stripe/stripe-php/pull/628) Add constants for `person.*` event types
+* [#628](https://github.com/stripe/stripe-php/pull/628) Add missing constants for `Account` and `Person`
+
+## 6.31.4 - 2019-04-05
+* [#624](https://github.com/stripe/stripe-php/pull/624) Fix encoding of nested parameters in multipart requests
+
 ## 6.31.3 - 2019-04-02
 * [#623](https://github.com/stripe/stripe-php/pull/623) Only use HTTP/2 with curl >= 7.60.0
 

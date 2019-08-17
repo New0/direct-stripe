@@ -51,7 +51,7 @@ class dsScripts {
         include( DSCORE_PATH . 'includes/styles.php');
         wp_add_inline_style( 'direct-stripe-style', $custom_css );
         
-	    wp_register_script('direct-stripe-checkout-script',  '//checkout.stripe.com/checkout.js' );
+	    wp_register_script('direct-stripe-checkout-script',  '//js.stripe.com/v3/' );
         wp_register_script('direct-stripe-handler-script', DSCORE_URL . 'assets/public/dist/js/main.min.js', array('jquery' ), false, false);
 
         $style_settings = get_option( 'direct_stripe_styles_settings' );
@@ -60,7 +60,16 @@ class dsScripts {
         } else {
             $checkTC = 'Please check the T&C';
         }
+
+        $general_settings = get_option( 'direct_stripe_general_settings' );
+        if($general_settings["direct_stripe_checkbox_api_keys"] === true){
+            $p_key = $general_settings['direct_stripe_test_publishable_api_key'];
+        } else {
+            $p_key = $general_settings['direct_stripe_publishable_api_key'];
+        }
+        
         wp_localize_script('direct-stripe-handler-script', 'direct_stripe_script_vars', array(
+                'p_key' => $p_key,
                 'text'  => array(
                     'checkTC'       => __( $checkTC, 'direct-stripe' ),
                     'enterAmount'   => __( 'Please enter amount', 'direct-stripe' ),
