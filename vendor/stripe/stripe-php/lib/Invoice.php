@@ -7,6 +7,8 @@ namespace Stripe;
  *
  * @property string $id
  * @property string $object
+ * @property string $account_country
+ * @property string $account_name
  * @property int $amount_due
  * @property int $amount_paid
  * @property int $amount_remaining
@@ -17,11 +19,21 @@ namespace Stripe;
  * @property string $billing
  * @property string $billing_reason
  * @property string $charge
+ * @property string $collection_method
  * @property int $created
  * @property string $currency
- * @property mixed $custom_fields
+ * @property array $custom_fields
  * @property string $customer
+ * @property mixed $customer_address
+ * @property string $customer_email
+ * @property string $customer_name
+ * @property string $customer_phone
+ * @property mixed $customer_shipping
+ * @property string $customer_tax_exempt
+ * @property array $customer_tax_ids
+ * @property string $default_payment_method
  * @property string $default_source
+ * @property array $default_tax_rates
  * @property string $description
  * @property Discount $discount
  * @property int $due_date
@@ -35,8 +47,11 @@ namespace Stripe;
  * @property int $next_payment_attempt
  * @property string $number
  * @property bool $paid
+ * @property string $payment_intent
  * @property int $period_end
  * @property int $period_start
+ * @property int $post_payment_credit_notes_amount
+ * @property int $pre_payment_credit_notes_amount
  * @property string $receipt_number
  * @property int $starting_balance
  * @property string $statement_descriptor
@@ -46,9 +61,9 @@ namespace Stripe;
  * @property int $subscription_proration_date
  * @property int $subtotal
  * @property int $tax
- * @property float $tax_percent
  * @property mixed $threshold_reason
  * @property int $total
+ * @property array $total_tax_amounts
  * @property int $webhooks_delivered_at
  *
  * @package Stripe

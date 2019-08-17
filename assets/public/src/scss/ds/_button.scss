@@ -40,30 +40,7 @@
     display: inline;
   }
 }
-.directStripe_answer {
-  display: none;
-  padding: 0.4rem 0.9rem;
-  position: absolute;
-  z-index: 11111111;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  transform: translateY(-100%);
 
-  &.error {
-    color: #fff;
-    background-color: red;
-  }
-  &.alert {
-    color: #fff;
-    background-color: orange;
-  }
-  &.success {
-    color: #fff;
-    background-color: green;
-  }
-}
 .direct-stripe {
   margin: 1em;
 
@@ -80,4 +57,13 @@
     margin: 0 0 0 auto;
     text-align: right;
   }
+}
+
+.answer {
+  display: none;
+  position: absolute;
+  color: #fff;
+  background-color: #ff0000;
+  padding: 0.2em 0.7em;
+  transform: translate(5%, -105%);
 }

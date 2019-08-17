@@ -18,10 +18,10 @@
 		</td>
 	</tr>
 	<tr>
-		<!-- Billing_country -->
-		<th><label for="ds_billing_address_country"><?php _e('Billing country', 'direct-stripe'); ?></label></th>
+		<!-- Billing_phone-->
+		<th><label for="ds_billing_phone"><?php _e('Billing phone', 'direct-stripe'); ?></label></th>
 		<td>
-			<input disabled="disabled" type="text" name="ds_billing_address_country" id="ds_billing_address_country" value="<?php echo esc_attr( get_post_meta( $post->ID, 'ds_billing_address_country', true ) ); ?>" class="infos-sup" /><br />
+			<input disabled="disabled" type="text" name="ds_billing_phone" id="ds_billing_phone" value="<?php echo esc_attr( get_post_meta( $post->ID, 'ds_billing_phone', true ) ); ?>" class="infos-sup" /><br />
 		</td>
 	</tr>
 	<tr>
@@ -70,10 +70,10 @@
 		</td>
 	</tr>
 	<tr>
-		<!-- shipping_country -->
-		<th><label for="ds_shipping_address_country"><?php _e('Shipping country', 'direct-stripe'); ?></label></th>
+		<!-- shipping_phone -->
+		<th><label for="ds_shipping_phone"><?php _e('Shipping phone', 'direct-stripe'); ?></label></th>
 		<td>
-			<input disabled="disabled" type="text" name="ds_shipping_address_country" id="ds_shipping_address_country" value="<?php echo esc_attr( get_post_meta( $post->ID, 'ds_shipping_address_country', true ) ); ?>" class="infos-sup" /><br />
+			<input disabled="disabled" type="text" name="ds_shipping_phone" id="ds_shipping_phone" value="<?php echo esc_attr( get_post_meta( $post->ID, 'ds_shipping_phone', true ) ); ?>" class="infos-sup" /><br />
 		</td>
 	</tr>
 	<tr>
