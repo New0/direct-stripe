@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
-"POT-Creation-Date: 2019-03-17 18:02+0100\n"
-"PO-Revision-Date: 2019-03-17 18:02+0100\n"
+"POT-Creation-Date: 2019-08-17 18:41+0200\n"
+"PO-Revision-Date: 2019-08-17 18:45+0200\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language-Team: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: controllers/class-ds-admin.php:30 direct-stripe.php:138
+#: controllers/class-ds-admin.php:30 direct-stripe.php:159
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -33,7 +33,8 @@ msgstr "Quelque chose ne va pas, vérifier les nonces..."
 msgid "Settings Saved"
 msgstr "Paramètres sauvegardés"
 
-#: controllers/class-ds-block.php:41 includes/localized-texts.php:23
+#: controllers/class-ds-block.php:41 includes/elements/ds-modal-error.php:7
+#: includes/localized-texts.php:23
 msgid "Error"
 msgstr "Erreur"
 
@@ -183,13 +184,24 @@ msgstr "Tous les types d'entrées"
 msgid "Transaction type"
 msgstr "Type transaction"
 
-#: controllers/class-ds-scripts.php:66
+#: controllers/class-ds-scripts.php:75
 msgid "Please enter amount"
 msgstr "Veuillez saisir le montant"
 
-#: controllers/class-ds-users.php:26 direct-stripe.php:102
+#: controllers/class-ds-users.php:26 direct-stripe.php:122
 msgid "Stripe user"
 msgstr "Utilisateur Stripe"
+
+#: direct-stripe.php:228
+msgid ""
+"Thanks for updating Direct Stripe. The update includes a new process and "
+"design to work with SCA regulation and accept 3D secure transactions. Please "
+"test and make sure that it matches your needs."
+msgstr ""
+"Merci pour la mise à jour de Direct Stripe. La mise à jour comprend un "
+"nouveau processus et une conception pour fonctionner avec la réglementation "
+"SCA et accepter les transactions sécurisées 3D. S'il vous plaît tester et "
+"assurez-vous qu'il correspond à vos besoins."
 
 #. Plugin Name of the plugin/theme
 #: includes/build-page.php:5
@@ -305,8 +317,8 @@ msgid "Billing name"
 msgstr "Facturer à"
 
 #: includes/display-bs-logs-data.php:22 includes/display-users.php:29
-msgid "Billing country"
-msgstr "Pays de Facturation"
+msgid "Billing phone"
+msgstr "Téléphone Facturation"
 
 #: includes/display-bs-logs-data.php:29 includes/display-users.php:36
 msgid "Billing address zip code"
@@ -337,8 +349,8 @@ msgid "Shipping name"
 msgstr "Nom de livraison"
 
 #: includes/display-bs-logs-data.php:74 includes/display-users.php:81
-msgid "Shipping country"
-msgstr "Pays de Livraison"
+msgid "Shipping phone"
+msgstr "Téléphone Livraison"
 
 #: includes/display-bs-logs-data.php:81 includes/display-users.php:88
 msgid "Shipping zip code"
@@ -408,21 +420,83 @@ msgstr "Infos utilisateur Direct Stripe"
 msgid "Direct Sripe ID"
 msgstr "ID Direct Stripe"
 
-#: includes/ds-answers.php:19
-msgid "Processing"
-msgstr "En cours"
-
-#: includes/ds-button.php:21
+#: includes/ds-button.php:22
 msgid "Undefined button value, check settings"
 msgstr "Argument \"Value\" du shortcode erroné, vérifier la configuration"
 
-#: includes/ds-data.php:43
+#: includes/ds-data.php:42 includes/elements/ds-modal-element.php:35
 msgid "Pay with card"
 msgstr "Payer par carte bancaire"
 
-#: includes/ds-data.php:44
+#: includes/ds-data.php:43
 msgid "Pay"
 msgstr "Payer"
+
+#: includes/elements/ds-billing-element.php:10
+#: includes/register-settings.php:148
+msgid "Billing information"
+msgstr "Détails de facturation"
+
+#: includes/elements/ds-billing-element.php:14
+#: includes/elements/ds-shipping-element.php:23
+msgid "Phone"
+msgstr "Téléphone"
+
+#: includes/elements/ds-billing-element.php:20
+#: includes/elements/ds-shipping-element.php:29
+msgid "Address"
+msgstr "Adresse"
+
+#: includes/elements/ds-billing-element.php:26
+#: includes/elements/ds-shipping-element.php:35
+msgid "City"
+msgstr "Ville"
+
+#: includes/elements/ds-billing-element.php:30
+#: includes/elements/ds-shipping-element.php:39
+msgid "ZIP"
+msgstr "Code postal"
+
+#: includes/elements/ds-billing-element.php:36
+#: includes/elements/ds-shipping-element.php:45
+msgid "State"
+msgstr "Département"
+
+#: includes/elements/ds-billing-element.php:48
+#: includes/elements/ds-shipping-element.php:57
+msgid "Country"
+msgstr "Pays"
+
+#: includes/elements/ds-card-element.php:10
+msgid "Card details"
+msgstr "Détails de la carte"
+
+#: includes/elements/ds-modal-element.php:36
+msgid "Or enter card details"
+msgstr "Ou entrez les détails de la carte"
+
+#: includes/elements/ds-modal-email.php:13
+#: includes/elements/ds-modal-email.php:22
+msgid "Email"
+msgstr "E-mail"
+
+#: includes/elements/ds-modal-name.php:11
+#: includes/elements/ds-shipping-element.php:17
+#: includes/localized-texts.php:110
+msgid "Name"
+msgstr "Nom"
+
+#: includes/elements/ds-modal-success.php:13
+msgid "Payment successful"
+msgstr "Paiement Réussi"
+
+#: includes/elements/ds-shipping-element.php:10
+msgid "Use same details for Shipping"
+msgstr "Utilisez les mêmes détails pour l'expédition"
+
+#: includes/elements/ds-shipping-element.php:13
+msgid "Shipping information"
+msgstr "Informations de livraison"
 
 #: includes/localized-texts.php:19
 msgid "Required field"
@@ -775,10 +849,6 @@ msgstr ""
 "\"Label\" est le texte du bouton, le \"Panel Label est le texte du bouton du "
 "formulaire Stripe"
 
-#: includes/localized-texts.php:110
-msgid "Name"
-msgstr "Nom"
-
 #: includes/localized-texts.php:111
 msgid "Label"
 msgstr "Label"
@@ -1020,10 +1090,6 @@ msgstr "Les champs de contenu des emails supportent le balisage html:"
 msgid "Landing pages"
 msgstr "Pages de redirections"
 
-#: includes/register-settings.php:148
-msgid "Billing information"
-msgstr "Détails de facturation"
-
 #: includes/register-settings.php:154
 msgid "Ask for address in modal Form"
 msgstr "Demander adresse dans le formulaire"
@@ -1068,11 +1134,11 @@ msgstr "Insérer bouton"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: process/ds_process_transactions.php:50
+#: process/ds_process_transactions.php:89
 msgid "One time setup fee "
 msgstr "Frais d’installation "
 
-#: process/ds_retrieve_data.php:55
+#: process/ds_retrieve_data.php:57
 msgid "Direct Stripe "
 msgstr "Direct Stripe "
 
@@ -1091,6 +1157,15 @@ msgstr "Nicolas Figueira"
 #. Author URI of the plugin/theme
 msgid "https://newo.me"
 msgstr "https://newo.me"
+
+#~ msgid "Billing country"
+#~ msgstr "Pays de Facturation"
+
+#~ msgid "Shipping country"
+#~ msgstr "Pays de Livraison"
+
+#~ msgid "Processing"
+#~ msgstr "En cours"
 
 #~ msgid "Will display the amount in the modal form's button"
 #~ msgstr ""
