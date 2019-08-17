@@ -117,13 +117,8 @@ function buildElement(instance, ds_values) {
  */
 function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
 
-    var dsProcess = document.querySelector(".ds-element-" + ds_values.instance);
-
     var parobj = ds_values,
     type = parobj["type"];
-
-    var ds_answer_input = "#ds-answer-" + parobj.instance,
-    ds_loading_span = "#loadingDS-" + parobj.instance;
 
     if(type === "donation") {
         var amount = setDonationValue(parobj.instance);
@@ -214,9 +209,7 @@ function displayFinalResult(data,  ds_values){
   
   var dsProcess = document.querySelector(".ds-element-" + ds_values.instance),
   success_input = document.querySelector("#ds-success-answer-" + ds_values.instance),
-  error_div = document.querySelector("." + ds_values.instance + "-error"),
-  error_input = document.querySelector("#ds-error-answer-" + ds_values.instance),
-  form = document.querySelector(".ds-element-" + ds_values.instance + " > form ");
+  error_input = document.querySelector("#ds-error-answer-" + ds_values.instance);
   
   switch (data.id) {
     case "1":
@@ -230,13 +223,11 @@ function displayFinalResult(data,  ds_values){
       window.location.assign(data.url);
       break;
     default:
-      console.log(error_div);
+
       console.log(data);
       dsProcess.classList.remove('submitting');
       dsProcess.classList.add('error');
-      //form.classList.add('hide');
-      //error_div.classList.add('visible');
-      jQuery(ds_answer_input).addClass("error");
+
       if(typeof data.error.message !== "undefined"){
         jQuery(error_input).html(data.error.message);
       } else if(typeof data.message !== "undefined"){
@@ -265,7 +256,8 @@ function registerElements(elements, elementName) {
   var ds_values = window[instance];
 
   //Reset trigger
-  var resetButton = dsProcess.querySelector('a.reset-' + instance);
+  var resetButtonSuccess = dsProcess.querySelector('a.reset-success-' + instance);
+  var resetButtonError = dsProcess.querySelector('a.reset-error-' + instance);
 
   function enableInputs() {
     Array.prototype.forEach.call(
@@ -422,8 +414,23 @@ function registerElements(elements, elementName) {
     
   });
 
-  resetButton.addEventListener('click', function(e) {
+  resetButtonError.addEventListener('click', function(e) {
     e.preventDefault();
+
+    dsStripeResetForm(form, elements, dsProcess, error);
+
+  });
+
+  resetButtonSuccess.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    dsStripeResetForm(form, elements, dsProcess, error);
+
+  });
+
+  function dsStripeResetForm(form, elements, dsProcess, error) {
+
+    jQuery('.error-bubble').hide();
     // Resetting the form (instead of setting the value to `''` for each input)
     // helps us clear webkit autofill styles.
     form.reset();
@@ -439,8 +446,11 @@ function registerElements(elements, elementName) {
     // Resetting the form does not un-disable inputs, so we need to do it separately:
     enableInputs();
     dsProcess.classList.remove('submitted');
-  });
+
+  }
+  
 }
+
 //Set Values for donation buttons
 function setDonationValue(instance){
     var ds_values = window[instance];

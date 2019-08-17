@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name: Direct Stripe
  * Description: Use Stripe payment buttons anywhere in a WordPress website, let your users easily proceed to checkout
- * Version:     2.1.15
+ * Version:     3.0.0-beta
  * Author:      Nicolas Figueira
  * Author URI:  https://newo.me
  * Text Domain: direct-stripe
@@ -72,7 +72,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          * @since 2.0.0
          * @var string
          */
-        const version = '2.1.15';
+        const version = '3.0.0-beta';
 
         /**
          * Plugin Textdomain.
@@ -129,7 +129,9 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         public function init_hooks() {
 		    add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
-	        add_filter( 'plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+            add_filter( 'plugin_action_links', array( $this, 'ds_plugin_action_links'), 10, 2);
+            add_action( 'upgrader_process_complete', array( $this, 'ds_check_update' ), 10, 2 );
+            add_action( 'admin_notices', array( $this, 'ds_display_update_notice' ) );
         }
 
         /**
@@ -192,6 +194,46 @@ if ( ! class_exists( 'DirectStripe' ) ) :
 	        //include_once( 'controllers/class-ds-logs-taxonomies.php' );
             include_once( 'controllers/class-ds-users.php' );
         }
+
+
+        /**
+         * Add admin notice on update
+         *
+         * @since 3.0.0
+         */
+        public function ds_check_update( $upgrader_object, $options ) {
+     
+            $ds_plugin = plugin_basename( FILE );
+            // If an update has taken place and the updated type is plugins and the plugins element exists
+            if( $options['action'] === 'update' && $options['type'] === 'plugin' && isset( $options['plugins'] ) ) {
+                // Iterate through the plugins being updated and check if ds is there
+                foreach( $options['plugins'] as $plugin ) {
+                    if( $plugin === $ds_plugin ) {
+                        // Set a transient to record that ds plugin has just been updated
+                        set_transient( 'ds_plugin_updated', 1 );
+                    }
+                }
+            }
+        }
+
+        /**
+         * Add admin notice on update
+         *
+         * @since 3.0.0
+         */
+        public function ds_display_update_notice() {
+     
+             // Check the transient to see if we've just updated the plugin
+            if( get_transient( 'ds_plugin_updated' ) ) {
+                $message =  __( 'Thanks for updating Direct Stripe. The update includes a new process and design to work with SCA regulation and accept 3D secure transactions. Please test and make sure that it matches your needs.', 'ds-stripe' );
+
+                echo '<div class="notice notice-success">' . $message . '</div>';
+                delete_transient( 'ds_plugin_updated' );
+            }
+            
+        }
+
+
     }
 
 endif; //if class exists

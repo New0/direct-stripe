@@ -23,8 +23,7 @@
     }
 
     &.submitted,
-    &.submitting,
-    &.error {
+    &.submitting {
         form {
             fieldset {
                 opacity: 0;
@@ -69,31 +68,6 @@
             }
         }
     }
-    &.submitted {
-        .error {
-            > * {
-                opacity: 1;
-            }
-
-            .border,
-            .checkmark {
-                stroke-dashoffset: 0 !important;
-            }
-        }
-    }
-
-    &.error {
-        .error {
-            > * {
-                opacity: 1;
-            }
-
-            .border,
-            .checkmark {
-                stroke-dashoffset: 0 !important;
-            }
-        }
-    }
    
     form {
         position: relative;
@@ -120,7 +94,7 @@
         }
     }
     
-    .success, .error {
+    .success {
         display: -ms-flexbox;
         display: flex;
         -ms-flex-direction: column;
@@ -188,6 +162,7 @@
         }
 
         .reset {
+            color: #fff;
             padding-top: 1rem;
 
             &:active {
@@ -200,6 +175,45 @@
             }
         }
     }
+
+    &.submitted {
+        .success {
+            * {
+                opacity: 1;
+            }
+            .icon {
+                display: none;
+            } 
+        }
+    }
+
+    .error {
+        display:none;
+    }
+
+    &.error {
+        .error {
+            display: block;
+            text-align: center;
+
+            * {
+                opacity: 1
+            }
+
+            a {
+                &.reset {
+                    padding: 1rem;
+                    
+                    svg {
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+   
 
 }
 

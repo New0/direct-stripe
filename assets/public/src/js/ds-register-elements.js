@@ -18,7 +18,8 @@ function registerElements(elements, elementName) {
   var ds_values = window[instance];
 
   //Reset trigger
-  var resetButton = dsProcess.querySelector('a.reset-' + instance);
+  var resetButtonSuccess = dsProcess.querySelector('a.reset-success-' + instance);
+  var resetButtonError = dsProcess.querySelector('a.reset-error-' + instance);
 
   function enableInputs() {
     Array.prototype.forEach.call(
@@ -175,8 +176,23 @@ function registerElements(elements, elementName) {
     
   });
 
-  resetButton.addEventListener('click', function(e) {
+  resetButtonError.addEventListener('click', function(e) {
     e.preventDefault();
+
+    dsStripeResetForm(form, elements, dsProcess, error);
+
+  });
+
+  resetButtonSuccess.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    dsStripeResetForm(form, elements, dsProcess, error);
+
+  });
+
+  function dsStripeResetForm(form, elements, dsProcess, error) {
+
+    jQuery('.error-bubble').hide();
     // Resetting the form (instead of setting the value to `''` for each input)
     // helps us clear webkit autofill styles.
     form.reset();
@@ -192,5 +208,7 @@ function registerElements(elements, elementName) {
     // Resetting the form does not un-disable inputs, so we need to do it separately:
     enableInputs();
     dsProcess.classList.remove('submitted');
-  });
+
+  }
+  
 }

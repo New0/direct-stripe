@@ -5,6 +5,9 @@
  * Date: 20/06/2018
  * Time: 17:49
  */
+
+use PayPal\Api\Error;
+
 defined( 'ABSPATH' ) or die( 'Please!' );
 
 
@@ -185,6 +188,12 @@ class ds_process_transactions {
             $e = $e;
             error_log("Something wrong happened:" . $e->getMessage() );
             \ds_process_functions::pre_process_answer($e, $resultData);
+
+        } catch (Error $e) {
+            $e = $e;
+            error_log("Something wrong happened:" . $e->getMessage() );
+            \ds_process_functions::pre_process_answer($e, $resultData);
+            
         }
 
     }

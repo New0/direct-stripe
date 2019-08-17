@@ -29,6 +29,8 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                         $ds_modal_form_complete .= $ds_company_element;
                     }
 
+                    $ds_modal_form_complete .= $ds_modal_error;
+
                     $ds_modal_form_complete .= '<fieldset>
                         <legend class="card-only" data-tid="ds-element.form.pay_with_card">' . __('Pay with card', 'direct-stripe') . '</legend>
                         <legend class="payment-request-available" data-tid="elements_ds-element.form.enter_card_manually">' . __('Or enter card details', 'direct-stripe') . '</legend>
@@ -54,7 +56,7 @@ $ds_modal_form_complete = '<!-- DS Modal -->
                                               
                     $ds_modal_form_complete .= '
                     </fieldset>
-                    ' . $ds_modal_error  . $ds_modal_success . '
+                    ' . $ds_modal_success . '
                 </form>
             </div>
         </div><!-- .ds-form -->
