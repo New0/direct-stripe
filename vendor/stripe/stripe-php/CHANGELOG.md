@@ -1,5 +1,37 @@
 # Changelog
 
+## 6.43.0 - 2019-08-09
+* [#694](https://github.com/stripe/stripe-php/pull/694) Add `SubscriptionItem::createUsageRecord` method
+
+## 6.42.0 - 2019-08-09
+* [#688](https://github.com/stripe/stripe-php/pull/688) Remove `SubscriptionScheduleRevision`
+  * Note that this is technically a breaking change, however we've chosen to release it as a minor version in light of the fact that this resource and its API methods were virtually unused.
+
+## 6.41.0 - 2019-07-31
+* [#683](https://github.com/stripe/stripe-php/pull/683) Move the List Balance History API to `/v1/balance_transactions`
+
+## 6.40.0 - 2019-06-27
+* [#675](https://github.com/stripe/stripe-php/pull/675) Add support for `SetupIntent` resource and APIs
+
+## 6.39.2 - 2019-06-26
+* [#676](https://github.com/stripe/stripe-php/pull/676) Fix exception message in `CustomerBalanceTransaction::update()`
+
+## 6.39.1 - 2019-06-25
+* [#674](https://github.com/stripe/stripe-php/pull/674) Add new constants for `collection_method` on `Invoice`
+
+## 6.39.0 - 2019-06-24
+* [#673](https://github.com/stripe/stripe-php/pull/673) Enable request latency telemetry by default
+
+## 6.38.0 - 2019-06-17
+* [#649](https://github.com/stripe/stripe-php/pull/649) Add support for `CustomerBalanceTransaction` resource and APIs
+
+## 6.37.2 - 2019-06-17
+* [#671](https://github.com/stripe/stripe-php/pull/671) Add new PHPDoc
+* [#672](https://github.com/stripe/stripe-php/pull/672) Add constants for `submit_type` on Checkout `Session`
+
+## 6.37.1 - 2019-06-14
+* [#670](https://github.com/stripe/stripe-php/pull/670) Add new PHPDoc
+
 ## 6.37.0 - 2019-05-23
 * [#663](https://github.com/stripe/stripe-php/pull/663) Add support for `radar.early_fraud_warning` resource
 
@@ -35,7 +67,7 @@
 * [#642](https://github.com/stripe/stripe-php/pull/642) Fix an issue where existing idempotency keys would be overwritten when using automatic retries
 
 ## 6.34.1 - 2019-04-25
-* [#640](https://github.com/stripe/stripe-php/pull/640) Add missing phpdocs 
+* [#640](https://github.com/stripe/stripe-php/pull/640) Add missing phpdocs
 
 ## 6.34.0 - 2019-04-24
 * [#626](https://github.com/stripe/stripe-php/pull/626) Add support for the `TaxRate` resource and APIs
@@ -123,7 +155,7 @@
 * [#564](https://github.com/stripe/stripe-php/pull/564) Add event name constants for subscription schedule aborted/expiring
 
 ## 6.23.0 - 2018-11-27
-* [#542](https://github.com/stripe/stripe-php/pull/542) Add support for `ValueList` and `ValueListItem` for Radar 
+* [#542](https://github.com/stripe/stripe-php/pull/542) Add support for `ValueList` and `ValueListItem` for Radar
 
 ## 6.22.1 - 2018-11-20
 * [#561](https://github.com/stripe/stripe-php/pull/561) Add cast and some docs to telemetry introduced in 6.22.0/#549
@@ -377,7 +409,7 @@ Pull requests included in this release:
 * Add support for payouts and recipient transfers
 
 ## 4.6.0 - 2017-04-06
-* Please see 4.7.0 instead (no-op release)	
+* Please see 4.7.0 instead (no-op release)
 
 ## 4.5.1 - 2017-03-22
 * Remove hard dependency on cURL
