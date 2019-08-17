@@ -3,13 +3,15 @@ Contributors: nahuelmahe
 Donate link: https://newo.me/direct-stripe-payment-button-for-wordpress/
 Tags: payments, stripe, credit cards, donations, subscriptions, checkout, direct checkout
 Requires at least: 4.7
-Tested up to: 5.1.1
+Tested up to: 5.2.2
 Stable tag: 2.1.15
 License: GPLv2 or later 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 #Simple Payments, Donations and Subscriptions using Stripe
+
+##Accepts 3D secure cards, ready for SCA regulation
 
 ###High conversion Stripe checkout buttons, easily start charging without users leaving your website, Styling, T&C and automated emails options!
 
@@ -103,6 +105,11 @@ You can also insert direct stripe buttons using a shortcode `[direct-stripe valu
 
 
 == Changelog ==
+
+=3.0.0-beta=
+* Switched to Payment Intents API
+* Custom modal form
+* New frontend filter hooks https://newo.me/direct-stripe-actions-and-filters-hooks/
 
 =2.1.15=
 * Fix issue saving settings with & symbol
