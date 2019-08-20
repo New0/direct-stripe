@@ -203,12 +203,11 @@ if ( ! class_exists( 'DirectStripe' ) ) :
          */
         public function ds_check_update( $upgrader_object, $options ) {
      
-            $ds_plugin = plugin_basename( FILE );
             // If an update has taken place and the updated type is plugins and the plugins element exists
             if( $options['action'] === 'update' && $options['type'] === 'plugin' && isset( $options['plugins'] ) ) {
                 // Iterate through the plugins being updated and check if ds is there
                 foreach( $options['plugins'] as $plugin ) {
-                    if( $plugin === $ds_plugin ) {
+                    if( $plugin === DSCORE_BASENAME ) {
                         // Set a transient to record that ds plugin has just been updated
                         set_transient( 'ds_plugin_updated', 1 );
                     }
