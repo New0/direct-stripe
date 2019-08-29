@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Direct Stripe\n"
-"POT-Creation-Date: 2019-08-17 18:41+0200\n"
-"PO-Revision-Date: 2019-08-17 18:45+0200\n"
+"POT-Creation-Date: 2019-08-29 17:47+0200\n"
+"PO-Revision-Date: 2019-08-29 17:48+0200\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language-Team: New0 Nicolas Figueira <nico@newo.me>\n"
 "Language: fr_FR\n"
@@ -192,7 +192,7 @@ msgstr "Veuillez saisir le montant"
 msgid "Stripe user"
 msgstr "Utilisateur Stripe"
 
-#: direct-stripe.php:228
+#: direct-stripe.php:227
 msgid ""
 "Thanks for updating Direct Stripe. The update includes a new process and "
 "design to work with SCA regulation and accept 3D secure transactions. Please "
@@ -825,9 +825,13 @@ msgid "Donation amount is set by user"
 msgstr "Le montant du don est défini par l’utilisateur"
 
 #: includes/localized-texts.php:106
+#, fuzzy
+#| msgid ""
+#| "For subscriptions, enter the pricing plan ID of a product, created in "
+#| "Stripe admin panel."
 msgid ""
-"For subscriptions, enter the pricing plan ID of a product, created in Stripe "
-"admin panel."
+"For subscriptions, enter the pricing plan ID of a product (plan_xxx not "
+"prod_xxx), created in Stripe admin panel."
 msgstr ""
 "Pour les abonnements, entrez l’ID de plan tarifaire d’un produit, créé dans "
 "l'admin Stripe."
@@ -1134,11 +1138,11 @@ msgstr "Insérer bouton"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: process/ds_process_transactions.php:89
+#: process/ds_process_transactions.php:92
 msgid "One time setup fee "
 msgstr "Frais d’installation "
 
-#: process/ds_retrieve_data.php:57
+#: process/ds_retrieve_data.php:58
 msgid "Direct Stripe "
 msgstr "Direct Stripe "
 

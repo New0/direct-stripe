@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Direct Stripe\n"
-"POT-Creation-Date: 2019-08-17 18:45+0200\n"
+"POT-Creation-Date: 2019-08-29 17:35+0200\n"
 "PO-Revision-Date: 2018-06-19 15:28+0200\n"
 "Last-Translator: New0 Nicolas Figueira <nico@newo.fr>\n"
 "Language-Team: New0 Nicolas Figueira <nico@newo.fr>\n"
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Stripe user"
 msgstr ""
 
-#: direct-stripe.php:228
+#: direct-stripe.php:227
 msgid ""
 "Thanks for updating Direct Stripe. The update includes a new process and "
 "design to work with SCA regulation and accept 3D secure transactions. Please "
@@ -811,8 +811,8 @@ msgstr ""
 
 #: includes/localized-texts.php:106
 msgid ""
-"For subscriptions, enter the pricing plan ID of a product, created in Stripe "
-"admin panel."
+"For subscriptions, enter the pricing plan ID of a product (plan_xxx not "
+"prod_xxx), created in Stripe admin panel."
 msgstr ""
 
 #: includes/localized-texts.php:107
@@ -1084,11 +1084,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: process/ds_process_transactions.php:89
+#: process/ds_process_transactions.php:92
 msgid "One time setup fee "
 msgstr ""
 
-#: process/ds_retrieve_data.php:57
+#: process/ds_retrieve_data.php:58
 msgid "Direct Stripe "
 msgstr ""
 
