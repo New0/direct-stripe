@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: nahuel
@@ -8,19 +9,21 @@
 
 use PayPal\Api\Error;
 
-defined( 'ABSPATH' ) or die( 'Please!' );
+defined('ABSPATH') or die('Please!');
 
 
-class ds_process_transactions {
+class ds_process_transactions
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         // Stripe
-        if ( ! class_exists('Stripe\Stripe')) {
-            require_once( DSCORE_PATH . 'vendor/autoload.php' );
+        if (!class_exists('Stripe\Stripe')) {
+            require_once(DSCORE_PATH . 'vendor/autoload.php');
         }
         //Functions
-        if ( ! class_exists('ds_process_functions')) {
-            require_once( DSCORE_PATH . 'process/ds_process_functions.php');
+        if (!class_exists('ds_process_functions')) {
+            require_once(DSCORE_PATH . 'process/ds_process_functions.php');
         }
 
         $this->ds_process();
@@ -34,38 +37,38 @@ class ds_process_transactions {
     function ds_process()
     {
         //Security check
-        check_ajax_referer( 'direct-stripe-nonce', 'ds_nonce' );
+        check_ajax_referer('direct-stripe-nonce', 'ds_nonce');
 
         //Retrieve Data
-        require_once( DSCORE_PATH . 'process/ds_retrieve_data.php');
+        require_once(DSCORE_PATH . 'process/ds_retrieve_data.php');
 
         //Process API Keys
-        \ds_process_functions::api_keys( $d_stripe_general );
+        \ds_process_functions::api_keys($d_stripe_general);
 
-        
+
         //Confirm Payment Intent Server side and display answers
-        if ( !empty($payment_intent_id) && !empty( get_transient('ds_data' . $button_id) ) ) {
+        if (!empty($payment_intent_id) && !empty(get_transient('ds_data' . $button_id))) {
             $intent = \Stripe\PaymentIntent::retrieve(
-              $payment_intent_id
+                $payment_intent_id
             );
             $intent->confirm();
 
             $resultData = get_transient('ds_data' . $button_id);
             delete_transient('ds_data' . $button_id);
-            
-            \ds_process_functions::ds_generatePaymentResponse( $intent, $resultData );
 
-        //Payment Intent already confirmed on frontend, display answers
-        } else if( !empty( $paymentIntentSucceeded ) && !empty( get_transient('ds_data' . $button_id) ) ) {
+            \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
+
+            //Payment Intent already confirmed on frontend, display answers
+        } else if (!empty($paymentIntentSucceeded) && !empty(get_transient('ds_data' . $button_id))) {
             $intent = (object) $paymentIntentSucceeded;
             $resultData = get_transient('ds_data' . $button_id);
             delete_transient('ds_data' . $button_id);
 
-            \ds_process_functions::ds_generatePaymentResponse( $intent, $resultData );
+            \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
         }
 
         //Process User
-        $user = \ds_process_functions::check_user_process( $email_address, $d_stripe_general, $custom_role, $logsdata, $params );
+        $user = \ds_process_functions::check_user_process($email_address, $d_stripe_general, $custom_role, $logsdata, $params);
 
         //Set of data for answers
         $resultData = [
@@ -76,48 +79,48 @@ class ds_process_transactions {
             'logsdata'          => $logsdata,
             'user'              => $user
         ];
-        set_transient('ds_data' . $button_id, $resultData, 600 );
+        set_transient('ds_data' . $button_id, $resultData, 600);
 
         //Process Transaction
         try {
 
             // Charge for setup fee
-            if( !empty( $setup_fee) ){
+            if (!empty($setup_fee)) {
                 $setupfeedata = array(
                     "amount" => $setup_fee,
                     "currency" => $currency,
                     "description" => __('One time setup fee ', 'direct-stripe') . $description
                 );
-                if( $user === false ) {
-                    $setupfeedata['source' ] = $token;
+                if ($user === false) {
+                    $setupfeedata['source'] = $token;
                 } else {
                     $setupfeedata['customer'] = $user['stripe_id'];
                 }
-                $setupfeedata = apply_filters( 'direct_stripe_setup_fee_data', $setupfeedata, $user, $token, $setup_fee, $currency, $description );
-                $fee = \Stripe\InvoiceItem::create( $setupfeedata );
+                $setupfeedata = apply_filters('direct_stripe_setup_fee_data', $setupfeedata, $user, $token, $setup_fee, $currency, $description);
+                $fee = \Stripe\InvoiceItem::create($setupfeedata);
             }
 
             //Process Update Type
-            if( $params['type'] === 'update' ) { 
+            if ($params['type'] === 'update') {
 
                 $intent = [
                     'user'  =>  $user,
                     'text'  =>  $amount,
                     'type'  =>  'card_update',
-                    'status'=>  'succeeded'
+                    'status' =>  'succeeded'
                 ];
 
                 \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
 
-            //Process payment and donation Type
-            } elseif( $params['type'] === 'payment' || $params['type'] === 'donation') {
-                
-                if($capture === true){
+                //Process payment and donation Type
+            } elseif ($params['type'] === 'payment' || $params['type'] === 'donation') {
+
+                if ($capture === true) {
                     $capture_method = 'automatic';
                 } else {
                     $capture_method = 'manual';
                 }
-                if ( !empty($payment_method_id) ) {
+                if (!empty($payment_method_id)) {
                     $chargerdata = [
                         'payment_method'        => $payment_method_id,
                         'amount'                => $amount,
@@ -127,10 +130,10 @@ class ds_process_transactions {
                         'confirmation_method'   => 'manual',
                         'capture_method'        => $capture_method,
                     ];
-                    if( $user !== false ) {
+                    if ($user !== false) {
                         $chargerdata['customer'] = $user['stripe_id'];
                     }
-                    if( $params['shipping'] === '1' ) {
+                    if ($params['shipping'] === '1') {
                         $chargerdata["shipping"]  = [
                             "name"  => $logsdata['ds_shipping_name'],
                             "phone" => $logsdata['ds_shipping_address_phone'],
@@ -143,14 +146,14 @@ class ds_process_transactions {
                             ]
                         ];
                     }
-                    $chargerdata = apply_filters( 'direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params );
-                    $intent  = \Stripe\PaymentIntent::create( $chargerdata );
+                    $chargerdata = apply_filters('direct_stripe_charge_data', $chargerdata, $user, $token, $amount, $currency, $capture, $description, $button_id, $params);
+                    $intent  = \Stripe\PaymentIntent::create($chargerdata);
                     \ds_process_functions::ds_generatePaymentResponse($intent, $resultData);
                 }
 
-            //Process subscription Type
-            } elseif( $params['type'] === 'subscription' && !empty($payment_method_id) ) {
-               
+                //Process subscription Type
+            } elseif ($params['type'] === 'subscription' && !empty($payment_method_id)) {
+
                 // create new subscription to plan
                 $subscriptiondata = [
                     "items" => [
@@ -159,15 +162,15 @@ class ds_process_transactions {
                         ],
                     ],
                     "coupon"    => $coupon,
-                    "metadata"	=> [
+                    "metadata"    => [
                         "description" => $description
                     ],
                     "expand[]"  => "latest_invoice.payment_intent"
                 ];
-                if( $user !== false ) {
+                if ($user !== false) {
                     $subscriptiondata['customer'] = $user['stripe_id'];
                 }
-                if( $params['shipping'] === '1' ) {
+                if ($params['shipping'] === '1') {
                     $subscriptiondata["metadata"]  = [
                         "shipping_name"                  => $logsdata['ds_shipping_name'],
                         "shipping_phone"                 => $logsdata['ds_shipping_phone'],
@@ -178,25 +181,19 @@ class ds_process_transactions {
                         "shipping_address_state"         => $logsdata['ds_shipping_address_state']
                     ];
                 }
-                $subscriptiondata = apply_filters( 'direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description );
-                $subscription = \Stripe\Subscription::create( $subscriptiondata );
-                \ds_process_functions::ds_generatePaymentResponse( $subscription, $resultData );
-
+                $subscriptiondata = apply_filters('direct_stripe_subscription_data', $subscriptiondata, $user, $token, $button_id, $amount, $coupon, $description);
+                $subscription = \Stripe\Subscription::create($subscriptiondata);
+                \ds_process_functions::ds_generatePaymentResponse($subscription, $resultData);
             }
-
         } catch (Exception $e) {
             $e = $e;
-            error_log("Something wrong happened:" . $e->getMessage() );
+            error_log("Something wrong happened:" . $e->getMessage());
             \ds_process_functions::pre_process_answer($e, $resultData);
-
         } catch (Error $e) {
             $e = $e;
-            error_log("Something wrong happened:" . $e->getMessage() );
+            error_log("Something wrong happened:" . $e->getMessage());
             \ds_process_functions::pre_process_answer($e, $resultData);
-            
         }
-
     }
-
 }
 $dsProcess = new ds_process_transactions;

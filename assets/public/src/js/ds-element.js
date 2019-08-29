@@ -35,8 +35,7 @@ function buildElement(instance, ds_values) {
       }
     }
   });
-  card.mount("#ds-element-"+instance+"-card");
+  card.mount("#ds-element-" + instance + "-card");
 
-  registerElements([card], "ds-element-"+instance);
-
+  registerElements([card], "ds-element-" + instance);
 }
