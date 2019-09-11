@@ -75,6 +75,14 @@ if ( ! class_exists( 'DirectStripe' ) ) :
         const version = '3.0.0-beta';
 
         /**
+         * Stripe Api Version used by this plugin
+         *
+         * @since 3.0.0
+         * @var string
+         */
+        const stripe_api_version = "2019-09-09";
+
+        /**
          * Plugin Textdomain.
          *
          * @since 2.0.0
@@ -95,6 +103,7 @@ if ( ! class_exists( 'DirectStripe' ) ) :
             $this->init_hooks();
             $this->activation_hooks();
             $this->register_stripe_app();
+            $this->set_stripe_api_version();
         }
 
         /**
@@ -108,6 +117,15 @@ if ( ! class_exists( 'DirectStripe' ) ) :
                 self::version,
                 "https://wordpress.org/plugins/direct-stripe/"
             );
+        }
+
+        /**
+        * Set Stripe Api Version https://stripe.com/docs/api/versioning
+        *
+        * @since 3.0.0
+        */
+        function set_stripe_api_version() {
+            \Stripe\Stripe::setApiVersion(self::stripe_api_version);
         }
 
         function activation_hooks() {
