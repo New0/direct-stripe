@@ -552,7 +552,7 @@ class ds_process_functions
                     'action_type'   => 'incomplete'
                 )
             );
-        } else if ($intent->status === "succeeded" || $intent->status === "requires_capture") {
+        } else if ($intent->status === "succeeded" || $intent->status === "requires_capture" || $intent->status === "active") {
             // Process completed get answer
             self::pre_process_answer($intent, $resultData);
         } else {
