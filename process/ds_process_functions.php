@@ -441,11 +441,11 @@ class ds_process_functions
                 $return = array('id' => '2', 'url' => $s_url);
             } else {
 
-                if ($answer['type'] === "card_update" && !empty($answer['text'])) {
+                if (is_array($answer) && $answer['type'] === "card_update" && !empty($answer['text'])) {
                     $success_message = $answer['text'];
                 } else {
                     $success_message = $d_stripe_general['direct_stripe_success_message'];
-                }
+                }     
 
                 $return = array(
                     'id'      => '1',
@@ -532,13 +532,13 @@ class ds_process_functions
     public static function ds_generatePaymentResponse($intent, $resultData)
     {
 
-        if ($intent->status === "requires_action" && $intent->next_action->type === "use_stripe_sdk") {
+        if (  $intent->next_action && $intent->next_action->type === "use_stripe_sdk" ) {
             // Tell the client to handle the action
             wp_send_json(
                 array(
-                    'requires_action' => true,
+                    'requires_source_action' => true,
                     'payment_intent_client_secret' => $intent->client_secret,
-                    'action_type'   => 'requires_action'
+                    'action_type'   => 'requires_source_action'
                 )
             );
         } else if ($intent->status === "incomplete" && $intent->object === "subscription") {
@@ -547,7 +547,7 @@ class ds_process_functions
             // Tell the client to complete payment
             wp_send_json(
                 array(
-                    'requires_action' => true,
+                    'requires_source_action' => true,
                     'payment_intent_client_secret' => $client_secret,
                     'action_type'   => 'incomplete'
                 )

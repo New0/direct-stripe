@@ -28,6 +28,7 @@ namespace Stripe;
  * @property string $latest_invoice
  * @property boolean $livemode
  * @property StripeObject $metadata
+ * @property string $pending_setup_intent
  * @property Plan $plan
  * @property int $quantity
  * @property SubscriptionSchedule $schedule
@@ -79,6 +80,8 @@ class Subscription extends ApiResource
     /**
      * @param array|null $params
      *
+     * @throws \Stripe\Exception\ApiErrorException if the request fails
+     *
      * @return Subscription The deleted subscription.
      */
     public function cancel($params = null, $opts = null)
@@ -87,6 +90,8 @@ class Subscription extends ApiResource
     }
 
     /**
+     * @throws \Stripe\Exception\ApiErrorException if the request fails
+     *
      * @return Subscription The updated subscription.
      */
     public function deleteDiscount()

@@ -149,27 +149,29 @@ function stripe_checkout(token, ds_values, additionalData, paymentMethodID) {
 }
 
 function handleServerResponse(response, ds_values) {
-  if (response.requires_action && response.action_type === "incomplete") {
-    // Use Stripe.js to handle required card action
-    stripe
-      .handleCardPayment(response.payment_intent_client_secret)
-      .then(function(result) {
-        processResult(result, ds_values);
-      });
-  } else if (
-    response.requires_action &&
-    response.action_type === "requires_action"
-  ) {
-    // Use Stripe.js to handle required card action
-    stripe
-      .handleCardAction(response.payment_intent_client_secret)
-      .then(function(result) {
-        processResult(result, ds_values);
-      });
-  } else if (
-    typeof response === "object" &&
-    typeof response.id !== "undefined"
-  ) {
+
+  if (response.requires_source_action ) {
+
+    switch (response.action_type) {
+      case 'incomplete':
+        stripe
+          .handleCardPayment(response.payment_intent_client_secret)
+          .then(function(result) {
+            processResult(result, ds_values);
+          });
+        break;
+      case 'requires_source_action':
+        stripe
+          .handleCardAction(response.payment_intent_client_secret)
+          .then(function(result) {
+            processResult(result, ds_values);
+          });
+        break;
+      default:
+        processResult(response, ds_values);
+    }
+
+  } else if (typeof response === "object" && typeof response.id !== "undefined") {
     displayFinalResult(response, ds_values);
   } else {
     processResult(response, ds_values);

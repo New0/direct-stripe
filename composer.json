@@ -18,6 +18,6 @@
     }
   ],
   "require": {
-    "stripe/stripe-php": "^6.6"
+    "stripe/stripe-php": "*"
   }
 }

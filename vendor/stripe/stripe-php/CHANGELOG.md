@@ -1,5 +1,49 @@
 # Changelog
 
+## 7.0.2 - 2019-09-06
+* [#729](https://github.com/stripe/stripe-php/pull/729) Fix usage of `SignatureVerificationException` in PHPDoc blocks
+
+## 7.0.1 - 2019-09-05
+* [#728](https://github.com/stripe/stripe-php/pull/728) Clean up Collection
+
+## 7.0.0 - 2019-09-03
+Major version release. The [migration guide](https://github.com/stripe/stripe-php/wiki/Migration-guide-for-v7) contains a detailed list of backwards-incompatible changes with upgrade instructions.
+
+Pull requests included in this release (cf. [#552](https://github.com/stripe/stripe-php/pull/552)) (⚠️ = breaking changes):
+* ⚠️ Drop support for PHP 5.4 ([#551](https://github.com/stripe/stripe-php/pull/551))
+* ⚠️ Drop support for PHP 5.5 ([#554](https://github.com/stripe/stripe-php/pull/554))
+* Bump dependencies ([#553](https://github.com/stripe/stripe-php/pull/553))
+* Remove `CURLFile` check ([#555](https://github.com/stripe/stripe-php/pull/555))
+* Update constant definitions for PHP >= 5.6 ([#556](https://github.com/stripe/stripe-php/pull/556))
+* ⚠️ Remove `FileUpload` alias ([#557](https://github.com/stripe/stripe-php/pull/557))
+* Remove `curl_reset` check ([#570](https://github.com/stripe/stripe-php/pull/570))
+* Use `\Stripe\<class>::class` constant instead of strings ([#643](https://github.com/stripe/stripe-php/pull/643))
+* Use `array_column` to flatten params ([#686](https://github.com/stripe/stripe-php/pull/686))
+* ⚠️ Remove deprecated methods ([#692](https://github.com/stripe/stripe-php/pull/692))
+* ⚠️ Remove `IssuerFraudRecord` ([#696](https://github.com/stripe/stripe-php/pull/696))
+* Update constructors of Stripe exception classes ([#559](https://github.com/stripe/stripe-php/pull/559))
+* Fix remaining TODOs ([#700](https://github.com/stripe/stripe-php/pull/700))
+* Use yield for autopagination ([#703](https://github.com/stripe/stripe-php/pull/703))
+* ⚠️ Rename fake magic methods and rewrite array conversion ([#704](https://github.com/stripe/stripe-php/pull/704))
+* Add `ErrorObject` to Stripe exceptions ([#705](https://github.com/stripe/stripe-php/pull/705))
+* Start using PHP CS Fixer ([#706](https://github.com/stripe/stripe-php/pull/706))
+* Update error messages for nested resource operations ([#708](https://github.com/stripe/stripe-php/pull/708))
+* Upgrade retry logic ([#707](https://github.com/stripe/stripe-php/pull/707))
+* ⚠️ `Collection` improvements / fixes ([#715](https://github.com/stripe/stripe-php/pull/715))
+* ⚠️ Modernize exceptions ([#709](https://github.com/stripe/stripe-php/pull/709))
+* Add constants for error codes ([#716](https://github.com/stripe/stripe-php/pull/716))
+* Update certificate bundle ([#717](https://github.com/stripe/stripe-php/pull/717))
+* Retry requests on a 429 that's a lock timeout ([#718](https://github.com/stripe/stripe-php/pull/718))
+* Fix `toArray()` calls ([#719](https://github.com/stripe/stripe-php/pull/719))
+* Couple of fixes for PHP 7.4 ([#725](https://github.com/stripe/stripe-php/pull/725))
+
+## 6.43.1 - 2019-08-29
+* [#722](https://github.com/stripe/stripe-php/pull/722) Make `LoggerInterface::error` compatible with its PSR-3 counterpart
+* [#714](https://github.com/stripe/stripe-php/pull/714) Add `pending_setup_intent` property in `Subscription`
+* [#713](https://github.com/stripe/stripe-php/pull/713) Add typehint to `ApiResponse`
+* [#712](https://github.com/stripe/stripe-php/pull/712) Fix comment
+* [#701](https://github.com/stripe/stripe-php/pull/701) Start testing PHP 7.3
+
 ## 6.43.0 - 2019-08-09
 * [#694](https://github.com/stripe/stripe-php/pull/694) Add `SubscriptionItem::createUsageRecord` method
 
@@ -158,7 +202,7 @@
 * [#542](https://github.com/stripe/stripe-php/pull/542) Add support for `ValueList` and `ValueListItem` for Radar
 
 ## 6.22.1 - 2018-11-20
-* [#561](https://github.com/stripe/stripe-php/pull/561) Add cast and some docs to telemetry introduced in 6.22.0/#549
+* [#561](https://github.com/stripe/stripe-php/pull/561) Add cast and some docs to telemetry introduced in 6.22.0/549
 
 ## 6.22.0 - 2018-11-15
 * [#549](https://github.com/stripe/stripe-php/pull/549) Add support for client telemetry
