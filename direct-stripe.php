@@ -237,7 +237,7 @@ if (!class_exists('DirectStripe')) :
 
             // Check the transient to see if we've just updated the plugin
             if (get_transient('ds_plugin_updated')) {
-                $message =  __('Thanks for updating Direct Stripe. The update includes a new process and design to work with SCA regulation and accept 3D secure transactions. Please test and make sure that it matches your needs.', 'ds-stripe');
+                $message =  __('This update of Direct Stripe is a bêta and includes a new process and design to work with SCA regulation and accept 3D secure transactions. Please test and make sure that it matches your needs.', 'ds-stripe');
 
                 echo '<div class="notice notice-success">' . $message . '</div>';
                 delete_transient('ds_plugin_updated');
