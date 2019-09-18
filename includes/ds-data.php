@@ -60,7 +60,7 @@ $directStripeAttrValues = shortcode_atts( array(
 	'rememberme'        =>  ''
 ), $atts, 'direct_stripe' );
 
-
+$directStripeAttrValues['display_amount'] = filter_var( $directStripeAttrValues['display_amount'], FILTER_VALIDATE_BOOLEAN );
 
 /*
  * Check if the shortcode is given a value argument
