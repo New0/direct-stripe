@@ -73,7 +73,20 @@ class dsScripts {
                 'text'  => array(
                     'checkTC'       => __( $checkTC, 'direct-stripe' ),
                     'enterAmount'   => __( 'Please enter amount', 'direct-stripe' ),
-                )
+                ),
+                'styles' => apply_filters('direct_stripe__stripe_styles', array(
+                    'iconStyle' => "solid",
+                    'iconColor' => "#fff",
+                    'color' => "#fff",
+                    'fontWeight' => 400,
+                    'fontFamily' => "Helvetica Neue, Helvetica, Arial, sans-serif",
+                    'fontSize' => "16px",
+                    'fontSmoothing' => "antialiased",
+                    'placeholderColor' => "#fff",
+                    'webkitAutofillColor' => "#fff",
+                    'invalidIconColor' => "#FFC7EE",
+                    'invalidColor'=> "#FFC7EE"
+                ))
             )
         );
 

@@ -1,4 +1,4 @@
-function buildElement(instance, ds_values) {
+function buildElement(instance, ds_values, ds_script_vars) {
   "use strict";
 
   var elements = stripe.elements({
@@ -15,23 +15,22 @@ function buildElement(instance, ds_values) {
     iconStyle: "solid",
     style: {
       base: {
-        iconColor: "#fff",
-        color: "#fff",
-        fontWeight: 400,
-        fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
-        fontSize: "16px",
+        iconColor: ds_script_vars.iconColor,
+        color: ds_script_vars.color,
+        fontWeight: ds_script_vars.fontWeight,
+        fontFamily: ds_script_vars.fontFamily,
+        fontSize: ds_script_vars.fontSize,
         fontSmoothing: "antialiased",
-
         "::placeholder": {
-          color: "#fff"
+          color: ds_script_vars.placeholderColor
         },
         ":-webkit-autofill": {
-          color: "#fff"
+          color: ds_script_vars.webkitAutofillColor
         }
       },
       invalid: {
-        iconColor: "#FFC7EE",
-        color: "#FFC7EE"
+        iconColor: ds_script_vars.invalidIconColor,
+        color: ds_script_vars.invalidColor
       }
     }
   });
