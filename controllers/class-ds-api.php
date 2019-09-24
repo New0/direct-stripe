@@ -116,7 +116,7 @@ class DS_API {
             );
         } else if ( in_array( $key, $urls) ) {
             $setting = array(
-                $key => esc_url( $value )
+                $key => $value && 'empty' != $value ? esc_url( $value ) : ''
             );
         } else if ( in_array( $key, $post_kses) ) {
             $setting = array(
