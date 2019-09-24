@@ -65,7 +65,7 @@ jQuery(".direct-stripe-button-id").on("click", function(e) {
 
   buildElement(instance, ds_values, ds_script_vars);
   //Modal events
-  modalEvent(instance);
+  ds.modal.open(instance);
 
   e.preventDefault();
 });

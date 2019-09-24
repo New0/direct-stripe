@@ -65,7 +65,7 @@ jQuery(".direct-stripe-button-id").on("click", function(e) {
 
   buildElement(instance, ds_values, ds_script_vars);
   //Modal events
-  modalEvent(instance);
+  ds.modal.open(instance);
 
   e.preventDefault();
 });
@@ -458,6 +458,8 @@ function registerElements(elements, elementName) {
   }
 }
 
+var ds = window.ds || {};
+
 //Set Values for donation buttons
 function setDonationValue(instance) {
   var ds_values = window[instance];
@@ -502,25 +504,62 @@ function returnError(ds_answer_input, direct_stripe_script_vars, error) {
   }, 10000);
 }
 
-//Open / Cose modal window that holds the form
-function modalEvent(instance) {
-  //Get Modal Form
-  var modal = document.getElementById("modal-" + instance);
-  //Open Modal Form
-  modal.style.display = "block";
+// Modal window
+ds.modal = {
+  // Stores the modal instances of the page
+  instances: [],
+  /**
+   * Initialize a modal instance
+   *
+   * @param string instance
+   * @return the jQuery object
+   */
+  initInstance: function (instance) {
+    // If the instance was already initialize, return it (avoid duplicating events)
+    if (this.instances[instance]) return this.instances[instance];
 
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("ds-close")[0];
+    // Store the modal jQuery object
+    this.instances[instance] = jQuery("#modal-" + instance);
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  };
+    // Get the <span> element that closes the modal
+    var $close = this.instances[instance].find(".ds-close");
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+    // Move the modal to the document root to avoid inheriting styles from inner containers
+    this.instances[instance].appendTo('body');
+
+    // When the user clicks on <span> (x), close the modal
+    $close.on('click', function (e) {
+      e.preventDefault();
+      this.instances[instance].hide();
+    }.bind(this));
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == this.instances[instance][0]) {
+        this.instances[instance].hide()
+      }
+    }.bind(this);
+
+    return this.instances[instance];
+  },
+  /**
+   * Open the modal
+   *
+   * @param {string} instance 
+   */
+  open: function (instance) {
+    if (!ds.modal.instances[instance]) ds.modal.initInstance(instance);
+    // Open Modal Form
+    ds.modal.instances[instance].show();
+  },
+  /**
+   * Close the modal
+   *
+   * @param {string} instance 
+   */
+  close: function (instance) {
+    if (!ds.modal.instances[instance]) return;
+    // Close Modal Form
+    ds.modal.instances[instance].hide();
+  }
 }
