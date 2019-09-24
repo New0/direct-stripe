@@ -72,9 +72,17 @@ class ds_process_functions
                 if (empty($check_user->data)) { //Create Stripe customer
                     $stripe_id = self::ds_create_stripe_customer($email_address, $logsdata);
                 } else { //Or update stripe customer
-                    $stripe_id = $check_user->data[0]->id;
-                    $check_user->data[0]->source = $logsdata['token'];
-                    $check_user->data[0]->save();
+
+                    try {
+
+                        $stripe_id = $check_user->data[0]->id;
+                        $check_user->data[0]->source = $logsdata['token'];
+                        $check_user->data[0]->save();
+
+                    } catch (Throwable $t) {
+                        error_log( __('Something wrong happened updating Stripe user: ', 'direct-stripe') . $t->getMessage() );
+                        self::process_answer($t, null, null, null, null, null);
+                    }  
                 }
 
                 //Register Stripe ID if Allowed
@@ -94,11 +102,20 @@ class ds_process_functions
             $check_user = \Stripe\Customer::all(array("email" => $email_address));
 
             if (!empty($check_user->data)) {
-                $stripe_id = $check_user->data[0]->id;
-                $check_user->data[0]->source = $logsdata['token'];
-                $check_user->data[0]->save();
+
+                try{
+
+                    $stripe_id = $check_user->data[0]->id;
+                    $check_user->data[0]->source = $logsdata['token'];
+                    $check_user->data[0]->save();
+
+                } catch (Throwable $t) {
+                    error_log( __('Something wrong happened saving Stripe user: ', 'direct-stripe') . $t->getMessage() );
+                    self::process_answer($t, null, null, null, null, null);
+                }               
 
                 $user_id = self::ds_create_wp_user($email_address, $d_stripe_general, $custom_role, $stripe_id);
+
             } else {
                 // Create Stripe Customer
                 $stripe_id = self::ds_create_stripe_customer($email_address, $logsdata);
@@ -344,7 +361,7 @@ class ds_process_functions
     {
 
         //Transaction failed
-        if (isset($answer->jsonBody['error'])) {
+        if ( isset($answer->jsonBody['error']) ) {
 
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id']);
@@ -364,8 +381,9 @@ class ds_process_functions
                 if (!empty($e_query)) {
                     $e_url = add_query_arg($e_query, $e_url);
                 }
-                //Redirection after success
+                //Redirection after error
                 $return = array('id' => '2', 'url' => $e_url);
+
             } else if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
 
                 $e_url       = isset($d_stripe_general['direct_stripe_error_page']) ? $d_stripe_general['direct_stripe_error_page'] : '';
@@ -479,15 +497,22 @@ class ds_process_functions
      */
     public static function ds_create_stripe_customer($email_address, $logsdata)
     {
-        //Create Stripe customer
-        $customer  = \Stripe\Customer::create([
-            'email'     => $email_address,
-            'source'    => $logsdata['token'],
-            'name'      => $logsdata['ds_billing_name'],
-            'phone'     => $logsdata['ds_billing_phone']
-        ]);
+        try {
+            //Create Stripe customer
+            $customer  = \Stripe\Customer::create([
+                'email'     => $email_address,
+                'source'    => $logsdata['token'],
+                'name'      => $logsdata['ds_billing_name'],
+                'phone'     => $logsdata['ds_billing_phone']
+            ]);
 
-        return $customer->id;
+            return $customer->id;
+
+        } catch (Throwable $t) {
+            error_log( __('Something wrong happened creating Stripe customer: ', 'direct-stripe') . $t->getMessage() );
+            self::process_answer($t, null, null, null, null, null);
+        }
+
     }
 
     /**
@@ -531,35 +556,40 @@ class ds_process_functions
      */
     public static function ds_generatePaymentResponse($intent, $resultData)
     {
+        try{
+            if (  $intent->next_action && $intent->next_action->type === "use_stripe_sdk" ) {
+                // Tell the client to handle the action
+                wp_send_json(
+                    array(
+                        'requires_source_action' => true,
+                        'payment_intent_client_secret' => $intent->client_secret,
+                        'action_type'   => 'requires_source_action'
+                    )
+                );
+            } else if ($intent->status === "incomplete" && $intent->object === "subscription") {
 
-        if (  $intent->next_action && $intent->next_action->type === "use_stripe_sdk" ) {
-            // Tell the client to handle the action
-            wp_send_json(
-                array(
-                    'requires_source_action' => true,
-                    'payment_intent_client_secret' => $intent->client_secret,
-                    'action_type'   => 'requires_source_action'
-                )
-            );
-        } else if ($intent->status === "incomplete" && $intent->object === "subscription") {
-
-            $client_secret = $intent->latest_invoice->payment_intent->client_secret;
-            // Tell the client to complete payment
-            wp_send_json(
-                array(
-                    'requires_source_action' => true,
-                    'payment_intent_client_secret' => $client_secret,
-                    'action_type'   => 'incomplete'
-                )
-            );
-        } else if ($intent->status === "succeeded" || $intent->status === "requires_capture") {
-            // Process completed get answer
-            self::pre_process_answer($intent, $resultData);
-        } else {
-            # Invalid status
-            http_response_code(500);
-            self::pre_process_answer($intent, $resultData);
+                $client_secret = $intent->latest_invoice->payment_intent->client_secret;
+                // Tell the client to complete payment
+                wp_send_json(
+                    array(
+                        'requires_source_action' => true,
+                        'payment_intent_client_secret' => $client_secret,
+                        'action_type'   => 'incomplete'
+                    )
+                );
+            } else if ($intent->status === "succeeded" || $intent->status === "requires_capture") {
+                // Process completed get answer
+                self::pre_process_answer($intent, $resultData);
+            } else {
+                # Invalid status
+                http_response_code(500);
+                self::pre_process_answer($intent, $resultData);
+            }
+        } catch (Throwable $t) {
+            error_log( __('Something wrong happened generating payment response: ', 'direct-stripe') . $t->getMessage() );
+            self::process_answer($t, $resultData['params']['button_id'], $resultData['params'], $resultData['general_options'], $resultData['user'], null);
         }
+
     }
 
 
