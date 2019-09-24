@@ -11,26 +11,27 @@ function buildElement(instance, ds_values, ds_script_vars) {
   /**
    * Card Element
    */
+  var ce_styles = ds_script_vars.styles.card_element;
   var card = elements.create("card", {
     iconStyle: "solid",
     style: {
       base: {
-        iconColor: ds_script_vars.iconColor,
-        color: ds_script_vars.color,
-        fontWeight: ds_script_vars.fontWeight,
-        fontFamily: ds_script_vars.fontFamily,
-        fontSize: ds_script_vars.fontSize,
+        iconColor: ce_styles.iconColor,
+        color: ce_styles.color,
+        fontWeight: ce_styles.fontWeight,
+        fontFamily: ce_styles.fontFamily,
+        fontSize: ce_styles.fontSize,
         fontSmoothing: "antialiased",
         "::placeholder": {
-          color: ds_script_vars.placeholderColor
+          color: ce_styles.placeholderColor
         },
         ":-webkit-autofill": {
-          color: ds_script_vars.webkitAutofillColor
+          color: ce_styles.webkitAutofillColor
         }
       },
       invalid: {
-        iconColor: ds_script_vars.invalidIconColor,
-        color: ds_script_vars.invalidColor
+        iconColor: ce_styles.invalidIconColor,
+        color: ce_styles.invalidColor
       }
     }
   });

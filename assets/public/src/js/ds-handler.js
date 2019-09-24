@@ -117,8 +117,7 @@ function displayFinalResult(data, ds_values) {
     default:
       dsProcess.classList.remove("submitting");
       dsProcess.classList.add("error");
-
-      if (typeof data.error.message !== "undefined") {
+      if (typeof data.error !== "undefined") {
         jQuery(error_input).html(data.error.message);
       } else if (typeof data.message !== "undefined") {
         jQuery(error_input).html(data.message);
