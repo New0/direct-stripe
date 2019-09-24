@@ -63,7 +63,7 @@ jQuery(".direct-stripe-button-id").on("click", function(e) {
     return false;
   }
 
-  buildElement(instance, ds_values);
+  buildElement(instance, ds_values, ds_script_vars);
   //Modal events
   modalEvent(instance);
 
@@ -74,7 +74,7 @@ window.addEventListener("popstate", function() {
   handler.close();
 });
 
-function buildElement(instance, ds_values) {
+function buildElement(instance, ds_values, ds_script_vars) {
   "use strict";
 
   var elements = stripe.elements({
@@ -87,27 +87,27 @@ function buildElement(instance, ds_values) {
   /**
    * Card Element
    */
+  var ce_styles = ds_script_vars.styles.card_element;
   var card = elements.create("card", {
     iconStyle: "solid",
     style: {
       base: {
-        iconColor: "#fff",
-        color: "#fff",
-        fontWeight: 400,
-        fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
-        fontSize: "16px",
+        iconColor: ce_styles.iconColor,
+        color: ce_styles.color,
+        fontWeight: ce_styles.fontWeight,
+        fontFamily: ce_styles.fontFamily,
+        fontSize: ce_styles.fontSize,
         fontSmoothing: "antialiased",
-
         "::placeholder": {
-          color: "#fff"
+          color: ce_styles.placeholderColor
         },
         ":-webkit-autofill": {
-          color: "#fff"
+          color: ce_styles.webkitAutofillColor
         }
       },
       invalid: {
-        iconColor: "#FFC7EE",
-        color: "#FFC7EE"
+        iconColor: ce_styles.invalidIconColor,
+        color: ce_styles.invalidColor
       }
     }
   });
@@ -235,8 +235,7 @@ function displayFinalResult(data, ds_values) {
     default:
       dsProcess.classList.remove("submitting");
       dsProcess.classList.add("error");
-
-      if (typeof data.error.message !== "undefined") {
+      if (typeof data.error !== "undefined") {
         jQuery(error_input).html(data.error.message);
       } else if (typeof data.message !== "undefined") {
         jQuery(error_input).html(data.message);

@@ -20,7 +20,7 @@
             </v-flex>
 
             <v-flex md4 xs12>
-                <div id="dsModalLogo">
+                <div id="dsModalLogo" v-if="attachmentURL">
                     <img class="Header-logoImage"
                          :alt="text.altAttachment"
                          :src="attachmentURL"
@@ -73,7 +73,6 @@
         media_uploader.on("select", function(){
           const attachment = media_uploader.state().get("selection").first().toJSON();
 
-          let imgContainer = jQuery('#dsModalLogo img');
           let el = jQuery('#save-result');
 
           function bubble(){
@@ -88,7 +87,7 @@
           axios
             .post(req_url)
             .then(response => {
-                jQuery(imgContainer).attr( "src", attachment.url);
+                this.attachmentURL = attachment.url
                 jQuery('#load-result').removeClass('active');
                 bubble();
             })
@@ -97,14 +96,13 @@
                 jQuery('#load-result').removeClass('active');
             })
 
-        });
+        }.bind(this));
 
         media_uploader.open();
       },
       remove_attachment: function () {
 
         jQuery('#load-result').addClass('active');
-        let imgContainer = jQuery('#dsModalLogo img');
         let el = jQuery('#save-result');
 
         function bubble(){
@@ -121,7 +119,7 @@
           .then(response => {
             jQuery('#load-result').removeClass('active');
             bubble()
-            jQuery(imgContainer).attr( "src", "#");
+            this.attachmentURL = ''
           })
           .catch(error => {
             console.log(error);

@@ -12,7 +12,7 @@
   "devDependencies": {
     "autoprefixer": "^8.6.5",
     "graceful-fs": "*",
-    "gulp": "*",
+    "gulp": "3*",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-cache": "*",
     "gulp-concat": "*",
