@@ -194,7 +194,6 @@ function registerElements(elements, elementName) {
   });
 
   function dsStripeResetForm(form, elements, dsProcess, error) {
-    jQuery(".error-bubble").hide();
     // Resetting the form (instead of setting the value to `''` for each input)
     // helps us clear webkit autofill styles.
     form.reset();
@@ -206,6 +205,7 @@ function registerElements(elements, elementName) {
 
     // Reset error state as well.
     error.classList.remove("visible");
+    dsProcess.classList.remove("error");
 
     // Resetting the form does not un-disable inputs, so we need to do it separately:
     enableInputs();
