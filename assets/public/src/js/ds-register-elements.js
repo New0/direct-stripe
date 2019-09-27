@@ -163,9 +163,9 @@ function registerElements(elements, elementName) {
       })
       .then(function(resultP) {
         if (resultP.error) {
-          // Show error in payment form
           enableInputs();
-          errorMessage.innerText = resultP.error.message;
+          // Show error in payment form
+          displayFinalResult(resultP, ds_values);
         } else {
           stripe.createToken(elements[0], {}).then(function(resultT) {
             if (resultT.token) {
