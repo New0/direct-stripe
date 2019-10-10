@@ -1,5 +1,27 @@
 # Changelog
 
+## 7.3.1 - 2019-10-07
+* [#755](https://github.com/stripe/stripe-php/pull/755) Respect Stripe-Should-Retry and Retry-After headers
+
+## 7.3.0 - 2019-10-02
+* [#752](https://github.com/stripe/stripe-php/pull/752) Add `payment_intent.canceled` and `setup_intent.canceled` events
+* [#749](https://github.com/stripe/stripe-php/pull/749) Call `toArray()` on objects only
+
+## 7.2.2 - 2019-09-24
+* [#746](https://github.com/stripe/stripe-php/pull/746) Add missing decline codes
+
+## 7.2.1 - 2019-09-23
+* [#744](https://github.com/stripe/stripe-php/pull/744) Added new PHPDoc
+
+## 7.2.0 - 2019-09-17
+* [#738](https://github.com/stripe/stripe-php/pull/738) Added missing constants for `SetupIntent` events
+
+## 7.1.1 - 2019-09-16
+* [#737](https://github.com/stripe/stripe-php/pull/737) Added new PHPDoc
+
+## 7.1.0 - 2019-09-13
+* [#736](https://github.com/stripe/stripe-php/pull/736) Make `CaseInsensitiveArray` countable and traversable
+
 ## 7.0.2 - 2019-09-06
 * [#729](https://github.com/stripe/stripe-php/pull/729) Fix usage of `SignatureVerificationException` in PHPDoc blocks
 
