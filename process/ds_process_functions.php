@@ -78,11 +78,10 @@ class ds_process_functions
                         $stripe_id = $check_user->data[0]->id;
                         $check_user->data[0]->source = $logsdata['token'];
                         $check_user->data[0]->save();
-
                     } catch (Throwable $t) {
-                        error_log( __('Something wrong happened updating Stripe user: ', 'direct-stripe') . $t->getMessage() );
+                        error_log(__('Something wrong happened updating Stripe user: ', 'direct-stripe') . $t->getMessage());
                         self::process_answer($t, null, null, null, null, null);
-                    }  
+                    }
                 }
 
                 //Register Stripe ID if Allowed
@@ -103,19 +102,17 @@ class ds_process_functions
 
             if (!empty($check_user->data)) {
 
-                try{
+                try {
 
                     $stripe_id = $check_user->data[0]->id;
                     $check_user->data[0]->source = $logsdata['token'];
                     $check_user->data[0]->save();
-
                 } catch (Throwable $t) {
-                    error_log( __('Something wrong happened saving Stripe user: ', 'direct-stripe') . $t->getMessage() );
+                    error_log(__('Something wrong happened saving Stripe user: ', 'direct-stripe') . $t->getMessage());
                     self::process_answer($t, null, null, null, null, null);
-                }               
+                }
 
                 $user_id = self::ds_create_wp_user($email_address, $d_stripe_general, $custom_role, $stripe_id);
-
             } else {
                 // Create Stripe Customer
                 $stripe_id = self::ds_create_stripe_customer($email_address, $logsdata);
@@ -359,9 +356,8 @@ class ds_process_functions
      */
     public static function process_answer($answer, $button_id, $params, $d_stripe_general, $user, $post_id)
     {
-
         //Transaction failed
-        if ( isset($answer->jsonBody['error']) ) {
+        if (isset($answer->jsonBody['error']) || !empty($answer->declineCode) || !empty($answer->error) || "Stripe\Exception\CardException" === get_class($answer)) {
 
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id']);
@@ -383,7 +379,6 @@ class ds_process_functions
                 }
                 //Redirection after error
                 $return = array('id' => '2', 'url' => $e_url);
-
             } else if (isset($d_stripe_general['direct_stripe_use_redirections']) && $d_stripe_general['direct_stripe_use_redirections'] === true && empty($params['error_url'])) {
 
                 $e_url       = isset($d_stripe_general['direct_stripe_error_page']) ? $d_stripe_general['direct_stripe_error_page'] : '';
@@ -463,7 +458,7 @@ class ds_process_functions
                     $success_message = $answer['text'];
                 } else {
                     $success_message = $d_stripe_general['direct_stripe_success_message'];
-                }     
+                }
 
                 $return = array(
                     'id'      => '1',
@@ -507,12 +502,10 @@ class ds_process_functions
             ]);
 
             return $customer->id;
-
         } catch (Throwable $t) {
-            error_log( __('Something wrong happened creating Stripe customer: ', 'direct-stripe') . $t->getMessage() );
+            error_log(__('Something wrong happened creating Stripe customer: ', 'direct-stripe') . $t->getMessage());
             self::process_answer($t, null, null, null, null, null);
         }
-
     }
 
     /**
@@ -556,8 +549,8 @@ class ds_process_functions
      */
     public static function ds_generatePaymentResponse($intent, $resultData)
     {
-        try{
-            if (  $intent->next_action && $intent->next_action->type === "use_stripe_sdk" ) {
+        try {
+            if ($intent->next_action && $intent->next_action->type === "use_stripe_sdk") {
                 // Tell the client to handle the action
                 wp_send_json(
                     array(
@@ -577,7 +570,7 @@ class ds_process_functions
                         'action_type'   => 'incomplete'
                     )
                 );
-            } else if ($intent->status === "succeeded" || $intent->status === "requires_capture") {
+            } else if ($intent->status === "succeeded" || $intent->status === "requires_capture" || $intent->status === "active") {
                 // Process completed get answer
                 self::pre_process_answer($intent, $resultData);
             } else {
@@ -586,10 +579,9 @@ class ds_process_functions
                 self::pre_process_answer($intent, $resultData);
             }
         } catch (Throwable $t) {
-            error_log( __('Something wrong happened generating payment response: ', 'direct-stripe') . $t->getMessage() );
+            error_log(__('Something wrong happened generating payment response: ', 'direct-stripe') . $t->getMessage());
             self::process_answer($t, $resultData['params']['button_id'], $resultData['params'], $resultData['general_options'], $resultData['user'], null);
         }
-
     }
 
 
