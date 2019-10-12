@@ -359,9 +359,8 @@ class ds_process_functions
      */
     public static function process_answer($answer, $button_id, $params, $d_stripe_general, $user, $post_id)
     {
-
         //Transaction failed
-        if ( isset($answer->jsonBody['error']) ) {
+        if ( isset($answer->jsonBody['error']) || !empty( $answer->declineCode) || !empty($answer->error) || "Stripe\Exception\CardException" === get_class($answer) ) {
 
             // Add custom action before redirection
             do_action('direct_stripe_before_error_redirection', false, $post_id, $button_id, $user['user_id']);
@@ -418,7 +417,7 @@ class ds_process_functions
             wp_send_json($return);
 
 
-            //Transaction succeeded
+        //Transaction succeeded
         } else {
 
             // Add custom action before redirection
