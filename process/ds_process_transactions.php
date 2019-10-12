@@ -185,14 +185,10 @@ class ds_process_transactions
                 $subscription = \Stripe\Subscription::create($subscriptiondata);
                 \ds_process_functions::ds_generatePaymentResponse($subscription, $resultData);
             }
-        } catch (Exception $e) {
-            $e = $e;
-            error_log("Something wrong happened:" . $e->getMessage());
-            \ds_process_functions::pre_process_answer($e, $resultData);
-        } catch (Error $e) {
-            $e = $e;
-            error_log("Something wrong happened:" . $e->getMessage());
-            \ds_process_functions::pre_process_answer($e, $resultData);
+
+        } catch (Throwable $t) {
+            error_log( __('Something wrong happened processing Stripe payment: ', 'direct-stripe') . $t->getMessage() );
+            \ds_process_functions::process_answer($t, $resultData['params']['button_id'], $resultData['params'], $resultData['general_options'], $resultData['user'], null);
         }
     }
 }

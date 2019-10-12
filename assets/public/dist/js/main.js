@@ -63,9 +63,9 @@ jQuery(".direct-stripe-button-id").on("click", function(e) {
     return false;
   }
 
-  buildElement(instance, ds_values);
+  buildElement(instance, ds_values, ds_script_vars);
   //Modal events
-  modalEvent(instance);
+  ds.modal.open(instance);
 
   e.preventDefault();
 });
@@ -74,7 +74,7 @@ window.addEventListener("popstate", function() {
   handler.close();
 });
 
-function buildElement(instance, ds_values) {
+function buildElement(instance, ds_values, ds_script_vars) {
   "use strict";
 
   var elements = stripe.elements({
@@ -87,27 +87,27 @@ function buildElement(instance, ds_values) {
   /**
    * Card Element
    */
+  var ce_styles = ds_script_vars.styles.card_element;
   var card = elements.create("card", {
     iconStyle: "solid",
     style: {
       base: {
-        iconColor: "#fff",
-        color: "#fff",
-        fontWeight: 400,
-        fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
-        fontSize: "16px",
+        iconColor: ce_styles.iconColor,
+        color: ce_styles.color,
+        fontWeight: ce_styles.fontWeight,
+        fontFamily: ce_styles.fontFamily,
+        fontSize: ce_styles.fontSize,
         fontSmoothing: "antialiased",
-
         "::placeholder": {
-          color: "#fff"
+          color: ce_styles.placeholderColor
         },
         ":-webkit-autofill": {
-          color: "#fff"
+          color: ce_styles.webkitAutofillColor
         }
       },
       invalid: {
-        iconColor: "#FFC7EE",
-        color: "#FFC7EE"
+        iconColor: ce_styles.invalidIconColor,
+        color: ce_styles.invalidColor
       }
     }
   });
@@ -235,8 +235,7 @@ function displayFinalResult(data, ds_values) {
     default:
       dsProcess.classList.remove("submitting");
       dsProcess.classList.add("error");
-
-      if (typeof data.error.message !== "undefined") {
+      if (typeof data.error !== "undefined") {
         jQuery(error_input).html(data.error.message);
       } else if (typeof data.message !== "undefined") {
         jQuery(error_input).html(data.message);
@@ -409,9 +408,9 @@ function registerElements(elements, elementName) {
       })
       .then(function(resultP) {
         if (resultP.error) {
-          // Show error in payment form
           enableInputs();
-          errorMessage.innerText = resultP.error.message;
+          // Show error in payment form
+          displayFinalResult(resultP, ds_values);
         } else {
           stripe.createToken(elements[0], {}).then(function(resultT) {
             if (resultT.token) {
@@ -440,7 +439,6 @@ function registerElements(elements, elementName) {
   });
 
   function dsStripeResetForm(form, elements, dsProcess, error) {
-    jQuery(".error-bubble").hide();
     // Resetting the form (instead of setting the value to `''` for each input)
     // helps us clear webkit autofill styles.
     form.reset();
@@ -452,12 +450,15 @@ function registerElements(elements, elementName) {
 
     // Reset error state as well.
     error.classList.remove("visible");
+    dsProcess.classList.remove("error");
 
     // Resetting the form does not un-disable inputs, so we need to do it separately:
     enableInputs();
     dsProcess.classList.remove("submitted");
   }
 }
+
+var ds = window.ds || {};
 
 //Set Values for donation buttons
 function setDonationValue(instance) {
@@ -503,25 +504,62 @@ function returnError(ds_answer_input, direct_stripe_script_vars, error) {
   }, 10000);
 }
 
-//Open / Cose modal window that holds the form
-function modalEvent(instance) {
-  //Get Modal Form
-  var modal = document.getElementById("modal-" + instance);
-  //Open Modal Form
-  modal.style.display = "block";
+// Modal window
+ds.modal = {
+  // Stores the modal instances of the page
+  instances: [],
+  /**
+   * Initialize a modal instance
+   *
+   * @param string instance
+   * @return the jQuery object
+   */
+  initInstance: function (instance) {
+    // If the instance was already initialize, return it (avoid duplicating events)
+    if (this.instances[instance]) return this.instances[instance];
 
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("ds-close")[0];
+    // Store the modal jQuery object
+    this.instances[instance] = jQuery("#modal-" + instance);
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  };
+    // Get the <span> element that closes the modal
+    var $close = this.instances[instance].find(".ds-close");
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+    // Move the modal to the document root to avoid inheriting styles from inner containers
+    this.instances[instance].appendTo('body');
+
+    // When the user clicks on <span> (x), close the modal
+    $close.on('click', function (e) {
+      e.preventDefault();
+      this.instances[instance].hide();
+    }.bind(this));
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == this.instances[instance][0]) {
+        this.instances[instance].hide()
+      }
+    }.bind(this);
+
+    return this.instances[instance];
+  },
+  /**
+   * Open the modal
+   *
+   * @param {string} instance 
+   */
+  open: function (instance) {
+    if (!ds.modal.instances[instance]) ds.modal.initInstance(instance);
+    // Open Modal Form
+    ds.modal.instances[instance].show();
+  },
+  /**
+   * Close the modal
+   *
+   * @param {string} instance 
+   */
+  close: function (instance) {
+    if (!ds.modal.instances[instance]) return;
+    // Close Modal Form
+    ds.modal.instances[instance].hide();
+  }
 }

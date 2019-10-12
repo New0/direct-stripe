@@ -63,9 +63,9 @@ jQuery(".direct-stripe-button-id").on("click", function(e) {
     return false;
   }
 
-  buildElement(instance, ds_values);
+  buildElement(instance, ds_values, ds_script_vars);
   //Modal events
-  modalEvent(instance);
+  ds.modal.open(instance);
 
   e.preventDefault();
 });

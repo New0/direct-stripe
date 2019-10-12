@@ -111,6 +111,8 @@
         padding: 10px;
         text-align: center;
         pointer-events: none;
+        border: none;
+        background: transparent;
         
 
         > * {
@@ -195,6 +197,7 @@
         .error {
             display: block;
             text-align: center;
+            padding: 1em;
 
             * {
                 opacity: 1

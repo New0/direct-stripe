@@ -44,6 +44,7 @@
         .get(SETTINGS)
         .then(response => {
           this.dscolor = '#' + response.data.direct_stripe_main_color_style;
+          jQuery( '.direct-stripe-color-field' ).wpColorPicker().iris('color', this.dscolor)
         })
         .catch(error => console.log(error))
 
@@ -93,10 +94,6 @@
         height: 1rem;
         display: block;
         position: relative;
-    }
-
-    .wp-picker-container .wp-color-result.button {
-        padding-left: 0 !important;
     }
 
 </style>
