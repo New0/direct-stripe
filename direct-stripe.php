@@ -83,6 +83,14 @@ if (!class_exists('DirectStripe')) :
          * @var string
          */
         const domain = 'direct-stripe';
+        
+        /**
+         * Stripe API version
+         *
+         * @since 3.0.2
+         * @var string
+         */
+        const stripeApiVersion = '7.3.1';
 
         /**
          * Plugin constructor.
@@ -107,11 +115,16 @@ if (!class_exists('DirectStripe')) :
          */
         function register_stripe_app()
         {
+            //Regiter App
             \Stripe\Stripe::setAppInfo(
                 "WordPress Direct Stripe Plugin",
                 self::version,
-                "https://wordpress.org/plugins/direct-stripe/"
+                "https://wordpress.org/plugins/direct-stripe/",
+                "pp_partner_FFkBDcKtfXekSW"
             );
+
+            //Set API version
+            \Stripe\Stripe::setApiVersion(stripeApiVersion);
         }
 
         function activation_hooks()
