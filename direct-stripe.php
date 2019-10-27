@@ -124,7 +124,7 @@ if (!class_exists('DirectStripe')) :
             );
 
             //Set API version
-            \Stripe\Stripe::setApiVersion(stripeApiVersion);
+            \Stripe\Stripe::setApiVersion(self::stripeApiVersion);
         }
 
         function activation_hooks()
