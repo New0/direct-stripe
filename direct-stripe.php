@@ -90,7 +90,7 @@ if (!class_exists('DirectStripe')) :
          * @since 3.0.2
          * @var string
          */
-        const stripeApiVersion = '7.3.1';
+        const stripeApiVersion = '2019-10-17';
 
         /**
          * Plugin constructor.
