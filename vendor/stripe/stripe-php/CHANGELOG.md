@@ -1,5 +1,22 @@
 # Changelog
 
+## 7.7.1 - 2019-10-25
+* [#781](https://github.com/stripe/stripe-php/pull/781) Fix telemetry header
+* [#780](https://github.com/stripe/stripe-php/pull/780) Contributor Convenant
+
+## 7.7.0 - 2019-10-23
+* [#776](https://github.com/stripe/stripe-php/pull/776) Add `CAPABILITY_TRANSFERS` to `Account`
+* [#778](https://github.com/stripe/stripe-php/pull/778) Add support for `TYPE_MX_RFC` type on `TaxId`
+
+## 7.6.0 - 2019-10-22
+* [#770](https://github.com/stripe/stripe-php/pull/770) Add missing constants for Customer's `TaxId`
+
+## 7.5.0 - 2019-10-18
+* [#768](https://github.com/stripe/stripe-php/pull/768) Redact API key in `RequestOptions` debug info
+
+## 7.4.0 - 2019-10-15
+* [#764](https://github.com/stripe/stripe-php/pull/764) Add support for HTTP request monitoring callback
+
 ## 7.3.1 - 2019-10-07
 * [#755](https://github.com/stripe/stripe-php/pull/755) Respect Stripe-Should-Retry and Retry-After headers
 

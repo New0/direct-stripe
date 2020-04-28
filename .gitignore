@@ -4,6 +4,10 @@ svn
 npm-debug.log
 yarn-error.log
 
+admin-app
+assets
+vendor
+
 # Editor directories and files
 .idea
 *.suo

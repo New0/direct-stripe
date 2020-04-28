@@ -61,6 +61,10 @@ $directStripeAttrValues = shortcode_atts( array(
 ), $atts, 'direct_stripe' );
 
 $directStripeAttrValues['display_amount'] = filter_var( $directStripeAttrValues['display_amount'], FILTER_VALIDATE_BOOLEAN );
+$directStripeAttrValues['billing'] = filter_var( $directStripeAttrValues['billing'], FILTER_VALIDATE_BOOLEAN );
+$directStripeAttrValues['shipping'] = filter_var( $directStripeAttrValues['shipping'], FILTER_VALIDATE_BOOLEAN );
+$directStripeAttrValues['tc'] = filter_var( $directStripeAttrValues['tc'], FILTER_VALIDATE_BOOLEAN );
+$directStripeAttrValues['display_amount'] = filter_var( $directStripeAttrValues['display_amount'], FILTER_VALIDATE_BOOLEAN );
 
 /*
  * Check if the shortcode is given a value argument
