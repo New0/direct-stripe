@@ -1,0 +1,24 @@
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 992px) {
+  .ds-modal-content {
+    max-width: 80%;
+  }
+
+  .ds-element {
+    &.in-form {
+      .row {
+        display: block;
+      }
+    }
+
+    .CardField {
+      .CardField-input-wrapper {
+        .CardField-child {
+          display: block !important;
+          position: relative;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

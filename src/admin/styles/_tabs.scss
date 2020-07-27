@@ -1,0 +1,17 @@
+.ds-tab-panel {
+
+    .components-tab-panel__tabs {
+
+        .components-button {
+            font-size: 1.8rem;
+            padding: 1.5rem;
+
+            &.ds-active-tab {
+                border-bottom: thick solid #0073aa;
+            }
+
+        }
+
+    }
+   
+}

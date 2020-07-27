@@ -32,8 +32,7 @@ class dsAdmin {
 
     //Build admin settings page
     function direct_stripe_options_page() {
-        //include( DSCORE_PATH . '/includes/build-page.php');
-        include( DSCORE_PATH . 'admin-app/index.html');
+        include( DSCORE_PATH . '/includes/admin-app.html');
     }
 
     /**

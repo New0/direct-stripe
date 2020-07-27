@@ -1,0 +1,17 @@
+.ds-spinner {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+
+    &.active {
+        display: block;
+    }
+
+    .components-spinner {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+    }
+}

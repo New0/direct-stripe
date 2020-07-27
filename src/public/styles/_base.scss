@@ -1,0 +1,227 @@
+/** Page-specific styles */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+@keyframes void-animation-out {
+    0%,
+    to {
+        opacity: 1;
+    }
+}
+
+.ds-element {
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    &.submitted,
+    &.submitting {
+        form {
+            fieldset {
+                opacity: 0;
+                transform: scale(0.9);
+                pointer-events: none;
+            }  
+        }
+
+        .success, .error {
+            pointer-events: all;
+
+            .icon {
+                opacity: 1;
+
+                .border,
+                .checkmark {
+                    opacity: 1;
+                }
+                
+            }
+
+            > :nth-child(2) {
+                transition-delay: 0.1s;
+            }
+
+            > :nth-child(3) {
+                transition-delay: 0.2s;
+            }
+
+            > :nth-child(4) {
+                transition-delay: 0.3s;
+            }
+
+        }
+    } 
+
+    &.submitting {
+        .success {
+            .border,
+            .checkmark {
+                stroke-dashoffset: 60 !important;
+            }
+        }
+    }
+   
+    form {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        transition-property: opacity, transform;
+        transition-duration: 0.35s;
+        transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+        input::-webkit-input-placeholder {
+            opacity: 1;
+        }
+
+        input::-moz-placeholder {
+            opacity: 1;
+        }
+
+        input:-ms-input-placeholder {
+            opacity: 1;
+        }
+
+        &.hide {
+            display: none;
+        }
+    }
+    
+    .success {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+        pointer-events: none;
+        border: none;
+        background: transparent;
+        
+
+        > * {
+            transition-property: opacity, transform;
+            transition-duration: 0.35s;
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .icon {
+            margin: 15px 0 30px;
+            transform: translateY(70px) scale(0.75);
+
+            svg {
+                will-change: transform;
+            }
+            
+            .border {
+                stroke-dasharray: 251;
+                stroke-dashoffset: 62.75;
+                transform-origin: 50% 50%;
+                transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+                animation: spin 1s linear infinite;
+            }
+
+            .checkmark {
+                stroke-dasharray: 60;
+                stroke-dashoffset: 60;
+                transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) 0.35s;
+            }
+        }
+
+        .title {
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .message {
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.6em;
+
+            span {
+                font-size: inherit;
+            }
+        }
+
+        .reset {
+            color: #fff;
+            padding-top: 1rem;
+
+            &:active {
+                transition-duration: 0.15s;
+                transition-delay: 0s;
+                opacity: 0.65;
+            }
+            svg {
+                will-change: transform;
+            }
+        }
+    }
+
+    &.submitted {
+        .success {
+            * {
+                opacity: 1;
+            }
+            .icon {
+                display: none;
+            } 
+        }
+    }
+
+    .error {
+        display:none;
+    }
+
+    &.error {
+        .error {
+            display: block;
+            text-align: center;
+            padding: 1em;
+
+            * {
+                opacity: 1
+            }
+
+            a {
+                &.reset {
+                    padding: 1rem;
+                    
+                    svg {
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+   
+
+}
+
+@media (min-width: 670px) {
+    .ds-element .success {
+        padding: 40px;
+    }
+}

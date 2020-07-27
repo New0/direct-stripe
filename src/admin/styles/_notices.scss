@@ -1,0 +1,8 @@
+.ds-notice {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+}

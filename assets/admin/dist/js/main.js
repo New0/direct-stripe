@@ -1,14 +1,12 @@
-(function($) {
+( function( $ ) {
+	$( '#ds_insert_shortcode' ).click( function() {
+		const ds_button = $( '#ds_button' ).val();
 
-  $("#ds_insert_shortcode").click(function(){
+		let ds_button_shortcode = '[direct-stripe value="' + ds_button + '"]';
 
-    const ds_button = $("#ds_button").val();
+		window.send_to_editor( ds_button_shortcode );
 
-    let ds_button_shortcode = '[direct-stripe value="' + ds_button + '"]';
-
-    window.send_to_editor(ds_button_shortcode);
-
-    /*
+		/*
       jQuery.get( direct_stripe_admin_script_vars.api.buttons, function( data ) {
 
         const selected_button = data[ds_button];
@@ -98,6 +96,5 @@
 
 
       }); */
-
-  });
-})(jQuery);
+	} );
+} )( jQuery );

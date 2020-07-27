@@ -164,7 +164,7 @@ $texts = array(
     'api'   => array(
         'settings'      =>  esc_url_raw( rest_url( 'direct-stripe/v1/settings' ) ),
         'buttons'       =>  esc_url_raw( rest_url( 'direct-stripe/v1/buttons' ) ),
-        'nonce'         =>  wp_create_nonce( 'ds_rest' ),
+        'nonce'         =>  wp_create_nonce( 'wp_rest' ),
         'pages'         =>  esc_url_raw( rest_url( 'wp/v2/pages?per_page=100' ) ),
     )
 );

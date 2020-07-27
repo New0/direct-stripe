@@ -140,7 +140,7 @@ class DS_API_Settings {
             "type":"payment",
             "amount": "1000",
             "button_id": "MyButton", 
-            "name": "Company Name"
+            "name": "Company Name",
             "description": "Description",
             "label": "Payment",
             "panellabel": "Confirm payment", 
@@ -226,13 +226,13 @@ class DS_API_Settings {
 
         $ds_buttons = get_option( self::$ds_buttons_key, array() );
 
-        if( array_key_exists( $id, $ds_buttons ) && $delete === 'yes' ) {
+        if( array_key_exists( $id, $ds_buttons ) && $delete === true ) {
             unset( $ds_buttons[$id] );
             update_option( self::$ds_buttons_key, $ds_buttons );
         } else {
             if( $data ) {
                 $ds_buttons[$id] = $data;
-                update_option( self::$ds_buttons_key, $ds_buttons );
+                return update_option( self::$ds_buttons_key, $ds_buttons );
             }
         }
 

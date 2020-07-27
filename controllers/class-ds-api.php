@@ -2,7 +2,7 @@
 class DS_API {
 
     public function __construct() {
-        add_action('rest_api_init', array($this, 'add_routes'));
+        add_action('rest_api_init', [$this, 'add_routes']);
     }
 
     /**
@@ -13,40 +13,40 @@ class DS_API {
         //$buttons = self::ds_buttons();
 
         register_rest_route( 'direct-stripe/v1', '/settings',
-            array(
+            [
                 'methods'         => 'POST',
-                'callback'        => array( $this, 'update_settings' ),
-                'args'            => array(
-                ),
-                'permission_callback' => array( $this, 'permissions' )
-            )
+                'callback'        => [ $this, 'update_settings' ],
+                'args'            => [
+                ],
+                'permission_callback' => [ $this, 'permissions' ]
+            ]
         );
         register_rest_route( 'direct-stripe/v1', '/settings',
-            array(
+            [
                 'methods'         => 'GET',
-                'callback'        => array( $this, 'get_settings' ),
-                'args'            => array(
-                ),
-                'permission_callback' => array( $this, 'permissions' )
-            )
+                'callback'        => [ $this, 'get_settings' ],
+                'args'            => [
+                ],
+                'permission_callback' => [ $this, 'permissions' ]
+            ]
         );
         register_rest_route( 'direct-stripe/v1', '/buttons',
-            array(
+            [
                 'methods'         => 'POST',
-                'callback'        => array( $this, 'update_buttons' ),
-                'args'            => array(
-                ),
-                'permission_callback' => array( $this, 'permissions' )
-            )
+                'callback'        => [ $this, 'update_buttons' ],
+                'args'            => [
+                ],
+                'permission_callback' => [ $this, 'permissions' ]
+            ]
         );
         register_rest_route( 'direct-stripe/v1', '/buttons',
-            array(
+            [
                 'methods'         => 'GET',
-                'callback'        => array( $this, 'get_buttons' ),
-                'args'            => array(
-                ),
-                'permission_callback' => array( $this, 'permissions' )
-            )
+                'callback'        => [ $this, 'get_buttons' ],
+                'args'            => [
+                ],
+                'permission_callback' => [ $this, 'permissions' ]
+            ]
         );
 
     }
@@ -57,10 +57,8 @@ class DS_API {
      * @return bool
      */
     public function permissions(){
-
-        $user_id = apply_filters( 'determine_current_user', false );
-        wp_set_current_user( $user_id );
-
+        //Nonce check validated by x-wp-nonce header in rest_cookie_check_errors()
+        //User set via nonce check
         return current_user_can('edit_others_posts');
     }
 
@@ -71,14 +69,7 @@ class DS_API {
      */
     public function update_settings( WP_REST_Request $request ){
 
-        $nonce = $request->get_param( '_dsnonce' );
-
-        if ( ! wp_verify_nonce( $nonce, 'ds_rest' ) ) {
-            return array(
-                'text'  =>  __('Something went wrong, check nonces...', 'direct-stripe'),
-                'error'  =>  true
-            );
-        }
+        //Nonce check validated by x-wp-nonce header in rest_cookie_check_errors()
 
         $set = $request->get_params();
         if( isset( $set ) ) {
@@ -88,44 +79,44 @@ class DS_API {
             $value = reset($set);
         }
 
-        $booleans = array( 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
+        $booleans = [ 'direct_stripe_checkbox_api_keys', 'direct_stripe_use_redirections',
             'direct_stripe_admin_emails_checkbox', 'direct_stripe_user_emails_checkbox',
             'direct_stripe_admin_error_emails_checkbox', 'direct_stripe_user_error_emails_checkbox',
             'direct_stripe_check_records'
-        );
-        $texts = array( 'direct_stripe_publishable_api_key', 'direct_stripe_secret_api_key',
+        ];
+        $texts = [ 'direct_stripe_publishable_api_key', 'direct_stripe_secret_api_key',
             'direct_stripe_test_publishable_api_key', 'direct_stripe_test_secret_api_key', 'direct_stripe_currency',
             'direct_stripe_use_custom_styles', 'direct_stripe_main_color_style', 'direct_stripe_border_radius',
             'direct_stripe_tc_text', 'direct_stripe_tc_link_text',
             'direct_stripe_tc_link', 'direct_stripe_admin_email_subject', 'direct_stripe_user_email_subject',
             'direct_stripe_admin_error_email_subject', 'direct_stripe_user_error_email_subject', 'direct_stripe_tc_error_bubble',
 			'direct_stripe_button_locale', 'direct_stripe_error_message', 'direct_stripe_success_message'
-        );
-        $urls = array( 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' );
-        $post_kses = array( 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content',
+        ];
+        $urls = [ 'direct_stripe_success_page', 'direct_stripe_error_page', 'direct_stripe_logo_image' ];
+        $post_kses = [ 'direct_stripe_admin_email_content', 'direct_stripe_user_email_content', 'direct_stripe_user_error_email_content',
          'direct_stripe_admin_error_email_content'
-        );
+        ];
 
         if ( in_array( $key, $booleans ) ) {
-            $setting = array(
+            $setting = [
                 $key => filter_var( $value, FILTER_VALIDATE_BOOLEAN )
-            );
+            ];
         } else if ( in_array( $key, $texts ) ) {
-            $setting = array(
+            $setting = [
                 $key => sanitize_text_field( $value )
-            );
-        } else if ( in_array( $key, $urls) ) {
-            $setting = array(
+            ];
+        } else if ( in_array( $key, $urls ) ) {
+            $setting = [
                 $key => $value && 'empty' != $value ? esc_url( $value ) : ''
-            );
-        } else if ( in_array( $key, $post_kses) ) {
-            $setting = array(
+            ];
+        } else if ( in_array( $key, $post_kses ) ) {
+            $setting = [
                 $key => wp_kses_post( $value )
-            );
+            ];
         }
 
         DS_API_Settings::save_settings( $setting );
-        return rest_ensure_response( DS_API_Settings::get_settings())->set_status( 201 );
+
     }
 
     /**
@@ -144,33 +135,19 @@ class DS_API {
      */
     public function update_buttons( WP_REST_Request $request ){
 
-        $nonce = $request->get_param( '_dsnonce' );
+        //Nonce check validated by x-wp-nonce header in rest_cookie_check_errors()
 
-        if ( ! wp_verify_nonce( $nonce, 'ds_rest' ) ) {
-            return array(
-                'text'  =>  'Something went wrong, check nonces...',
-                'error'  =>  true
-            );
-        }
+        //Get button ID if set
+        $id = $request->get_param( 'id' ) ? $request->get_param( 'id' ) : null;
 
-        if( $request->get_param( 'id' ) ) {
-            $id = $request->get_param( 'id' );
-        } else  {
-            $id = null;
-        }
-        if( $request->get_param( 'delete' ) && $request->get_param( 'delete' ) === 'yes' ) {
-            $delete = 'yes';
-            $data = false;
-        } else  {
-            $delete = null;
-            if( $request->get_param( 'data' ) ) {
-                $data = json_decode( $request->get_param( 'data' ) );
-            } else  {
-                $data = null;
-            }
-        }
-        DS_API_Settings::save_buttons( $id, $data, $delete );
-        return rest_ensure_response( DS_API_Settings::get_buttons())->set_status( 201 );
+        //Are we deleting a button 
+        $delete = $request->get_param( 'delete' ) && $request->get_param( 'delete' ) === 'yes' ? true : null;
+
+        //Get data
+        $data = $request->get_param( 'data' ) ? json_decode( $request->get_param( 'data' ) ) : null;
+
+        return rest_ensure_response( DS_API_Settings::save_buttons( $id, $data, $delete ) );
+        
     }
     /**
      * Get buttons via API
@@ -182,32 +159,32 @@ class DS_API {
     }
 
     public function ds_options() {
-        $options = array(
-            'direct_stripe_test_publishable_api_key' => array(
+        $options = [
+            'direct_stripe_test_publishable_api_key' => [
                 'type' => 'string',
                 'required' => false,
                 'sanitize_callback' => 'sanitize_text_field'
-            ),
-            'direct_stripe_test_secret_api_key' => array(
+            ],
+            'direct_stripe_test_secret_api_key' => [
                 'type' => 'string',
                 'required' => false,
                 'sanitize_callback' => 'sanitize_text_field'
-            ),
-            'direct_stripe_buttons' => array(
+            ],
+            'direct_stripe_buttons' => [
                 'type' => 'string',
                 'required' => false,
                 'sanitize_callback' => 'sanitize_text_field'
-            )
-        );
+            ]
+        ];
         return $options;
     }
 
     public function ds_buttons() {
-        $buttons = array(
+        $buttons = [
             'type' => 'json_object',
             'required' => false,
             'sanitize_callback' => 'sanitize_text_field'
-        );
+        ];
         return $buttons;
     }
 }
