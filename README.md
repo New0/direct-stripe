@@ -1,6 +1,6 @@
 # Direct-Stripe
 Stripe payment button for WordPress
-
+Stripe is a payment getway
 == Description ==
 #Simple Payments, Donations and Subscriptions using Stripe
 
