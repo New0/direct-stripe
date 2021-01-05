@@ -22,6 +22,6 @@
   "dependencies": {
     "@wordpress/api-fetch": "^2.0.0",
     "@wordpress/api-request": "^1.0.0-alpha.3",
-    "axios": "^0.18.0"
+    "axios": "^0.21.1"
   }
 }
