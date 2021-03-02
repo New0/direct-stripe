@@ -1,17 +1,17 @@
 import domReady from '@wordpress/dom-ready';
+import { render, createElement } from '@wordpress/element';
 import { DsTabPanel } from './components/tabs';
 
-import './styles/main.scss';
-
 const strings = ds_admin_app_vars.strings;
+console.log(strings);
 
 const Admin = () => (
     <DsTabPanel />
 );
 
 domReady( function() {
-	wp.element.render( 
-        wp.element.createElement( Admin ), 
+	render( 
+        createElement( Admin ), 
         document.getElementById( 'ds-admin-app' ) 
     );
 });

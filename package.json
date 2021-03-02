@@ -5,7 +5,7 @@
   "description": "WordPress plugin for Stripe handled transactions",
   "author": "New0 Nicolas Figueira",
   "license": "GPL-2.0-or-later",
-  "main": "index.js",
+  "main": "src/",
   "scripts": {
     "test": "yarn test:unit && yarn test:e2e:ci",
     "test:unit": "wp-scripts test-unit-js",
@@ -15,7 +15,7 @@
     "format:js": "wp-scripts format-js",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
-    "start": "wp-scripts start",
+    "start": "wp-scripts start ./src/admin.js ./src/public.js ./src/block.js",
     "packages-update": "wp-scripts packages-update",
     "env:start": "wp-env start",
     "env:install": "yarn env:start && yarn env:config",
@@ -24,32 +24,23 @@
     "version_number": "grunt version_number",
     "zip": "grunt just_build"
   },
-  "devDependencies": {
-    "@testing-library/react": "^10.0.1",
-    "@wordpress/env": "^1.3.0",
-    "@wordpress/scripts": "^9.1.0",
-    "css-loader": "^3.4.2",
-    "cypress": "^4.2.0",
-    "ignore-emit-webpack-plugin": "^2.0.2",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
-    "postcss-preset-env": "^6.7.0",
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.1.3"
-  },
-  "dependencies": {
-    "@wordpress/api-fetch": "^3.15.0",
-    "@wordpress/compose": "^3.15.0",
-    "@wordpress/dom": "^2.9.0",
-    "@wordpress/dom-ready": "^2.9.0",
-    "@wordpress/element": "^2.14.0",
-    "@wordpress/i18n": "^3.12.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "@wordpress/api-fetch": "^3.21.5",
+    "@wordpress/dom": "^2.16.2",
+    "@wordpress/dom-ready": "^2.12.1",
+    "@wordpress/element": "^2.19.1",
+    "@wordpress/i18n": "^3.18.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.5",
+    "@wordpress/env": "^3.0.2",
+    "@wordpress/scripts": "^13.0.3",
+    "cypress": "^6.6.0"
+  }
 }

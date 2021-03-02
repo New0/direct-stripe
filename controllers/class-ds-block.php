@@ -31,7 +31,7 @@ if ( ! class_exists( 'DSBlock' ) ) :
 
             wp_register_script(
                 'direct-stripe-block-script',
-                DSCORE_URL . 'block/js/block.build.js',
+                DSCORE_URL . 'build/block.js',
                 array( 'wp-blocks', 'wp-components', 'wp-editor' )
             );
 

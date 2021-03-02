@@ -1,3 +1,4 @@
+import { Component } from '@wordpress/element';
 import { TabPanel, Spinner, Notice } from '@wordpress/components';
 import { GlobalSettings } from './globalSettings/globalSettings.js';
 import { StylesSettings } from './stylesSettings/stylesSettings.js';
@@ -41,7 +42,7 @@ export const buttonsState = ( state, buttons ) => {
 	return newState;
 }
 
-export class DsTabPanel extends React.Component {
+export class DsTabPanel extends Component {
 
 	constructor(props) {    
 		super(props)
