@@ -19,12 +19,8 @@
     "packages-update": "wp-scripts packages-update",
     "env:start": "wp-env start",
     "env:install": "yarn env:start && yarn env:config",
-    "env:config": "wp-env run cli wp rewrite structure %postname%",
-    "release": "grunt release",
-    "version_number": "grunt version_number",
-    "zip": "grunt just_build"
+    "env:config": "wp-env run cli wp rewrite structure %postname%"
   },
-    "postcss-loader": "^3.0.0",
   "browserslist": [
     "> 1%",
     "last 2 versions",
