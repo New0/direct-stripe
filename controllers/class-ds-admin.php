@@ -26,7 +26,7 @@ class dsAdmin {
      * @since 2.0.0
      */
     function direct_stripe_add_admin_menu() {
-        add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'assets/admin/dist/img/logo_stripe_white.svg' );
+        add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'build/img/logo_stripe_white.svg' );
         add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
     }
 
