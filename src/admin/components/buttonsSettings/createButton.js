@@ -5,6 +5,7 @@ import {
 	Card,
 	CardBody
 } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 import { setButtons } from '../';
 
 export class CreateButton extends Component {
@@ -56,6 +57,24 @@ export class CreateButton extends Component {
 				data: JSON.stringify( {
 					text: buttonName,
 					value: buttonID,
+					type: "payment",
+					amount: 1000,
+					button_id: buttonID,
+					name: __("Company Name", "direct-stripe" ),
+					description: __("Description", "direct-stripe" ),
+					label: __("Payment", "direct-stripe" ),
+					panellabel: __("Confirm payment", "direct-stripe" ),
+					coupon: "",
+					setup_fee: "",
+					zero_decimal: false,
+					capture: true,
+					billing: false,
+					shipping: false,
+					tc: false,
+					rememberme: false,
+					display_amount: false,
+					currency: "USD",
+					locale: "auto",
 				} ),
 			};
 

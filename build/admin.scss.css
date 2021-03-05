@@ -875,10 +875,14 @@
 }
 
 .ds-notice {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 3s;
+  transition: all 3s;
 }
 .ds-notice.active {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .ds-tab-panel .components-tab-panel__tabs .components-button {

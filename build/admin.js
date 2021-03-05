@@ -2679,7 +2679,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ */ "./src/admin/components/index.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ */ "./src/admin/components/index.js");
 
 
 
@@ -2691,6 +2693,7 @@ __webpack_require__.r(__webpack_exports__);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -2728,7 +2731,7 @@ var CreateButton = /*#__PURE__*/function (_Component) {
         actions.notice({
           state: true,
           status: 'warning',
-          message: __('Define a button name before creating it', 'direct-stripe')
+          message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Define a button name before creating it', 'direct-stripe')
         });
       } else {
         actions.spinner();
@@ -2756,10 +2759,28 @@ var CreateButton = /*#__PURE__*/function (_Component) {
           id: buttonID,
           data: JSON.stringify({
             text: buttonName,
-            value: buttonID
+            value: buttonID,
+            type: "payment",
+            amount: 1000,
+            button_id: buttonID,
+            name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Company Name", "direct-stripe"),
+            description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Description", "direct-stripe"),
+            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Payment", "direct-stripe"),
+            panellabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Confirm payment", "direct-stripe"),
+            coupon: "",
+            setup_fee: "",
+            zero_decimal: false,
+            capture: true,
+            billing: false,
+            shipping: false,
+            tc: false,
+            rememberme: false,
+            display_amount: false,
+            currency: "USD",
+            locale: "auto"
           })
         };
-        Object(___WEBPACK_IMPORTED_MODULE_8__["setButtons"])(buttonValues, actions);
+        Object(___WEBPACK_IMPORTED_MODULE_9__["setButtons"])(buttonValues, actions);
       }
     }
   }, {
@@ -3091,13 +3112,11 @@ var setSettings = function setSettings(settings) {
 };
 var setButtons = /*#__PURE__*/function () {
   var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2(buttons, actions) {
-    var buttonSet;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log(buttons);
-            _context2.next = 3;
+            _context2.next = 2;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
               url: api.buttons + '?_wpnonce=' + api.nonce,
               method: 'POST',
@@ -3107,17 +3126,26 @@ var setButtons = /*#__PURE__*/function () {
                 actions.notice({
                   state: true,
                   status: 'error',
-                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Something wrong happened, couldn't create the Stripe button", 'direct-stripe')
+                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Something wrong happened, couldn't create the Stripe button", "direct-stripe")
                 });
+              } else {
+                actions.notice({
+                  state: true,
+                  status: 'success',
+                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Button created with success", "direct-stripe")
+                });
+                setTimeout(function () {
+                  actions.notice({
+                    state: false
+                  });
+                }, 5000);
               }
             });
 
-          case 3:
-            buttonSet = _context2.sent;
+          case 2:
             actions.spinner();
-            return _context2.abrupt("return", buttonSet);
 
-          case 6:
+          case 3:
           case "end":
             return _context2.stop();
         }
@@ -3201,23 +3229,25 @@ var StylesSettings = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DsTabPanel", function() { return DsTabPanel; });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ */ "./src/admin/components/index.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ */ "./src/admin/components/index.js");
 
 
 
@@ -3226,7 +3256,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -3234,14 +3265,14 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 var DsTabPanel = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(DsTabPanel, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(DsTabPanel, _Component);
 
   var _super = _createSuper(DsTabPanel);
 
   function DsTabPanel(props) {
     var _this;
 
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, DsTabPanel);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, DsTabPanel);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -3254,15 +3285,15 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
         message: ""
       }
     };
-    _this.handleSpinner = _this.handleSpinner.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.handleNotice = _this.handleNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.removeNotice = _this.removeNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.resetButtons = _this.resetButtons.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
-    _this.setCurrentButton = _this.setCurrentButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.handleSpinner = _this.handleSpinner.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
+    _this.handleNotice = _this.handleNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
+    _this.removeNotice = _this.removeNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
+    _this.resetButtons = _this.resetButtons.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
+    _this.setCurrentButton = _this.setCurrentButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
     return _this;
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(DsTabPanel, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(DsTabPanel, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.resetButtons();
@@ -3306,14 +3337,16 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
     value: function resetButtons() {
       var _this2 = this;
 
-      Object(___WEBPACK_IMPORTED_MODULE_8__["getButtons"])().then(function (buttonsData) {
-        Object.values(buttonsData).map(function (data) {
-          data.label = data.text;
-        });
+      Object(___WEBPACK_IMPORTED_MODULE_9__["getButtons"])().then(function (buttonsData) {
+        if (_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(buttonsData) === "object") {
+          Object.values(buttonsData).map(function (data) {
+            data.label = data.text;
+          });
 
-        _this2.setState({
-          buttons: Object.values(buttonsData)
-        });
+          _this2.setState({
+            buttons: Object.values(buttonsData)
+          });
+        }
       });
     }
   }, {
@@ -3326,6 +3359,8 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var handleSpinner = this.handleSpinner,
           handleNotice = this.handleNotice,
           setCurrentButton = this.setCurrentButton,
@@ -3342,47 +3377,47 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
         currentButton: currentButton,
         strings: strings
       };
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
         className: "ds-spinner ".concat(this.state.spinner ? "active" : "hidden")
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Spinner"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-        className: "ds-notice ".concat(this.state.notice.state ? "active" : "hidden")
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Notice"], {
-        status: this.state.notice.status,
-        onRemove: this.removeNotice
-      }, this.state.notice.message)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TabPanel"], {
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Spinner"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TabPanel"], {
         className: "ds-tab-panel",
         activeClass: "ds-active-tab",
         tabs: [{
           name: 'global',
           title: 'Global',
           className: 'ds-global-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["GlobalSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["GlobalSettings"], null)
         }, {
           name: 'styles',
           title: 'Styles',
           className: 'ds-styles-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["StylesSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["StylesSettings"], null)
         }, {
           name: 'emails',
           title: 'Emails',
           className: 'ds-emails-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["EmailsSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["EmailsSettings"], null)
         }, {
           name: 'buttons',
           title: 'Buttons',
           className: 'ds-buttons-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["ButtonsSettings"], {
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["ButtonsSettings"], {
             data: passedData
           })
         }]
       }, function (tab) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, tab.content);
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+          className: "ds-notice ".concat(_this3.state.notice.state ? "active" : "")
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Notice"], {
+          status: _this3.state.notice.status,
+          onRemove: _this3.removeNotice
+        }, _this3.state.notice.message)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["HorizontalRule"], null), tab.content);
       }));
     }
   }]);
 
   return DsTabPanel;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Component"]);
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["Component"]);
 
 /***/ }),
 

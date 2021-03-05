@@ -1,5 +1,5 @@
 import { Component } from '@wordpress/element';
-import { TabPanel, Spinner, Notice } from '@wordpress/components';
+import { TabPanel, Spinner, Notice, HorizontalRule } from '@wordpress/components';
 import { GlobalSettings, StylesSettings, EmailsSettings, ButtonsSettings, getButtons } from './';
 
 export class DsTabPanel extends Component {
@@ -57,12 +57,16 @@ export class DsTabPanel extends Component {
 	}
 
 	resetButtons() {
+		
 		getButtons().then(      
 			buttonsData => { 
-				Object.values( buttonsData ).map( data => {
-					data.label = data.text;
-				});
-				this.setState({ buttons: Object.values( buttonsData )});      
+				if(typeof buttonsData === "object"){
+					Object.values( buttonsData ).map( data => {
+						data.label = data.text;
+					});
+	
+					this.setState({ buttons: Object.values( buttonsData ) });
+				}
 			}    
 		);
 	}
@@ -90,14 +94,6 @@ export class DsTabPanel extends Component {
 			<div>
 				<div className={`ds-spinner ${this.state.spinner ? "active" : "hidden"}`} >
 					<Spinner />
-				</div>
-				<div className={`ds-notice ${this.state.notice.state ? "active" : "hidden"}`} >
-					<Notice 
-						status={this.state.notice.status}
-						onRemove={this.removeNotice}
-					>
-						{this.state.notice.message}
-					</Notice>
 				</div>
 				<TabPanel
 					className="ds-tab-panel"
@@ -129,8 +125,21 @@ export class DsTabPanel extends Component {
 						},
 					] }
 				>
-					{ ( tab ) => <div>{ tab.content }</div> }
+					{ ( tab ) => <div>
+						<div className={`ds-notice ${this.state.notice.state ? "active" : ""}`} >
+							<Notice 
+								status={this.state.notice.status}
+								onRemove={this.removeNotice}
+							>
+								{this.state.notice.message}
+							</Notice>
+						</div>
+						<HorizontalRule />
+						{ tab.content }
+						
+					</div> }
 				</TabPanel>
+				
 			</div>
 		)
 	}
