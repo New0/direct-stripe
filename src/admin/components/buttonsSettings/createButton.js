@@ -1,89 +1,111 @@
-import { Button, TextControl, Card, CardBody } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { setButtons }  from '../settings-api';
+import { Component } from '@wordpress/element';
+import {
+	Button,
+	TextControl,
+	Card,
+	CardBody
+} from '@wordpress/components';
+import { setButtons } from '../';
 
-export class CreateButton extends React.Component {
+export class CreateButton extends Component {
+	constructor( props ) {
+		super( props );
+		this.state = {
+			buttonName: '',
+		};
 
-    constructor(props)
-    {
-        super(props);
-        
-        this.state = {
-            buttonName: "Button Name"
-        }
-     
-    }
+		this.setButton = this.setButton.bind( this );
+		this.setButtonName = this.setButtonName.bind( this );
+	}
 
-    setButton( buttonName, actions ) { 
+	setButtonName( value ) {
+		this.setState( { buttonName: value } );
+	}
 
-        if(typeof buttonName === "undefined" || buttonName === "" ){
-            actions.notice(
-				{
-					state: true,
-					status: "warning",
-					message: __("Define a button name before creating it", "direct-stripe")
+	setButton( buttonName, actions ) {
+		if ( typeof buttonName === 'undefined' || buttonName === '' ) {
+			actions.notice( {
+				state: true,
+				status: 'warning',
+				message: __(
+					'Define a button name before creating it',
+					'direct-stripe'
+				),
+			} );
+		} else {
+			actions.spinner();
+
+			function uniqueNumber() {
+				let date = Date.now();
+				if ( date <= uniqueNumber.previous ) {
+					date = ++uniqueNumber.previous;
+				} else {
+					uniqueNumber.previous = date;
 				}
-			);
-        } else {
+				return date;
+			}
+			uniqueNumber.previous = 0;
+			function ID() {
+				return uniqueNumber();
+			}
 
-            actions.spinner();
+			let buttonID = 'ds' + ID();
 
-            function uniqueNumber() {
-                let date = Date.now();
-                if (date <= uniqueNumber.previous) {
-                    date = ++uniqueNumber.previous;
-                } else {
-                    uniqueNumber.previous = date;
-                }
-                return date;
-            }
-            uniqueNumber.previous = 0;
-            function ID(){
-                return uniqueNumber();
-            }
-    
-            let buttonID = "ds" + ID();
-            
-            const buttonValues = { 
-                "id": buttonID, 
-                "data": JSON.stringify({ 
-                    "text": buttonName, 
-                    "value": buttonID
-                })
-            }
-    
-            setButtons( buttonValues, actions );
-        }  
-         
+			const buttonValues = {
+				id: buttonID,
+				data: JSON.stringify( {
+					text: buttonName,
+					value: buttonID,
+				} ),
+			};
+
+			setButtons( buttonValues, actions );
+
+		}
+	}
+
+    componentWillUnmount() {
+        this.props.data.notice({ state: false });
     }
 
-    render() {
+	render() {
+		const { data } = this.props;
+		const { buttonName } = this.state;
 
-        const actions = {
-            spinner:  this.props.data.spinner,
-            notice: this.props.data.notice
-        }
+		const actions = {
+			spinner: data.spinner,
+			notice: data.notice,
+		};
 
-        return (
-            <div>
-                 <Card className="ds-createButtonCard" size="small" isElevated="true" isBorderless="true">
-                    <CardBody>
-                        <TextControl
-                            label={ __("Name of button to create", "direct-stripe") }
-                            value={ this.state.buttonName }
-                            onChange={ ( value ) => this.setState( { buttonName: value } ) }
-                        />
-                    </CardBody>
-                    <CardBody>
-                        <Button 
-                            isPrimary="true" 
-                            onClick={ () => this.setButton( this.state.buttonName, actions ) }
-                        >{ __("Create New Button", "direct-stripe") }</Button>
-                    </CardBody>
-                </Card>
-            </div>
-        
-        )
-    }
-
+		return (
+			<div>
+				<Card
+					className="ds-createButtonCard"
+					size="small"
+					isElevated="true"
+					isBorderless="true"
+				>
+					<CardBody>
+						<TextControl
+							label={ data.strings.createButtonsTitle }
+							value={ buttonName }
+							onChange={ ( value ) =>
+								this.setButtonName( value )
+							}
+						/>
+					</CardBody>
+					<CardBody>
+						<Button
+							isPrimary="true"
+							onClick={ () =>
+								this.setButton( buttonName, actions )
+							}
+						>
+							{ data.strings.createButtons }
+						</Button>
+					</CardBody>
+				</Card>
+			</div>
+		);
+	}
 }

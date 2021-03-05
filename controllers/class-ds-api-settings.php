@@ -136,6 +136,7 @@ class DS_API_Settings {
     public static function get_buttons(){
         $example = json_decode( '{ 
             "text": "Example button", 
+            "label": "Example button",
             "value": 0, 
             "type":"payment",
             "amount": "1000",
@@ -179,20 +180,20 @@ class DS_API_Settings {
      */
     public static function save_settings( $settings ){
 
-        if( get_option( self::$ds_general_key, array() ) ) {
-            $saved_general = get_option( self::$ds_general_key, array() );
+        if( get_option( self::$ds_general_key, [] ) ) {
+            $saved_general = get_option( self::$ds_general_key, [] );
             $ds_general =  wp_parse_args( $saved_general, self::$ds_general_defaults );
         } else {
             $ds_general = self::$ds_general_defaults;
         }
-        if( get_option( self::$ds_styles_key, array() ) ) {
-            $saved_styles = get_option( self::$ds_styles_key, array() );
+        if( get_option( self::$ds_styles_key, [] ) ) {
+            $saved_styles = get_option( self::$ds_styles_key, [] );
             $ds_styles = wp_parse_args( $saved_styles, self::$ds_styles_defaults );
         } else {
             $ds_styles = self::$ds_styles_defaults;
         }
-        if( get_option( self::$ds_emails_key, array() ) ) {
-            $saved_emails = get_option( self::$ds_emails_key, array() );
+        if( get_option( self::$ds_emails_key, [] ) ) {
+            $saved_emails = get_option( self::$ds_emails_key, [] );
             $ds_emails = wp_parse_args( $saved_emails, self::$ds_emails_defaults );
         } else {
             $ds_emails = self::$ds_emails_defaults;
@@ -223,8 +224,9 @@ class DS_API_Settings {
      * @param array $buttons
      */
     public static function save_buttons( $id, $data, $delete ){
+        
 
-        $ds_buttons = get_option( self::$ds_buttons_key, array() );
+        $ds_buttons = get_option( self::$ds_buttons_key, [] );
 
         if( array_key_exists( $id, $ds_buttons ) && $delete === true ) {
             unset( $ds_buttons[$id] );

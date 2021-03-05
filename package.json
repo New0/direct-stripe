@@ -15,7 +15,7 @@
     "format:js": "wp-scripts format-js",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
-    "start": "wp-scripts start ./src/admin.js ./src/public.js ./src/block.js",
+    "start": "wp-scripts start ./src/admin.scss ./src/public.scss ./src/admin.js ./src/public.js ./src/block.js",
     "packages-update": "wp-scripts packages-update",
     "env:start": "wp-env start",
     "env:install": "yarn env:start && yarn env:config",
@@ -27,6 +27,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
+    "@rmwc/grid": "^6.1.4",
     "@wordpress/api-fetch": "^3.21.5",
     "@wordpress/dom": "^2.16.2",
     "@wordpress/dom-ready": "^2.12.1",

@@ -26,7 +26,8 @@ class dsScripts {
 
             wp_enqueue_script('direct-stripe-admin-app', DSCORE_URL . 'build/admin.js', ['wp-components', 'wp-api-fetch', 'jquery'], DirectStripe::version, true );
             wp_localize_script('direct-stripe-admin-app', 'ds_admin_app_vars', self::direct_stripe_localization() );
-            wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'build/admin.css', ['wp-components'], DirectStripe::version, false);
+            wp_set_script_translations( 'direct-stripe-admin-app', 'direct-stripe', DSCORE_PATH . '/languages' );
+            wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'build/admin.scss.css', ['wp-components'], DirectStripe::version, false);
 
         }
 
@@ -39,7 +40,7 @@ class dsScripts {
      */
     function direct_stripe_scripts() {
 
-        wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'build/publicStyles.css' );
+        wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'build/public.scss.css' );
         include( DSCORE_PATH . 'includes/styles.php');
         wp_add_inline_style( 'direct-stripe-style', $custom_css );
         

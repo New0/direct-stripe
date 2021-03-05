@@ -29,7 +29,7 @@ function registerElements( elements, elementName ) {
 			form.querySelectorAll(
 				"input[type='text'], input[type='email'], input[type='tel']"
 			),
-			function( input ) {
+			function ( input ) {
 				input.removeAttribute( 'disabled' );
 			}
 		);
@@ -40,7 +40,7 @@ function registerElements( elements, elementName ) {
 			form.querySelectorAll(
 				"input[type='text'], input[type='email'], input[type='tel']"
 			),
-			function( input ) {
+			function ( input ) {
 				input.setAttribute( 'disabled', 'true' );
 			}
 		);
@@ -59,8 +59,8 @@ function registerElements( elements, elementName ) {
 
 	// Listen for errors from each Element, and show error messages in the UI.
 	var savedErrors = {};
-	elements.forEach( function( element, idx ) {
-		element.on( 'change', function( event ) {
+	elements.forEach( function ( element, idx ) {
+		element.on( 'change', function ( event ) {
 			if ( event.error ) {
 				error.classList.add( 'visible' );
 				savedErrors[ idx ] = event.error.message;
@@ -71,7 +71,7 @@ function registerElements( elements, elementName ) {
 				// Loop over the saved errors and find the first one, if any.
 				var nextError = Object.keys( savedErrors )
 					.sort()
-					.reduce( function( maybeFoundError, key ) {
+					.reduce( function ( maybeFoundError, key ) {
 						return maybeFoundError || savedErrors[ key ];
 					}, null );
 
@@ -87,7 +87,7 @@ function registerElements( elements, elementName ) {
 	} );
 
 	// Listen on the form's 'submit' handler...
-	form.addEventListener( 'submit', function( e ) {
+	form.addEventListener( 'submit', function ( e ) {
 		e.preventDefault();
 
 		// Trigger HTML5 validation UI on the form if any of the inputs fail
@@ -95,7 +95,7 @@ function registerElements( elements, elementName ) {
 		var plainInputsValid = true;
 		Array.prototype.forEach.call(
 			form.querySelectorAll( 'input' ),
-			function( input ) {
+			function ( input ) {
 				if ( input.checkValidity && ! input.checkValidity() ) {
 					plainInputsValid = false;
 					return;
@@ -164,7 +164,7 @@ function registerElements( elements, elementName ) {
 			.createPaymentMethod( 'card', elements[ 0 ], {
 				billing_details: billingDetails,
 			} )
-			.then( function( resultP ) {
+			.then( function ( resultP ) {
 				if ( resultP.error ) {
 					enableInputs();
 					// Show error in payment form
@@ -172,7 +172,7 @@ function registerElements( elements, elementName ) {
 				} else {
 					stripe
 						.createToken( elements[ 0 ], {} )
-						.then( function( resultT ) {
+						.then( function ( resultT ) {
 							if ( resultT.token ) {
 								stripe_checkout(
 									resultT.token,
@@ -186,13 +186,13 @@ function registerElements( elements, elementName ) {
 			} );
 	} );
 
-	resetButtonError.addEventListener( 'click', function( e ) {
+	resetButtonError.addEventListener( 'click', function ( e ) {
 		e.preventDefault();
 
 		dsStripeResetForm( form, elements, dsProcess, error );
 	} );
 
-	resetButtonSuccess.addEventListener( 'click', function( e ) {
+	resetButtonSuccess.addEventListener( 'click', function ( e ) {
 		e.preventDefault();
 
 		dsStripeResetForm( form, elements, dsProcess, error );
@@ -204,7 +204,7 @@ function registerElements( elements, elementName ) {
 		form.reset();
 
 		// Clear each Element.
-		elements.forEach( function( element ) {
+		elements.forEach( function ( element ) {
 			element.clear();
 		} );
 

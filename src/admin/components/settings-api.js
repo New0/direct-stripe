@@ -11,40 +11,42 @@ export const getSettings = () => {
 	} );
 };
 
-export const getButtons = () => {
-	
-	apiFetch( { url: api.buttons } ).then( ( res ) => {
-		return res;
-	});
+export const getButtons = async () => {
+	let buttons = await apiFetch( { url: api.buttons } );
 
+	return buttons;
 };
 
-export const setSettings = (settings) => {
+export const setSettings = ( settings ) => {
 	apiFetch( {
 		url: api.settings,
 		method: 'POST',
 		data: { settings },
-	} ).then( res => {
+	} ).then( ( res ) => {
 		console.log( res );
 	} );
-}
+};
 
-export const setButtons = ( buttons, actions ) => {
-
-	apiFetch( {
-		url: api.buttons + "?_wpnonce=" + api.nonce,
+export const setButtons = async ( buttons, actions ) => {
+	console.log(buttons);
+	let buttonSet = await apiFetch( {
+		url: api.buttons + '?_wpnonce=' + api.nonce,
 		method: 'POST',
 		data: buttons,
-	} ).then( res => {
-		if( !res ){
-			actions.notice(
-				{
-					state: true,
-					status: "error",
-					message: __("Something wrong happened, couldn't create the Stripe button", "direct-stripe")
-				}
-			);
-		} 
-		actions.spinner();
+	} ).then( ( res ) => {
+		if ( ! res ) {
+			actions.notice( {
+				state: true,
+				status: 'error',
+				message: __(
+					"Something wrong happened, couldn't create the Stripe button",
+					'direct-stripe'
+				),
+			} );
+		}
 	} );
-}
+	
+	actions.spinner();
+
+	return buttonSet;
+};

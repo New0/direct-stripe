@@ -1,17 +1,24 @@
 import { HorizontalRule } from '@wordpress/components';
-import { CreateButton } from './createButton.js';
-import { SelectButton } from './selectButton.js';
+import { CreateButton, SelectButton, ButtonEditor   } from './';
 
-export class ButtonsSettings extends React.Component {
+export const ButtonsSettings = ( props ) => {
 
-    render() {
-        return (
-            <div>
-                <CreateButton data={this.props.data}/>
-                <HorizontalRule />
-                <SelectButton data={this.props.data}/>
-            </div>
-        )
-    }
-   
-};
+	const { data } = props;
+	const { currentButton, buttons, setButton } = data;
+
+	return (
+		<div>
+			<CreateButton 
+				data={ data }
+			/>
+			<HorizontalRule />
+			<SelectButton 
+				setButton={setButton} 
+				currentButton={currentButton}
+				buttons={buttons}
+			/>
+			<ButtonEditor />
+		</div>
+	);
+	
+}

@@ -39,7 +39,7 @@ function returnError( ds_answer_input, direct_stripe_script_vars, error ) {
 	jQuery( ds_answer_input ).html( text + '<br/>' );
 	jQuery( ds_answer_input ).addClass( 'error' );
 	jQuery( ds_answer_input ).show();
-	setTimeout( function() {
+	setTimeout( function () {
 		jQuery( ds_answer_input ).hide();
 	}, 10000 );
 }
@@ -54,7 +54,7 @@ ds.modal = {
 	 * @param string instance
 	 * @return the jQuery object
 	 */
-	initInstance: function( instance ) {
+	initInstance: function ( instance ) {
 		// If the instance was already initialize, return it (avoid duplicating events)
 		if ( this.instances[ instance ] ) return this.instances[ instance ];
 
@@ -70,14 +70,14 @@ ds.modal = {
 		// When the user clicks on <span> (x), close the modal
 		$close.on(
 			'click',
-			function( e ) {
+			function ( e ) {
 				e.preventDefault();
 				this.instances[ instance ].hide();
 			}.bind( this )
 		);
 
 		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function( event ) {
+		window.onclick = function ( event ) {
 			if ( event.target == this.instances[ instance ][ 0 ] ) {
 				this.instances[ instance ].hide();
 			}
@@ -90,7 +90,7 @@ ds.modal = {
 	 *
 	 * @param {string} instance
 	 */
-	open: function( instance ) {
+	open: function ( instance ) {
 		if ( ! ds.modal.instances[ instance ] )
 			ds.modal.initInstance( instance );
 		// Open Modal Form
@@ -101,7 +101,7 @@ ds.modal = {
 	 *
 	 * @param {string} instance
 	 */
-	close: function( instance ) {
+	close: function ( instance ) {
 		if ( ! ds.modal.instances[ instance ] ) return;
 		// Close Modal Form
 		ds.modal.instances[ instance ].hide();

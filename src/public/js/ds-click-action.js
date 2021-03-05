@@ -3,7 +3,7 @@
  */
 
 //Start process on button Click
-jQuery( '.direct-stripe-button-id' ).on( 'click', function( e ) {
+jQuery( '.direct-stripe-button-id' ).on( 'click', function ( e ) {
 	//Get unique button ID
 	var instance = jQuery( this ).data( 'id' );
 
@@ -76,6 +76,6 @@ jQuery( '.direct-stripe-button-id' ).on( 'click', function( e ) {
 	e.preventDefault();
 } );
 // Close Checkout on page navigation:
-window.addEventListener( 'popstate', function() {
+window.addEventListener( 'popstate', function () {
 	handler.close();
 } );

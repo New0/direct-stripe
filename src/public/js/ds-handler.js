@@ -24,7 +24,7 @@ function stripe_checkout( token, ds_values, additionalData, paymentMethodID ) {
 			params: parobj,
 			ds_nonce: parobj.ds_nonce,
 		},
-		function( data ) {
+		function ( data ) {
 			handleServerResponse( data, ds_values );
 		}
 	);
@@ -36,14 +36,14 @@ function handleServerResponse( response, ds_values ) {
 			case 'incomplete':
 				stripe
 					.handleCardPayment( response.payment_intent_client_secret )
-					.then( function( result ) {
+					.then( function ( result ) {
 						processResult( result, ds_values );
 					} );
 				break;
 			case 'requires_source_action':
 				stripe
 					.handleCardAction( response.payment_intent_client_secret )
-					.then( function( result ) {
+					.then( function ( result ) {
 						processResult( result, ds_values );
 					} );
 				break;
@@ -71,7 +71,7 @@ function processResult( result, ds_values ) {
 					params: ds_values,
 					ds_nonce: ds_values.ds_nonce,
 				},
-				function( data ) {
+				function ( data ) {
 					displayFinalResult( data, ds_values );
 				}
 			);
@@ -84,7 +84,7 @@ function processResult( result, ds_values ) {
 					params: ds_values,
 					ds_nonce: ds_values.ds_nonce,
 				},
-				function( data ) {
+				function ( data ) {
 					displayFinalResult( data, ds_values );
 				}
 			);
