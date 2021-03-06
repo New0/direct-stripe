@@ -86,6 +86,44 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
@@ -200,6 +238,33 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js":
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
@@ -245,6 +310,61 @@ function _inherits(subClass, superClass) {
 }
 
 module.exports = _inherits;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
@@ -295,6 +415,30 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/typeof.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -323,6 +467,29 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
@@ -782,17 +949,6 @@ exports.estimateScrollWidth = estimateScrollWidth;
 /******/ });
 });
 //# sourceMappingURL=mdc.dom.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@material/layout-grid/dist/mdc.layout-grid.css":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@material/layout-grid/dist/mdc.layout-grid.css ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -2012,21 +2168,6 @@ GridRow.displayName = 'GridRow';
 
 /***/ }),
 
-/***/ "./node_modules/@rmwc/grid/styles.js":
-/*!*******************************************!*\
-  !*** ./node_modules/@rmwc/grid/styles.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(/*! @material/layout-grid/dist/mdc.layout-grid.css */ "./node_modules/@material/layout-grid/dist/mdc.layout-grid.css");
-
-
-/***/ }),
-
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -2593,29 +2734,252 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonEditor", function() { return ButtonEditor; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _rmwc_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @rmwc/grid */ "./node_modules/@rmwc/grid/next/index.js");
-/* harmony import */ var _rmwc_grid_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @rmwc/grid/styles */ "./node_modules/@rmwc/grid/styles.js");
-/* harmony import */ var _rmwc_grid_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_rmwc_grid_styles__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../ */ "./src/admin/components/index.js");
+/* harmony import */ var _rmwc_grid__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @rmwc/grid */ "./node_modules/@rmwc/grid/next/index.js");
 
 
 
 
-var ButtonEditor = function ButtonEditor(props) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_2__["Grid"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_2__["GridCell"], {
-    tablet: 12,
-    desktop: 4
-  }, "1"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_2__["GridCell"], {
-    tablet: 12,
-    desktop: 4
-  }, "2"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_2__["GridCell"], {
-    tablet: 12,
-    desktop: 4
-  }, "3"));
-};
+
+
+
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_7___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_7___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_6___default()(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+
+
+var ButtonEditor = /*#__PURE__*/function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(ButtonEditor, _Component);
+
+  var _super = _createSuper(ButtonEditor);
+
+  function ButtonEditor(props) {
+    var _this$state;
+
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, ButtonEditor);
+
+    _this = _super.call(this, props);
+    var currentButton;
+    props.data.buttons.map(function (buttonObj) {
+      if (buttonObj.value == _this.props.data.currentButton) {
+        currentButton = buttonObj;
+      }
+    });
+    _this.state = (_this$state = {
+      text: typeof currentButton !== 'undefined' && typeof currentButton.text !== 'undefined' ? currentButton.text : '',
+      label: typeof currentButton !== 'undefined' && typeof currentButton.label !== 'undefined' ? currentButton.label : '',
+      value: typeof currentButton !== 'undefined' && typeof currentButton.value !== 'undefined' ? currentButton.value : '',
+      type: typeof currentButton !== 'undefined' && typeof currentButton.type !== 'undefined' ? currentButton.type : '',
+      amount: typeof currentButton !== 'undefined' && typeof currentButton.amount !== 'undefined' ? currentButton.amount : '',
+      button_id: typeof currentButton !== 'undefined' && typeof currentButton.button_id !== 'undefined' ? currentButton.button_id : '',
+      name: typeof currentButton !== 'undefined' && typeof currentButton.name !== 'undefined' ? currentButton.name : '',
+      description: typeof currentButton !== 'undefined' && typeof currentButton.description !== 'undefined' ? currentButton.description : ''
+    }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "label", typeof currentButton !== 'undefined' && typeof currentButton.label !== 'undefined' ? currentButton.label : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "panellabel", typeof currentButton !== 'undefined' && typeof currentButton.panellabel !== 'undefined' ? currentButton.panellabel : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "coupon", typeof currentButton !== 'undefined' && typeof currentButton.coupon !== 'undefined' ? currentButton.coupon : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "setup_fee", typeof currentButton !== 'undefined' && typeof currentButton.setup_fee !== 'undefined' ? currentButton.setup_fee : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "zero_decimal", typeof currentButton !== 'undefined' && typeof currentButton.zero_decimal !== 'undefined' ? currentButton.zero_decimal : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "capture", typeof currentButton !== 'undefined' && typeof currentButton.capture !== 'undefined' ? currentButton.capture : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "billing", typeof currentButton !== 'undefined' && typeof currentButton.billing !== 'undefined' ? currentButton.billing : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "shipping", typeof currentButton !== 'undefined' && typeof currentButton.shipping !== 'undefined' ? currentButton.shipping : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "tc", typeof currentButton !== 'undefined' && typeof currentButton.tc !== 'undefined' ? currentButton.tc : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "rememberme", typeof currentButton !== 'undefined' && typeof currentButton.rememberme !== 'undefined' ? currentButton.rememberme : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "display_amount", typeof currentButton !== 'undefined' && typeof currentButton.display_amount !== 'undefined' ? currentButton.display_amount : true), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "currency", typeof currentButton !== 'undefined' && typeof currentButton.currency !== 'undefined' ? currentButton.currency : 'USD'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "locale", typeof currentButton !== 'undefined' && typeof currentButton.locale !== 'undefined' ? currentButton.locale : 'auto'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "custom_role", typeof currentButton !== 'undefined' && typeof currentButton.custom_role !== 'undefined' ? currentButton.custom_role : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "success_query", typeof currentButton !== 'undefined' && typeof currentButton.success_query !== 'undefined' ? currentButton.success_query : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "error_query", typeof currentButton !== 'undefined' && typeof currentButton.error_query !== 'undefined' ? currentButton.error_query : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "success_url", typeof currentButton !== 'undefined' && typeof currentButton.success_url !== 'undefined' ? currentButton.success_url : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "error_url", typeof currentButton !== 'undefined' && typeof currentButton.error_url !== 'undefined' ? currentButton.error_url : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "isDeletionModalOpen", false), _this$state);
+    _this.setButtonSettingState = _this.setButtonSettingState.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.setButton = _this.setButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.openDeletionModal = _this.openDeletionModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.closeDeletionModal = _this.closeDeletionModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(ButtonEditor, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(nextProps) {
+      if (nextProps.data.currentButton !== this.props.data) {
+        this.setCurrentButtonObj();
+      }
+    }
+  }, {
+    key: "setCurrentButtonObj",
+    value: function setCurrentButtonObj() {
+      var _this2 = this;
+
+      this.props.data.buttons.map(function (buttonObj) {
+        if (buttonObj.value === _this2.props.data.currentButton) {
+          for (var _i = 0, _Object$entries = Object.entries(buttonObj); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            _this2.setButtonSettingState(key, value);
+          }
+        }
+      });
+    }
+  }, {
+    key: "setButtonSettingState",
+    value: function setButtonSettingState(set, value) {
+      this.setState(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({}, set, value));
+    }
+  }, {
+    key: "setButton",
+    value: function setButton(button, actions, isDelete) {
+      if (typeof button === 'undefined' || button === '') {
+        actions.notice({
+          state: true,
+          status: 'warning',
+          message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('The button is not set values', 'direct-stripe')
+        });
+      } else {
+        actions.spinner();
+        var buttonValues = {
+          id: button.value,
+          data: JSON.stringify(button)
+        };
+        Object(___WEBPACK_IMPORTED_MODULE_11__["setButtons"])(buttonValues, actions, isDelete);
+      }
+    }
+  }, {
+    key: "openDeletionModal",
+    value: function openDeletionModal() {
+      this.setState({
+        isDeletionModalOpen: true
+      });
+    }
+  }, {
+    key: "closeDeletionModal",
+    value: function closeDeletionModal() {
+      this.setState({
+        isDeletionModalOpen: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var props = this.props,
+          state = this.state,
+          setButtonSettingState = this.setButtonSettingState,
+          setButton = this.setButton,
+          openDeletionModal = this.openDeletionModal,
+          closeDeletionModal = this.closeDeletionModal,
+          isDeletionModalOpen = state.isDeletionModalOpen,
+          data = props.data,
+          strings = data.strings,
+          actions = {
+        resetButtons: data.resetButtons,
+        spinner: data.spinner,
+        notice: data.notice
+      };
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["Grid"], {
+        align: "center"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 6
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+        align: "left"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small"
+      }, strings.buttonSelected, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 8
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small"
+      }, state.text))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+        align: "left"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small"
+      }, strings.buttonSelectedId, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 8
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small"
+      }, state.value)))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 6
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        span: 12
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        className: "ds-save-button",
+        isPrimary: "true",
+        onClick: function onClick() {
+          return setButton(state, actions, false);
+        }
+      }, strings.saveButton))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        span: 12
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        isSecondary: true,
+        onClick: openDeletionModal
+      }, strings.deleteButton), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Modal"], {
+        title: "This is my modal",
+        onRequestClose: closeDeletionModal
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        className: "ds-delete-button",
+        isPrimary: "true",
+        onClick: function onClick() {
+          return setButton(state, actions, true);
+        }
+      }, strings.deleteButton), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        isSecondary: true,
+        onClick: closeDeletionModal
+      }, "My custom close button")))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        label: strings.buttonName,
+        value: state.name,
+        onChange: function onChange(value) {
+          return setButtonSettingState('name', value);
+        }
+      })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, "2"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, "3"))));
+    }
+  }]);
+
+  return ButtonEditor;
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Component"]);
 
 /***/ }),
 
@@ -2640,15 +3004,14 @@ __webpack_require__.r(__webpack_exports__);
 var ButtonsSettings = function ButtonsSettings(props) {
   var data = props.data;
   var currentButton = data.currentButton,
-      buttons = data.buttons,
-      setButton = data.setButton;
+      buttons = data.buttons;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["CreateButton"], {
     data: data
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["SelectButton"], {
-    setButton: setButton,
-    currentButton: currentButton,
-    buttons: buttons
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["ButtonEditor"], null));
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["HorizontalRule"], null), typeof buttons !== 'undefined' && buttons.length > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["SelectButton"], {
+    data: data
+  }), typeof currentButton !== 'undefined' && currentButton.length > 0 && typeof buttons !== 'undefined' && buttons.length > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["ButtonEditor"], {
+    data: data
+  }));
 };
 
 /***/ }),
@@ -2760,15 +3123,15 @@ var CreateButton = /*#__PURE__*/function (_Component) {
           data: JSON.stringify({
             text: buttonName,
             value: buttonID,
-            type: "payment",
+            type: 'payment',
             amount: 1000,
             button_id: buttonID,
-            name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Company Name", "direct-stripe"),
-            description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Description", "direct-stripe"),
-            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Payment", "direct-stripe"),
-            panellabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])("Confirm payment", "direct-stripe"),
-            coupon: "",
-            setup_fee: "",
+            name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Company Name', 'direct-stripe'),
+            description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Description', 'direct-stripe'),
+            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Payment', 'direct-stripe'),
+            panellabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Confirm payment', 'direct-stripe'),
+            coupon: '',
+            setup_fee: '',
             zero_decimal: false,
             capture: true,
             billing: false,
@@ -2776,11 +3139,11 @@ var CreateButton = /*#__PURE__*/function (_Component) {
             tc: false,
             rememberme: false,
             display_amount: false,
-            currency: "USD",
-            locale: "auto"
+            currency: 'USD',
+            locale: 'auto'
           })
         };
-        Object(___WEBPACK_IMPORTED_MODULE_9__["setButtons"])(buttonValues, actions);
+        Object(___WEBPACK_IMPORTED_MODULE_9__["setButtons"])(buttonValues, actions, false);
       }
     }
   }, {
@@ -2795,9 +3158,10 @@ var CreateButton = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var data = this.props.data;
-      var buttonName = this.state.buttonName;
-      var actions = {
+      var data = this.props.data,
+          buttonName = this.state.buttonName,
+          actions = {
+        resetButtons: data.resetButtons,
         spinner: data.spinner,
         notice: data.notice
       };
@@ -2871,13 +3235,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SelectButton = function SelectButton(props) {
+  if (typeof props.data.buttons !== 'undefined' && Object.keys(props.data.buttons[0]).length > 0) {
+    props.data.buttons.unshift({});
+  }
+
+  var selectLabel = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
+    variant: "title"
+  }, props.data.strings.selectButton);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     className: "ds-select-current-button",
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Select Button', 'direct-stripe'),
-    value: props.currentButton,
-    options: props.buttons,
+    label: selectLabel,
+    value: props.data.currentButton,
+    options: props.data.buttons,
     onChange: function onChange(value) {
-      props.setButton(value);
+      props.data.setButton(value);
     }
   });
 };
@@ -3111,7 +3482,7 @@ var setSettings = function setSettings(settings) {
   });
 };
 var setButtons = /*#__PURE__*/function () {
-  var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2(buttons, actions) {
+  var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2(button, actions, isDelete) {
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -3120,19 +3491,21 @@ var setButtons = /*#__PURE__*/function () {
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
               url: api.buttons + '?_wpnonce=' + api.nonce,
               method: 'POST',
-              data: buttons
+              data: button,
+              delete: isDelete ? 'yes' : false
             }).then(function (res) {
               if (!res) {
                 actions.notice({
                   state: true,
                   status: 'error',
-                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Something wrong happened, couldn't create the Stripe button", "direct-stripe")
+                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Something wrong happened, couldn't create the Stripe button", 'direct-stripe')
                 });
               } else {
+                actions.resetButtons();
                 actions.notice({
                   state: true,
                   status: 'success',
-                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("Button created with success", "direct-stripe")
+                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Button saved with success', 'direct-stripe')
                 });
                 setTimeout(function () {
                   actions.notice({
@@ -3153,7 +3526,7 @@ var setButtons = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
-  return function setButtons(_x, _x2) {
+  return function setButtons(_x, _x2, _x3) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -3229,25 +3602,23 @@ var StylesSettings = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DsTabPanel", function() { return DsTabPanel; });
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ */ "./src/admin/components/index.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ */ "./src/admin/components/index.js");
 
 
 
@@ -3256,8 +3627,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default()(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -3265,45 +3635,36 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 var DsTabPanel = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(DsTabPanel, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(DsTabPanel, _Component);
 
   var _super = _createSuper(DsTabPanel);
 
   function DsTabPanel(props) {
     var _this;
 
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, DsTabPanel);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, DsTabPanel);
 
     _this = _super.call(this, props);
     _this.state = {
-      buttons: {},
-      currentButton: {},
+      buttons: _this.resetButtons(),
+      currentButton: '',
       spinner: false,
       notice: {
         state: false,
-        status: "",
-        message: ""
+        status: '',
+        message: '',
+        context: ''
       }
     };
-    _this.handleSpinner = _this.handleSpinner.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
-    _this.handleNotice = _this.handleNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
-    _this.removeNotice = _this.removeNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
-    _this.resetButtons = _this.resetButtons.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
-    _this.setCurrentButton = _this.setCurrentButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this));
+    _this.handleSpinner = _this.handleSpinner.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.handleNotice = _this.handleNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.removeNotice = _this.removeNotice.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.resetButtons = _this.resetButtons.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.setCurrentButton = _this.setCurrentButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
     return _this;
   }
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(DsTabPanel, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.resetButtons();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.resetButtons();
-    }
-  }, {
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(DsTabPanel, [{
     key: "handleSpinner",
     value: function handleSpinner() {
       this.setState({
@@ -3327,8 +3688,8 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
       this.setState({
         notice: {
           state: false,
-          status: "",
-          message: ""
+          status: '',
+          message: ''
         }
       });
     }
@@ -3337,8 +3698,8 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
     value: function resetButtons() {
       var _this2 = this;
 
-      Object(___WEBPACK_IMPORTED_MODULE_9__["getButtons"])().then(function (buttonsData) {
-        if (_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(buttonsData) === "object") {
+      Object(___WEBPACK_IMPORTED_MODULE_8__["getButtons"])().then(function (buttonsData) {
+        if (typeof buttonsData !== 'undefined') {
           Object.values(buttonsData).map(function (data) {
             data.label = data.text;
           });
@@ -3364,60 +3725,62 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
       var handleSpinner = this.handleSpinner,
           handleNotice = this.handleNotice,
           setCurrentButton = this.setCurrentButton,
+          resetButtons = this.resetButtons,
           state = this.state,
-          props = this.props;
-      var currentButton = state.currentButton,
-          buttons = state.buttons;
-      var strings = props.strings;
-      var passedData = {
+          props = this.props,
+          currentButton = state.currentButton,
+          buttons = state.buttons,
+          strings = props.strings,
+          passedData = {
         spinner: handleSpinner,
         notice: handleNotice,
         setButton: setCurrentButton,
+        resetButtons: resetButtons,
         buttons: buttons,
         currentButton: currentButton,
         strings: strings
       };
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
-        className: "ds-spinner ".concat(this.state.spinner ? "active" : "hidden")
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Spinner"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TabPanel"], {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
+        className: "ds-spinner ".concat(this.state.spinner ? 'active' : 'hidden')
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Spinner"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TabPanel"], {
         className: "ds-tab-panel",
         activeClass: "ds-active-tab",
         tabs: [{
           name: 'global',
-          title: 'Global',
+          title: strings['general'],
           className: 'ds-global-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["GlobalSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["GlobalSettings"], null)
         }, {
           name: 'styles',
-          title: 'Styles',
+          title: strings['styles'],
           className: 'ds-styles-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["StylesSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["StylesSettings"], null)
         }, {
           name: 'emails',
-          title: 'Emails',
+          title: strings['emails'],
           className: 'ds-emails-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["EmailsSettings"], null)
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["EmailsSettings"], null)
         }, {
           name: 'buttons',
-          title: 'Buttons',
+          title: strings['buttons'],
           className: 'ds-buttons-settings',
-          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(___WEBPACK_IMPORTED_MODULE_9__["ButtonsSettings"], {
+          content: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(___WEBPACK_IMPORTED_MODULE_8__["ButtonsSettings"], {
             data: passedData
           })
         }]
       }, function (tab) {
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
-          className: "ds-notice ".concat(_this3.state.notice.state ? "active" : "")
-        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Notice"], {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
+          className: "ds-notice ".concat(_this3.state.notice.state ? 'active' : '')
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Notice"], {
           status: _this3.state.notice.status,
           onRemove: _this3.removeNotice
-        }, _this3.state.notice.message)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["HorizontalRule"], null), tab.content);
+        }, _this3.state.notice.message)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["HorizontalRule"], null), tab.content);
       }));
     }
   }]);
 
   return DsTabPanel;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["Component"]);
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Component"]);
 
 /***/ }),
 

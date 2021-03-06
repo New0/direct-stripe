@@ -1,39 +1,42 @@
 import { Component } from '@wordpress/element';
-import { TabPanel, Spinner, Notice, HorizontalRule } from '@wordpress/components';
-import { GlobalSettings, StylesSettings, EmailsSettings, ButtonsSettings, getButtons } from './';
+import {
+	TabPanel,
+	Spinner,
+	Notice,
+	HorizontalRule,
+} from '@wordpress/components';
+import {
+	GlobalSettings,
+	StylesSettings,
+	EmailsSettings,
+	ButtonsSettings,
+	getButtons,
+} from './';
 
 export class DsTabPanel extends Component {
-
-	constructor(props) {    
-		super(props)
+	constructor( props ) {
+		super( props );
 		this.state = {
-			buttons: {},
-			currentButton: {},
+			buttons: this.resetButtons(),
+			currentButton: '',
 			spinner: false,
 			notice: {
 				state: false,
-				status: "",
-				message: ""
-			}
-		}
+				status: '',
+				message: '',
+				context: '',
+			},
+		};
 
-		this.handleSpinner = this.handleSpinner.bind(this);
-		this.handleNotice = this.handleNotice.bind(this);
-		this.removeNotice = this.removeNotice.bind(this);
-		this.resetButtons = this.resetButtons.bind(this);
-		this.setCurrentButton = this.setCurrentButton.bind(this);
+		this.handleSpinner = this.handleSpinner.bind( this );
+		this.handleNotice = this.handleNotice.bind( this );
+		this.removeNotice = this.removeNotice.bind( this );
+		this.resetButtons = this.resetButtons.bind( this );
+		this.setCurrentButton = this.setCurrentButton.bind( this );
 	}
 
-	componentDidMount() {
-		this.resetButtons()
-	}
-
-	componentDidUpdate() {
-		this.resetButtons()
-	}
-
-	handleSpinner() {	
-		this.setState( { spinner: !this.state.spinner } );
+	handleSpinner() {
+		this.setState( { spinner: ! this.state.spinner } );
 	}
 
 	handleNotice( notice ) {
@@ -41,58 +44,65 @@ export class DsTabPanel extends Component {
 			notice: {
 				state: notice.state,
 				status: notice.status,
-				message: notice.message
-			} 
-		});
+				message: notice.message,
+			},
+		} );
 	}
 
 	removeNotice() {
 		this.setState( {
 			notice: {
 				state: false,
-				status: "",
-				message: ""
-			}
-		});
+				status: '',
+				message: '',
+			},
+		} );
 	}
 
 	resetButtons() {
-		
-		getButtons().then(      
-			buttonsData => { 
-				if(typeof buttonsData === "object"){
-					Object.values( buttonsData ).map( data => {
-						data.label = data.text;
-					});
-	
-					this.setState({ buttons: Object.values( buttonsData ) });
-				}
-			}    
-		);
+		getButtons().then( ( buttonsData ) => {
+			if ( typeof buttonsData !== 'undefined' ) {
+				Object.values( buttonsData ).map( ( data ) => {
+					data.label = data.text;
+				} );
+
+				this.setState( { buttons: Object.values( buttonsData ) } );
+			}
+		} );
 	}
 
 	setCurrentButton( button ) {
-		this.setState( { currentButton: button });
+		this.setState( { currentButton: button } );
 	}
-	
-	
-	render(){
 
-		const { handleSpinner, handleNotice, setCurrentButton, state, props } = this;
-		const { currentButton, buttons } = state;
-		const { strings } = props;
-		const passedData = {
-			spinner: handleSpinner,
-			notice: handleNotice,
-			setButton: setCurrentButton,
-			buttons: buttons,
-			currentButton: currentButton,
-			strings: strings
-		}
+	render() {
+		const {
+				handleSpinner,
+				handleNotice,
+				setCurrentButton,
+				resetButtons,
+				state,
+				props,
+			} = this,
+			{ currentButton, buttons } = state,
+			{ strings } = props,
+			passedData = {
+				spinner: handleSpinner,
+				notice: handleNotice,
+				setButton: setCurrentButton,
+				resetButtons: resetButtons,
+				buttons: buttons,
+				currentButton: currentButton,
+				strings: strings,
+			};
 
 		return (
 			<div>
-				<div className={`ds-spinner ${this.state.spinner ? "active" : "hidden"}`} >
+				<div
+					className={ `ds-spinner ${
+						this.state.spinner ? 'active' : 'hidden'
+					}` }
+				>
 					<Spinner />
 				</div>
 				<TabPanel
@@ -101,47 +111,50 @@ export class DsTabPanel extends Component {
 					tabs={ [
 						{
 							name: 'global',
-							title: 'Global',
+							title: strings[ 'general' ],
 							className: 'ds-global-settings',
-							content: <GlobalSettings />
+							content: <GlobalSettings />,
 						},
 						{
 							name: 'styles',
-							title: 'Styles',
+							title: strings[ 'styles' ],
 							className: 'ds-styles-settings',
-							content: <StylesSettings />
+							content: <StylesSettings />,
 						},
 						{
 							name: 'emails',
-							title: 'Emails',
+							title: strings[ 'emails' ],
 							className: 'ds-emails-settings',
-							content: <EmailsSettings />
+							content: <EmailsSettings />,
 						},
 						{
 							name: 'buttons',
-							title: 'Buttons',
+							title: strings[ 'buttons' ],
 							className: 'ds-buttons-settings',
-							content: <ButtonsSettings data={passedData}/>
+							content: <ButtonsSettings data={ passedData } />,
 						},
 					] }
 				>
-					{ ( tab ) => <div>
-						<div className={`ds-notice ${this.state.notice.state ? "active" : ""}`} >
-							<Notice 
-								status={this.state.notice.status}
-								onRemove={this.removeNotice}
+					{ ( tab ) => (
+						<div>
+							<div
+								className={ `ds-notice ${
+									this.state.notice.state ? 'active' : ''
+								}` }
 							>
-								{this.state.notice.message}
-							</Notice>
+								<Notice
+									status={ this.state.notice.status }
+									onRemove={ this.removeNotice }
+								>
+									{ this.state.notice.message }
+								</Notice>
+							</div>
+							<HorizontalRule />
+							{ tab.content }
 						</div>
-						<HorizontalRule />
-						{ tab.content }
-						
-					</div> }
+					) }
 				</TabPanel>
-				
 			</div>
-		)
+		);
 	}
-	
 }

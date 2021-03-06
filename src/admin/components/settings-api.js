@@ -27,12 +27,12 @@ export const setSettings = ( settings ) => {
 	} );
 };
 
-export const setButtons = async ( buttons, actions ) => {
-	
+export const setButtons = async ( button, actions, isDelete ) => {
 	await apiFetch( {
 		url: api.buttons + '?_wpnonce=' + api.nonce,
 		method: 'POST',
-		data: buttons,
+		data: button,
+		delete: isDelete ? 'yes' : false,
 	} ).then( ( res ) => {
 		if ( ! res ) {
 			actions.notice( {
@@ -40,26 +40,23 @@ export const setButtons = async ( buttons, actions ) => {
 				status: 'error',
 				message: __(
 					"Something wrong happened, couldn't create the Stripe button",
-					"direct-stripe"
+					'direct-stripe'
 				),
 			} );
 		} else {
+			actions.resetButtons();
 			actions.notice( {
 				state: true,
 				status: 'success',
-				message: __(
-					"Button created with success",
-					"direct-stripe"
-				),
+				message: __( 'Button saved with success', 'direct-stripe' ),
 			} );
-			setTimeout( () => { 
-				actions.notice({
-					state: false
-				});
-			}, 5000	);
+			setTimeout( () => {
+				actions.notice( {
+					state: false,
+				} );
+			}, 5000 );
 		}
 	} );
-	
-	actions.spinner();
 
+	actions.spinner();
 };

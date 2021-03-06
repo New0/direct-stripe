@@ -42,7 +42,9 @@ class dsScripts {
 
         wp_enqueue_style( 'direct-stripe-style', DSCORE_URL . 'build/public.scss.css' );
         include( DSCORE_PATH . 'includes/styles.php');
-        wp_add_inline_style( 'direct-stripe-style', $custom_css );
+        if(!empty($custom_css)){
+            wp_add_inline_style( 'direct-stripe-style', $custom_css );
+        }
         
 	    wp_register_script('direct-stripe-checkout-script',  '//js.stripe.com/v3/' );
         wp_register_script('direct-stripe-handler-script', DSCORE_URL . 'build/public.js', array('jquery' ), false, false);
@@ -55,10 +57,12 @@ class dsScripts {
         }
 
         $general_settings = get_option( 'direct_stripe_general_settings' );
-        if($general_settings["direct_stripe_checkbox_api_keys"] === true){
-            $p_key = $general_settings['direct_stripe_test_publishable_api_key'];
-        } else {
-            $p_key = $general_settings['direct_stripe_publishable_api_key'];
+        if( !empty( $general_settings ) ) {
+            if($general_settings["direct_stripe_checkbox_api_keys"] === true){
+                $p_key = $general_settings['direct_stripe_test_publishable_api_key'];
+            } else {
+                $p_key = $general_settings['direct_stripe_publishable_api_key'];
+            }
         }
 
         $card_element_styles = apply_filters( 'direct_stripe_card_element_styles', [
@@ -79,14 +83,14 @@ class dsScripts {
             'card_element' => $card_element_styles
         ]);
         
-        wp_localize_script('direct-stripe-handler-script', 'direct_stripe_script_vars', array(
-                'p_key' => $p_key,
+        wp_localize_script('direct-stripe-handler-script', 'direct_stripe_script_vars', [
+                'p_key' => !empty($p_key) ? $p_key : "",
                 'text'  => array(
                     'checkTC'       => __( $checkTC, 'direct-stripe' ),
                     'enterAmount'   => __( 'Please enter amount', 'direct-stripe' ),
                 ),
                 'styles' => $localized_styles
-            )
+            ]
         );
 
     }

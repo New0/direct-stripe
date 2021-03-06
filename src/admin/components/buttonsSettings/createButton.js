@@ -1,10 +1,5 @@
 import { Component } from '@wordpress/element';
-import {
-	Button,
-	TextControl,
-	Card,
-	CardBody
-} from '@wordpress/components';
+import { Button, TextControl, Card, CardBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { setButtons } from '../';
 
@@ -57,15 +52,15 @@ export class CreateButton extends Component {
 				data: JSON.stringify( {
 					text: buttonName,
 					value: buttonID,
-					type: "payment",
+					type: 'payment',
 					amount: 1000,
 					button_id: buttonID,
-					name: __("Company Name", "direct-stripe" ),
-					description: __("Description", "direct-stripe" ),
-					label: __("Payment", "direct-stripe" ),
-					panellabel: __("Confirm payment", "direct-stripe" ),
-					coupon: "",
-					setup_fee: "",
+					name: __( 'Company Name', 'direct-stripe' ),
+					description: __( 'Description', 'direct-stripe' ),
+					label: __( 'Payment', 'direct-stripe' ),
+					panellabel: __( 'Confirm payment', 'direct-stripe' ),
+					coupon: '',
+					setup_fee: '',
 					zero_decimal: false,
 					capture: true,
 					billing: false,
@@ -73,28 +68,27 @@ export class CreateButton extends Component {
 					tc: false,
 					rememberme: false,
 					display_amount: false,
-					currency: "USD",
-					locale: "auto",
+					currency: 'USD',
+					locale: 'auto',
 				} ),
 			};
 
-			setButtons( buttonValues, actions );
-
+			setButtons( buttonValues, actions, false );
 		}
 	}
 
-    componentWillUnmount() {
-        this.props.data.notice({ state: false });
-    }
+	componentWillUnmount() {
+		this.props.data.notice( { state: false } );
+	}
 
 	render() {
-		const { data } = this.props;
-		const { buttonName } = this.state;
-
-		const actions = {
-			spinner: data.spinner,
-			notice: data.notice,
-		};
+		const { data } = this.props,
+			{ buttonName } = this.state,
+			actions = {
+				resetButtons: data.resetButtons,
+				spinner: data.spinner,
+				notice: data.notice,
+			};
 
 		return (
 			<div>

@@ -1,4 +1,7 @@
 .ds-notice {
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
     visibility: hidden;
     opacity: 0;
     -webkit-transition: all 3s;

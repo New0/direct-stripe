@@ -875,6 +875,9 @@
 }
 
 .ds-notice {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 3s;
@@ -899,6 +902,10 @@
 
 .ds-select-current-button select, .ds-select-current-button .components-input-control__container {
   width: initial !important;
+}
+
+.ds-save-button {
+  margin: 2rem auto;
 }
 
 /*# sourceMappingURL=admin.scss.css.map*/
