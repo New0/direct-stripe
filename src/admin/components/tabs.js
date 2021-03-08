@@ -62,10 +62,6 @@ export class DsTabPanel extends Component {
 	resetButtons() {
 		getButtons().then( ( buttonsData ) => {
 			if ( typeof buttonsData !== 'undefined' ) {
-				Object.values( buttonsData ).map( ( data ) => {
-					data.label = data.text;
-				} );
-
 				this.setState( { buttons: Object.values( buttonsData ) } );
 			}
 		} );
@@ -89,7 +85,7 @@ export class DsTabPanel extends Component {
 			passedData = {
 				spinner: handleSpinner,
 				notice: handleNotice,
-				setButton: setCurrentButton,
+				setCurrentButton: setCurrentButton,
 				resetButtons: resetButtons,
 				buttons: buttons,
 				currentButton: currentButton,
@@ -145,6 +141,8 @@ export class DsTabPanel extends Component {
 								<Notice
 									status={ this.state.notice.status }
 									onRemove={ this.removeNotice }
+									isDismissible="true"
+									shouldCloseOnClickOutside="true"
 								>
 									{ this.state.notice.message }
 								</Notice>

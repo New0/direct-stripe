@@ -13,3 +13,13 @@
     }
 
 }
+
+.ds-modal-dialog {
+    button {
+        margin: 1rem;
+        
+        &.ds-modal-ation {
+            margin-left: 0;
+        }
+    }
+}

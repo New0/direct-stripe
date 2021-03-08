@@ -13,10 +13,9 @@ class dsAdmin {
         // Admin actions
         if ( is_admin() ) {
             // Add admin settings area
-            add_action( 'admin_menu', array( $this, 'direct_stripe_add_admin_menu') );
-            //add_action( 'admin_init', array( $this, 'direct_stripe_settings_init') );
-            add_action( 'media_buttons', array( $this, 'direct_stripe_add_shortcode_button'), 20);
-            add_action( 'admin_footer', array( $this, 'direct_stripe_mce_popup') );
+            add_action( 'admin_menu', [$this, 'direct_stripe_add_admin_menu'] );
+            add_action( 'media_buttons', [$this, 'direct_stripe_add_shortcode_button'], 20);
+            add_action( 'admin_footer', [$this, 'direct_stripe_mce_popup'] );
         }
     }
 
@@ -26,22 +25,13 @@ class dsAdmin {
      * @since 2.0.0
      */
     function direct_stripe_add_admin_menu() {
-        add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', array( $this,'direct_stripe_options_page'), DSCORE_URL . 'img/logo_stripe_white.svg' );
+        add_menu_page( 'Direct Stripe', 'Direct Stripe', 'manage_options', 'direct_stripe', [ $this,'direct_stripe_options_page' ], 'dashicons-money' );
         add_submenu_page( 'direct_stripe', __( 'Settings', 'direct-stripe' ), __( 'Settings', 'direct-stripe' ), 'manage_options', 'direct_stripe' );
     }
 
     //Build admin settings page
     function direct_stripe_options_page() {
         include( DSCORE_PATH . '/includes/admin-app.html');
-    }
-
-    /**
-     * Register settings
-     *
-     * @since 2.0.0
-     */
-    function direct_stripe_settings_init() {
-        include( DSCORE_PATH . '/includes/register-settings.php');
     }
 
     /**

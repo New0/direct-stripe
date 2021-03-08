@@ -5,9 +5,8 @@ import {
 	TextControl,
 	HorizontalRule,
 	__experimentalText as Text,
-	Modal,
 } from '@wordpress/components';
-import { setButtons } from '../';
+import { setButtons, ModalAlert } from '../';
 import { Grid, GridCell, GridRow } from '@rmwc/grid';
 
 export class ButtonEditor extends Component {
@@ -25,11 +24,6 @@ export class ButtonEditor extends Component {
 				typeof currentButton !== 'undefined' &&
 				typeof currentButton.text !== 'undefined'
 					? currentButton.text
-					: '',
-			label:
-				typeof currentButton !== 'undefined' &&
-				typeof currentButton.label !== 'undefined'
-					? currentButton.label
 					: '',
 			value:
 				typeof currentButton !== 'undefined' &&
@@ -160,7 +154,7 @@ export class ButtonEditor extends Component {
 	}
 
 	componentDidUpdate( nextProps ) {
-		if ( nextProps.data.currentButton !== this.props.data ) {
+		if ( nextProps.data.currentButton !== this.props.data.currentButton ) {
 			this.setCurrentButtonObj();
 		}
 	}
@@ -188,6 +182,7 @@ export class ButtonEditor extends Component {
 			} );
 		} else {
 			actions.spinner();
+			delete button.isDeletionModalOpen;
 
 			const buttonValues = {
 				id: button.value,
@@ -222,6 +217,7 @@ export class ButtonEditor extends Component {
 				resetButtons: data.resetButtons,
 				spinner: data.spinner,
 				notice: data.notice,
+				setCurrentButton: data.setCurrentButton,
 			};
 
 		return (
@@ -292,34 +288,6 @@ export class ButtonEditor extends Component {
 									>
 										{ strings.deleteButton }
 									</Button>
-									{ isDeletionModalOpen && (
-										<Modal
-											title="This is my modal"
-											onRequestClose={
-												closeDeletionModal
-											}
-										>
-											<Button
-												className="ds-delete-button"
-												isPrimary="true"
-												onClick={ () =>
-													setButton(
-														state,
-														actions,
-														true
-													)
-												}
-											>
-												{ strings.deleteButton }
-											</Button>
-											<Button
-												isSecondary
-												onClick={ closeDeletionModal }
-											>
-												My custom close button
-											</Button>
-										</Modal>
-									) }
 								</GridCell>
 							</GridRow>
 						</GridCell>
@@ -343,6 +311,21 @@ export class ButtonEditor extends Component {
 						</GridCell>
 					</GridRow>
 				</Grid>
+				{ isDeletionModalOpen && (
+					<ModalAlert
+						title={ strings.titDeleteButton }
+						closeModal={ closeDeletionModal }
+						closeModalText={ strings.cancel }
+						modalAction={ () => {
+							setButton( state, actions, true );
+						} }
+						modalActionText={ strings.deleteButton }
+						text={ {
+							first: strings.defDeleteButton,
+							second: strings.queDeleteButton,
+						} }
+					/>
+				) }
 			</>
 		);
 	}

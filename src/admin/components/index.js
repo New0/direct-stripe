@@ -2,6 +2,7 @@ import { GlobalSettings } from './globalSettings/globalSettings.js';
 import { StylesSettings } from './stylesSettings/stylesSettings.js';
 import { EmailsSettings } from './emailsSettings/emailsSettings.js';
 import { ButtonsSettings } from './buttonsSettings/buttonsSettings.js';
+import { ModalAlert } from './elements.js';
 import { getButtons, setButtons } from './settings-api';
 
 export {
@@ -11,4 +12,5 @@ export {
 	ButtonsSettings,
 	getButtons,
 	setButtons,
+	ModalAlert,
 };

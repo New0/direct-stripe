@@ -28,11 +28,13 @@ export const setSettings = ( settings ) => {
 };
 
 export const setButtons = async ( button, actions, isDelete ) => {
+	if ( isDelete ) {
+		button.delete = isDelete;
+	}
 	await apiFetch( {
 		url: api.buttons + '?_wpnonce=' + api.nonce,
 		method: 'POST',
 		data: button,
-		delete: isDelete ? 'yes' : false,
 	} ).then( ( res ) => {
 		if ( ! res ) {
 			actions.notice( {
@@ -45,10 +47,19 @@ export const setButtons = async ( button, actions, isDelete ) => {
 			} );
 		} else {
 			actions.resetButtons();
+			if ( typeof actions.setButtonName !== 'undefined' ) {
+				actions.setButtonName( '' );
+			}
+			if ( isDelete ) {
+				actions.setCurrentButton( '' );
+			}
+			let message = isDelete
+				? __( 'Button deleted with success', 'direct-stripe' )
+				: __( 'Button saved with success', 'direct-stripe' );
 			actions.notice( {
 				state: true,
 				status: 'success',
-				message: __( 'Button saved with success', 'direct-stripe' ),
+				message: message,
 			} );
 			setTimeout( () => {
 				actions.notice( {

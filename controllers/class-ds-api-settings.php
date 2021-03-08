@@ -230,7 +230,7 @@ class DS_API_Settings {
 
         if( array_key_exists( $id, $ds_buttons ) && $delete === true ) {
             unset( $ds_buttons[$id] );
-            update_option( self::$ds_buttons_key, $ds_buttons );
+            return update_option( self::$ds_buttons_key, $ds_buttons );
         } else {
             if( $data ) {
                 $ds_buttons[$id] = $data;

@@ -2734,10 +2734,10 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonEditor", function() { return ButtonEditor; });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
@@ -2783,8 +2783,6 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(ButtonEditor);
 
   function ButtonEditor(props) {
-    var _this$state;
-
     var _this;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, ButtonEditor);
@@ -2796,16 +2794,34 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         currentButton = buttonObj;
       }
     });
-    _this.state = (_this$state = {
+    _this.state = {
       text: typeof currentButton !== 'undefined' && typeof currentButton.text !== 'undefined' ? currentButton.text : '',
-      label: typeof currentButton !== 'undefined' && typeof currentButton.label !== 'undefined' ? currentButton.label : '',
       value: typeof currentButton !== 'undefined' && typeof currentButton.value !== 'undefined' ? currentButton.value : '',
       type: typeof currentButton !== 'undefined' && typeof currentButton.type !== 'undefined' ? currentButton.type : '',
       amount: typeof currentButton !== 'undefined' && typeof currentButton.amount !== 'undefined' ? currentButton.amount : '',
       button_id: typeof currentButton !== 'undefined' && typeof currentButton.button_id !== 'undefined' ? currentButton.button_id : '',
       name: typeof currentButton !== 'undefined' && typeof currentButton.name !== 'undefined' ? currentButton.name : '',
-      description: typeof currentButton !== 'undefined' && typeof currentButton.description !== 'undefined' ? currentButton.description : ''
-    }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "label", typeof currentButton !== 'undefined' && typeof currentButton.label !== 'undefined' ? currentButton.label : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "panellabel", typeof currentButton !== 'undefined' && typeof currentButton.panellabel !== 'undefined' ? currentButton.panellabel : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "coupon", typeof currentButton !== 'undefined' && typeof currentButton.coupon !== 'undefined' ? currentButton.coupon : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "setup_fee", typeof currentButton !== 'undefined' && typeof currentButton.setup_fee !== 'undefined' ? currentButton.setup_fee : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "zero_decimal", typeof currentButton !== 'undefined' && typeof currentButton.zero_decimal !== 'undefined' ? currentButton.zero_decimal : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "capture", typeof currentButton !== 'undefined' && typeof currentButton.capture !== 'undefined' ? currentButton.capture : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "billing", typeof currentButton !== 'undefined' && typeof currentButton.billing !== 'undefined' ? currentButton.billing : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "shipping", typeof currentButton !== 'undefined' && typeof currentButton.shipping !== 'undefined' ? currentButton.shipping : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "tc", typeof currentButton !== 'undefined' && typeof currentButton.tc !== 'undefined' ? currentButton.tc : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "rememberme", typeof currentButton !== 'undefined' && typeof currentButton.rememberme !== 'undefined' ? currentButton.rememberme : false), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "display_amount", typeof currentButton !== 'undefined' && typeof currentButton.display_amount !== 'undefined' ? currentButton.display_amount : true), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "currency", typeof currentButton !== 'undefined' && typeof currentButton.currency !== 'undefined' ? currentButton.currency : 'USD'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "locale", typeof currentButton !== 'undefined' && typeof currentButton.locale !== 'undefined' ? currentButton.locale : 'auto'), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "custom_role", typeof currentButton !== 'undefined' && typeof currentButton.custom_role !== 'undefined' ? currentButton.custom_role : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "success_query", typeof currentButton !== 'undefined' && typeof currentButton.success_query !== 'undefined' ? currentButton.success_query : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "error_query", typeof currentButton !== 'undefined' && typeof currentButton.error_query !== 'undefined' ? currentButton.error_query : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "success_url", typeof currentButton !== 'undefined' && typeof currentButton.success_url !== 'undefined' ? currentButton.success_url : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "error_url", typeof currentButton !== 'undefined' && typeof currentButton.error_url !== 'undefined' ? currentButton.error_url : ''), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_this$state, "isDeletionModalOpen", false), _this$state);
+      description: typeof currentButton !== 'undefined' && typeof currentButton.description !== 'undefined' ? currentButton.description : '',
+      label: typeof currentButton !== 'undefined' && typeof currentButton.label !== 'undefined' ? currentButton.label : '',
+      panellabel: typeof currentButton !== 'undefined' && typeof currentButton.panellabel !== 'undefined' ? currentButton.panellabel : '',
+      coupon: typeof currentButton !== 'undefined' && typeof currentButton.coupon !== 'undefined' ? currentButton.coupon : '',
+      setup_fee: typeof currentButton !== 'undefined' && typeof currentButton.setup_fee !== 'undefined' ? currentButton.setup_fee : false,
+      zero_decimal: typeof currentButton !== 'undefined' && typeof currentButton.zero_decimal !== 'undefined' ? currentButton.zero_decimal : false,
+      capture: typeof currentButton !== 'undefined' && typeof currentButton.capture !== 'undefined' ? currentButton.capture : false,
+      billing: typeof currentButton !== 'undefined' && typeof currentButton.billing !== 'undefined' ? currentButton.billing : false,
+      shipping: typeof currentButton !== 'undefined' && typeof currentButton.shipping !== 'undefined' ? currentButton.shipping : false,
+      tc: typeof currentButton !== 'undefined' && typeof currentButton.tc !== 'undefined' ? currentButton.tc : false,
+      rememberme: typeof currentButton !== 'undefined' && typeof currentButton.rememberme !== 'undefined' ? currentButton.rememberme : false,
+      display_amount: typeof currentButton !== 'undefined' && typeof currentButton.display_amount !== 'undefined' ? currentButton.display_amount : true,
+      currency: typeof currentButton !== 'undefined' && typeof currentButton.currency !== 'undefined' ? currentButton.currency : 'USD',
+      locale: typeof currentButton !== 'undefined' && typeof currentButton.locale !== 'undefined' ? currentButton.locale : 'auto',
+      custom_role: typeof currentButton !== 'undefined' && typeof currentButton.custom_role !== 'undefined' ? currentButton.custom_role : '',
+      success_query: typeof currentButton !== 'undefined' && typeof currentButton.success_query !== 'undefined' ? currentButton.success_query : '',
+      error_query: typeof currentButton !== 'undefined' && typeof currentButton.error_query !== 'undefined' ? currentButton.error_query : '',
+      success_url: typeof currentButton !== 'undefined' && typeof currentButton.success_url !== 'undefined' ? currentButton.success_url : '',
+      error_url: typeof currentButton !== 'undefined' && typeof currentButton.error_url !== 'undefined' ? currentButton.error_url : '',
+      isDeletionModalOpen: false
+    };
     _this.setButtonSettingState = _this.setButtonSettingState.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
     _this.setButton = _this.setButton.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
     _this.openDeletionModal = _this.openDeletionModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
@@ -2816,7 +2832,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(ButtonEditor, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(nextProps) {
-      if (nextProps.data.currentButton !== this.props.data) {
+      if (nextProps.data.currentButton !== this.props.data.currentButton) {
         this.setCurrentButtonObj();
       }
     }
@@ -2828,7 +2844,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
       this.props.data.buttons.map(function (buttonObj) {
         if (buttonObj.value === _this2.props.data.currentButton) {
           for (var _i = 0, _Object$entries = Object.entries(buttonObj); _i < _Object$entries.length; _i++) {
-            var _Object$entries$_i = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_Object$entries[_i], 2),
+            var _Object$entries$_i = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_Object$entries[_i], 2),
                 key = _Object$entries$_i[0],
                 value = _Object$entries$_i[1];
 
@@ -2840,7 +2856,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
   }, {
     key: "setButtonSettingState",
     value: function setButtonSettingState(set, value) {
-      this.setState(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({}, set, value));
+      this.setState(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, set, value));
     }
   }, {
     key: "setButton",
@@ -2853,6 +2869,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         });
       } else {
         actions.spinner();
+        delete button.isDeletionModalOpen;
         var buttonValues = {
           id: button.value,
           data: JSON.stringify(button)
@@ -2889,7 +2906,8 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
           actions = {
         resetButtons: data.resetButtons,
         spinner: data.spinner,
-        notice: data.notice
+        notice: data.notice,
+        setCurrentButton: data.setCurrentButton
       };
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["Grid"], {
         align: "center"
@@ -2944,19 +2962,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
         isSecondary: true,
         onClick: openDeletionModal
-      }, strings.deleteButton), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Modal"], {
-        title: "This is my modal",
-        onRequestClose: closeDeletionModal
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        className: "ds-delete-button",
-        isPrimary: "true",
-        onClick: function onClick() {
-          return setButton(state, actions, true);
-        }
-      }, strings.deleteButton), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        isSecondary: true,
-        onClick: closeDeletionModal
-      }, "My custom close button")))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, strings.deleteButton))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
         desktop: 4
@@ -2974,7 +2980,19 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         align: "middle",
         tablet: 12,
         desktop: 4
-      }, "3"))));
+      }, "3"))), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(___WEBPACK_IMPORTED_MODULE_11__["ModalAlert"], {
+        title: strings.titDeleteButton,
+        closeModal: closeDeletionModal,
+        closeModalText: strings.cancel,
+        modalAction: function modalAction() {
+          setButton(state, actions, true);
+        },
+        modalActionText: strings.deleteButton,
+        text: {
+          first: strings.defDeleteButton,
+          second: strings.queDeleteButton
+        }
+      }));
     }
   }]);
 
@@ -3161,6 +3179,7 @@ var CreateButton = /*#__PURE__*/function (_Component) {
       var data = this.props.data,
           buttonName = this.state.buttonName,
           actions = {
+        setButtonName: this.setButtonName,
         resetButtons: data.resetButtons,
         spinner: data.spinner,
         notice: data.notice
@@ -3239,6 +3258,14 @@ var SelectButton = function SelectButton(props) {
     props.data.buttons.unshift({});
   }
 
+  if (typeof props.data.buttons !== 'undefined') {
+    Object.values(props.data.buttons).map(function (data) {
+      if (typeof data.text !== 'undefined') {
+        data.label = data.text;
+      }
+    });
+  }
+
   var selectLabel = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
     variant: "title"
   }, props.data.strings.selectButton);
@@ -3248,9 +3275,43 @@ var SelectButton = function SelectButton(props) {
     value: props.data.currentButton,
     options: props.data.buttons,
     onChange: function onChange(value) {
-      props.data.setButton(value);
+      props.data.setCurrentButton(value);
     }
   });
+};
+
+/***/ }),
+
+/***/ "./src/admin/components/elements.js":
+/*!******************************************!*\
+  !*** ./src/admin/components/elements.js ***!
+  \******************************************/
+/*! exports provided: ModalAlert */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalAlert", function() { return ModalAlert; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var ModalAlert = function ModalAlert(props) {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+    overlayClassName: "ds-modal-dialog",
+    title: props.title,
+    onRequestClose: props.closeModal
+  }, props.text.first && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, props.text.first), props.text.second && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, props.text.second), props.modalAction && props.modalActionText && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "ds-modal-ation",
+    isPrimary: true,
+    onClick: props.modalAction
+  }, props.modalActionText), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "ds-modal-close",
+    isSecondary: true,
+    onClick: props.closeModal
+  }, props.closeModalText)));
 };
 
 /***/ }),
@@ -3377,7 +3438,7 @@ var GlobalSettings = /*#__PURE__*/function (_React$Component) {
 /*!***************************************!*\
   !*** ./src/admin/components/index.js ***!
   \***************************************/
-/*! exports provided: GlobalSettings, StylesSettings, EmailsSettings, ButtonsSettings, getButtons, setButtons */
+/*! exports provided: GlobalSettings, StylesSettings, EmailsSettings, ButtonsSettings, getButtons, setButtons, ModalAlert */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3394,10 +3455,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _buttonsSettings_buttonsSettings_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./buttonsSettings/buttonsSettings.js */ "./src/admin/components/buttonsSettings/buttonsSettings.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ButtonsSettings", function() { return _buttonsSettings_buttonsSettings_js__WEBPACK_IMPORTED_MODULE_3__["ButtonsSettings"]; });
 
-/* harmony import */ var _settings_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings-api */ "./src/admin/components/settings-api.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getButtons", function() { return _settings_api__WEBPACK_IMPORTED_MODULE_4__["getButtons"]; });
+/* harmony import */ var _elements_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elements.js */ "./src/admin/components/elements.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalAlert", function() { return _elements_js__WEBPACK_IMPORTED_MODULE_4__["ModalAlert"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setButtons", function() { return _settings_api__WEBPACK_IMPORTED_MODULE_4__["setButtons"]; });
+/* harmony import */ var _settings_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings-api */ "./src/admin/components/settings-api.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getButtons", function() { return _settings_api__WEBPACK_IMPORTED_MODULE_5__["getButtons"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setButtons", function() { return _settings_api__WEBPACK_IMPORTED_MODULE_5__["setButtons"]; });
+
 
 
 
@@ -3487,12 +3552,15 @@ var setButtons = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            if (isDelete) {
+              button.delete = isDelete;
+            }
+
+            _context2.next = 3;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
               url: api.buttons + '?_wpnonce=' + api.nonce,
               method: 'POST',
-              data: button,
-              delete: isDelete ? 'yes' : false
+              data: button
             }).then(function (res) {
               if (!res) {
                 actions.notice({
@@ -3502,10 +3570,20 @@ var setButtons = /*#__PURE__*/function () {
                 });
               } else {
                 actions.resetButtons();
+
+                if (typeof actions.setButtonName !== 'undefined') {
+                  actions.setButtonName('');
+                }
+
+                if (isDelete) {
+                  actions.setCurrentButton('');
+                }
+
+                var message = isDelete ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Button deleted with success', 'direct-stripe') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Button saved with success', 'direct-stripe');
                 actions.notice({
                   state: true,
                   status: 'success',
-                  message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Button saved with success', 'direct-stripe')
+                  message: message
                 });
                 setTimeout(function () {
                   actions.notice({
@@ -3515,10 +3593,10 @@ var setButtons = /*#__PURE__*/function () {
               }
             });
 
-          case 2:
+          case 3:
             actions.spinner();
 
-          case 3:
+          case 4:
           case "end":
             return _context2.stop();
         }
@@ -3700,10 +3778,6 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
 
       Object(___WEBPACK_IMPORTED_MODULE_8__["getButtons"])().then(function (buttonsData) {
         if (typeof buttonsData !== 'undefined') {
-          Object.values(buttonsData).map(function (data) {
-            data.label = data.text;
-          });
-
           _this2.setState({
             buttons: Object.values(buttonsData)
           });
@@ -3734,7 +3808,7 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
           passedData = {
         spinner: handleSpinner,
         notice: handleNotice,
-        setButton: setCurrentButton,
+        setCurrentButton: setCurrentButton,
         resetButtons: resetButtons,
         buttons: buttons,
         currentButton: currentButton,
@@ -3773,7 +3847,9 @@ var DsTabPanel = /*#__PURE__*/function (_Component) {
           className: "ds-notice ".concat(_this3.state.notice.state ? 'active' : '')
         }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Notice"], {
           status: _this3.state.notice.status,
-          onRemove: _this3.removeNotice
+          onRemove: _this3.removeNotice,
+          isDismissible: "true",
+          shouldCloseOnClickOutside: "true"
         }, _this3.state.notice.message)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["HorizontalRule"], null), tab.content);
       }));
     }

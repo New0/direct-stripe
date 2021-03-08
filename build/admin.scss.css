@@ -888,6 +888,13 @@
   opacity: 1;
 }
 
+.ds-modal-dialog button {
+  margin: 1rem;
+}
+.ds-modal-dialog button.ds-modal-ation {
+  margin-left: 0;
+}
+
 .ds-tab-panel .components-tab-panel__tabs .components-button {
   font-size: 1.8rem;
   padding: 1.5rem;

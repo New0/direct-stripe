@@ -12,6 +12,14 @@ export const SelectButton = ( props ) => {
 		props.data.buttons.unshift( {} );
 	}
 
+	if ( typeof props.data.buttons !== 'undefined' ) {
+		Object.values( props.data.buttons ).map( ( data ) => {
+			if ( typeof data.text !== 'undefined' ) {
+				data.label = data.text;
+			}
+		} );
+	}
+
 	const selectLabel = (
 		<Text variant="title">{ props.data.strings.selectButton }</Text>
 	);
@@ -23,7 +31,7 @@ export const SelectButton = ( props ) => {
 			value={ props.data.currentButton }
 			options={ props.data.buttons }
 			onChange={ ( value ) => {
-				props.data.setButton( value );
+				props.data.setCurrentButton( value );
 			} }
 		/>
 	);

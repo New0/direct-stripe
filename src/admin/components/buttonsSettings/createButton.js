@@ -85,6 +85,7 @@ export class CreateButton extends Component {
 		const { data } = this.props,
 			{ buttonName } = this.state,
 			actions = {
+				setButtonName: this.setButtonName,
 				resetButtons: data.resetButtons,
 				spinner: data.spinner,
 				notice: data.notice,

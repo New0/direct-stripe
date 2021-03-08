@@ -71,7 +71,7 @@ class DS_API {
 
         //Nonce check validated by x-wp-nonce header in rest_cookie_check_errors()
 
-        $set = $request->get_params();
+        $set = $request->get_json_params();
         if( isset( $set ) ) {
             $key = key( $set );
         }
@@ -115,7 +115,7 @@ class DS_API {
             ];
         }
 
-        DS_API_Settings::save_settings( $setting );
+        return rest_ensure_response( DS_API_Settings::save_settings( $setting ) );
 
     }
 
@@ -137,14 +137,18 @@ class DS_API {
 
         //Nonce check validated by x-wp-nonce header in rest_cookie_check_errors()
 
+        $params = $request->get_json_params();
+
+        if( !$params) return;
+
         //Get button ID if set
-        $id = $request->get_param( 'id' ) ? $request->get_param( 'id' ) : null;
+        $id = array_key_exists('id',  $params) ? $params['id'] : null;
 
         //Are we deleting a button 
-        $delete = $request->get_param( 'delete' ) && $request->get_param( 'delete' ) === 'yes' ? true : null;
+        $delete = array_key_exists('delete',  $params) ? $params['delete'] : null;
 
         //Get data
-        $data = $request->get_param( 'data' ) ? json_decode( $request->get_param( 'data' ) ) : null;
+        $data = array_key_exists('data',  $params) ? json_decode( $data = $params['data'] ) : null;
 
         return rest_ensure_response( DS_API_Settings::save_buttons( $id, $data, $delete ) );
         
@@ -158,6 +162,8 @@ class DS_API {
         return rest_ensure_response( DS_API_Settings::get_buttons());
     }
 
+
+    
     public function ds_options() {
         $options = [
             'direct_stripe_test_publishable_api_key' => [

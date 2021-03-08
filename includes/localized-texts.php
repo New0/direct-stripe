@@ -19,6 +19,7 @@ $texts = array(
         'requiredField'         =>  __( 'Required field', 'direct-stripe' ),
         'yes'                   =>  __( 'Yes', 'direct-stripe' ),
         'no'                    =>  __( 'No', 'direct-stripe' ),
+        'cancel'                =>  __( 'Cancel', 'direct-stripe' ),
         'settingSaved'          =>  __( 'Saved', 'direct-stripe' ),
         'settingError'          =>  __( 'Error', 'direct-stripe' ),
         'textSelect'            =>  __( 'Select', 'direct-stripe' ),
