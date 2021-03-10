@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	Button,
 	TextControl,
+	SelectControl,
 	HorizontalRule,
 	__experimentalText as Text,
 } from '@wordpress/components';
@@ -182,6 +183,7 @@ export class ButtonEditor extends Component {
 			} );
 		} else {
 			actions.spinner();
+
 			delete button.isDeletionModalOpen;
 
 			const buttonValues = {
@@ -220,32 +222,22 @@ export class ButtonEditor extends Component {
 				setCurrentButton: data.setCurrentButton,
 			};
 
+		const saveButton = (
+			<Button
+				className="ds-save-button"
+				isPrimary="true"
+				onClick={ () => setButton( state, actions, false ) }
+			>
+				{ strings.saveButton }
+			</Button>
+		);
+
 		return (
 			<>
 				<Grid align="center">
 					<GridRow>
 						<GridCell align="middle" tablet={ 12 } desktop={ 6 }>
-							<GridRow align="left">
-								<GridCell
-									align="middle"
-									tablet={ 12 }
-									desktop={ 4 }
-								>
-									<Text variant="subtitle.small">
-										{ strings.buttonSelected } :
-									</Text>
-								</GridCell>
-								<GridCell
-									align="middle"
-									tablet={ 12 }
-									desktop={ 8 }
-								>
-									<Text variant="subtitle.small">
-										{ state.text }
-									</Text>
-								</GridCell>
-							</GridRow>
-							<GridRow align="left">
+							<GridRow className="dsMTB-2" align="left">
 								<GridCell
 									align="middle"
 									tablet={ 12 }
@@ -265,19 +257,42 @@ export class ButtonEditor extends Component {
 									</Text>
 								</GridCell>
 							</GridRow>
+							<GridRow align="left">
+								<GridCell
+									align="middle"
+									phone={ 12 }
+									desktop={ 4 }
+								>
+									<Text
+										variant="subtitle.small"
+										as="label"
+										htmlFor="dsButtonName"
+									>
+										{ strings.currentlySelected }
+									</Text>
+								</GridCell>
+								<GridCell
+									align="middle"
+									phone={ 12 }
+									desktop={ 8 }
+								>
+									<TextControl
+										id="dsButtonName"
+										value={ state.text }
+										onChange={ ( value ) =>
+											setButtonSettingState(
+												'text',
+												value
+											)
+										}
+									/>
+								</GridCell>
+							</GridRow>
 						</GridCell>
 						<GridCell align="middle" tablet={ 12 } desktop={ 6 }>
 							<GridRow>
 								<GridCell align="middle" span={ 12 }>
-									<Button
-										className="ds-save-button"
-										isPrimary="true"
-										onClick={ () =>
-											setButton( state, actions, false )
-										}
-									>
-										{ strings.saveButton }
-									</Button>
+									{ saveButton }
 								</GridCell>
 							</GridRow>
 							<GridRow>
@@ -293,23 +308,55 @@ export class ButtonEditor extends Component {
 						</GridCell>
 					</GridRow>
 					<HorizontalRule />
+					<GridRow className="dsMTB-2">
+						<GridCell align="middle" span={ 12 }>
+							<Text variant="title.small" as="h3">
+								{ strings.buttonMainOptions }
+							</Text>
+						</GridCell>
+					</GridRow>
 					<GridRow>
 						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
-							<TextControl
-								label={ strings.buttonName }
-								value={ state.name }
-								onChange={ ( value ) =>
-									setButtonSettingState( 'name', value )
+							<SelectControl
+								label={ strings.selectButtonType }
+								value={ state.type }
+								onChange={ ( value ) => 
+									setButtonSettingState( 'type', value )
 								}
+								options={ [
+									{ value: 'payment', label: 'Payment' },
+									{
+										value: 'subscription',
+										label: 'Subscription',
+									},
+									{ value: 'donation', label: 'Donation' },
+								] }
 							/>
 						</GridCell>
 						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
-							2
+							{ state.type !== 'donation' &&
+								<TextControl
+									label={
+										state.type === 'payment'
+											? strings.valueAmountLabel
+											: strings.valueSubscriptionLabel
+									}
+									value={ state.amount }
+									onChange={ ( value ) => 
+										setButtonSettingState(
+											'amount',
+											value
+										)
+									}
+								/>
+							}
 						</GridCell>
 						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
 							3
 						</GridCell>
 					</GridRow>
+					<HorizontalRule />
+					<GridRow>{ saveButton }</GridRow>
 				</Grid>
 				{ isDeletionModalOpen && (
 					<ModalAlert

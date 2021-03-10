@@ -2909,6 +2909,13 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         notice: data.notice,
         setCurrentButton: data.setCurrentButton
       };
+      var saveButton = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        className: "ds-save-button",
+        isPrimary: "true",
+        onClick: function onClick() {
+          return setButton(state, actions, false);
+        }
+      }, strings.saveButton);
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["Grid"], {
         align: "center"
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
@@ -2916,20 +2923,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         tablet: 12,
         desktop: 6
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
-        align: "left"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
-        tablet: 12,
-        desktop: 4
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
-        variant: "subtitle.small"
-      }, strings.buttonSelected, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
-        tablet: 12,
-        desktop: 8
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
-        variant: "subtitle.small"
-      }, state.text))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+        className: "dsMTB-2",
         align: "left"
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
@@ -2943,44 +2937,82 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         desktop: 8
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
         variant: "subtitle.small"
-      }, state.value)))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, state.value))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+        align: "left"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        phone: 12,
+        desktop: 4
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small",
+        as: "label",
+        htmlFor: "dsButtonName"
+      }, strings.currentlySelected)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        phone: 12,
+        desktop: 8
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        id: "dsButtonName",
+        value: state.text,
+        onChange: function onChange(value) {
+          return setButtonSettingState('text', value);
+        }
+      })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
         desktop: 6
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         span: 12
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        className: "ds-save-button",
-        isPrimary: "true",
-        onClick: function onClick() {
-          return setButton(state, actions, false);
-        }
-      }, strings.saveButton))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, saveButton)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         span: 12
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
         isSecondary: true,
         onClick: openDeletionModal
-      }, strings.deleteButton))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, strings.deleteButton))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+        className: "dsMTB-2"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        span: 12
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "title.small",
+        as: "h3"
+      }, strings.buttonMainOptions))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
         desktop: 4
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
-        label: strings.buttonName,
-        value: state.name,
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["SelectControl"], {
+        label: strings.selectButtonType,
+        value: state.type,
         onChange: function onChange(value) {
-          return setButtonSettingState('name', value);
+          return setButtonSettingState('type', value);
+        },
+        options: [{
+          value: 'payment',
+          label: 'Payment'
+        }, {
+          value: 'subscription',
+          label: 'Subscription'
+        }, {
+          value: 'donation',
+          label: 'Donation'
+        }]
+      })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+        align: "middle",
+        tablet: 12,
+        desktop: 4
+      }, state.type !== 'donation' && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        label: state.type === 'payment' ? strings.valueAmountLabel : strings.valueSubscriptionLabel,
+        value: state.amount,
+        onChange: function onChange(value) {
+          return setButtonSettingState('amount', value);
         }
       })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
         desktop: 4
-      }, "2"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
-        tablet: 12,
-        desktop: 4
-      }, "3"))), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(___WEBPACK_IMPORTED_MODULE_11__["ModalAlert"], {
+      }, "3")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, saveButton)), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(___WEBPACK_IMPORTED_MODULE_11__["ModalAlert"], {
         title: strings.titDeleteButton,
         closeModal: closeDeletionModal,
         closeModalText: strings.cancel,
@@ -3027,9 +3059,12 @@ var ButtonsSettings = function ButtonsSettings(props) {
     data: data
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["HorizontalRule"], null), typeof buttons !== 'undefined' && buttons.length > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["SelectButton"], {
     data: data
-  }), typeof currentButton !== 'undefined' && currentButton.length > 0 && typeof buttons !== 'undefined' && buttons.length > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["ButtonEditor"], {
+  }), typeof currentButton !== 'undefined' && currentButton.length > 0 ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["ButtonEditor"], {
     data: data
-  }));
+  }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
+    variant: "title.small",
+    as: "h3"
+  }, data.strings.currentlySelectedNo));
 };
 
 /***/ }),

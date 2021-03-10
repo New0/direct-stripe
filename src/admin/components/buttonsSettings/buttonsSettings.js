@@ -1,4 +1,7 @@
-import { HorizontalRule } from '@wordpress/components';
+import {
+	HorizontalRule,
+	__experimentalText as Text,
+} from '@wordpress/components';
 import { CreateButton, SelectButton, ButtonEditor } from './';
 
 export const ButtonsSettings = ( props ) => {
@@ -13,9 +16,13 @@ export const ButtonsSettings = ( props ) => {
 				<SelectButton data={ data } />
 			) }
 			{ typeof currentButton !== 'undefined' &&
-				currentButton.length > 0 &&
-				typeof buttons !== 'undefined' &&
-				buttons.length > 0 && <ButtonEditor data={ data } /> }
+			currentButton.length > 0 ? (
+				<ButtonEditor data={ data } />
+			) : (
+				<Text variant="title.small" as="h3">
+					{ data.strings.currentlySelectedNo }
+				</Text>
+			) }
 		</div>
 	);
 };

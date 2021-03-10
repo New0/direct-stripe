@@ -135,8 +135,7 @@ class DS_API_Settings {
      */
     public static function get_buttons(){
         $example = json_decode( '{ 
-            "text": "Example button", 
-            "label": "Example button",
+            "text": "Example button",
             "value": 0, 
             "type":"payment",
             "amount": "1000",
