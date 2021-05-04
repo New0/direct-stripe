@@ -912,7 +912,11 @@
 }
 
 .ds-save-button {
-  margin: 2rem auto;
+  margin: 1rem auto;
+}
+
+.ds-delete-button {
+  margin-left: 2rem;
 }
 
 .dsPTB-2 {
@@ -921,6 +925,14 @@
 
 .dsMTB-2 {
   margin: 2rem 0;
+}
+
+.dsMTB-1 {
+  margin: 1rem 0;
+}
+
+.dsMax-W15R {
+  max-width: 15rem;
 }
 
 /*# sourceMappingURL=admin.scss.css.map*/

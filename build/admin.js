@@ -2916,9 +2916,19 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
           return setButton(state, actions, false);
         }
       }, strings.saveButton);
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["Grid"], {
-        align: "center"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      var buttonControls = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Card"], {
+        className: "ds-createButtonCard dsMTB-1",
+        size: "small",
+        isElevated: "true",
+        isBorderless: "true"
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["CardHeader"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
+        variant: "subtitle.small"
+      }, strings.buttonControlsTitle)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["CardBody"], null, saveButton, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        className: "ds-delete-button",
+        isSecondary: true,
+        onClick: openDeletionModal
+      }, strings.deleteButton)));
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["Grid"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
         desktop: 6
@@ -2928,30 +2938,29 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
-        desktop: 4
+        desktop: 3
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
         variant: "subtitle.small"
-      }, strings.buttonSelectedId, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, strings.valueIDLabel, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
         tablet: 12,
-        desktop: 8
+        desktop: 9
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
         variant: "subtitle.small"
-      }, state.value))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
-        align: "left"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, state.value))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
-        phone: 12,
-        desktop: 4
+        tablet: 12,
+        desktop: 3
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["__experimentalText"], {
         variant: "subtitle.small",
         as: "label",
         htmlFor: "dsButtonName"
-      }, strings.currentlySelected)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
+      }, strings.buttonName, " :")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
-        phone: 12,
-        desktop: 8
+        tablet: 12,
+        desktop: 9
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        className: "dsMax-W15R",
         id: "dsButtonName",
         value: state.text,
         onChange: function onChange(value) {
@@ -2961,16 +2970,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         align: "middle",
         tablet: 12,
         desktop: 6
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
-        span: 12
-      }, saveButton)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
-        span: 12
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        isSecondary: true,
-        onClick: openDeletionModal
-      }, strings.deleteButton))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
+      }, buttonControls)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], {
         className: "dsMTB-2"
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
         align: "middle",
@@ -2979,7 +2979,7 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         variant: "title.small",
         as: "h3"
       }, strings.buttonMainOptions))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
+        align: "top",
         tablet: 12,
         desktop: 4
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["SelectControl"], {
@@ -2990,29 +2990,36 @@ var ButtonEditor = /*#__PURE__*/function (_Component) {
         },
         options: [{
           value: 'payment',
-          label: 'Payment'
+          label: strings.dsPaymentType
         }, {
           value: 'subscription',
-          label: 'Subscription'
+          label: strings.dsSubscriptionType
         }, {
           value: 'donation',
-          label: 'Donation'
+          label: strings.dsDonationType
         }]
       })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
+        align: "top",
         tablet: 12,
         desktop: 4
-      }, state.type !== 'donation' && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+      }, state.type === 'donation' ? strings.valueDonationLabel : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        help: state.type === 'subscription' ? strings.valueAmountHint : "",
         label: state.type === 'payment' ? strings.valueAmountLabel : strings.valueSubscriptionLabel,
         value: state.amount,
         onChange: function onChange(value) {
           return setButtonSettingState('amount', value);
         }
       })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridCell"], {
-        align: "middle",
+        align: "top",
         tablet: 12,
         desktop: 4
-      }, "3")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, saveButton)), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(___WEBPACK_IMPORTED_MODULE_11__["ModalAlert"], {
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["TextControl"], {
+        label: strings.valueCSSIDLabel,
+        value: state.button_id,
+        onChange: function onChange(value) {
+          return setButtonSettingState('button_id', value);
+        }
+      }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["HorizontalRule"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_rmwc_grid__WEBPACK_IMPORTED_MODULE_12__["GridRow"], null, saveButton)), isDeletionModalOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(___WEBPACK_IMPORTED_MODULE_11__["ModalAlert"], {
         title: strings.titDeleteButton,
         closeModal: closeDeletionModal,
         closeModalText: strings.cancel,
@@ -3062,8 +3069,8 @@ var ButtonsSettings = function ButtonsSettings(props) {
   }), typeof currentButton !== 'undefined' && currentButton.length > 0 ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(___WEBPACK_IMPORTED_MODULE_2__["ButtonEditor"], {
     data: data
   }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
-    variant: "title.small",
-    as: "h3"
+    variant: "subtitle",
+    as: "h4"
   }, data.strings.currentlySelectedNo));
 };
 
@@ -3219,8 +3226,11 @@ var CreateButton = /*#__PURE__*/function (_Component) {
         spinner: data.spinner,
         notice: data.notice
       };
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Card"], {
-        className: "ds-createButtonCard",
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["__experimentalText"], {
+        variant: "title.small",
+        as: "h3"
+      }, data.strings.buttonsSettings), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Card"], {
+        className: "ds-createButtonCard dsMTB-1",
         size: "small",
         isElevated: "true",
         isBorderless: "true"
@@ -3304,7 +3314,10 @@ var SelectButton = function SelectButton(props) {
   var selectLabel = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
     variant: "title"
   }, props.data.strings.selectButton);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["__experimentalText"], {
+    variant: "title.small",
+    as: "h3"
+  }, props.data.strings.editButtonTitle), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
     className: "ds-select-current-button",
     label: selectLabel,
     value: props.data.currentButton,
@@ -3312,7 +3325,7 @@ var SelectButton = function SelectButton(props) {
     onChange: function onChange(value) {
       props.data.setCurrentButton(value);
     }
-  });
+  }));
 };
 
 /***/ }),

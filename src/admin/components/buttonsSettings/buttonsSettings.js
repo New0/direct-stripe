@@ -19,7 +19,7 @@ export const ButtonsSettings = ( props ) => {
 			currentButton.length > 0 ? (
 				<ButtonEditor data={ data } />
 			) : (
-				<Text variant="title.small" as="h3">
+				<Text variant="subtitle" as="h4">
 					{ data.strings.currentlySelectedNo }
 				</Text>
 			) }

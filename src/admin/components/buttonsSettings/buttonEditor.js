@@ -6,6 +6,9 @@ import {
 	SelectControl,
 	HorizontalRule,
 	__experimentalText as Text,
+	Card,
+	CardHeader,
+	CardBody
 } from '@wordpress/components';
 import { setButtons, ModalAlert } from '../';
 import { Grid, GridCell, GridRow } from '@rmwc/grid';
@@ -232,51 +235,62 @@ export class ButtonEditor extends Component {
 			</Button>
 		);
 
+		const buttonControls = (
+			<Card
+				className="ds-createButtonCard dsMTB-1"
+				size="small"
+				isElevated="true"
+				isBorderless="true"
+			>
+				<CardHeader>
+					<Text variant="subtitle.small">
+						{strings.buttonControlsTitle}
+						</Text>
+				</CardHeader>
+				<CardBody>
+					{saveButton}
+					<Button
+						className="ds-delete-button"
+						isSecondary
+						onClick={openDeletionModal}
+					>
+						{ strings.deleteButton }
+					</Button>
+				</CardBody>
+
+			</Card>
+		);
+
 		return (
 			<>
-				<Grid align="center">
+				<Grid>
 					<GridRow>
 						<GridCell align="middle" tablet={ 12 } desktop={ 6 }>
 							<GridRow className="dsMTB-2" align="left">
-								<GridCell
-									align="middle"
-									tablet={ 12 }
-									desktop={ 4 }
-								>
+								<GridCell align="middle" tablet={ 12 } desktop={ 3 }>
 									<Text variant="subtitle.small">
-										{ strings.buttonSelectedId } :
+										{ strings.valueIDLabel } :
 									</Text>
 								</GridCell>
-								<GridCell
-									align="middle"
-									tablet={ 12 }
-									desktop={ 8 }
-								>
+								<GridCell align="middle" tablet={ 12 } desktop={ 9 }>
 									<Text variant="subtitle.small">
 										{ state.value }
 									</Text>
 								</GridCell>
 							</GridRow>
-							<GridRow align="left">
-								<GridCell
-									align="middle"
-									phone={ 12 }
-									desktop={ 4 }
-								>
+							<GridRow>
+								<GridCell align="middle" tablet={ 12 } desktop={ 3 }>
 									<Text
 										variant="subtitle.small"
 										as="label"
 										htmlFor="dsButtonName"
 									>
-										{ strings.currentlySelected }
+										{ strings.buttonName } :
 									</Text>
 								</GridCell>
-								<GridCell
-									align="middle"
-									phone={ 12 }
-									desktop={ 8 }
-								>
+								<GridCell align="middle" tablet={ 12 } desktop={ 9 }>
 									<TextControl
+										className="dsMax-W15R"
 										id="dsButtonName"
 										value={ state.text }
 										onChange={ ( value ) =>
@@ -290,21 +304,7 @@ export class ButtonEditor extends Component {
 							</GridRow>
 						</GridCell>
 						<GridCell align="middle" tablet={ 12 } desktop={ 6 }>
-							<GridRow>
-								<GridCell align="middle" span={ 12 }>
-									{ saveButton }
-								</GridCell>
-							</GridRow>
-							<GridRow>
-								<GridCell align="middle" span={ 12 }>
-									<Button
-										isSecondary
-										onClick={ openDeletionModal }
-									>
-										{ strings.deleteButton }
-									</Button>
-								</GridCell>
-							</GridRow>
+							{buttonControls}
 						</GridCell>
 					</GridRow>
 					<HorizontalRule />
@@ -316,7 +316,7 @@ export class ButtonEditor extends Component {
 						</GridCell>
 					</GridRow>
 					<GridRow>
-						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
+						<GridCell align="top" tablet={ 12 } desktop={ 4 }>
 							<SelectControl
 								label={ strings.selectButtonType }
 								value={ state.type }
@@ -324,18 +324,19 @@ export class ButtonEditor extends Component {
 									setButtonSettingState( 'type', value )
 								}
 								options={ [
-									{ value: 'payment', label: 'Payment' },
+									{ value: 'payment', label: strings.dsPaymentType },
 									{
 										value: 'subscription',
-										label: 'Subscription',
+										label: strings.dsSubscriptionType,
 									},
-									{ value: 'donation', label: 'Donation' },
+									{ value: 'donation', label: strings.dsDonationType, },
 								] }
 							/>
 						</GridCell>
-						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
-							{ state.type !== 'donation' &&
-								<TextControl
+						<GridCell align="top" tablet={ 12 } desktop={ 4 }>
+							{ state.type === 'donation' ? strings.valueDonationLabel :
+								<TextControl					
+									help={state.type === 'subscription' ? strings.valueAmountHint : ""}
 									label={
 										state.type === 'payment'
 											? strings.valueAmountLabel
@@ -351,10 +352,20 @@ export class ButtonEditor extends Component {
 								/>
 							}
 						</GridCell>
-						<GridCell align="middle" tablet={ 12 } desktop={ 4 }>
-							3
+						<GridCell align="top" tablet={ 12 } desktop={ 4 }>
+							<TextControl					
+								label={strings.valueCSSIDLabel}
+								value={ state.button_id }
+								onChange={ ( value ) => 
+									setButtonSettingState(
+										'button_id',
+										value
+									)
+								}
+							/>
 						</GridCell>
 					</GridRow>
+					
 					<HorizontalRule />
 					<GridRow>{ saveButton }</GridRow>
 				</Grid>

@@ -1,5 +1,5 @@
 import { Component } from '@wordpress/element';
-import { Button, TextControl, Card, CardBody } from '@wordpress/components';
+import { Button, TextControl, Card, CardBody, __experimentalText as Text } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { setButtons } from '../';
 
@@ -92,9 +92,12 @@ export class CreateButton extends Component {
 			};
 
 		return (
-			<div>
+			<>
+				<Text variant="title.small" as="h3">
+					{ data.strings.buttonsSettings }
+				</Text>
 				<Card
-					className="ds-createButtonCard"
+					className="ds-createButtonCard dsMTB-1"
 					size="small"
 					isElevated="true"
 					isBorderless="true"
@@ -119,7 +122,7 @@ export class CreateButton extends Component {
 						</Button>
 					</CardBody>
 				</Card>
-			</div>
+			</>
 		);
 	}
 }

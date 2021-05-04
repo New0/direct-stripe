@@ -25,14 +25,19 @@ export const SelectButton = ( props ) => {
 	);
 
 	return (
-		<SelectControl
-			className="ds-select-current-button"
-			label={ selectLabel }
-			value={ props.data.currentButton }
-			options={ props.data.buttons }
-			onChange={ ( value ) => {
-				props.data.setCurrentButton( value );
-			} }
-		/>
+		<>
+			<Text variant="title.small" as="h3">
+				{ props.data.strings.editButtonTitle }
+			</Text>
+			<SelectControl
+				className="ds-select-current-button"
+				label={ selectLabel }
+				value={ props.data.currentButton }
+				options={ props.data.buttons }
+				onChange={ ( value ) => {
+					props.data.setCurrentButton( value );
+				} }
+			/>
+		</>
 	);
 };
