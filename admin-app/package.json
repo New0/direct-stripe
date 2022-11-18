@@ -29,7 +29,7 @@
     "vue-cli-plugin-vuetify": "^0.1.6",
     "vue-loader": "^17.0.1",
     "vue-template-compiler": "2.5.11",
-    "webpack": "^3.6.0",
+    "webpack": "^5.75.0",
     "webpack-dev-server": "^4.11.1"
   },
   "browserslist": [
